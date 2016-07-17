@@ -1,0 +1,12 @@
+Obsidian:	33%
+Topaz:		22%
+Opal:		19%
+Pearl:		12%/8%
+Diamond:	5%/4%
+Ruby:		3%/3%
+Emerald:	1.1%/2.5%
+Amethyst:	0.7%/1.6%
+Sapphire:	0.4%/0.9%
+Black Pearl:	0.3%/0.6%
+
+Gems higher than opal have different chances to drop in Part II, the first value is the chance in Part I and the second one is the chance in Part II.

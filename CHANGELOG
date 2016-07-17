@@ -1,0 +1,851 @@
+Changelog
+
+3.1.21 (maintenance, development)
+If the player completes the scenario early, in addition to extra gold, it scares the enemies, if they are scared enough, they will summon Beelzebub, an optional and very rewarding enemy
+Added 5 new items (there are now 300 randomly dropped items)
+Made scenario End of the World significantly harder
+Reduced the penalty from cleave attacks
+Lethalia's, Krux' and Fire Dragon Legacy's AoE weapon specials are now optional, the player can choose if he wants or doesn't want to use the AoE weapon special when attacking
+Made the campaign load on Wesnoth 1.13 (currently it shows some deprecated messages from time to time)
+Fixed a few bugs
+Added some new bugs
+
+3.1.20 (maintenance)
+If the player stays in a single location in chapter 9 for too long, blood will rain, strongly worsening the fighting conditions
+Improved items Deathblade Inheritance, Spectral Jet and Despicable heroism
+Spell suck is also shown in unit information
+Scenario Gladiators (multiplayer) is no longer win when turn is ended
+Units that recently picked up gems will not be listed as units with items
+Fixed a few larger bugs added in the previous version
+
+3.1.19 (development/maintenance)
+Weapon specials that allow hitting more enemies do give experience for kills, but exhaust the users, reducing their damage in a way like if they were struck by a Black Soul
+Significantly improved Krux and Vritra, mostly by new attacks and abilities
+Modifiers that increase the number of attacks by a flat constant no longer affect thundersticks
+The later versions of Efraim and Lethalia now increase their maximum exp in the same way regardless if they take redeem AMLA or normal AMLA
+Using whirlwind is now so tiring that the user's damage temporarily decreases
+Improved item sets: Rherraent's, Ice, Unseen, Cunctator's, King's
+Added an option to view items on units on recall list, allowing also to rename them or to collect the items; it's accessible from the items menu
+Added a rare item modifier that makes spells suck some life with each hit (does not work with explosive etc.)
+Added 5 new items
+Army of Darkness scenario is no longer won just by hitting next turn
+Dark Dragon legacy no longer adds slow
+Fixed some bugs
+
+3.1.18 (maintenance/development)
+It is now possible to disable some attacks from being used for retaliation
+Empowered most redeem-AMLA
+Added a new crafting recipe
+Added 20 new items
+Traders now sell also gems, prices increase roughly with geometric sequence
+Sling weapons now can improve attacks with net
+Spiritual essence weapons now can improve attacks with torch
+Added dodge and magic resistance AMLA to Reaper
+Fixed a bug causing some portals to be unusable in scenario Rush
+Fixed some bugs
+
+3.1.17 (maintenance/development)
+Added 5 new items
+Made the Nightmare Cellar scenario less generic
+Made the Pandemonium scenario's landscape weirder
+The default rainforests are used, removed their copy from the images/terrain/forest folder, reducing the add-on's size
+Fixed a bug making some terrains unusable in editor
+
+3.1.16 (maintenance)
+Reduced the price of extra autorecall slots on easy and normal
+Added 5 new items
+Fixed a few rather annoying bugs from the previous version
+
+3.1.15 (maintenance)
+Added an experimental German translation
+Added a new legacy - Legacy of the Free, adding mostly movement and dexterity related advancements
+Added 10 new items, some of them limited to drop only in Part II and themed after characters from the campaign Affably Evil
+Increased the damage of black souls on higher difficulties
+Improved AMLA of some elvish units
+Added new images for items on the ground, coloured some of them according to their properties
+Fixed a few AI bugs
+Fixed some other bugs
+
+3.1.14 (maintenance/development)
+Rebalanced elvish AMLA, improved Juggernaut, Overlord and Seer, nerfed Incarnation
+Added a new legacy - Legacy of the Freezing North, melee oriented, mainly allowing its user to transform into a mountain of ice, getting extra melee damage and resistances
+Added a new unit - Abomination, a level 4 advancement of the Ghoul line, it does not have the feeding ability, made it available to the player
+Added 5 new items, two of them focusing on improving undead
+Added a new craft-only weapon type, otherwordly essence that improves touch and baneblade attacks
+Rebalanced demon traits, mostly improving the weak ones, adding a couple of new ones and removing furious
+Added a lot of new possible traits to demon lords, they now get three of them
+New sprites for Elvish Overlord and Chaos Rider (drawn by Van Tarkin)
+Dragon legacies's breath attacks now add less damage, but add penetration (so that units that already have that kind of attack would benefit from it too)
+In scenario Jungle Hell, unpicked items (usually dropped by demons standing on impassable) are collected at scenario end, replaced all random items on the ground from start with chests
+When a unit dies and becomes a lich using the necromancy ability, it keeps its legacy (because when a unit advances into a lich, the legacy is not lost)
+The abilities listed on the unit information panel are now formatted as separate sections and separated from the rest by a smaller font
+Fixed a bug causing some black souls not to get lethargy
+Fixed a few AI bugs
+Fixed some other bugs
+
+3.1.13 (maintenance/development)
+Added a new weapon special to the black soul race - lethargy, it temporarily reduces the damage of their victims, stackable
+Added comments to most items that didn't have them
+Added information about books the unit is carrying to the unit information panel
+Fixed an old bug causing units that advanced during the enemy turn to never get their advancement in some cases
+Fixed many lesser bugs
+
+3.1.12 (maintenance/development)
+Fixed a serious bug causing the AI to attack units when it was supposed to be quite idle (for example the patrollers in scenarios Investigations and We Walk in the Shadows)
+Added Legacy of Exile, that adds some bonuses that are good when the unit is alone
+Fixed a lot of lesser bugs
+
+3.1.11 (maintenance)
+Fixed an issue sometimes causing the AI to malfunct, showing a big and very visible error message
+
+3.1.10 (maintenance)
+Fixed a serious bug causing units that were supposed to wait and attack only if you approach to attack anyway, making some scenarios impossibly hard
+Item descriptions now show 'X less movement points' instead of '-X more movement points' where X is a positive integer
+Fixed a typo preventing claws from having any effect
+
+3.1.9 (maintenance/development)
+Replaced the AI with a custom one that is far faster but a little bit worse
+Items now can have short comment, shown bellow the effects (not shown if it is on a list of items to save space)
+Added comments to a half of items, it can be a short comment from a unit seeing or using that item, a description how that item works or a reference to something unrelated
+Added a switch to experimentally disable the AMLA workaround that sometimes causes bugs, it can be enabled by defining DISABLE_AMLA_WORKAROUND, but the performance will be terrible
+Fixed a many bugs and oddities
+
+3.1.8 (maintenance)
+Fixed a serious bug preventing the 9th chapter from being doable, causing Seal Guardians to fail to spawn inside their hideouts
+Fixed a few lesser bugs
+
+3.1.7 (maintenance/development)
+Added 20 new items, including 1 set of 4 items
+Added 2 new crafting recipes
+Added a new legacy, named Legacy of Phoenix, adding fire and arcane resistance, ability to deal fire damage to nearby enemies and heal when close to death
+Demon leaders how have traits
+Charge leadership no longer affects attacks with the charge weapon special
+Fixed some lesser bugs
+
+3.1.6 (maintenance)
+When viewing the item storage and there is so many items that they're divided into submenus, there is a back button that returns to the list of items types
+Fixed some lesser bugs
+
+3.1.5 (maintenance)
+Fixed a fatal bug preventing the first part of the campaign from being loaded
+When some gems are transmuted, the UI does not exit, but returns back into the transmuting menu
+Made demons and chapter 9 harder, especially on higher difficulties
+Fixed some lesser bugs
+
+3.1.4 (development)
+Lower gems can be randomly upgraded, possibly to the highest ones
+Added 15 new items and one crafting recipe
+Decreased the level of Burning Souls because they are way too easy to kill
+Added a new item property called Devastating Blow to certain items, it gives the weapon a chance to take 20% of the enemy's current life away
+In scenario Escape from Oblivion, Connor no longer just appears out of nowhere, he arrives during a cave-in that crushes nearby enemies (preventing him from appearing desperately swarmed)
+Added a turn limit to the Annihilation scenario, decreased turn limits in some scenarios where they were extremely high
+Made Warlock a bit stronger
+Fixed a few bugs and typos
+
+3.1.3 (maintenance/development)
+The player can start playing the campaign only from chapters 1 and 6, no longer cluttering the campaign list and saving some space
+Added introduction screens to chapters, followed by quotes from the following chapter giving some deliberately unclear information about its content
+Hordes of the Other World scenario now works also in networked multiplayer and the AI should not be slow, but doesn't work and is invisible on versions before 1.11.13
+New sprite for Efraim
+New graphics for meteor
+Celestial Messenger can now move through deep water and has no defence penalties in water generally
+Efraim's new dark portrait is used only when he is undead
+Fixed two problematic bugs in Lost in Space and Pandemonium scenarios
+Fixed some lesser bugs
+
+3.1.2 (maintenance)
+New portrait for Efraim (he gets it after being stuck in the cave, studying necromancy)
+Fixed a problem in the Gladiators multiplayer scenario that made bosses spawn twice
+Altered the Paradise Lost scenario to make the beginning more dynamic
+Fixed some lesser bugs
+
+3.1.1 (maintenance/development)
+Improved and debugged the campaign image on the add-on server
+New sprite for Celestial Messenger, based on van Tarkin's draft
+Added some new starting units and seller items (of otherwise craftable-only types) to the Gladiators multiplayer scenario, limited the number of waves of weak units
+Fixed a lot of lesser bugs
+
+3.1.0 (development)
+Added an additional questline to chapter 9 concerning Lilith, whose completition is mandatory
+In chapter 9, when the player enters Uria's den, he will be told where he should go, to make the navigation clearer, also added space to some levels of chapter 9
+Done a lot of other changes to chapter 9
+Rewrote parts of the code to support translations
+Run wmlindent on the files
+Added a portrait to Stormrider
+Removed some macro bloat around calculation of item properties, chapter 9 map and redeem, it should decrease the size of save files a bit and quicken the loading a very tiny bit
+Added 10 new items
+Improved the graphics of the tentacles of chapter 5 specific enemies
+Improved the Gladiators multuiplayer scenario
+Fixed some problems related to the Gladiators multiplayer scenario
+Replaced the Blackguard sprite by a new one made by van Tarkin
+Fixed many lesser bugs
+Fixed graphical problems with demon infiltrator Spearmen and Cavalrymen on 1.11
+
+3.0.12 (maintenance)
+Made Faerie Incarnation have stronger supportive abilities
+Chapter 4 enemy mages' fireballs' explosive weapon special now behave exactly the same as the usual explosive weapon special
+Fixed some smaller bugs
+
+3.0.11 (development/maintenance)
+Added 20 new items (there is now 200 items in total)
+Added a new miscellaneous item effect, vision, that increases the distance how far can the unit reveal shroud or fog and added it to some items (1.11 only, might not be visible if using older save files)
+Plague that creates something else than Walking Corpses shows what it creates behind its name in brackets
+Special traits will show correct descriptions now (only on wesnoth 1.11.8 and newer)
+
+3.0.10 (maintenance/development)
+Significantly changed the Twilight scenario of chapter 1
+Added 3 scenario dialogue rewrites by Zydin
+Added 1 scenario dialogue rewrite by Revelations
+Fixed some lesser bugs
+
+3.0.9 (maintenance)
+Fixed the problem making scenario An Army is Born impossible to complete on wesnoth 1.11.7
+
+3.0.8 (maintenance)
+Fixed the problem when units in chapter 5 weren't autorecalled
+Fixed the problem when items could not be picked up when an item was destroyed above it from the inventory window
+High quality crafting recipes cost some lower gems again, but not as much as before
+Renamed the Stormrider unit type to Divine Emissary, Stormrider is now his name
+Removed the struggle weapon special from Champion
+Fixed lots of smaller bugs
+
+3.0.7 (maintenance)
+Fixed a graphical issue related to Shadowalker accidentally introduced in the previous version
+Fixed a small graphical issue with Champion, causing him to play a non-existent idle animation
+
+3.0.6 (development/maintenance)
+Fixed the 1.11.7 only instant crash problem
+Added a new unit: Champion, a new advancement of Master at Arms, a really defensive alternative to Shadowalker
+Made the autorecall in chapter 5 work like it works in chapter 9, thus removing the unpopular 'Devour' menu option
+Enemy units sharing the same graphics as some default units (chapter 5's hybrids of steel, chapter 7's corrupted beings, chapter 8's demon infiltrators) now have an aura that makes them visually different
+On wesnoth 1.11.7, opening the inventory hotkey defaults to Shift+I
+Fixed some lesser bugs
+
+3.0.5 (maintenance)
+Fixed a crash bug occurring in all part II scenarios if played on the hard difficulty
+Replaced two scenarios' dialogues by edits by RaustBD
+
+3.0.4 (development/maintenance)
+Most enemy leaders have additional and usually unusual abilities and weapon specials, especially on higher difficulties, to add variability and challenge to the gameplay
+Replaced the special version of Orcish Sovereign by Orcish Warmonger, with similar properties and position in the advancement paths
+Added walkthroughs for chapter 10
+Higher crafting recipes no longer require large numbers of lower gems
+Added a new crafting recipe
+Fixed an issue making some sprites invisible on 1.11 versions
+Fixed a lot of smaller bugs 
+
+3.0.3 (maintenance)
+All items that dropped by leaders in the last turn before victory are taken into the item storage properly, without failing or causing save file corruption
+
+3.0.2 (maintenance)
+Added an option to unequip all items from a unit and put them into the item storage
+When equipping an item, the name of the item the unit currently has and will be dropped is shown, and also the number of same items in the inventory
+Shrunk the infamously large map for the Where the Hatred Grows scenario
+Fixed a large number of smaller bugs
+
+3.0.1 (maintenance)
+Made many weapons weaker on higher difficulties, especially those with other good properties than damage
+Fixed a bug that could cause animations to get messed up and save files growing excessively large
+Fixed a bug causing serious mess with some items in item-collecting scenarios of chapter 5
+Shrunk the Chasing Dragons scenario's map
+Added a few caves to the Despair scenario and added a few magical runes on ground in Fimbulwinter scenario
+Added 5 new items, renamed the 'Reaper's items' to 'The gloomy items'
+If a unit is equipped two crafted items of the same type and chooses to unequip one, both will be unequipped no more
+Problems with ability descriptions on wesnoth 1.11.4 and 1.11.5 should appear no more
+Slightly altered Darkness Closing In and Meeting of the Ancients scenarios to make them more comfortable to play
+Fixed a possible multiplayer spillover problem that might happen if using some custom lua codes
+
+3.0.0 (development)
+Added chapter 10, ending the story
+A few scenarios were rewritten by other people in order to improve dialogues
+Added orcs and goblins to the selection of units with extra levels and AMLA and used them in many earlier scenarios
+If a player has more than 20 items in the storage, they are sorted by types into submenus
+Fixed the problem with units advancing many times in a row
+The last amla can be changed only once now
+Fixed a bug causing the delayed advancements (due to advancing during another side's turn) to be delayed really badly
+Fixed a rare bug causing the game show weird error messages on scenario startups
+Fixed a lot of lesser bugs
+
+2.5.9 (development/maintenance)
+Thundersticks can be crafted now
+Krux has his own sprite and portrait now
+Added a new unit: Troll Boulderlobber (slighly edited Troll Rocklobber's advancement from Balancing Extended Era Modification)
+Walking Corpses that aren't carrying any items are removed from the recall list automatically
+Added 2 new crafting recipes, designed by Silux
+Added marksman to Exterminator's knives
+Slightly altered the dialogues in the first parts of the campaign
+Fixed a problem with units not being able to view the global inventory when standing on a castle
+Retribution ability now gives exp for kills with it
+Teleport units to leader function is recharged every ten turns as intended in scenarios where it was broken before (Tundra, Arctic Wastelands, The Desert and Jungle Hell)
+More regular kinds of demons have -2 damage if starting from the 9th chapter
+
+2.5.8 (maintenance)
+Standard units advance faster on lower difficulties, leaders advance much slower on higher difficulties
+On higher difficulties, coloured units will appear; they have special improvements and are very dangerous
+Fixed a glitch allowing creating items that would be placed into glitch inventory slots
+The number of redeems required to advance it is now shown properly
+Redeem is now the first attack on the list
+Specials that added exp somehow, but did not cause the unit to advance now make the units advance properly
+Fixed a lot of smaller bugs
+
+2.5.7 (maintenance/development)
+Worked around a segmentation fault problem in tutorial
+Added a new unit: Monstrosity, a level 2 advancement of Soulless, as an alternative to advancing into skeletons
+Item sellers will also show the description of items you are interested in
+Fixed an old, rarely appearing bug causing some units, mostly created with plague, to interact wrongly in some cases
+Made the Infinite Legion scenario harder by increasing some resistances and changing some damage types to make it harder for Preserved Liches to hack through
+Improved the balance of chapter 1 a bit
+Fixed a lot of smaller bugs
+
+2.5.6 (maintenance)
+Made enemies in chapter 9 stronger, mostly by making their traits even more significant
+Redeem can advance up to level 20 now, for those who want to play The Last Crusade for long
+Fixed a bug causing Efraim to advance strangely on 1.11.1 and 1.11.2
+Pierce weapon special can no longer harm allies
+
+2.5.5 (maintenance)
+Fixed some bugs in tutorial
+It's now possible to access all items in item storage on castles
+
+2.5.4 (development/maintenance)
+Added tutorial
+Delly is now a new unit type, with a new sprite and a new portrait
+Changed some dialogues in chapter 1
+Fixed the lua error problems showing on wesnoth 1.11.1/1.11.2 when a low level unit advanced
+Made The Last Crusade scenario's difficulty increase in a new way
+
+2.5.3 (maintenance/development)
+Fixed the AMLA bug that was recently created on wesnoth 1.11.1/1.11.2
+Gauntlets now add the GEARED trait like they always should
+The 1.11.2 version of wesnoth should no longer rant deprecated ability descriptions
+Added 5 new items
+Fixed some lesser bugs
+
+2.5.2 (maintenance)
+Fixed the bug preventing chapter 9's files from being loaded when continuing from chapter 8 or before
+When the controversial ally in chapter 9 dies, it triggers a dialogue about her death
+Made the Purity item recipe significantly more expensive
+
+2.5.1 (development/maintenance)
+Fixed the 1.11.1/1.11.2 advancement bug
+Slowed down the advancement speed of leaders... again
+The 'Unit Information' message now shows also all abilities
+Added 2 new crafted items and 5 new dropped items
+Added help to chapter 9 and end of chapter 8
+Removed the immune to fire and immune to cold abilities, because they led to exploits due to bugs in the game and also other bugs and were possibly overpowered
+
+2.5.0 (development)
+Added chapter 9
+Items in the new inventory are ordered properly
+Scenarios with a turn limit only preventing the player from endlessly killing spawning enemies no longer give insane early finish bonuses
+Demons have randomly generated names now
+Halved the chance to of books to drop
+Fixed plenty of lesser bugs
+
+2.4.14 (maintenance)
+Items taken from the old inventory now properly disappear
+Added dodge advancements to all elves who didn't have it
+Updated Argan's portrait
+Made the 'Banished' scenario easier
+Decreased demigods' resistances to fire and cold by 10%, set Krux's resistances to a something between Efraim and Lethalia
+Added some physical resistances to Scythemaster and Swordmaster, now they have at least 10% resistance to physical damage
+Decreased Chaos Rider's cold resistance to 0%
+
+2.4.13 (maintenance/development)
+Scenarios with endless supplies of enemies now have a turn limit, usually high enough for everyone, but not for free exp and/or redeem
+Items in the item storage are ordered by type (only those that were put there on this version)
+Decreased the magical damages of enemies in late parts of the game (chapters 7 and 8)
+Decreased the cold resistance of demons by 10%
+Globally decreased the gold in chapter 3, significantly
+Slightly weakened the leaders
+Added 5 new items and 1 new crafting recipe, mostly aimed for better protection of units from possessed creatures in chapter 7
+Leech ability no longer drains allies
+Improved the performance of the Across the Barren land scenario
+Fixed some lesser bugs
+
+2.4.12 (maintenance)
+Items on the crafting list show the materials needed for them
+Fixed crossbow drops in Part I - Glitch item should no longer drop
+
+2.4.11 (development)
+Added a multiplayer scenario
+By selecting a new option in items menu, Unit information, it is now possible to view some information that might be useful, but impossible to be known otherwise
+No more mandatorily converging advancement paths; however, some may optionally converge (Chocobone advances to Grim Knight, Deathbade advances to Phatom, but may also advance to Grim Knight):
+Added a new unit: Predator, an advancement of Huntsman (he no longer advances to Forester)
+Added a new unit: Exterminator, an advancement of Assassin (Assassin cannot advance to Shadowalker anymore, and Shadowalker is more Fencer-like now)
+Added a new unit: Lunatic Knight, an advancement of Lancer (Lancer no longer advances to Grand Knight and Paladin)
+Added more AMLA advancements to units who had only a few of them
+Claw weapons can now be crafted for Gryphon Riders (and weakened Elvish Gryphon Rider's claw attack)
+It is now possible to break less useful items to get gems for crating
+When units are advancing, it will no longer be randomly possible to see the same unit twice on the list
+Fixed a few lesser issues
+Removed retrospective compatibility to some old versions (several months old)
+
+2.4.10 (maintenance)
+Fixed a bug with redeem cooldown, that was causing it to last for much longer under some circumstances
+
+2.4.9 (development/maintenance)
+Efraim and Lethalia in chapter 7 and onwards get 15% increase to their maximum experience when they advance now
+Redeem has a 3 turns' cooldown now
+Death Knight now advances to Lich King as he always should have
+Things that decrease enemy resistances now really decrease them
+
+2.4.8 (maintenance)
+Units can advance to Lich King in singleplayer now (that was accidentally disabled before)
+Redeem now works past level 14
+The Army of Darkness scenario is now easier, especially on higher difficulties
+Dark Helm of Destruction now adds only one attack instead of accidental 15
+
+2.4.7 (development/maintenance)
+Leech now drains only 10% of damage dealt (instead of 25%)
+The effect increasing magical damages no longer affects elemental weapon damages
+Made Faerie Incarnation able to pick up staves and get bonuses to her wine attack from bonuses to magical damage
+Added 5 items (two smaller item sets)
+Explosive weapon special is now weaker
+Fixed a lot of smaller bugs
+
+2.4.6 (maintenance)
+Fixed a bug preventing units from advancing if they had advance by killing an enemy during the AI's turn with the inferno weapon special
+All Efraim's fireball advancements are available now
+
+2.4.5 (development/maintenance)
+Added storyline images
+Added iceball spell advancement to half-god version of Efraim to make him have a convenient slowing retaliation attack
+Fixed a problem that high-level redeem did not add any bonuses for AoE targets
+Fixed a bug causing some units to get immortal
+Fixed a few other bugs
+
+2.4.4 (maintenance/development)
+Added a new unit: Chaos Rider, advancement of Cavalier instead of Dragon Rider
+Fixed some bugs
+Made weapon specials Trickery and Doom stronger
+Phantoms can no longer equip swords if they have the whirlwind attack
+Added Doom to Swordmaster
+
+2.4.2 (maintenance)
+Units cannot be knocked into walls with knockback
+Fixed some bugs
+Done some more balancing changes
+
+2.4.1 (maintenance)
+Nerfed some weapons that were too strong
+Done some more balancing changes
+
+2.4.0 (development)
+Added chapter 8
+When a unit advances during AI's turn, it only heals and the player will select the advancement at the the beginning of his turn - therefore, now you do not have to watch AI's turn to avoid delays related to appearing windows waiting for you, asking you about things you can decide later in sigleplayer, and you can choose your advancements better in multiplayer
+The last advancement a unit has taken can be swapped for another (for the case when the player realises it wasn't the best idea)
+Improved performance
+Fixed a mess with special attacks
+
+2.3.7 (development/maintenance)
+Active set item effects are now written in bold
+Elvish Lords can be recruited in some scenarios
+Added a new unit: Elvish Warlord, to split the converging advancement path of Elvish Marshal and Elvish High Lord
+Removed Elvish Overlord's leadership ability
+If a leader drops an item, winning the scenario, you really get the item
+Female units no longer take male animations for attacks in some cases
+Swordmaster no longer loses his team colour when trying to block an attack
+Added an item set
+
+2.3.6 (maintenace/development)
+Items now sparkle for better visibility
+Added a new unit, Lich King, an advancement of Lich and Death Knight, removed leadership from Deathlord
+Scenarios in chapter 5 dungeons, where you have to collect items, work again
+Fixed plenty of other bugs
+
+2.3.5 (maintenance/development)
+Made chapter 7 playable if selected from the campaigns menu by adding some recalls at the start
+Cone and hose weapon specials can no longer damage allies under certain circumstances
+Added a new unit line - Sword Mage, Knight of Magic and Warlock, advancing from Mage and Fencer
+Made scenario Army of Darkness easier if continuing from chapter 1
+
+2.3.4 (development)
+Added a new menu item, containing various help about things specific for this campaign, and walkthroughs
+Added Pilum Master, a new unit that advances from Javelineer (that no longer advances to Royal Guard or Halberdier)
+Removed retrospective compatibility to versions before 2.2.0 to shorten the loading delays - this can cause problems with units from chapter 3, so crashes should appear only in chapter 3
+
+2.3.3 (development)
+Added Dwarvish Battlerager the level 4 advancement of Dwarvish Berserker - now all dwarves advance to units that have advancements
+Added 5 items to random drops
+Added some warnings to decrease the chance the player will proceed wrongly and get stuck
+
+2.3.2 (development/maintenance)
+Added Dwarvish Technocrat, the level 4 advancement of Dwarvish Dragonguard
+Fixed a bug causing troubles with resistance penetrations - those from advancements never worked and those from items didn't always work
+Increased the difficulty in part I (chapters 1-5) by preventing some super-elite items from dropping and slightly decreasing the resistances of preserved liches
+
+2.3.1 (development/maintenance)
+Added Dwarvish Protector, the level 4 advancement of Dwarvish Sentinel
+Incineration no longer persists from one scenario to another
+Added 5 droppable items
+Fixed some lesser bugs
+
+2.3.0 (development)
+Added chapter 7
+Added two new playable units, Snow Hunter and Dwarvish Hero (advancement of Dwarvish Lord, other dwarves will have to wait slightly more for advancements)
+Storing a healing potion no longer heals the unit
+Fixed a load of bugs
+
+2.2.15 (maintenance)
+Fixed a bug spoiling a few things for the next chapters in the last scenario, possibly allowing the player to ruin advancing through the chapters - it is suggested to replay this scenario
+Animations of Delly in chapter 3 should be assigned correctly
+Improved all dialogues in chapter 4 (thanks to nigkg4000)
+Fixed a few lesser bugs
+
+2.2.14 (development/maintenance)
+Updated unit types of units in the last scenario of chapter 6; now they are fit to continue through chapters 7 - 10; however, the only scenario where they are is not long enough to try them out
+Units no longer show absurd weapon specials; units that add weapon specials to adjacent units have visible auras (they, however, remove the illumination's visual representation, and their visual manifestations will not stack one with another, only the newest one is shown)
+Shrunk the campaign images to fit better the campaign selection window
+Improved all dialogues in chapters 1-3 (thanks to nigkg4000)
+Items can be picked up even if there are gems above them
+Fixed a few lesser bugs
+
+2.2.13 (development)
+Improved dragon breath animations
+Added a new unit, Phantom (level 3 advancement of Deathblade), decreased the axe damage of Grim Knight
+Defence is calculated properly everywhere, even if it is a mounted unit on forested mountains
+Added one weapon crafting recipe with an interesting weapon special, and one armour crafting recipe
+
+2.2.12 (development/maintenance)
+Items on the crafting list that you cannot make are now red
+Crafting from obsidians now properly decreases the quantity of obsidians the player has
+Added a new unit: Duke (a level 5 advancement of Grand Marshal), removed leadership from Dragon Rider
+A bug in Wesnoth no longer causes mounted units to get 80% defence in forests
+Argan can use swords now
+Added 10 new items
+
+2.2.11 (development)
+Added a new unit: Elvish Assassin (an advancement of Elvish Sharpshooter), weakened Elvish Gryphon Rider accordingly
+Units you receive in chapter 3 (three dwarves, a necromancer) are now properly recalled at the beginning of scenarios
+Added 5 new items and 5 new crafting recipes
+
+2.2.10 (maintenance/development)
+Added a new unit: Arch Necromancer (Necromancer may also advance to him)
+Units recruited in scenario 1 chapter 2 are no longer improperly autorecalled in chapter 3 (requiring upkeep)
+Pikemen can uese spears
+Some previously not autorecalled units from chapter 3 are be autorecalled
+Added some crafting recipes
+
+2.2.9 (maintenance)
+Fixed a bug causing terrible delays when inventories of units with a weapon were manipulated
+Decreased the speed units advance globally in part 1 (chapters 1-5)
+Globally decreased the items' defensive properties
+The virtual trait 'GEARED' is colourless now, because it wasn't formatted properly in some cases
+Nerfed Shadowalker's parry attack
+Fixed a few lesser bugs
+
+2.2.8 (development)
+Added a new unit: Elvish Juggernaut (an advancement of Elvish Champion), Elvish Champion no longer advances to Elvish Overlord
+Added a new unit: Celestial Messenger (an advancement of Mage of Light), decreased Prophet's lightbeam damage
+Fixed an interface bug (bonus attacks ignored modifications of attack number) - main effect is that Shadowalker's whirlwind is now weaker
+Fixed a bug making Shadowalker's whirlwind attack useless
+
+2.2.7 (development/maintenance)
+Added some interesting advancements to Shadowalker
+Level 1 undead can be summoned anywhere next to a leader in the chapter 5 final dungeon again
+Items that have some gear have a very visible trait named 'GEARED', so they are visible on the recall list
+Fixed a few lesser bugs (explosionlance's experience, some dialogue mess)
+
+2.2.6 (maintenance/development)
+Replaced Lethalia's portrait by a WiP of Crow_T; because it looks better than my 'art' anyway
+Types of crafted items in the item storage are now displayed properly
+Added a new unit: Dark Shade (an advancement of Nightgaunt), removed nightstalk, skirmisher and backstab from Reaper, but gave it a few other things
+Fixed a bug causing Efraim to have to learn to cast Chill Tempest if willing to learn Shadow wave and lightning spells, although it was very similar to Wave of Fear he already has (and is much better)
+When beginning from chapters 2,3,4 and 5, the leaders obtain some gear and advancements, to make them as strong as if they were continuing from previous chapters (based on arobinson's saves)
+Added wings to Faerie Incarnation (no gameplay effect)
+Fixed an exploit allowing units to get abilities and some other things without occupying an inventory slot
+
+2.2.5 (maintenance)
+Gems higher than pearl now can drop
+Units no longer get 80% defence on certain rare terrain types, like flat/unwalkable
+Fixed some lesser bugs
+
+2.2.4 (development/maintenance)
+Added a new unit: Faerie Incarnation (advancement of Elvish Shyde); weakened Elvish Seer's healing
+Added a new unit: Duelist Wizard (advancement of Silver Mage); removed teleport from Elder Mage
+Scenario 'Pirates' no longer crashes at the beginning
+Leaders no longer lose advancements, traits and items at the end of scenario 'We Walk in the Shadows'
+
+2.2.3 (development/maintenance)
+Added unit legacies - on maximum level, any living unit may choose as AMLA taken to discover its legacy, and then may learn some special powers related to that legacy (8 legacies at the moment)
+Removed Elvish Sprite (people said it did not fit there)
+At the beginning of chapter 1, more unit types can be recruited (it tended to discourage people from playing it
+When a leader dies, dropping an item and winning the scenario, the item he dropped is moved into the item storage
+Item traders work properly
+Ability added by potion of starving no longer permanently affects maximum hitpoints; it wears off with the potion
+Chapter 3 units are autorecalled
+Effect 'Increases Terrain Defences' works
+Scenario 'Infinite Legion' is no longer won when Lethalia moves somewhere
+
+2.2.2 (maintenance)
+Weapon modifier 'sucks X hp with each hit' heals proper amounts of hitpoints
+Fixed Destroyer's and Efraim's berserk advancements
+Changed the mechanics for improvements for bonus attacks (attacks whose properties depend on properties of an attack the unit already has, like Werewolf or Efraim's berserk)
+Items granting teleport no longer allow the unit to teleport between unowned villages
+Book of Courage works again
+
+2.2.1 (maintenance)
+Blue lines in item descriptions are now in lighter blue, and therefore more visible
+Prophets have 30% defence on mountains and move slightly better in caves
+Chapter 4 loads
+Item pictures are no longer erroneously displaying on the ground when some items are put into inventory
+Skeletal Dragon's jaw attack advancements are now correct
+
+2.2.0 (development)
+Added chapter 6
+Effects of items are displayed in a clear way (no more vague descriptions)
+Altered the effects of a lot of items, mostly improved
+Units no longer flash white when their inventory is manipulated
+Chapters have their own pictures
+Books add new advancements, rather than simply improve the unit - this can be more powerful, but it is impossible to stack bonuses from a lot of them
+New sprites for main characters - it should be easy to distinguish them from other units now, and they should suit their portraits more (Lethalia's portrait is not finished yet)
+Altered the main characters; the main change was the replacement of feeding by an ability named 'soul eater', that allows the unit to take new advancement paths after a certain amount of kills
+Atttacks hitting multiple enemies now now affected by the time of day, leadership, etc., and their ranges depend more on damage (less damage to additional targets)
+Added a new unit: Elvish Sprite (good both at melee and ranged combat, but excellent at neither, alternative advancement of Shyde and Sylph)
+Added a new unit: Swordmaster (an advancement of Royal Guard, Destroyer now uses maces and advances from Iron Maulers)
+Added a new unit: Shadow Prince (replacing Renegade and Marauder, because they sucked)
+Added a new unit: Blackguard (advances from Highwayman and Iron Mauler)
+Altered a lot of units to avoid RIPLIB violations (lesser RIPLIB violations, like converging advancement lines, are still present)
+Potions now give temporary bonuses (until the unit advances), and they can be all unstored at any time (and it works like intended)
+Added a lot of items
+Significantly altered scenarios Pirates and Lost in Space
+Fixed a lot of bugs
+
+2.1.16 (maintenance)
+Units can no longer advance to Forester in mutiplayer outside LotI (causing OoS errors)
+
+2.1.15 (maintenance)
+In multiplayer, advancing to a Dragon Rider, Destroyer or Champion Bowman no longer crashes the game
+Grand Marshal in multiplayer can advance to Dragon Rider now
+'Travel to' option in multiplayer now works
+
+2.1.14 (development/maintenance)
+Added a multiplayer scenario
+When Efraim or Lethalia pick up an object, they don't lose fatal amounts of maximum hitpoints (hell this damned feeding is extremely bug-prone)
+Dwarvish Lords can pick up axes now
+'Start controlling the undead' menu item vanishes after the Bloodbath scenario, and no longer allows the player to take control of side 5 units any time he chooses, but only once
+Added a portrait to Akula
+Amulets have descriptions again
+Spears and maces can be unequipped
+Boots of Evanescence no longer allow the unit to teleport anywhere
+Fixed two broken transitions in the final dungeon
+A lot of lesser bug fixes
+
+2.1.13 (maintenance)
+Fixed the problem that no enemies were spawned in the chapter 5 final dungeon (created in 2.1.9)
+Fixed Foul Potion - now it gives 3 to maximum hp per turn, but staying away from combat will drain the unit's maximum hp incredibly fast, unless cared by a healer
+Potion of healing heals again
+Fixed explosive slow
+There are 100 randomly found items now
+Gold can drop as pickuppable item again
+Cleave and pierce weapon specials now tolerate the poison and slow weapon specials
+All mages can pick up staves now
+Leaders are now unrenamable (as they should have always been)
+
+2.1.12 (maintenance)
+Fixed a fatal bug preventing 2.1.11 from loading
+
+2.1.11 (development)
+Added crafting - in the items menu, you can create items (15 types at the moment) for which you choose the item type, from crafting materials that drop like items
+Item list is now updated when you start a new scenario, no longer has to be a new campaign (this was an error)
+
+2.1.10 (maintenance)
+Decreased the randomness of drops; only items a unit in your present or past recruit list or its advancements can take can drop; also, all scenarios have specific drop chances
+Added spears and tridents to the game (tridents are the same thing as spears, just a different name)
+Boots are now visible
+Units cannot equip multiple maces
+
+2.1.9 (maintenance)
+The campaign loads 70% faster now; still taking a bit longer than other campaigns, but only a bit (due to the length of this one)
+Weapon names no longer appear as weapon specials, now they just rename the attack
+Each recruited unit has a 2% chance to be loyal; each recruited unit has a 1% chance to have a trait named highlander, that is far the best trait
+Added 10 new items with completely new kinds of effects
+Boots, Helms and Gauntlets can be unequipped now
+Potions of Healing can now be unstored even after turn 2
+Item storage is inaccessible in multiplayer (it was useless anyway)
+Item changing the alignments of units now really change the alignments, not just add weapon specials that add 25% damage during one period of day and subtract 25% damage another period of day
+Fixed a lot of lesser item bugs
+Chapter 3 Heavy Infantrymen and their advancements can take maces now, also Mages of Light
+Disabled the multiplayer era
+
+2.1.8 (development)
+Added item storage, a place where items that could not be equipped by the unit that picked them up are stored and can be taken from (this option vanishes after turn 2 to prevent exploits)
+Units with items are marked on the screen
+Fixed a bunch of bugs in the resistance calculation, causing it to get insanely high in many cases
+In the Toxic Sun scenario, items equipped on Efraim and Lethalia before they became undead are placed into the storage
+Enabled Maces to drop in single player (because the can be stored now if there is no unit that can take it), their chance to drop is however much lower than in multiplayer
+Added two items (there is 80 items now)
+Chapter 2 should be harder if continuing from chapter 1, also the beginning of chapter 3 (guerilla -> war)
+Enemies in Antediluvian Tunnels should be much stronger (more hp) if continuing from earlier chapters
+
+2.1.7 (maintenance)
+Fixed a possibly fatal bug causing the multiplayer to fail to load
+Units with Nightstalk should be no longer hidden in shadows when chatting with others in chapter 2 dialogues
+Gods scenario is now shrouded (as it always had to be)
+
+2.1.6 (development)
+Humans can advance to 4th level (or 5th level in case of magi, horsemen and Grand Marshal), where they have specific advancements, like elves or undead
+Added Era of the Invincibles, a multiplayer era with strong leaders from campaign and five factions made from normal units, those that appear in the campaign, it should work with most multiplayer scenarios because all units except leaders are regular units
+Javelineer can now advance to Royal Guard and Halberdier, Lancer can now advance to Paladin and Grand Knight, Silver Mage can now advance to a slightly more Silver Mage-like Great Mage
+Items disappear when the scenario is won; this means that enemy leaders will no longer drop items you cannot pick them up because of the victory
+Completely redone the Underground scenario (Chapter 2)
+Fixed a broken transition in the Armoury scenario
+In chapter 5, enemy units are spawned at the beginning of player's turn, and are coming from visible trapdoors; this means that you can kill them before they attack and so they will appear more frequently now
+Lethalia can pick up staves now
+Added maces to the game (four of them); they are multiplayer-only because they would be quite useless in the campaign
+Expanded the texts in books in the Library scenario in Chapter 5
+Added one other item
+Changed the name of King Salmon in Chapter 5 to King Dantair
+Rangers can pick up swords now
+Scenario Nemesis no longer crashes if begun from the 4th chapter
+Boots of Evancescence now add a teleport animation (like they were supposed to)
+
+2.1.5 (maintenance)
+Fixed bugs making a few new items useless
+Elvish Nightprowler can now pick up bows
+Fixed a bug causing unit's properties to be generated wrongly under certain circumstances
+Made a deep overhaul of the item picking macros, that decreased the size of RAM it needs by 100 megabytes and shortened the loading time approximately by 40%
+
+2.1.4 (maintenance/development)
+Renamed a lot of items (Crow_T's suggestions)
+Added four items
+Weapon special disintegrate can be obtained now
+Fixed a possible bug causing traders to attack enemies or player
+Beefed up the stats of the Dark Dragon (he is 10 times as strong now)
+Drops at the beginning of chapters 2 and 3 will be increased if the player starts by that chapter
+Dropping items is no longer limited to the first 9 if the unit has more than 9 items
+
+2.1.3 (development/maintenance)
+Added traders to the game
+Users of explosive attacks will pay more attention to avoid harming allies
+Added helmets, boots and gauntlets to the game, three kinds of boots, three kinds of helmets and three kinds of gauntlets
+Decreased the resistance granted by armours
+Added four other items
+Rewritten the part of the code that determinates the type of item dropped; rebalanced the chances to drop of particular items
+Added a cap for resistances - the maximum resistance to physical is now 80%, the maximum resistance to fire and cold is 90% and the maximum resistance to arcane is 70%
+Redone the armour system; armours no longer add to resistances, now they increase them multiplicatively; so a Fencer's resistances will increase more than the resistances of a Shock Trooper
+Replaced Efraim's portrait with an improved one from CrowT
+Fixed some possible display bugs after the We Walk in the Shadows scenario
+Long Way Home scenario will no longer have problems with messages about deprecated WML parts
+Fixed one possible item exploit leading to making a unit invincible
+Fixed a possible bug with Orb of Dragonflame
+
+2.1.2 (maintenance)
+Replaced Efraim's portrait with one from CrowT
+Added an item
+Ring of Wisdom is no longer invisible when dropped
+Elvish Nightprowlers can now pick bows like they were supposed to
+Leaders no longer have a chance to lose hp obtained by feeding in the We Walk in the Shadows scenario
+
+2.1.1 (maintenance)
+Enemies in chapter 5 no longer drop two items at once
+Animations of lightnings in scenario 'Akula's Place' when somebody attacks an ally of Akula work properly now
+The animations of Shadowalkers when attacking with a sword should work properly now
+Delly's animations with sword should work properly now
+Attacks hitting multiple enemies now give experience only for fighting the selected target; this means that it will no longer give insane amounts of experience
+When passing from one location of Antediluvian tunnels to another, the game will pass there without announcing that the level is over and XXX gold will be retained
+Decreased the damage of Deathlord from 12-5 to 10-5, added crossbows to them (5-3 pierce)
+Efraim can no longer pick up crossbows (they were absolutely useless to him anyway))
+
+2.1.0 (development/maintenance)
+Added 5th chapter
+Soul Shooters can now take bows as they were supposed to
+Fixed some language mess in description of an advancement of Lethalia
+Efraim and Lethalia can now feed also on the non-living
+Improved the whirlwind code - now it is fully affected by weapon damage, and also inherits some of the weapon specials
+Changed the whirlwind attack's properties; will not affect save files, only newly created characters; now its chance to hit is always 70% and it is uncounterable
+Explosive damages now deal a splash damage of 75% of the attack's damage; if the damage is high enough, also the enemies 2 hexes from the unit are damaged a bit
+Lethalia's faerie fire no longer drains or slows, but it deals more damage
+The plague advancement for faerie fire is now optional
+Fixed a bug causing problems when viewing inventory of a unit with the Ring of Wisdom or a Staff of Aimucasur
+Efraim should no longer have to reequip items when some weapon specials were lost due to an advancement
+Fixed a bug that caused items to be invisible when dropped after picking up an item of the same type under some special circumstances
+Halved the drop chance
+Liches (obtainable only through the Tome of Liches) can now advance to Ancient Liches
+Decreased the starting hp of preserved liches when starting from later chapters; they have some starting gear instead
+Delly's advancement is now identical to Efraim's
+
+2.0.13 (maintenance)
+Argan's resistances were fixed
+Elvish Gryphon Riders in chapter 3 should get their advancements with bows properly
+Amulets and rings adding to resistances in combination with good armours no longer cause the Preserved Liches to be immune to damage
+Edited a few scenarios in late chapter 3, decreasing the size of the maps and increasing the enemy gold
+
+2.0.12 (maintenance)
+Fixed the bug that made chapter 3 autorecall work quite weirdly
+Poison potion's negative effect vanishes at the end of the scenario where it was picked
+Preserved liches no longer lose tons of hitpoints when their inventory is viewed
+
+2.0.11 (development/maintenance)
+Undo works again
+Scenarios in chapter 3 do not take ages to load anymore, the bug that was there for almost two years was fixed
+Preserved liches can equip items, except potions (items will not affect the damage dealt to additional units)
+Delly is now a Shadowalker from the end of chapter 1
+Increased the chance to drop of some useful items in the first scenarios
+Added Soul Shooter, a level 4 advancement of Banebows
+
+2.0.10 (maintenance/development)
+Fixed the quasi fatal bug wiping the whole unit list except one unit in the 'Toxic Sun' scenario I created when trying to fix a lesser issue shortly before
+Knockback bug fixed (now it can kill)
+Added Grim Knight, a level 3 advancement of Chocobones and Deathblades
+Added daggers and throwing knives to the drop list
+Undead are no longer removed from the recall list in the 'Long Way Home' scenario
+
+2.0.9 (development)
+Added a new unit, Reaper, a level 4 advancement of Spectre and Nightgaunt
+Improved some older advancement descriptions ('What should the victorious unit become? - Learn to throw fireballs' no more)
+Soulless can advance to Revenants, Skeletons can advance to Chocobones, Revenants can advance to Death Knights
+Edited a few maps, mostly removing the deprecated flowers' terrain (should work on Wesnoth 1.11 now)
+
+2.0.8 (development/maintenace)
+Fixed a bug causing the non-immortalised version of Efraim to remain on the recall list in chapter 1
+Added crossbows to the drop list (4 types)
+Introduced a new unit, Deathlord, a level 4 advancement of Draugs and Death Knights
+
+2.0.7 (development)
+Units from older chapters are no longer autorecalled in chapter 3
+Completely redone the drop system, fixing many bugs with it, shortening the save files and scenario loading delays
+It is no longer possible to wear two items of the same type with the same unit, when you pick the second one, the first one will drop on the ground
+Added 1 new item, and activated an item that was accidentally set as undroppable
+Improved the illumination/darkening halo system, now any unit with the illumination or darkening ability will have a halo showing it
+Some items and advancements altering attacks will also change to attack icon
+Fixed some Lethalia's animations triggering when they were not supposed to trigger
+Set up a changelog
+
+2.0.6 (maintenance)
+Fixed the bug causing weird behaviour and then disappearance of some Elvish Avengers
+Improved the graphics for Elvish Gryphon Riders
+
+2.0.5 (maintenance)
+Cleaned a lot of mess in the 'Thirst for Adventures' scenario, possibly causing save file corruption or making it impossible to be completed
+
+2.0.4 (maintenance)
+Fixed a bug that could prevent the player from completing the 'Nemesis' scenario in chapter 4
+
+2.0.3 (maintenance)
+Fixed an exploit allowing important characters in chapter 3 to die - and that could cause serious issues later in chapter 4
+
+2.0.2 (development)
+Added one new item
+Slightly altered Lethalia
+Gave an ability to steal to the thief advancement line
+
+2.0.1 (development/maintenance)
+Fixed a crash bug at the beginning, that occurred if Efraim advanced before scenario 10 in chapter 1 (that was quite likely to happen)
+Fixed a bug in the 'Way of the Assassins' scenario in chapter 4 preventing the player from completing it
+Added an item drop system
+
+2.0.0 (development)
+Redone the add-on for BfW 1.10.0
+Added the 4th chapter
+Elves can advance to 4th level, where they have specific advancements
+It is possible to continue from one chapter into another
+Redone Efraim and Lethalia
+(because of the enormous quantity of changes, I have listed only the important ones)
+
+1.0.1-1.0.6
+Fixed the fatal bugs, fixed many other bugs
+
+1.0.0 (initial release)
+Campaign with several fatal bugs, 3 chapters with about 40 scenarios, some units with specific advancements and no items was published

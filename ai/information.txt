@@ -1,0 +1,1 @@
+This was coded by mattsc for this campaign. It is a micro AI that is much faster as the usual AI, but is a bit dumber. All say a big thanks to mattsc for this!

@@ -1,0 +1,81 @@
+Attacks:
+mostly edited core files
+noctum.png was taken from Invasion of the Unknown
+spirit.png was taken from Wesband (but I saw it also in other add-ons)
+some taken from various resource packs, present in too many places so that I am unable to track their origins
+
+Halo:
+darkness-beam was taken from Invasion of the Unknown
+meteor, icebeam, firebeam and burning was drawn by Dugi
+
+Icons:
+edits of core files
+
+Items:
+edits of core files, some were drawn by Dugi entirely (the uglier ones)
+greatsword.png was originally drawn by Doofus-01
+foap-amulet.png was taken from Fate of a Princess (obviously)
+swordbeam.png was originally drawn by Doofus-01
+battle-axe.png was originally drawn by Doofus-01
+
+Masks:
+taken from wesnoth forums, I cannot remember its author
+
+Misc:
+edits of core files
+schedules taken from Under the Burning Suns
+status icon for infect taken from wesnoth forums
+flames drawn by Dugi
+
+Portraits:
+Akula.png is an edit of a core file, made by Dugi's brother (uses nickname Eruantien)
+Efraim.png, Efraim-later.png and Lethalia.png were drawn for LotI by Crow_T
+Vritra.png was made by Dugi, corrected by Crow_T, head, parts of wings, hair and position taken from mainline portrait for Elvish Shyde
+Argan.png was made by Crow_T, heavily based on a portrait from Era of Chaos or possibly Invasion from the Unknown/After the Storm
+Krux.png, Delenia.png and Lilith.png were made by Dugi, under Crow_T's supervision
+Stormrider.png was drawn by Dugi
+
+Projectiles:
+drawn by Dugi
+
+Scenery:
+frozen units are edits of core files by Dugi
+bookshelves are edits of a file of Bad Moon Rising
+portals are drawn by Dugi
+
+Units:
+edits of core files, with some of them were changed significantly
+incarnation.png is a slightly modified sprite from Invasion of the Unknown, its animations are made by Dugi
+demonologist.png was taken from Era of Myths, but it might originate from elsewhere (I saw that unit also in Invasion from the Unknown)
+hellhound.png was taken from Invasion of the Unknown, animated by Dugi
+demons' baseframes originate from an old version of Invasion of the Unknown, animations created by Dugi
+baseframe for Demon Despot was drawn by Zerovirus (probably, it looks like his style)
+Demon Lord sprite was drawn by Zerovirus, it was unused
+celestial.png was created by van Tarkin and edited and animated by Dugi, but its wings are taken from only van Tarkin knows where
+lethalia.png is based on core files, her legs were taken from Battle Princess from Heir to the throne
+reaper.png is based on core files, its wings were taken from Era of Myths
+arcanister.png was taken somewhere from Wesnoth forums, original author unknown to me, animations by Dugi
+Snow Hunter is a modified Elvish Hunter
+Sword Mage advancement path's female sprites are based on Princess from Heir to the Throne
+Evil Plants and Troll Boulderlobber come from Balancing Extended Era Modification
+Evil Mushrooms come from RPG Creation Kit, former creator unknown to me, animated by Dugi
+Steelhive faction's artwork was made by Zerovirus, it was just taken here because it suited, some animation frames were added by Dugi
+Siege Troll comes from RPG Creation Kit resource pack, original author unknown to me
+Goblin Warbanner and former Rocmaster renamed to Sky Goblin taken from Era of Magic
+Orcish Nightblade was drawn by Sleepwalker and probably forgotten and never coded, it was just taken here
+Orcish Warmonger was drawn by trickityhouses, and left to rot on the forums, taken unchanged
+blackguard was made by van Tarkin
+Efraim was originally drawn by Dugi, edited by van Tarkin
+halo/ice-golem was taken from Era of Myths and maybe somewhat edited
+Blackguard, Chaos Rider and Elvish Overlord were made by van Tarkin
+Ice Dragon is based on the original dragon, significantly improved by SFault
+
+Campaign images:
+drawn by Dugi, a few things taken from units
+
+Campaign icons:
+Assembled from other images, either core or mentioned here
+
+Terrains:
+Edits of core files
+Tropical forests were made by Mephisto and a part of Wesnoth 1.11.4+ core, but needed to be here to make it work on versions before 1.11.4

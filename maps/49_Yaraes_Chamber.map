@@ -1,0 +1,13 @@
+border_size=1
+usage=map
+
+Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         
+Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Iwr         , Xol         , Iwr         , Iwr         , Iwr         , Xol         , Xol         , Xol         , Xol         , Xol         
+Xol         , Xol         , Iwr         , Iwr         , Iwr         , Xol         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Xol         , Xol         , Xol         
+Xol         , Xol         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Xol         , Xol         
+Xol         , Xol         , Iwr         , Iwr         , 2 Iwr       , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Urb         , Iwr         , Iwr         , Iwr         , Xol         , Xol         
+Xol         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Urb         , Urb         , Qxu         , Urb         , Urb         , Iwr         , Xol         , Xol         
+Xol         , Xol         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Urb         , Qxu         , 1 Qxu       , Qxu         , Urb         , Iwr         , Xol         , Xol         
+Xol         , Xol         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Urb         , Qxu         , Qxu         , Qxu         , Urb         , Xol         , Xol         , Xol         
+Xol         , Xol         , Xol         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Iwr         , Xol         , Urb         , Urb         , Urb         , Xol         , Xol         , Xol         , Xol         
+Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         , Xol         

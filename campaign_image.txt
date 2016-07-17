@@ -1,0 +1,49 @@
+If you ever wondered how to make interesting campaign images that actually work if the add-on isn't installed (that is, no custom images used), you might be interested to see the code of the current one. Remove the tabs and newlines, they're added only for transparency (find&replace will do).
+
+misc/blank-hex.png
+~BLIT(
+	units/elves-wood/sylph-melee.png~RC(magenta>black)~CROP(10,10,62,62)
+,0,0)
+~BLIT(
+	halo/undead/idle-flash-6.png~CROP(30,10,62,72)
+,0,0)
+~BLIT(
+	halo/elven/elven-shield-halo-60pct.png~CROP(54,54,72,72)
+,0,0)
+~BLIT(
+	halo/elven/druid-healing4.png~CROP(0,0,62,62)~O(70%)
+,10,10)
+~BLIT(
+	halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(40%)
+,20,20)
+~BLIT(
+	halo/elven/druid-healing2.png~O(40%)~CS(200,-200,-200)~CROP(5,5,57,37)
+,5,35)
+~BLIT(units/human-outlaws/assassin-melee-2-1.png~RC(magenta>black)~CROP(0,0,67,62)
+	~BLIT(
+		units/human-loyalists/master-at-arms-melee-1-1.png~CROP(11,1,10,20)~FL(horizontal)
+	,27,16)
+	~BLIT(
+		halo/elven/druid-healing6.png~O(40%)~CS(200,-200,-200)~CROP(5,15,57,37)
+	,0,25)
+	~BLIT(halo/undead/idle-flash-7.png~CS(50,-50,-50)~CROP(10,0,62,62)
+	,0,0)
+,5,10)
+~BLIT(
+	halo/elven/druid-healing4.png~CROP(0,0,62,62)~O(30%)
+,10,10)
+~BLIT(
+	halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(60%)
+,20,20)
+~BLIT(
+	projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert)~O(30%)
+,44,40)
+~BLIT(
+	projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert)~O(50%)
+,47,45)
+~BLIT(
+	projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert)
+,50,50)
+
+In the .pbl file, it looks like this:
+icon="misc/blank-hex.png~BLIT(units/elves-wood/sylph-melee.png~RC(magenta>black)~CROP(10,10,62,62),0,0)~BLIT(halo/undead/idle-flash-6.png~CROP(30,10,62,72),0,0)~BLIT(halo/elven/elven-shield-halo-60pct.png~CROP(54,54,72,72),0,0)~BLIT(halo/elven/druid-healing4.png~CROP(0,0,62,62)~O(70%),10,10)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(40%),20,20)~BLIT(halo/elven/druid-healing2.png~O(40%)~CS(200,-200,-200)~CROP(5,5,57,37),5,35)~BLIT(units/human-outlaws/assassin-melee-2-1.png~RC(magenta>black)~CROP(0,0,67,62)~BLIT(halo/elven/druid-healing6.png~O(40%)~CS(200,-200,-200)~CROP(5,15,57,37),0,25)~BLIT(halo/undead/idle-flash-7.png~CS(50,-50,-50)~CROP(10,0,62,62),0,0),5,10)~BLIT(halo/elven/druid-healing4.png~CROP(0,0,62,62)~O(30%),10,10)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(60%),20,20)"
