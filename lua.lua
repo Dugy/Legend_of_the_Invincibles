@@ -279,7 +279,7 @@ function unit_information_part_1()
       result = result .. span .. _"Starving:</span> "
       .. starving .. " \n"
     end
-    if from_the_ashes_used ~= nil and from_the_ashes_used == "yes" then
+    if from_the_ashes_used ~= nil then
       result = result .. span .. _"Turns until From The Ashes will be usable:</span> "
       .. from_the_ashes_cooldown .. " \n"
     end
