@@ -491,7 +491,7 @@ function unit_information_part_3()
         end
       end
  
-      if result ~= nil and result == "" then
+      if next(result_list) == nil or result_list == ""  then
         return "none"
       else
         return table.concat(result_list, " \n")
