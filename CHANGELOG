@@ -1,5 +1,10 @@
 Changelog
 
+3.1.22 (maintenance)
+Fixed various bugs related to Beelzebub
+Reduced the damage penalty of AoE attacks
+Fixed a few other bugs
+
 3.1.21 (maintenance, development)
 If the player completes the scenario early, in addition to extra gold, it scares the enemies, if they are scared enough, they will summon Beelzebub, an optional and very rewarding enemy
 Added 5 new items (there are now 300 randomly dropped items)
