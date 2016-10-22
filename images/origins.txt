@@ -34,6 +34,7 @@ Vritra.png was made by Dugi, corrected by Crow_T, head, parts of wings, hair and
 Argan.png was made by Crow_T, heavily based on a portrait from Era of Chaos or possibly Invasion from the Unknown/After the Storm
 Krux.png, Delenia.png and Lilith.png were made by Dugi, under Crow_T's supervision
 Stormrider.png was drawn by Dugi
+female Prophet was created by The_Gnat
 
 Projectiles:
 drawn by Dugi
@@ -69,6 +70,7 @@ Efraim was originally drawn by Dugi, edited by van Tarkin
 halo/ice-golem was taken from Era of Myths and maybe somewhat edited
 Blackguard, Chaos Rider and Elvish Overlord were made by van Tarkin
 Ice Dragon is based on the original dragon, significantly improved by SFault
+female Prophet was given by ForestDragon, animations by Dugi
 
 Campaign images:
 drawn by Dugi, a few things taken from units
