@@ -1,5 +1,10 @@
 Changelog
 
+3.1.23 (development/maintenance)
+Blood rain in chapter 9 now focuses on player's units and appears less often, to prevent it from thrashing performance
+Added a female version of Prophet (before, if a female unit advanced to one, the result was male)
+Fixed a few lesser bugs
+
 3.1.22 (maintenance)
 Fixed various bugs related to Beelzebub
 Reduced the damage penalty of AoE attacks
