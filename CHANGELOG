@@ -1,6 +1,7 @@
 Changelog
 
 3.1.23 (development/maintenance)
+Added 15 new items
 Blood rain in chapter 9 now focuses on player's units and appears less often, to prevent it from thrashing performance
 Added a new unit to chapter 7, Spell Eater, a monster that protects its mearby allies from arcane damage, made the chapter 7 monsters weaker to balance it
 Added a female version of Prophet (before, if a female unit advanced to one, the result was male)
