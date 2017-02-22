@@ -595,3 +595,36 @@ function unit_information_part_5()
     wesnoth.set_variable("advancements_taken", result_amla)
     wesnoth.set_variable("soul_eating", result_soul)
 end
+
+
+function clear_advancements(unit)
+    for i = #unit, 1, -1 do
+        v = unit[i]
+        if v[1] == "advancement" then
+            table.remove(unit, i)
+        end
+    end
+    return unit
+end
+
+function wesnoth.wml_actions.pre_advance_stuff(cfg)
+    local unit = wesnoth.get_units(cfg)[1].__cfg
+    unit = clear_advancements(unit)
+    local u = wesnoth.create_unit { type = "Advancing " + unit.type }
+    for i, v in ipairs(u.__cfg) do
+      if v[1] == "advancement" then
+       table.insert(unit, v)
+      end
+    end
+    wesnoth.set_variable("advancing_unit", unit)
+    wesnoth.wml_actions.inspect {}
+    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
+    wesnoth.wml_actions.fire_event{name="advance", { "primary_unit", id=unit.id }}
+end
+
+function wesnoth.wml_actions.advance_stuff(cfg)
+    local unit = wesnoth.get_units(cfg)[1].__cfg
+    unit = clear_advancements(unit)
+    wesnoth.set_variable("advancing_unit", unit)
+    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
+end
