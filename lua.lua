@@ -608,23 +608,28 @@ function clear_advancements(unit)
 end
 
 function wesnoth.wml_actions.pre_advance_stuff(cfg)
+    wesnoth.message("pre_advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
     unit = clear_advancements(unit)
-    local u = wesnoth.create_unit { type = "Advancing " + unit.type }
+    local u = wesnoth.create_unit { type = "Advancing" .. unit.type }
     for i, v in ipairs(u.__cfg) do
       if v[1] == "advancement" then
        table.insert(unit, v)
       end
     end
-    wesnoth.set_variable("advancing_unit", unit)
-    wesnoth.wml_actions.inspect {}
-    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
-    wesnoth.wml_actions.fire_event{name="advance", { "primary_unit", id=unit.id }}
+    wesnoth.put_unit(unit)
+--    wesnoth.set_variable("advancing_unit", unit)
+--    wesnoth.wml_actions.inspect {}
+--    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
+--    wesnoth.wml_actions.fire_event{name="advance", { "primary_unit", id=unit.id }}
 end
 
 function wesnoth.wml_actions.advance_stuff(cfg)
+    wesnoth.message("advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
     unit = clear_advancements(unit)
-    wesnoth.set_variable("advancing_unit", unit)
-    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
+--    unit.type = loti_advancing_type
+    wesnoth.put_unit(unit)
+--    wesnoth.set_variable("advancing_unit", unit)
+--    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
 end
