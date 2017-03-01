@@ -607,29 +607,56 @@ function clear_advancements(unit)
     return unit
 end
 
+loti_needs_advance = nil
+
 function wesnoth.wml_actions.pre_advance_stuff(cfg)
-    wesnoth.message("pre_advance_stuff")
+--    wesnoth.message("pre_advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
-    unit = clear_advancements(unit)
-    local u = wesnoth.create_unit { type = "Advancing" .. unit.type }
-    for i, v in ipairs(u.__cfg) do
-      if v[1] == "advancement" then
-       table.insert(unit, v)
-      end
+    local a = helper.get_child(unit, "advancement")
+    local t = wesnoth.get_variable("side_number")
+    if t == unit.side then
+        if a ~= nil and a.id == "backup_amla" then
+            unit = clear_advancements(unit)
+            local u = wesnoth.create_unit { type = "Advancing" .. unit.type }
+            for i, v in ipairs(u.__cfg) do
+                if v[1] == "advancement" then
+                    table.insert(unit, v)
+                end
+            end
+            local v = helper.get_child(unit, "variables")
+            v.achieved_amla = true
+            wesnoth.put_unit(unit)
+            loti_needs_advance = true
+        end
+    else
+        local v = helper.get_child(unit, "variables")
+        v.may_need_respec = true
+        wesnoth.put_unit(unit)
     end
-    wesnoth.put_unit(unit)
---    wesnoth.set_variable("advancing_unit", unit)
---    wesnoth.wml_actions.inspect {}
---    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
---    wesnoth.wml_actions.fire_event{name="advance", { "primary_unit", id=unit.id }}
 end
 
 function wesnoth.wml_actions.advance_stuff(cfg)
-    wesnoth.message("advance_stuff")
+--    wesnoth.message("advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
+    if loti_needs_advance == nil then
+        if unit.type == "Elvish Assassin" then
+--	    wesnoth.message("is assassin")
+            local a = { "advancement", { max_times = 1, always_display = true, id = "execution", image = "attacks/bow-elven-magic.png", strict_amla = true, require_amla="",
+                { "effect", { apply_to = "remove_attack", name = "execution" }},
+                { "effect", { apply_to = "bonus_attack", name = "execution", description = _"execution", icon = "attacks/bow-elven-magic.png", range = "ranged", defense_weight = "0", damage = "-40", merge = true, force_original_attack = "longbow" }}
+            }}
+            table.insert(m, a)
+            wesnoth.put_unit(unit)
+        end
+        return
+    end
     unit = clear_advancements(unit)
---    unit.type = loti_advancing_type
+    local m = helper.get_child(unit, "modifications")
+    for i = #m, 1, -1 do
+        if m[i][2].sort ~= nil and string.find(m[i][2].sort, "potion") then
+            table.remove(m, i)
+        end
+    end
     wesnoth.put_unit(unit)
---    wesnoth.set_variable("advancing_unit", unit)
---    wesnoth.wml_actions.unstore_unit{variable="advancing_unit", find_vacant=false}
+    loti_needs_advance = nil
 end
