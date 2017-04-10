@@ -1,5 +1,13 @@
 Changelog
 
+3.2.0 (development)
+The campaign should work on wesnoth 1.13
+Made large changes to chapter 9, reducing the quantity of usual enemies and adding other, scenario-specific threats
+In chapter 4, it is now possible to recall a few units from previous parts of the campaign
+In chapter 4, protagonists will create weaker clones of themselves as allies in scenarios where they would be alone
+Added a new enemy group to chapter 4
+Fixed a few lesser bugs
+
 3.1.23 (development/maintenance)
 Added 15 new items
 Blood rain in chapter 9 now focuses on player's units and appears less often, to prevent it from thrashing performance

@@ -223,6 +223,9 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				end
 				wesnoth.wml_actions.kill({
 					id = unit_to_harm.id,
+					{ "filter_second", {
+						id=harmer.id
+					}},
 					animate = toboolean( animate ),
 					fire_event = fire_event
 				})
