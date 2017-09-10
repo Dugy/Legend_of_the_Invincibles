@@ -149,7 +149,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			end
 
 			unit_to_harm.hitpoints = unit_to_harm.hitpoints - damage
-			local text = string.format("%d%s", damage, "\n")
+			local text = string.format("%d%s", math.floor(damage), "\n")
 			local add_tab = false
 			local gender = unit_to_harm.__cfg.gender
 
@@ -236,7 +236,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			end
 
 			if variable then
-				wesnoth.set_variable(string.format("%s[%d]", variable, index - 1), { harm_amount = damage })
+				wesnoth.set_variable(string.format("%s[%d]", variable, math.floor(index - 1)), { harm_amount = damage })
 			end
 		end
 
@@ -335,7 +335,7 @@ function unit_information_part_2()
       local format_string = "<span font_family='monospace' font_weight='bold'>%4d"
       .. "-"
       .. "%-2d</span>"
-      return string.format(format_string, damage, number)
+      return string.format(format_string, math.floor(damage), math.floor(number))
     end
 
     -- Each attack has two different names in this context:
@@ -516,7 +516,7 @@ function unit_information_part_4()
         penetrate = v["sub"]
       end
     end
-    return string.format("%6d%%       %6d%%</span> \n", resist, penetrate)
+    return string.format("%6d%%       %6d%%</span> \n", math.floor(resist), math.floor(penetrate))
   end
 
   local result = _"<span font_family='monospace' weight='bold' color='#60A0FF'>"
@@ -556,7 +556,7 @@ function unit_information_part_5()
       local result = ""
       for abil, count in pairs(t) do
         result = result .. "<span font_family='monospace' font_weight='bold' color='#60A0FF'>    "
-        .. string.format("%2dx ", count) .. "</span>" .. abil .. " \n"
+        .. string.format("%2dx ", math.floor(count)) .. "</span>" .. abil .. " \n"
       end
       return result
     end
