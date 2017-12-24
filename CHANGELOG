@@ -1,5 +1,9 @@
 Changelog
 
+3.2.1 (maintenance)
+Fixed a large number of bugs, many of which were showstoppers on 1.13
+Added 15 new items
+
 3.2.0 (development)
 The campaign should work on wesnoth 1.13
 Made large changes to chapter 9, reducing the quantity of usual enemies and adding other, scenario-specific threats
