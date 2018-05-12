@@ -386,12 +386,12 @@ function unit_information_part_2()
       elseif attack["type"] == "arcane" then dmgType = _"arcane"
       elseif attack["type"] == "lightning" then dmgType = _"lightning" end
 
-      return  "<span font_weight='bold' color='#60A0FF'>" 
+      return  "<span font_weight='bold' color='#60A0FF'>"
       .. range .. " - " .. dmgType
       .. "</span>"
       .. attack_status
     end
-    
+
     -- An attack special is reported only if it has a valid "name" field.
     function get_attack_specials(attack)
       H = wesnoth.require "lua/helper.lua"
@@ -407,8 +407,8 @@ function unit_information_part_2()
          elseif special_name == "dummy" and special_data["id"] == "spell_suck" then
            special = "spell suck " .. tostring(special_data["suck"])
          elseif special_name == "dummy" and special_data["suck"] ~= nil then
-           if attack["type"] == "blade" 
-           or attack["type"] == "pierce" 
+           if attack["type"] == "blade"
+           or attack["type"] == "pierce"
            or attack["type"] == "impact" then
              special = "suck " .. tostring(special_data["suck"])
            end
@@ -428,7 +428,7 @@ function unit_information_part_2()
       result_table = remove_duplicates(result_table)
       if len(result_table) == 0 then
         return ""
-      else 
+      else
         return "<span font_family='monospace'>       </span> "
              .. table.concat(result_table, ", ")
       end
@@ -436,7 +436,7 @@ function unit_information_part_2()
 
     -- This is a simple helper function we use to summarize each individual attack
     function list_one_attack(attack)
-      local result = get_attack_damage_summary(attack) .. " " 
+      local result = get_attack_damage_summary(attack) .. " "
       .. get_attack_name(attack) .. ": "
       .. get_attack_range_and_type(attack) .. " \n"
       .. get_attack_specials(attack) .. " \n"
@@ -474,11 +474,11 @@ function unit_information_part_3()
       if ability_info["description"] == nil or ability_info["description"] == "" then
         return nil
       end
-      
-      local result = "<span color='#60A0FF' weight='bold'>" 
+
+      local result = "<span color='#60A0FF' weight='bold'>"
       .. tostring(ability_info["name"])
       .. "</span>: " ..  tostring(ability_info["description"])
-      
+
       -- Replace all newlines in the abilities description with spaces.  This
       -- keeps the ability list much more compact.
       result = string.gsub(tostring(result), " \n", " ")
@@ -493,7 +493,7 @@ function unit_information_part_3()
           table.insert(result_list, list_one_ability(v))
         end
       end
- 
+
       if next(result_list) == nil or result_list == ""  then
         return "none"
       else
@@ -560,13 +560,18 @@ function unit_information_part_5()
       end
       return result
     end
-  
+
     -- Main function for this block: create a nicely formatted list of all of a
     -- unit's advancements and the number of times it took each of them.
     -- AMLA advancements, and soul eating choices
     function list_amla()
       H = wesnoth.require "lua/helper.lua"
-      local advances = H.get_variable_array("unit.modifications.advance")
+      local advances
+      if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.2") then
+        advances = H.get_variable_array("unit.modifications.advancement")
+      else
+        advances = H.get_variable_array("unit.modifications.advance")
+      end
       local result_amla = ""
       local result_soul = ""
       local result_table = {}
