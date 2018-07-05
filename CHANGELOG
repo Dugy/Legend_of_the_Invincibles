@@ -1,5 +1,9 @@
 Changelog
 
+3.2.2 (maintenance)
+Updated Orcish Nightblade to be closer to the newly added mainline one
+Fixed a lot of lesser bugs, mostly compatibility problems with 1.14
+
 3.2.1 (maintenance)
 Fixed a large number of bugs, many of which were showstoppers on 1.13
 Added 15 new items
