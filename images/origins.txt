@@ -63,7 +63,6 @@ Evil Mushrooms come from RPG Creation Kit, former creator unknown to me, animate
 Steelhive faction's artwork was made by Zerovirus, it was just taken here because it suited, some animation frames were added by Dugi
 Siege Troll comes from RPG Creation Kit resource pack, original author unknown to me
 Goblin Warbanner and former Rocmaster renamed to Sky Goblin taken from Era of Magic
-Orcish Nightblade was drawn by Sleepwalker and probably forgotten and never coded, it was just taken here
 Orcish Warmonger was drawn by trickityhouses, and left to rot on the forums, taken unchanged
 blackguard was made by van Tarkin
 Efraim was originally drawn by Dugi, edited by van Tarkin
