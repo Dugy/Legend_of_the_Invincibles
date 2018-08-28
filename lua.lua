@@ -218,7 +218,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					wesnoth.wml_actions.unstore_unit { variable = "Lua_store_unit",
 									find_vacant = false,
 									animate = toboolean( animate ),
-									fire_event = fire_event }
+									fire_event = toboolean(fire_event) }
 					wesnoth.set_variable ( "Lua_store_unit", nil )
 				end
 				wesnoth.wml_actions.kill({
@@ -227,7 +227,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 						id=harmer.id
 					}},
 					animate = toboolean( animate ),
-					fire_event = fire_event
+					fire_event = toboolean(toboolean(fire_event))
 				})
 			end
 
