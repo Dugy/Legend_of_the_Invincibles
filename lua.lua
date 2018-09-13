@@ -226,6 +226,9 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					{ "filter_second", {
 						id=harmer.id
 					}},
+					{ "secondary_unit", {
+						id=harmer.id
+					}},
 					animate = toboolean( animate ),
 					fire_event = toboolean(toboolean(fire_event))
 				})
