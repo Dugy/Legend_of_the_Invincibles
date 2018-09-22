@@ -1,10 +1,13 @@
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/titles.lua")
+
 --! #textdomain "wesnoth-loti"
+
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 local helper = wesnoth.require "lua/helper.lua"
 
- local old_unit_status = wesnoth.theme_items.unit_status
- function wesnoth.theme_items.unit_status()
+local old_unit_status = wesnoth.theme_items.unit_status
+function wesnoth.theme_items.unit_status()
      local u = wesnoth.get_displayed_unit()
      if not u then return {} end
      local s = old_unit_status()
@@ -15,21 +18,21 @@ local helper = wesnoth.require "lua/helper.lua"
          } })
      end
      return s
- end
+end
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 local old_unit_status = wesnoth.theme_items.unit_status
 function wesnoth.theme_items.unit_status()
-local u = wesnoth.get_displayed_unit()
-if not u then return {} end
-local s = old_unit_status()
-if u.status.incinerated then
- table.insert(s, { "element", {
-     image = "misc/incinerated.png",
-     tooltip = _"in flames: This unit is in flames. It will lose 16 HP per turn, unless cured by a healer or by standing on a village."
- } })
-end
-return s
+	local u = wesnoth.get_displayed_unit()
+	if not u then return {} end
+	local s = old_unit_status()
+	if u.status.incinerated then
+		table.insert(s, { "element", {
+		image = "misc/incinerated.png",
+		tooltip = _"in flames: This unit is in flames. It will lose 16 HP per turn, unless cured by a healer or by standing on a village."
+		} })
+	end
+	return s
 end
 
 function wesnoth.wml_actions.get_unit_resistance(cfg)
@@ -670,4 +673,105 @@ function wesnoth.wml_actions.advance_stuff(cfg)
     end
     wesnoth.put_unit(unit)
     loti_needs_advance = nil
+end
+
+nameless_generator = wesnoth.name_generator("cfg", [[
+main={prefix}{middle}{suffix}|{prefix}{suffix}
+prefix=Marth|Orgh|Vazz|Mal|Horgh|Thar|Aath|Bohr|Dur|Kurg|Nerh|Roeg|Xen
+middle=rho|maarg|vret|loeg|vurh|'gez|'eth|rug
+suffix=roth|mortus|vath|'deth|arth|uth|grus|bul
+]])
+
+undead_names = wesnoth.name_generator("cfg", [[
+main={title} {nickname}|{prefix}{suffix}
+title=Mister|Doctor|Lord|Baron|Old
+nickname=Bone|Skinny|Pale|Departed|Buried|von Bone|Dead|Boney|Holey|Phillip Marrow
+prefix=Bone|Dust|Death|Rot|Rattle|Creak|Wrap|Hollow
+suffix=face|bones|tooth|skin|ribs|soul|scratch|knuckle|femur
+]])
+
+
+function wesnoth.wml_actions.check_unit_title(cfg)
+	local u
+	if cfg.variable then
+		u = wesnoth.get_variable(cfg.variable)
+	else
+		u =  wesnoth.get_units(cfg)[1].__cfg
+	end
+	if not u or not u.race or u.race == "" then
+		return
+	end
+	local unit_variables = helper.get_child(u, "variables")
+
+	-- Check if the unit should be given a title
+	if unit_variables.been_given_title or u.unrenamable then
+		return
+	end
+	unit_variables.been_given_title = true
+	local deserves = false
+	if not u.advances_to or u.advances_to == "null" or u.advances_to == "" then
+		deserves = true
+	elseif u.canrecruit then
+		deserves = true
+	elseif (u.overlays and u.overlays:find("misc/hero%-icon%.png")) or (u.ellipse and u.ellipse:find("misc/ellipse%-hero")) then
+		deserves = true
+	end
+	if u.race == "demon-loti" or u.race == "demon lord-loti" or u.race == "demon-loti-secret" or u.race == "imp-loti" then
+		deserves = false
+	end
+	if not deserves then
+		return
+	end
+
+	-- If the unit has no name, give it one
+	if u.name == "" then
+		if u.race == "undead" then
+			u.name = undead_names()
+		else
+			u.name = nameless_generator()
+		end
+	end
+	
+	local flavour = get_unit_flavour(u)
+
+	-- Make legacy affect flavour, even unset one
+	local function check_legacy(advancement_name, legacy_name, legacy_flavour)
+		if advancement_name == legacy_name then
+			for i = 1,#flavours_table do
+				if legacy_flavour[flavours_table[i]] then
+					flavour[flavours_table[i]] = flavour[flavours_table[i]] + legacy_flavour[flavours_table[i]]
+				end
+			end
+		end
+	end
+	local modifications = helper.get_child(u, "modifications")
+	for i = 1,#modifications do
+		if modifications[i][1] == "advancement" then
+			local name = modifications[i][2].id
+			check_legacy(name, "fire_dragon_legacy", { chivalrous = 3, wizardly = 5, brutish = 2 })
+			check_legacy(name, "ice_dragon_legacy", { chivalrous = 3, wizardly = 5, brutish = 2 })
+			check_legacy(name, "dark_dragon_legacy", { dark = 5, wizardly = 5 })
+			check_legacy(name, "undead_legacy", { dark = 7, ghostly = 3 })
+			check_legacy(name, "legacy_of_kings", { chivalrous = 7, warlike = 3 })
+			check_legacy(name, "legacy_of_titans", { brutish = 10 })
+			check_legacy(name, "legacy_of_sorrow", { dark = 5, criminal = 5 })
+			check_legacy(name, "legacy_of_light", { chivalrous = 10 })
+			check_legacy(name, "legacy_of_phoenix", { chivalrous = 5, ghostly = 5 })
+			check_legacy(name, "legacy_of_exile", { criminal = 10 })
+			check_legacy(name, "legacy_of_the_freezing_north", { brutish = 3, dark = 3, warlike = 4 })
+			check_legacy(name, "legacy_of_the_free", { criminal = 5, sneaky = 5 })
+		end
+	end
+	
+	-- Normalise flavour to have sum equal to 10
+	flavour = normalise_flavour(flavour)	
+
+	-- Finalise
+	u.name = assign_title(u.name, u.gender, flavour)
+
+	if cfg.variable then
+		u = wesnoth.set_variable(cfg.variable, u)
+	else
+		wesnoth.put_unit(u)
+	end
 end
