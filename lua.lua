@@ -696,7 +696,11 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	if cfg.variable then
 		u = wesnoth.get_variable(cfg.variable)
 	else
-		u =  wesnoth.get_units(cfg)[1].__cfg
+		local units = wesnoth.get_units(cfg)
+		if #units < 1 then
+			return
+		end
+		u =  units[1].__cfg
 	end
 	if not u or not u.race or u.race == "" then
 		return
