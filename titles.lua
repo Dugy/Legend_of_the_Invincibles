@@ -457,7 +457,7 @@ function assign_title(name, female, flavour)
 				elseif female and data[i].female_text then
 					relevant = data[i].female_text
 				else
-					wesnoth.chat{ message="Nonterminal variation for " .. nonterminal .. " lacks a text or a male_text and a female_text"}
+					wesnoth.wml_actions.chat{ message="Nonterminal variation for " .. nonterminal .. " lacks a text or a male_text and a female_text"}
 					relevant = "(error)"
 				end
 				if suitable[fitting] then
@@ -503,7 +503,7 @@ function assign_title(name, female, flavour)
 			end
 			return result
 		else
-			wesnoth.chat{ message = "Nonterminal " .. nonterminal .. " not defined"}
+			wesnoth.wml_actions.chat{ message = "Nonterminal " .. nonterminal .. " not defined"}
 			return "(error)"
 		end
 	end
