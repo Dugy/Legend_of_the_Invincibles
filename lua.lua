@@ -17,22 +17,13 @@ function wesnoth.theme_items.unit_status()
              tooltip = _"infected: This unit is infected. It will become undead after death, unless cured by a healer or by standing on a village."
          } })
      end
+     if u.status.incinerated then
+	 table.insert(s, { "element", {
+	     image = "misc/incinerated.png",
+	     tooltip = _"in flames: This unit is in flames. It will lose 16 HP per turn, unless cured by a healer or by standing on a village."
+	} })
+     end
      return s
-end
-
-local _ = wesnoth.textdomain "wesnoth-loti"
-local old_unit_status = wesnoth.theme_items.unit_status
-function wesnoth.theme_items.unit_status()
-	local u = wesnoth.get_displayed_unit()
-	if not u then return {} end
-	local s = old_unit_status()
-	if u.status.incinerated then
-		table.insert(s, { "element", {
-		image = "misc/incinerated.png",
-		tooltip = _"in flames: This unit is in flames. It will lose 16 HP per turn, unless cured by a healer or by standing on a village."
-		} })
-	end
-	return s
 end
 
 function wesnoth.wml_actions.get_unit_resistance(cfg)
