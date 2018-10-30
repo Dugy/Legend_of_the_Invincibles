@@ -636,6 +636,7 @@ function wesnoth.wml_actions.pre_advance_stuff(cfg)
     else
         local v = helper.get_child(unit, "variables")
         v.may_need_respec = true
+	unit.hitpoints = unit.max_hitpoints
         wesnoth.put_unit(unit)
     end
 end
