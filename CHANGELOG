@@ -2,6 +2,14 @@ Changelog
 
 3.2.2 (maintenance/development)
 Added 5 new items
+Units now get titles depending on their type and legacy when they reach maximum level
+Added a new unit: Zombie Rider, a skeleton rider with plague advancing from Chocobone
+Added a new unit: Demilich, a ghost-like lich advancing from Lich and Necromancer
+Added a new unit: Infernal Knight, a fiery Death Knight that advances from Death Knight
+Fixed a large quantity of lesser bugs
+
+3.2.2 (maintenance/development)
+Added 5 new items
 Demons now have evil titles behind their names
 Updated the Skeletal Dragon to use the new sprite, with custom animations
 Updated Orcish Nightblade to be closer to the newly added mainline one
