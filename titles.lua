@@ -248,11 +248,13 @@ function get_unit_flavour(u)
 	local defence = 0
 	local terrains = 0
 	local defences = helper.get_child(data, "defense")
-	for k,v in pairs(defences) do
-		defence = defence + v
-		terrains = terrains + 1
+	if defences then
+		for k,v in pairs(defences) do
+			defence = defence + v
+			terrains = terrains + 1
+		end
+		defence = defence / terrains
 	end
-	defence = defence / terrains
 
 	local resistances = helper.get_child(data, "resistance")
 	local resistance = 100
