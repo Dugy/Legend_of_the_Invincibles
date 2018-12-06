@@ -771,3 +771,37 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 		wesnoth.put_unit(u)
 	end
 end
+
+function pick_random_item()
+	-- Picks random item (numeric ID) of requested type ("item_sort")
+	-- from the list of all droppable items,
+	-- excluding the items that are not allowed in this scenario.
+	-- (e.g. Gladiators scenario excludes Woodland Cloak, because it has no forests)
+	-- Variables "droppable_items" and "droppable_items_blacklist" are comma-separated numbers.
+	local item_sort = wesnoth.get_variable("item_sort")
+	local droppable_items = wesnoth.get_variable("droppable_items")[item_sort]
+
+	-- Sanity check: available items should be listed in [item_list.cfg].
+	if not droppable_items then
+		helper.wml_error("pick_random_item(): no items of type [" .. item_sort .. "] were found in droppable_items variable.")
+	end
+
+	-- Comma-separated list for helper.rand()
+	local options = droppable_items
+	
+	local blacklist = wesnoth.get_variable("droppable_items_blacklist")
+	if blacklist then
+		-- Remove each blacklisted number from "options" string
+		options = "," .. options .. ","
+		for item in string.gmatch(blacklist, "[^,]*") do
+			options = options:gsub("," .. item .. ",", ",")
+		end
+		
+		-- Strip leading/trailing commas.
+		-- If all items were excluded, ignore the blacklist (allow all items to be dropped).
+		options = options:gsub("^,", ""):gsub(",$", ""):gsub("^$", droppable_items)
+	end
+
+	-- Provide the item ID - randomly chosen number from "options" list.
+	wesnoth.set_variable("item_type", helper.rand(options));
+end
