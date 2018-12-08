@@ -772,13 +772,14 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	end
 end
 
-function pick_random_item()
-	-- Picks random item (numeric ID) of requested type ("item_sort")
-	-- from the list of all droppable items,
-	-- excluding the items that are not allowed in this scenario.
-	-- (e.g. Gladiators scenario excludes Woodland Cloak, because it has no forests)
-	-- Variables "droppable_items" and "droppable_items_blacklist" are comma-separated numbers.
-	local item_sort = wesnoth.get_variable("item_sort")
+-- Picks random item (numeric ID) of requested type (cfg.item_sort) from the
+-- list of all droppable items, excluding the items that are not allowed in this scenario.
+-- (e.g. Gladiators scenario excludes Woodland Cloak, because it has no forests)
+-- Variables "droppable_items" and "droppable_items_blacklist" are comma-separated numbers.
+function wesnoth.wml_actions.pick_random_item(cfg)
+	local item_sort = cfg.item_sort or helper.wml_error "[pick_random_item] has no item sort specified"
+	local to_variable = cfg.to_variable or "item_type"
+
 	local droppable_items = wesnoth.get_variable("droppable_items")[item_sort]
 
 	-- Sanity check: available items should be listed in [item_list.cfg].
@@ -803,5 +804,5 @@ function pick_random_item()
 	end
 
 	-- Provide the item ID - randomly chosen number from "options" list.
-	wesnoth.set_variable("item_type", helper.rand(options));
+	wesnoth.set_variable(to_variable, helper.rand(options));
 end
