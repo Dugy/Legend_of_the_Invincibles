@@ -806,3 +806,200 @@ function wesnoth.wml_actions.pick_random_item(cfg)
 	-- Provide the item ID - randomly chosen number from "options" list.
 	wesnoth.set_variable(to_variable, helper.rand(options));
 end
+
+-- Determine the list of item sorts (e.g. sword,staff,boots) that can be equipped by this unit.
+-- Returns the Lua table { sword = 1, armour = 1, ... }.
+function loti_util_list_equippable_sorts(unit_type)
+	-- Doppelganger can't equip anything (but can drink potions).
+	if unit_type:match( "doppelganger" ) then
+		return { potion = 1 }
+	end
+
+	-- Everyone can equip rings/amulets/cloaks and use potions/books.
+	local can_equip = { ring = 1, amulet = 1, cloak = 1, potion = 1, limited = 1 }
+
+	-- All corporeal beings except bats can wear armour.
+	if not ( unit_type == "Ghost" or unit_type == "Wraith" or unit_type == "Spectre"
+		or unit_type == "Shadow" or unit_type == "Nightgaunt" or unit_type == "Dark Shade"
+		or unit_type:match(" Bat$") )
+	then
+		can_equip.armour = 1
+		can_equip.helm = 1
+		can_equip.gauntlets = 1
+		can_equip.boots = 1
+	end
+
+	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
+	for attack in pairs(loti_util_list_attacks(unit_type)) do
+		if attack:match("sword$") or attack == "saber"
+			or attack == "war talon" or attack == "war blade"
+			or attack == "mberserk" or attack == "whirlwind"
+			or attack == "spectral blades"
+				then can_equip.sword = 1
+
+		elseif attack:match("axe$") or attack == "berserker frenzy"
+			then can_equip.axe = 1
+
+		elseif attack:match("bow$")
+			then can_equip.bow = 1
+
+		elseif attack:match("staff$")
+			then can_equip.staff = 1
+
+		elseif attack == "crossbow" or attack == "slurbow"
+			then can_equip.xbow = 1
+
+		elseif attack == "dagger"
+			then can_equip.dagger = 1
+
+		elseif attack == "knife" or attack == "throwing knives"
+			then can_equip.knife = 1
+
+		elseif attack == "mace" or attack == "mace-spiked"
+			or attack == "morning star" or attack == "club"
+			or attack == "flail" or attack == "scourge"
+			or attack == "mace_berserk" or attack == "hammer"
+			or attack == "hammer_runic"
+				then can_equip.mace = 1
+
+		elseif attack == "halberd" or attack == "scythe"
+			or attack == "scythe-whirlwind"
+				then can_equip.polearm = 1
+
+		elseif attack:match("claws$")
+			then can_equip.claws = 1
+
+		elseif attack == "sling" or attack == "bolas" or attack == "net"
+			then can_equip.sling = 1
+
+		elseif attack == "touch" or attack == "baneblade"
+			or attack == "faerie touch" or attack == "vine"
+			or attack == "torch"
+				then can_equip.essence = 1
+
+		elseif attack == "thunderstick" or attack == "dragonstaff"
+			then can_equip.thunderstick = 1
+
+
+		elseif attack == "spear" or attack == "javelin"
+			or attack == "lance" or attack == "spike"
+			or attack == "pike" or attack == "trident"
+			or attack == "trident-blade"
+				then can_equip.spear = 1
+		end
+	end
+
+	-- Some magician-like units can carry a staff (even if they don't attack with it).
+	if unit_type == "Lich" or unit_type == "09 Ancient Lich" or unit_type == "Lich King"
+		or unit_type == "Demilich" or unit_type == "Infernal Knight"
+		or unit_type == "Dark Adept" or unit_type == "Elvish Shyde"
+		or unit_type == "Elvish Seer" or unit_type == "Elvish Sylph"
+		or unit_type == "Celestial Messenger" or unit_type == "Prophet"
+		or unit_type == "Mage of Light" or unit_type == "Stormrider"
+		or unit_type == "Sword Mage" or unit_type == "Knight of Magic"
+		or unit_type == "Warlock" or unit_type == "Faerie Incarnation"
+		or unit_type == "Elvish Overlord" or unit_type == "Lethalia_lich_weakened"
+	then
+		can_equip.staff = 1
+	end
+
+	-- Return the list of equippable item sorts for this unit
+	return can_equip
+end
+
+-- Check if certain unit can equip certain item.
+-- Item is passed as cfg.item_number parameter (numeric ID of the item).
+-- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
+-- Result is either 1 (which means "can equip") or error string that explains why it can't be equipped.
+-- Result is placed into Wesnoth variable cfg.to_variable.
+function wesnoth.wml_actions.can_equip_item(cfg)
+	local to_variable = cfg.to_variable or "can_take"
+
+	local units = wesnoth.get_units(cfg)
+	if #units < 1 then
+		helper.wml_error("[can_equip_item]: no units found, may need find_in= parameter.")
+	end
+
+	local unit = units[1]
+	local item = wesnoth.get_variable("item_list.object[" .. cfg.item_number .. "]")
+	local result = 1
+
+	if not loti_util_list_equippable_sorts(unit.type)[item.sort] then
+		result = _"This unit can't equip this item."
+
+		-- More specific error
+		if item.sort == "armour"
+			then result = _"This unit cannot wear armours."
+		elseif item.sort == "helm"
+			then result = _"This unit cannot wear armours, not even helms."
+		elseif item.sort == "gauntlet"
+			then result = _"This unit cannot wear armours, not even gauntlets."
+		elseif item.sort == "boots"
+			then result = _"This unit cannot wear armours, not even boots. It's a sad person, having to walk barefoot all the time..."
+		elseif item.sort == "ring"
+			then result = _"This unit cannot wear rings. It might make marriage problematic."
+		elseif item.sort == "amulet"
+			then result = _"This unit cannot wear amulets."
+		elseif item.sort == "cloak"
+			then result = _"This unit cannot wear cloaks. Winter is not coming, fortunately."
+		elseif item.sort == "sword"
+			then result = _"This unit cannot use swords."
+		elseif item.sort == "axe"
+			then result = _"This unit cannot use axes."
+		elseif item.sort == "bow"
+			then result = _"This unit cannot use bows."
+		elseif item.sort == "staff"
+			then result = _"This unit cannot use staves."
+		elseif item.sort == "xbow"
+			then result = _"This unit cannot use crossbows."
+		elseif item.sort == "dagger"
+			then result = _"This unit cannot use daggers. Probably prefers more honest combat tactics."
+		elseif item.sort == "knife"
+			then result = _"This unit cannot throw knives."
+		elseif item.sort == "mace"
+			then result = _"This unit cannot use maces."
+		elseif item.sort == "polearm"
+			then result = _"This unit cannot use polearms."
+		elseif item.sort == "claws"
+			then result = _"This unit cannot use metal claws."
+		elseif item.sort == "sling"
+			then result = _"This unit cannot use slings."
+		elseif item.sort == "essence"
+			then result = _"This unit cannot use otherworldly essences."
+		elseif item.sort == "thunderstick"
+			then result = _"This unit cannot use weapons that are so advanced."
+		elseif item.sort == "spear"
+			then result = _"This unit cannot use spears. Seems to prefer more advanced weapons."
+		end
+	end
+
+	-- TODO: (when item.sort == "limited") check for "already has this book" here, not in WML
+
+	wesnoth.set_variable(to_variable, result);
+end
+
+--
+-- Utility function for [can_equip_item] (can also be used in get_unit_flavour()).
+-- List the names of all attacks (e.g. "chill tempest") of a certain unit.
+-- Returns the Lua table { attack_name = 1, another_attack_name = 1, ... },
+-- where attack names are untranslated (always English) and can therefore be used in conditionals.
+--
+function loti_util_list_attacks(unit_type)
+	-- We don't use unit.attacks, because it has a problem with unit.attacks[1].name field
+	-- being already translated (possibly not English), which prevents comparison operations.
+	-- Instead we scan the variable representation of Unit for "attack" fields.
+	local temp_variable = "loti_util_temporary_unit";
+
+	wesnoth.wml_actions.unit { type = unit_type, to_variable = temp_variable}
+	local data = wesnoth.get_variable(temp_variable)
+	wesnoth.set_variable(temp_variable, nil)
+
+	local has_attack = {}
+	for idx, tag in pairs(data) do
+		if type(tag) == "table" and tag[1] == "attack" then
+			has_attack[tag[2].name] = true
+		end
+	end
+
+	return has_attack
+end
