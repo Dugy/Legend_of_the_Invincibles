@@ -163,10 +163,15 @@ local known_upgrades = {
 -- that have already been picked by this Unit.
 -- Returns the Lua table { firestorm = 1, lightning = 1, ... }.
 function loti_util_list_existing_upgrades(unit)
+	local temp_variable = "loti_util_temporary_unit"
+	wesnoth.fire("store_unit", { variable = temp_variable, { "filter", { x = unit.x, y = unit.y } } })
+	local advancements = helper.get_variable_array(temp_variable .. ".modifications.advancement")
+	wesnoth.set_variable(temp_variable, nil)
+
 	local found = {}
-	for nr, advancement in pairs(unit.modifications.advancement) do
+	for nr, advancement in pairs(advancements) do
 		if known_upgrades[advancement.id] then
-			table.insert(found, advancemenent.id)
+			found[advancement.id] = 1
 		end
 	end
 
