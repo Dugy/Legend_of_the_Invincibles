@@ -6,7 +6,9 @@
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
 
-local known_upgrades = {
+local known_ability_trees = {}
+
+known_ability_trees.redeem = {
 	spirit = {
 		image = "attacks/spirit.png",
 		label =_ "Spiritual transformation (a very powerful combat technique)",
@@ -159,14 +161,150 @@ local known_upgrades = {
 	}
 }
 
+known_ability_trees.soul_eater = {
+	spirit = {
+		image = "attacks/spirit.png",
+		label =_ "Spiritual transformation (a very powerful combat technique)",
+		requires = { "absorb" },
+		short_name =_ "Spiritual transformation"
+	},
+	regeneration = {
+		image = "icons/potion_green_medium.png",
+		label =_ "Regeneration (advancements improving the regeneration)",
+		requires = { "health" },
+		short_name =_ "Regeneration"
+	},
+	absorb = {
+		image = "attacks/dark-missile.png",
+		label =_ "Absorption (advancements that allow the unit heal from enemy attacks)",
+		requires = { "regeneration" },
+		short_name =_ "Absorb"
+	},
+	lightning = {
+		image = "attacks/lightning.png",
+		label =_ "Lightning (high damage, few attacks, can get firststrike)",
+		requires = { "fireball", "chill" },
+		short_name =_ "Lightning"
+	},
+	thunder = {
+		image = "attacks/lightning.png",
+		label =_ "Thunder (high damage, explosive, great area of effect, only a very few attacks)",
+		requires = { "lightning" },
+		short_name =_ "Thunder"
+	},
+	fireball = {
+		image = "attacks/fireball.png",
+		label =_ "Fireball (quite powerful fiery attack)",
+		requires = {},
+		short_name =_ "Fireball"
+	},
+	meteor = {
+		image = "attacks/meteor.png",
+		label =_ "Meteor (great damage, range and precision, only one attack)",
+		requires = { "fireball" },
+		short_name =_ "Meteor"
+	},
+	fire_penetrate = {
+		image = "attacks/noctum.png",
+		label =_ "Fire resistance penetration",
+		requires = { "meteor" }
+	},
+	chill = {
+		image = "attacks/iceball.png",
+		label =_ "Chill tempest (capable to slow a lot of units)",
+		requires = {},
+		short_name =_ "Chill tempest"
+	},
+	cold_penetrate = {
+		image = "attacks/noctum.png",
+		label =_ "Cold resistance penetration",
+		requires = { "chill" }
+	},
+	shadowwave = {
+		image = "attacks/dark-missile.png",
+		label =_ "Shadow wave (can become a powerful draining ability)",
+		requires = {},
+		short_name =_ "Shadow wave"
+	},
+	arcane_penetrate = {
+		image = "attacks/noctum.png",
+		label =_ "Arcane resistance penetration",
+		requires = { "shadowwave" }
+	},
+	resist_fire = {
+		image = "icons/armor_leather.png",
+		label =_ "Resist fire",
+		requires = { "fireball" }
+	},
+	resist_cold = {
+		image = "icons/armor_leather.png",
+		label =_ "Resist cold",
+		requires = { "chill" }
+	},
+	resist_arcane = {
+		image = "icons/armor_leather.png",
+		label =_ "Resist arcane",
+		requires = { "shadowwave", "chill" }
+	},
+	health = {
+		image = "icons/potion_red_medium.png",
+		label =_ "Health (+10 to HP advancements)",
+		requires = {},
+		short_name =_ "Health"
+	},
+	leadership = {
+		image = "attacks/fist.png",
+		label =_ "Leadership",
+		requires = {}
+	},
+	heal = {
+		image = "attacks/lightbeam.png",
+		label =_ "Healing others",
+		requires = {}
+	},
+	blade_penetrate = {
+		image = "attacks/noctum.png",
+		label =_ "Blade resistance penetration",
+		requires = { "health" }
+	},
+	impact_penetrate = {
+		image = "attacks/noctum.png",
+		label =_ "Impact resistance penetration",
+		requires = { "health" }
+	},
+	pierce_penetrate = {
+		image = "attacks/noctum.png",
+		label =_ "Pierce resistance penetration",
+		requires = { "health" }
+	},
+	resist_blade = {
+		image = "icons/armor_leather.png",
+		label =_ "Resist blade",
+		requires = { "health" }
+	},
+	resist_pierce = {
+		image = "icons/armor_leather.png",
+		label =_ "Resist pierce",
+		requires = { "health" }
+	},
+	resist_impact = {
+		image = "icons/armor_leather.png",
+		label =_ "Resist impact",
+		requires = { "health" }
+	}
+}
+
 -- Determine the list of redeem upgrades (e.g. "particlestorm")
 -- that have already been picked by this Unit.
+-- Parameter "ability_tree" can be "redeem" or "soul_eater".
 -- Returns the Lua table { firestorm = 1, lightning = 1, ... }.
-function loti_util_list_existing_upgrades(unit)
+function loti_util_list_existing_upgrades(ability_tree, unit)
 	local temp_variable = "loti_util_temporary_unit"
 	wesnoth.fire("store_unit", { variable = temp_variable, { "filter", { x = unit.x, y = unit.y } } })
 	local advancements = helper.get_variable_array(temp_variable .. ".modifications.advancement")
 	wesnoth.set_variable(temp_variable, nil)
+
+	local known_upgrades = known_ability_trees[ability_tree]
 
 	local found = {}
 	for nr, advancement in pairs(advancements) do
@@ -179,12 +317,18 @@ function loti_util_list_existing_upgrades(unit)
 end
 
 -- Display the menu that chooses between redeem upgrades available to certain Unit.
+-- Parameter "ability_tree" can be "redeem" or "soul_eater".
 -- Returns the selected upgrade (ID string), e.g. "particlestorm".
-function redeem_menu(unit)
+function redeem_menu(ability_tree, unit)
+	local known_upgrades = known_ability_trees[ability_tree]
+	if not known_upgrades then
+		helper.wml_error("redeem_menu(): unknown ability tree. Try \"redeem\" or \"soul_eater\".");
+	end
+
 	-- Unit is optional, so that we can test UI of redeem_menu() separately from everything else.
 	local existing_upgrades = {}
 	if unit then
-		existing_upgrades = loti_util_list_existing_upgrades(unit)
+		existing_upgrades = loti_util_list_existing_upgrades(ability_tree, unit)
 	end
 
 	-- Menu items, as expected by wesnoth.show_menu()
@@ -363,7 +507,7 @@ function redeem_menu(unit)
 	if not selected_menu_item.allowed then
 		-- Disabled menu item was somehow selected,
 		-- ignore this and just show the dialog again.
-		return redeem_menu(unit)
+		return redeem_menu(ability_tree, unit)
 	end
 
 	return selected_menu_item.selected_upgrade
@@ -371,17 +515,19 @@ end
 
 -- Tag [show_redeem_menu] allows to use redeem upgrade menu from WML.
 -- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
+-- Parameter cfg.ability_tree can be "redeem" or "soul_eater" (chooses what menu to show).
 -- Returns the selected upgrade (ID string), e.g. "particlestorm".
 -- Result is placed into Wesnoth variable cfg.to_variable.
 function wesnoth.wml_actions.show_redeem_menu(cfg)
 	local to_variable = cfg.to_variable or "chose"
+	local ability_tree = cfg.ability_tree or "redeem"
 
 	local units = wesnoth.get_units(cfg)
 	if #units < 1 then
 		helper.wml_error("[show_redeem_menu]: no units found, may need find_in= parameter.")
 	end
 
-	local result = redeem_menu(units[1])
+	local result = redeem_menu(ability_tree, units[1])
 	wesnoth.set_variable(to_variable, result)
 end
 
