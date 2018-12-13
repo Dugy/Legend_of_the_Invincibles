@@ -307,7 +307,7 @@ function redeem_menu(unit)
 			-- Header (1 row containing a [label] with help)
 			wml.tag.row {
 				wml.tag.column {
-					border = "top,bottom",
+					border = "bottom",
 					border_size = 10,
 					wml.tag.label {
 						id = "redeem_menu_top_label"
@@ -332,7 +332,11 @@ function redeem_menu(unit)
 	}
 
 	local function preshow()
-		wesnoth.set_dialog_value("Which new advancement path should our victorious unit get?", "redeem_menu_top_label")
+		wesnoth.set_dialog_markup(true, "redeem_menu_top_label")
+		wesnoth.set_dialog_value(
+			"<span size='large' weight='bold'>Which new advancement path should our victorious unit get?</span>",
+			"redeem_menu_top_label"
+		)
 
 		for index, menu_item in pairs(menu_items) do
 			wesnoth.set_dialog_value(menu_item.image, listbox_id, index, "image")
