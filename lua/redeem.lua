@@ -12,7 +12,7 @@ local known_upgrades = {
 		label =_ "Spiritual transformation (a very powerful combat technique)",
 		requires = { "absorb", "weapons" },
 
-		-- Short names are used in "Provides: [upgrade1], [upgrade2], ..." lists.
+		-- Short names are used in "Requires: [upgrade1], [upgrade2], ..." lists.
 		short_name =_ "Spiritual transformation"
 	},
 	particlestorm = {
@@ -178,22 +178,6 @@ function loti_util_list_existing_upgrades(unit)
 	return found
 end
 
--- Determine the list of redeem upgrades that require "upgrade_id" to be already picked.
--- Returns the Lua table { firestorm = 1, resist_fire = 1, ... }
-function loti_util_list_upgrades_depending_on(upgrade_id)
-	local found = {}
-	for id, upgrade in pairs(known_upgrades) do
-		for nr2, required_upgrade in pairs(upgrade.requires) do
-			if required_upgrade == upgrade_id then
-				-- Found a dependency.
-				found[id] = 1
-			end
-		end
-	end
-
-	return found
-end
-
 -- Display the menu that chooses between redeem upgrades available to certain Unit.
 -- Returns the selected upgrade (ID string), e.g. "particlestorm".
 function redeem_menu(unit)
@@ -204,60 +188,66 @@ function redeem_menu(unit)
 	end
 
 	-- Menu items, as expected by wesnoth.show_menu()
-	local menu_items = {};
+	local menu_items = {}
 
 	for id, upgrade in pairs(known_upgrades) do
 		-- If haven't already picked
 		if not existing_upgrades[id] then
 			-- Check if all required upgrades have already been picked
-			local dependencies_met = true
+			local unmet_dependencies = {}
 			for nr2, required_upgrade in pairs(upgrade.requires) do
 				if not existing_upgrades[required_upgrade] then
-					dependencies_met = false
-					break
+					table.insert(unmet_dependencies, required_upgrade)
 				end
 			end
 
-			if dependencies_met then
-				local label = upgrade.label
+			local label = upgrade.label
 
-				-- Inform the player which upgrades can become available after this one gets picked.
+			-- Inform the player which upgrades are needed before this one can get picked.
+			if unmet_dependencies[1] then
+				label = label .. "\n" .. _("Requires:") .. " "
 
-				local provides_labels = {}
-				for provided_id in pairs(loti_util_list_upgrades_depending_on(id)) do
-					if not existing_upgrades[provided_id] then
-						local provided_upgrade = known_upgrades[provided_id]
-						local extra_label = provided_upgrade.short_name
-							or provided_upgrade.label
+				-- Can't use table.concat(), because unmet_dependencies has translated strings,
+				-- and they are technically objects.
+				for nr3, required_id in pairs(unmet_dependencies) do
+					local required_upgrade = known_upgrades[required_id]
+					local extra_label = required_upgrade.short_name or required_upgrade.label
 
-						table.insert(provides_labels, extra_label)
+					label = label .. extra_label
+					if nr3 ~= #unmet_dependencies then
+						label = label .. ", "
 					end
 				end
-
-				if provides_labels[1] then
-					label = label .. "\n" .. _("Provides:") .. " "
-
-					-- Can't use table.concat(), because provides_labels has translated strings,
-					-- and they are technically objects.
-					for nr3,extra_label in pairs(provides_labels) do
-						label = label .. extra_label
-						if nr3 ~= #provides_labels then
-							label = label .. ", "
-						end
-					end
-				end
-
-				table.insert(menu_items, {
-					image = upgrade.image,
-					details = label,
-
-					-- The following field is not used by wesnoth.show_menu(),
-					-- we use it to determine which upgrade has been selected.
-					selected_upgrade = id
-				})
 			end
+
+			table.insert(menu_items, {
+				-- Fields with the same meaning as in wesnoth.show_menu()
+				image = upgrade.image,
+				details = label,
+
+				-- This field is used to determine which upgrade has been selected.
+				selected_upgrade = id,
+
+				-- If false, this upgrade can't be selected yet.
+				allowed = not unmet_dependencies[1]
+			})
 		end
 	end
+
+	-- Determine the order of menu_items[] array. Non-allowed items should be last.
+	local function menu_sort(a,b)
+		if a.allowed and not b.allowed then
+			return true
+		end
+
+		if b.allowed and not a.allowed then
+			return false
+		end
+
+		return a.details < b.details
+	end
+
+	table.sort(menu_items, menu_sort)
 
 	-- Prepare the layout structure for wesnoth.show_dialog().
 	local listbox_id = "redeem_menu_list"
@@ -293,7 +283,7 @@ function redeem_menu(unit)
 			wml.tag.row {
 				wml.tag.column {
 					horizontal_grow = true,
-					wml.tag.toggle_panel { return_value = -1, listbox_template }
+					wml.tag.toggle_panel { listbox_template }
 				}
 			}
 		}
@@ -331,6 +321,11 @@ function redeem_menu(unit)
 		}
 	}
 
+	local function get_selected_menu_item()
+		local index = wesnoth.get_dialog_value(listbox_id)
+		return menu_items[index]
+	end
+
 	local function preshow()
 		wesnoth.set_dialog_markup(true, "redeem_menu_top_label")
 		wesnoth.set_dialog_value(
@@ -338,19 +333,40 @@ function redeem_menu(unit)
 			"redeem_menu_top_label"
 		)
 
+
 		for index, menu_item in pairs(menu_items) do
 			wesnoth.set_dialog_value(menu_item.image, listbox_id, index, "image")
 			wesnoth.set_dialog_value(menu_item.details, listbox_id, index, "upgrade_name")
+
+			if not menu_item.allowed then
+				wesnoth.set_dialog_active(false, listbox_id, index, "upgrade_name")
+			end
 		end
+
+		-- If user selects a non-allowed upgrade, OK button must become disabled.
+		-- If user then selects an allowed upgrade, OK button must become enabled.
+		local function toggle_ok_button()
+			return wesnoth.set_dialog_active(get_selected_menu_item().allowed, "ok")
+		end
+
+		wesnoth.set_dialog_callback(toggle_ok_button, listbox_id)
+
 	end
 
-	local selected_index = 1
+	local selected_menu_item = nil
 	local function postshow()
-		selected_index = wesnoth.get_dialog_value(listbox_id)
+		selected_menu_item = get_selected_menu_item()
 	end
 
 	wesnoth.show_dialog(dialog, preshow, postshow)
-	return menu_items[selected_index].selected_upgrade
+
+	if not selected_menu_item.allowed then
+		-- Disabled menu item was somehow selected,
+		-- ignore this and just show the dialog again.
+		return redeem_menu(unit)
+	end
+
+	return selected_menu_item.selected_upgrade
 end
 
 -- Tag [redeem_menu] allows to use redeem upgrade menu from WML.
