@@ -1,4 +1,5 @@
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/titles.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/redeem.lua")
 
 --! #textdomain "wesnoth-loti"
 
