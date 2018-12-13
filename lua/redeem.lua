@@ -369,7 +369,7 @@ function redeem_menu(unit)
 	return selected_menu_item.selected_upgrade
 end
 
--- Tag [redeem_menu] allows to use redeem upgrade menu from WML.
+-- Tag [show_redeem_menu] allows to use redeem upgrade menu from WML.
 -- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
 -- Returns the selected upgrade (ID string), e.g. "particlestorm".
 -- Result is placed into Wesnoth variable cfg.to_variable.
@@ -383,4 +383,23 @@ function wesnoth.wml_actions.show_redeem_menu(cfg)
 
 	local result = redeem_menu(units[1])
 	wesnoth.set_variable(to_variable, result)
+end
+
+-- Tag [count_redeem_upgrades] counts the number of existing redeem upgrades of current unit.
+-- Result is placed into Wesnoth variable cfg.to_variable.
+-- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
+-- NOTE: this is TEMPORARY (won't be needed in the future),
+-- because the WML code that needs this variable might be replaced by Lua.
+function wesnoth.wml_actions.count_redeem_upgrades(cfg)
+	local to_variable = cfg.to_variable or "upgrade_count"
+
+	local units = wesnoth.get_units(cfg)
+	if #units < 1 then
+		helper.wml_error("[show_redeem_menu]: no units found, may need find_in= parameter.")
+	end
+
+	local count = 0
+	for i in pairs(loti_util_list_existing_upgrades(units[1])) do count = count + 1 end
+
+	wesnoth.set_variable(to_variable, count)
 end
