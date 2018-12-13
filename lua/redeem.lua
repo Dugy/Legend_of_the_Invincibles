@@ -259,8 +259,94 @@ function redeem_menu(unit)
 		end
 	end
 
-	local idx = wesnoth.show_menu(menu_items)
-	return menu_items[idx].selected_upgrade
+	-- Prepare the layout structure for wesnoth.show_dialog().
+	local listbox_id = "redeem_menu_list"
+
+	-- 1) listbox_template: shows one possible upgrade (icon + description), e.g. Particle Storm.
+	local listbox_template = wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				grow_factor = 0,
+				border = "all",
+				border_size = 5,
+				horizontal_alignment = "left",
+				wml.tag.image {
+					id = "image"
+				}
+			},
+			wml.tag.column {
+				grow_factor = 1,
+				border = "all",
+				border_size = 5,
+				horizontal_grow = true,
+				wml.tag.label {
+					id = "upgrade_name",
+					text_alignment = "left"
+				}
+			}
+		}
+	}
+
+	-- 2) listbox_widget: shows a list of all upgrades.
+	local listbox = wml.tag.listbox { id = listbox_id,
+		wml.tag.list_definition {
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_grow = true,
+					wml.tag.toggle_panel { return_value = -1, listbox_template }
+				}
+			}
+		}
+	}
+
+	-- 3) Top-level dialog, includes help message and listbox.
+	local dialog = {
+		wml.tag.tooltip { id = "tooltip_large" },
+		wml.tag.helptip { id = "tooltip_large" },
+		wml.tag.grid {
+			-- Header (1 row containing a [label] with help)
+			wml.tag.row {
+				wml.tag.column {
+					border = "top,bottom",
+					border_size = 10,
+					wml.tag.label {
+						id = "redeem_menu_top_label"
+					}
+				}
+			},
+
+			-- Listbox, where each row shows ONE of the possible upgrades (e.g. "particlestorm")
+			wml.tag.row {
+				wml.tag.column { horizontal_grow = true, listbox }
+			},
+
+			-- OK button
+			wml.tag.row {
+				wml.tag.column {
+					border = "top",
+					border_size = 10,
+					wml.tag.button { id = "ok", label = _"OK" },
+				}
+			}
+		}
+	}
+
+	local function preshow()
+		wesnoth.set_dialog_value("Which new advancement path should our victorious unit get?", "redeem_menu_top_label")
+
+		for index, menu_item in pairs(menu_items) do
+			wesnoth.set_dialog_value(menu_item.image, listbox_id, index, "image")
+			wesnoth.set_dialog_value(menu_item.details, listbox_id, index, "upgrade_name")
+		end
+	end
+
+	local selected_index = 1
+	local function postshow()
+		selected_index = wesnoth.get_dialog_value(listbox_id)
+	end
+
+	wesnoth.show_dialog(dialog, preshow, postshow)
+	return menu_items[selected_index].selected_upgrade
 end
 
 -- Tag [redeem_menu] allows to use redeem upgrade menu from WML.
