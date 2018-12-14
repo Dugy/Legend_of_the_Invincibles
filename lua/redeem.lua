@@ -87,17 +87,17 @@ known_ability_trees.redeem = {
 		requires = { "magic" }
 	},
 	resist_fire = {
-		image = "icons/armor_leather.png",
+		image = "items/armour-fire.png",
 		label =_ "Resist fire",
 		requires = { "fireblast" }
 	},
 	resist_cold = {
-		image = "icons/armor_leather.png",
+		image = "items/armour-ice.png",
 		label =_ "Resist cold",
 		requires = { "arcticblast" }
 	},
 	resist_arcane = {
-		image = "icons/armor_leather.png",
+		image = "items/armour-arcane.png",
 		label =_ "Resist arcane",
 		requires = { "magic" }
 	},
@@ -232,17 +232,17 @@ known_ability_trees.soul_eater = {
 		requires = { "shadowwave" }
 	},
 	resist_fire = {
-		image = "icons/armor_leather.png",
+		image = "items/armour-fire.png",
 		label =_ "Resist fire",
 		requires = { "fireball" }
 	},
 	resist_cold = {
-		image = "icons/armor_leather.png",
+		image = "items/armour-ice.png",
 		label =_ "Resist cold",
 		requires = { "chill" }
 	},
 	resist_arcane = {
-		image = "icons/armor_leather.png",
+		image = "items/armour-arcane.png",
 		label =_ "Resist arcane",
 		requires = { "shadowwave", "chill" }
 	},
