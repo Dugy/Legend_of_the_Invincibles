@@ -841,14 +841,14 @@ function loti_util_list_equippable_sorts(unit_type)
 		elseif attack:match("axe$") or attack == "berserker frenzy"
 			then can_equip.axe = 1
 
-		elseif attack:match("bow$")
-			then can_equip.bow = 1
-
 		elseif attack:match("staff$")
 			then can_equip.staff = 1
 
 		elseif attack == "crossbow" or attack == "slurbow"
 			then can_equip.xbow = 1
+
+		elseif attack:match("bow$")
+			then can_equip.bow = 1
 
 		elseif attack == "dagger"
 			then can_equip.dagger = 1
