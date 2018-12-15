@@ -1,3 +1,4 @@
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/titles.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/redeem.lua")
 
