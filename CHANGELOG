@@ -144,7 +144,7 @@ Fixed a typo preventing claws from having any effect
 
 3.1.9 (maintenance/development)
 Replaced the AI with a custom one that is far faster but a little bit worse
-Items now can have short comment, shown bellow the effects (not shown if it is on a list of items to save space)
+Items now can have short comment, shown below the effects (not shown if it is on a list of items to save space)
 Added comments to a half of items, it can be a short comment from a unit seeing or using that item, a description how that item works or a reference to something unrelated
 Added a switch to experimentally disable the AMLA workaround that sometimes causes bugs, it can be enabled by defining DISABLE_AMLA_WORKAROUND, but the performance will be terrible
 Fixed a many bugs and oddities
