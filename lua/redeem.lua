@@ -87,17 +87,17 @@ known_ability_trees.redeem = {
 		requires = { "magic" }
 	},
 	resist_fire = {
-		image = "items/armour-fire.png",
+		image = "attacks/blank-attack.png~BLIT(items/armour-fire.png,-5,-5)",
 		label =_ "Resist fire",
 		requires = { "fireblast" }
 	},
 	resist_cold = {
-		image = "items/armour-ice.png",
+		image = "attacks/blank-attack.png~BLIT(items/armour-ice.png,-5,-5)",
 		label =_ "Resist cold",
 		requires = { "arcticblast" }
 	},
 	resist_arcane = {
-		image = "items/armour-arcane.png",
+		image = "attacks/blank-attack.png~BLIT(items/armour-arcane.png,-5,-5)",
 		label =_ "Resist arcane",
 		requires = { "magic" }
 	},
@@ -232,17 +232,17 @@ known_ability_trees.soul_eater = {
 		requires = { "shadowwave" }
 	},
 	resist_fire = {
-		image = "items/armour-fire.png",
+		image = "attacks/blank-attack.png~BLIT(items/armour-fire.png,-5,-5)",
 		label =_ "Resist fire",
 		requires = { "fireball" }
 	},
 	resist_cold = {
-		image = "items/armour-ice.png",
+		image = "attacks/blank-attack.png~BLIT(items/armour-ice.png,-5,-5)",
 		label =_ "Resist cold",
 		requires = { "chill" }
 	},
 	resist_arcane = {
-		image = "items/armour-arcane.png",
+		image = "attacks/blank-attack.png~BLIT(items/armour-arcane.png,-5,-5)",
 		label =_ "Resist arcane",
 		requires = { "shadowwave", "chill" }
 	},
