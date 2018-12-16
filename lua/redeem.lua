@@ -473,7 +473,7 @@ function redeem_menu(ability_tree, unit)
 	local function preshow()
 		wesnoth.set_dialog_markup(true, "redeem_menu_top_label")
 		wesnoth.set_dialog_value(
-			"<span size='large' weight='bold'>Which new advancement path should our victorious unit get?</span>",
+			"<span size='large' weight='bold'>" .. _"Which new advancement path should our victorious unit get?" .. "</span>",
 			"redeem_menu_top_label"
 		)
 
