@@ -565,12 +565,7 @@ function unit_information_part_5()
     -- AMLA advancements, and soul eating choices
     function list_amla()
       H = wesnoth.require "lua/helper.lua"
-      local advances
-      if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.2") then
-        advances = H.get_variable_array("unit.modifications.advancement")
-      else
-        advances = H.get_variable_array("unit.modifications.advance")
-      end
+      local advances = H.get_variable_array("unit.modifications.advancement")
       local result_amla = ""
       local result_soul = ""
       local result_table = {}
