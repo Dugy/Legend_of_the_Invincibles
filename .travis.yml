@@ -20,7 +20,7 @@ before_script:
 
   # Apply pull request #3785 - required bugfix for wmllint.
   # Remove this line after https://github.com/wesnoth/wesnoth/pull/3785 gets merged.
-  - ( cd wesnoth && git fetch origin pull/3785/head:bugfix && git merge bugfix )
+  - wget https://raw.githubusercontent.com/wesnoth/wesnoth/fbb79dc94f2af0840cff5ed44b419778fb4c6281/data/tools/wmllint -O wesnoth/data/tools/wmllint
 
 script:
   - python wesnoth/data/tools/wmllint -vv -d -K Legend_of_the_Invincibles
