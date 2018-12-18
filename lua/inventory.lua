@@ -183,8 +183,7 @@ function inventory(unit)
 		for _, button_config in ipairs(inventory_config.action_buttons) do
 			local button = wml.tag.button {
 				id = button_config.id,
-				label = button_config.label,
-				text_alignment = "left"
+				label = button_config.label
 			}
 
 			table.insert(columns, wml.tag.column {
@@ -236,34 +235,38 @@ function inventory(unit)
 		}
 	end
 
+	-- Contents of the inventory page - everything except the actions menu.
+	local dialog_page_contents = wml.tag.grid {
+		-- Row 1: header text ("what is this page for")
+		wml.tag.row {
+			wml.tag.column {
+				border = "bottom",
+				border_size = 10,
+				wml.tag.label {
+					id = "inventory_menu_top_label"
+				}
+			}
+		},
+
+		-- Row2: inventory slots
+		wml.tag.row {
+			wml.tag.column {
+				slots_grid
+			}
+		}
+	}
+
 	local dialog = {
 		wml.tag.tooltip { id = "tooltip_large" },
 		wml.tag.helptip { id = "tooltip_large" },
 		wml.tag.grid {
-			-- Header (1 row containing a [label] with help)
 			wml.tag.row {
-				wml.tag.column {
-					border = "bottom",
-					border_size = 10,
-					wml.tag.label {
-						id = "inventory_menu_top_label"
-					}
-				}
-			},
+				-- Column 1: vertical menu.
+				wml.tag.column { get_action_menu_vertical() },
 
-			wml.tag.row {
-				wml.tag.column {
-					slots_grid
-				}
-			},
-
-			-- Action buttons
-			wml.tag.row {
-				wml.tag.column {
-					get_action_menu_vertical()
-				}
+				-- Column 2: contents of the inventory.
+				wml.tag.column { dialog_page_contents }
 			}
-
 		}
 	}
 
