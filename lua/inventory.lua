@@ -12,13 +12,15 @@ local inventory_config = {
 
 	-- Action buttons are buttons below the inventory dialog, e.g. "Disable retaliation attacks".
 	action_buttons = {
-		{ id = "storage", label = _"View item storage" },
+		{ id = "storage", label = _"Item storage" },
 		{ id = "crafting", label = _"Crafting" },
 		{ id = "unit_information", label = _"Unit information" },
-		{ id = "retaliation", label = _"Disable attacks for retaliation" },
-		{ id = "unequip_all", label = _"Unequip all items and put them into the item storage" },
-		{ id = "recall_list_items", label = _"Show items on units on the recall list" },
+		{ spacer = true },
+		{ id = "retaliation", label = _"Select weapons for retaliation" },
+		{ id = "unequip_all", label = _"Unequip (store) all items" },
+		{ id = "recall_list_items", label = _"Items on units on the recall list" },
 		{ id = "ground_items", label = _"Pick up items on the ground" },
+		{ spacer = true },
 		{ id = "ok", label = _"Close" }
 	}
 }
@@ -45,21 +47,9 @@ local NO_ITEM_TEXT = {
 	polearm = _"no polearm",
 	claws = _"no metal claws",
 	sling = _"no sling",
-	essence = _"no otherworldly essence",
+	essence = _"no essence",
 	thunderstick = _"no thunderstick",
 	spear = _"no spear"
-}
-
--- NOT_EQUIPPABLE_TEXT doesn't need to list weapons.
-local NOT_EQUIPPABLE_TEXT = {
-	default = _"[can't equip]",
-	ring = _"can't carry rings",
-	amulet = _"can't wear amulets",
-	cloak = _"can't wear cloaks",
-	armour = _"can't wear armours",
-	helm = _"can't wear helms",
-	gauntlets = _"can't wear gauntlets",
-	boots = _"can't wear boots"
 }
 
 -- Display the inventory dialog for a unit.
@@ -181,13 +171,15 @@ function inventory(unit)
 	local function get_action_buttons()
 		local columns = {}
 		for _, button_config in ipairs(inventory_config.action_buttons) do
-			local button = wml.tag.button {
-				id = button_config.id,
-				label = button_config.label
-			}
+			local button
+			if button_config.spacer then
+				button = wml.tag.spacer { height = 20 }
+			else
+				button = wml.tag.button(button_config)
+			end
 
 			table.insert(columns, wml.tag.column {
-				border = "all",
+				border = "bottom",
 				border_size = 5,
 				horizontal_grow = true,
 				button
@@ -240,7 +232,7 @@ function inventory(unit)
 		-- Row 1: header text ("what is this page for")
 		wml.tag.row {
 			wml.tag.column {
-				border = "bottom",
+				border = "left,bottom",
 				border_size = 10,
 				wml.tag.label {
 					id = "inventory_menu_top_label"
@@ -299,12 +291,7 @@ function inventory(unit)
 				wesnoth.set_dialog_visible(false, "slot" .. index)
 			else
 				-- Unequippable item, e.g. gauntlets for a Ghost.
-				default_text = NOT_EQUIPPABLE_TEXT[item_sort]
-
-				if not default_text then
-					helper.wml_error("NOT_EQUIPPABLE_TEXT is not defined for item_sort=" .. item_sort)
-					default_text = NOT_EQUIPPABLE_TEXT["default"]
-				end
+				wesnoth.set_dialog_visible(false, "slot" .. index)
 			end
 
 			wesnoth.set_dialog_value( default_text, "slot" .. index, "item_name")
