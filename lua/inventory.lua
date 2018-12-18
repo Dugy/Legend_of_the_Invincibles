@@ -108,7 +108,8 @@ local function loti_inventory(unit)
 						border_size = 5,
 						horizontal_alignment = "left",
 						wml.tag.image {
-							id = "item_image"
+							id = "item_image",
+							label = inventory_config.slot_background_image
 						}
 					}
 				},
@@ -232,7 +233,8 @@ local function loti_inventory(unit)
 				border = "left,bottom",
 				border_size = 10,
 				wml.tag.label {
-					id = "inventory_menu_top_label"
+					id = "inventory_menu_top_label",
+					label = "<span size='large' weight='bold'>" .. _"Items currently on the unit." .. "</span>"
 				}
 			}
 		},
@@ -261,15 +263,9 @@ local function loti_inventory(unit)
 
 	local function preshow()
 		wesnoth.set_dialog_markup(true, "inventory_menu_top_label")
-		wesnoth.set_dialog_value(
-			"<span size='large' weight='bold'>" .. _"Items currently on the unit." .. "</span>",
-			"inventory_menu_top_label"
-		)
 
 		-- Add placeholder images into all slots.
 		for index, item_sort in ipairs(slots) do
-			wesnoth.set_dialog_value(inventory_config.slot_background_image, "slot" .. index, "item_image")
-
 			local default_text = ""
 			if equippable_sorts[item_sort] then
 				-- "No such item" message: shown for items that are not yet equipped, but can be.
@@ -296,7 +292,10 @@ local function loti_inventory(unit)
 
 		local modifications = helper.get_child(unit.__cfg, "modifications")
 		for _, item in ipairs(helper.child_array(modifications, "object")) do
-			if item.sort and item.sort ~= "potion" and item.sort ~= "limited" then
+			-- There are non-items in object[] array, but they don't have 'sort' key.
+			-- Also there are fake items (e.g. sort=quest_effect), but they have 'silent' key.
+			-- We also ignore objects without name, because they can't be valid items.
+			if item.sort and not item.silent and item.name and item.sort ~= "potion" and item.sort ~= "limited" then
 				if not equippable_sorts[item.sort] then
 					-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
 					-- Shown in a specially reserved "leftover" slot.
