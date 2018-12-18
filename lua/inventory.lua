@@ -24,6 +24,15 @@ local inventory_config = {
 		{ id = "ok", label = _"Close" }
 	},
 
+	-- Maps the id= of action button (see inventory_config.action_buttons)
+	-- to a Lua function that is called when this button gets clicked.
+	action_button_callbacks = {
+		storage = function() wesnoth.log("debug", "Clicked on storage button!") end,
+
+		-- Special callback 'default' is called when no callback has been defined for this button.
+		default = function(id) helper.wml_error("Button " .. id .. " is not yet implemented.") end
+	},
+
 	-- Background image behind the picture of the item (should look like a button)
 	slot_background_image = "buttons/button_square/button_square_60.png"
 }
@@ -264,7 +273,26 @@ local function loti_inventory(unit)
 	local function preshow()
 		wesnoth.set_dialog_markup(true, "inventory_menu_top_label")
 
-		-- Add placeholder images into all slots.
+		-- Add callbacks for clicks on all action buttons.
+		for _, button_config in ipairs(inventory_config.action_buttons) do
+			if not button_config.spacer and button_config.id ~= "ok" then
+				local id = button_config.id
+				local callback = inventory_config.action_button_callbacks[id]
+
+				if not callback then
+					callback = inventory_config.action_button_callbacks["default"]
+				end
+
+				-- Additionally pass ID to the callback.
+				local onclick = function(x)
+					callback(id);
+				end
+
+				wesnoth.set_dialog_callback(onclick, id)
+			end
+		end
+
+		-- Add placeholders into all slots.
 		for index, item_sort in ipairs(slots) do
 			local default_text = ""
 			if equippable_sorts[item_sort] then
