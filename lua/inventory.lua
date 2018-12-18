@@ -53,13 +53,7 @@ local NO_ITEM_TEXT = {
 }
 
 -- Display the inventory dialog for a unit.
-function inventory(unit)
-
-	if not unit then
-		-- Temporary, for debugging: show inventory of the leader of side 1.
-		unit = wesnoth.get_units({ side = 1, canrecruit = "yes" })[1]
-	end
-
+local function loti_inventory(unit)
 	local equippable_sorts = loti_util_list_equippable_sorts(unit.type)
 
 	-- Determine sorts of equippable weapons, e.g. { "sword", "spear", "staff" }.
@@ -334,4 +328,15 @@ function inventory(unit)
 
 	local result = wesnoth.show_dialog(dialog, preshow)
 	print("show_dialog returned result=" .. result)
+end
+
+-- Tag [show_inventory] displays the inventory dialog for the unit.
+-- Unit is identified by passing "cfg" parameter to wesnoth.get_units().
+function wesnoth.wml_actions.show_inventory(cfg)
+	local units = wesnoth.get_units(cfg)
+	if #units < 1 then
+		helper.wml_error("[show_inventory]: no units found.")
+	end
+
+	loti_inventory(units[1])
 end
