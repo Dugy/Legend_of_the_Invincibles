@@ -22,7 +22,10 @@ local inventory_config = {
 		{ id = "ground_items", label = _"Pick up items on the ground" },
 		{ spacer = true },
 		{ id = "ok", label = _"Close" }
-	}
+	},
+
+	-- Background image behind the picture of the item (should look like a button)
+	slot_background_image = "buttons/button_square/button_square_60.png"
 }
 
 -- These variables are for translation of strings that depend on a parameter.
@@ -265,7 +268,7 @@ local function loti_inventory(unit)
 
 		-- Add placeholder images into all slots.
 		for index, item_sort in ipairs(slots) do
-			wesnoth.set_dialog_value("attacks/blank-attack.png", "slot" .. index, "item_image")
+			wesnoth.set_dialog_value(inventory_config.slot_background_image, "slot" .. index, "item_image")
 
 			local default_text = ""
 			if equippable_sorts[item_sort] then
@@ -317,7 +320,8 @@ local function loti_inventory(unit)
 
 				wesnoth.set_dialog_value(item.name, item.sort, "item_name")
 				wesnoth.set_dialog_value(
-					"attacks/blank-attack.png~BLIT(" .. item.image .. "~SCALE_INTO(60,60))",
+					inventory_config.slot_background_image ..
+					"~BLIT(" .. item.image .. "~SCALE_INTO(60,60))",
 					item.sort, "item_image")
 
 				-- Unhide the slot (leftover slots are hidden by default)
