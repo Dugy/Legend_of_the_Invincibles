@@ -6,6 +6,23 @@
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
 
+-- The following variable contains "moddable" options of the inventory UI,
+-- so that scenarios like Tutorial could override them.
+local inventory_config = {
+
+	-- Action buttons are buttons below the inventory dialog, e.g. "Disable retaliation attacks".
+	action_buttons = {
+		{ id = "storage", label = _"View item storage" },
+		{ id = "crafting", label = _"Crafting" },
+		{ id = "unit_information", label = _"Unit information" },
+		{ id = "retaliation", label = _"Disable attacks for retaliation" },
+		{ id = "unequip_all", label = _"Unequip all items and put them into the item storage" },
+		{ id = "recall_list_items", label = _"Show items on units on the recall list" },
+		{ id = "ground_items", label = _"Pick up items on the ground" },
+		{ id = "ok", label = _"Close" }
+	}
+}
+
 -- These variables are for translation of strings that depend on a parameter.
 -- NO_ITEM_TEXT must list all item types that have a slot (i.e. all except potion/limited).
 local NO_ITEM_TEXT = {
@@ -154,10 +171,70 @@ function inventory(unit)
 		},
 		wml.tag.row {
 			get_slot_widget "weapon", -- Depends on the unit
-			get_slot_widget "leftover", -- E.g. sword on Gryphon Rider, already equipped but not equippable
+			get_slot_widget "weapon", -- Depends on the unit.
+			                          -- No units have more than 3 weapons, so we have 4 slots to be on a safe side.
 			get_slot_widget "leftover" -- E.g. sword on Gryphon Rider, already equipped but not equippable
 		}
 	}
+
+	-- Returns Lua array of [column] tags with buttons like "View item storage".
+	local function get_action_buttons()
+		local columns = {}
+		for _, button_config in ipairs(inventory_config.action_buttons) do
+			local button = wml.tag.button {
+				id = button_config.id,
+				label = button_config.label,
+				text_alignment = "left"
+			}
+
+			table.insert(columns, wml.tag.column {
+				border = "all",
+				border_size = 5,
+				horizontal_grow = true,
+				button
+			})
+		end
+
+		return columns
+	end
+
+	-- UNUSED: horizontal version of get_action_menu_vertical().
+	-- Will probably we removed, because text on the buttons is too long for the menu
+	-- to be horizontal. Could have been useful if action buttons were icons.
+	-- Return value: [grid] tag.
+	local function get_action_menu_horizontal()
+		local columns = get_action_buttons()
+		return wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.grid {
+						id = "inventory-actions",
+						wml.tag.row(columns)
+					}
+				}
+			}
+		}
+	end
+
+	-- Menu that contains a vertical menu with action buttons.
+	-- Return value: [grid] tag.
+	local function get_action_menu_vertical()
+		local columns = get_action_buttons()
+		local rows = {}
+
+		for _, column in ipairs(columns) do
+			table.insert(rows, wml.tag.row { column })
+		end
+
+		rows.id = "inventory-actions"
+		return wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.grid(rows)
+				}
+			}
+		}
+	end
 
 	local dialog = {
 		wml.tag.tooltip { id = "tooltip_large" },
@@ -180,14 +257,13 @@ function inventory(unit)
 				}
 			},
 
-			-- Close button
+			-- Action buttons
 			wml.tag.row {
 				wml.tag.column {
-					border = "top",
-					border_size = 10,
-					wml.tag.button { id = "ok", label = _"Close" }
+					get_action_menu_vertical()
 				}
 			}
+
 		}
 	}
 
@@ -266,5 +342,6 @@ function inventory(unit)
 		end
 	end
 
-	wesnoth.show_dialog(dialog, preshow)
+	local result = wesnoth.show_dialog(dialog, preshow)
+	print("show_dialog returned result=" .. result)
 end
