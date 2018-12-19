@@ -19,6 +19,7 @@ local inventory_config = {
 		{ id = "retaliation", label = _"Select weapons for retaliation" },
 		{ id = "unequip_all", label = _"Unequip (store) all items" },
 		{ id = "recall_list_items", label = _"Items on units on the recall list" },
+		{ spacer = true },
 		{ id = "ground_items", label = _"Pick up items on the ground" }
 	},
 
@@ -66,13 +67,9 @@ local NO_ITEM_TEXT = {
 	spear = _"no spear"
 }
 
--- Flag to avoid calling loti_register_slot_widget() twice
-local widget_registered = false
-
+-- Register custom GUI widget "item_slot_button":
+-- button with the picture of some item drawn on top of it.
 local function loti_register_slot_widget()
-	-- Only run once
-	if widget_registered then return end
-	widget_registered = true
 
 	-- Image that displays the button itself (border, pressed/focused animation)
 	local background = "buttons/button_square/button_square_60"
@@ -145,13 +142,64 @@ local function loti_register_slot_widget()
 	}
 
 	wesnoth.add_widget_definition("button", "item_slot_button", definition)
-	print("Debug: created new widget type!");
+end
+
+-- Register custom GUI widget "itemlabel": label with fixed width/height.
+local function loti_register_itemlabel_widget()
+	local font_size = 14
+	local width = 125
+	local height = 60
+
+	-- TODO: flexible height?
+	-- (just setting max_height to 150 and height to 60 doesn't do the trick)
+
+	local draw = wml.tag.draw {
+		wml.tag.text {
+			text = "(text)",
+			font_size = font_size,
+			maximum_width = "(width)",
+			w = "(width)",
+			h = "(text_height)"
+		}
+	}
+
+	local definition = {
+		id = "itemlabel",
+		description = 'Label for item name in LotI inventory dialog.',
+
+		wml.tag.resolution {
+			min_width = width,
+			min_height = height,
+			default_width = width,
+			default_height = height,
+			max_width = width,
+			max_height = height,
+
+			wml.tag.state_enabled { draw },
+			wml.tag.state_disabled { draw }
+		}
+	}
+
+	wesnoth.add_widget_definition("label", "itemlabel", definition)
+end
+
+-- Flag to avoid calling loti_register_widgets() twice
+local widgets_registered = false
+
+-- Register all custom GUI widgets used by our inventory dialog.
+local function loti_register_widgets()
+	if not widgets_registered then
+		widgets_registered = true
+
+		loti_register_slot_widget()
+		loti_register_itemlabel_widget()
+	end
 end
 
 -- NOTE: the only reason we call this function here is because it's very convenient for debugging
 -- (any errors in add_widget_definition() are discovered before the map is even loaded)
 -- When the widget is completely implemented, this function will be called from loti_inventory().
-loti_register_slot_widget()
+loti_register_widgets()
 
 -- Display the inventory dialog for a unit.
 local function loti_inventory(unit)
@@ -171,7 +219,7 @@ local function loti_inventory(unit)
 		end
 	end
 
-	loti_register_slot_widget()
+	loti_register_widgets()
 
 	-- Array of slots, in order added via get_slot_widget().
 	-- Each element is the item_sort of this slot.
@@ -204,8 +252,6 @@ local function loti_inventory(unit)
 				id = item_sort,
 				wml.tag.row {
 					wml.tag.column {
-						border = "all",
-						border_size = 5,
 						horizontal_alignment = "left",
 						wml.tag.button {
 							id = "item_image",
@@ -215,11 +261,12 @@ local function loti_inventory(unit)
 				},
 				wml.tag.row {
 					wml.tag.column {
-						border = "all",
-						border_size = 5,
+						border = "top,bottom",
+						border_size = 8,
+						horizontal_alignment = "left",
 						wml.tag.label {
+							definition = "itemlabel",
 							id = "item_name",
-							text_alignment = "center",
 							wrap = "yes"
 						}
 					}
@@ -229,7 +276,7 @@ local function loti_inventory(unit)
 
 		return wml.tag.column {
 			grow_factor = 0,
-			border = "all",
+			border = "left",
 			border_size = 5,
 			horizontal_alignment = "left",
 			internal_widget
@@ -316,8 +363,6 @@ local function loti_inventory(unit)
 				wml.tag.spacer {}
 			},
 			wml.tag.column {
-				border = "top",
-				border_size = 10,
 				wml.tag.button {
 					id = "ok",
 					label = _"Close"
