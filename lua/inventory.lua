@@ -25,13 +25,20 @@ local inventory_config = {
 	},
 
 	-- Maps the id= of action button (see inventory_config.action_buttons)
-	-- to a Lua function that is called when this button gets clicked.
+	-- to a Lua function that is called when player clicks on this button.
 	action_button_callbacks = {
 		storage = function() wesnoth.log("debug", "Clicked on storage button!") end,
 
 		-- Special callback 'default' is called when no callback has been defined for this button.
+		-- It also receives id as parameter.
 		default = function(id) helper.wml_error("Button " .. id .. " is not yet implemented.") end
 	},
+
+	-- Lua function that is called when player clicks on an inventory slot
+	-- (e.g. on the image of gauntlets).
+	slot_callback = function(item_sort)
+		helper.wml_error("Changing " .. item_sort .. " is not yet implemented.")
+	end,
 
 	-- Background image behind the picture of the item (should look like a button)
 	slot_background_image = "buttons/button_square/button_square_60.png"
@@ -64,6 +71,92 @@ local NO_ITEM_TEXT = {
 	spear = _"no spear"
 }
 
+-- Flag to avoid calling loti_register_slot_widget() twice
+local widget_registered = false
+
+local function loti_register_slot_widget()
+	-- Only run once
+	if widget_registered then return end
+	widget_registered = true
+
+	local background = inventory_config.slot_background_image
+	local size
+
+	local w, h = wesnoth.get_image_size(background)
+	if w < h then size = w else size = h end
+
+	local definition = {
+		id = "item_slot_button",
+		description = "Clickable image of item (e.g. gauntlets) in LotI inventory dialog.",
+
+		wml.tag.resolution {
+			min_width = size,
+			min_height = size,
+			default_width = size,
+			default_height = size,
+			max_width = size,
+			max_height = size,
+
+			wml.tag.state_enabled {
+				wml.tag.draw {
+					wml.tag.image {
+						w = "(width)",
+						h = "(height)",
+						name = background
+					},
+					wml.tag.image {
+						name = "(text)"
+					}
+				}
+			},
+			wml.tag.state_disabled {
+				wml.tag.draw {
+					wml.tag.image {
+						w = "(width)",
+						h = "(height)",
+						name = background .. "~GS()"
+					},
+					wml.tag.image {
+						name = "(text)~GS()"
+					}
+				}
+			},
+			wml.tag.state_pressed {
+				wml.tag.draw {
+					wml.tag.image {
+						w = "(width)",
+						h = "(height)",
+						name = background
+					},
+					wml.tag.image {
+						name = "(text)"
+					}
+				}
+			},
+			wml.tag.state_focused {
+				wml.tag.draw {
+					wml.tag.image {
+						w = "(width)",
+						h = "(height)",
+						name = background
+					},
+					wml.tag.image {
+						name = "(text)"
+					}
+				}
+			}
+		}
+	}
+
+	wesnoth.add_widget_definition("button", "item_slot_button", definition)
+	print("Debug: created new widget type!");
+end
+
+-- NOTE: the only reason we call this function here is because it's very convenient for debugging
+-- (any errors in add_widget_definition() are discovered before the map is even loaded)
+-- When the widget is completely implemented, this function will be called from loti_inventory().
+loti_register_slot_widget()
+
 -- Display the inventory dialog for a unit.
 local function loti_inventory(unit)
 	local equippable_sorts = loti_util_list_equippable_sorts(unit.type)
@@ -81,6 +174,8 @@ local function loti_inventory(unit)
 			table.insert(equippable_weapons, item_sort)
 		end
 	end
+
+	loti_register_slot_widget()
 
 	-- Array of slots, in order added via get_slot_widget().
 	-- Each element is the item_sort of this slot.
@@ -116,9 +211,9 @@ local function loti_inventory(unit)
 						border = "all",
 						border_size = 5,
 						horizontal_alignment = "left",
-						wml.tag.image {
+						wml.tag.button {
 							id = "item_image",
-							label = inventory_config.slot_background_image
+							definition = "item_slot_button"
 						}
 					}
 				},
@@ -283,17 +378,21 @@ local function loti_inventory(unit)
 					callback = inventory_config.action_button_callbacks["default"]
 				end
 
-				-- Additionally pass ID to the callback.
-				local onclick = function(x)
-					callback(id);
-				end
-
-				wesnoth.set_dialog_callback(onclick, id)
+				-- Note: we additionally pass "id" to callback as a parameter.
+				wesnoth.set_dialog_callback(function() callback(id) end, id)
 			end
 		end
 
+
 		-- Add placeholders into all slots.
 		for index, item_sort in ipairs(slots) do
+			-- Set callback for situation when player clicks on this slot.
+			wesnoth.set_dialog_callback(
+				function() inventory_config.slot_callback(item_sort) end,
+				"slot" .. index,
+				"item_image"
+			)
+
 			local default_text = ""
 			if equippable_sorts[item_sort] then
 				-- "No such item" message: shown for items that are not yet equipped, but can be.
@@ -346,6 +445,7 @@ local function loti_inventory(unit)
 				end
 
 				wesnoth.set_dialog_value(item.name, item.sort, "item_name")
+
 				wesnoth.set_dialog_value(
 					inventory_config.slot_background_image ..
 					"~BLIT(" .. item.image .. "~SCALE_INTO(60,60))",
