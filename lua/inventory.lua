@@ -289,27 +289,9 @@ local function loti_inventory(unit)
 		return columns
 	end
 
-	-- UNUSED: horizontal version of get_action_menu_vertical().
-	-- Will probably we removed, because text on the buttons is too long for the menu
-	-- to be horizontal. Could have been useful if action buttons were icons.
-	-- Return value: [grid] tag.
-	local function get_action_menu_horizontal()
-		local columns = get_action_buttons()
-		return wml.tag.grid {
-			wml.tag.row {
-				wml.tag.column {
-					wml.tag.grid {
-						id = "inventory-actions",
-						wml.tag.row(columns)
-					}
-				}
-			}
-		}
-	end
-
 	-- Menu that contains a vertical menu with action buttons.
 	-- Return value: [grid] tag.
-	local function get_action_menu_vertical()
+	local function get_action_menu()
 		local columns = get_action_buttons()
 		local rows = {}
 
@@ -321,6 +303,8 @@ local function loti_inventory(unit)
 		return wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
+					border = "right",
+					border_size = 15,
 					wml.tag.grid(rows)
 				}
 			}
@@ -332,7 +316,7 @@ local function loti_inventory(unit)
 		-- Row 1: header text ("what is this page for")
 		wml.tag.row {
 			wml.tag.column {
-				border = "left,bottom",
+				border = "bottom",
 				border_size = 10,
 				wml.tag.label {
 					id = "inventory_menu_top_label",
@@ -355,7 +339,7 @@ local function loti_inventory(unit)
 		wml.tag.grid {
 			wml.tag.row {
 				-- Column 1: vertical menu.
-				wml.tag.column { get_action_menu_vertical() },
+				wml.tag.column { get_action_menu() },
 
 				-- Column 2: contents of the inventory.
 				wml.tag.column { dialog_page_contents }
