@@ -38,10 +38,7 @@ local inventory_config = {
 	-- (e.g. on the image of gauntlets).
 	slot_callback = function(item_sort)
 		helper.wml_error("Changing " .. item_sort .. " is not yet implemented.")
-	end,
-
-	-- Background image behind the picture of the item (should look like a button)
-	slot_background_image = "buttons/button_square/button_square_60.png"
+	end
 }
 
 -- These variables are for translation of strings that depend on a parameter.
@@ -79,11 +76,8 @@ local function loti_register_slot_widget()
 	if widget_registered then return end
 	widget_registered = true
 
-	local background = inventory_config.slot_background_image
-	local size
-
-	local w, h = wesnoth.get_image_size(background)
-	if w < h then size = w else size = h end
+	local background = "buttons/button_square/button_square_60"
+	local size = 60
 
 	local definition = {
 		id = "item_slot_button",
@@ -102,7 +96,7 @@ local function loti_register_slot_widget()
 					wml.tag.image {
 						w = "(width)",
 						h = "(height)",
-						name = background
+						name = background .. ".png"
 					},
 					wml.tag.image {
 						name = "(text)"
@@ -114,7 +108,7 @@ local function loti_register_slot_widget()
 					wml.tag.image {
 						w = "(width)",
 						h = "(height)",
-						name = background .. "~GS()"
+						name = background .. ".png~GS()"
 					},
 					wml.tag.image {
 						name = "(text)~GS()"
@@ -126,7 +120,7 @@ local function loti_register_slot_widget()
 					wml.tag.image {
 						w = "(width)",
 						h = "(height)",
-						name = background
+						name = background .. "-pressed.png"
 					},
 					wml.tag.image {
 						name = "(text)"
@@ -138,7 +132,7 @@ local function loti_register_slot_widget()
 					wml.tag.image {
 						w = "(width)",
 						h = "(height)",
-						name = background
+						name = background .. "-active.png"
 					},
 					wml.tag.image {
 						name = "(text)"
@@ -447,8 +441,7 @@ local function loti_inventory(unit)
 				wesnoth.set_dialog_value(item.name, item.sort, "item_name")
 
 				wesnoth.set_dialog_value(
-					inventory_config.slot_background_image ..
-					"~BLIT(" .. item.image .. "~SCALE_INTO(60,60))",
+					item.image .. "~SCALE_INTO(60,60)",
 					item.sort, "item_image")
 
 				-- Unhide the slot (leftover slots are hidden by default)
