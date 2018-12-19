@@ -19,9 +19,7 @@ local inventory_config = {
 		{ id = "retaliation", label = _"Select weapons for retaliation" },
 		{ id = "unequip_all", label = _"Unequip (store) all items" },
 		{ id = "recall_list_items", label = _"Items on units on the recall list" },
-		{ id = "ground_items", label = _"Pick up items on the ground" },
-		{ spacer = true },
-		{ id = "ok", label = _"Close" }
+		{ id = "ground_items", label = _"Pick up items on the ground" }
 	},
 
 	-- Maps the id= of action button (see inventory_config.action_buttons)
@@ -311,6 +309,23 @@ local function loti_inventory(unit)
 		}
 	end
 
+	-- "Close" button in the bottom-right corner of the dialog.
+	local close_button = wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				wml.tag.spacer {}
+			},
+			wml.tag.column {
+				border = "top",
+				border_size = 10,
+				wml.tag.button {
+					id = "ok",
+					label = _"Close"
+				}
+			}
+		}
+	}
+
 	-- Contents of the inventory page - everything except the actions menu.
 	local dialog_page_contents = wml.tag.grid {
 		-- Row 1: header text ("what is this page for")
@@ -325,10 +340,18 @@ local function loti_inventory(unit)
 			}
 		},
 
-		-- Row2: inventory slots
+		-- Row 2: inventory slots
 		wml.tag.row {
 			wml.tag.column {
 				slots_grid
+			}
+		},
+
+		-- Row 3: close button.
+		wml.tag.row {
+			wml.tag.column {
+				horizontal_alignment = "right",
+				close_button
 			}
 		}
 	}
@@ -352,7 +375,7 @@ local function loti_inventory(unit)
 
 		-- Add callbacks for clicks on all action buttons.
 		for _, button_config in ipairs(inventory_config.action_buttons) do
-			if not button_config.spacer and button_config.id ~= "ok" then
+			if not button_config.spacer then
 				local id = button_config.id
 				local callback = inventory_config.action_button_callbacks[id]
 
