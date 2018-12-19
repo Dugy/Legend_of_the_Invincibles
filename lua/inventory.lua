@@ -76,8 +76,12 @@ local function loti_register_slot_widget()
 	if widget_registered then return end
 	widget_registered = true
 
+	-- Image that displays the button itself (border, pressed/focused animation)
 	local background = "buttons/button_square/button_square_60"
 	local size = 60
+
+	-- Image of the item that is currently in this item slot (if any)
+	local item_picture= "(if(text!='',text,'misc/blank.png')) .. '~SCALE_INTO(" .. size .. "," .. size .. ")'"
 
 	local definition = {
 		id = "item_slot_button",
@@ -99,7 +103,7 @@ local function loti_register_slot_widget()
 						name = background .. ".png"
 					},
 					wml.tag.image {
-						name = "(text)"
+						name = item_picture
 					}
 				}
 			},
@@ -111,7 +115,7 @@ local function loti_register_slot_widget()
 						name = background .. ".png~GS()"
 					},
 					wml.tag.image {
-						name = "(text)~GS()"
+						name = item_picture .. "~GS()"
 					}
 				}
 			},
@@ -123,7 +127,7 @@ local function loti_register_slot_widget()
 						name = background .. "-pressed.png"
 					},
 					wml.tag.image {
-						name = "(text)"
+						name = item_picture
 					}
 				}
 			},
@@ -135,7 +139,7 @@ local function loti_register_slot_widget()
 						name = background .. "-active.png"
 					},
 					wml.tag.image {
-						name = "(text)"
+						name = item_picture
 					}
 				}
 			}
@@ -439,10 +443,7 @@ local function loti_inventory(unit)
 				end
 
 				wesnoth.set_dialog_value(item.name, item.sort, "item_name")
-
-				wesnoth.set_dialog_value(
-					item.image .. "~SCALE_INTO(60,60)",
-					item.sort, "item_image")
+				wesnoth.set_dialog_value(item.image, item.sort, "item_image")
 
 				-- Unhide the slot (leftover slots are hidden by default)
 				wesnoth.set_dialog_visible(true, "slot" .. found)
