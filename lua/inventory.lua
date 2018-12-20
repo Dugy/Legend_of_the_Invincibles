@@ -5,6 +5,7 @@
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
+local goto_tab -- Defined below
 
 -- The following variable contains "moddable" options of the inventory UI,
 -- so that scenarios like Tutorial could override them.
@@ -33,8 +34,7 @@ local inventory_config = {
 		{
 			id = "retaliation",
 			label = _"Select weapons for retaliation",
-			-- TODO: this should be elsewhere, goto_tab() is not visible here.
-			-- onclick = function(unit) goto_tab("inventory_tab") end
+			onclick = function(unit) goto_tab("retaliation_tab") end
 		},
 		{
 			id = "unequip_all",
@@ -214,44 +214,32 @@ local widgets_registered = false
 
 -- Register all custom GUI widgets used by our inventory dialog.
 local function loti_register_widgets()
-	if not widgets_registered then
-		widgets_registered = true
-
-		loti_register_slot_widget()
-		loti_register_itemlabel_widget()
+	if widgets_registered then
+		return
 	end
+
+	loti_register_slot_widget()
+	loti_register_itemlabel_widget()
+
+	widgets_registered = true
 end
 
 -- NOTE: the only reason we call this function here is because it's very convenient for debugging
 -- (any errors in add_widget_definition() are discovered before the map is even loaded)
--- When the widget is completely implemented, this function will be called from loti_inventory().
+-- When the widgets are completely implemented, this function will only be called from loti_inventory().
 loti_register_widgets()
 
--- Display the inventory dialog for a unit.
-local function loti_inventory(unit)
-	local equippable_sorts = loti_util_list_equippable_sorts(unit.type)
+-- Array of slots, in order added via get_slot_widget().
+-- Each element is the item_sort of this slot.
+-- E.g. { "amulet", "helm", "ring", ... }
+-- Note: element #5 can be found by id "slot5" in wesnoth.set_dialog_*() methods.
+local slots
 
-	-- Determine sorts of equippable weapons, e.g. { "sword", "spear", "staff" }.
-	-- Elements from this array will then consumed (and deleted) in get_slot_widget() calls.
-	local equippable_weapons = {}
-	for item_sort in pairs(equippable_sorts) do
-		if item_sort == "sword" or item_sort == "axe" or item_sort == "staff"
-			or item_sort == "xbow" or item_sort == "bow" or item_sort == "dagger"
-			or item_sort == "knife" or item_sort == "mace" or item_sort == "polearm"
-			or item_sort == "claws" or item_sort == "sling" or item_sort == "essence"
-			or item_sort == "thunderstick"  or item_sort == "spear"
-		then
-			table.insert(equippable_weapons, item_sort)
-		end
-	end
-
-	loti_register_widgets()
-
-	-- Array of slots, in order added via get_slot_widget().
-	-- Each element is the item_sort of this slot.
-	-- E.g. { "amulet", "helm", "ring", ... }
-	-- Note: element #5 can be found by id "slot5" in wesnoth.set_dialog_*() methods.
-	local slots = {}
+-- Construct tab #1: "items on the unit".
+-- Note: result is exactly the same for any unit. See onshow_items_tab() for unit-specific logic.
+-- Returns: top-level [grid] widget.
+local function get_items_tab()
+	slots = {}
 
 	-- Make a wml.tag.column that would display one currently equipped item.
 	-- Parameter item_sort is a type of the item (e.g. "amulet" or "gauntlets").
@@ -263,19 +251,11 @@ local function loti_inventory(unit)
 			helper.wml_error("get_slot_widget(): books/orbs are not supported.")
 		end
 
-		if item_sort == "weapon" then
-			-- Fake item_sort that means "whatever sort of weapon is allowed on this unit".
-			-- We immediately replace this, unless all allowed weapon sorts
-			-- have already been added (in this case the slot will be hidden).
-			item_sort = table.remove(equippable_weapons, 1) or "weapon"
-		end
-
 		table.insert(slots, item_sort)
 
 		local internal_widget = wml.tag.panel {
 			id = "slot" .. #slots, -- Unique within the dialog
 			wml.tag.grid {
-				id = item_sort,
 				wml.tag.row {
 					wml.tag.column {
 						horizontal_alignment = "left",
@@ -436,40 +416,137 @@ local function loti_inventory(unit)
 		}
 	}
 
-	-- Get tab #1: inventory ("items on the unit" screen).
-	-- Returns: [grid] widget.
-	local function get_inventory_screen()
-		return wml.tag.grid {
-			wml.tag.row {
-				-- Column 1: vertical menu.
-				wml.tag.column { get_action_menu() },
+	return wml.tag.grid {
+		wml.tag.row {
+			-- Column 1: vertical menu.
+			wml.tag.column { get_action_menu() },
 
-				-- Column 2: contents of the inventory.
-				wml.tag.column { dialog_page_contents }
-			}
+			-- Column 2: contents of the inventory.
+			wml.tag.column { dialog_page_contents }
 		}
-	end
+	}
+end
 
-	-- Get tab #2: retaliation ("weapons for retaliation" screen).
-	-- Returns: [grid] widget.
-	local function get_retaliation_screen()
-		return wml.tag.grid {
-			wml.tag.row {
-				wml.tag.column {
-					wml.tag.label {
-						label = _"Select weapons for retaliation"
-					}
+-- Construct tab #2: retaliation ("weapons for retaliation" screen).
+-- Note: result is exactly the same for any unit. See onshow_retaliation_tab() for unit-specific logic.
+-- Returns: top-level [grid] widget.
+local function get_retaliation_tab()
+	-- TODO
+	return wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				wml.tag.label {
+					label = _"Select weapons for retaliation"
 				}
 			}
 		}
-	end
+	}
+end
+
+-- Display the inventory dialog for a unit.
+-- TODO: support changing the unit without closing this dialog,
+-- which can be useful for features like "Items on units on the recall list".
+local function open_inventory_dialog(unit)
+	loti_register_widgets()
 
 	-- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.
 	-- Used to run onsubmit callbacks after the dialog is closed.
 	local clicked_button_id = nil
 
-	local function onshow_inventory_screen()
+	-- Callback that updates the "items on this unit" tab whenever it is shown.
+	-- Note: see get_items_tab() for internal structure of this tab.
+	local function onshow_items_tab()
 		wesnoth.set_dialog_markup(true, "inventory_menu_top_label")
+
+		local equippable_sorts = loti_util_list_equippable_sorts(unit.type)
+
+		-- Determine sorts of equippable weapons, e.g. { "sword", "spear", "staff" }.
+		-- Elements from this array will then consumed (and deleted) in get_slot_widget() calls.
+		local equippable_weapons = {}
+		for item_sort in pairs(equippable_sorts) do
+			if item_sort == "sword" or item_sort == "axe" or item_sort == "staff"
+				or item_sort == "xbow" or item_sort == "bow" or item_sort == "dagger"
+				or item_sort == "knife" or item_sort == "mace" or item_sort == "polearm"
+				or item_sort == "claws" or item_sort == "sling" or item_sort == "essence"
+				or item_sort == "thunderstick" or item_sort == "spear"
+			then
+				table.insert(equippable_weapons, item_sort)
+			end
+		end
+
+		-- Lua table { 'sword' => 'slot2', 'armour' => 'slot5', ... }.
+		-- Calculated below.
+		local slot_id_by_sort = {}
+
+		-- Add placeholders into all slots.
+		for index, item_sort in ipairs(slots) do
+			local slot_id = "slot" .. index
+
+			-- Set callback for situation when player clicks on this slot.
+			wesnoth.set_dialog_callback(
+				function() inventory_config.slot_callback(item_sort) end,
+				slot_id,
+				"item_image"
+			)
+
+			if item_sort == "weapon" then
+				-- Fake item_sort that means "whatever sort of weapon is allowed on this unit".
+				-- We immediately replace this, unless all allowed weapon sorts
+				-- have already been added (in this case the slot will be hidden).
+				item_sort = table.remove(equippable_weapons, 1) or "weapon"
+			end
+
+			slot_id_by_sort[item_sort] = slot_id
+
+			local default_text = ""
+			if equippable_sorts[item_sort] then
+				-- "No such item" message: shown for items that are not yet equipped, but can be.
+				default_text = NO_ITEM_TEXT[item_sort]
+
+				if not default_text then
+					helper.wml_error("NO_ITEM_TEXT is not defined for item_sort=" .. item_sort)
+					default_text = NO_ITEM_TEXT["default"]
+				end
+			elseif item_sort == "weapon" or item_sort == "leftover" then
+				-- These are fake sorts (no item actually uses them) that mean "unneeded slot":
+				-- "weapon" is a second/weapon for a unit that only uses 1 weapon, etc.,
+				-- "leftover" is a slot reserved for items that are not allowed on this unit,
+				-- but are still equipped (for example, Elvish Outrider had a sword and
+				-- then advanced to Gryphon Rider, but Gryphon Rider can't equip swords)
+				wesnoth.set_dialog_visible(false, slot_id)
+			else
+				-- Unequippable item, e.g. gauntlets for a Ghost.
+				wesnoth.set_dialog_visible(false, slot_id)
+			end
+
+			wesnoth.set_dialog_value( default_text, slot_id, "item_name")
+		end
+
+		local modifications = helper.get_child(unit.__cfg, "modifications")
+		for _, item in ipairs(helper.child_array(modifications, "object")) do
+			-- There are non-items in object[] array, but they don't have 'sort' key.
+			-- Also there are fake items (e.g. sort=quest_effect), but they have 'silent' key.
+			-- We also ignore objects without name, because they can't be valid items.
+			if item.sort and not item.silent and item.name and item.sort ~= "potion" and item.sort ~= "limited" then
+				if not equippable_sorts[item.sort] then
+					-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
+					-- Shown in a specially reserved "leftover" slot.
+					item.sort = "leftover"
+				end
+
+				local slot_id = slot_id_by_sort[item.sort]
+				if not slot_id then
+					helper.wml_error("Error: found item of type=" .. item.sort ..
+						", but the inventory screen doesn't have a slot for this type.")
+				end
+
+				wesnoth.set_dialog_value(item.name, slot_id, "item_name")
+				wesnoth.set_dialog_value(item.image, slot_id, "item_image")
+
+				-- Unhide the slot (leftover slots are hidden by default)
+				wesnoth.set_dialog_visible(true, slot_id)
+			end
+		end
 
 		-- Add callbacks for clicks on action buttons.
 		for _, button in ipairs(inventory_config.action_buttons) do
@@ -493,74 +570,6 @@ local function loti_inventory(unit)
 				end
 			end
 		end
-
-		-- Add placeholders into all slots.
-		for index, item_sort in ipairs(slots) do
-			-- Set callback for situation when player clicks on this slot.
-			wesnoth.set_dialog_callback(
-				function() inventory_config.slot_callback(item_sort) end,
-				"slot" .. index,
-				"item_image"
-			)
-
-			local default_text = ""
-			if equippable_sorts[item_sort] then
-				-- "No such item" message: shown for items that are not yet equipped, but can be.
-				default_text = NO_ITEM_TEXT[item_sort]
-
-				if not default_text then
-					helper.wml_error("NO_ITEM_TEXT is not defined for item_sort=" .. item_sort)
-					default_text = NO_ITEM_TEXT["default"]
-				end
-			elseif item_sort == "weapon" or item_sort == "leftover" then
-				-- These are fake sorts (no item actually uses them) that mean "unneeded slot":
-				-- "weapon" is a second/weapon for a unit that only uses 1 weapon, etc.,
-				-- "leftover" is a slot reserved for items that are not allowed on this unit,
-				-- but are still equipped (for example, Elvish Outrider had a sword and
-				-- then advanced to Gryphon Rider, but Gryphon Rider can't equip swords)
-				wesnoth.set_dialog_visible(false, "slot" .. index)
-			else
-				-- Unequippable item, e.g. gauntlets for a Ghost.
-				wesnoth.set_dialog_visible(false, "slot" .. index)
-			end
-
-			wesnoth.set_dialog_value( default_text, "slot" .. index, "item_name")
-		end
-
-		local modifications = helper.get_child(unit.__cfg, "modifications")
-		for _, item in ipairs(helper.child_array(modifications, "object")) do
-			-- There are non-items in object[] array, but they don't have 'sort' key.
-			-- Also there are fake items (e.g. sort=quest_effect), but they have 'silent' key.
-			-- We also ignore objects without name, because they can't be valid items.
-			if item.sort and not item.silent and item.name and item.sort ~= "potion" and item.sort ~= "limited" then
-				if not equippable_sorts[item.sort] then
-					-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
-					-- Shown in a specially reserved "leftover" slot.
-					item.sort = "leftover"
-				end
-
-				-- Sanity check: ensure that we have a slot for this type of item.
-				-- Because if not, wesnoth.set_dialog_value() would print a really non-helpful error.
-				local found
-				for index, slot in ipairs(slots) do
-					if slot == item.sort then
-						found=index
-						break
-					end
-				end
-
-				if not found then
-					helper.wml_error("Error: found item of type=" .. item.sort ..
-						", but the inventory screen doesn't have a slot for this type.")
-				end
-
-				wesnoth.set_dialog_value(item.name, item.sort, "item_name")
-				wesnoth.set_dialog_value(item.image, item.sort, "item_image")
-
-				-- Unhide the slot (leftover slots are hidden by default)
-				wesnoth.set_dialog_visible(true, "slot" .. found)
-			end
-		end
 	end
 
 	local function onshow_retaliation_screen()
@@ -572,13 +581,13 @@ local function loti_inventory(unit)
 	-- Another tab can be opened via goto_tab("id_of_new_tab").
 	local tabs = {
 		{
-			id = "inventory_tab",
-			grid = get_inventory_screen(),
-			onshow = onshow_inventory_screen
+			id = "items_tab",
+			grid = get_items_tab(),
+			onshow = onshow_items_tab
 		},
 		{
 			id = "retaliation_tab",
-			grid = get_retaliation_screen(),
+			grid = get_retaliation_tab(),
 			onshow = onshow_retaliation_screen
 		}
 	}
@@ -606,7 +615,7 @@ local function loti_inventory(unit)
 
 	-- Show one tab (and call its "onshow" callback), hide all other tabs.
 	-- Parameter: tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
-	local function goto_tab(tab_id)
+	function goto_tab(tab_id)
 		-- Quick sanity check for whether tab_id exists,
 		-- because trying to hide ALL widgets in a dialog crashes Wesnoth.
 		local found
@@ -635,7 +644,7 @@ local function loti_inventory(unit)
 	}
 
 	local function preshow()
-		goto_tab("inventory_tab")
+		goto_tab("items_tab")
 	end
 
 	local result = wesnoth.show_dialog(dialog, preshow)
@@ -658,5 +667,5 @@ function wesnoth.wml_actions.show_inventory(cfg)
 		helper.wml_error("[show_inventory]: no units found.")
 	end
 
-	loti_inventory(units[1])
+	open_inventory_dialog(units[1])
 end
