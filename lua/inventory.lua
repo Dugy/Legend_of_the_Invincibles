@@ -9,8 +9,7 @@ local helper = wesnoth.require "lua/helper.lua"
 -- The following variable contains "moddable" options of the inventory UI,
 -- so that scenarios like Tutorial could override them.
 local inventory_config = {
-
-	-- Action buttons are buttons below the inventory dialog, e.g. "Disable retaliation attacks".
+	-- Action buttons are buttons in the left menu, e.g. "Unequip all items".
 	action_buttons = {
 		{
 			id = "storage",
@@ -33,7 +32,9 @@ local inventory_config = {
 		{ spacer = true },
 		{
 			id = "retaliation",
-			label = _"Select weapons for retaliation"
+			label = _"Select weapons for retaliation",
+			-- TODO: this should be elsewhere, goto_tab() is not visible here.
+			-- onclick = function(unit) goto_tab("inventory_tab") end
 		},
 		{
 			id = "unequip_all",
@@ -310,8 +311,6 @@ local function loti_inventory(unit)
 
 	-- Prepare the layout structure for wesnoth.show_dialog().
 	local slots_grid = wml.tag.grid {
-		id = "inventory",
-
 		-- Slots (one per item_sort), arranged in a predetermined order
 		-- (e.g. helm is the top-middle item, and boots are bottom-middle).
 		wml.tag.row {
@@ -437,10 +436,10 @@ local function loti_inventory(unit)
 		}
 	}
 
-	local dialog = {
-		wml.tag.tooltip { id = "tooltip_large" },
-		wml.tag.helptip { id = "tooltip_large" },
-		wml.tag.grid {
+	-- Get tab #1: inventory ("items on the unit" screen).
+	-- Returns: [grid] widget.
+	local function get_inventory_screen()
+		return wml.tag.grid {
 			wml.tag.row {
 				-- Column 1: vertical menu.
 				wml.tag.column { get_action_menu() },
@@ -449,13 +448,27 @@ local function loti_inventory(unit)
 				wml.tag.column { dialog_page_contents }
 			}
 		}
-	}
+	end
+
+	-- Get tab #2: retaliation ("weapons for retaliation" screen).
+	-- Returns: [grid] widget.
+	local function get_retaliation_screen()
+		return wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.label {
+						label = _"Select weapons for retaliation"
+					}
+				}
+			}
+		}
+	end
 
 	-- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.
 	-- Used to run onsubmit callbacks after the dialog is closed.
 	local clicked_button_id = nil
 
-	local function preshow()
+	local function onshow_inventory_screen()
 		wesnoth.set_dialog_markup(true, "inventory_menu_top_label")
 
 		-- Add callbacks for clicks on action buttons.
@@ -548,6 +561,81 @@ local function loti_inventory(unit)
 				wesnoth.set_dialog_visible(true, "slot" .. found)
 			end
 		end
+	end
+
+	local function onshow_retaliation_screen()
+		-- TODO
+	end
+
+	-- List of all tabs in the Inventory dialog.
+	-- Only one tab is visible at a time.
+	-- Another tab can be opened via goto_tab("id_of_new_tab").
+	local tabs = {
+		{
+			id = "inventory_tab",
+			grid = get_inventory_screen(),
+			onshow = onshow_inventory_screen
+		},
+		{
+			id = "retaliation_tab",
+			grid = get_retaliation_screen(),
+			onshow = onshow_retaliation_screen
+		}
+	}
+
+	-- Get widget that contains all tabs.
+	-- (only one tab will be visible at the same time)
+	-- Returns: [grid] widget.
+	local function get_multitab_widget()
+		-- Wrap every tab in [panel], because panels can be made hidden/visible,
+		-- and place them all into one grid.
+		local column_wrapped_tabs = {}
+		for _, tab in ipairs(tabs) do
+			table.insert(column_wrapped_tabs, wml.tag.column {
+				wml.tag.panel {
+					id = tab.id,
+					tab.grid
+				}
+			})
+		end
+
+		return wml.tag.grid {
+			wml.tag.row(column_wrapped_tabs)
+		}
+	end
+
+	-- Show one tab (and call its "onshow" callback), hide all other tabs.
+	-- Parameter: tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
+	local function goto_tab(tab_id)
+		-- Quick sanity check for whether tab_id exists,
+		-- because trying to hide ALL widgets in a dialog crashes Wesnoth.
+		local found
+		for _, tab in ipairs(tabs) do
+			if tab.id == tab_id then found = 1 break end
+		end
+		if not found then
+			helper.wml_error("Error: goto_tab: tab \"" .. tab_id .. "\" doesn't exist.")
+		end
+
+		-- Actually hide/unhide the tabs.
+		for _, tab in ipairs(tabs) do
+			local should_show = tab.id == tab_id
+			if should_show then
+				tab.onshow()
+			end
+
+			wesnoth.set_dialog_visible(should_show, tab.id)
+		end
+	end
+
+	local dialog = {
+		wml.tag.tooltip { id = "tooltip_large" },
+		wml.tag.helptip { id = "tooltip_large" },
+		get_multitab_widget()
+	}
+
+	local function preshow()
+		goto_tab("inventory_tab")
 	end
 
 	local result = wesnoth.show_dialog(dialog, preshow)
