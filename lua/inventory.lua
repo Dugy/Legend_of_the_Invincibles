@@ -12,26 +12,51 @@ local inventory_config = {
 
 	-- Action buttons are buttons below the inventory dialog, e.g. "Disable retaliation attacks".
 	action_buttons = {
-		{ id = "storage", label = _"Item storage" },
-		{ id = "crafting", label = _"Crafting" },
-		{ id = "unit_information", label = _"Unit information" },
+		{
+			id = "storage",
+			label = _"Item storage"
+		},
+		{
+			id = "crafting",
+			label = _"Crafting",
+			onclick = function(unit)
+				helper.wml_error("Crafting is not yet implemented.")
+			end
+		},
+		{
+			id = "unit_information",
+			label = _"Unit information",
+			onsubmit = function(unit)
+				wesnoth.fire_event("unit information", unit.x, unit.y)
+			end,
+		},
 		{ spacer = true },
-		{ id = "retaliation", label = _"Select weapons for retaliation" },
-		{ id = "unequip_all", label = _"Unequip (store) all items" },
-		{ id = "recall_list_items", label = _"Items on units on the recall list" },
+		{
+			id = "retaliation",
+			label = _"Select weapons for retaliation"
+		},
+		{
+			id = "unequip_all",
+			label = _"Unequip (store) all items"
+		},
+		{
+			id = "recall_list_items",
+			label = _"Items on units on the recall list"
+		},
 		{ spacer = true },
-		{ id = "ground_items", label = _"Pick up items on the ground" }
+		{
+			id = "ground_items",
+			label = _"Pick up items on the ground",
+			onsubmit = function(unit)
+				wesnoth.fire_event("item_pick", unit.x, unit.y)
+			end
+		}
 	},
 
-	-- Maps the id= of action button (see inventory_config.action_buttons)
-	-- to a Lua function that is called when player clicks on this button.
-	action_button_callbacks = {
-		storage = function() wesnoth.log("debug", "Clicked on storage button!") end,
-
-		-- Special callback 'default' is called when no callback has been defined for this button.
-		-- It also receives id as parameter.
-		default = function(id) helper.wml_error("Button " .. id .. " is not yet implemented.") end
-	},
+	-- Called when clicking on action_buttons which don't have onsubmit/onclick callbacks.
+	default_button_callback = function(unit, button_id)
+		helper.wml_error("Button " .. button_id .. " is not yet implemented.")
+	end,
 
 	-- Lua function that is called when player clicks on an inventory slot
 	-- (e.g. on the image of gauntlets).
@@ -315,12 +340,23 @@ local function loti_inventory(unit)
 	-- Returns Lua array of [column] tags with buttons like "View item storage".
 	local function get_action_buttons()
 		local columns = {}
-		for _, button_config in ipairs(inventory_config.action_buttons) do
+		for _, config in ipairs(inventory_config.action_buttons) do
 			local button
-			if button_config.spacer then
+			if config.spacer then
 				button = wml.tag.spacer { height = 20 }
 			else
-				button = wml.tag.button(button_config)
+				-- Parameters of [button] tag.
+				local params = {
+					id = config.id,
+					label = config.label
+				}
+
+				-- If the button has onsubmit callback, then it always closes the dialog.
+				if config.onsubmit then
+					params.return_value_id = "ok"
+				end
+
+				button = wml.tag.button(params)
 			end
 
 			table.insert(columns, wml.tag.column {
@@ -415,24 +451,35 @@ local function loti_inventory(unit)
 		}
 	}
 
+	-- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.
+	-- Used to run onsubmit callbacks after the dialog is closed.
+	local clicked_button_id = nil
+
 	local function preshow()
 		wesnoth.set_dialog_markup(true, "inventory_menu_top_label")
 
-		-- Add callbacks for clicks on all action buttons.
-		for _, button_config in ipairs(inventory_config.action_buttons) do
-			if not button_config.spacer then
-				local id = button_config.id
-				local callback = inventory_config.action_button_callbacks[id]
+		-- Add callbacks for clicks on action buttons.
+		for _, button in ipairs(inventory_config.action_buttons) do
+			if not button.spacer then
+				if button.onsubmit then
+					-- onsubmit callbacks are only called after the dialog is closed.
+					-- The only thing we need here is to remember clicked_button_id.
+					wesnoth.set_dialog_callback(
+						function() clicked_button_id = button.id end,
+						button.id
+					)
+				else
+					-- Normal onclick callback (this button doesn't close the dialog).
+					local callback = button.onclick or inventory_config.default_button_callback
 
-				if not callback then
-					callback = inventory_config.action_button_callbacks["default"]
+					-- Note: we additionally pass Unit and button ID as parameters to callback.
+					wesnoth.set_dialog_callback(
+						function() callback(unit, button.id) end,
+						button.id
+					)
 				end
-
-				-- Note: we additionally pass "id" to callback as a parameter.
-				wesnoth.set_dialog_callback(function() callback(id) end, id)
 			end
 		end
-
 
 		-- Add placeholders into all slots.
 		for index, item_sort in ipairs(slots) do
@@ -504,7 +551,15 @@ local function loti_inventory(unit)
 	end
 
 	local result = wesnoth.show_dialog(dialog, preshow)
-	print("show_dialog returned result=" .. result)
+
+	-- Run onsubmit callback, assuming that the dialog was closed by click on the action button.
+	if clicked_button_id then
+		for _, button in ipairs(inventory_config.action_buttons) do
+			if button.id == clicked_button_id then
+				button.onsubmit(unit, button.id)
+			end
+		end
+	end
 end
 
 -- Tag [show_inventory] displays the inventory dialog for the unit.
