@@ -431,12 +431,71 @@ end
 -- Note: result is exactly the same for any unit. See onshow_retaliation_tab() for unit-specific logic.
 -- Returns: top-level [grid] widget.
 local function get_retaliation_tab()
-	-- TODO
+	local listbox_template = wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				grow_factor = 0,
+				border = "all",
+				border_size = 5,
+				horizontal_alignment = "left",
+				wml.tag.toggle_button {
+					id = "attack_enabled"
+				}
+			},
+			wml.tag.column {
+				grow_factor = 1,
+				border = "all",
+				border_size = 5,
+				horizontal_grow = true,
+				wml.tag.label {
+					id = "attack_name",
+					text_alignment = "left"
+				}
+			}
+		}
+	}
+
+	-- FIXME: toggle_panel causes lines themselves to look selected,
+	-- which is confusing, because there is already a checkbox (and only checkbox counts).
+	-- Should probably create a custom GUI widget based on [toggle_panel]:
+	-- either make a selected state look the same as non-selected,
+	-- or (better yet) draw a checkbox image on the [toggle_panel] itself.
+	local listbox = wml.tag.listbox {
+		id = "retaliation_listbox",
+		wml.tag.list_definition {
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_grow = true,
+					wml.tag.toggle_panel {
+						-- definition = "TODO",
+						listbox_template
+					}
+				}
+			}
+		}
+	}
+
 	return wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
+				border = "all",
+				border_size = 15,
 				wml.tag.label {
-					label = _"Select weapons for retaliation"
+					label = _"Which attacks do you allow to use for retaliation?"
+				}
+			}
+		},
+		wml.tag.row {
+			wml.tag.column {
+				horizontal_grow = true,
+				listbox
+			}
+		},
+		wml.tag.row {
+			wml.tag.column {
+				wml.tag.button {
+					id = "retaliation_save",
+					label = _"OK"
 				}
 			}
 		}
@@ -573,7 +632,25 @@ local function open_inventory_dialog(unit)
 	end
 
 	local function onshow_retaliation_screen()
-		-- TODO
+		local listbox_id = "retaliation_listbox"
+		for index, attack in ipairs(unit.attacks) do
+			wesnoth.set_dialog_value(attack.description, listbox_id, index, "attack_name")
+			wesnoth.set_dialog_value(attack.defense_weight > 0, listbox_id, index, "attack_enabled")
+		end
+
+		local function save()
+			-- Save changes (if any) and go back to the Items tab.
+			for index, attack in ipairs(unit.attacks) do
+				attack.defense_weight = 0
+				if wesnoth.get_dialog_value(listbox_id, index, "attack_enabled") then
+					attack.defense_weight = 1
+				end
+			end
+
+			goto_tab("items_tab")
+		end
+
+		wesnoth.set_dialog_callback(save, "retaliation_save")
 	end
 
 	-- List of all tabs in the Inventory dialog.
