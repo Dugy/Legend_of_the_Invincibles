@@ -209,6 +209,45 @@ local function loti_register_itemlabel_widget()
 	wesnoth.add_widget_definition("label", "itemlabel", definition)
 end
 
+-- Register custom GUI widget "checklist": toggle_panel with a checkbox (doesn't look like a selected row).
+local function loti_register_checklist_widget()
+	local height = 50
+
+	local function draw(icon)
+		return {
+			wml.tag.draw {
+				wml.tag.image {
+					name = icon
+				}
+			}
+		}
+	end
+
+	local definition = {
+		id = "checklist",
+		description = 'Toggle panel which looks like a checkbox, but can have content.',
+
+		wml.tag.resolution {
+			min_width = 26, -- Can't be less than GUI__LISTBOX_SELECTED_CELL
+			min_height = 26, -- Can't be less than GUI__LISTBOX_SELECTED_CELL
+			default_height = height,
+
+			wml.tag.state { -- Non-selected
+				wml.tag.enabled(draw("buttons/checkbox.png")),
+				wml.tag.disabled(draw("buttons/checkbox.png~GS()")),
+				wml.tag.focused(draw("buttons/checkbox-active.png"))
+			},
+			wml.tag.state { -- Selected
+				wml.tag.enabled(draw("buttons/checkbox-pressed.png")),
+				wml.tag.disabled(draw("buttons/checkbox-pressed.png~GS()")),
+				wml.tag.focused(draw("buttons/checkbox-active-pressed.png"))
+			}
+		}
+	}
+
+	wesnoth.add_widget_definition("toggle_panel", "checklist", definition)
+end
+
 -- Flag to avoid calling loti_register_widgets() twice
 local widgets_registered = false
 
@@ -220,6 +259,7 @@ local function loti_register_widgets()
 
 	loti_register_slot_widget()
 	loti_register_itemlabel_widget()
+	loti_register_checklist_widget()
 
 	widgets_registered = true
 end
@@ -434,40 +474,36 @@ local function get_retaliation_tab()
 	local listbox_template = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
-				grow_factor = 0,
-				border = "all",
-				border_size = 5,
-				horizontal_alignment = "left",
-				wml.tag.toggle_button {
-					id = "attack_enabled"
-				}
-			},
-			wml.tag.column {
 				grow_factor = 1,
-				border = "all",
-				border_size = 5,
+				border = "left",
+				border_size = 30,
 				horizontal_grow = true,
+				vertical_alignment = "center",
 				wml.tag.label {
 					id = "attack_name",
 					text_alignment = "left"
 				}
 			}
+		},
+		wml.tag.row {
+			wml.tag.column {
+				wml.tag.spacer {
+					height = 30
+				}
+			}
 		}
 	}
 
-	-- FIXME: toggle_panel causes lines themselves to look selected,
-	-- which is confusing, because there is already a checkbox (and only checkbox counts).
-	-- Should probably create a custom GUI widget based on [toggle_panel]:
-	-- either make a selected state look the same as non-selected,
-	-- or (better yet) draw a checkbox image on the [toggle_panel] itself.
 	local listbox = wml.tag.listbox {
 		id = "retaliation_listbox",
+		has_maximum = false, -- More than 1 checkbox can be selected.
+		has_minimum = false, -- All checkboxes can be unselected.
 		wml.tag.list_definition {
 			wml.tag.row {
 				wml.tag.column {
 					horizontal_grow = true,
 					wml.tag.toggle_panel {
-						-- definition = "TODO",
+						definition = "checklist",
 						listbox_template
 					}
 				}
@@ -634,6 +670,9 @@ local function open_inventory_dialog(unit)
 	local function onshow_retaliation_tab()
 		local listbox_id = "retaliation_listbox"
 
+		-- Ensure than no rows are selected.
+		wesnoth.set_dialog_value({}, listbox_id)
+
 		-- Ordered array of indexes of attacks (positions in unit.attacks array)
 		-- for attacks affected by the shown checkboxes.
 		-- E.g. { 1, 2, 4, ...} - where 3 was skipped because, for example, it was a whirlwind attack.
@@ -663,16 +702,29 @@ local function open_inventory_dialog(unit)
 
 				wesnoth.set_dialog_value(attack.description,
 					listbox_id, checkbox_id, "attack_name")
-				wesnoth.set_dialog_value(allowed,
-					listbox_id, checkbox_id, "attack_enabled")
+
+				-- This is a multiselect listbox,
+				-- each set_dialog_value() selects an additional row.
+				if allowed then
+					wesnoth.set_dialog_value(checkbox_id, listbox_id)
+				end
 			end
 		end
 
 		local function save()
+			local is_selected = {} -- { checkbox_id1 => 1, checkbox_id2 => 1, ... }
+
+			-- Determine which checkboxes are selected.
+			-- This is a multiselect listbox, so get_dialog_value() has a second return value.
+			local _, listbox_values = wesnoth.get_dialog_value(listbox_id)
+			for _, checkbox_id in pairs(listbox_values) do
+				is_selected[checkbox_id] = 1
+			end
+
 			-- Save changes (if any) and go back to the Items tab.
 			local disabled_defences = {}
 			for checkbox_id, attack_index in ipairs(checkboxes) do
-				if wesnoth.get_dialog_value(listbox_id, checkbox_id, "attack_enabled") then
+				if is_selected[checkbox_id] then
 					unit.attacks[attack_index].defense_weight = 1
 				else
 					unit.attacks[attack_index].defense_weight = 0
