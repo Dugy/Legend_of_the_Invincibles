@@ -42,7 +42,7 @@ local inventory_config = {
 			onclick = function(unit)
 				if wesnoth.confirm(_"Are you sure? All items of this unit will be placed into the item storage.") then
 					loti_item_storage().undress_unit(unit)
-					-- TODO: redraw, items are no longer in the slots
+					goto_tab("items_tab") -- redraw, items are no longer in the slots
 				end
 			end
 		},
@@ -550,10 +550,6 @@ end
 local function open_inventory_dialog(unit)
 	loti_register_widgets()
 
-	-- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.
-	-- Used to run onsubmit callbacks after the dialog is closed.
-	local clicked_button_id = nil
-
 	-- Callback that updates the "items on this unit" tab whenever it is shown.
 	-- Note: see get_items_tab() for internal structure of this tab.
 	local function onshow_items_tab()
@@ -583,13 +579,6 @@ local function open_inventory_dialog(unit)
 		for index, item_sort in ipairs(slots) do
 			local slot_id = "slot" .. index
 
-			-- Set callback for situation when player clicks on this slot.
-			wesnoth.set_dialog_callback(
-				function() inventory_config.slot_callback(item_sort) end,
-				slot_id,
-				"item_image"
-			)
-
 			if item_sort == "weapon" then
 				-- Fake item_sort that means "whatever sort of weapon is allowed on this unit".
 				-- We immediately replace this, unless all allowed weapon sorts
@@ -598,6 +587,17 @@ local function open_inventory_dialog(unit)
 			end
 
 			slot_id_by_sort[item_sort] = slot_id
+
+			-- Set callback for situation when player clicks on this slot.
+			wesnoth.set_dialog_callback(
+				function() inventory_config.slot_callback(item_sort) end,
+				slot_id,
+				"item_image"
+			)
+
+			-- Ensure that empty slots don't have any images.
+			-- This is needed when we redraw the dialog after "Unequip all items".
+			wesnoth.set_dialog_value("", slot_id, "item_image")
 
 			local default_text = ""
 			if equippable_sorts[item_sort] then
@@ -641,29 +641,6 @@ local function open_inventory_dialog(unit)
 
 			-- Unhide the slot (leftover slots are hidden by default)
 			wesnoth.set_dialog_visible(true, slot_id)
-		end
-
-		-- Add callbacks for clicks on action buttons.
-		for _, button in ipairs(inventory_config.action_buttons) do
-			if not button.spacer then
-				if button.onsubmit then
-					-- onsubmit callbacks are only called after the dialog is closed.
-					-- The only thing we need here is to remember clicked_button_id.
-					wesnoth.set_dialog_callback(
-						function() clicked_button_id = button.id end,
-						button.id
-					)
-				else
-					-- Normal onclick callback (this button doesn't close the dialog).
-					local callback = button.onclick or inventory_config.default_button_callback
-
-					-- Note: we additionally pass Unit and button ID as parameters to callback.
-					wesnoth.set_dialog_callback(
-						function() callback(unit, button.id) end,
-						button.id
-					)
-				end
-			end
 		end
 	end
 
@@ -812,7 +789,40 @@ local function open_inventory_dialog(unit)
 		get_multitab_widget()
 	}
 
+	-- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.
+	-- Used to run onsubmit callbacks after the dialog is closed.
+	local clicked_button_id = nil
+
+	-- Install callbacks for all action buttons, slots, etc.
+	-- Only called once, not repeated on goto_tab().
+	local function install_callbacks()
+		-- Callbacks of action buttons.
+		for _, button in ipairs(inventory_config.action_buttons) do
+			if not button.spacer then
+				if button.onsubmit then
+					-- onsubmit callbacks are only called after the dialog is closed.
+					-- The only thing we need here is to remember clicked_button_id.
+					wesnoth.set_dialog_callback(
+						function() clicked_button_id = button.id end,
+						button.id
+					)
+				else
+					-- Normal onclick callback (this button doesn't close the dialog).
+					local callback = button.onclick or inventory_config.default_button_callback
+
+					-- Note: we additionally pass Unit and button ID as parameters to callback.
+					wesnoth.set_dialog_callback(
+						function() callback(unit, button.id) end,
+						button.id
+					)
+				end
+			end
+		end
+	end
+
+
 	local function preshow()
+		install_callbacks()
 		goto_tab("items_tab")
 	end
 
