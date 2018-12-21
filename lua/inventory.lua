@@ -427,7 +427,7 @@ local function get_items_tab()
 	}
 end
 
--- Construct tab #2: retaliation ("weapons for retaliation" screen).
+-- Construct tab #2: "weapons for retaliation".
 -- Note: result is exactly the same for any unit. See onshow_retaliation_tab() for unit-specific logic.
 -- Returns: top-level [grid] widget.
 local function get_retaliation_tab()
@@ -631,22 +631,62 @@ local function open_inventory_dialog(unit)
 		end
 	end
 
-	local function onshow_retaliation_screen()
+	local function onshow_retaliation_tab()
 		local listbox_id = "retaliation_listbox"
+
+		-- Ordered array of indexes of attacks (positions in unit.attacks array)
+		-- for attacks affected by the shown checkboxes.
+		-- E.g. { 1, 2, 4, ...} - where 3 was skipped because, for example, it was a whirlwind attack.
+		local checkboxes = {}
+
 		for index, attack in ipairs(unit.attacks) do
-			wesnoth.set_dialog_value(attack.description, listbox_id, index, "attack_name")
-			wesnoth.set_dialog_value(attack.defense_weight > 0, listbox_id, index, "attack_enabled")
+			local attack_only = true -- True if "attack only" by design, e.g. whirlwind
+			local allowed = attack.defense_weight > 0 -- True if currently allowed
+
+			if not allowed then
+				-- Double-check that this attack was disabled via this dialog.
+				-- If not, this is likely an attack like whirlwind or redeem,
+				-- and we shouldn't show it on the list at all.
+				for _, disable_record in ipairs(helper.get_variable_array("disabled_defences", unit)) do
+					-- Note when comparing: "index" is Lua array index (starts with 1),
+					-- while order is C++ array index (starts with 0).
+					if disable_record.order + 1 == index then
+						attack_only = false
+						break
+					end
+				end
+			end
+
+			if allowed or not attack_only then
+				table.insert(checkboxes, index)
+				checkbox_id = #checkboxes
+
+				wesnoth.set_dialog_value(attack.description,
+					listbox_id, checkbox_id, "attack_name")
+				wesnoth.set_dialog_value(allowed,
+					listbox_id, checkbox_id, "attack_enabled")
+			end
 		end
 
 		local function save()
 			-- Save changes (if any) and go back to the Items tab.
-			for index, attack in ipairs(unit.attacks) do
-				attack.defense_weight = 0
-				if wesnoth.get_dialog_value(listbox_id, index, "attack_enabled") then
-					attack.defense_weight = 1
+			local disabled_defences = {}
+			for checkbox_id, attack_index in ipairs(checkboxes) do
+				if wesnoth.get_dialog_value(listbox_id, checkbox_id, "attack_enabled") then
+					unit.attacks[attack_index].defense_weight = 1
+				else
+					unit.attacks[attack_index].defense_weight = 0
+
+					-- Add to unit.variables.disabled_defences, so that we would later know
+					-- that this is not an "attack only by design" weapon.
+					table.insert(disabled_defences, {
+						name = unit.attacks[attack_index].name,
+						order = attack_index - 1 -- Backward compatibility with WML dialog
+					})
 				end
 			end
 
+			helper.set_variable_array("disabled_defences", disabled_defences, unit)
 			goto_tab("items_tab")
 		end
 
@@ -665,7 +705,7 @@ local function open_inventory_dialog(unit)
 		{
 			id = "retaliation_tab",
 			grid = get_retaliation_tab(),
-			onshow = onshow_retaliation_screen
+			onshow = onshow_retaliation_tab
 		}
 	}
 
