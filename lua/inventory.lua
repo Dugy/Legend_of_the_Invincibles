@@ -38,7 +38,13 @@ local inventory_config = {
 		},
 		{
 			id = "unequip_all",
-			label = _"Unequip (store) all items"
+			label = _"Unequip (store) all items",
+			onclick = function(unit)
+				if wesnoth.confirm(_"Are you sure? All items of this unit will be placed into the item storage.") then
+					loti_item_storage().undress_unit(unit)
+					-- TODO: redraw, items are no longer in the slots
+				end
+			end
 		},
 		{
 			id = "recall_list_items",
@@ -617,30 +623,24 @@ local function open_inventory_dialog(unit)
 			wesnoth.set_dialog_value( default_text, slot_id, "item_name")
 		end
 
-		local modifications = helper.get_child(unit.__cfg, "modifications")
-		for _, item in ipairs(helper.child_array(modifications, "object")) do
-			-- There are non-items in object[] array, but they don't have 'sort' key.
-			-- Also there are fake items (e.g. sort=quest_effect), but they have 'silent' key.
-			-- We also ignore objects without name, because they can't be valid items.
-			if item.sort and not item.silent and item.name and item.sort ~= "potion" and item.sort ~= "limited" then
-				if not equippable_sorts[item.sort] then
-					-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
-					-- Shown in a specially reserved "leftover" slot.
-					item.sort = "leftover"
-				end
-
-				local slot_id = slot_id_by_sort[item.sort]
-				if not slot_id then
-					helper.wml_error("Error: found item of type=" .. item.sort ..
-						", but the inventory screen doesn't have a slot for this type.")
-				end
-
-				wesnoth.set_dialog_value(item.name, slot_id, "item_name")
-				wesnoth.set_dialog_value(item.image, slot_id, "item_image")
-
-				-- Unhide the slot (leftover slots are hidden by default)
-				wesnoth.set_dialog_visible(true, slot_id)
+		for _, item in ipairs(loti_item_storage().list_items_on_unit(unit)) do
+			if not equippable_sorts[item.sort] then
+				-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
+				-- Shown in a specially reserved "leftover" slot.
+				item.sort = "leftover"
 			end
+
+			local slot_id = slot_id_by_sort[item.sort]
+			if not slot_id then
+				helper.wml_error("Error: found item of type=" .. item.sort ..
+					", but the inventory screen doesn't have a slot for this type.")
+			end
+
+			wesnoth.set_dialog_value(item.name, slot_id, "item_name")
+			wesnoth.set_dialog_value(item.image, slot_id, "item_image")
+
+			-- Unhide the slot (leftover slots are hidden by default)
+			wesnoth.set_dialog_visible(true, slot_id)
 		end
 
 		-- Add callbacks for clicks on action buttons.
