@@ -69,22 +69,21 @@ function loti_item_storage()
 	end
 
 	-- Get the list of distinct sorts of all items that are currently in the storage.
-	-- (Lua array, e.g. { "sword", "bow", "armour", ... }).
+	-- Counts the number of items of each sort.
+	-- (Lua array, e.g. { "sword" => 10, "bow" => 12, "armour" => 5, ... }).
 	storage.list_sorts = function()
 		local list = wesnoth.get_variable("item_storage") or {}
-
-		local results = {} -- { sort1, sort2, sort3, ... }
-		local seen = {} -- { sort1 => 1, sort2 => 1, ... } - to make results[] unique
+		local results = {}
 
 		for _, elem in ipairs(list) do
 			local item_sort = elem[1]
-			if not seen[item_sort] then
-				seen[item_sort] = 1
-				table.insert(results, item_sort)
+			if not results[item_sort] then
+				results[item_sort] = 0
 			end
+
+			results[item_sort] = results[item_sort] + 1
 		end
 
-		table.sort(results) -- Alphabetically
 		return results
 	end
 

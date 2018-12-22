@@ -14,7 +14,8 @@ local inventory_config = {
 	action_buttons = {
 		{
 			id = "storage",
-			label = _"Item storage"
+			label = _"Item storage",
+			onclick = function(unit) goto_tab("storage_tab") end
 		},
 		{
 			id = "crafting",
@@ -275,6 +276,24 @@ end
 -- When the widgets are completely implemented, this function will only be called from loti_inventory().
 loti_register_widgets()
 
+-- Create a "Close" button in the bottom-right corner of the dialog.
+-- Returns: [grid] widget.
+local function make_close_button()
+	return wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				wml.tag.spacer {}
+			},
+			wml.tag.column {
+				wml.tag.button {
+					id = "ok",
+					label = _"Close"
+				}
+			}
+		}
+	}
+end
+
 -- Array of slots, in order added via get_slot_widget().
 -- Each element is the item_sort of this slot.
 -- E.g. { "amulet", "helm", "ring", ... }
@@ -417,21 +436,6 @@ local function get_items_tab()
 		}
 	end
 
-	-- "Close" button in the bottom-right corner of the dialog.
-	local close_button = wml.tag.grid {
-		wml.tag.row {
-			wml.tag.column {
-				wml.tag.spacer {}
-			},
-			wml.tag.column {
-				wml.tag.button {
-					id = "ok",
-					label = _"Close"
-				}
-			}
-		}
-	}
-
 	-- Contents of the inventory page - everything except the actions menu.
 	local dialog_page_contents = wml.tag.grid {
 		-- Row 1: header text ("what is this page for")
@@ -457,7 +461,7 @@ local function get_items_tab()
 		wml.tag.row {
 			wml.tag.column {
 				horizontal_alignment = "right",
-				close_button
+				make_close_button()
 			}
 		}
 	}
@@ -480,7 +484,6 @@ local function get_retaliation_tab()
 	local listbox_template = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
-				grow_factor = 1,
 				border = "left",
 				border_size = 30,
 				horizontal_grow = true,
@@ -544,6 +547,64 @@ local function get_retaliation_tab()
 	}
 end
 
+-- Construct tab #3: item storage.
+-- Note: this only creates the widget. It gets populated with data in onshow_storage_tab().
+-- Returns: top-level [grid] widget.
+local function get_storage_tab()
+	local listbox_template = wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				border = "all",
+				border_size = 10,
+				horizontal_grow = true,
+				wml.tag.label {
+					id = "storage_text",
+					text_alignment = "left"
+				}
+			}
+		}
+	}
+
+	local listbox = wml.tag.listbox {
+		id = "storage_listbox",
+		wml.tag.list_definition {
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_grow = true,
+					wml.tag.toggle_panel {
+						listbox_template
+					}
+				}
+			}
+		}
+	}
+
+	return wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				border = "all",
+				border_size = 15,
+				wml.tag.label {
+					label = _"Item storage"
+				}
+			}
+		},
+		wml.tag.row {
+			wml.tag.column {
+				horizontal_grow = true,
+				listbox
+			}
+		},
+		wml.tag.row {
+			wml.tag.column {
+				horizontal_alignment = "right",
+				make_close_button()
+			}
+		}
+	}
+end
+
+
 -- Display the inventory dialog for a unit.
 -- TODO: support changing the unit without closing this dialog,
 -- which can be useful for features like "Items on units on the recall list".
@@ -589,6 +650,7 @@ local function open_inventory_dialog(unit)
 			slot_id_by_sort[item_sort] = slot_id
 
 			-- Set callback for situation when player clicks on this slot.
+			-- FIXME: MUST move this to install_callbacks() - because existing callback is NOT removed.
 			wesnoth.set_dialog_callback(
 				function() inventory_config.slot_callback(item_sort) end,
 				slot_id,
@@ -620,7 +682,7 @@ local function open_inventory_dialog(unit)
 				wesnoth.set_dialog_visible(false, slot_id)
 			end
 
-			wesnoth.set_dialog_value( default_text, slot_id, "item_name")
+			wesnoth.set_dialog_value(default_text, slot_id, "item_name")
 		end
 
 		for _, item in ipairs(loti_item_storage().list_items_on_unit(unit)) do
@@ -644,6 +706,8 @@ local function open_inventory_dialog(unit)
 		end
 	end
 
+	-- Callback that updates "Select weapons for retaliation" tab whenever it is shown.
+	-- Note: see get_retaliation_tab() for internal structure of this tab.
 	local function onshow_retaliation_tab()
 		local listbox_id = "retaliation_listbox"
 
@@ -688,6 +752,7 @@ local function open_inventory_dialog(unit)
 			end
 		end
 
+		-- Callback that submits the form of "Select weapons for retaliation" tab.
 		local function save()
 			local is_selected = {} -- { checkbox_id1 => 1, checkbox_id2 => 1, ... }
 
@@ -719,7 +784,28 @@ local function open_inventory_dialog(unit)
 			goto_tab("items_tab")
 		end
 
+		-- FIXME: MUST move this to install_callbacks() - because existing callback is NOT removed.
 		wesnoth.set_dialog_callback(save, "retaliation_save")
+	end
+
+	-- Callback that updates "Item storage" tab whenever it is shown.
+	-- Note: see get_storage_tab() for internal structure of this tab.
+	local function onshow_storage_tab()
+		local listbox_id = "storage_listbox"
+
+		wesnoth.log("error", "on Item Storage tab...")
+
+		-- Menu that selects subsection of Item Storage: "sword", "spear", etc.
+		local sorts = loti_item_storage().list_sorts()
+		local listbox_row = 1
+
+		for item_sort, count in pairs(sorts) do
+			-- TODO: print human-readable translatable name of item_sort.
+			local text = item_sort .. " (" .. count .. ")"
+
+			wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
+			listbox_row = listbox_row + 1
+		end
 	end
 
 	-- List of all tabs in the Inventory dialog.
@@ -735,6 +821,11 @@ local function open_inventory_dialog(unit)
 			id = "retaliation_tab",
 			grid = get_retaliation_tab(),
 			onshow = onshow_retaliation_tab
+		},
+		{
+			id = "storage_tab",
+			grid = get_storage_tab(),
+			onshow = onshow_storage_tab
 		}
 	}
 
@@ -760,8 +851,10 @@ local function open_inventory_dialog(unit)
 	end
 
 	-- Show one tab (and call its "onshow" callback), hide all other tabs.
-	-- Parameter: tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
-	function goto_tab(tab_id)
+	-- Parameters:
+	-- 1) tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
+	-- 2) extra_parameter - optional. Passed to "onshow" callback.
+	function goto_tab(tab_id, extra_parameter)
 		-- Quick sanity check for whether tab_id exists,
 		-- because trying to hide ALL widgets in a dialog crashes Wesnoth.
 		local found
@@ -776,7 +869,7 @@ local function open_inventory_dialog(unit)
 		for _, tab in ipairs(tabs) do
 			local should_show = tab.id == tab_id
 			if should_show then
-				tab.onshow()
+				tab.onshow(extra_parameter)
 			end
 
 			wesnoth.set_dialog_visible(should_show, tab.id)
