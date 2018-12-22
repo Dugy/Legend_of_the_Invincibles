@@ -33,9 +33,9 @@ function loti_item_storage()
 	-- Remove item_number from storage.
 	-- If storage has many identical items, only one gets removed.
 	storage.remove = function(item_number)
-		local list = wesnoth.get_variable("item_storage")
+		local list = wesnoth.get_variable("item_storage") or {}
 
-		for index, elem in pairs(list) do
+		for index, elem in ipairs(list) do
 			if elem[2].type == item_number then
 				table.remove(list, index)
 				break -- Only one item should be removed.
@@ -46,9 +46,46 @@ function loti_item_storage()
 	end
 
 	-- Get the list of all items in the storage (Lua array, each element is item_number).
+	-- Optional parameter: item_sort (string, e.g. "sword") - only items of this sort are returned.
+	-- If list_items() is called without parameters, all items in the storage are returned.
 	storage.list_items = function(item_sort)
-		-- TODO
-		return {}
+		local list = wesnoth.get_variable("item_storage") or {}
+		local results = {}
+
+		for _, elem in ipairs(list) do
+			if not item_sort or elem[1] == item_sort then
+				table.insert(results, elem[2].type)
+			end
+		end
+
+		if not item_sort then
+			-- Items with the same item_sort are already in correct order,
+			-- but when we merge those arrays, result needs to be reordered again.
+			-- NOTE: don't confuse item_sort (e.g. "sword") and array sorting.
+			table.sort(results)
+		end
+
+		return results
+	end
+
+	-- Get the list of distinct sorts of all items that are currently in the storage.
+	-- (Lua array, e.g. { "sword", "bow", "armour", ... }).
+	storage.list_sorts = function()
+		local list = wesnoth.get_variable("item_storage") or {}
+
+		local results = {} -- { sort1, sort2, sort3, ... }
+		local seen = {} -- { sort1 => 1, sort2 => 1, ... } - to make results[] unique
+
+		for _, elem in ipairs(list) do
+			local item_sort = elem[1]
+			if not seen[item_sort] then
+				seen[item_sort] = 1
+				table.insert(results, item_sort)
+			end
+		end
+
+		table.sort(results) -- Alphabetically
+		return results
 	end
 
 	-----------------------------------------------------------------------
@@ -71,6 +108,10 @@ function loti_item_storage()
 	-- Remove one item from storage, then open "Pick up item" dialog on behalf of unit.
 	storage.get_item_from_storage = function(unit, item_number)
 		storage.remove(item_number)
+
+		-- TODO: must place the item to unit.x, unit.y by putting it into "items" variable
+		-- (which lists items on the ground)
+
 		wesnoth.fire_event("item pick", unit.x, unit.y)
 	end
 
@@ -80,14 +121,20 @@ function loti_item_storage()
 
 	-- Get item sort (e.g. "bow") from item_number.
 	storage.sort_of = function(item_number)
+		return storage.find_type_by_number(item_number).sort
+	end
+
+	-- Find item_number in the list of all known item types.
+	-- Returns: [object] tag (with keys like "name", "sort", "flavour", "image", etc.)
+	storage.find_type_by_number = function(item_number)
 		local types = helper.get_variable_array("item_list.object")
 		for _, item in ipairs(types) do
 			if item_number == item.number then
-				return item.sort
+				return item
 			end
 		end
 
-		helper.wml_error("sort_of(): item #" .. tostring(item_number) .. " is not found in item_list.");
+		helper.wml_error("find_type_by_number(): item #" .. tostring(item_number) .. " is not found in item_list.");
 	end
 
 	-- Returns the list of all items on the unit (Lua array, each element is [object] tag).
