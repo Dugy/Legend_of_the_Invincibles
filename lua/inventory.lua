@@ -604,12 +604,24 @@ local function get_storage_tab()
 	}
 end
 
-
 -- Display the inventory dialog for a unit.
 -- TODO: support changing the unit without closing this dialog,
 -- which can be useful for features like "Items on units on the recall list".
 local function open_inventory_dialog(unit)
 	loti_register_widgets()
+
+	-- Lua tables:
+	-- slot_id_by_sort = { 'sword' => 'slot2', 'armour' => 'slot5', ... }.
+	-- sort_by_slot_id = { 'slot2' => 'sword', 'slot5' => 'armour', ... }
+	-- Calculated in onshow_items_tab().
+	local slot_id_by_sort = {}
+	local sort_by_slot_id = {}
+
+	-- Ordered array of indexes of attacks (positions in unit.attacks array)
+	-- for attacks affected by the shown checkboxes.
+	-- E.g. { 1, 2, 4, ...} - where 3 was skipped because, for example, it was a whirlwind attack.
+	-- Calculated in onshow_retaliation_tab().
+	local retaliation_checkboxes = {}
 
 	-- Callback that updates the "items on this unit" tab whenever it is shown.
 	-- Note: see get_items_tab() for internal structure of this tab.
@@ -632,9 +644,8 @@ local function open_inventory_dialog(unit)
 			end
 		end
 
-		-- Lua table { 'sword' => 'slot2', 'armour' => 'slot5', ... }.
-		-- Calculated below.
-		local slot_id_by_sort = {}
+		slot_id_by_sort = {}
+		sort_by_slot_id = {}
 
 		-- Add placeholders into all slots.
 		for index, item_sort in ipairs(slots) do
@@ -648,14 +659,7 @@ local function open_inventory_dialog(unit)
 			end
 
 			slot_id_by_sort[item_sort] = slot_id
-
-			-- Set callback for situation when player clicks on this slot.
-			-- FIXME: MUST move this to install_callbacks() - because existing callback is NOT removed.
-			wesnoth.set_dialog_callback(
-				function() inventory_config.slot_callback(item_sort) end,
-				slot_id,
-				"item_image"
-			)
+			sort_by_slot_id[slot_id] = item_sort
 
 			-- Ensure that empty slots don't have any images.
 			-- This is needed when we redraw the dialog after "Unequip all items".
@@ -713,11 +717,7 @@ local function open_inventory_dialog(unit)
 
 		-- Ensure than no rows are selected.
 		wesnoth.set_dialog_value({}, listbox_id)
-
-		-- Ordered array of indexes of attacks (positions in unit.attacks array)
-		-- for attacks affected by the shown checkboxes.
-		-- E.g. { 1, 2, 4, ...} - where 3 was skipped because, for example, it was a whirlwind attack.
-		local checkboxes = {}
+		retaliation_checkboxes = {}
 
 		for index, attack in ipairs(unit.attacks) do
 			local attack_only = true -- True if "attack only" by design, e.g. whirlwind
@@ -738,8 +738,8 @@ local function open_inventory_dialog(unit)
 			end
 
 			if allowed or not attack_only then
-				table.insert(checkboxes, index)
-				checkbox_id = #checkboxes
+				table.insert(retaliation_checkboxes, index)
+				checkbox_id = #retaliation_checkboxes
 
 				wesnoth.set_dialog_value(attack.description,
 					listbox_id, checkbox_id, "attack_name")
@@ -751,41 +751,39 @@ local function open_inventory_dialog(unit)
 				end
 			end
 		end
+	end
 
-		-- Callback that submits the form of "Select weapons for retaliation" tab.
-		local function save()
-			local is_selected = {} -- { checkbox_id1 => 1, checkbox_id2 => 1, ... }
+	-- Callback that submits the form of "Select weapons for retaliation" tab.
+	local function retaliation_onsave()
+		local listbox_id = "retaliation_listbox"
+		local is_selected = {} -- { checkbox_id1 => 1, checkbox_id2 => 1, ... }
 
-			-- Determine which checkboxes are selected.
-			-- This is a multiselect listbox, so get_dialog_value() has a second return value.
-			local _, listbox_values = wesnoth.get_dialog_value(listbox_id)
-			for _, checkbox_id in pairs(listbox_values) do
-				is_selected[checkbox_id] = 1
-			end
-
-			-- Save changes (if any) and go back to the Items tab.
-			local disabled_defences = {}
-			for checkbox_id, attack_index in ipairs(checkboxes) do
-				if is_selected[checkbox_id] then
-					unit.attacks[attack_index].defense_weight = 1
-				else
-					unit.attacks[attack_index].defense_weight = 0
-
-					-- Add to unit.variables.disabled_defences, so that we would later know
-					-- that this is not an "attack only by design" weapon.
-					table.insert(disabled_defences, {
-						name = unit.attacks[attack_index].name,
-						order = attack_index - 1 -- Backward compatibility with WML dialog
-					})
-				end
-			end
-
-			helper.set_variable_array("disabled_defences", disabled_defences, unit)
-			goto_tab("items_tab")
+		-- Determine which checkboxes are selected.
+		-- This is a multiselect listbox, so get_dialog_value() has a second return value.
+		local _, listbox_values = wesnoth.get_dialog_value(listbox_id)
+		for _, checkbox_id in pairs(listbox_values) do
+			is_selected[checkbox_id] = 1
 		end
 
-		-- FIXME: MUST move this to install_callbacks() - because existing callback is NOT removed.
-		wesnoth.set_dialog_callback(save, "retaliation_save")
+		-- Save changes (if any) and go back to the Items tab.
+		local disabled_defences = {}
+		for checkbox_id, attack_index in ipairs(retaliation_checkboxes) do
+			if is_selected[checkbox_id] then
+				unit.attacks[attack_index].defense_weight = 1
+			else
+				unit.attacks[attack_index].defense_weight = 0
+
+				-- Add to unit.variables.disabled_defences, so that we would later know
+				-- that this is not an "attack only by design" weapon.
+				table.insert(disabled_defences, {
+					name = unit.attacks[attack_index].name,
+					order = attack_index - 1 -- Backward compatibility with WML dialog
+				})
+			end
+		end
+
+		helper.set_variable_array("disabled_defences", disabled_defences, unit)
+		goto_tab("items_tab")
 	end
 
 	-- Callback that updates "Item storage" tab whenever it is shown.
@@ -911,8 +909,25 @@ local function open_inventory_dialog(unit)
 				end
 			end
 		end
-	end
 
+		-- Callbacks for situation when player clicks on the slot.
+		for index, _ in ipairs(slots) do
+			local slot_id = "slot" .. index
+
+			-- When we call set_dialog_callback(), we don't yet know the exact item_sort,
+			-- because for different units the "weapon" slot means different item_sorts,
+			-- and we don't yet know which unit will be displayed.
+			-- So we'll determine item_sort later, when the callback gets called,
+			-- because at this point sort_by_slot_id[] array will be populated.
+			wesnoth.set_dialog_callback(function()
+				local item_sort = sort_by_slot_id[slot_id]
+				inventory_config.slot_callback(item_sort)
+			end, slot_id, "item_image")
+		end
+
+		-- Callback for "Save" button the the "weapons for retaliation" tab.
+		wesnoth.set_dialog_callback(retaliation_onsave, "retaliation_save")
+	end
 
 	local function preshow()
 		install_callbacks()
