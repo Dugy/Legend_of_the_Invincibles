@@ -1,3 +1,7 @@
+-- Some libraries place utility functions into this array,
+-- e.g. loti.item.storage.add()
+loti = {}
+
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/item_storage.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/inventory.lua")

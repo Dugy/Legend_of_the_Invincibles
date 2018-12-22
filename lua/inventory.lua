@@ -42,7 +42,7 @@ local inventory_config = {
 			label = _"Unequip (store) all items",
 			onclick = function(unit)
 				if wesnoth.confirm(_"Are you sure? All items of this unit will be placed into the item storage.") then
-					loti_item_storage().undress_unit(unit)
+					loti.item.util.undress_unit(unit)
 					goto_tab("items_tab") -- redraw, items are no longer in the slots
 				end
 			end
@@ -685,7 +685,7 @@ local function open_inventory_dialog(unit)
 			wesnoth.set_dialog_value(default_text, slot_id, "item_name")
 		end
 
-		for _, item in ipairs(loti_item_storage().list_items_on_unit(unit)) do
+		for _, item in ipairs(loti.item.on_unit.list(unit)) do
 			if not equippable_sorts[item.sort] then
 				-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
 				-- Shown in a specially reserved "leftover" slot.
@@ -796,7 +796,7 @@ local function open_inventory_dialog(unit)
 		wesnoth.log("error", "on Item Storage tab...")
 
 		-- Menu that selects subsection of Item Storage: "sword", "spear", etc.
-		local sorts = loti_item_storage().list_sorts()
+		local sorts = loti.item.storage.list_sorts()
 		local listbox_row = 1
 
 		for item_sort, count in pairs(sorts) do
