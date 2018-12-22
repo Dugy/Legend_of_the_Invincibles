@@ -545,7 +545,7 @@ function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	end
 
 	local count = 0
-	for i in pairs(loti_util_list_existing_upgrades(units[1])) do count = count + 1 end
+	for i in pairs(loti_util_list_existing_upgrades("redeem", units[1])) do count = count + 1 end
 
 	wesnoth.set_variable(to_variable, count)
 end
