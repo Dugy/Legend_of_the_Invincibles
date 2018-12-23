@@ -213,16 +213,18 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 		})
 	end
 
-	-- TODO: update stats (recalculate damages, etc.)
-	-- Theoretically the following event calls UPDATE_STATS, but this doesn't do the trick:
-	--wesnoth.fire_event("unit placed", unit.x, unit.y)
+	-- Update stats (recalculate damages, etc.)
+	-- TODO: uncomment the following line when this function becomes available:
+	-- wesnoth.update_stats(unit)
 end
 
 -- Remove one item from the unit.
 loti.item.on_unit.remove = function(unit, item_number)
 	wesnoth.remove_modifications(unit, { number = item_number })
 
-	-- TODO: update stats, see loti.item.on_unit.add() for details
+	-- Update stats (recalculate damages, etc.)
+	-- TODO: uncomment the following line when this function becomes available:
+	-- wesnoth.update_stats(unit)
 end
 
 -------------------------------------------------------------------------------

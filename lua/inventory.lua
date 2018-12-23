@@ -925,7 +925,7 @@ local function open_inventory_dialog(unit)
 			end, slot_id, "item_image")
 		end
 
-		-- Callback for "Save" button the the "weapons for retaliation" tab.
+		-- Callback for "Save" button on the "weapons for retaliation" tab.
 		wesnoth.set_dialog_callback(retaliation_onsave, "retaliation_save")
 	end
 
