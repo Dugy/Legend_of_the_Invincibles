@@ -9,7 +9,9 @@ local helper = wesnoth.require "lua/helper.lua"
 -- These Lua files are loaded as plugins.
 -- They receive an "inventory_dialog" object as parameter,
 -- which provides methods for adding tabs, installing callbacks, etc.
-local PLUGINS_LIST = { "inventory/items", "inventory/retaliation", "inventory/storage" }
+local PLUGINS_LIST = { "items", "retaliation", "storage" }
+
+-------------------------------------------------------------------------------
 
 -- List of all tabs in the Inventory dialog.
 -- Only one tab is visible at a time.
@@ -38,14 +40,17 @@ inventory_dialog.add_tab = function(tab)
 	tabs[tab.id] = { grid = tab.grid, onshow = tab.onshow }
 end
 
+-- Queue install_function() to be called when it's good time to use wesnoth.set_dialog_callback().
 inventory_dialog.install_callbacks = function(install_function)
 	table.insert(install_callback_functions, install_function)
 end
 
+-- Queue register_function() to be called when it's good time to use wesnoth.add_widget_definition().
 inventory_dialog.register_widgets = function(register_function)
 	table.insert(register_widget_functions, register_function)
 end
 
+-- Queue callback() to be called when the Inventory dialog has been closed.
 inventory_dialog.add_onsubmit_callback = function(callback)
 	table.insert(onsubmit_callbacks, callback)
 end
