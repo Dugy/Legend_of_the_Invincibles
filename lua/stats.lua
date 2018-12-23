@@ -19,15 +19,9 @@ function call_event_on_unit(u, name)
 	local old_id = u.id
 	local id = "lua_stats_updating_dummy"
 	u.id = id
-	local function attempt()
-		wesnoth.set_variable("updated", u)
-		wesnoth.wml_actions.fire_event{ name = name }
-		u = wesnoth.get_variable("updated")
-	end
-	if pcall(attempt) then
-	else
-		wesnoth.dbms( u[15][2][42][2] )
-	end
+	wesnoth.set_variable("updated", u)
+	wesnoth.wml_actions.fire_event{ name = name }
+	u = wesnoth.get_variable("updated")
 	u.id = old_id
 	return u
 end
