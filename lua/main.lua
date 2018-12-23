@@ -3,7 +3,7 @@
 loti = {}
 
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
-wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/item_storage.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/items.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/inventory.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/titles.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/redeem.lua")
