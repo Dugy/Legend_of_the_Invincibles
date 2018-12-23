@@ -5,6 +5,7 @@
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
+local util = wesnoth.require "inventory/misc"
 
 
 -- List of all tabs in the Inventory dialog.
@@ -65,7 +66,7 @@ inventory_dialog.goto_tab = function(tab_id, extra_parameter)
 end
 
 -- Load plugins.
-for _, lua_plugin_file in ipairs({ "inventory/retaliation" }) do
+for _, lua_plugin_file in ipairs({ "inventory/retaliation", "inventory/storage" }) do
 	wesnoth.require(lua_plugin_file)(inventory_dialog)
 end
 
@@ -304,24 +305,6 @@ end
 -- When the widgets are completely implemented, this function will only be called from loti_inventory().
 loti_register_widgets()
 
--- Create a "Close" button in the bottom-right corner of the dialog.
--- Returns: [grid] widget.
-local function make_close_button()
-	return wml.tag.grid {
-		wml.tag.row {
-			wml.tag.column {
-				wml.tag.spacer {}
-			},
-			wml.tag.column {
-				wml.tag.button {
-					id = "ok",
-					label = _"Close"
-				}
-			}
-		}
-	}
-end
-
 -- Array of slots, in order added via get_slot_widget().
 -- Each element is the item_sort of this slot.
 -- E.g. { "amulet", "helm", "ring", ... }
@@ -489,7 +472,7 @@ local function get_items_tab()
 		wml.tag.row {
 			wml.tag.column {
 				horizontal_alignment = "right",
-				make_close_button()
+				util.make_close_button()
 			}
 		}
 	}
@@ -506,62 +489,6 @@ local function get_items_tab()
 end
 
 
--- Construct tab #3: item storage.
--- Note: this only creates the widget. It gets populated with data in onshow_storage_tab().
--- Returns: top-level [grid] widget.
-local function get_storage_tab()
-	local listbox_template = wml.tag.grid {
-		wml.tag.row {
-			wml.tag.column {
-				border = "all",
-				border_size = 10,
-				horizontal_grow = true,
-				wml.tag.label {
-					id = "storage_text",
-					text_alignment = "left"
-				}
-			}
-		}
-	}
-
-	local listbox = wml.tag.listbox {
-		id = "storage_listbox",
-		wml.tag.list_definition {
-			wml.tag.row {
-				wml.tag.column {
-					horizontal_grow = true,
-					wml.tag.toggle_panel {
-						listbox_template
-					}
-				}
-			}
-		}
-	}
-
-	return wml.tag.grid {
-		wml.tag.row {
-			wml.tag.column {
-				border = "all",
-				border_size = 15,
-				wml.tag.label {
-					label = _"Item storage"
-				}
-			}
-		},
-		wml.tag.row {
-			wml.tag.column {
-				horizontal_grow = true,
-				listbox
-			}
-		},
-		wml.tag.row {
-			wml.tag.column {
-				horizontal_alignment = "right",
-				make_close_button()
-			}
-		}
-	}
-end
 
 -- Display the inventory dialog for a unit.
 -- TODO: support changing the unit without closing this dialog,
@@ -663,37 +590,12 @@ local function open_inventory_dialog(unit)
 		end
 	end
 
-	-- Callback that updates "Item storage" tab whenever it is shown.
-	-- Note: see get_storage_tab() for internal structure of this tab.
-	local function onshow_storage_tab(unit)
-		local listbox_id = "storage_listbox"
-
-		wesnoth.log("error", "on Item Storage tab...")
-
-		-- Menu that selects subsection of Item Storage: "sword", "spear", etc.
-		local sorts = loti.item.storage.list_sorts()
-		local listbox_row = 1
-
-		for item_sort, count in pairs(sorts) do
-			-- TODO: print human-readable translatable name of item_sort.
-			local text = item_sort .. " (" .. count .. ")"
-
-			wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
-			listbox_row = listbox_row + 1
-		end
-	end
-
 	-- Add tabs that are not in plugins.
 	-- TODO: move ALL tabs to separate plugins (for better code readability).
 	inventory_dialog.add_tab {
 		id = "items_tab",
 		grid = get_items_tab(),
 		onshow = onshow_items_tab
-	}
-	inventory_dialog.add_tab {
-		id = "storage_tab",
-		grid = get_storage_tab(),
-		onshow = onshow_storage_tab
 	}
 
 	-- Get widget that contains all tabs.
