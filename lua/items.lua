@@ -166,13 +166,63 @@ loti.item.on_unit.list = function(unit)
 	return items
 end
 
-loti.item.on_unit.add = function(unit, item_number)
-	-- TODO
+-- Add one item to the unit.
+-- Optional parameter "crafted_sort" changes the item_sort of item (only for crafted items).
+loti.item.on_unit.add = function(unit, item_number, crafted_sort)
+	local item = loti.item.type[item_number]
+
+	if item.sort == "weaponword" or item.sort == "armourword" then
+		-- Crafted item
+		if not crafted_sort then
+			helper.wml_error("loti.item.on_unit.add(): item #" .. item_number ..
+				' is crafted, but required parameter "crafted_sort" hasn\'t been provided.')
+		end
+
+		item.sort = crafted_sort
+
+		-- Crafted non-armours have only 1/3 of the defence of crafted armours.
+		if item.sort == "helm" or item.sort == "boots" or item.sort == "gauntlets" then
+			item.defence = item.defence / 3
+		end
+	end
+
+	-- Add extra text to the description (if any).
+	if item.flavour then
+		item.description = item.description ..
+			"\n<span color='#808080'><i>" .. item.flavour .. "</i></span>"
+	end
+
+	-- Store the fact "unit has this item" by adding a modification to this unit.
+	wesnoth.add_modification(unit, "object", item)
+
+	-- Special handling for Foul Potion (#16): initialize starving counter.
+	if item.number == 16 then
+		unit.variables.starving = 0
+	end
+
+	-- Special handling for Book of Courage (#89): add "fearless" trait.
+	if item.number == 89 then
+		wesnoth.add_modification(unit, "trait", {
+			id = "fearless",
+			male_name = _"fearless",
+			female_name = _"female^fearless",
+			description = _"Fights normally during unfavorable times of day/night",
+			wml.tag.effect {
+				apply_to = "fearless"
+			}
+		})
+	end
+
+	-- TODO: update stats (recalculate damages, etc.)
+	-- Theoretically the following event calls UPDATE_STATS, but this doesn't do the trick:
+	--wesnoth.fire_event("unit placed", unit.x, unit.y)
 end
 
 -- Remove one item from the unit.
 loti.item.on_unit.remove = function(unit, item_number)
 	wesnoth.remove_modifications(unit, { number = item_number })
+
+	-- TODO: update stats, see loti.item.on_unit.add() for details
 end
 
 -------------------------------------------------------------------------------
