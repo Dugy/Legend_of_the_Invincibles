@@ -5,7 +5,69 @@
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
-local goto_tab -- Defined below
+
+
+-- List of all tabs in the Inventory dialog.
+-- Only one tab is visible at a time.
+-- Another tab can be opened via goto_tab("id_of_new_tab").
+local tabs = {}
+local install_callback_functions = {}
+local register_widget_functions = {}
+
+-- Plugin interface (inventory_dialog).
+-- This pseudo-object is passed to plugins like [retaliation.lua],
+-- allowing them to add new tabs/widgets/callbacks to the dialog.
+local inventory_dialog = {}
+inventory_dialog.add_tab = function(tab)
+	-- Sanity checks.
+	if not tab.id then
+		helper.wml_error('inventory_dialog.add_tab: missing parameter "id"')
+	elseif type(tab.grid) ~= "table" or tab.grid[1] ~= "grid" then
+		helper.wml_error('inventory_dialog.add_tab: parameter "grid" is not a [grid] tag.')
+	elseif type(tab.onshow) ~= "function" then
+		helper.wml_error('inventory_dialog.add_tab: parameter "onshow" is not a function.')
+	end
+
+	tabs[tab.id] = { grid = tab.grid, onshow = tab.onshow }
+end
+
+inventory_dialog.install_callbacks = function(install_function)
+	table.insert(install_callback_functions, install_function)
+end
+
+inventory_dialog.register_widgets = function(register_function)
+	table.insert(register_widget_functions, register_function)
+end
+
+-- Show one tab (and call its "onshow" callback), hide all other tabs.
+-- Parameters:
+-- 1) tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
+-- 2) extra_parameter - optional. Passed to "onshow" callback.
+inventory_dialog.goto_tab = function(tab_id, extra_parameter)
+	local tab = tabs[tab_id]
+	if not tab then
+		-- Trying to hide ALL widgets in a dialog would crash Wesnoth.
+		helper.wml_error("Error: goto_tab: tab \"" .. tab_id .. "\" doesn't exist.")
+	end
+
+	-- Show the new tab.
+	wesnoth.set_dialog_visible(true, tab_id)
+
+	-- Hide the other tabs.
+	for othertab_id in pairs(tabs) do
+		if othertab_id ~= tab_id then
+			wesnoth.set_dialog_visible(false, othertab_id)
+		end
+	end
+
+	-- Recalculate all fields on this tab (via onshow callback).
+	tab.onshow(inventory_dialog.current_unit, extra_parameter)
+end
+
+-- Load plugins.
+for _, lua_plugin_file in ipairs({ "inventory/retaliation" }) do
+	wesnoth.require(lua_plugin_file)(inventory_dialog)
+end
 
 -- The following variable contains "moddable" options of the inventory UI,
 -- so that scenarios like Tutorial could override them.
@@ -15,7 +77,7 @@ local inventory_config = {
 		{
 			id = "storage",
 			label = _"Item storage",
-			onclick = function(unit) goto_tab("storage_tab") end
+			onclick = function(unit) inventory_dialog.goto_tab("storage_tab") end
 		},
 		{
 			id = "crafting",
@@ -35,7 +97,7 @@ local inventory_config = {
 		{
 			id = "retaliation",
 			label = _"Select weapons for retaliation",
-			onclick = function(unit) goto_tab("retaliation_tab") end
+			onclick = function(unit) inventory_dialog.goto_tab("retaliation_tab") end
 		},
 		{
 			id = "unequip_all",
@@ -43,7 +105,7 @@ local inventory_config = {
 			onclick = function(unit)
 				if wesnoth.confirm(_"Are you sure? All items of this unit will be placed into the item storage.") then
 					loti.item.util.undress_unit(unit)
-					goto_tab("items_tab") -- redraw, items are no longer in the slots
+					inventory_dialog.goto_tab("items_tab") -- redraw, items are no longer in the slots
 				end
 			end
 		},
@@ -216,44 +278,7 @@ local function loti_register_itemlabel_widget()
 	wesnoth.add_widget_definition("label", "itemlabel", definition)
 end
 
--- Register custom GUI widget "checklist": toggle_panel with a checkbox (doesn't look like a selected row).
-local function loti_register_checklist_widget()
-	local height = 50
 
-	local function draw(icon)
-		return {
-			wml.tag.draw {
-				wml.tag.image {
-					name = icon
-				}
-			}
-		}
-	end
-
-	local definition = {
-		id = "checklist",
-		description = 'Toggle panel which looks like a checkbox, but can have content.',
-
-		wml.tag.resolution {
-			min_width = 26, -- Can't be less than GUI__LISTBOX_SELECTED_CELL
-			min_height = 26, -- Can't be less than GUI__LISTBOX_SELECTED_CELL
-			default_height = height,
-
-			wml.tag.state { -- Non-selected
-				wml.tag.enabled(draw("buttons/checkbox.png")),
-				wml.tag.disabled(draw("buttons/checkbox.png~GS()")),
-				wml.tag.focused(draw("buttons/checkbox-active.png"))
-			},
-			wml.tag.state { -- Selected
-				wml.tag.enabled(draw("buttons/checkbox-pressed.png")),
-				wml.tag.disabled(draw("buttons/checkbox-pressed.png~GS()")),
-				wml.tag.focused(draw("buttons/checkbox-active-pressed.png"))
-			}
-		}
-	}
-
-	wesnoth.add_widget_definition("toggle_panel", "checklist", definition)
-end
 
 -- Flag to avoid calling loti_register_widgets() twice
 local widgets_registered = false
@@ -266,7 +291,10 @@ local function loti_register_widgets()
 
 	loti_register_slot_widget()
 	loti_register_itemlabel_widget()
-	loti_register_checklist_widget()
+
+	for _, func in ipairs(register_widget_functions) do
+		func()
+	end
 
 	widgets_registered = true
 end
@@ -477,75 +505,6 @@ local function get_items_tab()
 	}
 end
 
--- Construct tab #2: "weapons for retaliation".
--- Note: result is exactly the same for any unit. See onshow_retaliation_tab() for unit-specific logic.
--- Returns: top-level [grid] widget.
-local function get_retaliation_tab()
-	local listbox_template = wml.tag.grid {
-		wml.tag.row {
-			wml.tag.column {
-				border = "left",
-				border_size = 30,
-				horizontal_grow = true,
-				vertical_alignment = "center",
-				wml.tag.label {
-					id = "attack_name",
-					text_alignment = "left"
-				}
-			}
-		},
-		wml.tag.row {
-			wml.tag.column {
-				wml.tag.spacer {
-					height = 30
-				}
-			}
-		}
-	}
-
-	local listbox = wml.tag.listbox {
-		id = "retaliation_listbox",
-		has_maximum = false, -- More than 1 checkbox can be selected.
-		has_minimum = false, -- All checkboxes can be unselected.
-		wml.tag.list_definition {
-			wml.tag.row {
-				wml.tag.column {
-					horizontal_grow = true,
-					wml.tag.toggle_panel {
-						definition = "checklist",
-						listbox_template
-					}
-				}
-			}
-		}
-	}
-
-	return wml.tag.grid {
-		wml.tag.row {
-			wml.tag.column {
-				border = "all",
-				border_size = 15,
-				wml.tag.label {
-					label = _"Which attacks do you allow to use for retaliation?"
-				}
-			}
-		},
-		wml.tag.row {
-			wml.tag.column {
-				horizontal_grow = true,
-				listbox
-			}
-		},
-		wml.tag.row {
-			wml.tag.column {
-				wml.tag.button {
-					id = "retaliation_save",
-					label = _"OK"
-				}
-			}
-		}
-	}
-end
 
 -- Construct tab #3: item storage.
 -- Note: this only creates the widget. It gets populated with data in onshow_storage_tab().
@@ -617,15 +576,9 @@ local function open_inventory_dialog(unit)
 	local slot_id_by_sort = {}
 	local sort_by_slot_id = {}
 
-	-- Ordered array of indexes of attacks (positions in unit.attacks array)
-	-- for attacks affected by the shown checkboxes.
-	-- E.g. { 1, 2, 4, ...} - where 3 was skipped because, for example, it was a whirlwind attack.
-	-- Calculated in onshow_retaliation_tab().
-	local retaliation_checkboxes = {}
-
 	-- Callback that updates the "items on this unit" tab whenever it is shown.
 	-- Note: see get_items_tab() for internal structure of this tab.
-	local function onshow_items_tab()
+	local function onshow_items_tab(unit)
 		wesnoth.set_dialog_markup(true, "inventory_menu_top_label")
 
 		local equippable_sorts = loti_util_list_equippable_sorts(unit.type)
@@ -710,85 +663,9 @@ local function open_inventory_dialog(unit)
 		end
 	end
 
-	-- Callback that updates "Select weapons for retaliation" tab whenever it is shown.
-	-- Note: see get_retaliation_tab() for internal structure of this tab.
-	local function onshow_retaliation_tab()
-		local listbox_id = "retaliation_listbox"
-
-		-- Ensure than no rows are selected.
-		wesnoth.set_dialog_value({}, listbox_id)
-		retaliation_checkboxes = {}
-
-		for index, attack in ipairs(unit.attacks) do
-			local attack_only = true -- True if "attack only" by design, e.g. whirlwind
-			local allowed = attack.defense_weight > 0 -- True if currently allowed
-
-			if not allowed then
-				-- Double-check that this attack was disabled via this dialog.
-				-- If not, this is likely an attack like whirlwind or redeem,
-				-- and we shouldn't show it on the list at all.
-				for _, disable_record in ipairs(helper.get_variable_array("disabled_defences", unit)) do
-					-- Note when comparing: "index" is Lua array index (starts with 1),
-					-- while order is C++ array index (starts with 0).
-					if disable_record.order + 1 == index then
-						attack_only = false
-						break
-					end
-				end
-			end
-
-			if allowed or not attack_only then
-				table.insert(retaliation_checkboxes, index)
-				checkbox_id = #retaliation_checkboxes
-
-				wesnoth.set_dialog_value(attack.description,
-					listbox_id, checkbox_id, "attack_name")
-
-				-- This is a multiselect listbox,
-				-- each set_dialog_value() selects an additional row.
-				if allowed then
-					wesnoth.set_dialog_value(checkbox_id, listbox_id)
-				end
-			end
-		end
-	end
-
-	-- Callback that submits the form of "Select weapons for retaliation" tab.
-	local function retaliation_onsave()
-		local listbox_id = "retaliation_listbox"
-		local is_selected = {} -- { checkbox_id1 => 1, checkbox_id2 => 1, ... }
-
-		-- Determine which checkboxes are selected.
-		-- This is a multiselect listbox, so get_dialog_value() has a second return value.
-		local _, listbox_values = wesnoth.get_dialog_value(listbox_id)
-		for _, checkbox_id in pairs(listbox_values) do
-			is_selected[checkbox_id] = 1
-		end
-
-		-- Save changes (if any) and go back to the Items tab.
-		local disabled_defences = {}
-		for checkbox_id, attack_index in ipairs(retaliation_checkboxes) do
-			if is_selected[checkbox_id] then
-				unit.attacks[attack_index].defense_weight = 1
-			else
-				unit.attacks[attack_index].defense_weight = 0
-
-				-- Add to unit.variables.disabled_defences, so that we would later know
-				-- that this is not an "attack only by design" weapon.
-				table.insert(disabled_defences, {
-					name = unit.attacks[attack_index].name,
-					order = attack_index - 1 -- Backward compatibility with WML dialog
-				})
-			end
-		end
-
-		helper.set_variable_array("disabled_defences", disabled_defences, unit)
-		goto_tab("items_tab")
-	end
-
 	-- Callback that updates "Item storage" tab whenever it is shown.
 	-- Note: see get_storage_tab() for internal structure of this tab.
-	local function onshow_storage_tab()
+	local function onshow_storage_tab(unit)
 		local listbox_id = "storage_listbox"
 
 		wesnoth.log("error", "on Item Storage tab...")
@@ -806,25 +683,17 @@ local function open_inventory_dialog(unit)
 		end
 	end
 
-	-- List of all tabs in the Inventory dialog.
-	-- Only one tab is visible at a time.
-	-- Another tab can be opened via goto_tab("id_of_new_tab").
-	local tabs = {
-		{
-			id = "items_tab",
-			grid = get_items_tab(),
-			onshow = onshow_items_tab
-		},
-		{
-			id = "retaliation_tab",
-			grid = get_retaliation_tab(),
-			onshow = onshow_retaliation_tab
-		},
-		{
-			id = "storage_tab",
-			grid = get_storage_tab(),
-			onshow = onshow_storage_tab
-		}
+	-- Add tabs that are not in plugins.
+	-- TODO: move ALL tabs to separate plugins (for better code readability).
+	inventory_dialog.add_tab {
+		id = "items_tab",
+		grid = get_items_tab(),
+		onshow = onshow_items_tab
+	}
+	inventory_dialog.add_tab {
+		id = "storage_tab",
+		grid = get_storage_tab(),
+		onshow = onshow_storage_tab
 	}
 
 	-- Get widget that contains all tabs.
@@ -834,10 +703,10 @@ local function open_inventory_dialog(unit)
 		-- Wrap every tab in [panel], because panels can be made hidden/visible,
 		-- and place them all into one grid.
 		local column_wrapped_tabs = {}
-		for _, tab in ipairs(tabs) do
+		for tab_id, tab in pairs(tabs) do
 			table.insert(column_wrapped_tabs, wml.tag.column {
 				wml.tag.panel {
-					id = tab.id,
+					id = tab_id,
 					tab.grid
 				}
 			})
@@ -846,32 +715,6 @@ local function open_inventory_dialog(unit)
 		return wml.tag.grid {
 			wml.tag.row(column_wrapped_tabs)
 		}
-	end
-
-	-- Show one tab (and call its "onshow" callback), hide all other tabs.
-	-- Parameters:
-	-- 1) tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
-	-- 2) extra_parameter - optional. Passed to "onshow" callback.
-	function goto_tab(tab_id, extra_parameter)
-		-- Quick sanity check for whether tab_id exists,
-		-- because trying to hide ALL widgets in a dialog crashes Wesnoth.
-		local found
-		for _, tab in ipairs(tabs) do
-			if tab.id == tab_id then found = 1 break end
-		end
-		if not found then
-			helper.wml_error("Error: goto_tab: tab \"" .. tab_id .. "\" doesn't exist.")
-		end
-
-		-- Actually hide/unhide the tabs.
-		for _, tab in ipairs(tabs) do
-			local should_show = tab.id == tab_id
-			if should_show then
-				tab.onshow(extra_parameter)
-			end
-
-			wesnoth.set_dialog_visible(should_show, tab.id)
-		end
 	end
 
 	local dialog = {
@@ -925,16 +768,24 @@ local function open_inventory_dialog(unit)
 			end, slot_id, "item_image")
 		end
 
-		-- Callback for "Save" button on the "weapons for retaliation" tab.
-		wesnoth.set_dialog_callback(retaliation_onsave, "retaliation_save")
+		for _, func in ipairs(install_callback_functions) do
+			func()
+		end
 	end
 
 	local function preshow()
 		install_callbacks()
-		goto_tab("items_tab")
+
+		-- We don't set current_unit variable before this point,
+		-- because we want all methods except onshow() to be unit-independent.
+		-- This way the dialog can be reused for another unit
+		-- (e.g. to show "Units on the recall list").
+		inventory_dialog.current_unit = unit
+		inventory_dialog.goto_tab("items_tab")
 	end
 
 	local result = wesnoth.show_dialog(dialog, preshow)
+	inventory_dialog.current_unit = nil -- If the dialog is reopened, it should start from a clean slate
 
 	-- Run onsubmit callback, assuming that the dialog was closed by click on the action button.
 	if clicked_button_id then
@@ -956,3 +807,5 @@ function wesnoth.wml_actions.show_inventory(cfg)
 
 	open_inventory_dialog(units[1])
 end
+
+
