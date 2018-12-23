@@ -32,6 +32,7 @@
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
+local wml_items = wesnoth.require "lua/wml/items.lua"
 
 loti.item = {}
 loti.item.storage = {}
@@ -180,19 +181,87 @@ end
 
 -- Place item on the ground at coordinates (x,y).
 loti.item.on_the_ground.add = function(item_number, x, y)
-	-- TODO
-	-- TODO: must place the item to unit.x, unit.y by putting it into "items" variable
-	-- (which lists items on the ground)
+	local list = helper.get_variable_array("items")
+	table.insert(list, {
+		type = item_number,
+		x = x,
+		y = y
+	})
+	helper.set_variable_array("items", list)
+
+	-- Draw the image of this item on the ground
+	wml_items.place_image(x, y, loti.item.type[item_number].image)
+
+	-- Enable "pick item" event when some unit walks onto this hex.
+	-- (see PLACE_ITEM_EVENT for WML version)
+	wesnoth.add_event_handler {
+		id = "ie" .. x .. y,
+		name = "moveto",
+		first_time_only = "no",
+		wml.tag.filter {
+			x = x,
+			y = y,
+			wml.tag["not"] {
+				wml.tag.filter_wml {
+					wml.tag.variables {
+						cant_pick = "yes"
+					}
+				}
+			},
+			wml.tag.filter_side {
+				controller = "human"
+			}
+		},
+		wml.tag.fire_event {
+			name = "item_pick",
+			wml.tag.primary_unit {
+				x = x,
+				y = y
+			}
+		}
+	}
 end
 
 -- Remove one item from the ground at coordinates (x,y).
 loti.item.on_the_ground.remove = function(item_number, x, y)
-	-- TODO
+	local list = helper.get_variable_array("items")
+
+	local index_to_remove = nil
+	local items_found = 0
+
+	for index, elem in ipairs(list) do
+		if elem.x == x and elem.y == y and elem.type == item_number then
+			index_to_remove = index
+			items_found = items_found + 1
+		end
+	end
+
+	if not index_to_remove then
+		return
+	end
+
+	table.remove(list, index_to_remove)
+	helper.set_variable_array("items", list)
+
+	-- Remove the image from the map,
+	-- but only if this hex doesn't have other items of the same type.
+	if items_found == 1 then
+		wml_items.remove(x, y, loti.item.type[item_number].image)
+	end
 end
 
 -- Get the list of all items in the storage (Lua array, each element is item_number).
 loti.item.on_the_ground.list = function(x, y)
-	-- TODO
+	local list = helper.get_variable_array("items")
+	local results = {}
+
+	for _, elem in ipairs(list) do
+		if elem.x == x and elem.y == y then
+			table.insert(results, elem.type)
+		end
+	end
+
+	return results
 end
 
 -------------------------------------------------------------------------------
