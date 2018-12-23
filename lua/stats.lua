@@ -529,13 +529,11 @@ function wesnoth.update_stats(original)
 									strongest_damage = 100000000000
 									break
 								end
-								if not eff.range or eff.range == atk.range then
-									if not eff.name or eff.name == atk.name then
-										local damage = atk.damage * atk.number
-										if damage > strongest_damage then
-											strongest_attack = atk
-											strongest_index = k
-										end
+								if (not eff.range or eff.range == atk.range) and not atk.is_bonus_attack then
+									local damage = atk.damage * atk.number
+									if damage > strongest_damage then
+										strongest_attack = atk
+										strongest_index = k
 									end
 								end
 							end
@@ -545,6 +543,7 @@ function wesnoth.update_stats(original)
 						else
 							strongest_attack = wesnoth.deepcopy(strongest_attack)
 						end
+						strongest_attack.is_bonus_attack = true
 						if eff.clone_anim then
 							local right_anim
 							local unit_type = wesnoth.unit_types[remade.type].__cfg
@@ -590,6 +589,9 @@ function wesnoth.update_stats(original)
 						if eff.attack_weight then
 							strongest_attack.attack_weight = eff.attack_weight
 						end
+						if eff.description then
+							strongest_attack.description = eff.description
+						end
 						-- Check if it's improved somewhere (I know this could be done with a better complexity)
 						for k = 1,#mods do
 							for m = 1,#mods[k][2] do
@@ -618,6 +620,7 @@ function wesnoth.update_stats(original)
 								table.insert(helper.get_child(strongest_attack, "specials"), specials[k])
 							end
 						end
+						table.insert(remade, { "attack", strongest_attack})
 					end
 				end
 			end
