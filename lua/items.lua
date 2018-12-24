@@ -46,10 +46,11 @@ loti.item.util = {}
 -------------------------------------------------------------------------------
 
 -- Add item_number to storage.
-loti.item.storage.add = function(item_number)
+-- Optional parameter crafted_sort: if present, overrides item_sort of the item.
+loti.item.storage.add = function(item_number, crafted_sort)
 	local list = wesnoth.get_variable("item_storage") or {}
 	table.insert(list, {
-		loti.item.type[item_number].sort,
+		crafted_sort or loti.item.type[item_number].sort,
 		{ type = item_number }
 	})
 
@@ -65,13 +66,16 @@ end
 
 -- Remove item_number from storage.
 -- If storage has many identical items, only one gets removed.
-loti.item.storage.remove = function(item_number)
+-- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
+loti.item.storage.remove = function(item_number, crafted_sort)
 	local list = wesnoth.get_variable("item_storage") or {}
 
 	for index, elem in ipairs(list) do
-		if elem[2].type == item_number then
-			table.remove(list, index)
-			break -- Only one item should be removed.
+		if not crafted_sort or item[1] == crafted_sort then
+			if elem[2].type == item_number then
+				table.remove(list, index)
+				break -- Only one item should be removed.
+			end
 		end
 	end
 
@@ -230,8 +234,15 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 end
 
 -- Remove one item from the unit.
-loti.item.on_unit.remove = function(unit, item_number)
-	wesnoth.remove_modifications(unit, { number = item_number })
+-- Optional parameter "crafted_sort" requires that only item of this sort gets removed.
+-- (needed for crafted items: e.g. crafted armour/gauntlets have the same item_number)
+loti.item.on_unit.remove = function(unit, item_number, crafted_sort)
+	local filter = { number = item_number }
+	if crafted_sort then
+		filter.sort = crafted_sort
+	end
+
+	wesnoth.remove_modifications(unit, filter)
 
 	-- Update stats (recalculate damages, etc.)
 	wesnoth.put_unit(wesnoth.update_stats(unit.__cfg))
@@ -242,13 +253,19 @@ end
 -------------------------------------------------------------------------------
 
 -- Place item on the ground at coordinates (x,y).
-loti.item.on_the_ground.add = function(item_number, x, y)
-	local list = helper.get_variable_array("items")
-	table.insert(list, {
+-- Optional parameter crafted_sort: if present, overrides item_sort of the item.
+loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
+	local record = {
 		type = item_number,
 		x = x,
 		y = y
-	})
+	}
+	if crafted_sort then
+		record.sort = crafted_sort
+	end
+
+	local list = helper.get_variable_array("items")
+	table.insert(list, record)
 	helper.set_variable_array("items", list)
 
 	-- Draw the image of this item on the ground
@@ -285,7 +302,8 @@ loti.item.on_the_ground.add = function(item_number, x, y)
 end
 
 -- Remove one item from the ground at coordinates (x,y).
-loti.item.on_the_ground.remove = function(item_number, x, y)
+-- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
+loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
 	local list = helper.get_variable_array("items")
 
 	local index_to_remove = nil
@@ -293,8 +311,10 @@ loti.item.on_the_ground.remove = function(item_number, x, y)
 
 	for index, elem in ipairs(list) do
 		if elem.x == x and elem.y == y and elem.type == item_number then
-			index_to_remove = index
-			items_found = items_found + 1
+			if not crafted_sort or elem.sort == crafted_sort then
+				index_to_remove = index
+				items_found = items_found + 1
+			end
 		end
 	end
 
@@ -334,19 +354,21 @@ end
 -- Remove all items from unit, place them to item storage.
 loti.item.util.undress_unit = function(unit)
 	for _, item in ipairs(loti.item.on_unit.list(unit)) do
-		loti.item.util.take_item_from_unit(unit, item.number)
+		loti.item.util.take_item_from_unit(unit, item.number, crafted_sort)
 	end
 end
 
 -- Remove one item from unit, place it to the item storage.
-loti.item.util.take_item_from_unit = function(unit, item_number)
-	loti.item.on_unit.remove(unit, item_number)
-	loti.item.storage.add(item_number)
+-- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
+loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort)
+	loti.item.on_unit.remove(unit, item_number, crafted_sort)
+	loti.item.storage.add(item_number, crafted_sort)
 end
 
 -- Remove one item from storage, then open "Pick up item" dialog on behalf of unit.
-loti.item.util.get_item_from_storage = function(unit, item_number)
-	loti.item.storage.remove(item_number)
-	loti.item.on_the_ground.add(item_number, unit.x, unit.y)
+-- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
+loti.item.util.get_item_from_storage = function(unit, item_number, crafted_sort)
+	loti.item.storage.remove(item_number, crafted_sort)
+	loti.item.on_the_ground.add(item_number, unit.x, unit.y, crafted_sort)
 	wesnoth.fire_event("item pick", unit.x, unit.y)
 end

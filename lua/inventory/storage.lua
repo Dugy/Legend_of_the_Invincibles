@@ -8,6 +8,7 @@ local helper = wesnoth.require "lua/helper.lua"
 local util = wesnoth.require "./misc.lua"
 
 local listbox_id = "storage_listbox"
+local inventory_dialog -- Set below
 
 -- Construct tab: "item storage".
 -- Note: this only creates the widget. It gets populated with data in onshow().
@@ -45,7 +46,6 @@ local function get_tab()
 	local yesno_buttons = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
-				horizontal_alignment = "left",
 				wml.tag.button {
 					id = "equip",
 					label = _"Equip"
@@ -53,8 +53,10 @@ local function get_tab()
 			},
 			wml.tag.spacer {},
 			wml.tag.column {
-				horizontal_alignment = "right",
-				util.make_close_button()
+				wml.tag.button {
+					id = "close_storage",
+					label = _"Close"
+				}
 			}
 		}
 	}
@@ -121,14 +123,6 @@ end
 
 local listbox_row = 0
 
--- Empty all rows in the listbox.
-function clear_listbox()
-	while listbox_row > 0 do
-		wesnoth.set_dialog_value("", listbox_id, listbox_row, "storage_text")
-		listbox_row = listbox_row - 1
-	end
-end
-
 -- Show the menu that selects subsection of Item Storage: "sword", "spear", etc.
 local function show_item_sorts()
 	local sorts = loti.item.storage.list_sorts()
@@ -156,29 +150,39 @@ function get_item_description(item, count)
 	return text
 end
 
+-- Last shown item_sort, used in Equip/Unequip callbacks.
+local shown_item_sort
+
 -- Callback that updates "Item storage" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
 local function onshow(unit, item_sort)
-	clear_listbox()
+	-- Clear the form.
+	while listbox_row > 0 do
+		wesnoth.set_dialog_value("", listbox_id, listbox_row, "storage_text")
+		listbox_row = listbox_row - 1
+	end
+
+	-- Hide Unequip and "Current item" until we know that something is equipped
+	wesnoth.set_dialog_visible(false, "current_item")
+	wesnoth.set_dialog_visible(false, "unequip")
 
 	if not item_sort then
-		show_item_sorts()
-		return
+		return show_item_sorts()
 	end
+
+	-- Remember item_sort for Equip/Unequip callbacks.
+	shown_item_sort = item_sort
 
 	-- Display currently equipped item (if any)
-	local has_current_item = false
 	local item = loti.item.on_unit.find(unit, item_sort)
 	if item then
-		has_current_item = true
-
 		local text = _"Currently equipped: " .. get_item_description(item)
 		wesnoth.set_dialog_value(text, "current_item")
-	end
 
-	-- Show/hide fields related to current item
-	wesnoth.set_dialog_visible(has_current_item, "current_item")
-	wesnoth.set_dialog_visible(has_current_item, "unequip")
+		-- Show/hide fields related to current item
+		wesnoth.set_dialog_visible(true, "current_item")
+		wesnoth.set_dialog_visible(true, "unequip")
+	end
 
 	-- Show all stored items of the selected item_sort.
 	local types = loti.item.storage.list_items(item_sort)
@@ -190,12 +194,36 @@ local function onshow(unit, item_sort)
 	end
 end
 
+local function unequip()
+	local unit = inventory_dialog.current_unit;
+	local item = loti.item.on_unit.find(unit, shown_item_sort)
+
+	loti.item.util.take_item_from_unit(unit, item.number, item.sort)
+	inventory_dialog.goto_tab("items_tab")
+end
+
 -- Add this tab to the dialog.
 
-return function(inventory_dialog)
+return function(provided_inventory_dialog)
+	-- Place this interface into the file-scope local variable,
+	-- because some code above needs inventory_dialog.goto_tab(), etc.
+	inventory_dialog = provided_inventory_dialog
+
 	inventory_dialog.add_tab {
 		id = "storage_tab",
 		grid = get_tab(),
 		onshow = onshow
 	}
+
+	inventory_dialog.install_callbacks(function()
+		-- Callback for "Unequip" button.
+		wesnoth.set_dialog_callback(unequip, "unequip")
+
+		-- Callback for "Close" button.
+		wesnoth.set_dialog_callback(
+			function() inventory_dialog.goto_tab("items_tab") end,
+			"close_storage"
+		)
+
+	end)
 end
