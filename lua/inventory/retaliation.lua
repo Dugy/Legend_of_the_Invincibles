@@ -152,8 +152,9 @@ local function onshow(unit)
 			table.insert(retaliation_checkboxes, index)
 			checkbox_id = #retaliation_checkboxes
 
-			wesnoth.set_dialog_value(attack.description,
-				listbox_id, checkbox_id, "attack_name")
+			local text = attack.description .. ": " .. attack.damage .. "x" .. attack.number .. " " .. attack.type
+
+			wesnoth.set_dialog_value(text, listbox_id, checkbox_id, "attack_name")
 
 			-- This is a multiselect listbox,
 			-- each set_dialog_value() selects an additional row.
