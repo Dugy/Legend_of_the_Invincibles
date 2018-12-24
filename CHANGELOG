@@ -1,6 +1,10 @@
 Changelog
 
 3.2.3. (development/maintenance)
+Added 10 new items
+Rewrote stats.cfg to lua, refactoring the code and adding new possibilities for item effects
+Redeem now has a nice UI window
+Fixed some bugs
 
 3.2.2 (maintenance/development)
 Added 5 new items
