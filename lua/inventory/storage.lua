@@ -122,6 +122,7 @@ local function get_tab()
 end
 
 local listbox_row = 0
+local shown_items -- Lua array of item numbers currently displayed in listbox, e.g. { 27, 34, 56}
 
 -- Show the menu that selects subsection of Item Storage: "sword", "spear", etc.
 local function show_item_sorts()
@@ -170,8 +171,9 @@ local function onshow(unit, item_sort)
 		return show_item_sorts()
 	end
 
-	-- Remember item_sort for Equip/Unequip callbacks.
+	-- Record things that will be needed in Equip/Unequip callbacks.
 	shown_item_sort = item_sort
+	shown_items = {}
 
 	-- Display currently equipped item (if any)
 	local item = loti.item.on_unit.find(unit, item_sort)
@@ -184,6 +186,7 @@ local function onshow(unit, item_sort)
 		wesnoth.set_dialog_visible(true, "unequip")
 	end
 
+
 	-- Show all stored items of the selected item_sort.
 	local types = loti.item.storage.list_items(item_sort)
 	for item_number, count in pairs(types) do
@@ -191,14 +194,31 @@ local function onshow(unit, item_sort)
 
 		local text = get_item_description(loti.item.type[item_number], count)
 		wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
+
+		-- For callback of "Equip" to know which item was selected.
+		shown_items[listbox_row] = item_number
 	end
 end
 
+-- Handler for the "Unequip" button.
 local function unequip()
-	local unit = inventory_dialog.current_unit;
+	local unit = inventory_dialog.current_unit
 	local item = loti.item.on_unit.find(unit, shown_item_sort)
 
 	loti.item.util.take_item_from_unit(unit, item.number, item.sort)
+	inventory_dialog.goto_tab("items_tab")
+end
+
+-- Handler for "Equip" button.
+local function equip()
+	local unit = inventory_dialog.current_unit
+
+	-- Determine selected item in the list.
+	local selected_index = wesnoth.get_dialog_value(listbox_id)
+	local item_number = shown_items[selected_index]
+
+	-- Unstore this item.
+	loti.item.util.get_item_from_storage(unit, item_number, shown_item_sort)
 	inventory_dialog.goto_tab("items_tab")
 end
 
@@ -216,8 +236,9 @@ return function(provided_inventory_dialog)
 	}
 
 	inventory_dialog.install_callbacks(function()
-		-- Callback for "Unequip" button.
+		-- Callback for Equip/Unequip buttons.
 		wesnoth.set_dialog_callback(unequip, "unequip")
+		wesnoth.set_dialog_callback(equip, "equip")
 
 		-- Callback for "Close" button.
 		wesnoth.set_dialog_callback(

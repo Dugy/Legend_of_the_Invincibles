@@ -71,7 +71,7 @@ loti.item.storage.remove = function(item_number, crafted_sort)
 	local list = wesnoth.get_variable("item_storage") or {}
 
 	for index, elem in ipairs(list) do
-		if not crafted_sort or item[1] == crafted_sort then
+		if not crafted_sort or elem[1] == crafted_sort then
 			if elem[2].type == item_number then
 				table.remove(list, index)
 				break -- Only one item should be removed.
