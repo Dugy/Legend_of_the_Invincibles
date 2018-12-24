@@ -231,27 +231,14 @@ local function get_tab()
 
 	-- Contents of the inventory page - everything except the actions menu.
 	local dialog_page_contents = wml.tag.grid {
-		-- Row 1: header text ("what is this page for")
-		wml.tag.row {
-			wml.tag.column {
-				border = "bottom",
-				border_size = 10,
-				wml.tag.label {
-					id = "inventory_menu_top_label",
-					use_markup = "yes",
-					label = "<span size='large' weight='bold'>" .. _"Items currently on the unit." .. "</span>"
-				}
-			}
-		},
-
-		-- Row 2: inventory slots
+		-- Row 1: inventory slots
 		wml.tag.row {
 			wml.tag.column {
 				slots_grid
 			}
 		},
 
-		-- Row 3: close button.
+		-- Row 2: close button.
 		wml.tag.row {
 			wml.tag.column {
 				horizontal_alignment = "right",

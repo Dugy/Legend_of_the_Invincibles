@@ -76,6 +76,9 @@ inventory_dialog.goto_tab = function(tab_id, extra_parameter)
 		end
 	end
 
+	-- Hide "unit name" header on the blank tab.
+	wesnoth.set_dialog_visible(tab_id ~= "blank_tab", "unit_name")
+
 	-- Recalculate all fields on this tab (via onshow callback).
 	tab.onshow(inventory_dialog.current_unit, extra_parameter)
 end
@@ -116,19 +119,29 @@ local function open_inventory_dialog(unit)
 	local function get_multitab_widget()
 		-- Wrap every tab in [panel], because panels can be made hidden/visible,
 		-- and place them all into one grid.
-		local column_wrapped_tabs = {}
+		local row_wrapped_tabs = {}
 		for tab_id, tab in pairs(tabs) do
-			table.insert(column_wrapped_tabs, wml.tag.column {
+			table.insert(row_wrapped_tabs, wml.tag.row { wml.tag.column {
 				wml.tag.panel {
 					id = tab_id,
 					tab.grid
 				}
-			})
+			}})
 		end
 
-		return wml.tag.grid {
-			wml.tag.row(column_wrapped_tabs)
-		}
+		-- Show name of the unit. This header is common for all tabs.
+		table.insert(row_wrapped_tabs, 1, wml.tag.row {
+			wml.tag.column {
+				border = "bottom",
+				border_size = 10,
+				wml.tag.label {
+					id = "unit_name",
+					use_markup = "yes"
+				}
+			}
+		})
+
+		return wml.tag.grid(row_wrapped_tabs)
 	end
 
 	local dialog = {
@@ -138,6 +151,10 @@ local function open_inventory_dialog(unit)
 	}
 
 	local function preshow()
+		local unit_name = "<span size='large' weight='bold' underline='single'>" .. unit.name ..
+			"</span> <span color='#88FCA0' size='large'>" .. unit.__cfg['language_name'] .. "</span>"
+		wesnoth.set_dialog_value(unit_name, "unit_name")
+
 		for _, func in ipairs(install_callback_functions) do
 			func()
 		end
