@@ -146,6 +146,11 @@ local function show_item_sorts()
 		listbox_row = listbox_row + 1
 		wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
 	end
+
+	wesnoth.set_dialog_visible(true, listbox_id)
+
+	-- Hide "Equip" button, not applicable
+	wesnoth.set_dialog_visible(false, "equip")
 end
 
 -- Returns human-readable description text of the item (string with Pango markup)
