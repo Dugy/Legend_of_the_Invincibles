@@ -165,6 +165,19 @@ loti.item.on_unit.list = function(unit)
 	return items
 end
 
+-- Returns the currently equipped item of a certain item_sort on the unit
+-- Returns: [object] tag or nil (if not equipped).
+loti.item.on_unit.find = function(unit, item_sort)
+	local items = loti.item.on_unit.list(unit)
+	for _, item in ipairs(items) do
+		if item.sort == item_sort then
+			return item
+		end
+	end
+
+	return nil -- Not equipped
+end
+
 -- Add one item to the unit.
 -- Optional parameter "crafted_sort" changes the item_sort of item (only for crafted items).
 loti.item.on_unit.add = function(unit, item_number, crafted_sort)
