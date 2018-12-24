@@ -94,7 +94,7 @@ local function get_tab()
 				border_size = 10,
 				horizontal_alignment = "left",
 				wml.tag.label {
-					label = _"In the item storage:"
+					id = "storage_header"
 				}
 			}
 		},
@@ -116,6 +116,18 @@ local function get_tab()
 				border = "top",
 				border_size = 10,
 				yesno_buttons
+			}
+		}
+	}
+end
+
+-- Blank tab is used in equip() to hide the Item Storage tab
+-- before showing "item pick" dialog (which is semi-transparent).
+function get_blank_tab()
+	return wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				wml.tag.spacer { width = 10, height = 10 }
 			}
 		}
 	}
@@ -157,7 +169,8 @@ local shown_item_sort
 -- Callback that updates "Item storage" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
 local function onshow(unit, item_sort)
-	-- Clear the form.
+	-- Clear the form. Keep the listbox hidden until populated.
+	wesnoth.set_dialog_visible(false, listbox_id)
 	while listbox_row > 0 do
 		wesnoth.set_dialog_value("", listbox_id, listbox_row, "storage_text")
 		listbox_row = listbox_row - 1
@@ -186,7 +199,6 @@ local function onshow(unit, item_sort)
 		wesnoth.set_dialog_visible(true, "unequip")
 	end
 
-
 	-- Show all stored items of the selected item_sort.
 	local types = loti.item.storage.list_items(item_sort)
 	for item_number, count in pairs(types) do
@@ -197,6 +209,21 @@ local function onshow(unit, item_sort)
 
 		-- For callback of "Equip" to know which item was selected.
 		shown_items[listbox_row] = item_number
+	end
+
+	-- If the item storage is empty, hide Equip button.
+	local empty = not shown_items[1]
+	wesnoth.set_dialog_visible(not empty, "equip")
+
+	if empty then
+		wesnoth.set_dialog_value(_"Item storage is empty.", "storage_header")
+	else
+		wesnoth.set_dialog_value(_"In the item storage:", "storage_header")
+
+		-- Unhide the listbox. Note: it's good for performance to show the listbox only
+		-- when it's completely populated (i.e. here), so that
+		-- it won't be unnecessarily redrawn on every set_dialog_value().
+		wesnoth.set_dialog_visible(true, listbox_id)
 	end
 end
 
@@ -217,7 +244,11 @@ local function equip()
 	local selected_index = wesnoth.get_dialog_value(listbox_id)
 	local item_number = shown_items[selected_index]
 
-	-- Unstore this item.
+	-- Because the "pick item" dialog (that we are about to open) is semi-transparent,
+	-- make sure that "Equip" and "Close" buttons don't show through it. (confusing)
+	inventory_dialog.goto_tab("blank_tab")
+
+	-- Unstore this item. Show "pick item" dialog.
 	loti.item.util.get_item_from_storage(unit, item_number, shown_item_sort)
 	inventory_dialog.goto_tab("items_tab")
 end
@@ -233,6 +264,12 @@ return function(provided_inventory_dialog)
 		id = "storage_tab",
 		grid = get_tab(),
 		onshow = onshow
+	}
+
+	inventory_dialog.add_tab {
+		id = "blank_tab",
+		grid = get_blank_tab(),
+		onshow = function() end
 	}
 
 	inventory_dialog.install_callbacks(function()
