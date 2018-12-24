@@ -79,23 +79,22 @@ loti.item.storage.remove = function(item_number)
 end
 
 -- Get the list of all items in the storage (Lua array, each element is item_number).
--- Optional parameter: item_sort (string, e.g. "sword") - only items of this sort are returned.
--- If list_items() is called without parameters, all items in the storage are returned.
+-- Optional parameter: item_sort (string, e.g. "sword") - if present, only items of this sort are returned.
+-- Counts the number of items of each type.
+-- Returns: Lua array, e.g. { "Cuctator's sword" => 1, "Ice Armour" => 5, ... }.
 loti.item.storage.list_items = function(item_sort)
 	local list = wesnoth.get_variable("item_storage") or {}
 	local results = {}
 
 	for _, elem in ipairs(list) do
 		if not item_sort or elem[1] == item_sort then
-			table.insert(results, elem[2].type)
-		end
-	end
+			local item_number = elem[2].type
+			if not results[item_number] then
+				results[item_number] = 0
+			end
 
-	if not item_sort then
-		-- Items with the same item_sort are already in correct order,
-		-- but when we merge those arrays, result needs to be reordered again.
-		-- NOTE: don't confuse item_sort (e.g. "sword") and array sorting.
-		table.sort(results)
+			results[item_number] = results[item_number] + 1
+		end
 	end
 
 	return results
@@ -103,7 +102,7 @@ end
 
 -- Get the list of distinct sorts of all items that are currently in the storage.
 -- Counts the number of items of each sort.
--- (Lua array, e.g. { "sword" => 10, "bow" => 12, "armour" => 5, ... }).
+-- Returns: Lua array, e.g. { "sword" => 10, "bow" => 12, "armour" => 5, ... }.
 loti.item.storage.list_sorts = function()
 	local list = wesnoth.get_variable("item_storage") or {}
 	local results = {}

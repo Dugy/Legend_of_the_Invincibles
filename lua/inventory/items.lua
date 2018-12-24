@@ -68,11 +68,7 @@ local inventory_config = {
 		helper.wml_error("Button " .. button_id .. " is not yet implemented.")
 	end,
 
-	-- Lua function that is called when player clicks on an inventory slot
-	-- (e.g. on the image of gauntlets).
-	slot_callback = function(item_sort)
-		helper.wml_error("Changing " .. item_sort .. " is not yet implemented.")
-	end
+
 }
 
 -- Array of slots, in order added via get_slot_widget().
@@ -90,6 +86,12 @@ local slots
 -- Calculated in onshow().
 local slot_id_by_sort
 local sort_by_slot_id
+
+-- Lua function that is called when player clicks on an inventory slot
+-- (e.g. on the image of gauntlets).
+inventory_config.slot_callback = function(item_sort)
+	inventory_dialog.goto_tab("storage_tab", item_sort)
+end
 
 -- Construct tab: "items on the unit".
 -- Note: result is exactly the same for any unit. See onshow() for unit-specific logic.
