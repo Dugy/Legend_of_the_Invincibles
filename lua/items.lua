@@ -354,7 +354,7 @@ end
 -- Remove all items from unit, place them to item storage.
 loti.item.util.undress_unit = function(unit)
 	for _, item in ipairs(loti.item.on_unit.list(unit)) do
-		loti.item.util.take_item_from_unit(unit, item.number, crafted_sort)
+		loti.item.util.take_item_from_unit(unit, item.number, item.sort)
 	end
 end
 
