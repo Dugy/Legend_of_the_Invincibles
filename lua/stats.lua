@@ -132,8 +132,8 @@ function wesnoth.update_stats(original)
 							end
 						end
 					end
-					local needs = it.needs or 1
-					if has >= needs then
+					local needed = it.needed or 1
+					if has >= needed then
 						table.insert(mods[i][2], {"effect", wesnoth.deepcopy(it)})
 						table.insert(latent_descriptions, "<b>" .. tostring(it.desc) .. "</b>")
 					else
@@ -476,9 +476,9 @@ function wesnoth.update_stats(original)
 
 	local visual_effects = {}
 
-	local function process_effects(vars)
-		for i = 1,#vars do
-			local obj = vars[i][2]
+	local function process_effects(mods)
+		for i = 1,#mods do
+			local obj = mods[i][2]
 			for j = 1,#obj do
 				if obj[j][1] == "effect" then
 					local eff = obj[j][2]
@@ -595,13 +595,15 @@ function wesnoth.update_stats(original)
 						-- Check if it's improved somewhere (I know this could be done with a better complexity)
 						for k = 1,#mods do
 							for m = 1,#mods[k][2] do
-								local other_effect = mods[k][2][m][2]
-								if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
-									if other_effect.increase_damage then
-										damage = damage + other_effect.increase_damage
-									end
-									if other_effect.increase_attacks then
-										attacks = attacks + other_effect.increase_attacks
+								if mods[k][2][m][1] == "effect" then
+									local other_effect = mods[k][2][m][2]
+									if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
+										if other_effect.increase_damage then
+											damage = damage + other_effect.increase_damage
+										end
+										if other_effect.increase_attacks then
+											attacks = attacks + other_effect.increase_attacks
+										end
 									end
 								end
 							end
