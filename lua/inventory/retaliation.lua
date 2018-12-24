@@ -152,7 +152,7 @@ local function onshow(unit)
 			table.insert(retaliation_checkboxes, index)
 			checkbox_id = #retaliation_checkboxes
 
-			local text = attack.description .. ": " .. attack.damage .. "x" .. attack.number .. " " .. attack.type
+			local text = attack.description .. ": " .. attack.damage .. "-" .. attack.number .. " " .. attack.type
 
 			wesnoth.set_dialog_value(text, listbox_id, checkbox_id, "attack_name")
 
