@@ -51,7 +51,8 @@ local inventory_config = {
 		},
 		{
 			id = "recall_list_items",
-			label = _"Items on units on the recall list"
+			label = _"Items on units on the recall list",
+			onclick = function(unit) inventory_dialog.goto_tab("recall_tab") end
 		},
 		{ spacer = true },
 		{
@@ -66,9 +67,7 @@ local inventory_config = {
 	-- Called when clicking on action_buttons which don't have onsubmit/onclick callbacks.
 	default_button_callback = function(unit, button_id)
 		helper.wml_error("Button " .. button_id .. " is not yet implemented.")
-	end,
-
-
+	end
 }
 
 -- Array of slots, in order added via get_slot_widget().

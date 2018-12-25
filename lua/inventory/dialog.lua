@@ -9,7 +9,7 @@ local helper = wesnoth.require "lua/helper.lua"
 -- These Lua files are loaded as plugins.
 -- They receive an "inventory_dialog" object as parameter,
 -- which provides methods for adding tabs, installing callbacks, etc.
-local PLUGINS_LIST = { "items", "retaliation", "storage" }
+local PLUGINS_LIST = { "items", "retaliation", "storage", "recall" }
 
 -------------------------------------------------------------------------------
 
@@ -76,11 +76,17 @@ inventory_dialog.goto_tab = function(tab_id, extra_parameter)
 		end
 	end
 
-	-- Hide "unit name" header on the blank tab.
-	wesnoth.set_dialog_visible(tab_id ~= "blank_tab", "unit_name")
+	-- Recalculate all fields on this tab (via onshow callback),
+	-- plus the "unit name" field (which is global for all tabs).
+	local unit = inventory_dialog.current_unit
+	tab.onshow(unit, extra_parameter)
 
-	-- Recalculate all fields on this tab (via onshow callback).
-	tab.onshow(inventory_dialog.current_unit, extra_parameter)
+	local unit_name = "<span size='large' weight='bold' underline='single'>" .. unit.name ..
+		"</span> <span color='#88FCA0' size='large'>" .. unit.__cfg['language_name'] .. "</span>"
+	wesnoth.set_dialog_value(unit_name, "unit_name")
+
+	-- Hide "unit name" on the blank tab.
+	wesnoth.set_dialog_visible(tab_id ~= "blank_tab", "unit_name")
 end
 
 -- Load plugins.
@@ -104,13 +110,13 @@ end
 
 -- NOTE: the only reason we call this function here is because it's very convenient for debugging
 -- (any errors in add_widget_definition() are discovered before the map is even loaded)
--- When the widgets are completely implemented, this function will only be called from loti_inventory().
+-- When the widgets are completely implemented, this function will only be called from get_dialog_widget().
 register_widgets()
 
--- Display the inventory dialog for a unit.
--- TODO: support changing the unit without closing this dialog,
--- which can be useful for features like "Items on units on the recall list".
-local function open_inventory_dialog(unit)
+-- Construct the unit-independent WML of Inventory dialog.
+-- Note: this only creates the widget. It gets populated with data in open_inventory_dialog().
+-- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+local function get_dialog_widget()
 	register_widgets()
 
 	-- Get widget that contains all tabs.
@@ -144,17 +150,16 @@ local function open_inventory_dialog(unit)
 		return wml.tag.grid(row_wrapped_tabs)
 	end
 
-	local dialog = {
+	return {
 		wml.tag.tooltip { id = "tooltip_large" },
 		wml.tag.helptip { id = "tooltip_large" },
 		get_multitab_widget()
 	}
+end
 
+-- Display the inventory dialog for a unit.
+local function open_inventory_dialog(unit)
 	local function preshow()
-		local unit_name = "<span size='large' weight='bold' underline='single'>" .. unit.name ..
-			"</span> <span color='#88FCA0' size='large'>" .. unit.__cfg['language_name'] .. "</span>"
-		wesnoth.set_dialog_value(unit_name, "unit_name")
-
 		for _, func in ipairs(install_callback_functions) do
 			func()
 		end
@@ -167,13 +172,16 @@ local function open_inventory_dialog(unit)
 		inventory_dialog.goto_tab("items_tab")
 	end
 
-	local result = wesnoth.show_dialog(dialog, preshow)
-	inventory_dialog.current_unit = nil -- If the dialog is reopened, it should start from a clean slate
+	local result = wesnoth.show_dialog(get_dialog_widget(), preshow)
+	unit = inventory_dialog.current_unit -- Allow "recall" tab to select another unit
 
 	-- Run onsubmit callbacks (e.g. "Items" tab uses this to handle clicks on some action buttons)
 	for _, func in ipairs(onsubmit_callbacks) do
 		func(unit)
 	end
+
+	-- Next time the Inventory dialog is reopened, it should start from a clean slate.
+	inventory_dialog.current_unit = nil
 end
 
 -- Tag [show_inventory] displays the inventory dialog for the unit.
