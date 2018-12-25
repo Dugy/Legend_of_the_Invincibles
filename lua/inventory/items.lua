@@ -357,6 +357,10 @@ local function onshow(unit)
 		local lying_items = loti.item.on_the_ground.list(unit.x, unit.y)
 		wesnoth.set_dialog_active(#lying_items > 0, "ground_items")
 	end
+
+	-- Disable "Items on units on the recall list" if none of those units have items.
+	local geared_recall_units = wesnoth.get_recall_units({ trait = "geared" })
+	wesnoth.set_dialog_active(#geared_recall_units > 0, "recall_list_items")
 end
 
 -- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.
