@@ -30,7 +30,11 @@ local inventory_config = {
 			id = "unit_information",
 			label = _"Unit information",
 			onsubmit = function(unit)
-				wesnoth.fire_event("unit information", unit.x, unit.y)
+				-- This may be a unit on recall list, so make sure that "unit" variable
+				-- (which is needed in unit_information_part_1()) gets populated anyway.
+				wesnoth.set_variable("unit", unit.__cfg)
+				wesnoth.fire_event("unit information", unit)
+				wesnoth.set_variable("unit", nil)
 			end,
 		},
 		{ spacer = true },
