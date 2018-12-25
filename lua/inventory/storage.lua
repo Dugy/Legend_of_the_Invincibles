@@ -187,9 +187,9 @@ local shown_item_sort
 local function onshow(unit, item_sort)
 	-- Clear the form. Keep the listbox hidden until populated.
 	wesnoth.set_dialog_visible(false, listbox_id)
-	while listbox_row > 0 do
-		wesnoth.set_dialog_value("", listbox_id, listbox_row, "storage_text")
-		listbox_row = listbox_row - 1
+	if listbox_row > 0 then
+		wesnoth.remove_dialog_item(1, 0, listbox_id)
+		listbox_row = 0
 	end
 
 	-- Hide optiional widgets until we know that they are needed.
