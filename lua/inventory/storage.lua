@@ -46,10 +46,20 @@ local function get_tab()
 	local yesno_buttons = wml.tag.grid {
 		wml.tag.row {
 			-- Only one of Equip and View buttons is shown at a time.
+			-- They both may be hidden when viewing units on the recall list
+			-- (it's illogical for absent unit to be able to take new items)
 			wml.tag.column {
 				wml.tag.button {
 					id = "equip",
 					label = _"Equip"
+				}
+			},
+			wml.tag.column {
+				border = "right",
+				border_size = 20,
+				wml.tag.label {
+					id = "noequip_reason_recall_list",
+					label = _"This unit is currently not on the battlefield,\nso it can't take new items from the storage."
 				}
 			},
 			wml.tag.column {
@@ -196,6 +206,7 @@ local function onshow(unit, item_sort)
 	wesnoth.set_dialog_visible(false, "current_item")
 	wesnoth.set_dialog_visible(false, "unequip")
 	wesnoth.set_dialog_visible(false, "view")
+	wesnoth.set_dialog_visible(false, "noequip_reason_recall_list")
 
 	-- Record things that will be needed in Equip/Unequip callbacks.
 	shown_item_sort = item_sort
@@ -228,9 +239,12 @@ local function onshow(unit, item_sort)
 		shown_items[listbox_row] = item_number
 	end
 
-	-- If the item storage is empty, hide Equip button.
+	-- Hide Equip button when a) the storage is empty or b) unit is on recall list.
 	local empty = not shown_items[1]
-	wesnoth.set_dialog_visible(not empty, "equip")
+	local present = unit.valid ~= "recall"
+
+	wesnoth.set_dialog_visible(not empty and present, "equip")
+	wesnoth.set_dialog_visible(not empty and not present, "noequip_reason_recall_list")
 
 	if empty then
 		wesnoth.set_dialog_value(_"Item storage is empty.", "storage_header")
