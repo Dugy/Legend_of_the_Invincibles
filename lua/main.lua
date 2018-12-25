@@ -830,6 +830,9 @@ function loti_util_list_equippable_sorts(unit_type)
 
 	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
 	for attack in pairs(loti_util_list_attacks(unit_type)) do
+		-- Remove trailing numbers, e.g. bow2 -> bow.
+		attack = attack:gsub('%d+$', '')
+
 		if attack:match("sword$") or attack == "saber"
 			or attack == "war talon" or attack == "war blade"
 			or attack == "mberserk" or attack == "whirlwind"
@@ -984,20 +987,11 @@ end
 -- where attack names are untranslated (always English) and can therefore be used in conditionals.
 --
 function loti_util_list_attacks(unit_type)
-	-- We don't use unit.attacks, because it has a problem with unit.attacks[1].name field
-	-- being already translated (possibly not English), which prevents comparison operations.
-	-- Instead we scan the variable representation of Unit for "attack" fields.
-	local temp_variable = "loti_util_temporary_unit";
-
-	wesnoth.wml_actions.unit { type = unit_type, to_variable = temp_variable}
-	local data = wesnoth.get_variable(temp_variable)
-	wesnoth.set_variable(temp_variable, nil)
-
+	local temp_unit = wesnoth.create_unit { type = unit_type }
 	local has_attack = {}
-	for idx, tag in pairs(data) do
-		if type(tag) == "table" and tag[1] == "attack" then
-			has_attack[tag[2].name] = true
-		end
+
+	for _, attack in ipairs(temp_unit.attacks) do
+		has_attack[attack.name] = true
 	end
 
 	return has_attack

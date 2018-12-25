@@ -15,7 +15,7 @@ damage_type_list = { "blade", "pierce", "impact", "fire", "cold", "arcane" }
 resist_type_list = { "blade_resist", "pierce_resist", "impact_resist", "fire_resist", "cold_resist", "arcane_resist" }
 resist_penetrate_list = { "blade_penetrate", "pierce_penetrate", "impact_penetrate", "fire_penetrate", "cold_penetrate", "arcane_penetrate" }
 
-function call_event_on_unit(u, name)
+local function call_event_on_unit(u, name)
 	local old_id = u.id
 	local id = "lua_stats_updating_dummy"
 	u.id = id
@@ -26,7 +26,36 @@ function call_event_on_unit(u, name)
 	return u
 end
 
+-- Rename duplicate attacks within the [unit] WML table,
+-- adding numbers 2, 3, etc. to them to make them unique.
+local function make_attacks_unique(unit)
+	-- This array records the attack names that were already used,
+	-- along with the number of repetitions.
+	-- E.g. { "chill tempest" => 1, "bow" => 2 }.
+	local attack_seen = {}
+
+	-- Find all attacks of this unit.
+	for _, data in ipairs(unit) do
+		if data[1] == "attack" then
+			local name = data[2].name
+			if attack_seen[name] then
+				-- Duplicate found. Rename this attack, e.g. "bow" -> "bow2".
+				local repetition = attack_seen[name] + 1
+				data[2].name = name .. repetition
+
+				-- Next "bow" attacks will be called "bow3", "bow4", etc.
+				attack_seen[name] = repetition
+			else
+				-- Unique attack name (so far).
+				attack_seen[name] = 1
+			end
+		end
+	end
+end
+
 -- This will need more edits once that WML intercompatibility is not needed
+-- Parameter: original - WML table of [unit] tag.
+-- Returns: modified WML table of [unit] tag.
 function wesnoth.update_stats(original)
 	-- PART I: WML pre-update hook
 	original = call_event_on_unit(original, "pre stats update")
@@ -682,6 +711,8 @@ function wesnoth.update_stats(original)
 		end
 		table.insert(specials, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	end
+
+	make_attacks_unique(remade)
 
 	-- PART VIII: Apply visual effects
 	if #visual_effects > 0 then
