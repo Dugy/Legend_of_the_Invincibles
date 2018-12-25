@@ -230,7 +230,9 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 	end
 
 	-- Update stats (recalculate damages, etc.)
-	wesnoth.put_unit(wesnoth.update_stats(unit.__cfg))
+	if unit.valid == "map" then
+		wesnoth.put_unit(wesnoth.update_stats(unit.__cfg))
+	end
 end
 
 -- Remove one item from the unit.
@@ -245,7 +247,9 @@ loti.item.on_unit.remove = function(unit, item_number, crafted_sort)
 	wesnoth.remove_modifications(unit, filter)
 
 	-- Update stats (recalculate damages, etc.)
-	wesnoth.put_unit(wesnoth.update_stats(unit.__cfg))
+	if unit.valid == "map" then
+		wesnoth.put_unit(wesnoth.update_stats(unit.__cfg))
+	end
 end
 
 -------------------------------------------------------------------------------
