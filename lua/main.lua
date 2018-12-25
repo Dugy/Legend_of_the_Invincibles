@@ -830,9 +830,6 @@ function loti_util_list_equippable_sorts(unit_type)
 
 	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
 	for attack in pairs(loti_util_list_attacks(unit_type)) do
-		-- Remove trailing numbers, e.g. bow2 -> bow.
-		attack = attack:gsub('%d+$', '')
-
 		if attack:match("sword$") or attack == "saber"
 			or attack == "war talon" or attack == "war blade"
 			or attack == "mberserk" or attack == "whirlwind"
@@ -981,7 +978,7 @@ function wesnoth.wml_actions.can_equip_item(cfg)
 end
 
 --
--- Utility function for [can_equip_item] (can also be used in get_unit_flavour()).
+-- Utility function for [can_equip_item] and get_unit_flavour().
 -- List the names of all attacks (e.g. "chill tempest") of a certain unit.
 -- Returns the Lua table { attack_name = 1, another_attack_name = 1, ... },
 -- where attack names are untranslated (always English) and can therefore be used in conditionals.
@@ -991,7 +988,9 @@ function loti_util_list_attacks(unit_type)
 	local has_attack = {}
 
 	for _, attack in ipairs(temp_unit.attacks) do
-		has_attack[attack.name] = true
+		-- Remove trailing numbers, e.g. bow2 -> bow.
+		local name = attack.name:gsub('%d+$', '')
+		has_attack[name] = true
 	end
 
 	return has_attack
