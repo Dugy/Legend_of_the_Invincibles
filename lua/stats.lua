@@ -15,7 +15,7 @@ damage_type_list = { "blade", "pierce", "impact", "fire", "cold", "arcane" }
 resist_type_list = { "blade_resist", "pierce_resist", "impact_resist", "fire_resist", "cold_resist", "arcane_resist" }
 resist_penetrate_list = { "blade_penetrate", "pierce_penetrate", "impact_penetrate", "fire_penetrate", "cold_penetrate", "arcane_penetrate" }
 
-function call_event_on_unit(u, name)
+local function call_event_on_unit(u, name)
 	local old_id = u.id
 	local id = "lua_stats_updating_dummy"
 	u.id = id
@@ -26,7 +26,32 @@ function call_event_on_unit(u, name)
 	return u
 end
 
+-- Rename duplicate attacks within the [unit] WML table,
+-- adding numbers 2, 3, etc. to them to make them unique.
+local function make_attacks_unique(unit)
+	-- This array records the attack names that were already used.
+	-- E.g. { "chill tempest" => 1, "bow" => 1 }.
+	local attack_seen = {}
+
+	-- Find all attacks of this unit.
+	for _, data in ipairs(unit) do
+		if data[1] == "attack" then
+			local name = data[2].name
+			while attack_seen[name] do
+				-- Duplicate found. Rename this attack, e.g. "bow",
+				-- to "bowN", where N is a random number between 2 and 999.
+				name = data[2].name .. wesnoth.random(2, 999)
+			end
+
+			data[2].name = name
+			attack_seen[name] = 1
+		end
+	end
+end
+
 -- This will need more edits once that WML intercompatibility is not needed
+-- Parameter: original - WML table of [unit] tag.
+-- Returns: modified WML table of [unit] tag.
 function wesnoth.update_stats(original)
 	-- PART I: WML pre-update hook
 	original = call_event_on_unit(original, "pre stats update")
@@ -132,8 +157,8 @@ function wesnoth.update_stats(original)
 							end
 						end
 					end
-					local needs = it.needs or 1
-					if has >= needs then
+					local needed = it.needed or 1
+					if has >= needed then
 						table.insert(mods[i][2], {"effect", wesnoth.deepcopy(it)})
 						table.insert(latent_descriptions, "<b>" .. tostring(it.desc) .. "</b>")
 					else
@@ -476,9 +501,9 @@ function wesnoth.update_stats(original)
 
 	local visual_effects = {}
 
-	local function process_effects(vars)
-		for i = 1,#vars do
-			local obj = vars[i][2]
+	local function process_effects(mods)
+		for i = 1,#mods do
+			local obj = mods[i][2]
 			for j = 1,#obj do
 				if obj[j][1] == "effect" then
 					local eff = obj[j][2]
@@ -595,13 +620,15 @@ function wesnoth.update_stats(original)
 						-- Check if it's improved somewhere (I know this could be done with a better complexity)
 						for k = 1,#mods do
 							for m = 1,#mods[k][2] do
-								local other_effect = mods[k][2][m][2]
-								if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
-									if other_effect.increase_damage then
-										damage = damage + other_effect.increase_damage
-									end
-									if other_effect.increase_attacks then
-										attacks = attacks + other_effect.increase_attacks
+								if mods[k][2][m][1] == "effect" then
+									local other_effect = mods[k][2][m][2]
+									if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
+										if other_effect.increase_damage then
+											damage = damage + other_effect.increase_damage
+										end
+										if other_effect.increase_attacks then
+											attacks = attacks + other_effect.increase_attacks
+										end
 									end
 								end
 							end
@@ -680,6 +707,8 @@ function wesnoth.update_stats(original)
 		end
 		table.insert(specials, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	end
+
+	make_attacks_unique(remade)
 
 	-- PART VIII: Apply visual effects
 	if #visual_effects > 0 then

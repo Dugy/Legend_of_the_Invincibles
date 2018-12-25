@@ -1,12 +1,13 @@
 Changelog
 
-3.2.3. (development/maintenance)
-Added 10 new items
+3.2.4 (development/maintenance)
+Added 15 new items
 Rewrote stats.cfg to lua, refactoring the code and adding new possibilities for item effects
 Redeem now has a nice UI window
+Improved some less used crafting recipes
 Fixed some bugs
 
-3.2.2 (maintenance/development)
+3.2.3 (maintenance/development)
 Added 5 new items
 Units now get titles depending on their type and legacy when they reach maximum level
 Added a new unit: Zombie Rider, a skeleton rider with plague advancing from Chocobone
