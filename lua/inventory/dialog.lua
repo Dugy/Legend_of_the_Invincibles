@@ -81,16 +81,20 @@ inventory_dialog.goto_tab = function(tab_id, extra_parameter)
 	local unit = inventory_dialog.current_unit
 	tab.onshow(unit, extra_parameter)
 
-	local unit_name = "<span size='large' weight='bold' underline='single'>" .. unit.name ..
-		"</span> <span color='#88FCA0' size='large'>" .. unit.__cfg['language_name'] .. "</span>"
-	if unit.valid == "recall" then
-		unit_name = unit_name .. " (" .. _"on the recall list" .. ")"
+	-- Show "unit name" header everywhere except the blank and recall tabs.
+	if tab_id == "blank_tab" or tab_id == "recall_tab" then
+		wesnoth.set_dialog_visible(false, "unit_name")
+	else
+		wesnoth.set_dialog_visible(true, "unit_name")
+
+		local unit_name = "<span size='large' weight='bold'>" .. unit.name ..
+			"</span> <span color='#88FCA0' size='large'>" .. unit.__cfg['language_name'] .. "</span>"
+		if unit.valid == "recall" then
+			unit_name = unit_name .. " (" .. _"on the recall list" .. ")"
+		end
+
+		wesnoth.set_dialog_value(unit_name, "unit_name")
 	end
-
-	wesnoth.set_dialog_value(unit_name, "unit_name")
-
-	-- Hide "unit name" on the blank tab.
-	wesnoth.set_dialog_visible(tab_id ~= "blank_tab", "unit_name")
 end
 
 -- Load plugins.

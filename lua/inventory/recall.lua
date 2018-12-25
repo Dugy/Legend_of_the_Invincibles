@@ -63,7 +63,21 @@ local function get_tab()
 	}
 
 	return wml.tag.grid {
-		-- Row 1: list of geared units on the Recall List.
+		-- Row 1: header label.
+		wml.tag.row {
+			wml.tag.column {
+				border = "bottom",
+				border_size = 10,
+				horizontal_alignment = "left",
+				wml.tag.label {
+					id = "recall_header",
+					use_markup = "yes",
+					label = "<span size='x-large' color='#f47a7a'>" .. _"These units on recall list have items:" .. "</span>"
+				}
+			}
+		},
+
+		-- Row 2: list of geared units on the Recall List.
 		wml.tag.row {
 			wml.tag.column {
 				horizontal_grow = true,
@@ -73,7 +87,7 @@ local function get_tab()
 			}
 		},
 
-		-- Row 2: "View" and "Close" buttons.
+		-- Row 3: "View" and "Close" buttons.
 		wml.tag.row {
 			wml.tag.column {
 				horizontal_grow = true,
