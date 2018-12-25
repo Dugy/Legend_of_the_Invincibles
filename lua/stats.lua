@@ -29,26 +29,22 @@ end
 -- Rename duplicate attacks within the [unit] WML table,
 -- adding numbers 2, 3, etc. to them to make them unique.
 local function make_attacks_unique(unit)
-	-- This array records the attack names that were already used,
-	-- along with the number of repetitions.
-	-- E.g. { "chill tempest" => 1, "bow" => 2 }.
+	-- This array records the attack names that were already used.
+	-- E.g. { "chill tempest" => 1, "bow" => 1 }.
 	local attack_seen = {}
 
 	-- Find all attacks of this unit.
 	for _, data in ipairs(unit) do
 		if data[1] == "attack" then
 			local name = data[2].name
-			if attack_seen[name] then
-				-- Duplicate found. Rename this attack, e.g. "bow" -> "bow2".
-				local repetition = attack_seen[name] + 1
-				data[2].name = name .. repetition
-
-				-- Next "bow" attacks will be called "bow3", "bow4", etc.
-				attack_seen[name] = repetition
-			else
-				-- Unique attack name (so far).
-				attack_seen[name] = 1
+			while attack_seen[name] do
+				-- Duplicate found. Rename this attack, e.g. "bow",
+				-- to "bowN", where N is a random number between 2 and 999.
+				name = data[2].name .. wesnoth.random(2, 999)
 			end
+
+			data[2].name = name
+			attack_seen[name] = 1
 		end
 	end
 end
