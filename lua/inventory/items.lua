@@ -344,6 +344,13 @@ local function onshow(unit)
 		-- Unhide the slot (leftover slots are hidden by default)
 		wesnoth.set_dialog_visible(true, slot_id)
 	end
+
+	-- Hide/unhide action buttons that are not always applicable.
+	-- For example, units on recall list can't pick items from the ground.
+	local present = unit.valid ~= "recall"
+	for _, button_id in ipairs({ "storage", "crafting", "ground_items" }) do
+		wesnoth.set_dialog_active(present, button_id)
+	end
 end
 
 -- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.

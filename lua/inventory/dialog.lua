@@ -83,6 +83,10 @@ inventory_dialog.goto_tab = function(tab_id, extra_parameter)
 
 	local unit_name = "<span size='large' weight='bold' underline='single'>" .. unit.name ..
 		"</span> <span color='#88FCA0' size='large'>" .. unit.__cfg['language_name'] .. "</span>"
+	if unit.valid == "recall" then
+		unit_name = unit_name .. " (" .. _"on the recall list" .. ")"
+	end
+
 	wesnoth.set_dialog_value(unit_name, "unit_name")
 
 	-- Hide "unit name" on the blank tab.
