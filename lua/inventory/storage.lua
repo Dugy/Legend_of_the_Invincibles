@@ -45,10 +45,17 @@ local function get_tab()
 
 	local yesno_buttons = wml.tag.grid {
 		wml.tag.row {
+			-- Only one of Equip and View buttons is shown at a time.
 			wml.tag.column {
 				wml.tag.button {
 					id = "equip",
 					label = _"Equip"
+				}
+			},
+			wml.tag.column {
+				wml.tag.button {
+					id = "view",
+					label = _"View"
 				}
 			},
 			wml.tag.spacer {},
@@ -145,11 +152,15 @@ local function show_item_sorts()
 
 		listbox_row = listbox_row + 1
 		wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
+
+		-- For callback of "View" to know which item_sort was selected.
+		shown_items[listbox_row] = item_sort
 	end
 
 	wesnoth.set_dialog_visible(true, listbox_id)
 
-	-- Hide "Equip" button, not applicable
+	-- Hide "Equip" button (not applicable) and unhide "View"
+	wesnoth.set_dialog_visible(true, "view")
 	wesnoth.set_dialog_visible(false, "equip")
 end
 
@@ -181,17 +192,18 @@ local function onshow(unit, item_sort)
 		listbox_row = listbox_row - 1
 	end
 
-	-- Hide Unequip and "Current item" until we know that something is equipped
+	-- Hide optiional widgets until we know that they are needed.
 	wesnoth.set_dialog_visible(false, "current_item")
 	wesnoth.set_dialog_visible(false, "unequip")
-
-	if not item_sort then
-		return show_item_sorts()
-	end
+	wesnoth.set_dialog_visible(false, "view")
 
 	-- Record things that will be needed in Equip/Unequip callbacks.
 	shown_item_sort = item_sort
 	shown_items = {}
+
+	if not item_sort then
+		return show_item_sorts()
+	end
 
 	-- Display currently equipped item (if any)
 	local item = loti.item.on_unit.find(unit, item_sort)
@@ -241,13 +253,17 @@ local function unequip()
 	inventory_dialog.goto_tab("items_tab")
 end
 
+-- Determine selected element of the listbox.
+-- Used in handlers of "Equip" and "View" buttons.
+local function get_selected_item()
+	local selected_index = wesnoth.get_dialog_value(listbox_id)
+	return shown_items[selected_index]
+end
+
 -- Handler for "Equip" button.
 local function equip()
 	local unit = inventory_dialog.current_unit
-
-	-- Determine selected item in the list.
-	local selected_index = wesnoth.get_dialog_value(listbox_id)
-	local item_number = shown_items[selected_index]
+	local item_number = get_selected_item()
 
 	-- Because the "pick item" dialog (that we are about to open) is semi-transparent,
 	-- make sure that "Equip" and "Close" buttons don't show through it. (confusing)
@@ -281,6 +297,12 @@ return function(provided_inventory_dialog)
 		-- Callback for Equip/Unequip buttons.
 		wesnoth.set_dialog_callback(unequip, "unequip")
 		wesnoth.set_dialog_callback(equip, "equip")
+
+		-- Callback for View button (shown in the menu of all item sorts,
+		-- navigates to specific section of Item Storage, e.g. "polearm").
+		wesnoth.set_dialog_callback(function()
+			inventory_dialog.goto_tab("storage_tab", get_selected_item())
+		end, "view")
 
 		-- Callback for "Close" button.
 		wesnoth.set_dialog_callback(
