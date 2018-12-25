@@ -24,17 +24,7 @@ function get_unit_flavour(u)
 	local data = wesnoth.get_variable("lua_unit_to_get_flavour")
 	wesnoth.set_variable("lua_unit_to_get_flavour", nil)
 
-	local function has_attack(attack_name)
-		local has = false
-		for i = 1,#data do
-			if data[i][1] == "attack" then
-				if data[i][2].name == attack_name then
-					has = true
-				end
-			end
-		end
-		return has
-	end
+	local has_attack = loti_util_list_attacks(u.type)
 
 	local function has_special(special_name)
 		local has = false
@@ -128,7 +118,7 @@ function get_unit_flavour(u)
 			end
 		end
 		-- Act accordingly to the reason why it's chaotic, the unliving need more dark
-		if not_living > 1 or has_attack("chill wave") or has_attack("shadow wave") or has_attack("curse") or has_special("plague") then
+		if not_living > 1 or has_attack["chill wave"] or has_attack["shadow wave"] or has_attack["curse"] or has_special("plague") then
 			flavour.dark = flavour.dark + 10
 		else
 			flavour.dark = flavour.dark + 3

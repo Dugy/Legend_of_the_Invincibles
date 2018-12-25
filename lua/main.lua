@@ -978,26 +978,19 @@ function wesnoth.wml_actions.can_equip_item(cfg)
 end
 
 --
--- Utility function for [can_equip_item] (can also be used in get_unit_flavour()).
+-- Utility function for [can_equip_item] and get_unit_flavour().
 -- List the names of all attacks (e.g. "chill tempest") of a certain unit.
 -- Returns the Lua table { attack_name = 1, another_attack_name = 1, ... },
 -- where attack names are untranslated (always English) and can therefore be used in conditionals.
 --
 function loti_util_list_attacks(unit_type)
-	-- We don't use unit.attacks, because it has a problem with unit.attacks[1].name field
-	-- being already translated (possibly not English), which prevents comparison operations.
-	-- Instead we scan the variable representation of Unit for "attack" fields.
-	local temp_variable = "loti_util_temporary_unit";
-
-	wesnoth.wml_actions.unit { type = unit_type, to_variable = temp_variable}
-	local data = wesnoth.get_variable(temp_variable)
-	wesnoth.set_variable(temp_variable, nil)
-
+	local temp_unit = wesnoth.create_unit { type = unit_type }
 	local has_attack = {}
-	for idx, tag in pairs(data) do
-		if type(tag) == "table" and tag[1] == "attack" then
-			has_attack[tag[2].name] = true
-		end
+
+	for _, attack in ipairs(temp_unit.attacks) do
+		-- Remove trailing numbers, e.g. bow2 -> bow.
+		local name = attack.name:gsub('%d+$', '')
+		has_attack[name] = true
 	end
 
 	return has_attack
