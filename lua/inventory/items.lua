@@ -345,11 +345,17 @@ local function onshow(unit)
 		wesnoth.set_dialog_visible(true, slot_id)
 	end
 
-	-- Hide/unhide action buttons that are not always applicable.
+	-- Disable action buttons that aren't applicable.
 	-- For example, units on recall list can't pick items from the ground.
 	local present = unit.valid ~= "recall"
 	for _, button_id in ipairs({ "storage", "crafting", "ground_items" }) do
 		wesnoth.set_dialog_active(present, button_id)
+	end
+
+	-- Disable "Pick up items on the ground" button if the unit isn't standing on any items.
+	if present then
+		local lying_items = loti.item.on_the_ground.list(unit.x, unit.y)
+		wesnoth.set_dialog_active(#lying_items > 0, "ground_items")
 	end
 end
 
