@@ -45,6 +45,7 @@ local function get_tab()
 	local view_close_buttons = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
+				horizontal_alignment = "left",
 				wml.tag.button {
 					id = "view_recall_list_unit",
 					label = _"View"
@@ -52,6 +53,7 @@ local function get_tab()
 			},
 			wml.tag.spacer {},
 			wml.tag.column {
+				horizontal_alignment = "right",
 				wml.tag.button {
 					id = "close_recall_list",
 					label = _"Close"
@@ -83,17 +85,20 @@ local function get_tab()
 	}
 end
 
-
 local shown_units -- Lua array of units currently displayed in listbox
 
 -- Callback that updates "Items on units on the recall list" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
 local function onshow()
+	wesnoth.remove_dialog_item(1, 0, listbox_id) -- Clear the listbox
+
+	-- List all units who have at least 1 item.
 	shown_units = wesnoth.get_recall_units({ trait = "geared" })
 
 	for listbox_line, unit in ipairs(shown_units) do
 		-- Show name/type of the geared unit.
-		local text = unit.name .. " (" .. unit.__cfg['language_name'] .. "): "
+		local text = unit.name .. " <span color='#88FCA0'>(" ..
+			unit.__cfg['language_name'] .. ")</span>: "
 
 		-- List items on this unit as text.
 		local items = loti.item.on_unit.list(unit)
