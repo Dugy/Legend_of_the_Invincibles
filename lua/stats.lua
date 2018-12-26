@@ -377,7 +377,7 @@ function wesnoth.update_stats(original)
 		-- TODO: This could be a WML resource file producing a table indexed by weapon name and receiving weapon type
 		if wn == "sword" or wn == "short sword" or wn == "greatsword" or wn == "battlesword" or wn == "saber" or wn == "mberserk" or wn == "whirlwind" or wn == "spectral blades" then
 			weapon_type = "sword"
-		elseif wn == "axe" or wn == "battle axe" or wn == "axe_whirlwind" or wn == "berserk frenzy" or wn == "cleaver" or wn == "hatchet" then
+		elseif wn == "axe" or wn == "battle axe" or wn == "axe_whirlwind" or wn == "berserker frenzy" or wn == "cleaver" or wn == "hatchet" then
 			weapon_type = "axe"
 		elseif wn == "bow" or wn == "longbow" then
 			weapon_type = "bow"
