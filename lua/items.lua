@@ -127,20 +127,29 @@ end
 -- loti.item.type: registry of all known item types
 -------------------------------------------------------------------------------
 
+local item_type_cache -- Cache used in loti.item.type[]
+
 -- Pseudo-array of all known item types.
 -- Key is item_number.
 -- Value is [object] tag (with keys like "name", "sort", "flavour", "image", etc.)
 -- E.g. loti.item.type[100] returns { number = 100, name = "Cunctator's sword", sort = "sword", ... }
 loti.item.type = setmetatable({}, {
 	__index = function(_, item_number)
-		local all_known_types = helper.get_variable_array("item_list.object")
-		for _, item in ipairs(all_known_types) do
-			if item_number == item.number then
-				return item
+		if not item_type_cache then
+			item_type_cache = {}
+
+			local all_known_types = helper.get_variable_array("item_list.object")
+			for _, item in ipairs(all_known_types) do
+				item_type_cache[item.number] = item
 			end
 		end
 
-		helper.wml_error("loti.item.type[" .. tostring(item_number) .. "]: not found in item_list.");
+		local item = item_type_cache[item_number]
+		if not item then
+			helper.wml_error("loti.item.type[" .. tostring(item_number) .. "]: not found in item_list.");
+		end
+
+		return item
 	end,
 	__newindex = function() error("loti.item.type[] array is read-only.") end
 })
