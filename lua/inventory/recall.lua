@@ -55,7 +55,7 @@ local function get_tab()
 			wml.tag.column {
 				horizontal_alignment = "right",
 				wml.tag.button {
-					id = "close_recall_list",
+					id = "ok",
 					label = _"Close"
 				}
 			}
@@ -127,14 +127,12 @@ local function onshow()
 	end
 end
 
--- Handler for "View" and "Close" buttons.
--- Returns to "items on the unit" tab.
--- If optional parameter "newunit" is set, dialog will switch to this unit.
-local function onsubmit(newunit)
-	if newunit then
-		inventory_dialog.current_unit = newunit
-	end
+-- Handler for "View" button.
+-- Shows "items on the unit" tab with another unit.
+local function onsubmit()
+	local selected_index = wesnoth.get_dialog_value(listbox_id)
 
+	inventory_dialog.current_unit = shown_units[selected_index]
 	inventory_dialog.goto_tab("items_tab")
 end
 
@@ -152,11 +150,7 @@ return function(provided_inventory_dialog)
 	}
 
 	inventory_dialog.install_callbacks(function()
-		-- Callback for "View" and "Close" buttons.
-		wesnoth.set_dialog_callback(onsubmit, "close_recall_list")
-		wesnoth.set_dialog_callback(function()
-			local selected_index = wesnoth.get_dialog_value(listbox_id)
-			onsubmit(shown_units[selected_index])
-		end, "view_recall_list_unit")
+		-- Callback for "View" button.
+		wesnoth.set_dialog_callback(onsubmit, "view_recall_list_unit")
 	end)
 end
