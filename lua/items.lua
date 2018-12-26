@@ -165,13 +165,8 @@ loti.item.on_unit.list = function(unit)
 	local modifications = helper.get_child(unit.__cfg, "modifications")
 	for _, object in ipairs(helper.child_array(modifications, "object")) do
 		-- There are non-items in object[] array, but they don't have 'sort' key.
-		-- Also there are fake items (e.g. sort=quest_effect), but they have 'silent' key.
-		-- We also ignore objects without name, because they can't be valid items.
-		if object.sort and not object.silent and object.name then
-			-- Don't list potions and books.
-			if object.sort ~= "potion" and object.sort ~= "limited" then
-				table.insert(items, object)
-			end
+		if object.sort then
+			table.insert(items, object)
 		end
 	end
 
