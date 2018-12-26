@@ -55,8 +55,15 @@ end
 function wesnoth.update_stats(original)
 	-- PART I: WML pre-update hook
 	original = call_event_on_unit(original, "pre stats update")
-	original = wesnoth.get_units{ id = original.id }[1].__cfg
-	wesnoth.erase_unit(original)
+--	wesnoth.dbms{original.x, original.y}
+	if original.x > 0 and original.y > 0 then
+		original = wesnoth.get_units{ id = original.id }[1].__cfg
+		wesnoth.erase_unit(original)
+	else
+		original = wesnoth.get_recall_units{ id = original.id }[1]
+		wesnoth.extract_unit(original)
+		original= original.__cfg
+	end
 	if not helper.get_child(original, "resistance") or not helper.get_child(original, "movement_costs") or not helper.get_child(original, "defense") then
 		return original -- Fake unit
 	end
@@ -216,7 +223,7 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART III: Recreate the unit
-	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, moves = original.moves, hitpoints = original.hitpoints, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", helper.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
+	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", helper.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
 	vars = helper.get_child(original, "variables")
 	mods = helper.get_child(vars, "modifications")
 	if not mods then
@@ -377,7 +384,7 @@ function wesnoth.update_stats(original)
 		-- TODO: This could be a WML resource file producing a table indexed by weapon name and receiving weapon type
 		if wn == "sword" or wn == "short sword" or wn == "greatsword" or wn == "battlesword" or wn == "saber" or wn == "mberserk" or wn == "whirlwind" or wn == "spectral blades" then
 			weapon_type = "sword"
-		elseif wn == "axe" or wn == "battle axe" or wn == "axe_whirlwind" or wn == "berserk frenzy" or wn == "cleaver" or wn == "hatchet" then
+		elseif wn == "axe" or wn == "battle axe" or wn == "axe_whirlwind" or wn == "berserker frenzy" or wn == "cleaver" or wn == "hatchet" then
 			weapon_type = "axe"
 		elseif wn == "bow" or wn == "longbow" then
 			weapon_type = "bow"
