@@ -82,10 +82,10 @@ loti.item.storage.remove = function(item_number, crafted_sort)
 	wesnoth.set_variable("item_storage", list)
 end
 
--- Get the list of all items in the storage (Lua array, each element is item_number).
+-- Get the list of all items in the storage.
 -- Optional parameter: item_sort (string, e.g. "sword") - if present, only items of this sort are returned.
 -- Counts the number of items of each type.
--- Returns: Lua array, e.g. { "Cuctator's sword" => 1, "Ice Armour" => 5, ... }.
+-- Returns: Lua array, e.g. { 100 => 1, 15 => 5 } (one Cunctator's sword (#100) and five Ice Armours (#15)).
 loti.item.storage.list_items = function(item_sort)
 	local list = wesnoth.get_variable("item_storage") or {}
 	local results = {}
