@@ -58,8 +58,8 @@ end
 -- Show one tab (and call its "onshow" callback), hide all other tabs.
 -- Parameters:
 -- 1) tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
--- 2) extra_parameter - optional. Passed to "onshow" callback.
-inventory_dialog.goto_tab = function(tab_id, extra_parameter)
+-- 2) Any additional parameters (if any) are passed to "onshow" callback.
+inventory_dialog.goto_tab = function(tab_id, ...)
 	local tab = tabs[tab_id]
 	if not tab then
 		-- Trying to hide ALL widgets in a dialog would crash Wesnoth.
@@ -79,7 +79,7 @@ inventory_dialog.goto_tab = function(tab_id, extra_parameter)
 	-- Recalculate all fields on this tab (via onshow callback),
 	-- plus the "unit name" field (which is global for all tabs).
 	local unit = inventory_dialog.current_unit
-	tab.onshow(unit, extra_parameter)
+	tab.onshow(unit, ...)
 
 	-- Show "unit name" header everywhere except the blank and recall tabs.
 	if tab_id == "blank_tab" or tab_id == "recall_tab" then

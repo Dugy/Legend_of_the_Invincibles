@@ -93,10 +93,20 @@ local slots
 local slot_id_by_sort
 local sort_by_slot_id
 
+-- Exact item_sort of the item in leftover slot (if any).
+-- Always nil if there is no leftover item.
+local leftover_sort
+
 -- Lua function that is called when player clicks on an inventory slot
 -- (e.g. on the image of gauntlets).
 inventory_config.slot_callback = function(item_sort)
-	inventory_dialog.goto_tab("storage_tab", item_sort)
+	local is_leftover = false
+	if item_sort == "leftover" then
+		item_sort = leftover_sort
+		is_leftover = true
+	end
+
+	inventory_dialog.goto_tab("storage_tab", item_sort, is_leftover)
 end
 
 -- Construct tab: "items on the unit".
@@ -285,6 +295,7 @@ local function onshow(unit)
 
 	slot_id_by_sort = {}
 	sort_by_slot_id = {}
+	leftover_sort = nil
 
 	-- Add placeholders into all slots.
 	for index, item_sort in ipairs(slots) do
@@ -332,6 +343,7 @@ local function onshow(unit)
 		if not equippable_sorts[item.sort] then
 			-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
 			-- Shown in a specially reserved "leftover" slot.
+			leftover_sort = item.sort
 			item.sort = "leftover"
 		end
 
