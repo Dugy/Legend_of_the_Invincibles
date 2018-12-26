@@ -55,8 +55,15 @@ end
 function wesnoth.update_stats(original)
 	-- PART I: WML pre-update hook
 	original = call_event_on_unit(original, "pre stats update")
-	original = wesnoth.get_units{ id = original.id }[1].__cfg
-	wesnoth.erase_unit(original)
+--	wesnoth.dbms{original.x, original.y}
+	if original.x > 0 and original.y > 0 then
+		original = wesnoth.get_units{ id = original.id }[1].__cfg
+		wesnoth.erase_unit(original)
+	else
+		original = wesnoth.get_recall_units{ id = original.id }[1]
+		wesnoth.extract_unit(original)
+		original= original.__cfg
+	end
 	if not helper.get_child(original, "resistance") or not helper.get_child(original, "movement_costs") or not helper.get_child(original, "defense") then
 		return original -- Fake unit
 	end
