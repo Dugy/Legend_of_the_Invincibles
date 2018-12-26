@@ -22,8 +22,11 @@ local inventory_config = {
 		{
 			id = "crafting",
 			label = _"Crafting",
-			onclick = function(unit)
-				helper.wml_error("Crafting is not yet implemented.")
+			onsubmit = function(unit)
+				wesnoth.fire_event("crafting_menu", unit.x, unit.y)
+				if wesnoth.get_variable("item_chosen") > -1 then
+					wesnoth.fire_event("item_pick", unit.x, unit.y)
+				end
 			end
 		},
 		{
