@@ -159,6 +159,7 @@ loti.item.type = setmetatable({}, {
 -------------------------------------------------------------------------------
 
 -- Returns the list of all items on the unit (Lua array, each element is [object] tag).
+-- See also: list_regular().
 loti.item.on_unit.list = function(unit)
 	local items = {}
 
@@ -167,6 +168,31 @@ loti.item.on_unit.list = function(unit)
 		-- There are non-items in object[] array, but they don't have 'sort' key.
 		if object.sort then
 			table.insert(items, object)
+		end
+	end
+
+	return items
+end
+
+-- Returns the list of normal (able-to-unequip) items on the unit (Lua array, each element is [object] tag).
+-- Unlike list(), this excludes books, potions and temporary items.
+loti.item.on_unit.list_regular = function(unit)
+	local items = {}
+
+	for _, item in ipairs(loti.item.on_unit.list(unit)) do
+		-- There are fake/invisible items (e.g. sort=quest_effect), they have 'silent' key.
+		-- We also ignore objects without name. (clearly not normal items visible by player)
+		-- Also potions and books can't be unequipped, so we exclude them too.
+		local listed = item.name and not item.silent and not item.sort:find("potion")
+
+		if listed and item.sort == "limited" then
+			-- This can be a book or an orb. Books can't be unequipped.
+			-- Orbs (items #602 and #610) are normal items and can be unequipped.
+			listed = item.number == 602 or item.number == 610
+		end
+
+		if listed then
+			table.insert(items, item)
 		end
 	end
 
@@ -363,7 +389,7 @@ end
 
 -- Remove all items from unit, place them to item storage.
 loti.item.util.undress_unit = function(unit)
-	for _, item in ipairs(loti.item.on_unit.list(unit)) do
+	for _, item in ipairs(loti.item.on_unit.list_regular(unit)) do
 		loti.item.util.take_item_from_unit(unit, item.number, item.sort)
 	end
 end
