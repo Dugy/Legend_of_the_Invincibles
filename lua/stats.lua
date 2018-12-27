@@ -676,18 +676,20 @@ function wesnoth.update_stats(original)
 			end
 		end
 		-- Only the strongest backstab applies
-		local best_backstab_mult = 1
+		local best_backstab_mult = 0
 		local best_backstab
 		for i = #specials,1,-1 do
 			if specials[i][1] == "damage" and string.match(specials[i][2].id, "backstab") then
 				local quality = specials[i][2].multiply
+
 				if quality then
 					if specials[i][2].apply_to ~= "both" then
 						quality = quality * 0.75 -- Charging backstab is worse
 					end
-					if quality < best_backstab_mult then
+
+					if quality > best_backstab_mult then
 						best_backstab_mult = quality
-						best_backstab = specials[i][2]
+						best_backstab = specials[i]
 					end
 				end
 				table.remove(specials, i)
