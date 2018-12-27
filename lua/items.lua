@@ -146,7 +146,7 @@ loti.item.type = setmetatable({}, {
 
 		local item = item_type_cache[item_number]
 		if not item then
-			helper.wml_error("loti.item.type[" .. tostring(item_number) .. "]: not found in item_list.");
+			return nil
 		end
 
 		return item

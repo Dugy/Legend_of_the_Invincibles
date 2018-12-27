@@ -264,9 +264,9 @@ function wesnoth.update_stats(original)
 	local defence = 100
 	local dodge = 100
 
-	local function grab_pseudoeffects(vars)
-		for i = 1,#vars do
-			local obj = vars[i][2]
+	local function grab_pseudoeffects(mods)
+		for i = 1,#mods do
+			local obj = mods[i][2]
 			if obj.defence then
 				defence = defence * (100 - obj.defence) / 100
 			end
