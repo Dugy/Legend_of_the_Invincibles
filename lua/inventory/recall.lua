@@ -22,7 +22,8 @@ local function get_tab()
 				wml.tag.label {
 					id = "recall_list_line",
 					use_markup = "yes",
-					text_alignment = "left"
+					text_alignment = "left",
+					characters_per_line = 66
 				}
 			}
 		}
