@@ -180,16 +180,9 @@ loti.item.on_unit.list_regular = function(unit)
 	local items = {}
 
 	for _, item in ipairs(loti.item.on_unit.list(unit)) do
-		-- There are fake/invisible items (e.g. sort=quest_effect), they have 'silent' key.
-		-- We also ignore objects without name. (clearly not normal items visible by player)
+		-- Items without name are likely fake/invisible/temporary items.
 		-- Also potions and books can't be unequipped, so we exclude them too.
-		local listed = item.name and not item.silent and not item.sort:find("potion")
-
-		if listed and item.sort == "limited" then
-			-- This can be a book or an orb. Books can't be unequipped.
-			-- Orbs (items #602 and #610) are normal items and can be unequipped.
-			listed = item.number == 602 or item.number == 610
-		end
+		local listed = item.name and item.sort ~= "limited" and not item.sort:find("potion")
 
 		if listed then
 			table.insert(items, item)
