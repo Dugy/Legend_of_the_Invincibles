@@ -324,15 +324,11 @@ local function onshow(unit)
 				helper.wml_error("NO_ITEM_TEXT is not defined for item_sort=" .. item_sort)
 				default_text = util.NO_ITEM_TEXT["default"]
 			end
-		elseif item_sort == "weapon" or item_sort == "leftover" then
-			-- These are fake sorts (no item actually uses them) that mean "unneeded slot":
-			-- "weapon" is a second/weapon for a unit that only uses 1 weapon, etc.,
-			-- "leftover" is a slot reserved for items that are not allowed on this unit,
-			-- but are still equipped (for example, Elvish Outrider had a sword and
-			-- then advanced to Gryphon Rider, but Gryphon Rider can't equip swords)
-			wesnoth.set_dialog_visible(false, slot_id)
+
+			wesnoth.set_dialog_visible(true, slot_id)
 		else
-			-- Unequippable item, e.g. gauntlets for a Ghost.
+			-- Can't equip this item (e.g. boots for a Ghost), so hide this slot.
+			-- Note: if this is a leftover slot, it will become visible later, but only if needed.
 			wesnoth.set_dialog_visible(false, slot_id)
 		end
 
@@ -345,6 +341,9 @@ local function onshow(unit)
 			-- Shown in a specially reserved "leftover" slot.
 			leftover_sort = item.sort
 			item.sort = "leftover"
+
+			-- Unhide the leftover slot.
+			wesnoth.set_dialog_visible(true, slot_id)
 		end
 
 		local slot_id = slot_id_by_sort[item.sort]
@@ -355,9 +354,6 @@ local function onshow(unit)
 
 		wesnoth.set_dialog_value(item.name, slot_id, "item_name")
 		wesnoth.set_dialog_value(item.image, slot_id, "item_image")
-
-		-- Unhide the slot (leftover slots are hidden by default)
-		wesnoth.set_dialog_visible(true, slot_id)
 	end
 
 	-- Disable action buttons that aren't applicable.
