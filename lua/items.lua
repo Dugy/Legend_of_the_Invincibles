@@ -212,6 +212,14 @@ loti.item.on_unit.find = function(unit, item_sort)
 	return nil -- Not equipped
 end
 
+-- Internal: call update_stats on Lua unit object.
+local function update_stats(unit)
+	local updated = wesnoth.update_stats(unit.__cfg)
+	if unit.valid == "map" then
+		wesnoth.put_unit(updated)
+	end
+end
+
 -- Add one item to the unit.
 -- Optional parameter "crafted_sort" changes the item_sort of item (only for crafted items).
 loti.item.on_unit.add = function(unit, item_number, crafted_sort)
@@ -260,16 +268,15 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 	end
 
 	-- Update stats (recalculate damages, etc.)
-	local updated = wesnoth.update_stats(unit.__cfg)
-	if unit.valid == "map" then
-		wesnoth.put_unit(updated)
-	end
+	update_stats(unit)
 end
 
 -- Remove one item from the unit.
 -- Optional parameter "crafted_sort" requires that only item of this sort gets removed.
 -- (needed for crafted items: e.g. crafted armour/gauntlets have the same item_number)
-loti.item.on_unit.remove = function(unit, item_number, crafted_sort)
+-- Optional parameter skip_update (if set) prevents update_stats()
+-- after the removal (for better performance when removing many items).
+loti.item.on_unit.remove = function(unit, item_number, crafted_sort, skip_update)
 	local filter = { number = item_number }
 	if crafted_sort then
 		filter.sort = crafted_sort
@@ -278,9 +285,8 @@ loti.item.on_unit.remove = function(unit, item_number, crafted_sort)
 	wesnoth.remove_modifications(unit, filter)
 
 	-- Update stats (recalculate damages, etc.)
-	local updated = wesnoth.update_stats(unit.__cfg)
-	if unit.valid == "map" then
-		wesnoth.put_unit(updated)
+	if not skip_update then
+		update_stats(unit)
 	end
 end
 
@@ -390,14 +396,17 @@ end
 -- Remove all items from unit, place them to item storage.
 loti.item.util.undress_unit = function(unit)
 	for _, item in ipairs(loti.item.on_unit.list_regular(unit)) do
-		loti.item.util.take_item_from_unit(unit, item.number, item.sort)
+		loti.item.util.take_item_from_unit(unit, item.number, item.sort, true)
 	end
+
+	update_stats(unit)
 end
 
 -- Remove one item from unit, place it to the item storage.
 -- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
-loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort)
-	loti.item.on_unit.remove(unit, item_number, crafted_sort)
+-- Optional parameter skip_update: if present, unit stats won't be recalculated afterwards.
+loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort, skip_update)
+	loti.item.on_unit.remove(unit, item_number, crafted_sort, skip_update)
 	loti.item.storage.add(item_number, crafted_sort)
 end
 
