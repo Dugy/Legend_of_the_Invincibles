@@ -339,7 +339,7 @@ local function onshow(unit)
 		wesnoth.set_dialog_value(default_text, slot_id, "item_name")
 	end
 
-	for _, item in ipairs(loti.item.on_unit.list(unit)) do
+	for _, item in ipairs(loti.item.on_unit.list_regular(unit)) do
 		if not equippable_sorts[item.sort] then
 			-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
 			-- Shown in a specially reserved "leftover" slot.

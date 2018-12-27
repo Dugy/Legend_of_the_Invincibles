@@ -116,7 +116,7 @@ local function onshow()
 			unit.__cfg['language_name'] .. ")</span>: "
 
 		-- List items on this unit as text.
-		local items = loti.item.on_unit.list(unit)
+		local items = loti.item.on_unit.list_regular(unit)
 		for index, item in ipairs(items) do
 			text = text .. item.name
 			if index < #items then
