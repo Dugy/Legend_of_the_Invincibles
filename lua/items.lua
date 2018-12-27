@@ -82,10 +82,10 @@ loti.item.storage.remove = function(item_number, crafted_sort)
 	wesnoth.set_variable("item_storage", list)
 end
 
--- Get the list of all items in the storage (Lua array, each element is item_number).
+-- Get the list of all items in the storage.
 -- Optional parameter: item_sort (string, e.g. "sword") - if present, only items of this sort are returned.
 -- Counts the number of items of each type.
--- Returns: Lua array, e.g. { "Cuctator's sword" => 1, "Ice Armour" => 5, ... }.
+-- Returns: Lua array, e.g. { 100 => 1, 15 => 5 } (one Cunctator's sword (#100) and five Ice Armours (#15)).
 loti.item.storage.list_items = function(item_sort)
 	local list = wesnoth.get_variable("item_storage") or {}
 	local results = {}
@@ -127,20 +127,29 @@ end
 -- loti.item.type: registry of all known item types
 -------------------------------------------------------------------------------
 
+local item_type_cache -- Cache used in loti.item.type[]
+
 -- Pseudo-array of all known item types.
 -- Key is item_number.
 -- Value is [object] tag (with keys like "name", "sort", "flavour", "image", etc.)
 -- E.g. loti.item.type[100] returns { number = 100, name = "Cunctator's sword", sort = "sword", ... }
 loti.item.type = setmetatable({}, {
 	__index = function(_, item_number)
-		local all_known_types = helper.get_variable_array("item_list.object")
-		for _, item in ipairs(all_known_types) do
-			if item_number == item.number then
-				return item
+		if not item_type_cache then
+			item_type_cache = {}
+
+			local all_known_types = helper.get_variable_array("item_list.object")
+			for _, item in ipairs(all_known_types) do
+				item_type_cache[item.number] = item
 			end
 		end
 
-		helper.wml_error("loti.item.type[" .. tostring(item_number) .. "]: not found in item_list.");
+		local item = item_type_cache[item_number]
+		if not item then
+			helper.wml_error("loti.item.type[" .. tostring(item_number) .. "]: not found in item_list.");
+		end
+
+		return item
 	end,
 	__newindex = function() error("loti.item.type[] array is read-only.") end
 })
@@ -150,19 +159,33 @@ loti.item.type = setmetatable({}, {
 -------------------------------------------------------------------------------
 
 -- Returns the list of all items on the unit (Lua array, each element is [object] tag).
+-- See also: list_regular().
 loti.item.on_unit.list = function(unit)
 	local items = {}
 
 	local modifications = helper.get_child(unit.__cfg, "modifications")
 	for _, object in ipairs(helper.child_array(modifications, "object")) do
 		-- There are non-items in object[] array, but they don't have 'sort' key.
-		-- Also there are fake items (e.g. sort=quest_effect), but they have 'silent' key.
-		-- We also ignore objects without name, because they can't be valid items.
-		if object.sort and not object.silent and object.name then
-			-- Don't list potions and books.
-			if object.sort ~= "potion" and object.sort ~= "limited" then
-				table.insert(items, object)
-			end
+		if object.sort then
+			table.insert(items, object)
+		end
+	end
+
+	return items
+end
+
+-- Returns the list of normal (able-to-unequip) items on the unit (Lua array, each element is [object] tag).
+-- Unlike list(), this excludes books, potions and temporary items.
+loti.item.on_unit.list_regular = function(unit)
+	local items = {}
+
+	for _, item in ipairs(loti.item.on_unit.list(unit)) do
+		-- Items without name are likely fake/invisible/temporary items.
+		-- Also potions and books can't be unequipped, so we exclude them too.
+		local listed = item.name and item.sort ~= "limited" and not item.sort:find("potion")
+
+		if listed then
+			table.insert(items, item)
 		end
 	end
 
@@ -180,6 +203,14 @@ loti.item.on_unit.find = function(unit, item_sort)
 	end
 
 	return nil -- Not equipped
+end
+
+-- Internal: call update_stats on Lua unit object.
+local function update_stats(unit)
+	local updated = wesnoth.update_stats(unit.__cfg)
+	if unit.valid == "map" then
+		wesnoth.put_unit(updated)
+	end
 end
 
 -- Add one item to the unit.
@@ -230,16 +261,15 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 	end
 
 	-- Update stats (recalculate damages, etc.)
-	local updated = wesnoth.update_stats(unit.__cfg)
-	if unit.valid == "map" then
-		wesnoth.put_unit(updated)
-	end
+	update_stats(unit)
 end
 
 -- Remove one item from the unit.
 -- Optional parameter "crafted_sort" requires that only item of this sort gets removed.
 -- (needed for crafted items: e.g. crafted armour/gauntlets have the same item_number)
-loti.item.on_unit.remove = function(unit, item_number, crafted_sort)
+-- Optional parameter skip_update (if set) prevents update_stats()
+-- after the removal (for better performance when removing many items).
+loti.item.on_unit.remove = function(unit, item_number, crafted_sort, skip_update)
 	local filter = { number = item_number }
 	if crafted_sort then
 		filter.sort = crafted_sort
@@ -248,9 +278,8 @@ loti.item.on_unit.remove = function(unit, item_number, crafted_sort)
 	wesnoth.remove_modifications(unit, filter)
 
 	-- Update stats (recalculate damages, etc.)
-	local updated = wesnoth.update_stats(unit.__cfg)
-	if unit.valid == "map" then
-		wesnoth.put_unit(updated)
+	if not skip_update then
+		update_stats(unit)
 	end
 end
 
@@ -359,15 +388,18 @@ end
 
 -- Remove all items from unit, place them to item storage.
 loti.item.util.undress_unit = function(unit)
-	for _, item in ipairs(loti.item.on_unit.list(unit)) do
-		loti.item.util.take_item_from_unit(unit, item.number, item.sort)
+	for _, item in ipairs(loti.item.on_unit.list_regular(unit)) do
+		loti.item.util.take_item_from_unit(unit, item.number, item.sort, true)
 	end
+
+	update_stats(unit)
 end
 
 -- Remove one item from unit, place it to the item storage.
 -- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
-loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort)
-	loti.item.on_unit.remove(unit, item_number, crafted_sort)
+-- Optional parameter skip_update: if present, unit stats won't be recalculated afterwards.
+loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort, skip_update)
+	loti.item.on_unit.remove(unit, item_number, crafted_sort, skip_update)
 	loti.item.storage.add(item_number, crafted_sort)
 end
 
