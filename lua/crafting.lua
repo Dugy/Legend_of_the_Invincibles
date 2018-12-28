@@ -45,17 +45,19 @@ loti.item.transmuting_window = function()
 		local listbox_template = wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
+					grow_factor = 0,
 					horizontal_alignment = "left",
 					wml.tag.image {
-						id = "gui_gem_icon",
-						horizontal_grow = false
+						id = "gui_gem_icon"
 					}
 				},
 			   	wml.tag.column {
-					horizontal_alignment = "left",
+					grow_factor = 1,
+					border = "all",
+					border_size = 10,
+					horizontal_grow = true,
 					wml.tag.label {
-						id = "gui_gem_name",
-						horizontal_grow = true
+						id = "gui_gem_name"
 					}
 				}
 			}
@@ -79,10 +81,19 @@ loti.item.transmuting_window = function()
 		local yesno_buttons = wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
-					wml.tag.button { id = "ok", label = "Transmute" }
+					wml.tag.button {
+						id = "ok",
+						label = _"Transmute"
+					}
 				},
 				wml.tag.column {
-					wml.tag.button { id = "cancel", label = "Back" }
+					wml.tag.spacer {}
+				},
+				wml.tag.column {
+					wml.tag.button {
+						id = "cancel",
+						label = _"Back"
+					}
 				}
 			}
 		}
@@ -90,13 +101,10 @@ loti.item.transmuting_window = function()
 		return {
 			wml.tag.tooltip { id = "tooltip_large" },
 			wml.tag.helptip { id = "tooltip_large" },
-			maximum_width = 800,
-			maximum_height = 600,
 			wml.tag.grid {
 				wml.tag.row {
 					wml.tag.column {
 						wml.tag.label {
-							id = "title",
 							definition = "title",
 							label = _"Transmuting"
 						}
@@ -104,19 +112,24 @@ loti.item.transmuting_window = function()
 				},
 				wml.tag.row {
 					wml.tag.column {
+						border = "all",
+						border_size = 10,
 						wml.tag.label {
-							id = "gems_owned",
-							label = _"You can transmute some number of gems to get a new random gem"
+							label = _"You can transmute some number of gems\nto get a new random gem"
 						}
 					}
 				},
 				wml.tag.row {
 					wml.tag.column {
+						horizontal_grow = true,
 						listbox
 					}
 				},
 				wml.tag.row {
 					wml.tag.column {
+						border = "top",
+						border_size = 10,
+						horizontal_grow = true,
 						yesno_buttons
 					}
 				}
@@ -354,7 +367,6 @@ loti.item.crafting_window = function(x, y)
 				wml.tag.row {
 					wml.tag.column {
 						wml.tag.label {
-							id = "title",
 							definition = "title",
 							label = _"Crafting"
 						}
