@@ -378,5 +378,6 @@ loti.item.crafting_window = function(x, y)
 			gem_quantities[i] = gem_quantities[i] - loti.item.type[chose.recipe][gem_types[i]]
 		end
 		loti.item.set_gem_counts(gem_quantities)
+		wesnoth.wml_actions.fire_event{ name="item_pick", { "primary_unit", { x=x, y=y } } }
 	end
 end
