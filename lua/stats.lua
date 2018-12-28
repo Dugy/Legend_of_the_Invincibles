@@ -361,8 +361,8 @@ function wesnoth.update_stats(original)
 					end
 				end
 				add_specials("specials", weapon_type_list)
-				add_specials("melee_specials", melee_type_list)
-				add_specials("ranged_specials", ranged_type_list)
+				add_specials("specials_melee", melee_type_list)
+				add_specials("specials_ranged", ranged_type_list)
 			end
 			
 		end
