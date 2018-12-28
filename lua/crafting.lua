@@ -240,7 +240,7 @@ loti.item.crafting_window = function(x, y)
 					border_size = 10,
 					wml.tag.label {
 						id = "gui_type_name",
-						characters_per_line = 40
+						characters_per_line = 30
 					}
 				}
 			}
@@ -301,14 +301,16 @@ loti.item.crafting_window = function(x, y)
 			wml.tag.row {
 				wml.tag.column {
 					wml.tag.label {
-						id = "gui_gems_owned"
+						id = "gui_gems_owned",
+						use_markup = true
 					}
 				}
 			},
 			wml.tag.row {
 				wml.tag.column {
 					wml.tag.label {
-						id = "gui_item_description"
+						id = "gui_item_description",
+						use_markup = true
 					}
 				}
 			}
@@ -322,6 +324,11 @@ loti.item.crafting_window = function(x, y)
 					border_size = 20,
 					vertical_alignment = "top",
 					wml.tag.grid {
+						wml.tag.row {
+							wml.tag.column {
+								wml.tag.spacer { width = 350 }
+							}
+						},
 						wml.tag.row {
 							wml.tag.column {
 								border = "bottom",
@@ -505,6 +512,10 @@ loti.item.crafting_window = function(x, y)
 						order = order + 1
 						table.insert(selectable_sorts, sort)
 					end
+
+					-- Clear the type listbox
+					wesnoth.remove_dialog_item(1, 0, "gui_type_chosen")
+
 					local word_from, word_to
 					if base_type == 1 then
 						-- Armour
@@ -522,7 +533,7 @@ loti.item.crafting_window = function(x, y)
 						populate_item(_"Bow", "attacks/bow-short-reinforced.png", "bow")
 						populate_item(_"Axe", "attacks/battleaxe.png", "axe")
 						populate_item(_"Staff", "attacks/staff-magic.png", "staff")
-						populate_item(_"Mace (or hammer, club, mornig star, scourge, flail, ...)", "attacks/mace.png", "mace")
+						populate_item(_"Mace (or hammer, club, morning star, scourge, flail, ...)", "attacks/mace.png", "mace")
 						populate_item(_"Crossbow (or slurbow)", "attacks/crossbow-iron.png", "xbow")
 						populate_item(_"Dagger", "attacks/dagger-curved.png", "dagger")
 						populate_item(_"Knife (throwing)", "attacks/dagger-thrown-human.png", "knife")
@@ -537,7 +548,7 @@ loti.item.crafting_window = function(x, y)
 						word_to = 600
 					end
 
-					-- Clear the listbox
+					-- Clear the recipe listbox
 					wesnoth.remove_dialog_item(1, 0, "gui_recipe_chosen")
 
 					order = 1
@@ -578,8 +589,6 @@ loti.item.crafting_window = function(x, y)
 					check_validity()
 				end
 
-				wesnoth.set_dialog_markup(true, "gui_gems_owned")
-				wesnoth.set_dialog_markup(true, "gui_item_description")
 				wesnoth.set_dialog_value(_"Armour", "gui_basetype_chosen", 1, "gui_basetype_name")
 				wesnoth.set_dialog_value("icons/steel_armor.png", "gui_basetype_chosen", 1, "gui_basetype_icon")
 				wesnoth.set_dialog_value(_"Weapon", "gui_basetype_chosen", 2, "gui_basetype_name")
