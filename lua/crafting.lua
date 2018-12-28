@@ -129,7 +129,6 @@ loti.item.transmuting_window = function()
 		chosen = wesnoth.synchronize_choice(
 			function()
 				local picked = chosen
-				local dialog = get_dialog()
 
 				local function gem_changed()
 					picked = wesnoth.get_dialog_value("gui_gem_chosen")
@@ -153,7 +152,7 @@ loti.item.transmuting_window = function()
 					gem_changed()
 				end
 
-				local returned = wesnoth.show_dialog(dialog, preshow)
+				local returned = wesnoth.show_dialog(get_dialog(), preshow)
 				
 				if returned ~= -2 then
 					return { picked = picked }
@@ -174,67 +173,209 @@ end
 
 loti.item.crafting_window = function(x, y)
 	local gem_quantities = loti.item.get_gem_counts()
+
+	-- Construct the WML of Crafting dialog.
+	-- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+	local function get_dialog()
+		local basetype_listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.image {
+						id = "gui_basetype_icon",
+						horizontal_grow = false
+					}
+				},
+				wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.label {
+						id = "gui_basetype_name",
+						horizontal_grow = true
+					}
+				}
+			}
+		}
+
+		local basetype_listbox = wml.tag.listbox {
+			id = "gui_basetype_chosen",
+			vertical_scrollbar_mode = false,
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose between armour and weapon",
+							basetype_listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local type_listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.image {
+						id = "gui_type_icon",
+						horizontal_grow = false
+					}
+				},
+				wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.label {
+						id = "gui_type_name",
+						horizontal_grow = true
+					}
+				}
+			}
+		}
+
+		local type_listbox = wml.tag.listbox {
+			id = "gui_type_chosen",
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose item type",
+							type_listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local recipe_listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.image {
+						id = "gui_recipe_icon",
+						horizontal_grow = false
+					}
+				},
+				wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.label {
+						id = "gui_recipe_name",
+						minimum_width = 200
+					}
+				}
+			}
+			}
+
+		local recipe_listbox = wml.tag.listbox {
+			id = "gui_recipe_chosen",
+			vertical_scrollbar_mode = false,
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose crafting recipe",
+							recipe_listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local gem_information = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.label {
+						id = "gui_gems_owned"
+					}
+				}
+			},
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.label {
+						id = "gui_item_description"
+					}
+				}
+			}
+		}
+
+		-- A grid that includes all listboxes: base_type, type and recipe.
+		local main_widget = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.grid {
+						wml.tag.row {
+							wml.tag.column {
+								horizontal_grow = true,
+								basetype_listbox
+							}
+						},
+						wml.tag.row {
+							wml.tag.column { type_listbox }
+						}
+					}
+				},
+				wml.tag.column {
+					horizontal_grow = true,
+					recipe_listbox
+				},
+				wml.tag.column { gem_information }
+			}
+		}
+
+		local yesno_buttons =  wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.button {
+						id = "ok",
+						label = _"Craft"
+					}
+				},
+				wml.tag.column {
+					wml.tag.button {
+						id = "cancel",
+						label = _"Back"
+					}
+				},
+				wml.tag.column {
+					wml.tag.button {
+						id = "transmute",
+						label = _"Transmute gems"
+					}
+				}
+			}
+		}
+
+		return {
+			wml.tag.tooltip { id = "tooltip_large" },
+			wml.tag.helptip { id = "tooltip_large" },
+			maximum_width = 800,
+			maximum_height = 600,
+			wml.tag.grid {
+				wml.tag.row {
+					wml.tag.column {
+						wml.tag.label {
+							id = "title",
+							definition = "title",
+							label = _"Crafting"
+						}
+					}
+				},
+				wml.tag.row {
+					wml.tag.column { main_widget }
+				},
+				wml.tag.row {
+					wml.tag.column { yesno_buttons }
+				}
+			}
+		}
+	end
+
 	local chose = wesnoth.synchronize_choice(
 		function()
 			local base_type = 1
 			local sort_chosen = 1
 			local recipe_chosen = 541
-			local dialog = { wml.tag.tooltip { id = "tooltip_large" }, wml.tag.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
-				wml.tag.grid {
-					wml.tag.row { wml.tag.column { wml.tag.label { id = "title" , definition = "title" , label = _"Crafting"} }} ,
-					wml.tag.row { wml.tag.column { wml.tag.grid { wml.tag.row {
-						wml.tag.column {
-							wml.tag.grid {
-								wml.tag.row { wml.tag.column { horizontal_grow = true,
-									wml.tag.listbox { id = "gui_basetype_chosen", vertical_scrollbar_mode=false,
-										wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
-											wml.tag.toggle_panel { tooltip="Choose between armour and weapon", wml.tag.grid { wml.tag.row {
-												wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_basetype_icon", horizontal_grow = false } },
-					   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_basetype_name", horizontal_grow = true } }
-											}}}
-										}}}
-									}
-								}},
-								wml.tag.row { wml.tag.column {
-									wml.tag.listbox { id = "gui_type_chosen",
-										wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
-											wml.tag.toggle_panel { tooltip="Choose item type", wml.tag.grid { wml.tag.row {
-												wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_type_icon", horizontal_grow = false } },
-					   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_type_name", horizontal_grow = true } }
-											}}}
-										}}}
-									}
-								}}
-							}
-						},
-						wml.tag.column { horizontal_grow = true,
-							wml.tag.listbox { id = "gui_recipe_chosen", vertical_scrollbar_mode=false,
-								wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
-									wml.tag.toggle_panel { tooltip="Choose crafting recipe", wml.tag.grid { wml.tag.row {
-										wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_recipe_icon", horizontal_grow = false } },
-			   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_recipe_name", minimum_width = 200 } }
-									}}}
-								}}}
-							}
-						},
-						wml.tag.column {
-							wml.tag.grid{
-								wml.tag.row { wml.tag.column {
-									wml.tag.label { id="gui_gems_owned" , label=""}
-								}},
-								wml.tag.row { wml.tag.column {
-									wml.tag.label { id="gui_item_description" , label=""}
-								}}
-							}
-						}
-					}}}},
-					wml.tag.row { wml.tag.column { wml.tag.grid { wml.tag.row {
-						wml.tag.column { wml.tag.button { id = "ok", label = "Craft" } },
-						wml.tag.column { wml.tag.button { id = "cancel", label = "Back" } },
-						wml.tag.column { wml.tag.button { id = "transmute", label = "Transmute gems" } }
-					}}}}
-				}
-			}
+
 			local selectable_sorts = {}
 			local selectable_recipes = {}
 
@@ -410,7 +551,7 @@ loti.item.crafting_window = function(x, y)
 
 			local returned = -1
 			while returned == -1 do
-				returned = wesnoth.show_dialog(dialog, preshow)
+				returned = wesnoth.show_dialog(get_dialog(), preshow)
 				if returned == -1 then
 					if wesnoth.confirm(_"Are you sure to want to craft this item?") then
 						returned = 1
