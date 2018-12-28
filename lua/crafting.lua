@@ -1,7 +1,6 @@
 --! #textdomain "wesnoth-loti"
 
 local helper = wesnoth.require "lua/helper.lua"
-local T = helper.set_wml_tag_metatable {}
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 local gem_types = { "obsidians", "topazes", "opals", "pearls", "diamonds", "rubies", "emeralds", "amethysts", "sapphires", "black_pearls" }
@@ -48,25 +47,25 @@ loti.item.transmuting_window = function()
 		chosen = wesnoth.synchronize_choice(
 			function()
 				local picked = chosen
-				local dialog = { T.tooltip { id = "tooltip_large" }, T.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
-					T.grid {
-						T.row { T.column { T.label { id = "title" , definition = "title" , label = _"Transmuting"} }} ,
-						T.row { T.column {
-							T.label { id="gems_owned" , label="You can transmute some number of gems to get a new random gem"}
+				local dialog = { wml.tag.tooltip { id = "tooltip_large" }, wml.tag.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
+					wml.tag.grid {
+						wml.tag.row { wml.tag.column { wml.tag.label { id = "title" , definition = "title" , label = _"Transmuting"} }} ,
+						wml.tag.row { wml.tag.column {
+							wml.tag.label { id="gems_owned" , label="You can transmute some number of gems to get a new random gem"}
 						}},
-						T.row { T.column {
-							T.listbox { id = "gui_gem_chosen",
-								T.list_definition { T.row { T.column { horizontal_grow = true,
-									T.toggle_panel { tooltip="Choose item type", T.grid { T.row {
-										T.column { horizontal_alignment = "left", T.image { id = "gui_gem_icon", horizontal_grow = false } },
-			   							T.column { horizontal_alignment = "left", T.label { id = "gui_gem_name", horizontal_grow = true } }
+						wml.tag.row { wml.tag.column {
+							wml.tag.listbox { id = "gui_gem_chosen",
+								wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
+									wml.tag.toggle_panel { tooltip="Choose item type", wml.tag.grid { wml.tag.row {
+										wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_gem_icon", horizontal_grow = false } },
+			   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_gem_name", horizontal_grow = true } }
 									}}}
 								}}}
 							}
 						}},
-						T.row { T.column { T.grid { T.row {
-							T.column { T.button { id = "ok", label = "Transmute" } },
-							T.column { T.button { id = "cancel", label = "Back" } }
+						wml.tag.row { wml.tag.column { wml.tag.grid { wml.tag.row {
+							wml.tag.column { wml.tag.button { id = "ok", label = "Transmute" } },
+							wml.tag.column { wml.tag.button { id = "cancel", label = "Back" } }
 						}}}}
 					}
 				}
@@ -119,59 +118,59 @@ loti.item.crafting_window = function(x, y)
 			local base_type = 1
 			local sort_chosen = 1
 			local recipe_chosen = 541
-			local dialog = { T.tooltip { id = "tooltip_large" }, T.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
-				T.grid {
-					T.row { T.column { T.label { id = "title" , definition = "title" , label = _"Crafting"} }} ,
-					T.row { T.column { T.grid { T.row {
-						T.column {
-							T.grid {
-								T.row { T.column { horizontal_grow = true,
-									T.listbox { id = "gui_basetype_chosen", vertical_scrollbar_mode=false,
-										T.list_definition { T.row { T.column { horizontal_grow = true,
-											T.toggle_panel { tooltip="Choose between armour and weapon", T.grid { T.row {
-												T.column { horizontal_alignment = "left", T.image { id = "gui_basetype_icon", horizontal_grow = false } },
-					   							T.column { horizontal_alignment = "left", T.label { id = "gui_basetype_name", horizontal_grow = true } }
+			local dialog = { wml.tag.tooltip { id = "tooltip_large" }, wml.tag.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
+				wml.tag.grid {
+					wml.tag.row { wml.tag.column { wml.tag.label { id = "title" , definition = "title" , label = _"Crafting"} }} ,
+					wml.tag.row { wml.tag.column { wml.tag.grid { wml.tag.row {
+						wml.tag.column {
+							wml.tag.grid {
+								wml.tag.row { wml.tag.column { horizontal_grow = true,
+									wml.tag.listbox { id = "gui_basetype_chosen", vertical_scrollbar_mode=false,
+										wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
+											wml.tag.toggle_panel { tooltip="Choose between armour and weapon", wml.tag.grid { wml.tag.row {
+												wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_basetype_icon", horizontal_grow = false } },
+					   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_basetype_name", horizontal_grow = true } }
 											}}}
 										}}}
 									}
 								}},
-								T.row { T.column {
-									T.listbox { id = "gui_type_chosen",
-										T.list_definition { T.row { T.column { horizontal_grow = true,
-											T.toggle_panel { tooltip="Choose item type", T.grid { T.row {
-												T.column { horizontal_alignment = "left", T.image { id = "gui_type_icon", horizontal_grow = false } },
-					   							T.column { horizontal_alignment = "left", T.label { id = "gui_type_name", horizontal_grow = true } }
+								wml.tag.row { wml.tag.column {
+									wml.tag.listbox { id = "gui_type_chosen",
+										wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
+											wml.tag.toggle_panel { tooltip="Choose item type", wml.tag.grid { wml.tag.row {
+												wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_type_icon", horizontal_grow = false } },
+					   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_type_name", horizontal_grow = true } }
 											}}}
 										}}}
 									}
 								}}
 							}
 						},
-						T.column { horizontal_grow = true,
-							T.listbox { id = "gui_recipe_chosen", vertical_scrollbar_mode=false,
-								T.list_definition { T.row { T.column { horizontal_grow = true,
-									T.toggle_panel { tooltip="Choose crafting recipe", T.grid { T.row {
-										T.column { horizontal_alignment = "left", T.image { id = "gui_recipe_icon", horizontal_grow = false } },
-			   							T.column { horizontal_alignment = "left", T.label { id = "gui_recipe_name", minimum_width = 200 } }
+						wml.tag.column { horizontal_grow = true,
+							wml.tag.listbox { id = "gui_recipe_chosen", vertical_scrollbar_mode=false,
+								wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
+									wml.tag.toggle_panel { tooltip="Choose crafting recipe", wml.tag.grid { wml.tag.row {
+										wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_recipe_icon", horizontal_grow = false } },
+			   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_recipe_name", minimum_width = 200 } }
 									}}}
 								}}}
 							}
 						},
-						T.column {
-							T.grid{ 
-								T.row { T.column {
-									T.label { id="gui_gems_owned" , label=""}
+						wml.tag.column {
+							wml.tag.grid{
+								wml.tag.row { wml.tag.column {
+									wml.tag.label { id="gui_gems_owned" , label=""}
 								}},
-								T.row { T.column {
-									T.label { id="gui_item_description" , label=""}
+								wml.tag.row { wml.tag.column {
+									wml.tag.label { id="gui_item_description" , label=""}
 								}}
 							}
 						}
 					}}}},
-					T.row { T.column { T.grid { T.row {
-						T.column { T.button { id = "ok", label = "Craft" } },
-						T.column { T.button { id = "cancel", label = "Back" } },
-						T.column { T.button { id = "transmute", label = "Transmute gems" } }
+					wml.tag.row { wml.tag.column { wml.tag.grid { wml.tag.row {
+						wml.tag.column { wml.tag.button { id = "ok", label = "Craft" } },
+						wml.tag.column { wml.tag.button { id = "cancel", label = "Back" } },
+						wml.tag.column { wml.tag.button { id = "transmute", label = "Transmute gems" } }
 					}}}}
 				}
 			}
