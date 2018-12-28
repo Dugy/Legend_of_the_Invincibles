@@ -537,8 +537,11 @@ loti.item.crafting_window = function(x, y)
 						word_to = 600
 					end
 
+					-- Clear the listbox
+					wesnoth.remove_dialog_item(1, 0, "gui_recipe_chosen")
+
 					order = 1
-					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to)) do
+					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to + 1)) do
 						local item = loti.item.type[i]
 						wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", order, "gui_recipe_name")
 						if can_craft(i) then
