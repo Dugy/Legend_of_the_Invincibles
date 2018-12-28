@@ -10,7 +10,7 @@ for i = 1,#title_data do
 	if title_data[i][1] == "nonterminal" then
 		local made = {}
 		for j = 1,#title_data[i][2] do
-			if title_data[i][2][j][1] == "variation" then
+			if title_data[i][2][j][1] == "name_variation" then
 				table.insert(made, title_data[i][2][j][2])
 			end
 		end
@@ -292,7 +292,7 @@ function assign_title(name, female, flavour)
 				elseif female and data[i].female_text then
 					relevant = data[i].female_text
 				else
-					wesnoth.wml_actions.chat{ message="Nonterminal variation for " .. nonterminal .. " lacks a text or a male_text and a female_text"}
+					wesnoth.wml_actions.chat{ message="Nonterminal name_variation for " .. nonterminal .. " lacks a text or a male_text and a female_text"}
 					relevant = "(error)"
 				end
 				if suitable[fitting] then
