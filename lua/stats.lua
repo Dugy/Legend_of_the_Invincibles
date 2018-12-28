@@ -207,7 +207,6 @@ function wesnoth.update_stats(original)
 	for i = 1,#visible_modifications do
 		if visible_modifications[i][1] == "trait" and visible_modifications[i][2].id == "geared" then
 			is_marked_as_geared = true
-			table.remove(visible_modifications, i)
 			break
 		end
 	end
@@ -223,13 +222,13 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART III: Recreate the unit
-	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", helper.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
-	vars = helper.get_child(original, "variables")
+	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, goto_x = original.goto_x, goto_y = original.goto_y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", helper.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
+	vars = helper.get_child(remade, "variables")
 	mods = helper.get_child(vars, "modifications")
 	if not mods then
 		mods = {}
 	end
-	alt_mods = helper.get_child(original, "modifications")
+	alt_mods = helper.get_child(remade, "modifications")
 	visible_modifications = helper.get_child(remade, "modifications")
 	vars.updated = true
 
