@@ -302,7 +302,8 @@ loti.item.crafting_window = function(x, y)
 				wml.tag.column {
 					wml.tag.label {
 						id = "gui_gems_owned",
-						use_markup = true
+						use_markup = true,
+						characters_per_line = 40
 					}
 				}
 			},
@@ -310,7 +311,8 @@ loti.item.crafting_window = function(x, y)
 				wml.tag.column {
 					wml.tag.label {
 						id = "gui_item_description",
-						use_markup = true
+						use_markup = true,
+						characters_per_line = 40
 					}
 				}
 			}
