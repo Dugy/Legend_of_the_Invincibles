@@ -127,29 +127,56 @@ end
 -- loti.item.type: registry of all known item types
 -------------------------------------------------------------------------------
 
-local item_type_cache -- Cache used in loti.item.type[]
+-- Internal methods of loti.item.type. Don't use them directly.
+loti.item.type = {
+	-- Get the list of item types.
+	-- Returns Lua table { item_number1 = object1, ... }
+	_load = function()
+		local self = loti.item.type
+		return rawget(self, "_cache") or rawget(self, "_reload")()
+	end,
+
+	-- Load the cache of _load() from Wesnoth variable "item_list" (defined in [utils/item_list.cfg]).
+	-- Returns Lua table { item_number1 = object1, ... }
+	_reload = function()
+		local cache = {}
+		local all_known_types = helper.get_variable_array("item_list.object")
+
+		for _, item in ipairs(all_known_types) do
+			cache[item.number] = item
+		end
+
+		rawset(loti.item.type, "_cache", cache)
+		return cache
+	end
+}
+
+-- List all valid item_numbers in [start_number; end_number) range.
+-- Both parameters are optional.
+-- Returns: Lua array { number1, number2, ... }, sorted by number.
+loti.item.type.numbers_between = function(start_number, end_number)
+	local numbers = {}
+	for item_number in pairs(loti.item.type._load()) do
+		if not start_number or item_number >= start_number then
+			if not end_number or item_number < end_number then
+				table.insert(numbers, item_number)
+			end
+		end
+	end
+
+	table.sort(numbers)
+	return numbers
+end
 
 -- Pseudo-array of all known item types.
 -- Key is item_number.
 -- Value is [object] tag (with keys like "name", "sort", "flavour", "image", etc.)
 -- E.g. loti.item.type[100] returns { number = 100, name = "Cunctator's sword", sort = "sword", ... }
-loti.item.type = setmetatable({}, {
-	__index = function(_, item_number)
-		if not item_type_cache then
-			item_type_cache = {}
-
-			local all_known_types = helper.get_variable_array("item_list.object")
-			for _, item in ipairs(all_known_types) do
-				item_type_cache[item.number] = item
-			end
-		end
-
-		local item = item_type_cache[item_number]
-		if not item then
-			helper.wml_error("loti.item.type[" .. tostring(item_number) .. "]: not found in item_list.");
-		end
-
-		return item
+setmetatable(loti.item.type, {
+	__index = function(self, item_number)
+		return self._load()[item_number] or helper.wml_error(
+			"loti.item.type[" .. tostring(item_number) .. "]: not found in item_list."
+		)
 	end,
 	__newindex = function() error("loti.item.type[] array is read-only.") end
 })

@@ -89,7 +89,7 @@ function wesnoth.update_stats(original)
 	if vars.fully_healed or wesnoth.get_variable("fully_healed") == 1 then
 		original.hitpoints = original.max_hitpoints
 		original.moves = original.max_moves
-		original.attacks = original.max_attacks
+		original.attacks_left = original.max_attacks
 		for i = 1,#original do
 			if original[i][1] == "status" then
 				original[i][2] = {}
@@ -235,10 +235,10 @@ function wesnoth.update_stats(original)
 
 	-- Modifications are read when drawing, we may keep the effects elsewhere and apply them only when we need
 	for i = 1,#mods do
-		wesnoth.add_modification(remade, "object", mods[1][2], false)
+		wesnoth.add_modification(remade, "object", mods[i][2], false)
 	end
 
-	-- Remove temporary dummmy attacks
+	-- Remove temporary dummy attacks
 	for i = #remade,1,-1 do
 		if remade[i][1] == "attack" and remade[i][2].temporary == true then
 			table.remove(remade, i)
@@ -264,9 +264,9 @@ function wesnoth.update_stats(original)
 	local defence = 100
 	local dodge = 100
 
-	local function grab_pseudoeffects(vars)
-		for i = 1,#vars do
-			local obj = vars[i][2]
+	local function grab_pseudoeffects(mods)
+		for i = 1,#mods do
+			local obj = mods[i][2]
 			if obj.defence then
 				defence = defence * (100 - obj.defence) / 100
 			end
@@ -361,8 +361,8 @@ function wesnoth.update_stats(original)
 					end
 				end
 				add_specials("specials", weapon_type_list)
-				add_specials("melee_specials", melee_type_list)
-				add_specials("ranged_specials", ranged_type_list)
+				add_specials("specials_melee", melee_type_list)
+				add_specials("specials_ranged", ranged_type_list)
 			end
 			
 		end
