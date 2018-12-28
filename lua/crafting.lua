@@ -7,20 +7,15 @@ local gem_types = { "obsidians", "topazes", "opals", "pearls", "diamonds", "rubi
 
 loti.item.get_gem_counts = function()
 	local gem_quantities = {}
-	for i = 1,#gem_types do
-		local got = wesnoth.get_variable(gem_types[i])
-		if got then
-			table.insert(gem_quantities, got)
-		else
-			table.insert(gem_quantities, 0)
-		end
+	for _, gem in ipairs(gem_types) do
+		table.insert(gem_quantities, wesnoth.get_variable(gem) or 0)
 	end
 	return gem_quantities
 end
 
 loti.item.set_gem_counts = function(gem_quantities)
-	for i = 1,#gem_types do
-		wesnoth.set_variable(gem_types[i], gem_quantities[i])
+	for idx, gem in ipairs(gem_types) do
+		wesnoth.set_variable(gem, gem_quantities[idx])
 	end
 end
 
