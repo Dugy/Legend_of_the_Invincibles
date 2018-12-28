@@ -43,17 +43,41 @@ local function get_tab()
 		}
 	}
 
-	local yesno_buttons = wml.tag.grid {
+	-- Equip button + dropdown menu with "Drop" and "Destroy" buttons
+	local equip_dropdown_buttons = wml.tag.grid {
 		wml.tag.row {
-			-- Only one of Equip and View buttons is shown at a time.
-			-- They both may be hidden when viewing units on the recall list
-			-- (it's illogical for absent unit to be able to take new items)
 			wml.tag.column {
 				wml.tag.button {
 					id = "equip",
 					label = _"Equip"
 				}
 			},
+			wml.tag.column {
+				border = "left",
+				border_size = 2,
+				wml.tag.menu_button {
+					id = "storage_dropdown_menu",
+					definition = "dropdown_menu_thin",
+					wml.tag.option {
+						label = _"Drop to the ground"
+					},
+					wml.tag.option {
+						label = _"Destroy to get a random gem"
+					}
+				}
+			}
+		}
+	}
+
+	local yesno_buttons = wml.tag.grid {
+		wml.tag.row {
+			-- Only one of Equip and View buttons is shown at a time.
+			-- They both may be hidden when viewing units on the recall list
+			-- (it's illogical for absent unit to be able to take new items)
+			wml.tag.column {
+				equip_dropdown_buttons
+			},
+
 			wml.tag.column {
 				border = "right",
 				border_size = 20,
@@ -147,6 +171,50 @@ function get_blank_tab()
 			}
 		}
 	}
+end
+
+-- Register custom GUI widget "dropdown_menu_thin": menu_button with reduced width (for icon only).
+local function register_dropdown_widget()
+	local size = 25
+
+	local function draw()
+		return {
+			wml.tag.draw {
+				wml.tag.image {
+					name = "buttons/button_dropdown/button_dropdown.png"
+				},
+				wml.tag.rectangle {
+					w = "(width)",
+					h = "(height)",
+					border_thickness = 1,
+					border_color = "114, 79, 46, 255"
+				},
+				wml.tag.image {
+					name = "icons/arrows/short_arrow_left_25.png~ROTATE(-90)"
+				}
+			}
+		}
+	end
+
+	local definition = {
+		id = "dropdown_menu_thin",
+		description = 'Dropdown menu button with reduced width (for icon only).',
+
+		wml.tag.resolution {
+			min_width = 25,
+			min_height = 25,
+
+			default_width = size,
+			default_height = size,
+
+			wml.tag.state_enabled(draw()),
+			wml.tag.state_disabled(draw()),
+			wml.tag.state_pressed(draw()),
+			wml.tag.state_focused(draw())
+		}
+	}
+
+	wesnoth.add_widget_definition("menu_button", "dropdown_menu_thin", definition)
 end
 
 local listbox_row = 0
@@ -339,6 +407,9 @@ return function(provided_inventory_dialog)
 		onshow = function() end
 	}
 
+	-- Widget for dropdown menu button.
+	inventory_dialog.register_widgets(register_dropdown_widget)
+
 	inventory_dialog.install_callbacks(function()
 		-- Callback for Equip/Unequip buttons.
 		wesnoth.set_dialog_callback(unequip, "unequip")
@@ -356,5 +427,9 @@ return function(provided_inventory_dialog)
 			"close_storage"
 		)
 
+		wesnoth.set_dialog_callback(function()
+			local val = wesnoth.get_dialog_value("storage_dropdown_menu")
+			wesnoth.log("error", "Dropdown menu callback! value=" .. tostring(val))
+		end, "storage_dropdown_menu")
 	end)
 end
