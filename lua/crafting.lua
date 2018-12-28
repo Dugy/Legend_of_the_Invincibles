@@ -1,27 +1,21 @@
 --! #textdomain "wesnoth-loti"
 
 local helper = wesnoth.require "lua/helper.lua"
-local T = helper.set_wml_tag_metatable {}
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 local gem_types = { "obsidians", "topazes", "opals", "pearls", "diamonds", "rubies", "emeralds", "amethysts", "sapphires", "black_pearls" }
 
 loti.item.get_gem_counts = function()
 	local gem_quantities = {}
-	for i = 1,#gem_types do
-		local got = wesnoth.get_variable(gem_types[i])
-		if got then
-			table.insert(gem_quantities, got)
-		else
-			table.insert(gem_quantities, 0)
-		end
+	for _, gem in ipairs(gem_types) do
+		table.insert(gem_quantities, wesnoth.get_variable(gem) or 0)
 	end
 	return gem_quantities
 end
 
 loti.item.set_gem_counts = function(gem_quantities)
-	for i = 1,#gem_types do
-		wesnoth.set_variable(gem_types[i], gem_quantities[i])
+	for idx, gem in ipairs(gem_types) do
+		wesnoth.set_variable(gem, gem_quantities[idx])
 	end
 end
 
@@ -43,41 +37,119 @@ loti.item.transmuting_window = function()
 				{ amount = 2, text = _"2 topazes", picture = "items/topaz.png" },
 				{ amount = 1, text = _"1 opal", picture = "items/opal.png" },
 				{ amount = 1, text = _"1 pearl", picture = "items/pearl.png" } }
+
+	-- Construct the WML of Transmuting dialog.
+	-- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+	local function get_dialog()
+		-- One row of the listbox. [grid] widget.
+		local listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					grow_factor = 0,
+					horizontal_alignment = "left",
+					wml.tag.image {
+						id = "gui_gem_icon"
+					}
+				},
+			   	wml.tag.column {
+					grow_factor = 1,
+					border = "all",
+					border_size = 10,
+					horizontal_grow = true,
+					wml.tag.label {
+						id = "gui_gem_name"
+					}
+				}
+			}
+		}
+
+		local listbox = wml.tag.listbox {
+			id = "gui_gem_chosen",
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose item type",
+							listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local yesno_buttons = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.button {
+						id = "ok",
+						label = _"Transmute"
+					}
+				},
+				wml.tag.column {
+					wml.tag.spacer {}
+				},
+				wml.tag.column {
+					wml.tag.button {
+						id = "cancel",
+						label = _"Back"
+					}
+				}
+			}
+		}
+
+		return {
+			wml.tag.tooltip { id = "tooltip_large" },
+			wml.tag.helptip { id = "tooltip_large" },
+			wml.tag.grid {
+				wml.tag.row {
+					wml.tag.column {
+						wml.tag.label {
+							definition = "title",
+							label = _"Transmuting"
+						}
+					}
+				},
+				wml.tag.row {
+					wml.tag.column {
+						border = "all",
+						border_size = 10,
+						wml.tag.label {
+							label = _"You can transmute some number of gems\nto get a new random gem"
+						}
+					}
+				},
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						listbox
+					}
+				},
+				wml.tag.row {
+					wml.tag.column {
+						border = "top",
+						border_size = 10,
+						horizontal_grow = true,
+						yesno_buttons
+					}
+				}
+			}
+		}
+	end
+
 	local chosen = 1
+	local can_transmute -- Set to true in gem_changed(), becomes false when non-existent gem is selected.
+
 	while chosen ~= 0 do
 		chosen = wesnoth.synchronize_choice(
 			function()
 				local picked = chosen
-				local dialog = { T.tooltip { id = "tooltip_large" }, T.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
-					T.grid {
-						T.row { T.column { T.label { id = "title" , definition = "title" , label = _"Transmuting"} }} ,
-						T.row { T.column {
-							T.label { id="gems_owned" , label="You can transmute some number of gems to get a new random gem"}
-						}},
-						T.row { T.column {
-							T.listbox { id = "gui_gem_chosen",
-								T.list_definition { T.row { T.column { horizontal_grow = true,
-									T.toggle_panel { tooltip="Choose item type", T.grid { T.row {
-										T.column { horizontal_alignment = "left", T.image { id = "gui_gem_icon", horizontal_grow = false } },
-			   							T.column { horizontal_alignment = "left", T.label { id = "gui_gem_name", horizontal_grow = true } }
-									}}}
-								}}}
-							}
-						}},
-						T.row { T.column { T.grid { T.row {
-							T.column { T.button { id = "ok", label = "Transmute" } },
-							T.column { T.button { id = "cancel", label = "Back" } }
-						}}}}
-					}
-				}
 
 				local function gem_changed()
 					picked = wesnoth.get_dialog_value("gui_gem_chosen")
-					if gem_quantities[picked] < transmutables[picked].amount then
-						wesnoth.set_dialog_active(false, "ok")
-					else
-						wesnoth.set_dialog_active(true, "ok")
-					end
+
+					can_transmute = gem_quantities[picked] >= transmutables[picked].amount
+					wesnoth.set_dialog_active(can_transmute, "ok")
 				end
 
 				local function preshow()
@@ -93,7 +165,7 @@ loti.item.transmuting_window = function()
 					gem_changed()
 				end
 
-				local returned = wesnoth.show_dialog(dialog, preshow)
+				local returned = wesnoth.show_dialog(get_dialog(), preshow)
 				
 				if returned ~= -2 then
 					return { picked = picked }
@@ -101,9 +173,11 @@ loti.item.transmuting_window = function()
 				return { picked = 0 }
 			end
 		).picked
-		if chosen == 0 then
+
+		if chosen == 0 or not can_transmute then
 			break
 		end
+
 		gem_quantities[chosen] = gem_quantities[chosen] - transmutables[chosen].amount
 		local obtained = loti.item.generate_random_gem()
 		gem_quantities[obtained] = gem_quantities[obtained] + 1
@@ -114,102 +188,267 @@ end
 
 loti.item.crafting_window = function(x, y)
 	local gem_quantities = loti.item.get_gem_counts()
+
+	-- Construct the WML of Crafting dialog.
+	-- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+	local function get_dialog()
+		local basetype_listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					grow_factor = 0,
+					wml.tag.image {
+						id = "gui_basetype_icon"
+					}
+				},
+				wml.tag.column {
+					grow_factor = 1,
+					horizontal_grow = true,
+					wml.tag.label {
+						id = "gui_basetype_name"
+					}
+				}
+			}
+		}
+
+		local basetype_listbox = wml.tag.listbox {
+			id = "gui_basetype_chosen",
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose between armour and weapon",
+							basetype_listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local type_listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					grow_factor = 0,
+					wml.tag.image {
+						id = "gui_type_icon"
+					}
+				},
+				wml.tag.column {
+					grow_factor = 1,
+					horizontal_grow = true,
+					border = "all",
+					border_size = 10,
+					wml.tag.label {
+						id = "gui_type_name",
+						characters_per_line = 40
+					}
+				}
+			}
+		}
+
+		local type_listbox = wml.tag.listbox {
+			id = "gui_type_chosen",
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose item type",
+							type_listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local recipe_listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					grow_factor = 0,
+					vertical_alignment = "center",
+					wml.tag.image {
+						id = "gui_recipe_icon"
+					}
+				},
+				wml.tag.column {
+					grow_factor = 1,
+					horizontal_grow = true,
+					border = "all",
+					border_size = 5,
+					wml.tag.label {
+						id = "gui_recipe_name"
+					}
+				}
+			}
+		}
+
+		local recipe_listbox = wml.tag.listbox {
+			id = "gui_recipe_chosen",
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose crafting recipe",
+							recipe_listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local gem_information = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.label {
+						id = "gui_gems_owned"
+					}
+				}
+			},
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.label {
+						id = "gui_item_description"
+					}
+				}
+			}
+		}
+
+		-- A grid that includes all listboxes: base_type, type and recipe.
+		local main_widget = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					border = "right",
+					border_size = 20,
+					vertical_alignment = "top",
+					wml.tag.grid {
+						wml.tag.row {
+							wml.tag.column {
+								border = "bottom",
+								border_size = 15,
+								horizontal_grow = true,
+								basetype_listbox
+							}
+						},
+						wml.tag.row {
+							wml.tag.column {
+								horizontal_grow = true,
+								type_listbox
+							}
+						}
+					}
+				},
+				wml.tag.column {
+					horizontal_grow = true,
+					recipe_listbox
+				},
+				wml.tag.column {
+					border = "left",
+					border_size = 20,
+					vertical_alignment = "top",
+					gem_information
+				}
+			}
+		}
+
+		local yesno_buttons =  wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.button {
+						id = "ok",
+						label = _"Craft"
+					}
+				},
+				wml.tag.spacer {},
+				wml.tag.column {
+					wml.tag.button {
+						id = "cancel",
+						label = _"Back"
+					}
+				},
+				wml.tag.spacer {},
+				wml.tag.column {
+					wml.tag.button {
+						id = "transmute",
+						label = _"Transmute gems"
+					}
+				}
+			}
+		}
+
+		return {
+			wml.tag.tooltip { id = "tooltip_large" },
+			wml.tag.helptip { id = "tooltip_large" },
+			wml.tag.grid {
+				wml.tag.row {
+					wml.tag.column {
+						border = "bottom",
+						border_size = 10,
+						wml.tag.label {
+							definition = "title",
+							label = _"Crafting"
+						}
+					}
+				},
+				wml.tag.row {
+					wml.tag.column { main_widget }
+				},
+				wml.tag.row {
+					wml.tag.column {
+						border = "top",
+						border_size = 10,
+						horizontal_grow = true,
+						yesno_buttons
+					}
+				}
+			}
+		}
+	end
+
 	local chose = wesnoth.synchronize_choice(
 		function()
 			local base_type = 1
 			local sort_chosen = 1
 			local recipe_chosen = 541
-			local dialog = { T.tooltip { id = "tooltip_large" }, T.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
-				T.grid {
-					T.row { T.column { T.label { id = "title" , definition = "title" , label = _"Crafting"} }} ,
-					T.row { T.column { T.grid { T.row {
-						T.column {
-							T.grid {
-								T.row { T.column { horizontal_grow = true,
-									T.listbox { id = "gui_basetype_chosen", vertical_scrollbar_mode=false,
-										T.list_definition { T.row { T.column { horizontal_grow = true,
-											T.toggle_panel { tooltip="Choose between armour and weapon", T.grid { T.row {
-												T.column { horizontal_alignment = "left", T.image { id = "gui_basetype_icon", horizontal_grow = false } },
-					   							T.column { horizontal_alignment = "left", T.label { id = "gui_basetype_name", horizontal_grow = true } }
-											}}}
-										}}}
-									}
-								}},
-								T.row { T.column {
-									T.listbox { id = "gui_type_chosen",
-										T.list_definition { T.row { T.column { horizontal_grow = true,
-											T.toggle_panel { tooltip="Choose item type", T.grid { T.row {
-												T.column { horizontal_alignment = "left", T.image { id = "gui_type_icon", horizontal_grow = false } },
-					   							T.column { horizontal_alignment = "left", T.label { id = "gui_type_name", horizontal_grow = true } }
-											}}}
-										}}}
-									}
-								}}
-							}
-						},
-						T.column { horizontal_grow = true,
-							T.listbox { id = "gui_recipe_chosen", vertical_scrollbar_mode=false,
-								T.list_definition { T.row { T.column { horizontal_grow = true,
-									T.toggle_panel { tooltip="Choose crafting recipe", T.grid { T.row {
-										T.column { horizontal_alignment = "left", T.image { id = "gui_recipe_icon", horizontal_grow = false } },
-			   							T.column { horizontal_alignment = "left", T.label { id = "gui_recipe_name", minimum_width = 200 } }
-									}}}
-								}}}
-							}
-						},
-						T.column {
-							T.grid{ 
-								T.row { T.column {
-									T.label { id="gui_gems_owned" , label=""}
-								}},
-								T.row { T.column {
-									T.label { id="gui_item_description" , label=""}
-								}}
-							}
-						}
-					}}}},
-					T.row { T.column { T.grid { T.row {
-						T.column { T.button { id = "ok", label = "Craft" } },
-						T.column { T.button { id = "cancel", label = "Back" } },
-						T.column { T.button { id = "transmute", label = "Transmute gems" } }
-					}}}}
-				}
-			}
+			local crafting_allowed -- Set to true or false in check_validity()
+
 			local selectable_sorts = {}
 			local selectable_recipes = {}
 
-			local function preshow()
-				local function can_craft(item_type)
-					local item = loti.item.type[item_type]
-					if not item then
+			local function can_craft(item_type)
+				local item = loti.item.type[item_type]
+				for i = 1,#gem_types do
+					local got = item[gem_types[i]]
+					if got and got > gem_quantities[i] then
 						return false
 					end
-					for i = 1,#gem_types do
-						local got = item[gem_types[i]]
-						if got and got > gem_quantities[i] then
-							return false
-						end
+				end
+				return true
+			end
+
+			local function check_validity()
+				local function is_valid()
+					if not sort_chosen then
+						return false
 					end
+
+					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
+					if not recipe_chosen then
+						return false
+					end
+
+					if not can_craft(recipe_chosen) then
+						return false
+					end
+
 					return true
 				end
 
-				local function check_validity()
-					if not sort_chosen then
-						wesnoth.set_dialog_active(false, "ok")
-						return
-					end
-					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
-					if not recipe_chosen then
-						wesnoth.set_dialog_active(false, "ok")
-						return
-					end
-					if not can_craft(recipe_chosen) then
-						wesnoth.set_dialog_active(false, "ok")
-						return
-					end
-					wesnoth.set_dialog_active(true, "ok")
-				end
+				crafting_allowed = is_valid()
+				wesnoth.set_dialog_active(crafting_allowed, "ok")
+			end
 
+			local function preshow()
 				local function selected_type_changed()
 					sort_chosen = selectable_sorts[wesnoth.get_dialog_value("gui_type_chosen")]
 					check_validity()
@@ -218,33 +457,31 @@ loti.item.crafting_window = function(x, y)
 				local function selected_recipe_changed()
 					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
 					local item = loti.item.type[recipe_chosen]
-					if item then
-						local gems_text = ""
-						local order = 1
-						local function add_gem(name)
-							local needed = item[gem_types[order]] or 0
-							local text = name .. ": " .. needed .. "/" .. tostring(gem_quantities[order])
-							if needed > gem_quantities[order] then
-								gems_text = gems_text .. "<span color='red'>" .. text .. "</span>\n"
-							else
-								gems_text = gems_text .. text .. "\n"
-							end
-							order = order + 1
+					local gems_text = ""
+					local order = 1
+					local function add_gem(name)
+						local needed = item[gem_types[order]] or 0
+						local text = name .. ": " .. needed .. "/" .. tostring(gem_quantities[order])
+						if needed > gem_quantities[order] then
+							gems_text = gems_text .. "<span color='red'>" .. text .. "</span>\n"
+						else
+							gems_text = gems_text .. text .. "\n"
 						end
-						add_gem(_"obsidians")
-						add_gem(_"topazes")
-						add_gem(_"opals")
-						add_gem(_"pearls")
-						add_gem(_"diamonds")
-						add_gem(_"rubies")
-						add_gem(_"emeralds")
-						add_gem(_"amethysts")
-						add_gem(_"sapphires")
-						add_gem(_"black pearls")
-						wesnoth.set_dialog_value(gems_text, "gui_gems_owned")
-
-						wesnoth.set_dialog_value(item.description, "gui_item_description")
+						order = order + 1
 					end
+					add_gem(_"obsidians")
+					add_gem(_"topazes")
+					add_gem(_"opals")
+					add_gem(_"pearls")
+					add_gem(_"diamonds")
+					add_gem(_"rubies")
+					add_gem(_"emeralds")
+					add_gem(_"amethysts")
+					add_gem(_"sapphires")
+					add_gem(_"black pearls")
+					wesnoth.set_dialog_value(gems_text, "gui_gems_owned")
+
+					wesnoth.set_dialog_value(item.description, "gui_item_description")
 					check_validity()
 				end
 
@@ -271,10 +508,11 @@ loti.item.crafting_window = function(x, y)
 					local word_from, word_to
 					if base_type == 1 then
 						-- Armour
-						populate_item(_"Armour", "icons/cuirass_muscled.png", "armour")
-						populate_item(_"Helm (only a third of the resistance promised!)", "icons/helmet_great2.png", "helm")
-						populate_item(_"Boots (only a third of the resistance promised!)", "icons/greaves.png", "boots")
-						populate_item(_"Gauntlets (only a third of the resistance promised!)", "icons/gauntlets.png", "gauntlets")
+						local resistance_note = _"1/3 of promised resistances"
+						populate_item(_"Armour (chest)", "icons/cuirass_muscled.png", "armour")
+						populate_item(_"Helm\n" .. resistance_note, "icons/helmet_great2.png", "helm")
+						populate_item(_"Boots\n" .. resistance_note, "icons/greaves.png", "boots")
+						populate_item(_"Gauntlets\n" .. resistance_note, "icons/gauntlets.png", "gauntlets")
 
 						word_from = 531
 						word_to = 560
@@ -300,20 +538,18 @@ loti.item.crafting_window = function(x, y)
 					end
 
 					order = 1
-					for i = word_from, word_to do
+					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to)) do
 						local item = loti.item.type[i]
-						if item then
-							wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", order, "gui_recipe_name")
-							if can_craft(i) then
-								wesnoth.set_dialog_value("../../../images/icons/unit-groups/era_default_knalgan_alliance_30-pressed.png", "gui_recipe_chosen", order, "gui_recipe_icon")
-								wesnoth.set_dialog_active(true, "gui_recipe_chosen", order, "gui_recipe_name")
-							else
-								wesnoth.set_dialog_value("../../../images/icons/unit-groups/cross_30.png", "gui_recipe_chosen", order, "gui_recipe_icon")
-								wesnoth.set_dialog_active(false, "gui_recipe_chosen", order, "gui_recipe_name")
-							end
-							selectable_recipes[order] = i
-							order = order + 1
+						wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", order, "gui_recipe_name")
+						if can_craft(i) then
+							wesnoth.set_dialog_value("../../../images/icons/unit-groups/era_default_knalgan_alliance_30-pressed.png", "gui_recipe_chosen", order, "gui_recipe_icon")
+							wesnoth.set_dialog_active(true, "gui_recipe_chosen", order, "gui_recipe_name")
+						else
+							wesnoth.set_dialog_value("../../../images/icons/unit-groups/cross_30.png", "gui_recipe_chosen", order, "gui_recipe_icon")
+							wesnoth.set_dialog_active(false, "gui_recipe_chosen", order, "gui_recipe_name")
 						end
+						selectable_recipes[order] = i
+						order = order + 1
 					end
 
 					local position = 1
@@ -355,10 +591,14 @@ loti.item.crafting_window = function(x, y)
 				basetype_changed()
 			end
 
+			local function postshow()
+				check_validity()
+			end
+
 			local returned = -1
 			while returned == -1 do
-				returned = wesnoth.show_dialog(dialog, preshow)
-				if returned == -1 then
+				returned = wesnoth.show_dialog(get_dialog(), preshow, postshow)
+				if returned == -1 and crafting_allowed then
 					if wesnoth.confirm(_"Are you sure to want to craft this item?") then
 						returned = 1
 					end
