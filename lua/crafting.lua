@@ -389,39 +389,45 @@ loti.item.crafting_window = function(x, y)
 			local base_type = 1
 			local sort_chosen = 1
 			local recipe_chosen = 541
+			local crafting_allowed -- Set to true or false in check_validity()
 
 			local selectable_sorts = {}
 			local selectable_recipes = {}
 
-			local function preshow()
-				local function can_craft(item_type)
-					local item = loti.item.type[item_type]
-					for i = 1,#gem_types do
-						local got = item[gem_types[i]]
-						if got and got > gem_quantities[i] then
-							return false
-						end
+			local function can_craft(item_type)
+				local item = loti.item.type[item_type]
+				for i = 1,#gem_types do
+					local got = item[gem_types[i]]
+					if got and got > gem_quantities[i] then
+						return false
 					end
+				end
+				return true
+			end
+
+			local function check_validity()
+				local function is_valid()
+					if not sort_chosen then
+						return false
+					end
+
+					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
+					if not recipe_chosen then
+						return false
+					end
+
+					if not can_craft(recipe_chosen) then
+						return false
+					end
+
 					return true
 				end
 
-				local function check_validity()
-					if not sort_chosen then
-						wesnoth.set_dialog_active(false, "ok")
-						return
-					end
-					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
-					if not recipe_chosen then
-						wesnoth.set_dialog_active(false, "ok")
-						return
-					end
-					if not can_craft(recipe_chosen) then
-						wesnoth.set_dialog_active(false, "ok")
-						return
-					end
-					wesnoth.set_dialog_active(true, "ok")
-				end
+				crafting_allowed = is_valid()
+				wesnoth.set_dialog_active(crafting_allowed, "ok")
+			end
 
+			local function preshow()
 				local function selected_type_changed()
 					sort_chosen = selectable_sorts[wesnoth.get_dialog_value("gui_type_chosen")]
 					check_validity()
@@ -563,10 +569,14 @@ loti.item.crafting_window = function(x, y)
 				basetype_changed()
 			end
 
+			local function postshow()
+				check_validity()
+			end
+
 			local returned = -1
 			while returned == -1 do
-				returned = wesnoth.show_dialog(get_dialog(), preshow)
-				if returned == -1 then
+				returned = wesnoth.show_dialog(get_dialog(), preshow, postshow)
+				if returned == -1 and crafting_allowed then
 					if wesnoth.confirm(_"Are you sure to want to craft this item?") then
 						returned = 1
 					end
