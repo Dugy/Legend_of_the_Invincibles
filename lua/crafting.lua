@@ -175,9 +175,6 @@ loti.item.crafting_window = function(x, y)
 			local function preshow()
 				local function can_craft(item_type)
 					local item = loti.item.type[item_type]
-					if not item then
-						return false
-					end
 					for i = 1,#gem_types do
 						local got = item[gem_types[i]]
 						if got and got > gem_quantities[i] then
@@ -212,33 +209,31 @@ loti.item.crafting_window = function(x, y)
 				local function selected_recipe_changed()
 					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
 					local item = loti.item.type[recipe_chosen]
-					if item then
-						local gems_text = ""
-						local order = 1
-						local function add_gem(name)
-							local needed = item[gem_types[order]] or 0
-							local text = name .. ": " .. needed .. "/" .. tostring(gem_quantities[order])
-							if needed > gem_quantities[order] then
-								gems_text = gems_text .. "<span color='red'>" .. text .. "</span>\n"
-							else
-								gems_text = gems_text .. text .. "\n"
-							end
-							order = order + 1
+					local gems_text = ""
+					local order = 1
+					local function add_gem(name)
+						local needed = item[gem_types[order]] or 0
+						local text = name .. ": " .. needed .. "/" .. tostring(gem_quantities[order])
+						if needed > gem_quantities[order] then
+							gems_text = gems_text .. "<span color='red'>" .. text .. "</span>\n"
+						else
+							gems_text = gems_text .. text .. "\n"
 						end
-						add_gem(_"obsidians")
-						add_gem(_"topazes")
-						add_gem(_"opals")
-						add_gem(_"pearls")
-						add_gem(_"diamonds")
-						add_gem(_"rubies")
-						add_gem(_"emeralds")
-						add_gem(_"amethysts")
-						add_gem(_"sapphires")
-						add_gem(_"black pearls")
-						wesnoth.set_dialog_value(gems_text, "gui_gems_owned")
-
-						wesnoth.set_dialog_value(item.description, "gui_item_description")
+						order = order + 1
 					end
+					add_gem(_"obsidians")
+					add_gem(_"topazes")
+					add_gem(_"opals")
+					add_gem(_"pearls")
+					add_gem(_"diamonds")
+					add_gem(_"rubies")
+					add_gem(_"emeralds")
+					add_gem(_"amethysts")
+					add_gem(_"sapphires")
+					add_gem(_"black pearls")
+					wesnoth.set_dialog_value(gems_text, "gui_gems_owned")
+
+					wesnoth.set_dialog_value(item.description, "gui_item_description")
 					check_validity()
 				end
 
@@ -294,20 +289,18 @@ loti.item.crafting_window = function(x, y)
 					end
 
 					order = 1
-					for i = word_from, word_to do
+					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to)) do
 						local item = loti.item.type[i]
-						if item then
-							wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", order, "gui_recipe_name")
-							if can_craft(i) then
-								wesnoth.set_dialog_value("../../../images/icons/unit-groups/era_default_knalgan_alliance_30-pressed.png", "gui_recipe_chosen", order, "gui_recipe_icon")
-								wesnoth.set_dialog_active(true, "gui_recipe_chosen", order, "gui_recipe_name")
-							else
-								wesnoth.set_dialog_value("../../../images/icons/unit-groups/cross_30.png", "gui_recipe_chosen", order, "gui_recipe_icon")
-								wesnoth.set_dialog_active(false, "gui_recipe_chosen", order, "gui_recipe_name")
-							end
-							selectable_recipes[order] = i
-							order = order + 1
+						wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", order, "gui_recipe_name")
+						if can_craft(i) then
+							wesnoth.set_dialog_value("../../../images/icons/unit-groups/era_default_knalgan_alliance_30-pressed.png", "gui_recipe_chosen", order, "gui_recipe_icon")
+							wesnoth.set_dialog_active(true, "gui_recipe_chosen", order, "gui_recipe_name")
+						else
+							wesnoth.set_dialog_value("../../../images/icons/unit-groups/cross_30.png", "gui_recipe_chosen", order, "gui_recipe_icon")
+							wesnoth.set_dialog_active(false, "gui_recipe_chosen", order, "gui_recipe_name")
 						end
+						selectable_recipes[order] = i
+						order = order + 1
 					end
 
 					local position = 1
