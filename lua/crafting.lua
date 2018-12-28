@@ -37,33 +37,99 @@ loti.item.transmuting_window = function()
 				{ amount = 2, text = _"2 topazes", picture = "items/topaz.png" },
 				{ amount = 1, text = _"1 opal", picture = "items/opal.png" },
 				{ amount = 1, text = _"1 pearl", picture = "items/pearl.png" } }
+
+	-- Construct the WML of Transmuting dialog.
+	-- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+	local function get_dialog()
+		-- One row of the listbox. [grid] widget.
+		local listbox_template = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.image {
+						id = "gui_gem_icon",
+						horizontal_grow = false
+					}
+				},
+			   	wml.tag.column {
+					horizontal_alignment = "left",
+					wml.tag.label {
+						id = "gui_gem_name",
+						horizontal_grow = true
+					}
+				}
+			}
+		}
+
+		local listbox = wml.tag.listbox {
+			id = "gui_gem_chosen",
+			wml.tag.list_definition {
+				wml.tag.row {
+					wml.tag.column {
+						horizontal_grow = true,
+						wml.tag.toggle_panel {
+							tooltip = _"Choose item type",
+							listbox_template
+						}
+					}
+				}
+			}
+		}
+
+		local yesno_buttons = wml.tag.grid {
+			wml.tag.row {
+				wml.tag.column {
+					wml.tag.button { id = "ok", label = "Transmute" }
+				},
+				wml.tag.column {
+					wml.tag.button { id = "cancel", label = "Back" }
+				}
+			}
+		}
+
+		return {
+			wml.tag.tooltip { id = "tooltip_large" },
+			wml.tag.helptip { id = "tooltip_large" },
+			maximum_width = 800,
+			maximum_height = 600,
+			wml.tag.grid {
+				wml.tag.row {
+					wml.tag.column {
+						wml.tag.label {
+							id = "title",
+							definition = "title",
+							label = _"Transmuting"
+						}
+					}
+				},
+				wml.tag.row {
+					wml.tag.column {
+						wml.tag.label {
+							id = "gems_owned",
+							label = _"You can transmute some number of gems to get a new random gem"
+						}
+					}
+				},
+				wml.tag.row {
+					wml.tag.column {
+						listbox
+					}
+				},
+				wml.tag.row {
+					wml.tag.column {
+						yesno_buttons
+					}
+				}
+			}
+		}
+	end
+
 	local chosen = 1
 	while chosen ~= 0 do
 		chosen = wesnoth.synchronize_choice(
 			function()
 				local picked = chosen
-				local dialog = { wml.tag.tooltip { id = "tooltip_large" }, wml.tag.helptip { id = "tooltip_large" }, maximum_width = 800, maximum_height = 600,
-					wml.tag.grid {
-						wml.tag.row { wml.tag.column { wml.tag.label { id = "title" , definition = "title" , label = _"Transmuting"} }} ,
-						wml.tag.row { wml.tag.column {
-							wml.tag.label { id="gems_owned" , label="You can transmute some number of gems to get a new random gem"}
-						}},
-						wml.tag.row { wml.tag.column {
-							wml.tag.listbox { id = "gui_gem_chosen",
-								wml.tag.list_definition { wml.tag.row { wml.tag.column { horizontal_grow = true,
-									wml.tag.toggle_panel { tooltip="Choose item type", wml.tag.grid { wml.tag.row {
-										wml.tag.column { horizontal_alignment = "left", wml.tag.image { id = "gui_gem_icon", horizontal_grow = false } },
-			   							wml.tag.column { horizontal_alignment = "left", wml.tag.label { id = "gui_gem_name", horizontal_grow = true } }
-									}}}
-								}}}
-							}
-						}},
-						wml.tag.row { wml.tag.column { wml.tag.grid { wml.tag.row {
-							wml.tag.column { wml.tag.button { id = "ok", label = "Transmute" } },
-							wml.tag.column { wml.tag.button { id = "cancel", label = "Back" } }
-						}}}}
-					}
-				}
+				local dialog = get_dialog()
 
 				local function gem_changed()
 					picked = wesnoth.get_dialog_value("gui_gem_chosen")
