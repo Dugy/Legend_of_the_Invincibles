@@ -89,7 +89,7 @@ function wesnoth.update_stats(original)
 	if vars.fully_healed or wesnoth.get_variable("fully_healed") == 1 then
 		original.hitpoints = original.max_hitpoints
 		original.moves = original.max_moves
-		original.attacks = original.max_attacks
+		original.attacks_left = original.max_attacks
 		for i = 1,#original do
 			if original[i][1] == "status" then
 				original[i][2] = {}
