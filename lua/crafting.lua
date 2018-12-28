@@ -138,6 +138,8 @@ loti.item.transmuting_window = function()
 	end
 
 	local chosen = 1
+	local can_transmute -- Set to true in gem_changed(), becomes false when non-existent gem is selected.
+
 	while chosen ~= 0 do
 		chosen = wesnoth.synchronize_choice(
 			function()
@@ -145,11 +147,9 @@ loti.item.transmuting_window = function()
 
 				local function gem_changed()
 					picked = wesnoth.get_dialog_value("gui_gem_chosen")
-					if gem_quantities[picked] < transmutables[picked].amount then
-						wesnoth.set_dialog_active(false, "ok")
-					else
-						wesnoth.set_dialog_active(true, "ok")
-					end
+
+					can_transmute = gem_quantities[picked] >= transmutables[picked].amount
+					wesnoth.set_dialog_active(can_transmute, "ok")
 				end
 
 				local function preshow()
@@ -173,9 +173,11 @@ loti.item.transmuting_window = function()
 				return { picked = 0 }
 			end
 		).picked
-		if chosen == 0 then
+
+		if chosen == 0 or not can_transmute then
 			break
 		end
+
 		gem_quantities[chosen] = gem_quantities[chosen] - transmutables[chosen].amount
 		local obtained = loti.item.generate_random_gem()
 		gem_quantities[obtained] = gem_quantities[obtained] + 1
