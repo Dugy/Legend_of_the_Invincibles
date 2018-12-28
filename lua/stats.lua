@@ -235,10 +235,10 @@ function wesnoth.update_stats(original)
 
 	-- Modifications are read when drawing, we may keep the effects elsewhere and apply them only when we need
 	for i = 1,#mods do
-		wesnoth.add_modification(remade, "object", mods[1][2], false)
+		wesnoth.add_modification(remade, "object", mods[i][2], false)
 	end
 
-	-- Remove temporary dummmy attacks
+	-- Remove temporary dummy attacks
 	for i = #remade,1,-1 do
 		if remade[i][1] == "attack" and remade[i][2].temporary == true then
 			table.remove(remade, i)
