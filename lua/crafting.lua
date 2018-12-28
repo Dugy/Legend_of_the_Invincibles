@@ -195,17 +195,16 @@ loti.item.crafting_window = function(x, y)
 		local basetype_listbox_template = wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
-					horizontal_alignment = "left",
+					grow_factor = 0,
 					wml.tag.image {
-						id = "gui_basetype_icon",
-						horizontal_grow = false
+						id = "gui_basetype_icon"
 					}
 				},
 				wml.tag.column {
-					horizontal_alignment = "left",
+					grow_factor = 1,
+					horizontal_grow = true,
 					wml.tag.label {
-						id = "gui_basetype_name",
-						horizontal_grow = true
+						id = "gui_basetype_name"
 					}
 				}
 			}
@@ -213,7 +212,6 @@ loti.item.crafting_window = function(x, y)
 
 		local basetype_listbox = wml.tag.listbox {
 			id = "gui_basetype_chosen",
-			vertical_scrollbar_mode = false,
 			wml.tag.list_definition {
 				wml.tag.row {
 					wml.tag.column {
@@ -230,17 +228,19 @@ loti.item.crafting_window = function(x, y)
 		local type_listbox_template = wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
-					horizontal_alignment = "left",
+					grow_factor = 0,
 					wml.tag.image {
-						id = "gui_type_icon",
-						horizontal_grow = false
+						id = "gui_type_icon"
 					}
 				},
 				wml.tag.column {
-					horizontal_alignment = "left",
+					grow_factor = 1,
+					horizontal_grow = true,
+					border = "all",
+					border_size = 10,
 					wml.tag.label {
 						id = "gui_type_name",
-						horizontal_grow = true
+						characters_per_line = 40
 					}
 				}
 			}
@@ -264,25 +264,26 @@ loti.item.crafting_window = function(x, y)
 		local recipe_listbox_template = wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
-					horizontal_alignment = "left",
+					grow_factor = 0,
+					vertical_alignment = "center",
 					wml.tag.image {
-						id = "gui_recipe_icon",
-						horizontal_grow = false
+						id = "gui_recipe_icon"
 					}
 				},
 				wml.tag.column {
-					horizontal_alignment = "left",
+					grow_factor = 1,
+					horizontal_grow = true,
+					border = "all",
+					border_size = 5,
 					wml.tag.label {
-						id = "gui_recipe_name",
-						minimum_width = 200
+						id = "gui_recipe_name"
 					}
 				}
 			}
-			}
+		}
 
 		local recipe_listbox = wml.tag.listbox {
 			id = "gui_recipe_chosen",
-			vertical_scrollbar_mode = false,
 			wml.tag.list_definition {
 				wml.tag.row {
 					wml.tag.column {
@@ -317,15 +318,23 @@ loti.item.crafting_window = function(x, y)
 		local main_widget = wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
+					border = "right",
+					border_size = 20,
+					vertical_alignment = "top",
 					wml.tag.grid {
 						wml.tag.row {
 							wml.tag.column {
+								border = "bottom",
+								border_size = 15,
 								horizontal_grow = true,
 								basetype_listbox
 							}
 						},
 						wml.tag.row {
-							wml.tag.column { type_listbox }
+							wml.tag.column {
+								horizontal_grow = true,
+								type_listbox
+							}
 						}
 					}
 				},
@@ -333,7 +342,12 @@ loti.item.crafting_window = function(x, y)
 					horizontal_grow = true,
 					recipe_listbox
 				},
-				wml.tag.column { gem_information }
+				wml.tag.column {
+					border = "left",
+					border_size = 20,
+					vertical_alignment = "top",
+					gem_information
+				}
 			}
 		}
 
@@ -345,12 +359,14 @@ loti.item.crafting_window = function(x, y)
 						label = _"Craft"
 					}
 				},
+				wml.tag.spacer {},
 				wml.tag.column {
 					wml.tag.button {
 						id = "cancel",
 						label = _"Back"
 					}
 				},
+				wml.tag.spacer {},
 				wml.tag.column {
 					wml.tag.button {
 						id = "transmute",
@@ -363,11 +379,11 @@ loti.item.crafting_window = function(x, y)
 		return {
 			wml.tag.tooltip { id = "tooltip_large" },
 			wml.tag.helptip { id = "tooltip_large" },
-			maximum_width = 800,
-			maximum_height = 600,
 			wml.tag.grid {
 				wml.tag.row {
 					wml.tag.column {
+						border = "bottom",
+						border_size = 10,
 						wml.tag.label {
 							definition = "title",
 							label = _"Crafting"
@@ -378,7 +394,12 @@ loti.item.crafting_window = function(x, y)
 					wml.tag.column { main_widget }
 				},
 				wml.tag.row {
-					wml.tag.column { yesno_buttons }
+					wml.tag.column {
+						border = "top",
+						border_size = 10,
+						horizontal_grow = true,
+						yesno_buttons
+					}
 				}
 			}
 		}
@@ -487,10 +508,11 @@ loti.item.crafting_window = function(x, y)
 					local word_from, word_to
 					if base_type == 1 then
 						-- Armour
-						populate_item(_"Armour", "icons/cuirass_muscled.png", "armour")
-						populate_item(_"Helm (only a third of the resistance promised!)", "icons/helmet_great2.png", "helm")
-						populate_item(_"Boots (only a third of the resistance promised!)", "icons/greaves.png", "boots")
-						populate_item(_"Gauntlets (only a third of the resistance promised!)", "icons/gauntlets.png", "gauntlets")
+						local resistance_note = _"1/3 of promised resistances"
+						populate_item(_"Armour (chest)", "icons/cuirass_muscled.png", "armour")
+						populate_item(_"Helm\n" .. resistance_note, "icons/helmet_great2.png", "helm")
+						populate_item(_"Boots\n" .. resistance_note, "icons/greaves.png", "boots")
+						populate_item(_"Gauntlets\n" .. resistance_note, "icons/gauntlets.png", "gauntlets")
 
 						word_from = 531
 						word_to = 560
