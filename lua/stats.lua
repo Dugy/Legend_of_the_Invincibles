@@ -207,7 +207,6 @@ function wesnoth.update_stats(original)
 	for i = 1,#visible_modifications do
 		if visible_modifications[i][1] == "trait" and visible_modifications[i][2].id == "geared" then
 			is_marked_as_geared = true
-			table.remove(visible_modifications, i)
 			break
 		end
 	end
