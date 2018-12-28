@@ -268,7 +268,6 @@ function wesnoth.update_stats(original)
 		for i = 1,#mods do
 			local obj = mods[i][2]
 			if obj.defence then
-				wesnoth.dbms(obj)
 				defence = defence * (100 - obj.defence) / 100
 			end
 			if obj.dodge then
