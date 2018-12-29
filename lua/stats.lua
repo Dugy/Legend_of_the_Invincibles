@@ -846,6 +846,9 @@ function wesnoth.update_stats(original)
 		remade = call_event_on_unit(remade, events_to_fire[i])
 	end
 
+	-- Restore unit from variable after the WML hooks.
+	wesnoth.wml_actions.unstore_unit { variable = "updated", find_vacant = "no" }
+
 	return remade
 end
 
