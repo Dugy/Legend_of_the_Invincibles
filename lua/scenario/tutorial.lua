@@ -28,7 +28,7 @@ end
 
 -- Simplified crafting dialog for Tutorial,
 -- where Efraim has to craft 1 sword from 3 obsidians, and can't do anything else.
-function tutorial_craft()
+local function tutorial_craft()
 	local unit = wesnoth.get_units({ id = "Efraim_de_Ceise" })[1]
 	local item = loti.item.type[606] -- Twinkling Sword
 
@@ -72,10 +72,9 @@ function tutorial_craft()
 			end
 		end, "gui_basetype_chosen")
 
-		-- Don't allow to exit Crafting dialog until the sword is crafted.
+		-- When player clicks Exit.
 		wesnoth.set_dialog_callback(function()
 			Delly_says(_"Do not give up easily.")
-			tutorial_craft() -- Reopen the dialog
 		end, "cancel")
 
 		-- When player clicks Craft.
@@ -105,3 +104,6 @@ function tutorial_craft()
 		tutorial_craft()
 	end
 end
+
+-- Provide this method via wesnoth.require(...).craft
+return { craft = tutorial_craft }
