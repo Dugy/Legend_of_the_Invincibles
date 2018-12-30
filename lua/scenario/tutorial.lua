@@ -53,9 +53,6 @@ local function tutorial_craft()
 	local function preshow()
 		show_selected_item()
 
-		-- Hide Transmute button.
-		wesnoth.set_dialog_visible(false, "transmute")
-
 		-- Hide type chooser (Sword/Spear/etc.), sword is the only thing we craft.
 		wesnoth.set_dialog_visible(false, "gui_type_chosen")
 
@@ -76,6 +73,11 @@ local function tutorial_craft()
 		wesnoth.set_dialog_callback(function()
 			Delly_says(_"Do not give up easily.")
 		end, "cancel")
+
+		-- When player clicks Transmute.
+		wesnoth.set_dialog_callback(function()
+			Delly_says(_"Alchemy is great, but we don't have enough gems for that.")
+		end, "transmute")
 
 		-- When player clicks Craft.
 		wesnoth.set_dialog_callback(function()

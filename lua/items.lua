@@ -32,10 +32,6 @@
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
-local wml_items = wesnoth.require "lua/wml/items.lua"
-
--- Blinking animation on the ground hex if there is an item.
-local item_halo = "halo/misc/leadership-flare-1.png:20,halo/misc/leadership-flare-2.png:20,halo/misc/leadership-flare-3.png:20,halo/misc/leadership-flare-4.png:20,halo/misc/leadership-flare-4.png:20,halo/misc/leadership-flare-6.png:20,halo/misc/leadership-flare-7.png:20,halo/misc/leadership-flare-8.png:20,halo/misc/leadership-flare-9.png:20,halo/misc/leadership-flare-10.png:20,halo/misc/leadership-flare-11.png:20,halo/misc/leadership-flare-12.png:20,halo/misc/leadership-flare-13.png:20,misc/blank-hex.png:1000"
 
 loti.item = {}
 loti.item.storage = {}
@@ -43,6 +39,15 @@ loti.item.type = {}
 loti.item.on_unit = {}
 loti.item.on_the_ground = {}
 loti.item.util = {}
+
+-- Blinking animation on the ground hex if there is an item.
+loti.item.halo = "halo/misc/leadership-flare-1.png:20,halo/misc/leadership-flare-2.png:20," ..
+	"halo/misc/leadership-flare-3.png:20,halo/misc/leadership-flare-4.png:20," ..
+	"halo/misc/leadership-flare-4.png:20,halo/misc/leadership-flare-6.png:20," ..
+	"halo/misc/leadership-flare-7.png:20,halo/misc/leadership-flare-8.png:20," ..
+	"halo/misc/leadership-flare-9.png:20,halo/misc/leadership-flare-10.png:20," ..
+	"halo/misc/leadership-flare-11.png:20,halo/misc/leadership-flare-12.png:20," ..
+	"halo/misc/leadership-flare-13.png:20,misc/blank-hex.png:1000"
 
 -------------------------------------------------------------------------------
 -- loti.item.storage: methods to work with the Item Storage
@@ -333,12 +338,14 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 	table.insert(list, record)
 	helper.set_variable_array("items", list)
 
-	-- Draw the image of this item on the ground
-	wml_items.place_image(x, y, loti.item.type[item_number].image)
-
-	-- Add rare blinking animation (halo) to this hex.
-	wml_items.remove(x, y, item_halo)
-	wml_items.place_halo(x, y, item_halo)
+	-- Draw the image of this item on the ground,
+	-- plus rare blinking animation (halo) on the same hex.
+	wesnoth.wml_actions.item {
+		x = x,
+		y = y,
+		image = loti.item.type[item_number].image,
+		halo = loti.item.halo
+	}
 
 	-- Enable "pick item" event when some unit walks onto this hex.
 	-- (see PLACE_ITEM_EVENT for WML version)
@@ -374,21 +381,14 @@ end
 -- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
 loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
 	local list = helper.get_variable_array("items")
-
-	-- Count the number of items on the same hex.
-	local total_items_found = 0 -- Any items on this hex.
-	local same_items_found = 0 -- Items that are exactly the same.
+	local same_items_found = 0 -- Count the number of items on the same hex.
 
 	local index_to_remove = nil
 	for index, elem in ipairs(list) do
-		if elem.x == x and elem.y == y then
-			total_items_found = total_items_found + 1
-
-			if elem.type == item_number then
-				if not crafted_sort or elem.sort == crafted_sort then
-					index_to_remove = index
-					same_items_found = same_items_found + 1
-				end
+		if elem.x == x and elem.y == y and elem.type == item_number then
+			if not crafted_sort or elem.sort == crafted_sort then
+				index_to_remove = index
+				same_items_found = same_items_found + 1
 			end
 		end
 	end
@@ -403,12 +403,11 @@ loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
 	-- Remove the image from the map,
 	-- but only if this hex doesn't have other items of the same type.
 	if same_items_found == 1 then
-		wml_items.remove(x, y, loti.item.type[item_number].image)
-	end
-
-	-- Remove the blinking animation (halo) if no more items are left on this hex.
-	if total_items_found == 1 then
-		wml_items.remove(x, y, item_halo)
+		wesnoth.wml_actions.remove_item {
+			x = x,
+			y = y,
+			image = loti.item.type[item_number].image
+		}
 	end
 end
 

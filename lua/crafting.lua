@@ -40,7 +40,7 @@ loti.gem.random = function()
 	return chosen
 end
 
-loti.gem.show_transmuting_window = function()
+loti.gem.show_transmuting_window = function(selected_recipe)
 	local gem_quantities = loti.gem.get_counts()
 	local transmutables = { { amount = 4, text = _"4 obsidians", picture = "items/obsidian.png" },
 				{ amount = 2, text = _"2 topazes", picture = "items/topaz.png" },
@@ -192,6 +192,11 @@ loti.gem.show_transmuting_window = function()
 		gem_quantities[obtained] = gem_quantities[obtained] + 1
 		wesnoth.wml_actions.object( loti.item.type[520 + obtained] ) 
 		loti.gem.set_counts(gem_quantities)
+
+		-- Update the gem counts in the Crafting dialog (which is currently open).
+		if selected_recipe then
+			loti.gem.show_crafting_report(selected_recipe)
+		end
 	end
 end
 
@@ -576,7 +581,7 @@ loti.gem.show_crafting_window = function(x, y)
 						populate_item(_"Dagger", "attacks/dagger-curved.png", "dagger")
 						populate_item(_"Knife (throwing)", "attacks/dagger-thrown-human.png", "knife")
 						populate_item(_"Spear (or javelin, lance, pike, trident)", "attacks/spear.png", "spear")
-						populate_item(_"Polearm (halberd, scythe, ...)", "attacks/halberd.png", "halberd")
+						populate_item(_"Polearm (halberd, scythe, ...)", "attacks/halberd.png", "polearm")
 						populate_item(_"Sling (or bolas or net)", "attacks/sling.png", "sling")
 						populate_item(_"Thunderstick (or dragonstaff)", "attacks/thunderstick.png", "thunderstick")
 						populate_item(_"Metal claws", "attacks/claws.png", "claws")
@@ -630,7 +635,12 @@ loti.gem.show_crafting_window = function(x, y)
 				wesnoth.set_dialog_callback(basetype_changed, "gui_basetype_chosen")
 				wesnoth.set_dialog_callback(selected_type_changed, "gui_type_chosen")
 				wesnoth.set_dialog_callback(selected_recipe_changed, "gui_recipe_chosen")
-				wesnoth.set_dialog_callback(loti.gem.show_transmuting_window, "transmute")
+				wesnoth.set_dialog_callback(function()
+					-- Pass the number of selected recipe to Transmuting dialog,
+					-- so that it could update the report on needed/available gem counts
+					-- after each transmutation.
+					loti.gem.show_transmuting_window(recipe_chosen)
+				end, "transmute")
 
 				basetype_changed()
 			end
