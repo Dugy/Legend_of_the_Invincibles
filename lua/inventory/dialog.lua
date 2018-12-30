@@ -9,7 +9,7 @@ local helper = wesnoth.require "lua/helper.lua"
 -- These Lua files are loaded as plugins.
 -- They receive an "inventory_dialog" object as parameter,
 -- which provides methods for adding tabs, installing callbacks, etc.
-local PLUGINS_LIST = { "items", "retaliation", "storage", "recall" }
+local PLUGINS_LIST = { "multiplayer_safety", "items", "retaliation", "storage", "recall" }
 
 -------------------------------------------------------------------------------
 
@@ -166,7 +166,8 @@ local function get_dialog_widget()
 end
 
 -- Display the inventory dialog for a unit.
-local function open_inventory_dialog(unit)
+-- WARNING: not synchronized, use via open_inventory_dialog() to avoid OoS.
+local function open_inventory_dialog_unsynced(unit)
 	local function preshow()
 		for _, func in ipairs(install_callback_functions) do
 			func()
@@ -180,7 +181,7 @@ local function open_inventory_dialog(unit)
 		inventory_dialog.goto_tab("items_tab")
 	end
 
-	local result = wesnoth.show_dialog(get_dialog_widget(), preshow)
+	wesnoth.show_dialog(get_dialog_widget(), preshow)
 	unit = inventory_dialog.current_unit -- Allow "recall" tab to select another unit
 
 	-- Run onsubmit callbacks (e.g. "Items" tab uses this to handle clicks on some action buttons)
@@ -190,6 +191,19 @@ local function open_inventory_dialog(unit)
 
 	-- Next time the Inventory dialog is reopened, it should start from a clean slate.
 	inventory_dialog.current_unit = nil
+
+	-- Tell other players what changed (which items were equipped, etc.).
+	return inventory_dialog.mpsafety:export()
+end
+
+-- Multiplayer-safe (synchronized) version of open_inventory_dialog_unsynced().
+local function open_inventory_dialog(unit)
+	local result = wesnoth.synchronize_choice(function()
+		return open_inventory_dialog_unsynced(unit)
+	end)
+
+	-- Re-run the same operations (e.g. Equip/Unequip) for all other players.
+	inventory_dialog.mpsafety:synchronize(result)
 end
 
 -- Tag [show_inventory] displays the inventory dialog for the unit.

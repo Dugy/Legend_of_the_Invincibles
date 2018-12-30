@@ -51,7 +51,7 @@ local inventory_config = {
 			label = _"Unequip (store) all items",
 			onclick = function(unit)
 				if wesnoth.confirm(_"Are you sure? All items of this unit will be placed into the item storage.") then
-					loti.item.util.undress_unit(unit)
+					inventory_dialog.mpsafety:queue({ command = "undress", unit = unit })
 					inventory_dialog.goto_tab("items_tab") -- redraw, items are no longer in the slots
 				end
 			end
