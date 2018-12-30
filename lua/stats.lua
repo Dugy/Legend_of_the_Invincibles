@@ -586,17 +586,23 @@ function wesnoth.update_stats(original)
 							end
 							for anim in helper.child_range(unit_type, "attack_anim") do
 								local filter = helper.get_child(anim, "filter_attack")
-								if filter and filter.name == eff.name then
+								if filter and filter.name == strongest_attack.name then
 									right_anim = anim
 									break -- priority
-								elseif filter and filter.range == eff.range then
+								elseif filter and filter.range == strongest_attack.range then
 									right_anim = anim
 								elseif not filter then
 									right_anim = anim
 								end
 							end
+							right_anim = wesnoth.deepcopy(right_anim)
+							local filter = helper.get_child(right_anim, "filter_attack")
+							if filter.name then
+								filter.name = eff.name
+							end
 							table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
 						end
+						strongest_attack.name = eff.name
 						if eff.type then
 							strongest_attack.type = eff.type
 						end
@@ -845,6 +851,9 @@ function wesnoth.update_stats(original)
 	for i = 1,#events_to_fire do
 		remade = call_event_on_unit(remade, events_to_fire[i])
 	end
+
+	-- Restore unit from variable after the WML hooks.
+	wesnoth.wml_actions.unstore_unit { variable = "updated", find_vacant = "no" }
 
 	return remade
 end
