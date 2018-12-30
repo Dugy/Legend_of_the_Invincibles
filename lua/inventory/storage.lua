@@ -163,7 +163,7 @@ end
 
 -- Blank tab is used in equip() to hide the Item Storage tab
 -- before showing "item pick" dialog (which is semi-transparent).
-function get_blank_tab()
+local function get_blank_tab()
 	return wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
@@ -236,9 +236,11 @@ local function show_item_sorts()
 
 	wesnoth.set_dialog_visible(true, listbox_id)
 
-	-- Hide "Equip" button (not applicable) and unhide "View"
+	-- Unhide "View" button.
+	-- Hide "Equip" button and dropdown menu (not applicable).
 	wesnoth.set_dialog_visible(true, "view")
 	wesnoth.set_dialog_visible(false, "equip")
+	wesnoth.set_dialog_visible(false, "storage_dropdown_menu")
 end
 
 -- Returns human-readable description text of the item (string with Pango markup)
@@ -313,6 +315,7 @@ local function onshow(unit, item_sort, is_leftover)
 	local present = unit.valid ~= "recall"
 
 	wesnoth.set_dialog_visible(not empty and present and not is_leftover, "equip")
+	wesnoth.set_dialog_visible(not empty and present, "storage_dropdown_menu")
 
 	-- Show explanation why Equip is not available.
 	local pronoun = _"he"
@@ -389,22 +392,35 @@ end
 
 -- Handler for "Equip" button.
 local function equip()
-	local unit = inventory_dialog.current_unit
-	local item_number = get_selected_item()
-
-	-- Unequip the currently equipped item of the same sort.
-	-- (e.g. if we are equipping a new sword, then unequip the old sword)
+	-- Unequip the currently equipped item of the same sort (if any).
+	-- For example, if we are equipping a new sword, then unequip the old sword.
 	unequip_internal()
 
 	-- Remove new item from storage and give it to the current unit.
 	inventory_dialog.mpsafety:queue({
 		command = "equip",
-		unit = unit,
-		number = item_number,
+		unit = inventory_dialog.current_unit,
+		number = get_selected_item(),
 		sort = shown_item_sort
 	})
-
 	inventory_dialog.goto_tab("items_tab")
+end
+
+-- Handler for "Drop to the ground" button.
+local function drop_item()
+	-- Remove item from storage and place it on the ground.
+	inventory_dialog.mpsafety:queue({
+		command = "drop",
+		unit = inventory_dialog.current_unit, -- Only for coordinates where to drop
+		number = get_selected_item(),
+		sort = shown_item_sort
+	})
+	inventory_dialog.goto_tab("items_tab")
+end
+
+-- Handler for "Destroy to get a random gem" button.
+local function destroy_item()
+	wesnoth.log("error", "destroy_item(): not yet implemented")
 end
 
 -- Add this tab to the dialog.
@@ -446,9 +462,17 @@ return function(provided_inventory_dialog)
 			"close_storage"
 		)
 
+		-- Handler for dropdown menu actions: "Drop item" and "Destroy item".
 		wesnoth.set_dialog_callback(function()
-			local val = wesnoth.get_dialog_value("storage_dropdown_menu")
-			wesnoth.log("error", "Dropdown menu callback! value=" .. tostring(val))
+			-- Note: value of the "dropdown menu" widget with only 2 items
+			-- is false for option #1 and true for option #2.
+			if not wesnoth.get_dialog_value("storage_dropdown_menu") then
+				-- First option on the menu
+				drop_item()
+			else
+				-- Second option in the menu
+				destroy_item()
+			end
 		end, "storage_dropdown_menu")
 	end)
 end
