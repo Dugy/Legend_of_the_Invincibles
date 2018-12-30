@@ -132,6 +132,14 @@ function wesnoth.update_stats(original)
 				table.insert(items_owned, mods[i][2].number)
 				local sort = mods[i][2].sort
 				mods[i][2] = wesnoth.deepcopy(item_list[mods[i][2].number])
+
+				if mods[i][2].sort == "armourword" then
+					if sort == "helm" or sort == "boots" or sort == "gauntlets" then
+						-- Crafted non-armours have only 1/3 of the defence of crafted armours.
+						mods[i][2].defence = mods[i][2].defence / 3
+					end
+				end
+
 				mods[i][2].sort = sort
 			end
 		end

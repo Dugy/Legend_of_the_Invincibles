@@ -256,11 +256,6 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 		end
 
 		item.sort = crafted_sort
-
-		-- Crafted non-armours have only 1/3 of the defence of crafted armours.
-		if item.sort == "helm" or item.sort == "boots" or item.sort == "gauntlets" then
-			item.defence = item.defence / 3
-		end
 	end
 
 	-- Add extra text to the description (if any).
