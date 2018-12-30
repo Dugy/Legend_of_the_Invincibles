@@ -341,9 +341,6 @@ local function onshow(unit)
 			-- Shown in a specially reserved "leftover" slot.
 			leftover_sort = item.sort
 			item.sort = "leftover"
-
-			-- Unhide the leftover slot.
-			wesnoth.set_dialog_visible(true, slot_id)
 		end
 
 		local slot_id = slot_id_by_sort[item.sort]
@@ -354,6 +351,9 @@ local function onshow(unit)
 
 		wesnoth.set_dialog_value(item.name, slot_id, "item_name")
 		wesnoth.set_dialog_value(item.image, slot_id, "item_image")
+
+		-- Unhide the slot (leftover slots are hidden by default).
+		wesnoth.set_dialog_visible(true, slot_id)
 	end
 
 	-- Disable action buttons that aren't applicable.
