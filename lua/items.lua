@@ -219,6 +219,10 @@ loti.item.on_unit.list_regular = function(unit)
 		-- Also potions and books can't be unequipped, so we exclude them too.
 		local listed = item.name and item.sort ~= "limited" and not item.sort:find("potion")
 
+		if item.sort == "gem" or item.sort == "temporary" then
+			listed = false
+		end
+
 		if listed then
 			table.insert(items, item)
 		end
