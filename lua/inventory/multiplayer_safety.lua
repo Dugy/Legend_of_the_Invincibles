@@ -61,9 +61,15 @@ function mpsafety:run_immediately(operation)
 	local unit = operation.unit
 
 	if command == "undress" then
+		-- Remove all items from unit.
 		loti.item.util.undress_unit(unit)
 	elseif command == "unequip" then
+		-- Remove item from unit, add this item to storage.
 		loti.item.util.take_item_from_unit(unit, operation.number, operation.sort)
+	elseif command == "equip" then
+		-- Remove item from storage, add this item to unit.
+		loti.item.storage.remove(operation.number, operation.sort)
+		loti.item.on_unit.add(unit, operation.number, operation.sort)
 	end
 end
 

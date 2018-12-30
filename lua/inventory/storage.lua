@@ -346,6 +346,22 @@ local function onshow(unit, item_sort, is_leftover)
 	end
 end
 
+-- Unequip the current item. Doesn't ask any questions. Doesn't leave the Storage tab.
+-- Used in equip() and unequip().
+local function unequip_internal()
+	local unit = inventory_dialog.current_unit
+	local item = loti.item.on_unit.find(unit, shown_item_sort)
+
+	if item then
+		inventory_dialog.mpsafety:queue({
+			command = "unequip",
+			unit = unit,
+			number = item.number,
+			sort = item.sort
+		})
+	end
+end
+
 -- Handler for the "Unequip" button.
 local function unequip()
 	if shown_item_is_leftover then
@@ -360,16 +376,7 @@ local function unequip()
 		end
 	end
 
-	local unit = inventory_dialog.current_unit
-	local item = loti.item.on_unit.find(unit, shown_item_sort)
-
-	inventory_dialog.mpsafety:queue({
-		command = "unequip",
-		unit = unit,
-		number = item.number,
-		sort = item.sort
-	})
-
+	unequip_internal()
 	inventory_dialog.goto_tab("items_tab")
 end
 
@@ -385,12 +392,18 @@ local function equip()
 	local unit = inventory_dialog.current_unit
 	local item_number = get_selected_item()
 
-	-- Because the "pick item" dialog (that we are about to open) is semi-transparent,
-	-- make sure that "Equip" and "Close" buttons don't show through it. (confusing)
-	inventory_dialog.goto_tab("blank_tab")
+	-- Unequip the currently equipped item of the same sort.
+	-- (e.g. if we are equipping a new sword, then unequip the old sword)
+	unequip_internal()
 
-	-- Unstore this item. Show "pick item" dialog.
-	loti.item.util.get_item_from_storage(unit, item_number, shown_item_sort)
+	-- Remove new item from storage and give it to the current unit.
+	inventory_dialog.mpsafety:queue({
+		command = "equip",
+		unit = unit,
+		number = item_number,
+		sort = shown_item_sort
+	})
+
 	inventory_dialog.goto_tab("items_tab")
 end
 
