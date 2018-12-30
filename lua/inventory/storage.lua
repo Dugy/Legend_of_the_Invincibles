@@ -79,7 +79,7 @@ local function get_tab()
 			},
 
 			wml.tag.column {
-				border = "right",
+				border = "right,left",
 				border_size = 20,
 				wml.tag.label {
 					id = "noequip_reason"
@@ -260,11 +260,11 @@ end
 
 -- Last shown item_sort, used in Equip/Unequip callbacks.
 local shown_item_sort
-local shown_item_is_leftover
+local can_equip
 
 -- Callback that updates "Item storage" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
-local function onshow(unit, item_sort, is_leftover)
+local function onshow(unit, item_sort)
 	-- Clear the form. Keep the listbox hidden until populated.
 	wesnoth.set_dialog_visible(false, listbox_id)
 	if listbox_row > 0 then
@@ -280,11 +280,16 @@ local function onshow(unit, item_sort, is_leftover)
 
 	-- Record things that will be needed in Equip/Unequip callbacks.
 	shown_item_sort = item_sort
-	shown_item_is_leftover = is_leftover
 	shown_items = {}
 
 	if not item_sort then
 		return show_item_sorts()
+	end
+
+	-- Remember whether the items of this sort can be equipped.
+	can_equip = true
+	if not loti_util_list_equippable_sorts(unit.type)[item_sort] then
+		can_equip = false
 	end
 
 	-- Display currently equipped item (if any)
@@ -310,11 +315,12 @@ local function onshow(unit, item_sort, is_leftover)
 		shown_items[listbox_row] = item_number
 	end
 
-	-- Hide Equip button for: a) empty storage, b) unit on recall list, c) leftover item.
+	-- Hide Equip button for: a) empty storage, b) unit on recall list,
+	-- c) when viewing items that can't be equipped by current unit.
 	local empty = not shown_items[1]
 	local present = unit.valid ~= "recall"
 
-	wesnoth.set_dialog_visible(not empty and present and not is_leftover, "equip")
+	wesnoth.set_dialog_visible(not empty and present and can_equip, "equip")
 	wesnoth.set_dialog_visible(not empty and present, "storage_dropdown_menu")
 
 	-- Show explanation why Equip is not available.
@@ -329,10 +335,10 @@ local function onshow(unit, item_sort, is_leftover)
 			_" can't take new items from the storage.",
 			"noequip_reason")
 		wesnoth.set_dialog_visible(true, "noequip_reason")
-	elseif is_leftover then
+	elseif not can_equip then
 		wesnoth.set_dialog_value(
-			_"This unit can no longer equip such items.\n" ..
-			_"They are no longer worthy of a mighty " .. unit.__cfg['language_name'] .. ".",
+			_"This unit can't equip such items.\n" ..
+			_"They are unworthy of a mighty " .. unit.__cfg['language_name'] .. ".",
 			"noequip_reason")
 		wesnoth.set_dialog_visible(true, "noequip_reason")
 	end
@@ -367,8 +373,8 @@ end
 
 -- Handler for the "Unequip" button.
 local function unequip()
-	if shown_item_is_leftover then
-		-- Warn that this item can't be re-equipped.
+	if not can_equip then
+		-- Leftover item. Warn that this item can't be re-equipped.
 		local are_you_sure = "<span size='x-large'>" .. _"WARNING:" .. "</span> " ..
 			_"this item is purely nostalgic (from the good old times when this unit needed it).\n" ..
 			_"If you unequip it, this unit won't be able to equip it again.\n\n" ..

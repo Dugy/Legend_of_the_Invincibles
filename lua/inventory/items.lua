@@ -100,13 +100,11 @@ local leftover_sort
 -- Lua function that is called when player clicks on an inventory slot
 -- (e.g. on the image of gauntlets).
 inventory_config.slot_callback = function(item_sort)
-	local is_leftover = false
 	if item_sort == "leftover" then
 		item_sort = leftover_sort
-		is_leftover = true
 	end
 
-	inventory_dialog.goto_tab("storage_tab", item_sort, is_leftover)
+	inventory_dialog.goto_tab("storage_tab", item_sort)
 end
 
 -- Construct tab: "items on the unit".
