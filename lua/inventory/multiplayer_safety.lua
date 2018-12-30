@@ -62,6 +62,8 @@ function mpsafety:run_immediately(operation)
 
 	if command == "undress" then
 		loti.item.util.undress_unit(unit)
+	elseif command == "unequip" then
+		loti.item.util.take_item_from_unit(unit, operation.number, operation.sort)
 	end
 end
 

@@ -363,7 +363,13 @@ local function unequip()
 	local unit = inventory_dialog.current_unit
 	local item = loti.item.on_unit.find(unit, shown_item_sort)
 
-	loti.item.util.take_item_from_unit(unit, item.number, item.sort)
+	inventory_dialog.mpsafety:queue({
+		command = "unequip",
+		unit = unit,
+		number = item.number,
+		sort = item.sort
+	})
+
 	inventory_dialog.goto_tab("items_tab")
 end
 
