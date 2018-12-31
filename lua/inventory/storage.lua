@@ -448,9 +448,9 @@ local function destroy_item()
 	})
 
 	-- Tell player which gem was picked.
-	-- TODO: double-check that this doesn't cause OoS.
-	-- (this object is removed by the next update_stats() and doesn't affect anything, but still...)
-	wesnoth.wml_actions.object(loti.item.type[520 + gem])
+	local item = loti.item.type[520 + gem]
+	wesnoth.show_popup_dialog(item.name, item.description, item.image)
+
 	inventory_dialog.goto_tab("items_tab")
 end
 
