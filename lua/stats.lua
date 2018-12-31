@@ -3,8 +3,6 @@ local helper = wesnoth.require "lua/helper.lua"
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 -- Setup constants
-item_list = {} -- will be filled when used below
-
 sort_list = { "armour", "helm", "boots", "gauntlets", "boots", "gauntlets", "limited", "amulet", "ring", "cloak", "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
 
 weapon_type_list = { "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
@@ -115,23 +113,13 @@ function wesnoth.update_stats(original)
 	end
 
 	-- Update items to remove modifications made and temporary objects
-	if #item_list == 0 then
-		local item_list_wml = wesnoth.get_variable("item_list")
-		if item_list_wml then
-			for i = 1,#item_list_wml do
-				if item_list_wml[i] and item_list_wml[i][2].number then
-					item_list[item_list_wml[i][2].number] = item_list_wml[i][2]
-				end
-			end
-		end
-	end
 	local items_owned = {}
 	local function clean_objects(mods)
 		for i = 1,#mods do
-			if mods[i][1] == "object" and mods[i][2].number and item_list[mods[i][2].number] then
+			if mods[i][1] == "object" and mods[i][2].number then
 				table.insert(items_owned, mods[i][2].number)
 				local sort = mods[i][2].sort
-				mods[i][2] = wesnoth.deepcopy(item_list[mods[i][2].number])
+				mods[i][2] = wesnoth.deepcopy(loti.item.type[mods[i][2].number])
 
 				if mods[i][2].sort == "armourword" and sort ~= "armour" and mods[i][2].defence then
 					-- Crafted non-armours have only 1/3 of the defence of crafted armours.
