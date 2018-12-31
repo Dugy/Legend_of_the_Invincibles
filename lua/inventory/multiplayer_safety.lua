@@ -74,6 +74,15 @@ function mpsafety:run_immediately(operation)
 		-- Remove item from storage, place it on the ground.
 		loti.item.storage.remove(operation.number, operation.sort)
 		loti.item.on_the_ground.add(operation.number, unit.x, unit.y, operation.sort)
+	elseif command == "destroy" then
+		-- Remove item from storage, add one gem as compensation.
+		loti.item.storage.remove(operation.number, operation.sort)
+
+		local gems = loti.gem.get_counts()
+		gems[operation.gem] = gems[operation.gem] + 1
+		loti.gem.set_counts(gems)
+	else
+		helper.wml_error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
 	end
 end
 

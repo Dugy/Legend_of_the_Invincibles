@@ -426,7 +426,20 @@ end
 
 -- Handler for "Destroy to get a random gem" button.
 local function destroy_item()
-	wesnoth.log("error", "destroy_item(): not yet implemented")
+	-- Remove item from storage, add 1 random gem.
+	local gem = loti.gem.random()
+	inventory_dialog.mpsafety:queue({
+		command = "destroy",
+		number = get_selected_item(),
+		sort = shown_item_sort,
+		gem = gem
+	})
+
+	-- Tell player which gem was picked.
+	-- TODO: double-check that this doesn't cause OoS.
+	-- (this object is removed by the next update_stats() and doesn't affect anything, but still...)
+	wesnoth.wml_actions.object(loti.item.type[520 + gem])
+	inventory_dialog.goto_tab("items_tab")
 end
 
 -- Add this tab to the dialog.
