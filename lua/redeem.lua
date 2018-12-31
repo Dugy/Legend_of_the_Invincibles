@@ -494,7 +494,7 @@ function redeem_menu(ability_tree, unit)
 		end
 
 		wesnoth.set_dialog_callback(toggle_ok_button, listbox_id)
-
+		wesnoth.set_dialog_focus(listbox_id)
 	end
 
 	local selected_menu_item = nil
