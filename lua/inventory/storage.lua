@@ -177,11 +177,11 @@ end
 local function register_dropdown_widget()
 	local size = 25
 
-	local function draw()
+	local function draw(button_image, arrow_image)
 		return {
 			wml.tag.draw {
 				wml.tag.image {
-					name = "buttons/button_dropdown/button_dropdown.png"
+					name = button_image
 				},
 				wml.tag.rectangle {
 					w = "(width)",
@@ -190,7 +190,7 @@ local function register_dropdown_widget()
 					border_color = "114, 79, 46, 255"
 				},
 				wml.tag.image {
-					name = "icons/arrows/short_arrow_left_25.png~ROTATE(-90)"
+					name = arrow_image
 				}
 			}
 		}
@@ -207,10 +207,22 @@ local function register_dropdown_widget()
 			default_width = size,
 			default_height = size,
 
-			wml.tag.state_enabled(draw()),
-			wml.tag.state_disabled(draw()),
-			wml.tag.state_pressed(draw()),
-			wml.tag.state_focused(draw())
+			wml.tag.state_enabled(draw(
+				"buttons/button_dropdown/button_dropdown.png",
+				"icons/arrows/short_arrow_left_25.png~ROTATE(-90)"
+			)),
+			wml.tag.state_disabled(draw(
+				"buttons/button_dropdown/button_dropdown.png~GS()",
+				"icons/arrows/short_arrow_left_25.png~ROTATE(-90)~GS()"
+			)),
+			wml.tag.state_pressed(draw(
+				"buttons/button_dropdown/button_dropdown-pressed.png",
+				"icons/arrows/short_arrow_left_25-pressed.png~ROTATE(-90)"
+			)),
+			wml.tag.state_focused(draw(
+				"buttons/button_dropdown/button_dropdown-pressed.png",
+				"icons/arrows/short_arrow_left_25-active.png~ROTATE(-90)"
+			))
 		}
 	}
 
