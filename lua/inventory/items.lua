@@ -313,6 +313,10 @@ local function onshow(unit)
 		-- This is needed when we redraw the dialog after "Unequip all items".
 		wesnoth.set_dialog_value("", slot_id, "item_image")
 
+		if wesnoth.set_dialog_tooltip then -- Not yet in Wesnoth 1.14
+			wesnoth.set_dialog_tooltip("", slot_id, "item_image")
+		end
+
 		local default_text = ""
 		if equippable_sorts[item_sort] then
 			-- "No such item" message: shown for items that are not yet equipped, but can be.
@@ -349,6 +353,10 @@ local function onshow(unit)
 
 		wesnoth.set_dialog_value(item.name, slot_id, "item_name")
 		wesnoth.set_dialog_value(item.image, slot_id, "item_image")
+
+		if wesnoth.set_dialog_tooltip then -- Not yet in Wesnoth 1.14
+			wesnoth.set_dialog_tooltip(item.description, slot_id, "item_image")
+		end
 
 		-- Unhide the slot (leftover slots are hidden by default).
 		wesnoth.set_dialog_visible(true, slot_id)
