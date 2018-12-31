@@ -172,6 +172,8 @@ loti.gem.show_transmuting_window = function(selected_recipe)
 					wesnoth.set_dialog_value(picked, "gui_gem_chosen")
 					wesnoth.set_dialog_callback(gem_changed, "gui_gem_chosen")
 					gem_changed()
+
+					wesnoth.set_dialog_focus("gui_gem_chosen")
 				end
 
 				local returned = wesnoth.show_dialog(get_dialog(), preshow)
@@ -630,6 +632,8 @@ loti.gem.show_crafting_window = function(x, y)
 					selected_type_changed()
 					selected_recipe_changed()
 					check_validity()
+
+					wesnoth.set_dialog_focus("gui_recipe_chosen")
 				end
 
 				wesnoth.set_dialog_callback(basetype_changed, "gui_basetype_chosen")
