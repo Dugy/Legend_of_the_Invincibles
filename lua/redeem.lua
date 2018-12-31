@@ -299,15 +299,11 @@ known_ability_trees.soul_eater = {
 -- Parameter "ability_tree" can be "redeem" or "soul_eater".
 -- Returns the Lua table { firestorm = 1, lightning = 1, ... }.
 function loti_util_list_existing_upgrades(ability_tree, unit)
-	local temp_variable = "loti_util_temporary_unit"
-	wesnoth.fire("store_unit", { variable = temp_variable, { "filter", { x = unit.x, y = unit.y } } })
-	local advancements = helper.get_variable_array(temp_variable .. ".modifications.advancement")
-	wesnoth.set_variable(temp_variable, nil)
-
 	local known_upgrades = known_ability_trees[ability_tree]
-
 	local found = {}
-	for nr, advancement in pairs(advancements) do
+
+	local modifications = helper.get_child(unit.__cfg, "modifications")
+	for _, advancement in ipairs(helper.child_array(modifications, "advancement")) do
 		if known_upgrades[advancement.id] then
 			found[advancement.id] = 1
 		end
@@ -339,7 +335,7 @@ function redeem_menu(ability_tree, unit)
 		if not existing_upgrades[id] then
 			-- Check if all required upgrades have already been picked
 			local unmet_dependencies = {}
-			for nr2, required_upgrade in pairs(upgrade.requires) do
+			for _, required_upgrade in ipairs(upgrade.requires) do
 				if not existing_upgrades[required_upgrade] then
 					table.insert(unmet_dependencies, required_upgrade)
 				end
@@ -353,7 +349,7 @@ function redeem_menu(ability_tree, unit)
 
 				-- Can't use table.concat(), because unmet_dependencies has translated strings,
 				-- and they are technically objects.
-				for nr3, required_id in pairs(unmet_dependencies) do
+				for nr3, required_id in ipairs(unmet_dependencies) do
 					local required_upgrade = known_upgrades[required_id]
 					local extra_label = required_upgrade.short_name or required_upgrade.label
 
@@ -379,7 +375,7 @@ function redeem_menu(ability_tree, unit)
 	end
 
 	-- Determine the order of menu_items[] array. Non-allowed items should be last.
-	local function menu_sort(a,b)
+	local function menu_sort(a, b)
 		if a.allowed and not b.allowed then
 			return true
 		end
@@ -444,7 +440,10 @@ function redeem_menu(ability_tree, unit)
 					border = "bottom",
 					border_size = 10,
 					wml.tag.label {
-						id = "redeem_menu_top_label"
+						id = "redeem_menu_top_label",
+						use_markup = true,
+						label = "<span size='large' weight='bold'>" ..
+							_"Which new advancement path should our victorious unit get?" .. "</span>"
 					}
 				}
 			},
@@ -471,14 +470,7 @@ function redeem_menu(ability_tree, unit)
 	end
 
 	local function preshow()
-		wesnoth.set_dialog_markup(true, "redeem_menu_top_label")
-		wesnoth.set_dialog_value(
-			"<span size='large' weight='bold'>" .. _"Which new advancement path should our victorious unit get?" .. "</span>",
-			"redeem_menu_top_label"
-		)
-
-
-		for index, menu_item in pairs(menu_items) do
+		for index, menu_item in ipairs(menu_items) do
 			wesnoth.set_dialog_value(menu_item.image, listbox_id, index, "image")
 			wesnoth.set_dialog_value(menu_item.details, listbox_id, index, "upgrade_name")
 
@@ -545,7 +537,7 @@ function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	end
 
 	local count = 0
-	for i in pairs(loti_util_list_existing_upgrades("redeem", units[1])) do count = count + 1 end
+	for _ in pairs(loti_util_list_existing_upgrades("redeem", units[1])) do count = count + 1 end
 
 	wesnoth.set_variable(to_variable, count)
 end
