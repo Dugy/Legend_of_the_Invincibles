@@ -159,7 +159,7 @@ local function get_dialog_widget()
 	end
 
 	return {
-		wml.tag.tooltip { id = "tooltip_large" },
+		wml.tag.tooltip { id = "tooltip" },
 		wml.tag.helptip { id = "tooltip_large" },
 		get_multitab_widget()
 	}
