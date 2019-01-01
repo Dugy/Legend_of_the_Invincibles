@@ -1,22 +1,22 @@
 --! #textdomain "wesnoth-loti"
 --
 -- Functions that manipulate unit inventories and advancements.
--- Note: parameter "user" can accept both WML table and user ID (string).
+-- Note: parameter "unit" can accept both WML table and unit ID (string).
 --
 
 local helper = wesnoth.require "lua/helper.lua"
 
 -- Helper function.
--- Analyze "unit" parameter, which can be WML table or user ID,
--- and return two values: 1) WML table, 2) true if this was user ID, false otherwise.
+-- Analyze "unit" parameter, which can be WML table or unit ID.
+-- Returns WML table.
 local function normalize_unit_param(unit)
-	local is_user_id = false
-	if type(unit) ~= 'table' then
-		is_user_id = true
-		unit = wesnoth.get_unit(unit).__cfg
+	if type(unit) == 'table' then
+		-- WML table.
+		return unit
 	end
 
-	return unit, is_user_id
+	-- Unit ID
+	return wesnoth.get_unit(unit).__cfg
 end
 
 -- Helper function.
@@ -83,7 +83,24 @@ local wml_based_implementation = {
 
 	-- Add item to unit.
 	add_item = function(unit, item_number, item_sort)
-		-- TODO
+		local unit = normalize_unit_param(unit)
+		local modifications = helper.get_child(unit, "modifications")
+
+		local item = wesnoth.deepcopy(loti.item.type[item_number])
+		if item_sort then
+			item.sort = item_sort
+		end
+
+		table.insert(modifications, wml.tag.object(item))
+
+		-- Place updated unit back onto the map.
+		-- Need to know if it's on the map, on recall list or private.
+		local valid = wesnoth.get_unit(unit.id).valid
+		if valid == "map" then
+			wesnoth.put_unit(unit)
+		elseif valid == "recall" then
+			wesnoth.put_recall_unit(unit)
+		end
 	end,
 
 	-- Remove item from unit.
