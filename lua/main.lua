@@ -8,6 +8,7 @@ T = wml.tag
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/items.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/utils.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/unitdata.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/crafting.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/titles.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/redeem.lua")
