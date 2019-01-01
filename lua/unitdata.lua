@@ -100,7 +100,13 @@ local wml_based_implementation = {
 	-- Returns human-readable description of item (string)
 	-- with highlighted active bonuses from item sets on this unit.
 	describe_equipped_item = function(unit, item_number, item_sort)
-		-- TODO
+		for _, item in loti.unit.items(unit) do
+			if item.number == item_number then
+				if not item_sort or item.sort == item_sort then
+					return item.description
+				end
+			end
+		end
 	end
 }
 
