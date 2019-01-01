@@ -545,6 +545,9 @@ local function onsubmit_callback(unit)
 				button.onsubmit(unit, button.id)
 			end
 		end
+
+		-- This click has been handled, don't repeat these callbacks until the next click.
+		clicked_button_id = nil
 	end
 end
 
