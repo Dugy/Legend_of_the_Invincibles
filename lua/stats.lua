@@ -126,6 +126,12 @@ function wesnoth.update_stats(original)
 					mods[i][2].defence = mods[i][2].defence / 3
 				end
 
+				-- Add extra text to the description (if any).
+				if mods[i][2].flavour then
+					mods[i][2].description = mods[i][2].description ..
+						"\n<span color='#808080'><i>" .. mods[i][2].flavour .. "</i></span>"
+				end
+
 				mods[i][2].sort = sort
 			end
 		end

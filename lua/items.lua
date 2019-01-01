@@ -263,12 +263,6 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 		item.sort = crafted_sort
 	end
 
-	-- Add extra text to the description (if any).
-	if item.flavour then
-		item.description = item.description ..
-			"\n<span color='#808080'><i>" .. item.flavour .. "</i></span>"
-	end
-
 	-- Store the fact "unit has this item" by adding a modification to this unit.
 	wesnoth.add_modification(unit, "object", item)
 
