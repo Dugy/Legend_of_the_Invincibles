@@ -251,7 +251,7 @@ end
 -- Add one item to the unit.
 -- Optional parameter "crafted_sort" changes the item_sort of item (only for crafted items).
 loti.item.on_unit.add = function(unit, item_number, crafted_sort)
-	local item = loti.item.type[item_number]
+	local item = wesnoth.deepcopy(loti.item.type[item_number])
 
 	if item.sort == "weaponword" or item.sort == "armourword" then
 		-- Crafted item
