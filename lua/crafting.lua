@@ -223,7 +223,7 @@ loti.gem.show_crafting_report = function(item_number)
 	end
 
 	wesnoth.set_dialog_value(report, "gui_gems_owned")
-	wesnoth.set_dialog_value(item.description, "gui_item_description")
+	wesnoth.set_dialog_value(loti.item.describe_item(item, item.sort), "gui_item_description")
 end
 
 -- Construct the WML of Crafting dialog.

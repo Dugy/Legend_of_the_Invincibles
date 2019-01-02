@@ -33,6 +33,19 @@
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
 
+-- Setup useful item-related constants
+sort_list = { "armour", "helm", "boots", "gauntlets", "boots", "gauntlets", "limited", "amulet", "ring", "cloak", "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
+
+weapon_type_list = { "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
+melee_type_list = { "sword", "axe", "dagger", "spear", "mace", "staff", "polearm", "exotic", "claws", "essence" }
+ranged_type_list = { "bow", "xbow", "knife", "sling", "thunderstick" }
+
+damage_type_list = { "blade", "pierce", "impact", "fire", "cold", "arcane" }
+resist_type_list = { "blade_resist", "pierce_resist", "impact_resist", "fire_resist", "cold_resist", "arcane_resist" }
+resist_type_descriptions = { _"Resistance to blade", _"Resistance to pierce", _"Resistance to impact", _"Resistance to fire", _"Resistance to cold", _"Resistance to arcane"}
+resist_penetrate_list = { "blade_penetrate", "pierce_penetrate", "impact_penetrate", "fire_penetrate", "cold_penetrate", "arcane_penetrate" }
+resist_penetrate_descriptions = { _"Enemy resistances to blade", _"Enemy resistances to pierce", _"Enemy resistances to impact", _"Enemy resistances to fire", _"Enemy resistances to cold", _"Enemy resistances to arcane"}
+
 loti.item = {}
 loti.item.storage = {}
 loti.item.type = {}
@@ -461,4 +474,267 @@ end
 -- Parameters: cfg.number and cfg.sort.
 function wesnoth.wml_actions.loti_item_storage_add(cfg)
 	loti.item.storage.add(cfg.number, cfg.sort)
+end
+
+-------------------------------------------------------------------------------
+-- Generate item desciptions
+-------------------------------------------------------------------------------
+
+-- Generate the description of an item
+loti.item.describe_item = function(number, sort, set_items)
+	local item = loti.item.type[number]
+	if item.description then
+		return item.description -- Already has one (for manually set one)
+	end
+	local desc = {}
+
+	if item.defence then
+		local defence = item.defence
+		if item.sort == "armourword" and (sort == "boots" or sort == "helm" or sort == "gauntlets") then
+			defence = defence / 3
+		end
+		if defence > 0 then
+			table.insert(desc, _"<span color='#60A0FF'>Increases physical resistances by " .. tostring(defence) .. "% </span>")
+		else
+			table.insert(desc, _"<span color='#60A0FF'>Decreases physical resistances by " .. tostring(defence * -1) .. "% </span>")
+		end
+	end
+
+	local function describe_damage_modification(variable, ending)
+		if variable then
+			if variable > 0 then
+				table.insert(desc, _"<span color='green'>Damage increased by " .. tostring(variable) .. ending)
+			else
+				table.insert(desc, "<span color='green'>Damage decreased by " .. tostring(variable * -1) .. ending)
+			end
+		end
+	end
+	describe_damage_modification(item.damage, _"%</span>")
+	describe_damage_modification(item.damage_plus, _"</span>")
+	describe_damage_modification(item.melee_damage, _"% (melee attacks only)</span>")
+	describe_damage_modification(item.melee_damage_plus, _" (melee attacks only)</span>")
+	describe_damage_modification(item.ranged_damage, _"% (ranged attacks only)</span>")
+	describe_damage_modification(item.ranged_damage_plus, _" (ranged attacks only)</span>")
+
+	local is_weapon = false
+	for i = 1,#weapon_type_list do
+		if weapon_type_list[i] == item.sort then
+			is_weapon = true
+		end
+	end
+	local function describe_attacks_modification(variable, ending, ending_fewer)
+		if variable then
+			if variable > 0 then
+				table.insert(desc, _"<span color='green'>" .. tostring(variable) .. ending)
+			else
+				table.insert(desc, _"<span color='green'>" .. tostring(variable * -1) .. ending_fewer)
+			end
+		end
+	end	
+	if is_weapon then
+		describe_attacks_modification(item.attacks, _"% more attacks </span>", _"% fewer attacks </span>")
+	else
+		describe_attacks_modification(item.attacks, _" more attacks </span>", _" fewer attacks </span>")
+	end
+	describe_attacks_modification(item.attacks_plus, _" more attacks </span>", _" fewer attacks </span>")
+
+	if item.merge then
+		table.insert(desc, _"<span color='green'>Merges attacks</span>")
+	end
+
+	if item.damage_type then
+		if item.damage_type == "fire" then table.insert(desc, _"<span color='green'>Sets weapon damage type to fire</span>")
+		elseif item.damage_type == "cold" then table.insert(desc, _"<span color='green'>Sets weapon damage type to cold</span>")
+		elseif item.damage_type == "arcane" then table.insert(desc, _"<span color='green'>Sets weapon damage type to arcane</span>")
+		elseif item.damage_type == "blade" then table.insert(desc, _"<span color='green'>Sets weapon damage type to blade</span>")
+		elseif item.damage_type == "impact" then table.insert(desc, _"<span color='green'>Sets weapon damage type to impact</span>")
+		elseif item.damage_type == "pierce" then table.insert(desc, _"<span color='green'>Sets weapon damage type to pierce</span>")
+		elseif item.damage_type == "lightning" then table.insert(desc, _"<span color='green'>Sets weapon damage type to lightning</span>") end
+	end
+
+	if item.suck then
+		table.insert(desc, _"<span color='#60A0FF'>Sucks " .. tostring(item.suck) .. _" health from targets with each hit</span>")
+	end
+
+	if item.spell_suck then
+		table.insert(desc, _"<span color='#60A0FF'>Spells suck " .. tostring(item.spell_suck) .. _" health from targets with each hit</span>")
+	end
+
+	if item.devastating_blow then
+		table.insert(desc, _"<span color='#60A0FF'>" .. tostring(item.devastating_blow) .. _"% chance to strike a devastating blow</span>")
+	end
+
+	for i = 1,#damage_type_list do
+		if item[resist_type_list[i]] then
+			if item[resist_type_list[i]] > 0 then
+				table.insert(desc, _"<span color='#60A0FF'>" .. resist_type_descriptions[i] .. _" increased by " .. tostring(item[resist_type_list[i]]) .. _"%</span>")
+			else
+				table.insert(desc, _"<span color='#60A0FF'>" .. resist_type_descriptions[i] .. _" decreased by " .. tostring(item[resist_type_list[i]] * -1) .. _"%</span>")
+			end
+		end
+		if item[resist_penetrate_list[i]] then
+			if item[resist_penetrate_list[i]] > 0 then
+				table.insert(desc, _"<span color='green'>" .. resist_penetrate_descriptions[i] .. _" decreased by " .. tostring(item[resist_penetrate_list[i]]) .. _"%</span>")
+			else
+				table.insert(desc, _"<span color='green'>" .. resist_penetrate_descriptions[i] .. _" increased by " .. tostring(item[resist_penetrate_list[i]] * -1) .. _"%</span>")
+			end
+		end
+	end
+
+	local function add_specials(tag, ending)
+		local specials = helper.get_child(item, tag)
+		if specials then
+			for i = 1,#specials do
+				if specials[i][2].name then
+					table.insert(desc, "<span color='green'>New weapon special: " .. specials[i][2].name .. ending)
+				end
+			end
+		end
+	end
+	add_specials("specials", "</span>")
+	add_specials("specials_melee", " (melee weapons only)</span>")
+	add_specials("specials_ranged", " (ranged weapons only)</span>")
+
+	if item.vision then
+		if item.vision > 0 then
+			table.insert(desc, _"<span color='#60A0FF'>Increases vision range by " .. tostring(item.vision) .. _"</span>")
+		else
+			table.insert(desc, _"<span color='#60A0FF'>Decreases vision range by " .. tostring(item.vision * -1) .. _"</span>")
+		end
+	end
+
+	for i = 1,#item do
+		local line
+		local effect = item[i][2]
+		if effect.desc then
+			line = effect.desc -- Mostly for [latent] properties
+		elseif item[i][2].apply_to then
+			if effect.apply_to == "new_ability" then
+				local abilities = helper.get_child(effect, "abilities")
+				if abilities then
+					for j = 1,#abilities do
+						if abilities[j][2].name then
+							line = _"<span color='#60A0FF'>New ability: " .. abilities[j][2].name .. _"</span>"
+						end
+					end
+				end
+			elseif effect.apply_to == "movement" then
+				if effect.increase == 1 then
+					line = _"<span color='#60A0FF'>1 extra movement point </span>"
+				elseif effect.increase > 1 then
+					line = _"<span color='#60A0FF'>" .. tostring(item.vision) .. _"more movement points</span>"
+				elseif effect.increase == -1 then
+					line = _"<span color='#60A0FF'>1 less movement point </span>"
+				else
+					line = _"<span color='#60A0FF'>" .. tostring(effect.increase * -1) .. _" fewer movement points</span>"
+				end
+			elseif effect.apply_to == "hitpoints" then
+				local ending
+				if effect.times == "per level" then
+					ending = _" per level</span>"
+				else
+					ending = _"</span>"
+				end
+				if effect.increase_total then
+					if effect.increase_total > 0 then
+						line = _"<span color='#60A0FF'>" .. tostring(effect.increase_total) .. _" more hitpoints" .. ending
+					else
+						line = _"<span color='#60A0FF'>" .. tostring(effect.increase_total * -1) .. _" fewer hitpoints" .. ending
+					end
+				end
+			elseif effect.apply_to == "defense" and helper.get_child(effect, "defense") then
+				local def = helper.get_child(effect, "defense")
+				local function describe(tag, text)
+					if def[tag] then
+						if def[tag] > 0 then
+							line = _"<span color='#60A0FF'>Chance to get hit " .. text .. _" increased by " .. tostring(def[tag]) .. " </span>"
+						else
+							line = _"<span color='#60A0FF'>Chance to get hit " .. text .. _" decreased by " .. tostring(def[tag] * -1) .. " </span>"
+						end
+					end
+				end
+				describe("forest", _"in forests")
+				describe("frozen", _"on frozen places")
+				describe("flat", _"on flat terrains")
+				describe("cave", _"in caves")
+				describe("fungus", _"in mushroom groves")
+				describe("village", _"in villages")
+				describe("castle", _"in castles")
+				describe("shallow_water", _"in shallow waters")
+				describe("reef", _"on coastal reefs")
+				describe("deep_water", _"in deep water")
+				describe("swamp_water", _"in swamps")
+				describe("hills", _"on hills")
+				describe("mountains", _"on mountains")
+				describe("sand", _"on sands")
+				describe("unwalkable", _"above unwalkable places")
+				describe("impassable", _"inside impassable walls")
+			elseif effect.apply_to == "movement_costs" and helper.get_child(effect, "movement_costs") then
+				local mov = helper.get_child(effect, "movement_costs")
+				local function describe(tag, text)
+					if mov[tag] then
+						line = _"<span color='#60A0FF'>Movement costs " .. text .. _" set to " .. tostring(mov[tag]) .. " </span>"
+					end
+				end
+				describe("forest", _"through forests")
+				describe("frozen", _"on frozen lands")
+				describe("flat", _"on flat terrains")
+				describe("cave", _"through dark caves")
+				describe("fungus", _"through mushroom groves")
+				describe("village", _"through villages")
+				describe("castle", _"through castles")
+				describe("shallow_water", _"in shallow waters")
+				describe("reef", _"on coastal reefs")
+				describe("deep_water", _"in deep waters")
+				describe("swamp_water", _"through swampy places")
+				describe("hills", _"on hills")
+				describe("mountains", _"on mountains")
+				describe("sand", _"across sands")
+				describe("unwalkable", _"above unwalkable places")
+				describe("impassable", _"through impassable walls")
+			elseif effect.apply_to == "alignment" then
+				if effect.alignment == "chaotic" then line = _"<span color='green'>Sets alignment to chaotic</span>"
+				elseif effect.alignment == "liminal" then line = _"<span color='green'>Sets alignment to liminal</span>"
+				elseif effect.alignment == "lawful" then line = _"<span color='green'>Sets alignment to lawful</span>"
+				elseif effect.alignment == "neutral" then line = _"<span color='green'>Sets alignment to neutral</span>" end
+			elseif effect.apply_to == "bonus_attack" then
+				line = _"<span color='geen'>Bonus attack: " .. effect.description .. " </span>"
+			elseif effect.apply_to == "status" and effect.add == "not_living" then
+				line = _"<span color='#60A0FF'>Unlife (immunity to poison, plague and drain)</span>"
+			elseif effect.apply_to == "new_attack" then
+				line = _"<span color='green'>New attack: " .. effect.name .. " (" .. tostring(effect.damage) .. _" - " .. tostring(effect.number) .. _")</span>"
+			elseif effect.apply_to == "new_advancement" then
+				line = _"<span color='yellow'>New advancements: " .. effect.description .. _"</span>"
+			end
+		end
+		if effect.required and set_items then
+			local fulfilled = 0
+			for num in string.gmatch(effect.required, "[^%s,][^,]*") do
+				local sought = tonumber(num)
+				for i = 1,#set_items do
+					if set_items[i] == sought then
+						fulfilled = fulfilled + 1
+						break
+					end
+				end
+			end
+			if (not effect.needed and fulfilled >= 1) or (effect.needed and fulfilled >= effect.needed) then
+				line = "<b>" .. line .. "</b>"
+			end
+		end
+		table.insert(desc, line)
+	end
+	for i = 1,#desc do
+		desc[i] = tostring(desc[i]) -- Convert from translatable string
+	end
+	local result = table.concat(desc, "\n")
+	return result
+end
+
+function wesnoth.wml_actions.describe_object(cfg)
+	local number = cfg.number or helper.wml_error("[describe_object] lacks a required number= key")
+	local sort = cfg.sort or "unspecified"
+	local output = cfg.output or "object_description"
+	local result = loti.item.describe_item(number, sort)
+	wesnoth.set_variable(output, result)
 end

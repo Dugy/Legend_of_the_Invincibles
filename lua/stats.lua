@@ -2,17 +2,6 @@ local helper = wesnoth.require "lua/helper.lua"
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 
--- Setup constants
-sort_list = { "armour", "helm", "boots", "gauntlets", "boots", "gauntlets", "limited", "amulet", "ring", "cloak", "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
-
-weapon_type_list = { "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
-melee_type_list = { "sword", "axe", "dagger", "spear", "mace", "staff", "polearm", "exotic", "claws", "essence" }
-ranged_type_list = { "bow", "xbow", "knife", "sling", "thunderstick" }
-
-damage_type_list = { "blade", "pierce", "impact", "fire", "cold", "arcane" }
-resist_type_list = { "blade_resist", "pierce_resist", "impact_resist", "fire_resist", "cold_resist", "arcane_resist" }
-resist_penetrate_list = { "blade_penetrate", "pierce_penetrate", "impact_penetrate", "fire_penetrate", "cold_penetrate", "arcane_penetrate" }
-
 local function call_event_on_unit(u, name)
 	local old_id = u.id
 	local id = "lua_stats_updating_dummy"
@@ -233,9 +222,9 @@ function wesnoth.update_stats(original)
 	vars.updated = true
 
 	-- Modifications are read when drawing, we may keep the effects elsewhere and apply them only when we need
-	for i = 1,#mods do
-		wesnoth.add_modification(remade, "object", mods[i][2], false)
-	end
+--	for i = 1,#mods do
+--		wesnoth.add_modification(remade, "object", mods[i][2], false) -- TODO: Do this differently, it doesn't work this way
+--	end
 
 	-- Remove temporary dummy attacks
 	for i = #remade,1,-1 do
