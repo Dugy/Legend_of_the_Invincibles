@@ -56,9 +56,18 @@ loti.item.halo = "halo/misc/leadership-flare-1.png:20,halo/misc/leadership-flare
 -- Add item_number to storage.
 -- Optional parameter crafted_sort: if present, overrides item_sort of the item.
 loti.item.storage.add = function(item_number, crafted_sort)
+	local item = loti.item.type[item_number]
+	if item.sort == "gold" then
+		-- Special case: gold is added directly, not stored in Item Storage.
+		local side = wesnoth.sides[wesnoth.current.side]
+		side.gold = side.gold + item.gold_quantity
+		return
+	end
+
 	local list = wesnoth.get_variable("item_storage") or {}
+
 	table.insert(list, {
-		crafted_sort or loti.item.type[item_number].sort,
+		crafted_sort or item.sort,
 		{ type = item_number }
 	})
 
