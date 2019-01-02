@@ -340,7 +340,8 @@ loti.gem.get_crafting_dialog = function()
 				border = "all",
 				border_size = 5,
 				wml.tag.label {
-					id = "gui_recipe_name"
+					id = "gui_recipe_name",
+					characters_per_line = 20
 				}
 			}
 		}
@@ -367,17 +368,15 @@ loti.gem.get_crafting_dialog = function()
 			wml.tag.column {
 				wml.tag.label {
 					id = "gui_gems_owned",
-					use_markup = true,
-					characters_per_line = 40
+					use_markup = true
 				}
 			}
 		},
 		wml.tag.row {
 			wml.tag.column {
-				wml.tag.label {
+				wml.tag.scroll_label {
 					id = "gui_item_description",
-					use_markup = true,
-					characters_per_line = 40
+					use_markup = true
 				}
 			}
 		}
