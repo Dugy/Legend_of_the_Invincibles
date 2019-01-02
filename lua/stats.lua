@@ -603,7 +603,6 @@ function wesnoth.update_stats(original)
 							end
 							if right_anim then
 								right_anim = wesnoth.deepcopy(right_anim)
-								wesnoth.dbms(right_anim)
 								local filter = helper.get_child(right_anim, "filter_attack")
 								if filter.name then
 									filter.name = eff.name
