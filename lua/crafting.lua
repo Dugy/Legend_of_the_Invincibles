@@ -241,7 +241,8 @@ loti.gem.get_crafting_dialog = function()
 				grow_factor = 1,
 				horizontal_grow = true,
 				wml.tag.label {
-					id = "gui_basetype_name"
+					id = "gui_basetype_name",
+					characters_per_line = 25
 				}
 			}
 		}
@@ -300,10 +301,10 @@ loti.gem.get_crafting_dialog = function()
 				grow_factor = 1,
 				horizontal_grow = true,
 				border = "all",
-				border_size = 10,
+				border_size = 5,
 				wml.tag.label {
 					id = "gui_type_name",
-					characters_per_line = 30
+					characters_per_line = 24
 				}
 			}
 		}
@@ -386,13 +387,14 @@ loti.gem.get_crafting_dialog = function()
 	local main_widget = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
+				grow_factor = 0,
 				border = "right",
-				border_size = 20,
+				border_size = 10,
 				vertical_alignment = "top",
 				wml.tag.grid {
 					wml.tag.row {
 						wml.tag.column {
-							wml.tag.spacer { width = 350 }
+							wml.tag.spacer { width = 255 }
 						}
 					},
 					wml.tag.row {
@@ -418,7 +420,7 @@ loti.gem.get_crafting_dialog = function()
 			},
 			wml.tag.column {
 				border = "left",
-				border_size = 20,
+				border_size = 10,
 				vertical_alignment = "top",
 				gem_information
 			}
