@@ -443,3 +443,13 @@ loti.item.util.get_item_from_storage = function(unit, item_number, crafted_sort)
 	loti.item.on_the_ground.add(item_number, unit.x, unit.y, crafted_sort)
 	wesnoth.fire_event("item pick", unit.x, unit.y)
 end
+
+-------------------------------------------------------------------------------
+-- WML tags based on loti.item methods.
+-------------------------------------------------------------------------------
+
+-- Tag [loti_item_storage_add] does the same as loti.item.storage.add().
+-- Parameters: cfg.number and cfg.sort.
+function wesnoth.wml_actions.loti_item_storage_add(cfg)
+	loti.item.storage.add(cfg.number, cfg.sort)
+end
