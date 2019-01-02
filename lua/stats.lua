@@ -584,12 +584,34 @@ function wesnoth.update_stats(original)
 									right_anim = anim
 								end
 							end
-							right_anim = wesnoth.deepcopy(right_anim)
-							local filter = helper.get_child(right_anim, "filter_attack")
-							if filter.name then
-								filter.name = eff.name
+							if not right_anim then
+								for k = 1,#mods do
+									for inner_eff in helper.child_range(mods[k][2], "effect") do
+										if inner_eff.apply_to == "new_animation" then
+											local filter = helper.get_child(inner_eff, "filter")
+											if not filter or not filter.gender or filter.gender == remade.gender then
+												for anim in helper.child_range(inner_eff, "attack_anim") do
+													local filter = helper.get_child(anim, "filter_attack")
+													if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
+														right_anim = anim
+													end
+												end
+											end
+										end
+									end
+								end
 							end
-							table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
+							if right_anim then
+								right_anim = wesnoth.deepcopy(right_anim)
+								wesnoth.dbms(right_anim)
+								local filter = helper.get_child(right_anim, "filter_attack")
+								if filter.name then
+									filter.name = eff.name
+								end
+								table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
+							else
+								-- This should not happen
+							end
 						end
 						strongest_attack.name = eff.name
 						if eff.type then
