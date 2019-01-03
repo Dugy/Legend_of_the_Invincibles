@@ -673,7 +673,14 @@ loti.item.describe_item = function(number, sort, set_items)
 				local mov = helper.get_child(effect, "movement_costs")
 				local function describe(tag, text)
 					if mov[tag] then
-						line = _"<span color='#60A0FF'>Movement costs " .. text .. _" set to " .. tostring(mov[tag]) .. " </span>"
+						if line then
+							-- Found more than one "movement costs" bonus.
+							line = line .. "\n"
+						else
+							line = ""
+						end
+
+						line = line .. _"<span color='#60A0FF'>Movement costs " .. text .. _" set to " .. tostring(mov[tag]) .. " </span>"
 					end
 				end
 				describe("forest", _"through forests")
