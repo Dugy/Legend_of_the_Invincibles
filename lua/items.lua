@@ -738,3 +738,10 @@ function wesnoth.wml_actions.describe_object(cfg)
 	local result = loti.item.describe_item(number, sort)
 	wesnoth.set_variable(output, result)
 end
+
+-- Invalidate cache of loti.item.type[].
+-- Used at the end of GENERATE_ITEM_LIST macro,
+-- after all [describe_object] tags (they change item descriptions in item_list).
+function wesnoth.wml_actions.clear_item_list_cache()
+	loti.item.type._reload()
+end
