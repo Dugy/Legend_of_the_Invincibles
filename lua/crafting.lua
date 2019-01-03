@@ -232,28 +232,27 @@ loti.gem.get_crafting_dialog = function()
 	local basetype_listbox_template = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
-				grow_factor = 0,
 				wml.tag.image {
 					id = "gui_basetype_icon"
 				}
 			},
 			wml.tag.column {
-				grow_factor = 1,
-				horizontal_grow = true,
+				border = "all",
+				border_size = 10,
 				wml.tag.label {
-					id = "gui_basetype_name",
-					characters_per_line = 25
+					id = "gui_basetype_name"
 				}
-			}
+			},
 		}
 	}
 
-	local basetype_listbox = wml.tag.listbox {
+	local basetype_listbox = wml.tag.horizontal_listbox {
 		id = "gui_basetype_chosen",
 		wml.tag.list_definition {
 			wml.tag.row {
 				wml.tag.column {
-					horizontal_grow = true,
+					border = "right",
+					border_size = 10,
 					wml.tag.toggle_panel {
 						tooltip = _"Choose between armour and weapon",
 						basetype_listbox_template
@@ -304,7 +303,7 @@ loti.gem.get_crafting_dialog = function()
 				border_size = 5,
 				wml.tag.label {
 					id = "gui_type_name",
-					characters_per_line = 24
+					characters_per_line = 30
 				}
 			}
 		}
@@ -341,7 +340,7 @@ loti.gem.get_crafting_dialog = function()
 				border_size = 5,
 				wml.tag.label {
 					id = "gui_recipe_name",
-					characters_per_line = 20
+					characters_per_line = 30
 				}
 			}
 		}
@@ -371,11 +370,17 @@ loti.gem.get_crafting_dialog = function()
 					use_markup = true
 				}
 			}
-		},
+		}
+	}
+
+	local item_information = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
+				horizontal_grow = true,
 				wml.tag.scroll_label {
 					id = "gui_item_description",
+					definition = "description_small",
+					-- definition = "wml_message", -- larger version
 					use_markup = true
 				}
 			}
@@ -398,15 +403,7 @@ loti.gem.get_crafting_dialog = function()
 					},
 					wml.tag.row {
 						wml.tag.column {
-							border = "bottom",
-							border_size = 15,
-							horizontal_grow = true,
-							basetype_listbox
-						}
-					},
-					wml.tag.row {
-						wml.tag.column {
-							horizontal_grow = true,
+							vertical_grow = true,
 							type_listbox
 						}
 					}
@@ -466,7 +463,19 @@ loti.gem.get_crafting_dialog = function()
 				}
 			},
 			wml.tag.row {
+				wml.tag.column {
+					border = "bottom",
+					border_size = 15,
+					basetype_listbox
+				}
+			},
+			wml.tag.row {
 				wml.tag.column { main_widget }
+			},
+			wml.tag.row {
+				wml.tag.column {
+					item_information
+				}
 			},
 			wml.tag.row {
 				wml.tag.column {
