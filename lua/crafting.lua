@@ -297,10 +297,8 @@ loti.gem.get_crafting_dialog = function()
 				}
 			},
 			wml.tag.column {
-				grow_factor = 1,
-				horizontal_grow = true,
 				border = "all",
-				border_size = 5,
+				border_size = 10,
 				wml.tag.label {
 					id = "gui_type_name",
 					characters_per_line = 30
@@ -309,12 +307,11 @@ loti.gem.get_crafting_dialog = function()
 		}
 	}
 
-	local type_listbox = wml.tag.listbox {
+	local type_listbox = wml.tag.horizontal_listbox {
 		id = "gui_type_chosen",
 		wml.tag.list_definition {
 			wml.tag.row {
 				wml.tag.column {
-					horizontal_grow = true,
 					wml.tag.toggle_panel {
 						tooltip = _"Choose item type",
 						type_listbox_template
@@ -339,8 +336,7 @@ loti.gem.get_crafting_dialog = function()
 				border = "all",
 				border_size = 5,
 				wml.tag.label {
-					id = "gui_recipe_name",
-					characters_per_line = 30
+					id = "gui_recipe_name"
 				}
 			}
 		}
@@ -362,21 +358,33 @@ loti.gem.get_crafting_dialog = function()
 		}
 	}
 
-	local gem_information = wml.tag.grid {
+	-- A grid that includes (1) recipe listbox, (2) gem counts, (3) information about selected item.
+	local main_widget = wml.tag.grid {
 		wml.tag.row {
+			-- List of recipes.
 			wml.tag.column {
+				grow_factor = 0,
+				horizontal_alignment = "left",
+				vertical_grow = true, -- For Tutorial, where there is only 1 recipe
+				recipe_listbox
+			},
+			-- Statistics on gems: needed/available
+			wml.tag.column {
+				grow_factor = 0,
+				horizontal_alignment = "left",
+				vertical_alignment = "top",
+				border = "left,right",
+				border_size = 10,
 				wml.tag.label {
 					id = "gui_gems_owned",
 					use_markup = true
 				}
-			}
-		}
-	}
-
-	local item_information = wml.tag.grid {
-		wml.tag.row {
+			},
+			-- Description of selected item.
 			wml.tag.column {
+				grow_factor = 1,
 				horizontal_grow = true,
+				vertical_alignment = "top",
 				wml.tag.scroll_label {
 					id = "gui_item_description",
 					definition = "description_small",
@@ -384,42 +392,7 @@ loti.gem.get_crafting_dialog = function()
 					use_markup = true
 				}
 			}
-		}
-	}
 
-	-- A grid that includes all listboxes: base_type, type and recipe.
-	local main_widget = wml.tag.grid {
-		wml.tag.row {
-			wml.tag.column {
-				grow_factor = 0,
-				border = "right",
-				border_size = 10,
-				vertical_alignment = "top",
-				wml.tag.grid {
-					wml.tag.row {
-						wml.tag.column {
-							wml.tag.spacer { width = 255 }
-						}
-					},
-					wml.tag.row {
-						wml.tag.column {
-							vertical_grow = true,
-							type_listbox
-						}
-					}
-				}
-			},
-			wml.tag.column {
-				horizontal_grow = true,
-				vertical_grow = true, -- For Tutorial, where there is only 1 recipe
-				recipe_listbox
-			},
-			wml.tag.column {
-				border = "left",
-				border_size = 10,
-				vertical_alignment = "top",
-				gem_information
-			}
 		}
 	}
 
@@ -451,6 +424,7 @@ loti.gem.get_crafting_dialog = function()
 	return {
 		wml.tag.tooltip { id = "tooltip_large" },
 		wml.tag.helptip { id = "tooltip_large" },
+		maximum_width = 1000,
 		wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
@@ -465,16 +439,21 @@ loti.gem.get_crafting_dialog = function()
 			wml.tag.row {
 				wml.tag.column {
 					border = "bottom",
-					border_size = 15,
+					border_size = 10,
 					basetype_listbox
 				}
 			},
 			wml.tag.row {
-				wml.tag.column { main_widget }
+				wml.tag.column {
+					border = "bottom",
+					border_size = 15,
+					type_listbox
+				}
 			},
 			wml.tag.row {
 				wml.tag.column {
-					item_information
+					horizontal_grow = true,
+					main_widget
 				}
 			},
 			wml.tag.row {
