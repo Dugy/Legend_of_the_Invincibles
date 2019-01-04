@@ -454,6 +454,7 @@ loti.gem.get_crafting_dialog = function()
 					border = "top",
 					border_size = 10,
 					wml.tag.label {
+						id = "gui_choose_type_label",
 						label = _"Choose type of item:",
 						text_alignment = "left"
 					}
