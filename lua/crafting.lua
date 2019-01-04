@@ -527,14 +527,6 @@ loti.gem.show_crafting_window = function(x, y)
 				end
 
 				local function basetype_changed()
-					for i = 1,#selectable_sorts do
-						wesnoth.set_dialog_value("", "gui_type_chosen", i, "gui_type_name")
-						wesnoth.set_dialog_value("", "gui_type_chosen", i, "gui_type_icon")
-					end
-					for i = 1,#selectable_recipes do
-						wesnoth.set_dialog_value("", "gui_recipe_chosen", i, "gui_recipe_name")
-						wesnoth.set_dialog_value("", "gui_recipe_chosen", i, "gui_recipe_icon")
-					end
 					selectable_sorts = {}
 					selectable_recipes = {}
 
