@@ -484,7 +484,12 @@ end
 loti.item.describe_item = function(number, sort, set_items)
 	local item = loti.item.type[number]
 	if item.description then
-		return item.description -- Already has one (for manually set one)
+		-- Already have the description. No need to recalculate,
+		-- except when this is a craftable armour
+		-- (because gauntlets/boots/helms have less defence than armours).
+		if item.sort ~= "armourword" then
+			return item.description
+		end
 	end
 	local desc = {}
 

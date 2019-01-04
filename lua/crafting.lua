@@ -40,7 +40,7 @@ loti.gem.random = function()
 	return chosen
 end
 
-loti.gem.show_transmuting_window = function(selected_recipe)
+loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 	local gem_quantities = loti.gem.get_counts()
 	local transmutables = { { amount = 4, text = _"4 obsidians", picture = "items/obsidian.png" },
 				{ amount = 2, text = _"2 topazes", picture = "items/topaz.png" },
@@ -196,7 +196,7 @@ loti.gem.show_transmuting_window = function(selected_recipe)
 
 		-- Update the gem counts in the Crafting dialog (which is currently open).
 		if selected_recipe then
-			loti.gem.show_crafting_report(selected_recipe)
+			loti.gem.show_crafting_report(selected_recipe, selected_sort)
 		end
 	end
 end
@@ -205,7 +205,7 @@ end
 -- how many gems are currently available,
 -- how many gems are needed to craft "item_number",
 -- and the description of this item.
-loti.gem.show_crafting_report = function(item_number)
+loti.gem.show_crafting_report = function(item_number, crafted_sort)
 	local item = loti.item.type[item_number]
 	local available = loti.gem.get_counts()
 
@@ -222,7 +222,7 @@ loti.gem.show_crafting_report = function(item_number)
 	end
 
 	wesnoth.set_dialog_value(report, "gui_gems_owned")
-	wesnoth.set_dialog_value(loti.item.describe_item(item.number, item.sort), "gui_item_description")
+	wesnoth.set_dialog_value(loti.item.describe_item(item.number, crafted_sort or item.sort), "gui_item_description")
 end
 
 -- Construct the WML of Crafting dialog.
@@ -483,9 +483,7 @@ loti.gem.show_crafting_window = function(x, y)
 
 	local chose = wesnoth.synchronize_choice(
 		function()
-			local base_type = 1
-			local sort_chosen = 1
-			local recipe_chosen = 541
+			local base_type, sort_chosen, recipe_chosen
 			local crafting_allowed -- Set to true or false in check_validity()
 
 			local selectable_sorts = {}
@@ -525,14 +523,11 @@ loti.gem.show_crafting_window = function(x, y)
 			end
 
 			local function preshow()
-				local function selected_type_changed()
-					sort_chosen = selectable_sorts[wesnoth.get_dialog_value("gui_type_chosen")]
-					check_validity()
-				end
-
-				local function selected_recipe_changed()
+				local function type_or_recipe_selected()
 					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
-					loti.gem.show_crafting_report(recipe_chosen)
+					sort_chosen = selectable_sorts[wesnoth.get_dialog_value("gui_type_chosen")]
+
+					loti.gem.show_crafting_report(recipe_chosen, sort_chosen)
 					check_validity()
 				end
 
@@ -555,11 +550,10 @@ loti.gem.show_crafting_window = function(x, y)
 					local word_from, word_to
 					if base_type == 1 then
 						-- Armour
-						local resistance_note = _"1/3 of promised resistances"
 						populate_item(_"Armour (chest)", "icons/cuirass_muscled.png", "armour")
-						populate_item(_"Helm\n" .. resistance_note, "icons/helmet_great2.png", "helm")
-						populate_item(_"Boots\n" .. resistance_note, "icons/greaves.png", "boots")
-						populate_item(_"Gauntlets\n" .. resistance_note, "icons/gauntlets.png", "gauntlets")
+						populate_item(_"Helm", "icons/helmet_great2.png", "helm")
+						populate_item(_"Boots", "icons/greaves.png", "boots")
+						populate_item(_"Gauntlets", "icons/gauntlets.png", "gauntlets")
 
 						word_from = 531
 						word_to = 560
@@ -620,21 +614,20 @@ loti.gem.show_crafting_window = function(x, y)
 					end
 					wesnoth.set_dialog_value(position, "gui_recipe_chosen")
 
-					selected_type_changed()
-					selected_recipe_changed()
+					type_or_recipe_selected()
 					check_validity()
 
 					wesnoth.set_dialog_focus("gui_recipe_chosen")
 				end
 
 				wesnoth.set_dialog_callback(basetype_changed, "gui_basetype_chosen")
-				wesnoth.set_dialog_callback(selected_type_changed, "gui_type_chosen")
-				wesnoth.set_dialog_callback(selected_recipe_changed, "gui_recipe_chosen")
+				wesnoth.set_dialog_callback(type_or_recipe_selected, "gui_type_chosen")
+				wesnoth.set_dialog_callback(type_or_recipe_selected, "gui_recipe_chosen")
 				wesnoth.set_dialog_callback(function()
 					-- Pass the number of selected recipe to Transmuting dialog,
 					-- so that it could update the report on needed/available gem counts
 					-- after each transmutation.
-					loti.gem.show_transmuting_window(recipe_chosen)
+					loti.gem.show_transmuting_window(recipe_chosen, sort_chosen)
 				end, "transmute")
 
 				basetype_changed()
