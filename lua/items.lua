@@ -627,7 +627,7 @@ loti.item.describe_item = function(number, sort, set_items)
 				if effect.increase == 1 then
 					line = _"<span color='#60A0FF'>1 extra movement point </span>"
 				elseif effect.increase > 1 then
-					line = _"<span color='#60A0FF'>" .. tostring(item.vision) .. _"more movement points</span>"
+					line = _"<span color='#60A0FF'>" .. tostring(effect.increase) .. _" more movement points</span>"
 				elseif effect.increase == -1 then
 					line = _"<span color='#60A0FF'>1 less movement point </span>"
 				else
