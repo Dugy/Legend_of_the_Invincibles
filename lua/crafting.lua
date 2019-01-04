@@ -79,7 +79,6 @@ loti.gem.show_transmuting_window = function(selected_recipe)
 					wml.tag.column {
 						horizontal_grow = true,
 						wml.tag.toggle_panel {
-							tooltip = _"Choose item type",
 							listbox_template
 						}
 					}
@@ -439,21 +438,32 @@ loti.gem.get_crafting_dialog = function()
 			wml.tag.row {
 				wml.tag.column {
 					border = "bottom",
-					border_size = 10,
+					border_size = 5,
 					basetype_listbox
-				}
-			},
-			wml.tag.row {
-				wml.tag.column {
-					border = "bottom",
-					border_size = 15,
-					type_listbox
 				}
 			},
 			wml.tag.row {
 				wml.tag.column {
 					horizontal_grow = true,
 					main_widget
+				}
+			},
+			wml.tag.row {
+				wml.tag.column {
+					horizontal_grow = true,
+					border = "top",
+					border_size = 10,
+					wml.tag.label {
+						label = _"Choose type of item:",
+						text_alignment = "left"
+					}
+				}
+			},
+			wml.tag.row {
+				wml.tag.column {
+					border = "top",
+					border_size = 5,
+					type_listbox
 				}
 			},
 			wml.tag.row {
