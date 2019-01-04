@@ -705,7 +705,7 @@ loti.item.describe_item = function(number, sort, set_items)
 				elseif effect.alignment == "lawful" then line = _"<span color='green'>Sets alignment to lawful</span>"
 				elseif effect.alignment == "neutral" then line = _"<span color='green'>Sets alignment to neutral</span>" end
 			elseif effect.apply_to == "bonus_attack" then
-				line = _"<span color='geen'>Bonus attack: " .. effect.description .. " </span>"
+				line = _"<span color='green'>Bonus attack: " .. effect.description .. " </span>"
 			elseif effect.apply_to == "status" and effect.add == "not_living" then
 				line = _"<span color='#60A0FF'>Unlife (immunity to poison, plague and drain)</span>"
 			elseif effect.apply_to == "new_attack" then
