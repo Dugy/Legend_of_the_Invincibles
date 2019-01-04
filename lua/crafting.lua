@@ -107,6 +107,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 		}
 
 		return {
+			horizontal_placement = "left",
 			wml.tag.tooltip { id = "tooltip_large" },
 			wml.tag.helptip { id = "tooltip_large" },
 			wml.tag.grid {
