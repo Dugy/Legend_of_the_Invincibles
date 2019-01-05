@@ -600,6 +600,10 @@ loti.item.describe_item = function(number, sort, set_items)
 	add_specials("specials_melee", " (melee weapons only)</span>")
 	add_specials("specials_ranged", " (ranged weapons only)</span>")
 
+	if item.magic then
+		table.insert(desc, _"<span color='#60A0FF'>Damage of spells inreased by " .. tostring(item.magic) .. _"%</span>")
+	end
+
 	if item.vision then
 		if item.vision > 0 then
 			table.insert(desc, _"<span color='#60A0FF'>Increases vision range by " .. tostring(item.vision) .. _"</span>")
@@ -619,7 +623,11 @@ loti.item.describe_item = function(number, sort, set_items)
 				if abilities then
 					for j = 1,#abilities do
 						if abilities[j][2].name then
-							line = _"<span color='#60A0FF'>New ability: " .. abilities[j][2].name .. _"</span>"
+							if not line then
+								line = _"<span color='#60A0FF'>New ability: " .. abilities[j][2].name .. _"</span>"
+							else
+								line = line .. "\n" .. _"<span color='#60A0FF'>New ability: " .. abilities[j][2].name .. _"</span>"
+							end
 						end
 					end
 				end
