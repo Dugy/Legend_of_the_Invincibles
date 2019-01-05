@@ -601,7 +601,7 @@ loti.item.describe_item = function(number, sort, set_items)
 	add_specials("specials_ranged", " (ranged weapons only)</span>")
 
 	if item.magic then
-		table.insert(desc, _"<span color='#60A0FF'>Damage of spells inreased by " .. tostring(item.magic) .. _"%</span>")
+		table.insert(desc, _"<span color='#60A0FF'>Damage of spells increased by " .. tostring(item.magic) .. _"%</span>")
 	end
 
 	if item.vision then
