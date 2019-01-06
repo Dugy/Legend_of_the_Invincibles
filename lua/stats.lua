@@ -2,17 +2,6 @@ local helper = wesnoth.require "lua/helper.lua"
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 
--- Setup constants
-sort_list = { "armour", "helm", "boots", "gauntlets", "boots", "gauntlets", "limited", "amulet", "ring", "cloak", "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
-
-weapon_type_list = { "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
-melee_type_list = { "sword", "axe", "dagger", "spear", "mace", "staff", "polearm", "exotic", "claws", "essence" }
-ranged_type_list = { "bow", "xbow", "knife", "sling", "thunderstick" }
-
-damage_type_list = { "blade", "pierce", "impact", "fire", "cold", "arcane" }
-resist_type_list = { "blade_resist", "pierce_resist", "impact_resist", "fire_resist", "cold_resist", "arcane_resist" }
-resist_penetrate_list = { "blade_penetrate", "pierce_penetrate", "impact_penetrate", "fire_penetrate", "cold_penetrate", "arcane_penetrate" }
-
 local function call_event_on_unit(u, name)
 	local old_id = u.id
 	local id = "lua_stats_updating_dummy"
@@ -126,6 +115,12 @@ function wesnoth.update_stats(original)
 					mods[i][2].defence = mods[i][2].defence / 3
 				end
 
+				-- Add extra text to the description (if any).
+				if mods[i][2].flavour then
+					mods[i][2].description = mods[i][2].description ..
+						"\n<span color='#808080'><i>" .. mods[i][2].flavour .. "</i></span>"
+				end
+
 				mods[i][2].sort = sort
 			end
 		end
@@ -227,9 +222,9 @@ function wesnoth.update_stats(original)
 	vars.updated = true
 
 	-- Modifications are read when drawing, we may keep the effects elsewhere and apply them only when we need
-	for i = 1,#mods do
-		wesnoth.add_modification(remade, "object", mods[i][2], false)
-	end
+--	for i = 1,#mods do
+--		wesnoth.add_modification(remade, "object", mods[i][2], false) -- TODO: Do this differently, it doesn't work this way
+--	end
 
 	-- Remove temporary dummy attacks
 	for i = #remade,1,-1 do
@@ -589,12 +584,33 @@ function wesnoth.update_stats(original)
 									right_anim = anim
 								end
 							end
-							right_anim = wesnoth.deepcopy(right_anim)
-							local filter = helper.get_child(right_anim, "filter_attack")
-							if filter.name then
-								filter.name = eff.name
+							if not right_anim then
+								for k = 1,#mods do
+									for inner_eff in helper.child_range(mods[k][2], "effect") do
+										if inner_eff.apply_to == "new_animation" then
+											local filter = helper.get_child(inner_eff, "filter")
+											if not filter or not filter.gender or filter.gender == remade.gender then
+												for anim in helper.child_range(inner_eff, "attack_anim") do
+													local filter = helper.get_child(anim, "filter_attack")
+													if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
+														right_anim = anim
+													end
+												end
+											end
+										end
+									end
+								end
 							end
-							table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
+							if right_anim then
+								right_anim = wesnoth.deepcopy(right_anim)
+								local filter = helper.get_child(right_anim, "filter_attack")
+								if filter.name then
+									filter.name = eff.name
+								end
+								table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
+							else
+								-- This should not happen
+							end
 						end
 						strongest_attack.name = eff.name
 						if eff.type then

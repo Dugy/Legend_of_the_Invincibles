@@ -55,6 +55,7 @@ local function tutorial_craft()
 
 		-- Hide type chooser (Sword/Spear/etc.), sword is the only thing we craft.
 		wesnoth.set_dialog_visible(false, "gui_type_chosen")
+		wesnoth.set_dialog_visible(false, "gui_choose_type_label")
 
 		-- Select "Weapon" in "choose base type" listbox
 		wesnoth.set_dialog_value(2, "gui_basetype_chosen")
