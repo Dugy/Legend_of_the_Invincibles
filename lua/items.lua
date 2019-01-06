@@ -170,10 +170,10 @@ loti.item.type = {
 	-- Returns Lua table { item_number1 = object1, ... }
 	_reload = function()
 		local cache = {}
-		local all_known_types = helper.get_variable_array("item_list.object")
+		local all_known_types = helper.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
 
 		for _, item in ipairs(all_known_types) do
-			cache[item.number] = item
+			cache[item[2].number] = item[2]
 		end
 
 		rawset(loti.item.type, "_cache", cache)

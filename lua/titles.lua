@@ -5,7 +5,7 @@ local helper = wesnoth.require "lua/helper.lua"
 title_table = {}
 flavours_table = { "chivalrous", "wizardly", "dark", "criminal", "warlike", "sneaky", "brutish", "ghostly" }
 
-local title_data = helper.get_child(wesnoth.unit_types["Other Data Loader"].__cfg, "advancement")
+local title_data = helper.get_child(wesnoth.unit_types["Title Data Loader"].__cfg, "advancement")
 for i = 1,#title_data do
 	if title_data[i][1] == "nonterminal" then
 		local made = {}
