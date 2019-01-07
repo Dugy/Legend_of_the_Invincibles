@@ -605,6 +605,10 @@ loti.item.describe_item = function(number, sort, set_items)
 		table.insert(desc, _"<span color='#60A0FF'>Damage of spells increased by " .. tostring(item.magic) .. _"%</span>")
 	end
 
+	if item.dodge then
+		table.insert(desc, _"<span color='green'>Chance to get hit decreased by " .. tostring(item.dodge) .. _"%</span>")
+	end
+
 	if item.vision then
 		if item.vision > 0 then
 			table.insert(desc, _"<span color='#60A0FF'>Increases vision range by " .. tostring(item.vision) .. _"</span>")
