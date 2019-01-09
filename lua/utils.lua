@@ -15,3 +15,13 @@ function wesnoth.deepcopy(orig)
     end
     return copy
 end
+
+-- Places a unit back to the game, on the map or to the recall list
+loti.put_unit = function(unit)
+	local valid = wesnoth.get_unit(unit.id).valid
+	if valid == "map" then
+		wesnoth.put_unit(unit)
+	elseif valid == "recall" then
+		wesnoth.put_recall_unit(unit)
+	end
+end

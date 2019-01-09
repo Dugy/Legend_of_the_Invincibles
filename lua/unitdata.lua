@@ -211,12 +211,7 @@ local wml_based_implementation = {
 
 		-- Place updated unit back onto the map.
 		-- Need to know if it's on the map, on recall list or private.
-		local valid = wesnoth.get_unit(unit.id).valid
-		if valid == "map" then
-			wesnoth.put_unit(unit)
-		elseif valid == "recall" then
-			wesnoth.put_recall_unit(unit)
-		end
+		loti.put_unit(unit)
 	end,
 
 	-- Remove item from unit.
