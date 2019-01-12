@@ -11,7 +11,16 @@ notifications:
 python:
   - 3.6
 
+# Lua package manager, needed to install luacheck (see below).
+addons:
+  apt:
+    packages:
+    - luarocks
+
 before_script:
+  # Install luacheck (Lua static analyzer)
+  - sudo luarocks install luacheck
+
   # Copy the addon elsewhere, so that wmllint can check it without all the other Wesnoth sources
   # (they will also be in the root directory).
   - rsync --exclude .git -a . Legend_of_the_Invincibles
@@ -24,6 +33,17 @@ before_script:
   - wget https://raw.githubusercontent.com/wesnoth/wesnoth/fbb79dc94f2af0840cff5ed44b419778fb4c6281/data/tools/wmllint -O wesnoth/data/tools/wmllint
 
 script:
+# Luacheck is a Lua static analyzer. It notices Lua syntax errors, some typos,
+# things like "accessing undefined variable", unused variables, variables that are unexpectedly global, etc.
+# Exit code: 0 - success (not even a single warning),
+# 1 - there are warnings (shouldn't cause Travis build to fail),
+# 2 - some serious errors (syntax errors, etc.),
+# 3 - luacheck failed for whatever reason (file not found, etc.).
+  - luacheck Legend_of_the_Invincibles/ --std lua53 --globals loti wesnoth wml || [[ $? -le 1 ]]
+
+# wmllint (part of Wesnoth itself) is a static analyzer of WML files.
+# It is known for false positives (which can later be countered with special comments),
+# so for now its warnings shouldn't cause Travis build to fail.
   - python wesnoth/data/tools/wmllint -v -d -K Legend_of_the_Invincibles
 
 after_success:
