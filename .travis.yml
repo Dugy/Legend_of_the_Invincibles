@@ -25,3 +25,16 @@ before_script:
 
 script:
   - python wesnoth/data/tools/wmllint -v -d -K Legend_of_the_Invincibles
+
+after_success:
+# Upload the addon as "LotI daily builds" (only if we are in a Travis Cron Job, not on every commit).
+# If there is an environment variable PBL_PASSPHRASE (can be securily specified in Travis interface,
+# without making it public), then "passphrase=" in _server.pbl is ignored,
+# and value of this environment variable is used instead.
+# NOTE: file _server.pbl should be present in the repository (without the passphrase= line).
+  - >
+        [[ $PBL_PASSPHRASE != "" && $TRAVIS_EVENT_TYPE = "cron" && $TRAVIS_BRANCH = "master" ]] &&
+        python data/tools/wesnoth_addon_manager
+        -u Legend_of_the_Invincibles
+        --pbl-key passphrase $PBL_PASSPHRASE
+        --pbl-key title "LotI daily builds"
