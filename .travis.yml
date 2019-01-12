@@ -56,5 +56,7 @@ after_success:
         [[ $PBL_PASSPHRASE != "" && $TRAVIS_EVENT_TYPE = "cron" && $TRAVIS_BRANCH = "master" ]] &&
         python data/tools/wesnoth_addon_manager
         -u Legend_of_the_Invincibles
+        --pbl Legend_of_the_Invincibles/beta.pbl
         --pbl-key passphrase $PBL_PASSPHRASE
+        --pbl-key email $PBL_EMAIL
         --pbl-key title "LotI daily builds"

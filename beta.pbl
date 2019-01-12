@@ -1,0 +1,16 @@
+title="Legend of the Invincibles"
+type="campaign"
+icon="misc/blank-hex.png~BLIT(units/elves-wood/sorceress-melee-attack-6.png~RC(magenta>black)~CROP(20,0,52,72),0,0)~BLIT(halo/undead/idle-flash-6.png~CROP(30,20,62,72),0,0)~BLIT(halo/elven/elven-shield-halo-60pct.png~CROP(64,64,72,72),0,0)~BLIT(halo/elven/druid-healing4.png~CROP(20,20,72,72)~O(70%),0,0)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,62,62)~O(40%),10,10)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(40%),20,20)~BLIT(halo/elven/druid-healing2.png~O(40%)~CS(200,-200,-200)~CROP(5,5,57,37),5,35)~BLIT(units/human-outlaws/assassin-melee-2-1.png~RC(magenta>black)~CROP(0,0,67,62)~BLIT(units/human-loyalists/master-at-arms-melee-1-1.png~CROP(11,1,10,20)~FL(horizontal),27,16)~BLIT(halo/elven/druid-healing6.png~O(40%)~CS(200,-200,-200)~CROP(5,15,57,37),0,25)~BLIT(halo/undead/idle-flash-7.png~CS(50,-50,-50)~CROP(10,0,62,62),0,0),5,10)~BLIT(halo/elven/druid-healing4.png~CROP(0,0,62,62)~O(30%),10,10)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(60%),20,20)~BLIT(projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert)~O(30%),44,40)~BLIT(projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert)~O(50%),47,45)~BLIT(projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert),50,50)"
+version="3.2.4c"
+author="Dugi"
+description="Sometimes, people don't embrace the tempting powers of darkness because of desires to rule, but merely for survival. Can the dark powers be used to fight against dark schemes with no limits or will they eventually corrupt its users?
+
+A massive 200 scenarios long campaign divided into 2 parts, each of them consisting of five substories. The chapters offer a varied character development and changing strategies throughout. Although preserving the traditional Wesnoth gameplay, there are also many powerful items to collect, as well as a level-up system for all units that goes beyond the L3 limit. Your recalls will be all the more unique and fun to use due to the many power-ups obtained throughout this campaign.
+
+Also contains two coop multiplayer scenarios related to the campaign.
+
+The campaign has two spin-offs, 'The Beautiful Child' and 'Affably Evil'. The campaign 'Kill the King' is also related."
+translate=yes
+[feedback]
+    topic_id=32384
+[/feedback]
