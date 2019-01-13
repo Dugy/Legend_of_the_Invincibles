@@ -49,7 +49,8 @@ local function get_tab()
 			wml.tag.column {
 				wml.tag.button {
 					id = "equip",
-					label = _"Equip"
+					label = _"Equip",
+					return_value_id = "ok"
 				}
 			},
 			wml.tag.column {
@@ -279,7 +280,39 @@ end
 
 -- Last shown item_sort, used in Equip/Unequip callbacks.
 local shown_item_sort
-local can_equip
+local type_is_equippable
+
+-- Unequip the current item. Doesn't ask any questions. Doesn't leave the Storage tab.
+-- Used in equip() and unequip().
+local function unequip_internal()
+	local unit = inventory_dialog.current_unit
+	local item = loti.item.on_unit.find(unit, shown_item_sort)
+
+	if item then
+		inventory_dialog.mpsafety:queue({
+			command = "unequip",
+			unit = unit,
+			number = item.number,
+			sort = item.sort
+		})
+	end
+end
+
+-- Handler for "Equip" button.
+local function equip(item_number)
+	-- Unequip the currently equipped item of the same sort (if any).
+	-- For example, if we are equipping a new sword, then unequip the old sword.
+	unequip_internal()
+
+	-- Remove new item from storage and give it to the current unit.
+	inventory_dialog.mpsafety:queue({
+		command = "equip",
+		unit = inventory_dialog.current_unit,
+		number = item_number,
+		sort = shown_item_sort
+	})
+	inventory_dialog.goto_tab("items_tab")
+end
 
 -- Callback that updates "Item storage" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
@@ -306,9 +339,9 @@ local function onshow(unit, item_sort)
 	end
 
 	-- Remember whether the items of this sort can be equipped.
-	can_equip = true
+	type_is_equippable = true
 	if not loti_util_list_equippable_sorts(unit.type)[item_sort] then
-		can_equip = false
+		type_is_equippable = false
 	end
 
 	-- Display currently equipped item (if any)
@@ -339,22 +372,31 @@ local function onshow(unit, item_sort)
 	local empty = not shown_items[1]
 	local present = unit.valid ~= "recall"
 
-	wesnoth.set_dialog_visible(not empty and present and can_equip, "equip")
+	-- True if Equip operation is allowed, false otherwise.
+	local can_equip = not empty and present and type_is_equippable
+
+	wesnoth.set_dialog_visible(can_equip, "equip")
 	wesnoth.set_dialog_visible(not empty and present, "storage_dropdown_menu")
 
-	-- Show explanation why Equip is not available.
-	local pronoun = _"he"
-	if unit.__cfg.gender == "female" then
-		pronoun = _"she"
-	end
+	if can_equip then
+		-- Handler for Equip button.
+		inventory_dialog.catch_enter_or_ok(listbox_id, function(selected_index)
+			equip(shown_items[selected_index])
+		end)
+	elseif not present then
+		-- Explain that Equip is not allowed for units on recall list.
+		local pronoun = _"he"
+		if unit.__cfg.gender == "female" then
+			pronoun = _"she"
+		end
 
-	if not present then
 		wesnoth.set_dialog_value(
 			_"This unit is currently not on the battlefield,\nso " .. pronoun ..
 			_" can't take new items from the storage.",
 			"noequip_reason")
 		wesnoth.set_dialog_visible(true, "noequip_reason")
-	elseif not can_equip then
+	elseif not type_is_equippable then
+		-- Explain that Equip is not allowed because this is a wrong type of weapon.
 		wesnoth.set_dialog_value(
 			_"This unit can't equip such items.\n" ..
 			_"They are unworthy of a mighty " .. unit.__cfg['language_name'] .. ".",
@@ -374,25 +416,9 @@ local function onshow(unit, item_sort)
 	end
 end
 
--- Unequip the current item. Doesn't ask any questions. Doesn't leave the Storage tab.
--- Used in equip() and unequip().
-local function unequip_internal()
-	local unit = inventory_dialog.current_unit
-	local item = loti.item.on_unit.find(unit, shown_item_sort)
-
-	if item then
-		inventory_dialog.mpsafety:queue({
-			command = "unequip",
-			unit = unit,
-			number = item.number,
-			sort = item.sort
-		})
-	end
-end
-
 -- Handler for the "Unequip" button.
 local function unequip()
-	if not can_equip then
+	if not type_is_equippable then
 		-- Leftover item. Warn that this item can't be re-equipped.
 		local are_you_sure = "<span size='x-large'>" .. _"WARNING:" .. "</span> " ..
 			_"this item is purely nostalgic (from the good old times when this unit needed it).\n" ..
@@ -413,22 +439,6 @@ end
 local function get_selected_item()
 	local selected_index = wesnoth.get_dialog_value(listbox_id)
 	return shown_items[selected_index]
-end
-
--- Handler for "Equip" button.
-local function equip()
-	-- Unequip the currently equipped item of the same sort (if any).
-	-- For example, if we are equipping a new sword, then unequip the old sword.
-	unequip_internal()
-
-	-- Remove new item from storage and give it to the current unit.
-	inventory_dialog.mpsafety:queue({
-		command = "equip",
-		unit = inventory_dialog.current_unit,
-		number = get_selected_item(),
-		sort = shown_item_sort
-	})
-	inventory_dialog.goto_tab("items_tab")
 end
 
 -- Handler for "Drop to the ground" button.
@@ -484,9 +494,8 @@ return function(provided_inventory_dialog)
 	inventory_dialog.register_widgets(register_dropdown_widget)
 
 	inventory_dialog.install_callbacks(function()
-		-- Callback for Equip/Unequip buttons.
+		-- Callback for Unequip button.
 		wesnoth.set_dialog_callback(unequip, "unequip")
-		wesnoth.set_dialog_callback(equip, "equip")
 
 		-- Callback for "Close" button.
 		wesnoth.set_dialog_callback(
