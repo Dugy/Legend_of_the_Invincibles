@@ -17,6 +17,10 @@ addons:
     packages:
     - luarocks
 
+cache:
+  directories:
+    - wesnoth_tools
+
 before_script:
   # Install luacheck (Lua static analyzer)
   - sudo luarocks install luacheck
@@ -25,12 +29,20 @@ before_script:
   # (they will also be in the root directory).
   - rsync --exclude .git -a . Legend_of_the_Invincibles
 
-  # Download Wesnoth core (contains WML linter utility and its dependencies).
-  - git clone -q --depth 1 https://github.com/wesnoth/wesnoth
+  # Download Wesnoth tools (if not yet in the cache) from Wesnoth source repository.
+  - >
+        [ -f wesnoth_tools/COMPLETE ] || (
+                # Download Wesnoth core (contains WML linter utility and its dependencies).
+                git clone -q --depth 1 https://github.com/wesnoth/wesnoth &&
 
-  # Apply pull request #3785 - required bugfix for wmllint.
-  # Remove this line after https://github.com/wesnoth/wesnoth/pull/3785 gets merged.
-  - wget https://raw.githubusercontent.com/wesnoth/wesnoth/fbb79dc94f2af0840cff5ed44b419778fb4c6281/data/tools/wmllint -O wesnoth/data/tools/wmllint
+                # Apply pull request #3785 - required bugfix for wmllint.
+                # Remove this line after https://github.com/wesnoth/wesnoth/pull/3785 gets merged.
+                wget https://raw.githubusercontent.com/wesnoth/wesnoth/fbb79dc94f2af0840cff5ed44b419778fb4c6281/data/tools/wmllint -O wesnoth/data/tools/wmllint &&
+
+                # Save tools in the cache.
+                # Don't download the entire Wesnoth next time.
+                rm -rf wesnoth_tools && mv wesnoth/data/tools wesnoth_tools && touch wesnoth_tools/COMPLETE
+        )
 
 script:
 # Luacheck is a Lua static analyzer. It notices Lua syntax errors, some typos,
@@ -44,7 +56,7 @@ script:
 # wmllint (part of Wesnoth itself) is a static analyzer of WML files.
 # It is known for false positives (which can later be countered with special comments),
 # so for now its warnings shouldn't cause Travis build to fail.
-  - python wesnoth/data/tools/wmllint -v -d -K Legend_of_the_Invincibles
+  - python wesnoth_tools/wmllint -v -d -K Legend_of_the_Invincibles
 
 after_success:
 # Upload the daily version of addon (only if we are in a Travis Cron Job or in Triggered Build, not on every commit).
@@ -58,7 +70,7 @@ after_success:
         mv Legend_of_the_Invincibles $ADDON &&
         rm -rf $ADDON/.git &&
         find $ADDON -type f | xargs sed -i "s@add-ons/Legend_of_the_Invincibles@add-ons/$ADDON@g" &&
-        python wesnoth/data/tools/wesnoth_addon_manager
+        python wesnoth_tools/wesnoth_addon_manager
         -u $ADDON
         --pbl $ADDON/beta.pbl
         --pbl-key passphrase $PBL_PASSPHRASE
