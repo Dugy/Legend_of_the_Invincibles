@@ -234,6 +234,23 @@ end
 local listbox_row = 0
 local shown_items -- Lua array of item numbers currently displayed in listbox, e.g. { 27, 34, 56}
 
+-- Unhide the main listbox and focus on it.
+-- Explain absence of listbox when Item Storage is empty.
+-- Note: it's good for performance for listbox to be hidden until completely populated,
+-- so that it won't be unnecessarily redrawn on every set_dialog_value().
+local function unhide_listbox()
+	if not shown_items[1] then
+		wesnoth.set_dialog_value(_"Item storage is empty.", "storage_header")
+		return
+	end
+
+	wesnoth.set_dialog_value(_"In the item storage:", "storage_header")
+
+	-- Unhide/focus.
+	wesnoth.set_dialog_visible(true, listbox_id)
+	wesnoth.set_dialog_focus(listbox_id)
+end
+
 -- Show the menu that selects subsection of Item Storage: "sword", "spear", etc.
 local function show_item_sorts()
 	local sorts = loti.item.storage.list_sorts()
@@ -248,19 +265,24 @@ local function show_item_sorts()
 		shown_items[listbox_row] = item_sort
 	end
 
-	wesnoth.set_dialog_visible(true, listbox_id)
+	-- Listbox is completely populated, can show it now.
+	unhide_listbox()
 
 	-- Unhide "View" button.
+	local empty = not shown_items[1]
+	wesnoth.set_dialog_visible(not empty, "view")
+
 	-- Hide "Equip" button and dropdown menu (not applicable).
-	wesnoth.set_dialog_visible(true, "view")
 	wesnoth.set_dialog_visible(false, "equip")
 	wesnoth.set_dialog_visible(false, "storage_dropdown_menu")
 
 	-- Handler for View button (shown in the menu of all item sorts,
 	-- navigates to specific section of Item Storage, e.g. "polearm").
-	inventory_dialog.catch_enter_or_ok(listbox_id, function(selected_index)
-		inventory_dialog.goto_tab("storage_tab", shown_items[selected_index])
-	end)
+	if not empty then
+		inventory_dialog.catch_enter_or_ok(listbox_id, function(selected_index)
+			inventory_dialog.goto_tab("storage_tab", shown_items[selected_index])
+		end)
+	end
 end
 
 -- Returns human-readable description text of the item (string with Pango markup)
@@ -404,16 +426,8 @@ local function onshow(unit, item_sort)
 		wesnoth.set_dialog_visible(true, "noequip_reason")
 	end
 
-	if empty then
-		wesnoth.set_dialog_value(_"Item storage is empty.", "storage_header")
-	else
-		wesnoth.set_dialog_value(_"In the item storage:", "storage_header")
-
-		-- Unhide the listbox. Note: it's good for performance to show the listbox only
-		-- when it's completely populated (i.e. here), so that
-		-- it won't be unnecessarily redrawn on every set_dialog_value().
-		wesnoth.set_dialog_visible(true, listbox_id)
-	end
+	-- Listbox is completely populated, can show it now.
+	unhide_listbox()
 end
 
 -- Handler for the "Unequip" button.
