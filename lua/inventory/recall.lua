@@ -48,7 +48,7 @@ local function get_tab()
 			wml.tag.column {
 				horizontal_alignment = "left",
 				wml.tag.button {
-					id = "ok",
+					return_value_id = "ok",
 					label = _"View"
 				}
 			},

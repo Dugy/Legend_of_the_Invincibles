@@ -88,7 +88,8 @@ local function get_tab()
 			wml.tag.column {
 				wml.tag.button {
 					id = "view",
-					label = _"View"
+					label = _"View",
+					return_value_id = "ok"
 				}
 			},
 			wml.tag.spacer {},
@@ -253,6 +254,12 @@ local function show_item_sorts()
 	wesnoth.set_dialog_visible(true, "view")
 	wesnoth.set_dialog_visible(false, "equip")
 	wesnoth.set_dialog_visible(false, "storage_dropdown_menu")
+
+	-- Handler for View button (shown in the menu of all item sorts,
+	-- navigates to specific section of Item Storage, e.g. "polearm").
+	inventory_dialog.catch_enter_or_ok(listbox_id, function(selected_index)
+		inventory_dialog.goto_tab("storage_tab", shown_items[selected_index])
+	end)
 end
 
 -- Returns human-readable description text of the item (string with Pango markup)
@@ -480,12 +487,6 @@ return function(provided_inventory_dialog)
 		-- Callback for Equip/Unequip buttons.
 		wesnoth.set_dialog_callback(unequip, "unequip")
 		wesnoth.set_dialog_callback(equip, "equip")
-
-		-- Callback for View button (shown in the menu of all item sorts,
-		-- navigates to specific section of Item Storage, e.g. "polearm").
-		wesnoth.set_dialog_callback(function()
-			inventory_dialog.goto_tab("storage_tab", get_selected_item())
-		end, "view")
 
 		-- Callback for "Close" button.
 		wesnoth.set_dialog_callback(
