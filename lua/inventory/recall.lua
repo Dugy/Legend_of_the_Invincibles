@@ -133,6 +133,9 @@ local function onshow()
 		inventory_dialog.current_unit = shown_units[selected_index]
 		inventory_dialog.goto_tab("items_tab")
 	end)
+
+	-- Allow player to use up/down buttons without clicking on listbox.
+	wesnoth.set_dialog_focus(listbox_id)
 end
 
 -- Add this tab to the dialog.
