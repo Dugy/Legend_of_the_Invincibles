@@ -54,9 +54,12 @@ after_success:
 # NOTE: file _server.pbl should be present in the repository (without the passphrase= line).
   - >
         [[ $PBL_PASSPHRASE != "" && ( $TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api" ) && $TRAVIS_BRANCH = "master" ]] &&
-        mv Legend_of_the_Invincibles Legend_of_the_Invincibles_beta &&
+        ADDON=Legend_of_the_Invincibles_beta &&
+        mv Legend_of_the_Invincibles $ADDON &&
+        rm -rf $ADDON/.git &&
+        find $ADDON -type f | xargs sed -i "s@add-ons/Legend_of_the_Invincibles@add-ons/$ADDON@g" &&
         python wesnoth/data/tools/wesnoth_addon_manager
-        -u Legend_of_the_Invincibles_beta
-        --pbl Legend_of_the_Invincibles_beta/beta.pbl
+        -u $ADDON
+        --pbl $ADDON/beta.pbl
         --pbl-key passphrase $PBL_PASSPHRASE
         --pbl-key email $PBL_EMAIL
