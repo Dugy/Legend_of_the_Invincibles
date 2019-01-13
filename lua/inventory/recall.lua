@@ -48,7 +48,7 @@ local function get_tab()
 			wml.tag.column {
 				horizontal_alignment = "left",
 				wml.tag.button {
-					id = "view_recall_list_unit",
+					id = "ok",
 					label = _"View"
 				}
 			},
@@ -56,7 +56,7 @@ local function get_tab()
 			wml.tag.column {
 				horizontal_alignment = "right",
 				wml.tag.button {
-					id = "ok",
+					id = "cancel",
 					label = _"Close"
 				}
 			}
@@ -126,15 +126,13 @@ local function onshow()
 
 		wesnoth.set_dialog_value(text, listbox_id, listbox_line, "recall_list_line")
 	end
-end
 
--- Handler for "View" button.
--- Shows "items on the unit" tab with another unit.
-local function onsubmit()
-	local selected_index = wesnoth.get_dialog_value(listbox_id)
-
-	inventory_dialog.current_unit = shown_units[selected_index]
-	inventory_dialog.goto_tab("items_tab")
+	-- Handler for "View" button.
+	-- Shows "items on the unit" tab with another unit.
+	inventory_dialog.catch_enter_or_ok(listbox_id, function(selected_index)
+		inventory_dialog.current_unit = shown_units[selected_index]
+		inventory_dialog.goto_tab("items_tab")
+	end)
 end
 
 -- Add this tab to the dialog.
@@ -149,9 +147,4 @@ return function(provided_inventory_dialog)
 		grid = get_tab(),
 		onshow = onshow
 	}
-
-	inventory_dialog.install_callbacks(function()
-		-- Callback for "View" button.
-		wesnoth.set_dialog_callback(onsubmit, "view_recall_list_unit")
-	end)
 end

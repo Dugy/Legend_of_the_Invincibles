@@ -22,8 +22,8 @@ local helper = wesnoth.require "lua/helper.lua"
 local mpsafety = {}
 mpsafety.__index = mpsafety
 
--- Return a new (blank) mpsafety object.
--- Automatically called each time new Inventory dialog is created.
+-- Return a new (blank) mpsafety log.
+-- Used by the Inventory dialog.
 function mpsafety:constructor()
 	return setmetatable({ todo = {} }, mpsafety)
 end
@@ -86,9 +86,14 @@ function mpsafety:run_immediately(operation)
 	end
 end
 
--- Returns value that should be returned from wesnoth.synchronize_choice()
+-- Returns value that should be returned from wesnoth.synchronize_choice(),
+-- then clears the existing log (because exported operations will immediately be done for all players),
+-- so that next open_inventory_dialog() would start with an empty log.
 function mpsafety:export()
-	return self.todo
+	local result = self.todo
+	self.todo = {}
+
+	return result
 end
 
 -- Ensures that situation is synchronized for all players.
@@ -103,7 +108,5 @@ end
 
 return function(inventory_dialog)
 	-- Provide synchronized actions API to the Inventory dialog.
-	inventory_dialog.install_callbacks(function()
-		inventory_dialog.mpsafety = mpsafety:constructor()
-	end)
+	inventory_dialog.mpsafety = mpsafety:constructor()
 end
