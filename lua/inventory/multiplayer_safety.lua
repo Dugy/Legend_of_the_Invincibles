@@ -104,6 +104,10 @@ function mpsafety:synchronize(todo)
 			self:run_immediately(operation_tag[2])
 		end
 	end
+
+	-- Next time the Inventory dialog may be used by another player,
+	-- so unset "this player is who used the dialog" flag after each synchronization.
+	self.this_player_already_did_it = false
 end
 
 return function(inventory_dialog)
