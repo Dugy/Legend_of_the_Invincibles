@@ -27,7 +27,7 @@ before_script:
 
   # Copy the addon elsewhere, so that wmllint can check it without all the other Wesnoth sources
   # (they will also be in the root directory).
-  - rsync --exclude .git -a . Legend_of_the_Invincibles
+  - rsync --exclude .git --exclude wesnoth_tools -a . Legend_of_the_Invincibles
 
   # Download Wesnoth tools (if not yet in the cache) from Wesnoth source repository.
   - >
@@ -68,7 +68,6 @@ after_success:
         [[ $PBL_PASSPHRASE != "" && ( $TRAVIS_EVENT_TYPE = "cron" || $TRAVIS_EVENT_TYPE = "api" ) && $TRAVIS_BRANCH = "master" ]] &&
         ADDON=Legend_of_the_Invincibles_beta &&
         mv Legend_of_the_Invincibles $ADDON &&
-        rm -rf $ADDON/.git &&
         find $ADDON -type f | xargs sed -i "s@add-ons/Legend_of_the_Invincibles@add-ons/$ADDON@g" &&
         python wesnoth_tools/wesnoth_addon_manager
         -u $ADDON
