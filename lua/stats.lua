@@ -473,7 +473,7 @@ function wesnoth.update_stats(original)
 	end
 	for i = 1,#damage_type_list do
 		if penetrations[damage_type_list[i]] > 0 then
-			table.insert(remade_abilities, { "resistance", { id = resist_penetrate_list[i], sub = penetrations[damage_type_list[i]], max_value = 80, affect_enemies = true, affect_allies = false, affect_self = false, { "affect_adjacent", { adjacent = "n,ne,se,s,sw,nw" }}}})
+			table.insert(remade_abilities, { "resistance", { id = resist_penetrate_list[i], sub = penetrations[damage_type_list[i]], max_value = 80, affect_enemies = true, affect_allies = false, affect_self = false, apply_to = damage_type_list[i], { "affect_adjacent", { adjacent = "n,ne,se,s,sw,nw" }}}})
 		end
 	end
 
