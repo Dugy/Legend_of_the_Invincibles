@@ -817,7 +817,9 @@ end
 
 -- Determine the list of item sorts (e.g. sword,staff,boots) that can be equipped by this unit.
 -- Returns the Lua table { sword = 1, armour = 1, ... }.
-function loti_util_list_equippable_sorts(unit_type)
+function loti_util_list_equippable_sorts(unit)
+	local unit_type = unit.type
+
 	-- Doppelganger can't equip anything (but can drink potions).
 	if unit_type:match( "doppelganger" ) then
 		return { potion = 1 }
@@ -838,7 +840,7 @@ function loti_util_list_equippable_sorts(unit_type)
 	end
 
 	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
-	for attack in pairs(loti_util_list_attacks(unit_type)) do
+	for attack in pairs(loti_util_list_attacks(unit)) do
 		if attack:match("sword$") or attack == "saber"
 			or attack == "war talon" or attack == "war blade"
 			or attack == "mberserk" or attack == "whirlwind"
@@ -989,14 +991,18 @@ end
 --
 -- Utility function for [can_equip_item] and get_unit_flavour().
 -- List the names of all attacks (e.g. "chill tempest") of a certain unit.
+-- Parameter "unit" can be a WML table or Lua unit object.
 -- Returns the Lua table { attack_name = 1, another_attack_name = 1, ... },
 -- where attack names are untranslated (always English) and can therefore be used in conditionals.
 --
-function loti_util_list_attacks(unit_type)
-	local temp_unit = wesnoth.create_unit { type = unit_type }
-	local has_attack = {}
+function loti_util_list_attacks(unit)
+	-- Normalize to Lua unit object (to get unit.attacks)
+	if type(unit) == "table" then
+		unit = wesnoth.get_unit(unit.id)
+	end
 
-	for _, attack in ipairs(temp_unit.attacks) do
+	local has_attack = {}
+	for _, attack in ipairs(unit.attacks) do
 		-- Remove trailing numbers, e.g. bow2 -> bow.
 		local name = attack.name:gsub('%d+$', '')
 		has_attack[name] = true

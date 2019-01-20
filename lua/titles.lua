@@ -24,7 +24,7 @@ function get_unit_flavour(u)
 	local data = wesnoth.get_variable("lua_unit_to_get_flavour")
 	wesnoth.set_variable("lua_unit_to_get_flavour", nil)
 
-	local has_attack = loti_util_list_attacks(u.type)
+	local has_attack = loti_util_list_attacks(u)
 
 	local function has_special(special_name)
 		local has = false
