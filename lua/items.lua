@@ -517,10 +517,10 @@ loti.item.describe_item = function(number, sort, set_items)
 	end
 	describe_damage_modification(item.damage, _"%</span>")
 	describe_damage_modification(item.damage_plus, _"</span>")
-	describe_damage_modification(item.melee_damage, _"% (melee attacks only)</span>")
-	describe_damage_modification(item.melee_damage_plus, _" (melee attacks only)</span>")
-	describe_damage_modification(item.ranged_damage, _"% (ranged attacks only)</span>")
-	describe_damage_modification(item.ranged_damage_plus, _" (ranged attacks only)</span>")
+	describe_damage_modification(item.melee_damage, _"% (melee weapons only)</span>")
+	describe_damage_modification(item.melee_damage_plus, _" (melee weapons only)</span>")
+	describe_damage_modification(item.ranged_damage, _"% (ranged weapons only)</span>")
+	describe_damage_modification(item.ranged_damage_plus, _" (ranged weapons only)</span>")
 
 	local is_weapon = false
 	for i = 1,#weapon_type_list do
