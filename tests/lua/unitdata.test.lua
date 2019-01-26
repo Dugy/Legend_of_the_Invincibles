@@ -72,7 +72,7 @@ end
 return {
 	['add/remove/list advancements'] = function()
 		test_add_remove("advancements", "add_advancement", "remove_advancement",
-			{ "fireball", "iceball", "resist_fire" } )
+			{ "fireball", "ice_dragon_legacy", "resist_fire1" } )
 	end,
 
 	['list items on empty unit'] = function()

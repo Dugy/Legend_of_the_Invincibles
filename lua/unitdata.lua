@@ -231,9 +231,9 @@ local wml_based_implementation = {
 
 	-- Add advancement to unit.
 	add_advancement = function(unit, advancement_id)
-		wml = normalize_unit_param(unit)
+		local wml = normalize_unit_param(unit)
 		local mods = helper.get_child(wml, "modifications")
-		local advancement = get_type_advancement(wml.id, advancement.id)
+		local advancement = get_type_advancement(wml.id, advancement_id)
 		if advancement then
 			table.insert(mods, { "advancement", advancement })
 		end
