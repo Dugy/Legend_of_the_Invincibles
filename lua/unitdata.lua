@@ -23,11 +23,12 @@ end
 -- Construct iterator around some modifications of the unit.
 -- Parameters:
 -- tag - name of WML tag inside [modifications], e.g. "object" or "advancement".
--- filter_func (optional) - callback which:
+-- filter (optional) - function that:
 -- 1) receives one result (e.g. [object] WML table) as parameter,
--- 2) returns false if this result should be skipped, true otherwise.
+-- 2) returns the value that should be returned by iterator, or false if this result must be skipped.
+-- (if filter isn't specified, then all values are returned "as is", and nothing gets skipped)
 -- Sample usage: for _, advancement in wml_modification_iterator(unit, "advancement")
-local function wml_modification_iterator(unit, tag, retriever)
+local function wml_modification_iterator(unit, tag, filter)
 	local wml = normalize_unit_param(unit)
 	local modifications = helper.get_child(wml, "modifications")
 	local elements = helper.child_array(modifications, tag)
@@ -36,12 +37,15 @@ local function wml_modification_iterator(unit, tag, retriever)
 	return function()
 		idx = idx + 1
 		while elements[idx] do
-			if not retriever then
-				return idx, elements[idx]
+			local result = elements[idx]
+			if filter then
+				-- Allow callback to modify the result
+				-- (or return false, which would mean "skip this result")
+				result = filter(result)
 			end
-			local retrieved = retriever(elements[idx])
-			if retrieved then
-				return idx, retrieved
+
+			if result then
+				return idx, result
 			end
 
 			-- Element didn't pass a filter function,
