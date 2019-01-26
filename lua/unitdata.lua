@@ -55,8 +55,12 @@ end
 -- Helper function to obtain a unit type's advancement with a given id
 
 local function get_type_advancement(unit_type, advancement_id)
-	local model = wesnoth.unit_types["Advancing" .. unit_type].__cfg
-	for adv in helper.child_range(model, "advancement") do
+	local model = wesnoth.unit_types["Advancing" .. unit_type]
+	if not model then
+		helper.wml_error("get_type_advancement(): advancing unit type for " .. unit_type .. " is not found.")
+	end
+
+	for adv in helper.child_range(model.__cfg, "advancement") do
 		if adv.id == advancement_id then
 			return adv
 		end
@@ -233,7 +237,7 @@ local wml_based_implementation = {
 	add_advancement = function(unit, advancement_id)
 		local wml = normalize_unit_param(unit)
 		local mods = helper.get_child(wml, "modifications")
-		local advancement = get_type_advancement(wml.id, advancement_id)
+		local advancement = get_type_advancement(wml.type, advancement_id)
 		if advancement then
 			table.insert(mods, { "advancement", advancement })
 		end
