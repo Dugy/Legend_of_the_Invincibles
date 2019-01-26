@@ -528,6 +528,9 @@ loti.item.describe_item = function(number, sort, set_items)
 			is_weapon = true
 		end
 	end
+	if item.sort == "weaponword" then
+		is_weapon = true
+	end
 	local function describe_attacks_modification(variable, ending, ending_one, ending_fewer, ending_fewer_one)
 		if variable then
 			if variable > 1 then
