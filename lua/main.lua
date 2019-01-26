@@ -652,6 +652,16 @@ end
 function wesnoth.wml_actions.advance_stuff(cfg)
 --    wesnoth.message("advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
+
+	local function clear_potions()
+		local m = helper.get_child(unit, "modifications")
+		for i = #m, 1, -1 do
+			if m[i][2].sort ~= nil and string.find(m[i][2].sort, "potion") then
+				table.remove(m, i)
+			end
+		end
+	end
+
     if loti_needs_advance == nil then
         if unit.type == "Elvish Assassin" then
 --	    wesnoth.message("is assassin")
@@ -660,17 +670,13 @@ function wesnoth.wml_actions.advance_stuff(cfg)
                 { "effect", { apply_to = "bonus_attack", name = "execution", description = _"execution", icon = "attacks/bow-elven-magic.png", range = "ranged", defense_weight = "0", damage = "-40", merge = true, force_original_attack = "longbow" }}
             }}
             table.insert(m, a)
+	    clear_potions()
             wesnoth.put_unit(unit)
         end
         return
     end
     unit = clear_advancements(unit)
-    local m = helper.get_child(unit, "modifications")
-    for i = #m, 1, -1 do
-        if m[i][2].sort ~= nil and string.find(m[i][2].sort, "potion") then
-            table.remove(m, i)
-        end
-    end
+    clear_potions()
     wesnoth.put_unit(unit)
     loti_needs_advance = nil
 end
