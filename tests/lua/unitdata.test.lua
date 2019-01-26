@@ -44,7 +44,37 @@ local function test_iterator(unit, api_function_name, expected_array)
 	end
 end
 
+-- Check the add/remove/list sequence of functions like add_advancement().
+-- Parameters:
+-- iter_fn - name of iterator (e.g. "advancements"),
+-- add_fn - name of add function (e.g. "add_advancement"),
+-- remove_fn - name of remove function (e.g. "remove_advancement"),
+-- array_of_things_to_add - array of test values (e.g. advancement names) to pass to add_fn() and test_iterator().
+local function test_add_remove(iter_fn, add_fn, remove_fn, array_of_things_to_add)
+	-- Functions should equally accept both WML table and ID (string) of the unit.
+	for _, unit in ipairs({ newunit(), newunit().id }) do
+
+		-- Test the empty iterator. Should be valid and should provide an empty list.
+		test_iterator(unit, iter_fn, {})
+
+		-- Add the test objects (whatever they are - item WML tables, advancement IDs, doesn't matter).
+		for _, object in ipairs(array_of_things_to_add) do
+			loti.unit[add_fn](unit, object)
+		end
+
+		-- Compare current state of unit (e.g. items on unit) with array of what we just added.
+		test_iterator(unit, iter_fn, array_of_things_to_add)
+
+		-- TODO: test remove
+	end
+end
+
 return {
+	['add/remove/list advancements'] = function()
+		test_add_remove("advancements", "add_advancement", "remove_advancement",
+			{ "fireball", "iceball", "resist_fire" } )
+	end,
+
 	['list items on empty unit'] = function()
 		test_iterator(newunit(), "items", {})
 	end,
