@@ -177,7 +177,11 @@ local wml_based_implementation = {
 		local current
 		local retval
 		local doing = "advs"
+
+		local idx = 0 -- Numeric key returned by .effects() iterator
 		local function add_effect(bump)
+			idx = idx + 1
+
 			while current[eff_ord] and current[eff_ord][1] ~= "effect" do
 				eff_ord = eff_ord + 1
 			end
@@ -186,7 +190,7 @@ local wml_based_implementation = {
 				bump()
 				return retval()
 			else
-				return current[eff_ord]
+				return idx, current[eff_ord]
 			end
 		end
 		
