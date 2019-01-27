@@ -147,7 +147,7 @@ local wml_based_implementation = {
 	advancements = function(unit)
 		local wml = normalize_unit_param(unit)
 		local model = wesnoth.unit_types[wml.type]
-		return wml_modification_iterator(unit, "advancement", function(elem)
+		return wml_modification_iterator(wml, "advancement", function(elem)
 			return get_type_advancement(wml.type, elem.id)
 		end)
 	end,
