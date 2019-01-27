@@ -239,12 +239,19 @@ local wml_based_implementation = {
 
 	-- Add advancement to unit.
 	add_advancement = function(unit, advancement_id)
-		local wml = normalize_unit_param(unit)
-		local mods = helper.get_child(wml, "modifications")
-		local advancement = get_type_advancement(wml.type, advancement_id)
-		if advancement then
-			table.insert(mods, { "advancement", advancement })
+		unit = normalize_unit_param(unit)
+		local mods = helper.get_child(unit, "modifications")
+		local advancement = get_type_advancement(unit.type, advancement_id)
+
+		if not advancement then
+			helper.wml_error("Trying to add non-existent advancement \"" .. tostring(advancement_id) ..
+				" to unit " .. unit.id)
 		end
+		
+		table.insert(mods, { "advancement", advancement })
+			
+		-- Place updated unit back onto the map.
+		loti.put_unit(unit)
 	end,
 
 	-- Remove advancement from unit.
@@ -257,6 +264,9 @@ local wml_based_implementation = {
 				break
 			end
 		end
+		
+		-- Place updated unit back onto the map.
+		loti.put_unit(unit)
 	end,
 
 	-- Remove all advancements from unit.
@@ -268,11 +278,14 @@ local wml_based_implementation = {
 				table.remove(mods, i)
 			end
 		end
+		
+		-- Place updated unit back onto the map.
+		loti.put_unit(unit)
 	end,
 
 	-- Add item to unit.
 	add_item = function(unit, item_number, item_sort)
-		local unit = normalize_unit_param(unit)
+		unit = normalize_unit_param(unit)
 		local modifications = helper.get_child(unit, "modifications")
 
 		local item = wesnoth.deepcopy(loti.item.type[item_number])
@@ -283,7 +296,6 @@ local wml_based_implementation = {
 		table.insert(modifications, wml.tag.object(item))
 
 		-- Place updated unit back onto the map.
-		-- Need to know if it's on the map, on recall list or private.
 		loti.put_unit(unit)
 	end,
 
@@ -297,6 +309,9 @@ local wml_based_implementation = {
 				break
 			end
 		end
+		
+		-- Place updated unit back onto the map.
+		loti.put_unit(unit)
 	end,
 
 	-- Remove all items from unit.
@@ -309,6 +324,9 @@ local wml_based_implementation = {
 				table.remove(mods, i)
 			end
 		end
+		
+		-- Place updated unit back onto the map.
+		loti.put_unit(unit)
 	end,
 }
 
