@@ -15,7 +15,7 @@ local function assert_wml_equals(expected_wml, actual_wml)
 	wesnoth.set_variable("__tmp_compare_var1", expected_wml)
 	wesnoth.set_variable("__tmp_compare_var2", actual_wml)
 	local is_equal = wesnoth.eval_conditional {
-		{ "variable", { name = "__tmp_compare_var1", equals = "$__tmp_compare_var1" } }
+		{ "variable", { name = "__tmp_compare_var1", equals = "$__tmp_compare_var2" } }
 	}
 
 	-- Clean the temporary variables
@@ -45,8 +45,6 @@ local function test_iterator(unit, api_function_name, expected_array)
 		where .. " returned " .. #obtained_array .. " elements (expected: " .. #expected_array .. ")")
 
 	for idx in ipairs(expected_array) do
-		-- FIXME: doesn't seem to fail properly if obtained_array[] is empty,
-		-- e.g. when you comment the assert() above.
 		assert_wml_equals(expected_array[idx], obtained_array[idx])
 	end
 end
