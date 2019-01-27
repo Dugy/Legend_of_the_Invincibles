@@ -12,17 +12,11 @@ end
 
 -- Throw an exception if expected_wml isn't equal to actual_wml.
 local function assert_wml_equals(expected_wml, actual_wml)
-	wesnoth.set_variable("__tmp_compare_var1", expected_wml)
-	wesnoth.set_variable("__tmp_compare_var2", actual_wml)
-	local is_equal = wesnoth.eval_conditional {
-		{ "variable", { name = "__tmp_compare_var1", equals = "$__tmp_compare_var2" } }
-	}
+	local expected = wml.tostring(expected_wml)
+	local actual = wml.tostring(actual_wml)
 
-	-- Clean the temporary variables
-	wesnoth.set_variable("__tmp_compare_var1", nil)
-	wesnoth.set_variable("__tmp_compare_var2", nil)
-
-	assert(is_equal, "WML table is different from expected.")
+	assert(expected == actual, "WML table is different from expected:\n" ..
+		"Expected: " .. expected .. "\n" .. "Actual:   " .. actual)
 end
 
 -- Call iterator-returning function (e.g. "advancements") on unit (either WML table or ID)
