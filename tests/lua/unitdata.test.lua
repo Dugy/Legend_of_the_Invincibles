@@ -52,15 +52,14 @@ local function test_iterator(unit, api_function_name, expected_array)
 	end
 end
 
--- Check the add/remove/list sequence of functions like add_advancement().
+-- Check the add/list sequence of functions like add_advancement().
 -- Parameters:
 -- unit - main test unit (first parameter to API functions), can be either WML table or unit ID.
 -- iter_fn - name of iterator (e.g. "advancements"),
 -- add_fn - name of add function (e.g. "add_advancement"),
--- remove_fn - name of remove function (e.g. "remove_advancement"),
 -- array_of_things_to_add - array of arguments of add_fn() function (e.g. advancement names, or item number/sort).
 -- expected_results - expected contents of iterator after all add_fn() calls. This is passed to test_iterator().
-local function test_add_remove(unit, iter_fn, add_fn, remove_fn, array_of_things_to_add, expected_results)
+local function test_add_list(unit, iter_fn, add_fn, array_of_things_to_add, expected_results)
 	-- Test the empty iterator. Should be valid and should provide an empty list.
 	test_iterator(unit, iter_fn, {})
 
@@ -85,8 +84,8 @@ for unit_form, get_unit in pairs({
 }) do
 	local subtest_name = ' (on ' .. unit_form .. ')'
 		
-	tests['add/remove/list advancements' .. subtest_name] = function()
-		test_add_remove(get_unit(), "advancements", "add_advancement", "remove_advancement",
+	tests['add/list advancements' .. subtest_name] = function()
+		test_add_list(get_unit(), "advancements", "add_advancement",
 			-- Note: all these advancements must be valid for the test unit
 			-- (in this case, Efraim_god),
 			-- because add_advancement() won't add unknown advancements.
@@ -104,9 +103,56 @@ for unit_form, get_unit in pairs({
 			}
 		)
 	end
+	
+	tests['remove/list advancements' .. subtest_name] = function()
+		local unit
+	
+		-- Prepare a unit who already has some advancements
+		-- (so that we can test remove_advancement() on this unit)
+		local function prepare_unit()
+			unit = get_unit()
+			
+			loti.unit.add_advancement(unit, "fireball1_incineration")
+			loti.unit.add_advancement(unit, "LotF1")
+			loti.unit.add_advancement(unit, "resist_fire1")
+		end
 		
-	tests['add/remove/list items' .. subtest_name] = function()
-		test_add_remove(get_unit(), "items", "add_item", "remove_item",
+		-- Try deleting the first advancement.
+		prepare_unit()
+		loti.unit.remove_advancement(unit, "fireball1_incineration")
+		test_iterator(unit, "advancements", {
+			function(result) assert(result.id == "LotF1") end,
+			function(result) assert(result.id == "resist_fire1") end,
+		})
+		
+		-- Try deleting advancement in the middle.
+		prepare_unit()
+		loti.unit.remove_advancement(unit, "LotF1")
+		test_iterator(unit, "advancements", {
+			function(result) assert(result.id == "fireball1_incineration") end,
+			function(result) assert(result.id == "resist_fire1") end,
+		})
+		
+		-- Try deleting the last advancement.
+		prepare_unit()
+		loti.unit.remove_advancement(unit, "resist_fire1")
+		test_iterator(unit, "advancements", {
+			function(result) assert(result.id == "fireball1_incineration") end,
+			function(result) assert(result.id == "LotF1") end,
+		})
+		
+		-- Try deleting the non-existent advancement.
+		prepare_unit()
+		loti.unit.remove_advancement(unit, "fireball")
+		test_iterator(unit, "advancements", {
+			function(result) assert(result.id == "fireball1_incineration") end,
+			function(result) assert(result.id == "LotF1") end,
+			function(result) assert(result.id == "resist_fire1") end,
+		})
+	end
+		
+	tests['add/list items' .. subtest_name] = function()
+		test_add_list(get_unit(), "items", "add_item",
 			{ { 100, "sword" }, { 327 }, { 562, "spear" }, { 535, "armour" }, { 535, "gauntlets" } },
 			{
 				loti.item.type[100],
@@ -141,6 +187,123 @@ for unit_form, get_unit in pairs({
 				end,
 			}
 		)
+	end
+	
+	tests['remove/list items' .. subtest_name] = function()
+		local unit, expected_array
+	
+		-- Prepare a unit who already has some items
+		-- (so that we can test remove_item() on this unit)
+		local function prepare_unit()
+			unit = get_unit()
+			
+			loti.unit.add_item(unit, 100, "sword") -- Cunctator's sword
+			loti.unit.add_item(unit, 327) -- Eidolon's Coat
+			loti.unit.add_item(unit, 535, "armour")
+			loti.unit.add_item(unit, 535, "gauntlets")
+			loti.unit.add_item(unit, 562, "spear")
+		end
+		
+		-- Correct value that should pass test_iterator() check before making any remove_item() calls.
+		local original_array = {
+			function(result) assert(result.number == 100 and result.sort == "sword") end,
+			function(result) assert(result.number == 327 and result.sort == "cloak") end,
+			function(result) assert(result.number == 535 and result.sort == "armour") end,
+			function(result) assert(result.number == 535 and result.sort == "gauntlets") end,
+			function(result) assert(result.number == 562 and result.sort == "spear") end,
+		}
+		
+		-- Double-check that certain item (from "original_array" list, see above)
+		-- is not present on the unit, and that all other items from "original_array" are present,
+		-- Throw exception if this statement is incorrect.
+		-- Parameter: index - index of the item in "original_array" that should have been deleted.
+		-- Note: if index is false/nil, then NONE of the items are expected to be deleted.
+		local function assert_item_was_deleted(index)
+			local expected_array = table.pack(table.unpack(original_array)) -- Clone the original array
+			if index then
+				table.remove(expected_array, index)
+			end
+				
+			test_iterator(unit, "items", expected_array)			
+		end
+		
+		-- Before we start testing remove_item(),
+		-- let's double-check that "original_array" is correct.
+		prepare_unit()
+		test_iterator(unit, "items", original_array)
+
+		-- Try deleting non-crafted item. Don't provide item_sort parameter (which is optional).
+		prepare_unit()
+		loti.unit.remove_item(unit, 100)
+		assert_item_was_deleted(1)
+		
+		-- Try deleting non-crafted item, but provide item_sort parameter (which is optional).
+		prepare_unit()
+		loti.unit.remove_item(unit, 100, "sword")
+		assert_item_was_deleted(1)
+		
+		-- Try deleting non-crafted item, but provide incorrect item_sort parameter.
+		-- This shouldn't delete anything (because item with this item_sort doesn't exist).
+		prepare_unit()
+		loti.unit.remove_item(unit, 100, "mace")
+		assert_item_was_deleted(false)
+		
+		-- Try deleting item which is not present on the unit (without item_sort).
+		-- This shouldn't delete anything.
+		prepare_unit()
+		loti.unit.remove_item(unit, 123)
+		assert_item_was_deleted(false)
+		
+		-- Try deleting item which is not present on the unit
+		-- (but specify item_sort, which is the same as item_sort of one of the present items).
+		-- This shouldn't delete anything.
+		prepare_unit()
+		loti.unit.remove_item(unit, 123, "sword")
+		assert_item_was_deleted(false)		
+		
+		-- Try deleting non-first item in the list (with optional item_sort)
+		prepare_unit()
+		loti.unit.remove_item(unit, 327, "cloak")
+		assert_item_was_deleted(2)
+		
+		-- Try deleting non-first item in the list (without optional item_sort)
+		prepare_unit()
+		loti.unit.remove_item(unit, 327)
+		assert_item_was_deleted(2)
+
+		-- Try deleting crafted item without item_sort parameter.
+		prepare_unit()
+		loti.unit.remove_item(unit, 562)
+		assert_item_was_deleted(5)
+		
+		-- Try deleting crafted item with item_sort parameter.
+		prepare_unit()
+		loti.unit.remove_item(unit, 562, "spear")
+		assert_item_was_deleted(5)
+		
+		-- Try deleting crafted item, but provide incorrect item_sort parameter.
+		-- This shouldn't delete anything.
+		prepare_unit()
+		loti.unit.remove_item(unit, 562, "thunderstick")
+		assert_item_was_deleted(false)
+		
+		-- Try deleting crafted item without item_sort parameter,
+		-- when there are TWO items with this item_number.
+		-- Only one (the first one) should be deleted.
+		prepare_unit()
+		loti.unit.remove_item(unit, 535)
+		assert_item_was_deleted(3)
+		
+		-- Try deleting crafted item with item_sort parameter,
+		-- when there are TWO items with this item_number.
+		-- Only one (the one with correct item_sort) should be deleted.
+		prepare_unit()
+		loti.unit.remove_item(unit, 535, "armour")
+		assert_item_was_deleted(3)
+		
+		prepare_unit()
+		loti.unit.remove_item(unit, 535, "gauntlets")
+		assert_item_was_deleted(4)
 	end
 
 	tests['list effects on empty unit' .. subtest_name] = function()
