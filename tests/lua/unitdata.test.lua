@@ -55,45 +55,56 @@ end
 -- iter_fn - name of iterator (e.g. "advancements"),
 -- add_fn - name of add function (e.g. "add_advancement"),
 -- remove_fn - name of remove function (e.g. "remove_advancement"),
--- array_of_things_to_add - array of test values (e.g. advancement names) to pass to add_fn() and test_iterator().
-local function test_add_remove(unit, iter_fn, add_fn, remove_fn, array_of_things_to_add)
+-- array_of_things_to_add - array of arguments of add_fn() function (e.g. advancement names, or item number/sort).
+-- expected_results - expected contents of iterator after all add_fn() calls. This is passed to test_iterator().
+local function test_add_remove(unit, iter_fn, add_fn, remove_fn, array_of_things_to_add, expected_results)
 	-- Test the empty iterator. Should be valid and should provide an empty list.
 	test_iterator(unit, iter_fn, {})
 
 	-- Add the test objects (whatever they are - item WML tables, advancement IDs, doesn't matter).
-	for _, object in ipairs(array_of_things_to_add) do
-		loti.unit[add_fn](unit, object)
+	for _, add_arguments in ipairs(array_of_things_to_add) do
+		loti.unit[add_fn](unit, table.unpack(add_arguments))
 	end
 
 	-- Compare current state of unit (e.g. items on unit) with array of what we just added.
-	test_iterator(unit, iter_fn, array_of_things_to_add)
+	test_iterator(unit, iter_fn, expected_results)
 
 	-- TODO: test remove
 end
 
-return {
-	['add/remove/list advancements (on WML table))'] = function()
-		test_add_remove(newunit(), "advancements", "add_advancement", "remove_advancement",
-			{ "fireball1_incineration", "LotF1", "resist_fire1" } )
-	end,
+-- Prepare array of tests.
+local tests = {}
 
-	['add/remove/list advancements (on unit ID))'] = function()
-		test_add_remove(newunit().id, "advancements", "add_advancement", "remove_advancement",
-			{ "fireball1_incineration", "LotF1", "resist_fire1" } )
-	end,
+-- Functions should equally accept both WML table and ID (string) of the unit.
+for unit_form, get_unit in pairs({
+	['WML table'] = newunit,
+	['unit ID'] = function() return newunit().id end
+}) do
+	local subtest_name = ' (on ' .. unit_form .. ')'
+		
+	tests['add/remove/list advancements' .. subtest_name] = function()
+		test_add_remove(get_unit(), "advancements", "add_advancement", "remove_advancement",
+			{ { "fireball1_incineration" }, { "LotF1" }, { "resist_fire1" } },
+			
+			-- FIXME: it's inconvenient to list "expected values" for advancements,
+			-- should test this somehow else
+			-- (e.g. callback to analyze returned values and tell if they are OK or not).
+			-- (in the same test of "items", we just compare results with loti.item.type[N])
+			{ "TODO" }
+		)
+	end
+		
+	tests['add/remove/list items' .. subtest_name] = function()
+		test_add_remove(get_unit(), "items", "add_item", "remove_item",
+			{ { 100, "sword" }, { 327 }, { 562, "spear" } },
+			{ loti.item.type[100], loti.item.type[327], loti.item.type[562] }
+		)
+	end
 
-	['list items on empty unit'] = function()
-		test_iterator(newunit(), "items", {})
-	end,
+	tests['list effects on empty unit' .. subtest_name] = function()
+		test_iterator(get_unit(), "effects", {})
+	end
+end
 
-	['list advancements on empty unit'] = function()
-		test_iterator(newunit(), "advancements", {})
-	end,
-
-	['list effects on empty unit'] = function()
-		test_iterator(newunit(), "effects", {})
-	end,
-
-	-- TODO: add/delete various items/advancements/effects
-	-- and then use test_iterator() to compare the results with expected.
-}
+-- Provide the list of tests, will be used by loti.testsuite().
+return tests
