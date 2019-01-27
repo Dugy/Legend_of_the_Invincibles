@@ -45,7 +45,16 @@ local function test_iterator(unit, api_function_name, expected_array)
 		where .. " returned " .. #obtained_array .. " elements (expected: " .. #expected_array .. ")")
 
 	for idx in ipairs(expected_array) do
-		assert_wml_equals(expected_array[idx], obtained_array[idx])
+		local expected = expected_array[idx]
+		local obtained = obtained_array[idx]
+		
+		if type(expected) == "function" then
+			-- Callback to check the results
+			expected(obtained)
+		else
+			-- Exact value of the result, compare directly.
+			assert_wml_equals(expected, obtained)
+		end
 	end
 end
 
@@ -84,13 +93,21 @@ for unit_form, get_unit in pairs({
 		
 	tests['add/remove/list advancements' .. subtest_name] = function()
 		test_add_remove(get_unit(), "advancements", "add_advancement", "remove_advancement",
+			-- Note: all these advancements must be valid for the test unit
+			-- (in this case, Efraim_god),
+			-- because add_advancement() won't add unknown advancements.
 			{ { "fireball1_incineration" }, { "LotF1" }, { "resist_fire1" } },
 			
-			-- FIXME: it's inconvenient to list "expected values" for advancements,
-			-- should test this somehow else
-			-- (e.g. callback to analyze returned values and tell if they are OK or not).
-			-- (in the same test of "items", we just compare results with loti.item.type[N])
-			{ "TODO" }
+			-- Check each returned value with an evaluation callback.
+			{
+				function(result)				
+					assert(result.id == "fireball1_incineration")
+					assert(result.strict_amla)
+					assert(result.require_amla == "fireball")
+				end,
+				function(result) assert(result.id == "LotF1") end,
+				function(result) assert(result.id == "resist_fire1") end,
+			}
 		)
 	end
 		
