@@ -107,8 +107,39 @@ for unit_form, get_unit in pairs({
 		
 	tests['add/remove/list items' .. subtest_name] = function()
 		test_add_remove(get_unit(), "items", "add_item", "remove_item",
-			{ { 100, "sword" }, { 327 }, { 562, "spear" } },
-			{ loti.item.type[100], loti.item.type[327], loti.item.type[562] }
+			{ { 100, "sword" }, { 327 }, { 562, "spear" }, { 535, "armour" }, { 535, "gauntlets" } },
+			{
+				loti.item.type[100],
+				loti.item.type[327],
+				function(result)
+					-- Crafted weapon.
+					-- Its item sort (in this case, spear) must be different from default.
+					assert(result.sort == "spear")
+					
+					-- All other fields should be the same as in loti.item.type.
+					result.sort = "weaponword"
+					assert_wml_equals(loti.item.type[562], result)
+				end,
+				
+				function(result)
+					-- Crafted armour (chest).
+					assert(result.sort == "armour")
+					
+					-- All other fields should be the same as in loti.item.type.
+					result.sort = "armourword"
+					assert_wml_equals(loti.item.type[535], result)
+				end,
+				
+				function(result)
+					-- Crafted non-chest armour (in this case, a gauntlets).
+					assert(result.sort == "gauntlets")
+					
+					-- Note: result doesn't have its defence multiplied by 1/3 (yet),
+					-- because this is done by update_stats() later.
+					result.sort = "armourword"
+					assert_wml_equals(loti.item.type[535], result)
+				end,
+			}
 		)
 	end
 
