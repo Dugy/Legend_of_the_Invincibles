@@ -1,7 +1,6 @@
 title="Legend of the Invincibles (beta)"
 type="campaign"
 icon="misc/blank-hex.png~BLIT(units/elves-wood/sorceress-melee-attack-6.png~RC(magenta>black)~CROP(20,0,52,72),0,0)~BLIT(halo/undead/idle-flash-6.png~CROP(30,20,62,72),0,0)~BLIT(halo/elven/elven-shield-halo-60pct.png~CROP(64,64,72,72),0,0)~BLIT(halo/elven/druid-healing4.png~CROP(20,20,72,72)~O(70%),0,0)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,62,62)~O(40%),10,10)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(40%),20,20)~BLIT(halo/elven/druid-healing2.png~O(40%)~CS(200,-200,-200)~CROP(5,5,57,37),5,35)~BLIT(units/human-outlaws/assassin-melee-2-1.png~RC(magenta>black)~CROP(0,0,67,62)~BLIT(units/human-loyalists/master-at-arms-melee-1-1.png~CROP(11,1,10,20)~FL(horizontal),27,16)~BLIT(halo/elven/druid-healing6.png~O(40%)~CS(200,-200,-200)~CROP(5,15,57,37),0,25)~BLIT(halo/undead/idle-flash-7.png~CS(50,-50,-50)~CROP(10,0,62,62),0,0),5,10)~BLIT(halo/elven/druid-healing4.png~CROP(0,0,62,62)~O(30%),10,10)~BLIT(halo/elven/druid-healing5.png~CROP(0,0,52,52)~O(60%),20,20)~BLIT(projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert)~O(30%),44,40)~BLIT(projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert)~O(50%),47,45)~BLIT(projectiles/dagger-ne.png~CROP(25,25,22,22)~FL(vert),50,50)"
-version="3.2.4c+"
 author="Dugi"
 description="This is a daily build version of Legend of the Invincibles. It contains the latest changes, but also the latest bugs. Use this only for testing or if you have problems with the main version and you know it has been already fixed but not uploaded."
 translate=yes

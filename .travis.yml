@@ -74,3 +74,4 @@ after_success:
         --pbl $ADDON/beta.pbl
         --pbl-key passphrase $PBL_PASSPHRASE
         --pbl-key email $PBL_EMAIL
+        --pbl-key version $(git describe HEAD --tags | tr '-' '.')
