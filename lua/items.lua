@@ -743,9 +743,9 @@ loti.item.describe_item = function(number, sort, set_items)
 				line = _"<span color='yellow'>New advancements: " .. effect.description .. _"</span>"
 			end
 		end
-		if effect.required and set_items then
+		if effect.number_required and set_items then
 			local fulfilled = 0
-			for num in string.gmatch(effect.required, "[^%s,][^,]*") do
+			for num in string.gmatch(effect.number_required, "[^%s,][^,]*") do
 				local sought = tonumber(num)
 				for i = 1,#set_items do
 					if set_items[i] == sought then
