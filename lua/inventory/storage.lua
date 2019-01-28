@@ -289,13 +289,14 @@ end
 -- and all its special properties.
 -- Parameter "item" is an [object] tag.
 -- Optional parameter: if count>1, it will be shown that we have more than 1 of these items.
-function get_item_description(item, count)
+-- Optional parameter: set_items is an array of item numbers of all currently equipped items (used to show active set bonuses).
+function get_item_description(item, count, set_items)
 	local text = "<span font-weight='bold'>" .. item.name .. "</span>"
 	if count and count > 1 then
 		text = text .. " (" .. count .. ")"
 	end
 
-	text = text .. "\n" .. item.description
+	text = text .. "\n" .. loti.item.describe_item(item.number, item.sort, set_items)
 
 	return text
 end
@@ -366,10 +367,19 @@ local function onshow(unit, item_sort)
 		type_is_equippable = false
 	end
 
+	-- Calculate an array of currently equipped items,
+	-- so that get_item_description() could show "item set" bonuses.
+	-- TODO: replace this with loti.unit.list_unit_item_numbers() when unitdata.lua gets merged into master.
+	local set_items = {}
+	for _, item in ipairs(loti.item.on_unit.list(unit)) do
+		table.insert(set_items, item.number)
+	end
+
 	-- Display currently equipped item (if any)
+
 	local item = loti.item.on_unit.find(unit, item_sort)
 	if item then
-		local text = _"Currently equipped: " .. get_item_description(item)
+		local text = _"Currently equipped: " .. get_item_description(item, 1, set_items)
 		wesnoth.set_dialog_value(text, "current_item")
 
 		-- Show/hide fields related to current item
@@ -382,7 +392,7 @@ local function onshow(unit, item_sort)
 	for item_number, count in pairs(types) do
 		listbox_row = listbox_row + 1
 
-		local text = get_item_description(loti.item.type[item_number], count)
+		local text = get_item_description(loti.item.type[item_number], count, set_items)
 		wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
 
 		-- For callback of "Equip" to know which item was selected.

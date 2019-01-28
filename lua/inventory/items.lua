@@ -352,7 +352,9 @@ local function onshow(unit)
 		wesnoth.set_dialog_value(item.image, slot_id, "item_image")
 
 		if wesnoth.set_dialog_tooltip then -- Not yet in Wesnoth 1.14
-			wesnoth.set_dialog_tooltip(item.description, slot_id, "item_image")
+			-- TODO: pass set_items to describe_item().
+			local description = loti.item.describe_item(item.number, item.sort)
+			wesnoth.set_dialog_tooltip(description, slot_id, "item_image")
 		end
 
 		-- Unhide the slot (leftover slots are hidden by default).
