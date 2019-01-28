@@ -195,7 +195,11 @@ function wesnoth.update_stats(original)
 	local is_marked_as_geared = false
 	for i = 1,#visible_modifications do
 		if visible_modifications[i][1] == "trait" and visible_modifications[i][2].id == "geared" then
-			is_marked_as_geared = true
+			if geared == false then
+				table.remove(visible_modifications, i)
+			else
+				is_marked_as_geared = true
+			end
 			break
 		end
 	end
