@@ -154,91 +154,49 @@ local wml_based_implementation = {
 
 	-- Returns iterator over effects of this unit.
 	effects = function(unit)
-		local wml = normalize_unit_param(unit)
-		local model = wesnoth.unit_types[wml.type]
-		local modifications = helper.get_child(wml, "modifications")
-		local set_items = loti.unit.list_unit_item_numbers(wml)
-		local advs = {}
-		local objs = {}
-		local others = {}
-		for i = 1,#modifications do
-			if modifications[i][1] == "advancement" then
-				table.insert(advs, modifications[i][2])
-			elseif modifications[i][1] == "object" then
-				table.insert(objs, modifications[i][2])
-			else
-				table.insert(others, modifications[i][2])
-			end
-		end
-		local adv_ord = 1
-		local obj_ord = 1
-		local other_ord = 1
-		local eff_ord = 0
-		local current
-		local retval
-		local doing = "advs"
+		unit = normalize_unit_param(unit)
 
-		local idx = 0 -- Numeric key returned by .effects() iterator
-		local function add_effect(bump)
+		local set_items = loti.unit.list_unit_item_numbers(unit)
+		local modifications = helper.get_child(unit, "modifications")
+
+		local modif_idx = 0
+		local effect_idx = 0
+		local effects -- Effects of only one modification (modification we are currently processing)
+
+		local idx = 0 -- Top-level index returned as key from effects() iterator
+
+		return function()
+			effect_idx = effect_idx + 1
+
+			while not effects or not effects[effect_idx] do
+				-- Since we have already returned everything from effects[] array
+				-- (or when we just started using the iterator, when effects=nil),
+				-- obtain the new effects[] array (if any) from the next modification.
+
+				modif_idx = modif_idx + 1
+
+				local modif_tag = modifications[modif_idx]
+				if not modif_tag then
+					return -- Already listed everything, nothing more to return
+				end
+
+				local modif_type = modif_tag[1] -- E.g. "object" or "advancement"
+				local contents = modif_tag[2] -- WML table, e.g. one [object] tag.
+
+				if modif_type == "object" and contents.number then
+					-- This is an item, therefore we must add "item set" effects (if any).
+					contents = loti.unit.item_with_set_effects(contents.number, set_items)
+				end
+
+				-- New effects[] array.
+				-- Further calls to effects() iterator will return its values until this array is depleted.
+				effects = helper.child_array(contents, "effect")
+				effect_idx = 1
+			end
+
 			idx = idx + 1
-
-			while current[eff_ord] and current[eff_ord][1] ~= "effect" do
-				eff_ord = eff_ord + 1
-			end
-			if not current[eff_ord] then
-				current = nil
-				bump()
-				return retval()
-			else
-				return idx, current[eff_ord]
-			end
+			return idx, effects[effect_idx]
 		end
-		
-		retval = function()
-			if adv_ord <= #advs then
-				if not current then
-					current = get_type_advancement(wml.type, advs[adv_ord].id)
-					while not current and adv_ord < #advs do
-						adv_ord = adv_ord + 1
-						current = get_type_advancement(wml.type, advs[adv_ord].id)
-					end
-					eff_ord = 0
-				end
-				eff_ord = eff_ord + 1
-				if current then
-					return add_effect( function() adv_ord = adv_ord + 1 end )
-				end
-			end
-			doing = "objs"
-			if obj_ord <= #objs then
-				while not current and obj_ord < #objs do
-					if objs[obj_ord].number then
-						current = loti.unit.item_with_set_effects(objs[obj_ord].number, set_items)
-						local sort = objs[obj_ord]
-						if current == "armourword" and current.defence and (sort == "boots" or sort == "helm" or sort == "gauntlets") then
-							current.defence = current.defence / 3
-						end
-					else
-						current = objs[obj_ord]
-					end
-					eff_ord = 0
-				end
-				eff_ord = eff_ord + 1
-				if current then
-					return add_effect( function() obj_ord = obj_ord + 1 end )
-				end
-			end
-			doing = "others"
-			if other_ord <= #others then
-				if not current then
-					current = others[other_ord]
-					eff_ord = 0
-				end
-				eff_ord = eff_ord + 1
-				return add_effect( function() other_ord = other_ord + 1 end )
-			end
-		end
-		return retval
 	end,
 
 	-- Add advancement to unit.
