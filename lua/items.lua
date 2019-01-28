@@ -170,10 +170,10 @@ loti.item.type = {
 	-- Returns Lua table { item_number1 = object1, ... }
 	_reload = function()
 		local cache = {}
-		local all_known_types = helper.get_variable_array("item_list.object")
+		local all_known_types = helper.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
 
 		for _, item in ipairs(all_known_types) do
-			cache[item.number] = item
+			cache[item[2].number] = item[2]
 		end
 
 		rawset(loti.item.type, "_cache", cache)
@@ -502,6 +502,7 @@ loti.item.describe_item = function(number, sort, set_items)
 		if item.sort == "armourword" and (sort == "boots" or sort == "helm" or sort == "gauntlets") then
 			defence = defence / 3
 		end
+		defence = math.floor(defence)
 		if defence > 0 then
 			table.insert(desc, _"<span color='#60A0FF'>Increases physical resistances by " .. tostring(defence) .. "% </span>")
 		else
@@ -520,10 +521,10 @@ loti.item.describe_item = function(number, sort, set_items)
 	end
 	describe_damage_modification(item.damage, _"%</span>")
 	describe_damage_modification(item.damage_plus, _"</span>")
-	describe_damage_modification(item.melee_damage, _"% (melee attacks only)</span>")
-	describe_damage_modification(item.melee_damage_plus, _" (melee attacks only)</span>")
-	describe_damage_modification(item.ranged_damage, _"% (ranged attacks only)</span>")
-	describe_damage_modification(item.ranged_damage_plus, _" (ranged attacks only)</span>")
+	describe_damage_modification(item.melee_damage, _"% (melee weapons only)</span>")
+	describe_damage_modification(item.melee_damage_plus, _" (melee weapons only)</span>")
+	describe_damage_modification(item.ranged_damage, _"% (ranged weapons only)</span>")
+	describe_damage_modification(item.ranged_damage_plus, _" (ranged weapons only)</span>")
 
 	local is_weapon = false
 	for i = 1,#weapon_type_list do
@@ -531,21 +532,28 @@ loti.item.describe_item = function(number, sort, set_items)
 			is_weapon = true
 		end
 	end
-	local function describe_attacks_modification(variable, ending, ending_fewer)
+	if item.sort == "weaponword" then
+		is_weapon = true
+	end
+	local function describe_attacks_modification(variable, ending, ending_one, ending_fewer, ending_fewer_one)
 		if variable then
-			if variable > 0 then
+			if variable > 1 then
 				table.insert(desc, _"<span color='green'>" .. tostring(variable) .. ending)
+			elseif variable == 1 then
+				table.insert(desc, _"<span color='green'>" .. tostring(variable) .. ending_one)
+			elseif variable == -1 then
+				table.insert(desc, _"<span color='green'>" .. tostring(variable * -1) .. ending_fewer_one)
 			else
 				table.insert(desc, _"<span color='green'>" .. tostring(variable * -1) .. ending_fewer)
 			end
 		end
 	end	
 	if is_weapon then
-		describe_attacks_modification(item.attacks, _"% more attacks </span>", _"% fewer attacks </span>")
+		describe_attacks_modification(item.attacks, _"% more attacks </span>", _"% more attacks< /span>", _"% fewer attacks </span>", _"% fewer attacks </span>")
 	else
-		describe_attacks_modification(item.attacks, _" more attacks </span>", _" fewer attacks </span>")
+		describe_attacks_modification(item.attacks, _" more attacks </span>", _" more attack </span>", _" fewer attacks </span>", _" fewer attack </span>")
 	end
-	describe_attacks_modification(item.attacks_plus, _" more attacks </span>", _" fewer attacks </span>")
+	describe_attacks_modification(item.attacks_plus, _" more attacks </span>", _" more attack </span>", _" fewer attacks </span>", _" fewer attack </span>")
 
 	if item.merge then
 		table.insert(desc, _"<span color='green'>Merges attacks</span>")
@@ -562,15 +570,15 @@ loti.item.describe_item = function(number, sort, set_items)
 	end
 
 	if item.suck then
-		table.insert(desc, _"<span color='#60A0FF'>Sucks " .. tostring(item.suck) .. _" health from targets with each hit</span>")
+		table.insert(desc, _"<span color='green'>Sucks " .. tostring(item.suck) .. _" health from targets with each hit</span>")
 	end
 
 	if item.spell_suck then
-		table.insert(desc, _"<span color='#60A0FF'>Spells suck " .. tostring(item.spell_suck) .. _" health from targets with each hit</span>")
+		table.insert(desc, _"<span color='green'>Spells suck " .. tostring(item.spell_suck) .. _" health from targets with each hit</span>")
 	end
 
 	if item.devastating_blow then
-		table.insert(desc, _"<span color='#60A0FF'>" .. tostring(item.devastating_blow) .. _"% chance to strike a devastating blow</span>")
+		table.insert(desc, _"<span color='green'>" .. tostring(item.devastating_blow) .. _"% chance to strike a devastating blow</span>")
 	end
 
 	for i = 1,#damage_type_list do
@@ -595,7 +603,7 @@ loti.item.describe_item = function(number, sort, set_items)
 		if specials then
 			for i = 1,#specials do
 				if specials[i][2].name then
-					table.insert(desc, "<span color='green'>New weapon special: " .. specials[i][2].name .. ending)
+					table.insert(desc, "<span color='#C0C000'>New weapon special: " .. specials[i][2].name .. ending)
 				end
 			end
 		end
@@ -605,14 +613,18 @@ loti.item.describe_item = function(number, sort, set_items)
 	add_specials("specials_ranged", " (ranged weapons only)</span>")
 
 	if item.magic then
-		table.insert(desc, _"<span color='#60A0FF'>Damage of spells increased by " .. tostring(item.magic) .. _"%</span>")
+		table.insert(desc, _"<span color='green'>Damage of spells increased by " .. tostring(item.magic) .. _"%</span>")
+	end
+
+	if item.dodge then
+		table.insert(desc, _"<span color='#60A0FF'>Chance to get hit decreased by " .. tostring(item.dodge) .. _"%</span>")
 	end
 
 	if item.vision then
 		if item.vision > 0 then
-			table.insert(desc, _"<span color='#60A0FF'>Increases vision range by " .. tostring(item.vision) .. _"</span>")
+			table.insert(desc, _"<span color='#FF99CC'>Increases vision range by " .. tostring(item.vision) .. _"</span>")
 		else
-			table.insert(desc, _"<span color='#60A0FF'>Decreases vision range by " .. tostring(item.vision * -1) .. _"</span>")
+			table.insert(desc, _"<span color='#FF99CC'>Decreases vision range by " .. tostring(item.vision * -1) .. _"</span>")
 		end
 	end
 
@@ -628,22 +640,22 @@ loti.item.describe_item = function(number, sort, set_items)
 					for j = 1,#abilities do
 						if abilities[j][2].name then
 							if not line then
-								line = _"<span color='#60A0FF'>New ability: " .. abilities[j][2].name .. _"</span>"
+								line = _"<span color='#C0C000'>New ability: " .. abilities[j][2].name .. _"</span>"
 							else
-								line = line .. "\n" .. _"<span color='#60A0FF'>New ability: " .. abilities[j][2].name .. _"</span>"
+								line = line .. "\n" .. _"<span color='#C0C000'>New ability: " .. abilities[j][2].name .. _"</span>"
 							end
 						end
 					end
 				end
 			elseif effect.apply_to == "movement" then
 				if effect.increase == 1 then
-					line = _"<span color='#60A0FF'>1 extra movement point </span>"
+					line = _"<span color='#FF99CC'>1 extra movement point </span>"
 				elseif effect.increase > 1 then
-					line = _"<span color='#60A0FF'>" .. tostring(effect.increase) .. _" more movement points</span>"
+					line = _"<span color='#FF99CC'>" .. tostring(effect.increase) .. _" more movement points</span>"
 				elseif effect.increase == -1 then
-					line = _"<span color='#60A0FF'>1 less movement point </span>"
+					line = _"<span color='#FF99CC'>1 less movement point </span>"
 				else
-					line = _"<span color='#60A0FF'>" .. tostring(effect.increase * -1) .. _" fewer movement points</span>"
+					line = _"<span color='#FF99CC'>" .. tostring(effect.increase * -1) .. _" fewer movement points</span>"
 				end
 			elseif effect.apply_to == "hitpoints" then
 				local ending
@@ -697,7 +709,7 @@ loti.item.describe_item = function(number, sort, set_items)
 							line = ""
 						end
 
-						line = line .. _"<span color='#60A0FF'>Movement costs " .. text .. _" set to " .. tostring(mov[tag]) .. " </span>"
+						line = line .. _"<span color='#FF99CC'>Movement costs " .. text .. _" set to " .. tostring(mov[tag]) .. " </span>"
 					end
 				end
 				describe("forest", _"through forests")
@@ -717,10 +729,10 @@ loti.item.describe_item = function(number, sort, set_items)
 				describe("unwalkable", _"above unwalkable places")
 				describe("impassable", _"through impassable walls")
 			elseif effect.apply_to == "alignment" then
-				if effect.alignment == "chaotic" then line = _"<span color='green'>Sets alignment to chaotic</span>"
-				elseif effect.alignment == "liminal" then line = _"<span color='green'>Sets alignment to liminal</span>"
-				elseif effect.alignment == "lawful" then line = _"<span color='green'>Sets alignment to lawful</span>"
-				elseif effect.alignment == "neutral" then line = _"<span color='green'>Sets alignment to neutral</span>" end
+				if effect.alignment == "chaotic" then line = _"<span color='yellow'>Sets alignment to chaotic</span>"
+				elseif effect.alignment == "liminal" then line = _"<span color='yellow'>Sets alignment to liminal</span>"
+				elseif effect.alignment == "lawful" then line = _"<span color='yellow'>Sets alignment to lawful</span>"
+				elseif effect.alignment == "neutral" then line = _"<span color='yellow'>Sets alignment to neutral</span>" end
 			elseif effect.apply_to == "bonus_attack" then
 				line = _"<span color='green'>Bonus attack: " .. effect.description .. " </span>"
 			elseif effect.apply_to == "status" and effect.add == "not_living" then

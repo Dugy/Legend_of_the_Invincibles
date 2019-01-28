@@ -116,7 +116,7 @@ function wesnoth.update_stats(original)
 				end
 
 				-- Add extra text to the description (if any).
-				if mods[i][2].flavour then
+				if mods[i][2].flavour and mods[i][2].description then
 					mods[i][2].description = mods[i][2].description ..
 						"\n<span color='#808080'><i>" .. mods[i][2].flavour .. "</i></span>"
 				end
@@ -195,7 +195,11 @@ function wesnoth.update_stats(original)
 	local is_marked_as_geared = false
 	for i = 1,#visible_modifications do
 		if visible_modifications[i][1] == "trait" and visible_modifications[i][2].id == "geared" then
-			is_marked_as_geared = true
+			if geared == false then
+				table.remove(visible_modifications, i)
+			else
+				is_marked_as_geared = true
+			end
 			break
 		end
 	end
@@ -232,7 +236,7 @@ function wesnoth.update_stats(original)
 			table.remove(remade, i)
 		end
 	end
-	
+
 	-- PART IV: Read item properties
 	local penetrations = {}
 	local resistances = {}
@@ -352,7 +356,7 @@ function wesnoth.update_stats(original)
 				add_specials("specials_melee", melee_type_list)
 				add_specials("specials_ranged", ranged_type_list)
 			end
-			
+
 		end
 	end
 	grab_pseudoeffects(mods)
@@ -473,7 +477,7 @@ function wesnoth.update_stats(original)
 	end
 	for i = 1,#damage_type_list do
 		if penetrations[damage_type_list[i]] > 0 then
-			table.insert(remade_abilities, { "resistance", { id = resist_penetrate_list[i], sub = penetrations[damage_type_list[i]], max_value = 80, affect_enemies = true, affect_allies = false, affect_self = false, { "affect_adjacent", { adjacent = "n,ne,se,s,sw,nw" }}}})
+			table.insert(remade_abilities, { "resistance", { id = resist_penetrate_list[i], sub = penetrations[damage_type_list[i]], max_value = 80, affect_enemies = true, affect_allies = false, affect_self = false, apply_to = damage_type_list[i], { "affect_adjacent", { adjacent = "n,ne,se,s,sw,nw" }}}})
 		end
 	end
 
@@ -553,7 +557,7 @@ function wesnoth.update_stats(original)
 									local damage = atk.damage * atk.number
 									if damage > strongest_damage then
 										strongest_attack = atk
-										strongest_index = k
+										strongest_damage = damage
 									end
 								end
 							end
@@ -720,7 +724,7 @@ function wesnoth.update_stats(original)
 		table.insert(specials, { "damage", { id = "latent_charge", multiply = 1.5, apply_to = "both", active_on = "offense", { "filter_self", { { "filter_adjacent", { ability = "charge_leadership", is_enemy = false }}}}}})
 		table.insert(specials, { "berserk", { id = "latent_berserk", value = 30, { "filter_self", { { "filter_adjacent", { ability = "berserk_leadership", is_enemy = false }}}}}})
 		table.insert(specials, { "drains", { id = "latent_drain", value = 25, { "filter_self", { { "filter_adjacent", { ability = "drain_leadership", is_enemy = false }}}}}})
-		if atk.range == "ranged" then	
+		if atk.range == "ranged" then
 			table.insert(specials, { "chance_to_hit", { id = "latent_marksman", value = 60, cumulative = true, active_on = "offense", { "filter_self", { { "filter_adjacent", { ability = "marksman_leadership", is_enemy = false }}}}}})
 		end
 		table.insert(specials, { "firststrike", { id = "latent_firststrike", { "filter_self", { { "filter_adjacent", { ability = "firststrike_leadership", is_enemy = false }}}}}})

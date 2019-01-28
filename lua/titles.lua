@@ -5,7 +5,7 @@ local helper = wesnoth.require "lua/helper.lua"
 title_table = {}
 flavours_table = { "chivalrous", "wizardly", "dark", "criminal", "warlike", "sneaky", "brutish", "ghostly" }
 
-local title_data = helper.get_child(wesnoth.unit_types["Other Data Loader"].__cfg, "advancement")
+local title_data = helper.get_child(wesnoth.unit_types["Title Data Loader"].__cfg, "advancement")
 for i = 1,#title_data do
 	if title_data[i][1] == "nonterminal" then
 		local made = {}
@@ -24,7 +24,7 @@ function get_unit_flavour(u)
 	local data = wesnoth.get_variable("lua_unit_to_get_flavour")
 	wesnoth.set_variable("lua_unit_to_get_flavour", nil)
 
-	local has_attack = loti_util_list_attacks(u.type)
+	local has_attack = loti_util_list_attacks(u)
 
 	local function has_special(special_name)
 		local has = false

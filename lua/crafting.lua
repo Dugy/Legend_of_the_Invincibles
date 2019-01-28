@@ -246,7 +246,7 @@ loti.gem.get_crafting_dialog = function()
 		}
 	}
 
-	local basetype_listbox = wml.tag.horizontal_listbox {
+	local basetype_listbox = wml.tag.listbox {
 		id = "gui_basetype_chosen",
 		wml.tag.list_definition {
 			wml.tag.row {
@@ -292,13 +292,16 @@ loti.gem.get_crafting_dialog = function()
 		wml.tag.row {
 			wml.tag.column {
 				grow_factor = 0,
+				vertical_alignment = "center",
 				wml.tag.image {
 					id = "gui_type_icon"
 				}
 			},
 			wml.tag.column {
+				grow_factor = 1,
+				horizontal_grow = true,
 				border = "all",
-				border_size = 10,
+				border_size = 5,
 				wml.tag.label {
 					id = "gui_type_name",
 					characters_per_line = 30
@@ -307,11 +310,13 @@ loti.gem.get_crafting_dialog = function()
 		}
 	}
 
-	local type_listbox = wml.tag.horizontal_listbox {
+	local type_listbox = wml.tag.listbox {
 		id = "gui_type_chosen",
 		wml.tag.list_definition {
 			wml.tag.row {
 				wml.tag.column {
+					horizontal_grow = true,
+					vertical_alignment = "top",
 					wml.tag.toggle_panel {
 						tooltip = _"Choose item type",
 						type_listbox_template
@@ -361,38 +366,62 @@ loti.gem.get_crafting_dialog = function()
 	-- A grid that includes (1) recipe listbox, (2) gem counts, (3) information about selected item.
 	local main_widget = wml.tag.grid {
 		wml.tag.row {
-			-- List of recipes.
+			-- The main stuff
+			wml.tag.column {
+				grow_factor = 0,
+				horizontal_alignment = "left",
+				vertical_grow = true,
+				T.grid {
+					T.row {
+						T.column {
+							border = "bottom",
+							border_size = 5,
+							basetype_listbox
+						}
+					},
+					T.row {
+						-- Statistics on gems: needed/available
+						T.column {
+							grow_factor = 0,
+							horizontal_alignment = "left",
+							vertical_alignment = "top",
+							border = "left,right",
+							border_size = 10,
+							wml.tag.label {
+								id = "gui_gems_owned",
+								use_markup = true
+							}
+						}
+					},
+					T.row {
+						-- Description of selected item
+						T.column {
+							grow_factor = 1,
+							horizontal_grow = true,
+							vertical_alignment = "top",
+							wml.tag.scroll_label {
+								id = "gui_item_description",
+								definition = "description_small",
+								-- definition = "wml_message", -- larger version
+								use_markup = true
+							}
+						}
+					}
+				}
+			},
+			-- List of recipes
 			wml.tag.column {
 				grow_factor = 0,
 				horizontal_alignment = "left",
 				vertical_grow = true, -- For Tutorial, where there is only 1 recipe
 				recipe_listbox
 			},
-			-- Statistics on gems: needed/available
+			-- List of item types
 			wml.tag.column {
-				grow_factor = 0,
-				horizontal_alignment = "left",
-				vertical_alignment = "top",
-				border = "left,right",
-				border_size = 10,
-				wml.tag.label {
-					id = "gui_gems_owned",
-					use_markup = true
-				}
-			},
-			-- Description of selected item.
-			wml.tag.column {
-				grow_factor = 1,
-				horizontal_grow = true,
-				vertical_alignment = "top",
-				wml.tag.scroll_label {
-					id = "gui_item_description",
-					definition = "description_small",
-					-- definition = "wml_message", -- larger version
-					use_markup = true
-				}
+				border = "top",
+				border_size = 5,
+				type_listbox
 			}
-
 		}
 	}
 
@@ -425,6 +454,7 @@ loti.gem.get_crafting_dialog = function()
 		wml.tag.tooltip { id = "tooltip_large" },
 		wml.tag.helptip { id = "tooltip_large" },
 		maximum_width = 1000,
+		maximum_height = 800,
 		wml.tag.grid {
 			wml.tag.row {
 				wml.tag.column {
@@ -438,34 +468,8 @@ loti.gem.get_crafting_dialog = function()
 			},
 			wml.tag.row {
 				wml.tag.column {
-					border = "bottom",
-					border_size = 5,
-					basetype_listbox
-				}
-			},
-			wml.tag.row {
-				wml.tag.column {
 					horizontal_grow = true,
 					main_widget
-				}
-			},
-			wml.tag.row {
-				wml.tag.column {
-					horizontal_grow = true,
-					border = "top",
-					border_size = 10,
-					wml.tag.label {
-						id = "gui_choose_type_label",
-						label = _"Choose type of item:",
-						text_alignment = "left"
-					}
-				}
-			},
-			wml.tag.row {
-				wml.tag.column {
-					border = "top",
-					border_size = 5,
-					type_listbox
 				}
 			},
 			wml.tag.row {

@@ -2,6 +2,9 @@
 -- e.g. loti.item.storage.add()
 loti = {}
 
+-- Syntax sugar to make GUI2 dialogs more compact, e.g. T.column, T.row, etc.
+T = wml.tag
+
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/items.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/inventory/dialog.lua")
@@ -650,6 +653,16 @@ end
 function wesnoth.wml_actions.advance_stuff(cfg)
 --    wesnoth.message("advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
+
+	local function clear_potions()
+		local m = helper.get_child(unit, "modifications")
+		for i = #m, 1, -1 do
+			if m[i][2].sort ~= nil and string.find(m[i][2].sort, "potion") then
+				table.remove(m, i)
+			end
+		end
+	end
+
     if loti_needs_advance == nil then
         if unit.type == "Elvish Assassin" then
 --	    wesnoth.message("is assassin")
@@ -658,17 +671,13 @@ function wesnoth.wml_actions.advance_stuff(cfg)
                 { "effect", { apply_to = "bonus_attack", name = "execution", description = _"execution", icon = "attacks/bow-elven-magic.png", range = "ranged", defense_weight = "0", damage = "-40", merge = true, force_original_attack = "longbow" }}
             }}
             table.insert(m, a)
+	    clear_potions()
             wesnoth.put_unit(unit)
         end
         return
     end
     unit = clear_advancements(unit)
-    local m = helper.get_child(unit, "modifications")
-    for i = #m, 1, -1 do
-        if m[i][2].sort ~= nil and string.find(m[i][2].sort, "potion") then
-            table.remove(m, i)
-        end
-    end
+    clear_potions()
     wesnoth.put_unit(unit)
     loti_needs_advance = nil
 end
@@ -815,7 +824,9 @@ end
 
 -- Determine the list of item sorts (e.g. sword,staff,boots) that can be equipped by this unit.
 -- Returns the Lua table { sword = 1, armour = 1, ... }.
-function loti_util_list_equippable_sorts(unit_type)
+function loti_util_list_equippable_sorts(unit)
+	local unit_type = unit.type
+
 	-- Doppelganger can't equip anything (but can drink potions).
 	if unit_type:match( "doppelganger" ) then
 		return { potion = 1 }
@@ -836,7 +847,7 @@ function loti_util_list_equippable_sorts(unit_type)
 	end
 
 	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
-	for attack in pairs(loti_util_list_attacks(unit_type)) do
+	for attack in pairs(loti_util_list_attacks(unit)) do
 		if attack:match("sword$") or attack == "saber"
 			or attack == "war talon" or attack == "war blade"
 			or attack == "mberserk" or attack == "whirlwind"
@@ -930,7 +941,7 @@ function wesnoth.wml_actions.can_equip_item(cfg)
 	local item = wesnoth.get_variable("item_list.object[" .. cfg.item_number .. "]")
 	local result = 1
 
-	if not loti_util_list_equippable_sorts(unit.type)[item.sort] then
+	if not loti_util_list_equippable_sorts(unit)[item.sort] then
 		result = _"This unit can't equip this item."
 
 		-- More specific error
@@ -987,14 +998,18 @@ end
 --
 -- Utility function for [can_equip_item] and get_unit_flavour().
 -- List the names of all attacks (e.g. "chill tempest") of a certain unit.
+-- Parameter "unit" can be a WML table or Lua unit object.
 -- Returns the Lua table { attack_name = 1, another_attack_name = 1, ... },
 -- where attack names are untranslated (always English) and can therefore be used in conditionals.
 --
-function loti_util_list_attacks(unit_type)
-	local temp_unit = wesnoth.create_unit { type = unit_type }
-	local has_attack = {}
+function loti_util_list_attacks(unit)
+	-- Normalize to Lua unit object (to get unit.attacks)
+	if type(unit) == "table" then
+		unit = wesnoth.get_unit(unit.id)
+	end
 
-	for _, attack in ipairs(temp_unit.attacks) do
+	local has_attack = {}
+	for _, attack in ipairs(unit.attacks) do
 		-- Remove trailing numbers, e.g. bow2 -> bow.
 		local name = attack.name:gsub('%d+$', '')
 		has_attack[name] = true
