@@ -2,7 +2,7 @@ dist: trusty
 language: python
 
 git:
-  depth: 1
+  depth: false
   quiet: true
 
 notifications:
