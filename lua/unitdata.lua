@@ -188,6 +188,8 @@ local wml_based_implementation = {
 				if modif_type == "object" and contents.number then
 					-- This is an item, therefore we must add "item set" effects (if any).
 					contents = loti.unit.item_with_set_effects(contents.number, set_items)
+				elseif modif_type == "advancement" then
+					contents = get_type_advancement(unit.type, contents.id)
 				end
 
 				-- New effects[] array.
