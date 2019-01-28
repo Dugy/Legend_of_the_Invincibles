@@ -940,7 +940,7 @@ function wesnoth.wml_actions.can_equip_item(cfg)
 	local item = wesnoth.get_variable("item_list.object[" .. cfg.item_number .. "]")
 	local result = 1
 
-	if not loti_util_list_equippable_sorts(unit.type)[item.sort] then
+	if not loti_util_list_equippable_sorts(unit)[item.sort] then
 		result = _"This unit can't equip this item."
 
 		-- More specific error
