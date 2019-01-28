@@ -29,8 +29,9 @@ end
 -- (if filter isn't specified, then all values are returned "as is", and nothing gets skipped)
 -- Sample usage: for _, advancement in wml_modification_iterator(unit, "advancement")
 local function wml_modification_iterator(unit, tag, filter)
-	local wml = normalize_unit_param(unit)
-	local modifications = helper.get_child(wml, "modifications")
+	unit = normalize_unit_param(unit)
+
+	local modifications = helper.get_child(unit, "modifications")
 	local elements = helper.child_array(modifications, tag)
 
 	local idx = 0
@@ -77,9 +78,10 @@ local wml_based_implementation = {
 
 	-- Get a list of numbers of items on a unit
 	list_unit_item_numbers = function(unit)
-		local wml = normalize_unit_param(unit)
+		unit = normalize_unit_param(unit)
+
 		local retval = {}
-		local mods = helper.get_child(wml, "modifications")
+		local mods = helper.get_child(unit, "modifications")
 		for i = 1,#mods do
 			if mods[i][1] == "object" and mods[i][2].number then
 				table.insert(retval, mods[i][2].number)
@@ -125,9 +127,10 @@ local wml_based_implementation = {
 
 	-- Returns iterator over items of this unit.
 	items = function(unit)
-		local wml = normalize_unit_param(unit)
-		local set_items = loti.unit.list_unit_item_numbers(wml)
-		return wml_modification_iterator(wml, "object", function(elem)
+		unit = normalize_unit_param(unit)
+
+		local set_items = loti.unit.list_unit_item_numbers(unit)
+		return wml_modification_iterator(unit, "object", function(elem)
 			if not elem.number then
 				return nil
 			end
@@ -145,10 +148,9 @@ local wml_based_implementation = {
 
 	-- Returns iterator over advancements of this unit.
 	advancements = function(unit)
-		local wml = normalize_unit_param(unit)
-		local model = wesnoth.unit_types[wml.type]
-		return wml_modification_iterator(wml, "advancement", function(elem)
-			return get_type_advancement(wml.type, elem.id)
+		unit = normalize_unit_param(unit)
+		return wml_modification_iterator(unit, "advancement", function(elem)
+			return get_type_advancement(unit.type, elem.id)
 		end)
 	end,
 
