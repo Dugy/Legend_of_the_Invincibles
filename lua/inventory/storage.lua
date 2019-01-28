@@ -362,7 +362,7 @@ local function onshow(unit, item_sort)
 
 	-- Remember whether the items of this sort can be equipped.
 	type_is_equippable = true
-	if not loti_util_list_equippable_sorts(unit.type)[item_sort] then
+	if not loti_util_list_equippable_sorts(unit)[item_sort] then
 		type_is_equippable = false
 	end
 
