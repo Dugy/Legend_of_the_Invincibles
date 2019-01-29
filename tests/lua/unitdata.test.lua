@@ -72,8 +72,6 @@ local function test_add_list(unit, iter_fn, add_fn, array_of_things_to_add, expe
 
 	-- Compare current state of unit (e.g. items on unit) with array of what we just added.
 	test_iterator(unit, iter_fn, expected_results)
-
-	-- TODO: test remove
 end
 
 -- Prepare array of tests.
@@ -411,11 +409,11 @@ for unit_form, get_unit in pairs({
 			end,
 
 			function(effect)
-				-- absorb (1)
+				-- absorbs (1)
 				assert_adds_ability(effect, function(tag, ability)
-					-- NOTE: this changed on master branch, merge and update.
 					assert(tag == "dummy")
-					assert(ability.id == "absorb 1")
+					assert(ability.id == "absorb")
+					assert(ability.value == 1)
 				end)
 			end,
 
