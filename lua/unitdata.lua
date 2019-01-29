@@ -70,6 +70,12 @@ local function get_type_advancement(unit_type, advancement_id)
 			return adv
 		end
 	end
+
+	-- We must also support fake advancements like "particlestorm" or "ice_dragon_legacy".
+	-- They are not selectable in AMLA menu (and are not listed in Advancing type),
+	-- but are used as requirement for other advancements.
+	-- They don't contain any information except the fact that they are unlocked for this unit.
+	return { id = advancement_id }
 end
 
 -- Implementation based on the fact that items, effects, etc. are stored
