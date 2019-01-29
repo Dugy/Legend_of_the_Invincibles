@@ -1,8 +1,10 @@
 -- Automated test for [unitdata.lua] library.
 
+local helper = wesnoth.require "lua/helper.lua"
+
 -- Returns a new unit (WML table) for further testing.
 local function newunit()
-	local unit = wesnoth.create_unit { type = "Efraim_god" }
+	local unit = wesnoth.create_unit { type = "Efraim_god", random_traits = "no" }
 
 	-- Unit must be on the map for tests, otherwise wesnoth.get_unit() won't find it by ID.
 	unit:to_map(1, 1)
@@ -310,6 +312,7 @@ for unit_form, get_unit in pairs({
 		local unit = get_unit()
 
 		-- Empty (newly created) unit doesn't have any effects.
+		-- (assuming random_traits="no" when creating the unit).
 		test_iterator(unit, "effects", {})
 
 		-- Effects (things like "absorbs(1)" or "+16 regeneration") are added to unit indirectly.
@@ -325,7 +328,145 @@ for unit_form, get_unit in pairs({
 		loti.unit.add_item(unit, 535, "gauntlets")
 		loti.unit.add_item(unit, 562, "spear")
 
-		-- TODO: check values returned by loti.unit.effects(unit) here
+
+		-- Throw an exception if "effect" (WML table) doesn't add exactly N abilities,
+		-- where N is the number of elements in check_functions[] array.
+		-- Otherwise call check_functions[idx] callback for each added ability,
+		-- where idx is 1, 2, 3, etc.,
+		-- Each callback receives two parameters:
+		-- 1) name of ability tag (e.g. "leadership" or "heals"),
+		-- 2) contents of ability tag (WML table)
+		local function assert_added_abilities(effect, check_functions)
+			assert(effect.apply_to == "new_ability",
+				"Effect doesn't add any abilities: " .. wml.tostring(effect))
+
+			local added_abilities = effect[1][2]
+			assert(#added_abilities == #check_functions,
+				"Effect adds " .. #added_abilities ..
+				" abilities (should be " .. #check_functions .."): " .. wml.tostring(effect))
+
+			for idx, ability_tag in ipairs(added_abilities) do
+				check_functions[idx](ability_tag[1], ability_tag[2])
+			end
+		end
+
+		-- Same as assert_adds_abilities(), but expects only 1 ability.
+		local function assert_adds_ability(effect, check_function)
+			assert_added_abilities(effect, { check_function })
+		end
+
+		-- Now check values returned by loti.unit.effects(unit) here.
+		test_iterator(unit, "effects", {
+			function(effect)
+				-- Plus 5% resistance to arcane, cold and fire.
+				assert(effect.apply_to == "resistance")
+				assert(effect.number_required == 209)
+				assert(not effect.replace)
+
+				local resistance_wml = effect[1]
+				local tag = resistance_wml[1]
+				local bonus = resistance_wml[2]
+
+				assert(tag == "resistance")
+				assert(bonus.arcane == -5)
+				assert(bonus.cold == -5)
+				assert(bonus.fire == -5)
+			end,
+
+			function(effect)
+				-- Despair 15 (affects adjacent enemies)
+				assert_adds_ability(effect, function(tag, ability)
+					assert(tag == "leadership")
+					assert(ability.id == "despair")
+					assert(ability.value == -15)
+					assert(ability.affect_enemies)
+					assert(not ability.affect_allies)
+					assert(not ability.affect_self)
+					assert(not ability.cumulative)
+
+					local filter = helper.child_array(ability, "affect_adjacent")[1]
+					assert(filter.adjacent == "n,ne,se,s,sw,nw")
+				end)
+			end,
+
+			function(effect)
+				-- Resistance +10 (up to a maximum of 80) when defending
+				assert_adds_ability(effect, function(tag, ability)
+					assert(tag == "resistance")
+					assert(ability.id == "careful")
+					assert(ability.add == 10)
+					assert(ability.max_value == 80)
+					assert(ability.affect_self)
+					assert(ability.active_on == "defense")
+
+					local filter = helper.child_array(ability, "filter_base_value")[1]
+					assert(filter.less_than == 80)
+				end)
+			end,
+
+			function(effect)
+				-- Movement +1
+				assert(effect.apply_to == "movement")
+				assert(effect.increase == 1)
+			end,
+
+			function(effect)
+				-- absorb (1)
+				assert_adds_ability(effect, function(tag, ability)
+					-- NOTE: this changed on master branch, merge and update.
+					assert(tag == "dummy")
+					assert(ability.id == "absorb 1")
+				end)
+			end,
+
+			function(effect)
+				-- Two abilities are added by the same [effect]: cures and heals +8.
+				assert_added_abilities(effect, {
+					function(tag, ability)
+						-- Cures poison
+						assert(tag == "heals")
+						assert(ability.id == "curing")
+						assert(ability.affect_allies)
+						assert(not ability.affect_self)
+						assert(ability.poison == "cured")
+						assert(helper.child_array(ability, "affect_adjacent")[1]) -- Empty but present
+					end,
+					function(tag, ability)
+						-- Heals +8
+						assert(tag == "heals")
+						assert(ability.id == "healing")
+						assert(ability.affect_allies)
+						assert(not ability.affect_self)
+						assert(ability.poison == "slowed")
+						assert(ability.value == 8)
+						assert(helper.child_array(ability, "affect_adjacent")[1]) -- Empty but present
+					end
+				})
+			end,
+
+			function(effect)
+				-- frail tide (15): -15% physical resistance to adjacent enemies
+				assert_adds_ability(effect, function(tag, ability)
+					assert(tag == "resistance")
+					assert(ability.id == "frail tide")
+					assert(ability.sub == 15)
+					assert(ability.max_value == 80)
+					assert(ability.cumulative)
+					assert(ability.apply_to == "blade,impact,pierce")
+					assert(ability.affect_enemies)
+					assert(not ability.affect_allies)
+					assert(not ability.affect_self)
+
+					local filter = helper.child_array(ability, "affect_adjacent")[1]
+					assert(filter.adjacent == "n,ne,se,s,sw,nw")
+				end)
+			end,
+
+			function(effect)
+				-- FIXME: currently returns duplicate of frail tide(15).
+				-- Duplicates should be suppressed.
+			end,
+		})
 	end
 end
 
