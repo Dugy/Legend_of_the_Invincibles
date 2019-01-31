@@ -316,16 +316,17 @@ for unit_form, get_unit in pairs({
 		-- Effects (things like "absorbs(1)" or "+16 regeneration") are added to unit indirectly.
 		-- This happens when unit has some items/advancements that provide effects.
 		-- Furthermore, additional effects can be caused by combination of items ("item set bonus").
-		-- Let's add some effect-granting items/advancements to unit and then check the results.
+		-- Let's add some effect-granting traits/items/advancements to unit and then check the results.
 
+		loti.unit.add_advancement(unit, "sword1") -- "Better with the sword" advancement
 		loti.unit.add_item(unit, 100) -- Cunctator's sword
 		loti.unit.add_item(unit, 209) -- Cunctator's Helmet
 		loti.unit.add_item(unit, 249) -- Redshirt Armour
+		loti.unit.add_advancement(unit, "dodge") -- "Harder to hit" advancement
 		loti.unit.add_item(unit, 327) -- Eidolon's Coat
 		loti.unit.add_item(unit, 535, "armour")
 		loti.unit.add_item(unit, 535, "gauntlets")
 		loti.unit.add_item(unit, 562, "spear")
-
 
 		-- Throw an exception if "effect" (WML table) doesn't add exactly N abilities,
 		-- where N is the number of elements in check_functions[] array.
@@ -355,23 +356,53 @@ for unit_form, get_unit in pairs({
 
 		-- Now check values returned by loti.unit.effects(unit) here.
 		test_iterator(unit, "effects", {
+			-- Advancement "Better with the sword": +1 damage to "sword" attack.
 			function(effect)
+				assert(effect.apply_to == "attack")
+				assert(effect.name == "sword")
+				assert(effect.increase_damage == 1)
+			end,
+
+			-- Level-up (receiving the advancement "Better with the sword")
+			-- caused unit to completely heal and get +3 max hp.
+			function(effect)
+				assert(effect.apply_to == "hitpoints")
+				assert(effect.increase_total == 3)
+				assert(effect.heal_full)
+			end,
+
+			-- Level-up (receiving the advancement "Better with the sword")
+			-- caused Efraim (Demigod unit) to need 35 more xp for next advancement,
+			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
+			function(effect)
+				assert(effect.apply_to == "max_experience")
+				assert(effect.increase == 35)
+			end,
+
+			-- Level-up (receiving the advancement "Better with the sword")
+			-- caused Efraim (Demigod unit) to need 9% more xp for next advancement,
+			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
+			function(effect)
+				assert(effect.apply_to == "max_experience")
+				assert(effect.increase == '9%')
+			end,
+
+			function(effect)
+				-- Cunctator's sword (item #100):
+				-- set bonus from requires Cunctator's Helmet (item #209) also being present.
 				-- Plus 5% resistance to arcane, cold and fire.
 				assert(effect.apply_to == "resistance")
 				assert(effect.number_required == 209)
 				assert(not effect.replace)
 
-				local resistance_wml = effect[1]
-				local tag = resistance_wml[1]
-				local bonus = resistance_wml[2]
-
-				assert(tag == "resistance")
+				local bonus = helper.child_array(effect, "resistance")[1]
 				assert(bonus.arcane == -5)
 				assert(bonus.cold == -5)
 				assert(bonus.fire == -5)
 			end,
 
 			function(effect)
+				-- Cunctator's Helmet (item #209).
 				-- Despair 15 (affects adjacent enemies)
 				assert_adds_ability(effect, function(tag, ability)
 					assert(tag == "leadership")
@@ -388,6 +419,8 @@ for unit_form, get_unit in pairs({
 			end,
 
 			function(effect)
+				-- Cunctator's Helmet (item #209):
+				-- set bonus from requires Cunctator's sword (item #100) also being present.
 				-- Resistance +10 (up to a maximum of 80) when defending
 				assert_adds_ability(effect, function(tag, ability)
 					assert(tag == "resistance")
@@ -403,12 +436,14 @@ for unit_form, get_unit in pairs({
 			end,
 
 			function(effect)
+				-- Redshirt Armour (item #249).
 				-- Movement +1
 				assert(effect.apply_to == "movement")
 				assert(effect.increase == 1)
 			end,
 
 			function(effect)
+				-- Redshirt Armour (item #249).
 				-- absorbs (1)
 				assert_adds_ability(effect, function(tag, ability)
 					assert(tag == "dummy")
@@ -417,7 +452,55 @@ for unit_form, get_unit in pairs({
 				end)
 			end,
 
+			-- Advancement "Harder to hit": +1-2 defense on different terrains.
 			function(effect)
+				assert(effect.apply_to == "defense")
+				assert(not effect.replace)
+
+				local bonus = helper.child_array(effect, "defense")[1]
+				assert(bonus.frozen == -2)
+				assert(bonus.shallow_water == -2)
+				assert(bonus.deep_water == -2)
+				assert(bonus.reef == -2)
+				assert(bonus.flat == -2)
+				assert(bonus.castle == -1)
+				assert(bonus.frozen == -2)
+				assert(bonus.village == -1)
+				assert(bonus.forest == -1)
+				assert(bonus.cave == -2)
+				assert(bonus.hills == -1)
+				assert(bonus.mountains == -1)
+				assert(bonus.fungus == -2)
+				assert(bonus.swamp_water == -2)
+				assert(bonus.sand == -2)
+			end,
+
+			-- Level-up (receiving the advancement "Harder to hit")
+			-- caused unit to completely heal and get +3 max hp.
+			function(effect)
+				assert(effect.apply_to == "hitpoints")
+				assert(effect.increase_total == 3)
+				assert(effect.heal_full)
+			end,
+
+			-- Level-up (receiving the advancement "Harder to hit")
+			-- caused Efraim (Demigod unit) to need 35 more xp for next advancement,
+			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
+			function(effect)
+				assert(effect.apply_to == "max_experience")
+				assert(effect.increase == 35)
+			end,
+
+			-- Level-up (receiving the advancement "Harder to hit")
+			-- caused Efraim (Demigod unit) to need 9% more xp for next advancement,
+			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
+			function(effect)
+				assert(effect.apply_to == "max_experience")
+				assert(effect.increase == '9%')
+			end,
+
+			function(effect)
+				-- Eidolon's Coat (item #327).
 				-- Two abilities are added by the same [effect]: cures and heals +8.
 				assert_added_abilities(effect, {
 					function(tag, ability)
@@ -443,6 +526,7 @@ for unit_form, get_unit in pairs({
 			end,
 
 			function(effect)
+				-- Unimpalability (item #562).
 				-- frail tide (15): -15% physical resistance to adjacent enemies
 				assert_adds_ability(effect, function(tag, ability)
 					assert(tag == "resistance")
@@ -461,12 +545,16 @@ for unit_form, get_unit in pairs({
 			end,
 
 			function(effect)
-				-- FIXME: currently returns duplicate of frail tide(15).
+				-- FIXME: currently returns duplicate of frail tide(15)
+				-- caused by two Unimpalability items (each of them grants this effect).
 				-- Duplicates should be suppressed.
 			end,
 		})
 	end
 end
+
+-- To simplify debugging, uncomment the following line to run only ONE test named below:
+-- tests = { tests['list effects (on WML table)'] }
 
 -- Provide the list of tests, will be used by loti.testsuite().
 return tests
