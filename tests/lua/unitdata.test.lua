@@ -74,6 +74,28 @@ local function test_add_list(unit, iter_fn, add_fn, array_of_things_to_add, expe
 	test_iterator(unit, iter_fn, expected_results)
 end
 
+-- Utility function to add trait to unit (NOT provided by unitdata API),
+-- where unit can be WML table or ID. Used in the test of effects().
+-- Returns new version of unit (either WML table or ID, will be the same format as input parameter)
+local function add_trait(unit, trait)
+	local id = unit
+	local form = "id"
+
+	if type(unit) == "table" then
+		id = unit.id
+		form = "wml"
+	end
+
+	local lua_unit = wesnoth.get_unit(id)
+	lua_unit:add_modification("trait", trait)
+
+	if form == "wml" then
+		return lua_unit.__cfg
+	end
+
+	return lua_unit.id
+end
+
 -- Prepare array of tests.
 local tests = {}
 
@@ -318,6 +340,19 @@ for unit_form, get_unit in pairs({
 		-- Furthermore, additional effects can be caused by combination of items ("item set bonus").
 		-- Let's add some effect-granting traits/items/advancements to unit and then check the results.
 
+		unit = add_trait(unit, { -- "strong" trait: +1 melee damage, +1 hp
+			name = "strong",
+			{ "effect", {
+				apply_to = "attack",
+				increase_damage = 1,
+				range = "melee"
+			} },
+			{ "effect", {
+				apply_to = "hitpoints",
+				increase_total = 1
+			} }
+		})
+
 		loti.unit.add_advancement(unit, "sword1") -- "Better with the sword" advancement
 		loti.unit.add_item(unit, 100) -- Cunctator's sword
 		loti.unit.add_item(unit, 209) -- Cunctator's Helmet
@@ -375,6 +410,19 @@ for unit_form, get_unit in pairs({
 
 		-- Now check values returned by loti.unit.effects(unit) here.
 		test_iterator(unit, "effects", {
+			-- Trait "strong": +1 to melee damage.
+			function(effect)
+				assert(effect.apply_to == "attack")
+				assert(effect.increase_damage == 1)
+				assert(effect.range == "melee")
+			end,
+
+			-- Trait "strong": +1 to hitpoints.
+			function(effect)
+				assert(effect.apply_to == "hitpoints")
+				assert(effect.increase_total == 1)
+			end,
+
 			-- Advancement "Better with the sword": +1 damage to "sword" attack.
 			function(effect)
 				assert(effect.apply_to == "attack")
