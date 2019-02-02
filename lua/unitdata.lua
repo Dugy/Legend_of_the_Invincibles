@@ -176,11 +176,6 @@ local wml_based_implementation = {
 		local effects
 		local effect_idx = 0
 
-		-- List of effect.id for effects that we have already returned by iterator.
-		-- Format: Lua table { "healing" => true, "careful" => true, ...  }
-		-- This is used to avoid returning duplicate effects (when 2 items give the same effect).
-		local seen_effect_ids = {}
-
 		return function()
 			effect_idx = effect_idx + 1
 
@@ -208,23 +203,7 @@ local wml_based_implementation = {
 
 				-- New effects[] array.
 				-- Further calls to effects() iterator will return its values until this array is depleted.
-				effects = {}
-				for _, effect in ipairs(helper.child_array(contents, "effect") or {}) do
-					-- Avoid duplicates (won't return two effects with the same ID).
-					local duplicate = false
-					if effect.id then
-						if seen_effect_ids[effect.id] then
-							duplicate = true
-						else
-							seen_effect_ids[effect.id] = true
-						end
-					end
-
-					if not duplicate then
-						-- This effect can be listed.
-						table.insert(effects, effect)
-					end
-				end
+				effects = helper.child_array(contents, "effect")
 				effect_idx = 1
 			end
 
