@@ -3,13 +3,9 @@ local helper = wesnoth.require "lua/helper.lua"
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 local function call_event_on_unit(u, name)
-	local old_id = u.id
-	local id = "lua_stats_updating_dummy"
-	u.id = id
 	wesnoth.set_variable("updated", u)
 	wesnoth.wml_actions.fire_event{ name = name }
 	u = wesnoth.get_variable("updated")
-	u.id = old_id
 	return u
 end
 
