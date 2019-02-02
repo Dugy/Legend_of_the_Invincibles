@@ -164,14 +164,22 @@ local wml_based_implementation = {
 	effects = function(unit)
 		unit = normalize_unit_param(unit)
 
-		local set_items = loti.unit.list_unit_item_numbers(unit)
-		local modifications = helper.get_child(unit, "modifications")
-
-		local modif_idx = 0
-		local effect_idx = 0
-		local effects -- Effects of only one modification (modification we are currently processing)
-
 		local idx = 0 -- Top-level index returned as key from effects() iterator
+		local set_items = loti.unit.list_unit_item_numbers(unit)
+
+		-- List of all modifications of this unit.
+		-- Includes items, advancements, traits, etc.
+		local modifications = helper.get_child(unit, "modifications")
+		local modif_idx = 0
+
+		-- Effects of only one modification (modification we are currently processing)
+		local effects
+		local effect_idx = 0
+
+		-- List of effect.id for effects that we have already returned by iterator.
+		-- Format: Lua table { "healing" => true, "careful" => true, ...  }
+		-- This is used to avoid returning duplicate effects (when 2 items give the same effect).
+		local seen_effect_ids = {}
 
 		return function()
 			effect_idx = effect_idx + 1
@@ -200,7 +208,23 @@ local wml_based_implementation = {
 
 				-- New effects[] array.
 				-- Further calls to effects() iterator will return its values until this array is depleted.
-				effects = helper.child_array(contents, "effect")
+				effects = {}
+				for _, effect in ipairs(helper.child_array(contents, "effect") or {}) do
+					-- Avoid duplicates (won't return two effects with the same ID).
+					local duplicate = false
+					if effect.id then
+						if seen_effect_ids[effect.id] then
+							duplicate = true
+						else
+							seen_effect_ids[effect.id] = true
+						end
+					end
+
+					if not duplicate then
+						-- This effect can be listed.
+						table.insert(effects, effect)
+					end
+				end
 				effect_idx = 1
 			end
 
