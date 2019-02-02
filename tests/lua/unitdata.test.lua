@@ -354,6 +354,25 @@ for unit_form, get_unit in pairs({
 			assert_added_abilities(effect, { check_function })
 		end
 
+		-- Throw an exception if effect doesn't add the ability
+		-- frail tide (15): -15% physical resistance to adjacent enemies.
+		local function assert_adds_frail_tide_15(effect)
+			assert_adds_ability(effect, function(tag, ability)
+				assert(tag == "resistance")
+				assert(ability.id == "frail tide")
+				assert(ability.sub == 15)
+				assert(ability.max_value == 80)
+				assert(ability.cumulative)
+				assert(ability.apply_to == "blade,impact,pierce")
+				assert(ability.affect_enemies)
+				assert(not ability.affect_allies)
+				assert(not ability.affect_self)
+
+				local filter = helper.child_array(ability, "affect_adjacent")[1]
+				assert(filter.adjacent == "n,ne,se,s,sw,nw")
+			end)
+		end
+
 		-- Now check values returned by loti.unit.effects(unit) here.
 		test_iterator(unit, "effects", {
 			-- Advancement "Better with the sword": +1 damage to "sword" attack.
@@ -528,26 +547,15 @@ for unit_form, get_unit in pairs({
 			function(effect)
 				-- Unimpalability (item #562).
 				-- frail tide (15): -15% physical resistance to adjacent enemies
-				assert_adds_ability(effect, function(tag, ability)
-					assert(tag == "resistance")
-					assert(ability.id == "frail tide")
-					assert(ability.sub == 15)
-					assert(ability.max_value == 80)
-					assert(ability.cumulative)
-					assert(ability.apply_to == "blade,impact,pierce")
-					assert(ability.affect_enemies)
-					assert(not ability.affect_allies)
-					assert(not ability.affect_self)
-
-					local filter = helper.child_array(ability, "affect_adjacent")[1]
-					assert(filter.adjacent == "n,ne,se,s,sw,nw")
-				end)
+				assert_adds_frail_tide_15(effect)
 			end,
 
 			function(effect)
-				-- FIXME: currently returns duplicate of frail tide(15)
-				-- caused by two Unimpalability items (each of them grants this effect).
-				-- Duplicates should be suppressed.
+				-- Second Unimpalability (item #562).
+				-- The duplicate is caused by two Unimpalability items
+				-- (each of them grants this effect).
+				-- frail tide (15): -15% physical resistance to adjacent enemies
+				assert_adds_frail_tide_15(effect)
 			end,
 		})
 	end
