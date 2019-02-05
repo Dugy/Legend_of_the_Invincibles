@@ -158,3 +158,46 @@ function wesnoth.dbms(lua_var, clear, name, onscreen, wrap, only_return)
 	end
 	return result
 end
+
+local loop_check = 0
+function wesnoth.loop_guard(reaction, arg)
+	if not arg then
+		arg = 10000
+	end
+	loop_check = loop_check + 1
+	if loop_check > arg then
+		reaction()
+	end
+end
+
+-- Run the automated testsuite.
+-- Locates all .test.lua files in tests/lua/ directory and runs them.
+-- Each .test.lua file must return a Lua array { test_name_1 => function_to_call, test_name_2 => ... }
+-- (see unitdata.test.lua for example) to get detailed PASS/FAIL report.
+-- Test functions should throw an exception via error() or assert() to report test failures.
+loti.testsuite = function()
+	local passed_count = 0
+	local failed_count = 0
+
+	-- Find the tests.
+	local testdir = "~/add-ons/Legend_of_the_Invincibles/tests/lua"
+	for _, filename in ipairs(wesnoth.read_file(testdir)) do
+		if filename:match("%.test%.lua$") then
+			print("Testsuite: running " .. filename)
+
+			local checks = wesnoth.require(testdir .. "/" .. filename)
+			for description, method in pairs(checks) do
+				local is_ok, error_message = pcall(method)
+				if is_ok then
+					print("PASS\t" .. description)
+					passed_count = passed_count + 1
+				else
+					print("FAIL\t" .. description .. ": " .. error_message)
+					failed_count = failed_count + 1
+				end
+			end
+		end
+	end
+
+	print("Test results: passed: " .. passed_count .. ", failed: " .. failed_count .. ".")
+end
