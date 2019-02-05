@@ -211,6 +211,23 @@ for unit_form, get_unit in pairs({
 		)
 	end
 
+	tests['list_unit_item_numbers()' .. subtest_name] = function()
+		local unit = get_unit()
+
+		loti.unit.add_item(unit, 100, "sword")
+		loti.unit.add_item(unit, 327)
+		loti.unit.add_item(unit, 535, "armour")
+		loti.unit.add_item(unit, 535, "gauntlets")
+		loti.unit.add_item(unit, 562, "spear")
+
+		local actual = table.concat(loti.unit.list_unit_item_numbers(unit), ",")
+		local expected = table.concat({ 100, 327, 535, 535, 562 }, ",")
+
+		assert(expected == actual,
+			"Result of list_unit_item_numbers (" .. actual .. ") " ..
+			"is different from expected (" .. expected ..").")
+	end
+
 	tests['remove/list items' .. subtest_name] = function()
 		local unit
 
