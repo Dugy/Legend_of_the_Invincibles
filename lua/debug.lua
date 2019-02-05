@@ -158,3 +158,14 @@ function wesnoth.dbms(lua_var, clear, name, onscreen, wrap, only_return)
 	end
 	return result
 end
+
+local loop_check = 0
+function wesnoth.loop_guard(reaction, arg)
+	if not arg then
+		arg = 10000
+	end
+	loop_check = loop_check + 1
+	if loop_check > arg then
+		reaction()
+	end
+end

@@ -55,8 +55,7 @@ end
 -- Helper function to obtain a unit type's advancement with a given id
 
 local function get_type_advancement(unit_type, advancement_id)
-	local model = wesnoth.unit_types[unit_type]
-	local advancement
+	local model = wesnoth.unit_types["Advancing" .. unit_type].__cfg
 	for adv in helper.child_range(model, "advancement") do
 		if adv.id == advancement_id then
 			return adv
@@ -67,13 +66,64 @@ end
 -- Implementation based on the fact that items, effects, etc. are stored
 -- as modifications within the WML of the unit.
 local wml_based_implementation = {
+
+	-- Get a list of numbers of items on a unit
+	list_unit_item_numbers = function(unit)
+		local wml = normalize_unit_param(unit)
+		local retval = {}
+		local mods = helper.get_child(wml, "modifications")
+		for i = 1,#mods do
+			if mods[i][1] == "object" and mods[i][2].number then
+				table.insert(retval, mods[i][2].number)
+			end
+		end
+		return retval
+	end,
+
+	-- Transforms latent effects with filled requirements to regular effects
+	item_with_set_effects = function(number, set_items)
+		local got = loti.item.type[number]
+		if not got then
+			return nil
+		end
+		local item = wesnoth.deepcopy(got)
+
+		for i = 1,#item do
+			if item[i][1] == "latent" then
+				local latent = item[i][2]
+				local has = 0
+				local required = latent.required or latent.number_required
+				if not required then
+					helper.wml_error("[latent] of item " .. tostring(item.number) .. " lacks the necessary required= attribute")
+				end
+				for t in string.gmatch(required, "[^%s,][^,]*") do
+					local needed = tonumber(t)
+					for j = 1,#set_items do
+						if set_items[j] == needed then
+							has = has + 1
+							break
+						end
+					end
+				end
+				local needed = latent.needed or 1
+				if has >= needed then
+					item[i][1] = "effect"
+				end
+			end
+		end
+
+		return item
+	end,
+
 	-- Returns iterator over items of this unit.
 	items = function(unit)
-		return wml_modification_iterator(unit, "object", function(elem)
+		local wml = normalize_unit_param(unit)
+		local set_items = loti.unit.list_unit_item_numbers(wml)
+		return wml_modification_iterator(wml, "object", function(elem)
 			if not elem.number then
 				return nil
 			end
-			local item = loti.item.type(elem.number)
+			local item = loti.unit.item_with_set_effects(elem.number, set_items)
 			if item then
 				item = wesnoth.deepcopy(item)
 				if elem.sort then
@@ -90,7 +140,7 @@ local wml_based_implementation = {
 		local wml = normalize_unit_param(unit)
 		local model = wesnoth.unit_types[wml.type]
 		return wml_modification_iterator(unit, "advancement", function(elem)
-			get_type_advancement(wml.type, elem.id)
+			return get_type_advancement(wml.type, elem.id)
 		end)
 	end,
 
@@ -99,6 +149,7 @@ local wml_based_implementation = {
 		local wml = normalize_unit_param(unit)
 		local model = wesnoth.unit_types[wml.type]
 		local modifications = helper.get_child(wml, "modifications")
+		local set_items = loti.unit.list_unit_item_numbers(wml)
 		local advs = {}
 		local objs = {}
 		local others = {}
@@ -111,12 +162,13 @@ local wml_based_implementation = {
 				table.insert(others, modifications[i][2])
 			end
 		end
-		local adv_ord = 0
-		local obj_ord = 0
-		local other_ord = 0
+		local adv_ord = 1
+		local obj_ord = 1
+		local other_ord = 1
 		local eff_ord = 0
 		local current
 		local retval
+		local doing = "advs"
 		local function add_effect(bump)
 			while current[eff_ord] and current[eff_ord][1] ~= "effect" do
 				eff_ord = eff_ord + 1
@@ -131,18 +183,25 @@ local wml_based_implementation = {
 		end
 		
 		retval = function()
-			if adv_ord < #advs then
+			if adv_ord <= #advs then
 				if not current then
 					current = get_type_advancement(wml.type, advs[adv_ord].id)
+					while not current and adv_ord < #advs do
+						adv_ord = adv_ord + 1
+						current = get_type_advancement(wml.type, advs[adv_ord].id)
+					end
 					eff_ord = 0
 				end
 				eff_ord = eff_ord + 1
-				add_effect( function() adv_ord = adv_ord + 1 end )
+				if current then
+					return add_effect( function() adv_ord = adv_ord + 1 end )
+				end
 			end
-			if obj_ord < #objs then
-				if not obj then
+			doing = "objs"
+			if obj_ord <= #objs then
+				while not current and obj_ord < #objs do
 					if objs[obj_ord].number then
-						current = loti.item.type(objs[obj_ord].number)
+						current = loti.unit.item_with_set_effects(objs[obj_ord].number, set_items)
 						local sort = objs[obj_ord]
 						if current == "armourword" and current.defence and (sort == "boots" or sort == "helm" or sort == "gauntlets") then
 							current.defence = current.defence / 3
@@ -152,15 +211,19 @@ local wml_based_implementation = {
 					end
 					eff_ord = 0
 				end
-				add_effect( function() obj_ord = obj_ord + 1 end )
+				eff_ord = eff_ord + 1
+				if current then
+					return add_effect( function() obj_ord = obj_ord + 1 end )
+				end
 			end
-			if other_ord < #others then
+			doing = "others"
+			if other_ord <= #others then
 				if not current then
 					current = others[other_ord]
 					eff_ord = 0
 				end
 				eff_ord = eff_ord + 1
-				add_effect( function() other_ord = other_ord + 1 end )
+				return add_effect( function() other_ord = other_ord + 1 end )
 			end
 		end
 		return retval
@@ -171,7 +234,9 @@ local wml_based_implementation = {
 		wml = normalize_unit_param(unit)
 		local mods = helper.get_child(wml, "modifications")
 		local advancement = get_type_advancement(wml.id, advancement.id)
-		table.insert(mods, { "advancement", advancement })
+		if advancement then
+			table.insert(mods, { "advancement", advancement })
+		end
 	end,
 
 	-- Remove advancement from unit.
@@ -237,18 +302,6 @@ local wml_based_implementation = {
 			end
 		end
 	end,
-
-	-- Returns human-readable description of item (string)
-	-- with highlighted active bonuses from item sets on this unit.
-	describe_equipped_item = function(unit, item_number, item_sort)
-		for _, item in loti.unit.items(unit) do
-			if item.number == item_number then
-				if not item_sort or item.sort == item_sort then
-					return item.description
-				end
-			end
-		end
-	end
 }
 
 -- Implementation that efficiently stores items, effects, etc. in Lua array.
