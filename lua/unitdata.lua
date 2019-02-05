@@ -222,9 +222,9 @@ local wml_based_implementation = {
 			helper.wml_error("Trying to add non-existent advancement \"" .. tostring(advancement_id) ..
 				" to unit " .. unit.id)
 		end
-		
+
 		table.insert(mods, { "advancement", advancement })
-			
+
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
 	end,
@@ -239,7 +239,7 @@ local wml_based_implementation = {
 				break
 			end
 		end
-		
+
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
 	end,
@@ -253,7 +253,7 @@ local wml_based_implementation = {
 				table.remove(mods, i)
 			end
 		end
-		
+
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
 	end,
@@ -284,7 +284,7 @@ local wml_based_implementation = {
 				break
 			end
 		end
-		
+
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
 	end,
@@ -299,7 +299,7 @@ local wml_based_implementation = {
 				table.remove(mods, i)
 			end
 		end
-		
+
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
 	end,
