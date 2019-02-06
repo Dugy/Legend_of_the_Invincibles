@@ -482,15 +482,7 @@ end
 
 -- Generate the description of an item
 loti.item.describe_item = function(number, sort, set_items)
-	local item = loti.item.type[number]
-	if item.description then
-		-- Already have the description. No need to recalculate,
-		-- except when this is a craftable armour
-		-- (because gauntlets/boots/helms have less defence than armours).
-		if item.sort ~= "armourword" then
-			return item.description
-		end
-	end
+	local item = loti.unit.item_with_set_effects(number, set_items)
 	local desc = {}
 
 	if item.defence then
@@ -739,20 +731,8 @@ loti.item.describe_item = function(number, sort, set_items)
 				line = _"<span color='yellow'>New advancements: " .. effect.description .. _"</span>"
 			end
 		end
-		if effect.number_required and set_items then
-			local fulfilled = 0
-			for num in string.gmatch(effect.number_required, "[^%s,][^,]*") do
-				local sought = tonumber(num)
-				for i = 1,#set_items do
-					if set_items[i] == sought then
-						fulfilled = fulfilled + 1
-						break
-					end
-				end
-			end
-			if (not effect.needed and fulfilled >= 1) or (effect.needed and fulfilled >= effect.needed) then
-				line = "<b>" .. line .. "</b>"
-			end
+		if set_items and (effect.required or effect.number_required) and item[i][1] == "effect" then
+			line = "<b>" .. line .. "</b>"
 		end
 		table.insert(desc, line)
 	end

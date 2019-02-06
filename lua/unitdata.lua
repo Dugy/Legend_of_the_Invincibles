@@ -98,11 +98,10 @@ local wml_based_implementation = {
 
 	-- Transforms latent effects with filled requirements to regular effects
 	item_with_set_effects = function(number, set_items)
-		local got = loti.item.type[number]
-		if not got then
-			return nil
+		local item = wesnoth.deepcopy(loti.item.type[number])
+		if not set_items then
+			return item
 		end
-		local item = wesnoth.deepcopy(got)
 
 		for i = 1,#item do
 			if item[i][1] == "latent" then
