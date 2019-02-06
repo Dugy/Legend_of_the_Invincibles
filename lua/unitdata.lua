@@ -290,18 +290,30 @@ local wml_based_implementation = {
 
 	-- Remove all items from unit.
 	-- Returns a Lua array of items that were removed.
-	remove_all_items = function(unit)
+	-- Optional parameter: filter_func - callback function. If set, then:
+	--	each item is passed to this callback as a parameter,
+	--	item is only removed if the callback returned true.
+	remove_all_items = function(unit, filter_func)
 		unit = normalize_unit_param(unit)
+
 		local mods = helper.get_child(unit, "modifications")
 		for i = #mods,1,-1 do
 			if mods[i][1] == "object" then
-				table.remove(mods, i)
+				if not filter_func or filter_func(mods[i][2]) then
+					table.remove(mods, i)
+				end
 			end
 		end
 
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
 	end,
+
+	-- Remove all status conditions that are removed by full healing.
+	remove_healable_conditions = function(unit)
+		local filter = function(object) return object.remove_on_heal end
+		loti.unit.remove_all_items(unit, filter)
+	end
 }
 
 -- Implementation that efficiently stores items, effects, etc. in Lua array.

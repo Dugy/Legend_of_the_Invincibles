@@ -46,11 +46,6 @@ function wesnoth.update_stats(original)
 
 	-- PART II: Cleanup
 	local vars = helper.get_child(original, "variables")
-	--local mods = helper.get_child(vars, "modifications") -- This is where modifications are to be stored
-	--if not mods then
-	--	mods = {}
-	--end
-	--local alt_mods = helper.get_child(original, "modifications") -- This is where modifications are stored
 	local visible_modifications = helper.get_child(original, "modifications") -- This is where modifićations actually affecting visuals belong
 	local events_to_fire = {}
 	local set_items = loti.unit.list_unit_item_numbers(original)
@@ -73,18 +68,15 @@ function wesnoth.update_stats(original)
 				break
 			end
 		end
-		local function remove_heal_object(mods)
-			for i = 1,#mods do
-				if mods[i][2].remove_on_heal then
-					mods[i] = nil
-					break
-				end
-			end
-		end
-		remove_heal_object(mods)
-		remove_heal_object(alt_mods)
+
+		-- Remove pseudo-items like "incinerated" that should be removed by full healing.
+		loti.unit.remove_healable_conditions(original)
+
 		vars.fully_healed = nil
 		was_healing = true
+
+		-- FIXME: double-check: should this variable be cleared or not?
+		-- WML of items.cfg seems to need it for "You already had a potion on this turn" error.
 		wesnoth.set_variable("fully_healed", nil)
 	end
 	if was_healing then
@@ -131,11 +123,6 @@ function wesnoth.update_stats(original)
 	vars = helper.get_child(remade, "variables")
 	visible_modifications = helper.get_child(remade, "modifications")
 	vars.updated = true
-
-	-- Modifications are read when drawing, we may keep the effects elsewhere and apply them only when we need
---	for i = 1,#mods do
---		wesnoth.add_modification(remade, "object", mods[i][2], false) -- TODO: Do this differently, it doesn't work this way
---	end
 
 	-- Remove temporary dummy attacks
 	for i = #remade,1,-1 do
@@ -486,6 +473,7 @@ function wesnoth.update_stats(original)
 					end
 				end
 				if not right_anim then
+					-- FIXME: "mods" variable is no longer available
 					for k = 1,#mods do
 						for inner_eff in helper.child_range(mods[k][2], "effect") do
 							if inner_eff.apply_to == "new_animation" then
@@ -542,6 +530,7 @@ function wesnoth.update_stats(original)
 			end
 			-- Check if it's improved somewhere (I know this could be done with a better complexity)
 			for _, other_effect in loti.unit.effects(remade) do
+				-- FIXME: "mods" variable is no longer available
 				local other_effect = mods[k][2][m][2]
 				if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
 					if other_effect.increase_damage then
