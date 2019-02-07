@@ -6,9 +6,10 @@ loti = {}
 T = wml.tag
 
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/utils.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/items.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/inventory/dialog.lua")
-wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/utils.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/unitdata.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/crafting.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/titles.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/redeem.lua")
@@ -678,6 +679,11 @@ function wesnoth.wml_actions.advance_stuff(cfg)
     end
     unit = clear_advancements(unit)
     clear_potions()
+    for i = 1,#unit do
+	if unit[i][1] == "status" then
+		unit[i][2] = {}
+	end
+    end
     wesnoth.put_unit(unit)
     loti_needs_advance = nil
 end
