@@ -199,11 +199,12 @@ for unit_form, get_unit in pairs({
 				end,
 
 				function(result)
-					-- Crafted non-chest armour (in this case, a gauntlets).
+					-- Crafted non-chest armour (in this case, gauntlets).
 					assert(result.sort == "gauntlets")
 
-					-- Note: result doesn't have its defence multiplied by 1/3 (yet),
-					-- because this is done by update_stats() later.
+					-- Note: correct result should have its defence multiplied by 1/3
+					-- (only chest armours get the full defence)
+					result.defence = result.defence * 3
 					result.sort = "armourword"
 					assert_wml_equals(loti.item.type[535], result)
 				end,
