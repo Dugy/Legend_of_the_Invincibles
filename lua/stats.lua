@@ -479,23 +479,21 @@ function wesnoth.update_stats(original)
 					end
 				end
 				if not right_anim then
-					-- FIXME: "mods" variable is no longer available
-					for k = 1,#mods do
-						for inner_eff in helper.child_range(mods[k][2], "effect") do
-							if inner_eff.apply_to == "new_animation" then
-								local filter = helper.get_child(inner_eff, "filter")
-								if not filter or not filter.gender or filter.gender == remade.gender then
-									for anim in helper.child_range(inner_eff, "attack_anim") do
-										local filter = helper.get_child(anim, "filter_attack")
-										if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
-											right_anim = anim
-										end
+					for _, inner_eff in loti.unit.effects(remade) do
+						if inner_eff.apply_to == "new_animation" then
+							local filter = helper.get_child(inner_eff, "filter")
+							if not filter or not filter.gender or filter.gender == remade.gender then
+								for anim in helper.child_range(inner_eff, "attack_anim") do
+									local filter = helper.get_child(anim, "filter_attack")
+									if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
+										right_anim = anim
 									end
 								end
 							end
 						end
 					end
 				end
+
 				if right_anim then
 					right_anim = wesnoth.deepcopy(right_anim)
 					local filter = helper.get_child(right_anim, "filter_attack")
@@ -536,8 +534,6 @@ function wesnoth.update_stats(original)
 			end
 			-- Check if it's improved somewhere (I know this could be done with a better complexity)
 			for _, other_effect in loti.unit.effects(remade) do
-				-- FIXME: "mods" variable is no longer available
-				local other_effect = mods[k][2][m][2]
 				if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
 					if other_effect.increase_damage then
 						damage = damage + other_effect.increase_damage
