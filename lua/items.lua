@@ -422,7 +422,8 @@ loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
 	end
 end
 
--- Get the list of all items in the storage (Lua array, each element is item_number).
+-- Get the list of all items on the ground at coordinates (x,y).
+-- Returns: Lua array, each element is item_number.
 loti.item.on_the_ground.list = function(x, y)
 	local list = helper.get_variable_array("items")
 	local results = {}
