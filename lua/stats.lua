@@ -50,6 +50,12 @@ function wesnoth.update_stats(original)
 	local events_to_fire = {}
 	local set_items = loti.unit.list_unit_item_numbers(original)
 
+	-- Delete temporary objects and gems
+	-- (e.g. when the gem is picked up, old WML code adds it as an item)
+	loti.unit.remove_all_items(original, function(item)
+		return item.sort and (item.sort:match("gem") or item.sort:match("temporary"))
+	end)
+
 	-- Healing potions
 	local was_healing = false
 	if vars.healed or wesnoth.get_variable("healed") == 1 then -- TODO: equipping a healing potion should set a variable inside the unit instead
@@ -69,8 +75,9 @@ function wesnoth.update_stats(original)
 			end
 		end
 
-		-- Remove pseudo-items like "incinerated" that should be removed by full healing.
-		loti.unit.remove_healable_conditions(original)
+		-- Remove all status conditions that are removed by full healing
+		-- (e.g. pseudo-items like "incinerated")
+		loti.unit.remove_all_items(original, function(item) return item.remove_on_heal end)
 
 		vars.fully_healed = nil
 		was_healing = true

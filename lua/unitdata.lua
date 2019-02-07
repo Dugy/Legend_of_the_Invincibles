@@ -314,12 +314,6 @@ local wml_based_implementation = {
 
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
-	end,
-
-	-- Remove all status conditions that are removed by full healing.
-	remove_healable_conditions = function(unit)
-		local filter = function(object) return object.remove_on_heal end
-		loti.unit.remove_all_items(unit, filter)
 	end
 }
 
