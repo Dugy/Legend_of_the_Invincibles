@@ -96,9 +96,18 @@ local wml_based_implementation = {
 		return retval
 	end,
 
-	-- Transforms latent effects with filled requirements to regular effects
-	item_with_set_effects = function(number, set_items)
+	-- Transforms latent effects with filled requirements to regular effects.
+	-- Parameters:
+	-- set_items - Lua array of item numbers, e.g. { 100, 200, 300 }
+	-- (normally this is obtained via list_unit_item_numbers()).
+	-- crafted_sort (optional for non-crafted items) - if specified, this will override
+	-- the sort from loti.item.type.
+	item_with_set_effects = function(number, set_items, crafted_sort)
 		local item = wesnoth.deepcopy(loti.item.type[number])
+		if crafted_sort then
+			item.sort = crafted_sort
+		end
+
 		if not set_items then
 			return item
 		end
@@ -136,18 +145,9 @@ local wml_based_implementation = {
 
 		local set_items = loti.unit.list_unit_item_numbers(unit)
 		return wml_modification_iterator(unit, "object", function(elem)
-			if not elem.number then
-				return nil
+			if elem.number then
+				return loti.unit.item_with_set_effects(elem.number, set_items, elem.sort)
 			end
-			local item = loti.unit.item_with_set_effects(elem.number, set_items)
-			if item then
-				item = wesnoth.deepcopy(item)
-				if elem.sort then
-					item.sort = elem.sort
-				end
-				return item
-			end
-			-- Return nil on failure
 		end)
 	end,
 
@@ -195,7 +195,7 @@ local wml_based_implementation = {
 
 				if modif_type == "object" and contents.number then
 					-- This is an item, therefore we must add "item set" effects (if any).
-					contents = loti.unit.item_with_set_effects(contents.number, set_items)
+					contents = loti.unit.item_with_set_effects(contents.number, set_items, contents.sort)
 				elseif modif_type == "advancement" then
 					contents = get_type_advancement(unit.type, contents.id)
 				end

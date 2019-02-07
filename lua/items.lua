@@ -482,7 +482,7 @@ end
 
 -- Generate the description of an item
 loti.item.describe_item = function(number, sort, set_items)
-	local item = loti.unit.item_with_set_effects(number, set_items)
+	local item = loti.unit.item_with_set_effects(number, set_items, sort)
 	local desc = {}
 
 	if item.defence then

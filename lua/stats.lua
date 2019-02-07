@@ -112,7 +112,7 @@ function wesnoth.update_stats(original)
 
 	for i, item in ipairs(visible_modifications) do -- Update objects to reflect set effects and update items
 		if item[1] == "object" and item[2].number and item[2].sort then
-			visible_modifications[i][2] = loti.unit.item_with_set_effects(item[2].number, set_items)
+			visible_modifications[i][2] = loti.unit.item_with_set_effects(item[2].number, set_items, item[2].sort)
 			visible_modifications[i][2].sort = item[2].sort
 			visible_modifications[i][2].description = loti.item.describe_item(item[2].number, item[2].sort, set_items)
 		end
