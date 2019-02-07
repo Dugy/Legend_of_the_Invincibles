@@ -104,8 +104,15 @@ local wml_based_implementation = {
 	-- the sort from loti.item.type.
 	item_with_set_effects = function(number, set_items, crafted_sort)
 		local item = wesnoth.deepcopy(loti.item.type[number])
+		local default_sort = item.sort
+
 		if crafted_sort then
 			item.sort = crafted_sort
+		end
+
+		if item.defence and default_sort == "armourword" and item.sort ~= "armour" then
+			-- Crafted non-armours add only 1/3 of the defence of crafted armours
+			item.defence = item.defence / 3
 		end
 
 		if not set_items then
