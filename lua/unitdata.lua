@@ -96,9 +96,25 @@ local wml_based_implementation = {
 		return retval
 	end,
 
-	-- Transforms latent effects with filled requirements to regular effects
-	item_with_set_effects = function(number, set_items)
+	-- Transforms latent effects with filled requirements to regular effects.
+	-- Parameters:
+	-- set_items - Lua array of item numbers, e.g. { 100, 200, 300 }
+	-- (normally this is obtained via list_unit_item_numbers()).
+	-- crafted_sort (optional for non-crafted items) - if specified, this will override
+	-- the sort from loti.item.type.
+	item_with_set_effects = function(number, set_items, crafted_sort)
 		local item = wesnoth.deepcopy(loti.item.type[number])
+		local default_sort = item.sort
+
+		if crafted_sort then
+			item.sort = crafted_sort
+		end
+
+		if item.defence and default_sort == "armourword" and item.sort ~= "armour" then
+			-- Crafted non-armours add only 1/3 of the defence of crafted armours
+			item.defence = item.defence / 3
+		end
+
 		if not set_items then
 			return item
 		end
@@ -136,18 +152,9 @@ local wml_based_implementation = {
 
 		local set_items = loti.unit.list_unit_item_numbers(unit)
 		return wml_modification_iterator(unit, "object", function(elem)
-			if not elem.number then
-				return nil
+			if elem.number then
+				return loti.unit.item_with_set_effects(elem.number, set_items, elem.sort)
 			end
-			local item = loti.unit.item_with_set_effects(elem.number, set_items)
-			if item then
-				item = wesnoth.deepcopy(item)
-				if elem.sort then
-					item.sort = elem.sort
-				end
-				return item
-			end
-			-- Return nil on failure
 		end)
 	end,
 
@@ -195,7 +202,7 @@ local wml_based_implementation = {
 
 				if modif_type == "object" and contents.number then
 					-- This is an item, therefore we must add "item set" effects (if any).
-					contents = loti.unit.item_with_set_effects(contents.number, set_items)
+					contents = loti.unit.item_with_set_effects(contents.number, set_items, contents.sort)
 				elseif modif_type == "advancement" then
 					contents = get_type_advancement(unit.type, contents.id)
 				end
@@ -290,18 +297,24 @@ local wml_based_implementation = {
 
 	-- Remove all items from unit.
 	-- Returns a Lua array of items that were removed.
-	remove_all_items = function(unit)
+	-- Optional parameter: filter_func - callback function. If set, then:
+	--	each item is passed to this callback as a parameter,
+	--	item is only removed if the callback returned true.
+	remove_all_items = function(unit, filter_func)
 		unit = normalize_unit_param(unit)
+
 		local mods = helper.get_child(unit, "modifications")
 		for i = #mods,1,-1 do
 			if mods[i][1] == "object" then
-				table.remove(mods, i)
+				if not filter_func or filter_func(mods[i][2]) then
+					table.remove(mods, i)
+				end
 			end
 		end
 
 		-- Place updated unit back onto the map.
 		loti.put_unit(unit)
-	end,
+	end
 }
 
 -- Implementation that efficiently stores items, effects, etc. in Lua array.

@@ -483,7 +483,7 @@ end
 
 -- Generate the description of an item
 loti.item.describe_item = function(number, sort, set_items)
-	local item = loti.unit.item_with_set_effects(number, set_items)
+	local item = loti.unit.item_with_set_effects(number, set_items, sort)
 	if item.description then
 		-- This item has constant (non-calculated) description.
 		-- For example, this can be a gem or an item like Book of Courage
@@ -494,11 +494,7 @@ loti.item.describe_item = function(number, sort, set_items)
 	local desc = {}
 
 	if item.defence then
-		local defence = item.defence
-		if item.sort == "armourword" and (sort == "boots" or sort == "helm" or sort == "gauntlets") then
-			defence = defence / 3
-		end
-		defence = math.floor(defence)
+		local defence = math.floor(item.defence)
 		if defence > 0 then
 			table.insert(desc, _"<span color='#60A0FF'>Increases physical resistances by " .. tostring(defence) .. "% </span>")
 		else
@@ -744,6 +740,12 @@ loti.item.describe_item = function(number, sort, set_items)
 		end
 		table.insert(desc, line)
 	end
+
+	if item.flavour then
+		local line = "<span color='#808080'><i>" .. item.flavour .. "</i></span>"
+		table.insert(desc, line)
+	end
+
 	for i = 1,#desc do
 		desc[i] = tostring(desc[i]) -- Convert from translatable string
 	end
