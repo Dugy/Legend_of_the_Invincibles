@@ -736,6 +736,12 @@ loti.item.describe_item = function(number, sort, set_items)
 		end
 		table.insert(desc, line)
 	end
+
+	if item.flavour then
+		local line = "<span color='#808080'><i>" .. item.flavour .. "</i></span>"
+		table.insert(desc, line)
+	end
+
 	for i = 1,#desc do
 		desc[i] = tostring(desc[i]) -- Convert from translatable string
 	end
