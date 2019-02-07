@@ -486,11 +486,7 @@ loti.item.describe_item = function(number, sort, set_items)
 	local desc = {}
 
 	if item.defence then
-		local defence = item.defence
-		if item.sort == "armourword" and (sort == "boots" or sort == "helm" or sort == "gauntlets") then
-			defence = defence / 3
-		end
-		defence = math.floor(defence)
+		local defence = math.floor(item.defence)
 		if defence > 0 then
 			table.insert(desc, _"<span color='#60A0FF'>Increases physical resistances by " .. tostring(defence) .. "% </span>")
 		else
