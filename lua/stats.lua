@@ -82,12 +82,11 @@ function wesnoth.update_stats(original)
 		vars.fully_healed = nil
 		was_healing = true
 
-		-- FIXME: double-check: should this variable be cleared or not?
-		-- WML of items.cfg seems to need it for "You already had a potion on this turn" error.
 		wesnoth.set_variable("fully_healed", nil)
 	end
 	if was_healing then
 		table.insert(events_to_fire, "healed_by_potion")
+		vars.healed_this_turn = "yes" -- Used in ITEM_PICK macro
 	end
 
 	-- Check if geared and set the trait appropriately
