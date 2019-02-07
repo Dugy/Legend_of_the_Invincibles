@@ -91,22 +91,20 @@ function wesnoth.update_stats(original)
 	end
 
 	-- Check if geared and set the trait appropriately
-	local geared = false
-	if #(loti.unit.list_unit_item_numbers(original)) > 0 then
-		geared = true
-	end
-	local is_marked_as_geared = false
-	for i = 1,#visible_modifications do
-		if visible_modifications[i][1] == "trait" and visible_modifications[i][2].id == "geared" then
-			if geared == false then
+	local geared = #(loti.unit.list_unit_item_numbers(original)) > 0
+	local marked_as_geared
+
+	for i, modif in ipairs(visible_modifications) do
+		if modif[1] == "trait" and modif[2].id == "geared" then
+			if not geared then
 				table.remove(visible_modifications, i)
 			else
-				is_marked_as_geared = true
+				marked_as_geared = true
 			end
 			break
 		end
 	end
-	if is_marked_as_geared == false and geared == true then
+	if geared and not marked_as_geared then
 		table.insert(visible_modifications, { "trait", { id = "geared", name = _"GEARED", description = _"Geared: This unit is equipped with items. This is just to easily identify it on the recall list."}})
 	end
 
@@ -120,7 +118,8 @@ function wesnoth.update_stats(original)
 	for i, item in ipairs(visible_modifications) do -- Update objects to reflect set effects and update items
 		if item[1] == "object" and item[2].number and item[2].sort then
 			visible_modifications[i][2] = loti.unit.item_with_set_effects(item[2].number, set_items, item[2].sort)
-			visible_modifications[i][2].sort = item[2].sort
+
+			-- Legacy field: used by WML menu "Items" to show "Remove item" options
 			visible_modifications[i][2].description = loti.item.describe_item(item[2].number, item[2].sort, set_items)
 		end
 	end
