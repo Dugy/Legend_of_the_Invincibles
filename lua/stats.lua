@@ -447,7 +447,7 @@ function wesnoth.update_stats(original)
 						local damage = atk.damage * atk.number
 						if damage > strongest_damage then
 							strongest_attack = atk
-							strongest_index = k
+							strongest_damage = damage
 						end
 					end
 				end
