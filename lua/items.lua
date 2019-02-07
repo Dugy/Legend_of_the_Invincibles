@@ -220,12 +220,8 @@ setmetatable(loti.item.type, {
 loti.item.on_unit.list = function(unit)
 	local items = {}
 
-	local modifications = helper.get_child(unit.__cfg, "modifications")
-	for _, object in ipairs(helper.child_array(modifications, "object")) do
-		-- There are non-items in object[] array, but they don't have 'sort' key.
-		if object.sort then
-			table.insert(items, object)
-		end
+	for _, item in loti.unit.items(unit.__cfg) do
+		table.insert(items, item)
 	end
 
 	return items
@@ -236,7 +232,7 @@ end
 loti.item.on_unit.list_regular = function(unit)
 	local items = {}
 
-	for _, item in ipairs(loti.item.on_unit.list(unit)) do
+	for _, item in loti.unit.items(unit.__cfg) do
 		-- Items without name are likely fake/invisible/temporary items.
 		-- Also potions and books can't be unequipped, so we exclude them too.
 		local listed = item.name and item.sort ~= "limited" and not item.sort:find("potion")
@@ -252,49 +248,31 @@ end
 -- Returns the currently equipped item of a certain item_sort on the unit
 -- Returns: [object] tag or nil (if not equipped).
 loti.item.on_unit.find = function(unit, item_sort)
-	local items = loti.item.on_unit.list(unit)
-	for _, item in ipairs(items) do
+	for _, item in loti.unit.items(unit.__cfg) do
 		if item.sort == item_sort then
 			return item
 		end
 	end
-
-	return nil -- Not equipped
 end
 
 -- Internal: call update_stats on Lua unit object.
 local function update_stats(unit)
-	local updated = wesnoth.update_stats(unit.__cfg)
-	if unit.valid == "map" then
-		wesnoth.put_unit(updated)
-	end
+	loti.put_unit(wesnoth.update_stats(unit.__cfg))
 end
 
 -- Add one item to the unit.
 -- Optional parameter "crafted_sort" changes the item_sort of item (only for crafted items).
 loti.item.on_unit.add = function(unit, item_number, crafted_sort)
-	local item = wesnoth.deepcopy(loti.item.type[item_number])
-
-	if item.sort == "weaponword" or item.sort == "armourword" then
-		-- Crafted item
-		if not crafted_sort then
-			helper.wml_error("loti.item.on_unit.add(): item #" .. item_number ..
-				' is crafted, but required parameter "crafted_sort" hasn\'t been provided.')
-		end
-
-		item.sort = crafted_sort
-	end
-
-	-- Store the fact "unit has this item" by adding a modification to this unit.
-	wesnoth.add_modification(unit, "object", item)
+	-- Store the fact "unit has this item".
+	loti.unit.add_item(unit.__cfg, item_number, crafted_sort)
 
 	-- Special handling for Foul Potion (#16): initialize starving counter.
-	if item.number == 16 then
+	if item_number == 16 then
 		unit.variables.starving = 0
 	end
 
 	-- Special handling for Book of Courage (#89): add "fearless" trait.
-	if item.number == 89 then
+	if item_number == 89 then
 		wesnoth.add_modification(unit, "trait", {
 			id = "fearless",
 			male_name = _"fearless",
@@ -316,12 +294,7 @@ end
 -- Optional parameter skip_update (if set) prevents update_stats()
 -- after the removal (for better performance when removing many items).
 loti.item.on_unit.remove = function(unit, item_number, crafted_sort, skip_update)
-	local filter = { number = item_number }
-	if crafted_sort then
-		filter.sort = crafted_sort
-	end
-
-	wesnoth.remove_modifications(unit, filter)
+	loti.unit.remove_item(unit.__cfg, item_number, crafted_sort)
 
 	-- Update stats (recalculate damages, etc.)
 	if not skip_update then
