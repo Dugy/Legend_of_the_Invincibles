@@ -60,9 +60,9 @@ end
 -- Helper function to obtain a unit type's advancement with a given id
 
 local function get_type_advancement(unit_type, advancement_id)
-	local model = wesnoth.unit_types["Advancing" .. unit_type]
+	local model = wesnoth.unit_types["Advancing" .. unit_type] or wesnoth.unit_types[unit_type]
 	if not model then
-		helper.wml_error("get_type_advancement(): advancing unit type for " .. unit_type .. " is not found.")
+		helper.wml_error("get_type_advancement(): unit type " .. unit_type .. " is not found.")
 	end
 
 	for adv in helper.child_range(model.__cfg, "advancement") do
