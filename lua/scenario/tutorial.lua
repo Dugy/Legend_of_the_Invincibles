@@ -108,5 +108,29 @@ local function tutorial_craft()
 	end
 end
 
+-- Simplified Inventory dialog for step 4 of the Tutorial,
+-- where Efraim has to Unequip his Twinkling Sword, and can't do anything else.
+local function inventory_step4()
+	local config = loti.config.inventory
+
+	for idx, button in ipairs(config.action_buttons) do
+		if button.id == "storage" then
+			button.onclick = function()
+				Delly_says(_"No looking into your backpack, there is nothing relevant there anyway.")
+			end
+		elseif button.id == "crafting" then
+			button.onsubmit = nil
+			button.onclick = function()
+				Efraim_says(_"I have not found more precious gems anyway...")
+			end
+		elseif button.id == "unit_information" then
+			button.onsubmit = nil
+			button.onclick = function()
+				Efraim_says(_"Hm... I do not want her to learn everything about me at the moment.")
+			end
+		end
+	end
+end
+
 -- Provide this method via wesnoth.require(...).craft
-return { craft = tutorial_craft }
+return { craft = tutorial_craft, inventory_step4 = inventory_step4 }

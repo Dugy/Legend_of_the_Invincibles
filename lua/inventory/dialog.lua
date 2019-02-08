@@ -32,8 +32,8 @@ inventory_dialog.add_tab = function(tab)
 	-- Sanity checks.
 	if not tab.id then
 		helper.wml_error('inventory_dialog.add_tab: missing parameter "id"')
-	elseif type(tab.grid) ~= "table" or tab.grid[1] ~= "grid" then
-		helper.wml_error('inventory_dialog.add_tab: parameter "grid" is not a [grid] tag.')
+	elseif type(tab.grid) ~= "function" then
+		helper.wml_error('inventory_dialog.add_tab: parameter "grid" is not a function.')
 	elseif type(tab.onshow) ~= "function" then
 		helper.wml_error('inventory_dialog.add_tab: parameter "onshow" is not a function.')
 	end
@@ -159,10 +159,15 @@ local function get_dialog_widget()
 		-- and place them all into one grid.
 		local row_wrapped_tabs = {}
 		for tab_id, tab in pairs(tabs) do
+			local grid = tab.grid()
+			if type(grid) ~= "table" or grid[1] ~= "grid" then
+				helper.wml_error("tab " .. tab_id .. ": grid() function didn't return a [grid] tag.")
+			end
+
 			table.insert(row_wrapped_tabs, wml.tag.row { wml.tag.column {
 				wml.tag.panel {
 					id = tab_id,
-					tab.grid
+					grid
 				}
 			}})
 		end

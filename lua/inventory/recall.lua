@@ -147,7 +147,7 @@ return function(provided_inventory_dialog)
 
 	inventory_dialog.add_tab {
 		id = "recall_tab",
-		grid = get_tab(),
+		grid = get_tab,
 		onshow = onshow
 	}
 end

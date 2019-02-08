@@ -500,13 +500,13 @@ return function(provided_inventory_dialog)
 
 	inventory_dialog.add_tab {
 		id = "storage_tab",
-		grid = get_tab(),
+		grid = get_tab,
 		onshow = onshow
 	}
 
 	inventory_dialog.add_tab {
 		id = "blank_tab",
-		grid = get_blank_tab(),
+		grid = get_blank_tab,
 		onshow = function() end
 	}
 

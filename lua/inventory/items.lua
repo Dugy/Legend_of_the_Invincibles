@@ -386,7 +386,7 @@ end
 local clicked_button_id = nil
 
 -- Install callbacks for all action buttons, slots, etc.
-function callbacks_install_function()
+local function callbacks_install_function()
 	-- Callbacks of action buttons.
 	for _, button in ipairs(inventory_config.action_buttons) do
 		if not button.spacer then
@@ -564,7 +564,7 @@ return function(provided_inventory_dialog)
 
 	inventory_dialog.add_tab {
 		id = "items_tab",
-		grid = get_tab(),
+		grid = get_tab,
 		onshow = onshow
 	}
 
@@ -572,4 +572,10 @@ return function(provided_inventory_dialog)
 	inventory_dialog.register_widgets(register_slot_widget)
 	inventory_dialog.register_widgets(register_itemlabel_widget)
 	inventory_dialog.add_onsubmit_callback(onsubmit_callback)
+
+	-- Provide "inventory_config" variable to scenarios like Tutorial (they need to change it,
+	-- e.g. display some message like "No, not this!" when player clicks the wrong button,
+	-- not the button that was needed on the current step of the Tutorial).
+	loti.config = loti.config or {}
+	loti.config.inventory = inventory_config
 end

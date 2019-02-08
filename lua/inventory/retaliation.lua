@@ -203,7 +203,7 @@ end
 return function(inventory_dialog)
 	inventory_dialog.add_tab {
 		id = "retaliation_tab",
-		grid = get_tab(),
+		grid = get_tab,
 		onshow = onshow
 	}
 
