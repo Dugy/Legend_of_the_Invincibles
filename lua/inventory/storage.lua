@@ -369,11 +369,7 @@ local function onshow(unit, item_sort)
 
 	-- Calculate an array of currently equipped items,
 	-- so that get_item_description() could show "item set" bonuses.
-	-- TODO: replace this with loti.unit.list_unit_item_numbers() when unitdata.lua gets merged into master.
-	local set_items = {}
-	for _, item in ipairs(loti.item.on_unit.list(unit)) do
-		table.insert(set_items, item.number)
-	end
+	local set_items = loti.unit.list_unit_item_numbers(unit.__cfg)
 
 	-- Display currently equipped item (if any)
 

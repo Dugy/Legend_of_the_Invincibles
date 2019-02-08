@@ -334,6 +334,9 @@ local function onshow(unit)
 		wesnoth.set_dialog_value(default_text, slot_id, "item_name")
 	end
 
+	-- Array of equipped items, can be passed to describe_item() to show set bonuses
+	local set_items = loti.unit.list_unit_item_numbers(unit.__cfg)
+
 	for _, item in ipairs(loti.item.on_unit.list_regular(unit)) do
 		if not equippable_sorts[item.sort] then
 			-- Non-equippable equipped item - e.g. sword on the Gryphon Rider.
@@ -352,8 +355,7 @@ local function onshow(unit)
 		wesnoth.set_dialog_value(item.image, slot_id, "item_image")
 
 		if wesnoth.set_dialog_tooltip then -- Not yet in Wesnoth 1.14
-			-- TODO: pass set_items to describe_item().
-			local description = loti.item.describe_item(item.number, item.sort)
+			local description = loti.item.describe_item(item.number, item.sort, set_items)
 			wesnoth.set_dialog_tooltip(description, slot_id, "item_image")
 		end
 
