@@ -277,6 +277,9 @@ function unit_information_part_1()
     local span = "<span font_weight='bold'>"
     result = result .. span .. _"Hitpoints:</span> "
     .. string.format("%u/%u", wesnoth.get_variable("unit.hitpoints"), wesnoth.get_variable("unit.max_hitpoints")) .. " \n"
+    local span = "<span font_weight='bold'>"
+    result = result .. span .. _"Experience:</span> "
+    .. string.format("%u/%u", wesnoth.get_variable("unit.experience"), wesnoth.get_variable("unit.max_experience")) .. " \n"
     if max_devour_count ~= nil and max_devour_count > 0 then
       result = result .. span .. _"Soul eater score:</span> "
       .. string.format("%u/%u", devour_count, max_devour_count) .. " \n"
@@ -546,6 +549,39 @@ function unit_information_part_4()
 end
 
 function unit_information_part_5()
+  function form_one_line(type)
+    local defence = 100 - (wesnoth.get_variable("unit.defense." .. type) or 0)
+    local cost = wesnoth.get_variable("unit.movement_costs." .. type)
+    if cost == nil then
+	return "    none      inaccessible</span> \n"
+    end
+    return string.format("%6d%%       %6d</span> \n", math.floor(defence), math.floor(cost))
+  end
+
+  local result = _"<span font_family='monospace' weight='bold' color='#60A0FF'>"
+  ..                               _"    Location              Defence     Movement cost</span> \n"
+  .. _"<span font_family='monospace'>In forests              " .. form_one_line("forest")
+  .. _"<span font_family='monospace'>In frozen places        " .. form_one_line("frozen")
+  .. _"<span font_family='monospace'>On flat terrains        " .. form_one_line("flat")
+  .. _"<span font_family='monospace'>In caves                " .. form_one_line("cave")
+  .. _"<span font_family='monospace'>In mushroom grooves     " .. form_one_line("fungus")
+  .. _"<span font_family='monospace'>In villages             " .. form_one_line("village")
+  .. _"<span font_family='monospace'>In castles              " .. form_one_line("castle")
+  .. _"<span font_family='monospace'>In shallow waters       " .. form_one_line("shallow_water")
+  .. _"<span font_family='monospace'>On coastal reefs        " .. form_one_line("reef")
+  .. _"<span font_family='monospace'>In deep water           " .. form_one_line("deep_water")
+  .. _"<span font_family='monospace'>On hills                " .. form_one_line("hills")
+  .. _"<span font_family='monospace'>On mountains            " .. form_one_line("mountains")
+  .. _"<span font_family='monospace'>On sands                " .. form_one_line("sand")
+  .. _"<span font_family='monospace'>Above unwalkable places " .. form_one_line("unwalkable")
+  .. _"<span font_family='monospace'>Inside impassable walls " .. form_one_line("impassable")
+
+  -- Remove the last newline, just to make things compact
+  result = string.sub(tostring(result), 1, -2)
+  wesnoth.set_variable("resistances_list", result)
+end
+
+function unit_information_part_6()
     -- This table transforms an array like {'a', 'b', 'a'} into a table of
     -- counts like {'a': 2, 'b': 1}
     function count(t)
