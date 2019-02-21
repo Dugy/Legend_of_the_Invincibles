@@ -689,9 +689,9 @@ end
 function wesnoth.wml_actions.advance_stuff(cfg)
 --    wesnoth.message("advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
+    local m = helper.get_child(unit, "modifications")
 
 	local function clear_potions()
-		local m = helper.get_child(unit, "modifications")
 		for i = #m, 1, -1 do
 			if m[i][2].sort ~= nil and string.find(m[i][2].sort, "potion") then
 				table.remove(m, i)
