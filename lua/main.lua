@@ -578,7 +578,7 @@ function unit_information_part_5()
 
   -- Remove the last newline, just to make things compact
   result = string.sub(tostring(result), 1, -2)
-  wesnoth.set_variable("resistances_list", result)
+  wesnoth.set_variable("defences_list", result)
 end
 
 function unit_information_part_6()
