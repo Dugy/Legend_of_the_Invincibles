@@ -6,6 +6,7 @@ local function call_event_on_unit(u, name)
 	wesnoth.set_variable("updated", u)
 	wesnoth.wml_actions.fire_event{ name = name }
 	u = wesnoth.get_variable("updated")
+	wesnoth.dbms(u)
 	return u
 end
 
@@ -37,9 +38,9 @@ end
 -- Returns: modified WML table of [unit] tag.
 function wesnoth.update_stats(original)
 	-- PART I: WML pre-update hook
-	original = call_event_on_unit(original, "pre stats update")
 --	wesnoth.dbms{original.x, original.y}
 	original = loti.get_unit(original)
+	original = call_event_on_unit(original, "pre stats update")
 	if not helper.get_child(original, "resistance") or not helper.get_child(original, "movement_costs") or not helper.get_child(original, "defense") then
 		return original -- Fake unit
 	end
