@@ -579,7 +579,7 @@ function unit_information_part_5()
 
   -- Remove the last newline, just to make things compact
   result = string.sub(tostring(result), 1, -2)
-  wesnoth.set_variable("resistances_list", result)
+  wesnoth.set_variable("defences_list", result)
 end
 
 function unit_information_part_6()
@@ -690,9 +690,9 @@ end
 function wesnoth.wml_actions.advance_stuff(cfg)
 --    wesnoth.message("advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
+    local m = helper.get_child(unit, "modifications")
 
 	local function clear_potions()
-		local m = helper.get_child(unit, "modifications")
 		for i = #m, 1, -1 do
 			if m[i][2].sort ~= nil and string.find(m[i][2].sort, "potion") then
 				table.remove(m, i)
