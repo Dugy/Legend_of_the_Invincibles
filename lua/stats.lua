@@ -6,7 +6,6 @@ local function call_event_on_unit(u, name)
 	wesnoth.set_variable("updated", u)
 	wesnoth.wml_actions.fire_event{ name = name }
 	u = wesnoth.get_variable("updated")
-	wesnoth.dbms(u)
 	return u
 end
 
