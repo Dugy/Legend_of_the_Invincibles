@@ -218,6 +218,41 @@ local wml_based_implementation = {
 		end
 	end,
 
+	-- Returns iterator over containers containing effects of this unit
+	effect_containers = function(unit)
+		unit = normalize_unit_param(unit)
+
+		local idx = 0 -- Top-level index returned as key from effects() iterator
+		local set_items = loti.unit.list_unit_item_numbers(unit)
+
+		-- List of all modifications of this unit.
+		-- Includes items, advancements, traits, etc.
+		local modifications = helper.get_child(unit, "modifications")
+		local modif_idx = 0
+
+		return function()
+			modif_idx = modif_idx + 1
+
+			local modif_tag = modifications[modif_idx]
+			if not modif_tag then
+				return -- Already listed everything, nothing more to return
+			end
+
+			local modif_type = modif_tag[1] -- E.g. "object" or "advancement"
+			local contents = modif_tag[2] -- WML table, e.g. one [object] tag.
+
+			if modif_type == "object" and contents.number then
+				-- This is an item, therefore we must add "item set" effects (if any).
+				contents = loti.unit.item_with_set_effects(contents.number, set_items, contents.sort)
+			elseif modif_type == "advancement" then
+				contents = get_type_advancement(unit.type, contents.id)
+			end
+
+			idx = idx + 1
+			return idx, contents
+		end
+	end,
+
 	-- Add advancement to unit.
 	add_advancement = function(unit, advancement_id)
 		unit = normalize_unit_param(unit)

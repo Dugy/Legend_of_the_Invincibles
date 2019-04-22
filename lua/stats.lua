@@ -155,7 +155,7 @@ function wesnoth.update_stats(original)
 	local defence = 100
 	local dodge = 100
 
-	for index, obj in loti.unit.items(remade) do
+	for index, obj in loti.unit.effect_containers(remade) do
 		if obj.defence then
 			defence = defence * (100 - obj.defence) / 100
 		end
