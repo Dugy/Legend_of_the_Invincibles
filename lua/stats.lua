@@ -437,10 +437,15 @@ function wesnoth.update_stats(original)
 			for k = 1,#remade do
 				if remade[k][1] == "attack" then
 					local atk = remade[k][2]
-					if eff.force_original_attack and eff.force_original_attack == atk.name then
-						strongest_attack = atk
-						strongest_damage = 100000000000
-						break
+					if eff.force_original_attack then
+						if eff.force_original_attack == atk.name then
+							strongest_attack = atk
+							strongest_damage = 100000000000
+							break
+						else
+							strongest_attack = nil
+							break
+						end
 					end
 					if (not eff.range or eff.range == atk.range) and not atk.is_bonus_attack then
 						local damage = atk.damage * atk.number
