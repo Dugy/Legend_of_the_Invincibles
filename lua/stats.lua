@@ -449,6 +449,9 @@ function wesnoth.update_stats(original)
 					end
 					if (not eff.range or eff.range == atk.range) and not atk.is_bonus_attack then
 						local damage = atk.damage * atk.number
+						if eff.force_original_type and eff.force_original_type == atk.type then
+							damage = damage * 1000000
+						end
 						if damage > strongest_damage then
 							strongest_attack = atk
 							strongest_damage = damage
@@ -456,8 +459,8 @@ function wesnoth.update_stats(original)
 					end
 				end
 			end
-			if not strongest_attack then
-				strongest_attack = { name = "fangs", description = _"fangs", icon = "attacks/fangs-animal.png", type = "blade", range = "melee", damage = 5, number = 4, { "specials", {}}}
+			if not strongest_attack or (eff.force_original_type and strongest_attack.type ~= eff.force_original_type) then
+				strongest_attack = { name = "fangs", description = _"fangs", icon = "attacks/fangs-animal.png", type = "blade", range = eff.range or "melee", damage = 5, number = 4, { "specials", {}}}
 			else
 				strongest_attack = wesnoth.deepcopy(strongest_attack)
 			end
