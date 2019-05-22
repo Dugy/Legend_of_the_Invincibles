@@ -389,7 +389,6 @@ function wesnoth.update_stats(original)
 		end
 	end
 
-
 	-- PART VI: Apply additional effects
 
 	local visual_effects = {}
@@ -741,10 +740,8 @@ function wesnoth.update_stats(original)
 	for i = 1,#events_to_fire do
 		remade = call_event_on_unit(remade, events_to_fire[i])
 	end
-
 	-- Restore unit from variable after the WML hooks.
-	wesnoth.wml_actions.unstore_unit { variable = "updated", find_vacant = "no" }
-
+	wesnoth.wml_actions.unstore_unit { variable = "updated", find_vacant = "no", check_passability = false }
 	return remade
 end
 
