@@ -359,7 +359,7 @@ function wesnoth.update_stats(original)
 	end
 	remade_resistance.blade = remade_resistance.blade * defence / 100
 	remade_resistance.pierce = remade_resistance.pierce * defence / 100
-	remade_resistance.impact = remade_resistance.blade * (0.5 + defence / 200) -- Hammers always penetrated armours better than swords
+	remade_resistance.impact = remade_resistance.impact * (0.5 + defence / 200) -- Hammers always penetrated armours better than swords
 
 	remade.vision = remade.max_moves + vision
 
