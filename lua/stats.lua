@@ -441,9 +441,6 @@ function wesnoth.update_stats(original)
 							strongest_attack = atk
 							strongest_damage = 100000000000
 							break
-						else
-							strongest_attack = nil
-							break
 						end
 					end
 					if (not eff.range or eff.range == atk.range) and not atk.is_bonus_attack then
