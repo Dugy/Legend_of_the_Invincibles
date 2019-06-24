@@ -361,6 +361,18 @@ function wesnoth.update_stats(original)
 	remade_resistance.pierce = remade_resistance.pierce * defence / 100
 	remade_resistance.impact = remade_resistance.impact * (0.5 + defence / 200) -- Hammers always penetrated armours better than swords
 
+	local function limit_resistance(damage_type, max)
+		if remade_resistance[damage_type] < max then
+			remade_resistance[damage_type] = max
+		end
+	end
+	limit_resistance("fire", 10);
+	limit_resistance("cold", 10);
+	limit_resistance("arcane", 30);
+	limit_resistance("blade", 20);
+	limit_resistance("pierce", 20);
+	limit_resistance("impact", 20);
+
 	remade.vision = remade.max_moves + vision
 
 	local remade_abilities = helper.get_child(remade, "abilities")
