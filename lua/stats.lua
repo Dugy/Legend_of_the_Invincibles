@@ -456,7 +456,7 @@ function wesnoth.update_stats(original)
 						end
 					end
 					if (not eff.range or eff.range == atk.range) and not atk.is_bonus_attack then
-						local damage = atk.damage * atk.number
+						local damage = math.floor(atk.damage) * math.floor(atk.number)
 						if eff.force_original_type and eff.force_original_type == atk.type then
 							damage = damage * 1000000
 						end
