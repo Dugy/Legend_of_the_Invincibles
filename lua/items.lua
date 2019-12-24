@@ -92,6 +92,7 @@ loti.item.storage.add = function(item_number, crafted_sort)
 
 	table.sort(list, compare_entries)
 	wesnoth.set_variable("item_storage", list)
+	wesnoth.fire_event("added to storage")
 end
 
 -- Remove item_number from storage.
@@ -110,6 +111,7 @@ loti.item.storage.remove = function(item_number, crafted_sort)
 	end
 
 	wesnoth.set_variable("item_storage", list)
+	wesnoth.fire_event("removed from storage")
 end
 
 -- Get the list of all items in the storage.
@@ -237,6 +239,10 @@ loti.item.on_unit.list_regular = function(unit)
 		-- Also potions and books can't be unequipped, so we exclude them too.
 		local listed = item.name and item.sort ~= "limited" and not item.sort:find("potion")
 
+		if item.sort == "gem" or item.sort == "temporary" then
+			listed = false
+		end
+
 		if listed then
 			table.insert(items, item)
 		end
@@ -359,6 +365,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 			}
 		}
 	}
+	wesnoth.fire_event("item drop", x, y)
 end
 
 -- Remove one item from the ground at coordinates (x,y).
@@ -430,6 +437,7 @@ end
 loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort, skip_update)
 	loti.item.on_unit.remove(unit, item_number, crafted_sort, skip_update)
 	loti.item.storage.add(item_number, crafted_sort)
+	wesnoth.fire_event("unequip", unit.x, unit.y)
 end
 
 -- Remove one item from storage, then open "Pick up item" dialog on behalf of unit.
