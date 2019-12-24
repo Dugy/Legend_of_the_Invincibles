@@ -1,5 +1,10 @@
 Changelog
 
+3.2.5 (development/maintenance)
+Inventory has a new UI
+Added 15 new items
+Fixed some bugs
+
 3.2.4 (development/maintenance)
 Added 15 new items
 Rewrote stats.cfg to lua, refactoring the code and adding new possibilities for item effects
