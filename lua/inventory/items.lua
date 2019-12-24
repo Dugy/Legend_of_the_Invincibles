@@ -17,7 +17,9 @@ local inventory_config = {
 		{
 			id = "storage",
 			label = _"Item storage",
-			onclick = function(unit) inventory_dialog.goto_tab("storage_tab") end
+			onclick = function(unit)
+				inventory_dialog.goto_tab("storage_tab")
+			end
 		},
 		{
 			id = "crafting",

@@ -41,7 +41,7 @@ inventory_dialog.add_tab = function(tab)
 	tabs[tab.id] = { grid = tab.grid, onshow = tab.onshow }
 end
 
--- Queue install_function() to be called when it's good time to use wesnoth.set_dialog_callback().
+-- Queue install_function() to be called when it's good time to use wesnoth.set_dialog_callback(inventory_dialog).
 inventory_dialog.install_callbacks = function(install_function)
 	table.insert(install_callback_functions, install_function)
 end
@@ -281,6 +281,5 @@ function wesnoth.wml_actions.show_inventory(cfg)
 	if #units < 1 then
 		helper.wml_error("[show_inventory]: no units found.")
 	end
-
 	open_inventory_dialog(units[1])
 end

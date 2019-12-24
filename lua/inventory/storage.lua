@@ -10,6 +10,8 @@ local util = wesnoth.require "./misc.lua"
 local listbox_id = "storage_listbox"
 local inventory_dialog -- Set below
 
+local override_unequippability = {}
+
 -- Construct tab: "item storage".
 -- Note: this only creates the widget. It gets populated with data in onshow().
 -- Returns: top-level [grid] widget.
@@ -401,7 +403,7 @@ local function onshow(unit, item_sort)
 	local present = unit.valid ~= "recall"
 
 	-- True if Equip operation is allowed, false otherwise.
-	local can_equip = not empty and present and type_is_equippable
+	local can_equip = not empty and present and type_is_equippable or override_unequippability[item_sort] == true
 
 	wesnoth.set_dialog_visible(can_equip, "equip")
 	wesnoth.set_dialog_visible(not empty and present, "storage_dropdown_menu")
@@ -513,13 +515,24 @@ return function(provided_inventory_dialog)
 	-- Widget for dropdown menu button.
 	inventory_dialog.register_widgets(register_dropdown_widget)
 
+	loti.config = loti.config or {}
+	if not loti.config.inventory then loti.config.inventory = {} end
+	local overrides = loti.config.inventory
+	overrides.override_unequippability = override_unequippability
+
 	inventory_dialog.install_callbacks(function()
 		-- Callback for Unequip button.
-		wesnoth.set_dialog_callback(unequip, "unequip")
+		wesnoth.set_dialog_callback(overrides.unequip or unequip, "unequip")
 
 		-- Callback for "Close" button.
 		wesnoth.set_dialog_callback(
-			function() inventory_dialog.goto_tab("items_tab") end,
+			function() 
+				if overrides.close_storage then
+					overrides.close_storage()
+				else
+					inventory_dialog.goto_tab("items_tab")
+				end
+			end,
 			"close_storage"
 		)
 
@@ -529,10 +542,18 @@ return function(provided_inventory_dialog)
 			-- is false for option #1 and true for option #2.
 			if not wesnoth.get_dialog_value("storage_dropdown_menu") then
 				-- First option on the menu
-				drop_item()
+				if overrides.drop_item then
+					overrides.drop_item()
+				else
+					drop_item()
+				end
 			else
 				-- Second option in the menu
-				destroy_item()
+				if overrides.destroy_item then
+					overrides.destroy_item()
+				else
+					destroy_item()
+				end
 			end
 		end, "storage_dropdown_menu")
 	end)
