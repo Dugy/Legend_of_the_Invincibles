@@ -313,7 +313,7 @@ local function unequip_internal()
 	local unit = inventory_dialog.current_unit
 	local item = loti.item.on_unit.find(unit, shown_item_sort)
 
-	if item then
+	if item and not string.match(item.sort, "potion") then
 		inventory_dialog.mpsafety:queue({
 			command = "unequip",
 			unit = unit,
