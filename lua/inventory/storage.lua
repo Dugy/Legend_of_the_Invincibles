@@ -406,6 +406,11 @@ local function onshow(unit, item_sort)
 	local can_equip = not empty and present and type_is_equippable or override_unequippability[item_sort] == true
 
 	wesnoth.set_dialog_visible(can_equip, "equip")
+	if string.match(item_sort, "potion") then
+		wesnoth.set_dialog_value("Use", "equip")
+	else
+		wesnoth.set_dialog_value("Equip", "equip")
+	end
 	wesnoth.set_dialog_visible(not empty and present, "storage_dropdown_menu")
 
 	if can_equip then
@@ -453,6 +458,7 @@ local function unequip()
 	end
 
 	unequip_internal()
+	inventory_dialog.catch_enter_or_ok(listbox_id, function() end)
 	inventory_dialog.goto_tab("items_tab")
 end
 
