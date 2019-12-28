@@ -236,13 +236,32 @@ end
 local listbox_row = 0
 local shown_items -- Lua array of item numbers currently displayed in listbox, e.g. { 27, 34, 56}
 
+-- Check if the scenario has progressed enough to disable unstoring items
+local function is_too_progressed()
+	local unit = inventory_dialog.current_unit
+	local terrain = wesnoth.get_terrain(unit.x, unit.y)
+	if string.sub(terrain, 1, 1) == "C" or string.sub(terrain, 1, 1) == "K" then
+		return false
+	end
+
+	if wesnoth.get_variable("turn_number") <= 2 then
+		return false
+	end
+
+	return true
+end
+
 -- Unhide the main listbox and focus on it.
 -- Explain absence of listbox when Item Storage is empty.
 -- Note: it's good for performance for listbox to be hidden until completely populated,
 -- so that it won't be unnecessarily redrawn on every set_dialog_value().
 local function unhide_listbox()
 	if not shown_items[1] then
-		wesnoth.set_dialog_value(_"Item storage is empty.", "storage_header")
+		if is_too_progressed() then
+			wesnoth.set_dialog_value(_"Cannot access item storage after turn 2 outside a castle.", "storage_header")
+		else
+			wesnoth.set_dialog_value(_"Item storage is empty.", "storage_header")
+		end
 		return
 	end
 
@@ -256,15 +275,18 @@ end
 -- Show the menu that selects subsection of Item Storage: "sword", "spear", etc.
 local function show_item_sorts()
 	local sorts = loti.item.storage.list_sorts()
+	local too_progressed = is_too_progressed()
 	for item_sort, count in pairs(sorts) do
-		-- TODO: print human-readable translatable name of item_sort.
-		local text = item_sort .. " (" .. count .. ")"
+		if not too_progressed or item_sort == "potion" or item_sort == "limited" then
+			-- TODO: print human-readable translatable name of item_sort.
+			local text = item_sort .. " (" .. count .. ")"
 
-		listbox_row = listbox_row + 1
-		wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
+			listbox_row = listbox_row + 1
+			wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
 
-		-- For callback of "View" to know which item_sort was selected.
-		shown_items[listbox_row] = item_sort
+			-- For callback of "View" to know which item_sort was selected.
+			shown_items[listbox_row] = item_sort
+		end
 	end
 
 	-- Listbox is completely populated, can show it now.
@@ -386,15 +408,17 @@ local function onshow(unit, item_sort)
 	end
 
 	-- Show all stored items of the selected item_sort.
-	local types = loti.item.storage.list_items(item_sort)
-	for item_number, count in pairs(types) do
-		listbox_row = listbox_row + 1
+	if not is_too_progressed() or item_sort == "potion" or item_sort == "limited" then
+		local types = loti.item.storage.list_items(item_sort)
+		for item_number, count in pairs(types) do
+			listbox_row = listbox_row + 1
 
-		local text = get_item_description(loti.item.type[item_number], count, set_items)
-		wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
+			local text = get_item_description(loti.item.type[item_number], count, set_items)
+			wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
 
-		-- For callback of "Equip" to know which item was selected.
-		shown_items[listbox_row] = item_number
+			-- For callback of "Equip" to know which item was selected.
+			shown_items[listbox_row] = item_number
+		end
 	end
 
 	-- Hide Equip button for: a) empty storage, b) unit on recall list,
