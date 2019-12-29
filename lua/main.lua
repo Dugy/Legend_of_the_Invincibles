@@ -206,7 +206,9 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				end
 			end
 
-			wesnoth.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
+			if not unit_to_harm.hidden then
+				wesnoth.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
+			end
 
 			if unit_to_harm.hitpoints < 1 then
 				local uth_cfg = unit_to_harm.__cfg
