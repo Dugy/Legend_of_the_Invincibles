@@ -238,6 +238,10 @@ local shown_items -- Lua array of item numbers currently displayed in listbox, e
 
 -- Check if the scenario has progressed enough to disable unstoring items
 local function is_too_progressed()
+	if wesnoth.get_variable("tutorial.progress") then
+		return false -- Unstoring is always allowed during the Tutorial
+	end
+
 	local unit = inventory_dialog.current_unit
 	local terrain = wesnoth.get_terrain(unit.x, unit.y)
 	if string.sub(terrain, 1, 1) == "C" or string.sub(terrain, 1, 1) == "K" then
