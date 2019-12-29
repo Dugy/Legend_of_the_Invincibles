@@ -153,7 +153,7 @@ local function inventory_step1()
 		elseif button.id == "unequip_all" then
 			button.onsubmit = nil
 			button.onclick = function()
-				Efraim_says(_"No, no, I do not want her to see so soon how I missed my exercice recently.")
+				Efraim_says(_"No, no, I do not want her to see so soon how I missed my exercise recently.")
 			end
 		end
 	end
