@@ -45,3 +45,10 @@ loti.get_unit = function(unit)
 	end
 	return unit
 end
+
+-- Executes a block of WML code
+loti.execute = function(code)
+	for i = 1,#code do
+		wesnoth.fire(code[i][1], code[i][2])
+	end
+end

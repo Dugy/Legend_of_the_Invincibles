@@ -44,6 +44,8 @@ function wesnoth.update_stats(original)
 		return original -- Fake unit
 	end
 
+	local hitpoints_ratio = original.hitpoints / original.max_hitpoints
+
 	-- PART II: Cleanup
 	local vars = helper.get_child(original, "variables")
 	local visible_modifications = helper.get_child(original, "modifications") -- This is where modifićations actually affecting visuals belong
@@ -55,39 +57,6 @@ function wesnoth.update_stats(original)
 	loti.unit.remove_all_items(original, function(item)
 		return item.sort and (item.sort:match("gem") or item.sort:match("temporary"))
 	end)
-
-	-- Healing potions
-	local was_healing = false
-	if vars.healed or wesnoth.get_variable("healed") == 1 then -- TODO: equipping a healing potion should set a variable inside the unit instead
-		original.hitpoints = original.max_hitpoints
-		vars.healed = nil
-		was_healing = true
-		wesnoth.set_variable("healed", nil)
-	end
-	if vars.fully_healed or wesnoth.get_variable("fully_healed") == 1 then
-		original.hitpoints = original.max_hitpoints
-		original.moves = original.max_moves
-		original.attacks_left = original.max_attacks
-		for i = 1,#original do
-			if original[i][1] == "status" then
-				original[i][2] = {}
-				break
-			end
-		end
-
-		-- Remove all status conditions that are removed by full healing
-		-- (e.g. pseudo-items like "incinerated")
-		loti.unit.remove_all_items(original, function(item) return item.remove_on_heal end)
-
-		vars.fully_healed = nil
-		was_healing = true
-
-		wesnoth.set_variable("fully_healed", nil)
-	end
-	if was_healing then
-		table.insert(events_to_fire, "healed_by_potion")
-		vars.healed_this_turn = "yes" -- Used in ITEM_PICK macro
-	end
 
 	-- Check if geared and set the trait appropriately
 	local geared = #(loti.unit.list_unit_item_numbers(original)) > 0
@@ -400,6 +369,8 @@ function wesnoth.update_stats(original)
 			end
 		end
 	end
+
+	remade.hitpoints = remade.max_hitpoints * hitpoints_ratio
 
 	-- PART VI: Apply additional effects
 

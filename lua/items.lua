@@ -272,24 +272,6 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 	-- Store the fact "unit has this item".
 	loti.unit.add_item(unit.__cfg, item_number, crafted_sort)
 
-	-- Special handling for Foul Potion (#16): initialize starving counter.
-	if item_number == 16 then
-		unit.variables.starving = 0
-	end
-
-	-- Special handling for Book of Courage (#89): add "fearless" trait.
-	if item_number == 89 then
-		wesnoth.add_modification(unit, "trait", {
-			id = "fearless",
-			male_name = _"fearless",
-			female_name = _"female^fearless",
-			description = _"Fights normally during unfavorable times of day/night",
-			wml.tag.effect {
-				apply_to = "fearless"
-			}
-		})
-	end
-
 	-- Update stats (recalculate damages, etc.)
 	update_stats(unit)
 end

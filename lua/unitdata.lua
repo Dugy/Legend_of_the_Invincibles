@@ -302,13 +302,22 @@ local wml_based_implementation = {
 	-- Add item to unit.
 	add_item = function(unit, item_number, item_sort)
 		unit = normalize_unit_param(unit)
-		local modifications = helper.get_child(unit, "modifications")
 
 		local item = wesnoth.deepcopy(loti.item.type[item_number])
 		if item_sort then
 			item.sort = item_sort
 		end
 
+		local on_equip = helper.get_child(item, "on_equip")
+		if on_equip then
+			local variable = on_equip.variable or "armed"
+			wesnoth.set_variable(variable, unit)
+			loti.execute(on_equip)
+			unit = wesnoth.get_variable(variable)
+			wesnoth.set_variable(variable, nil)
+		end
+
+		local modifications = helper.get_child(unit, "modifications")
 		table.insert(modifications, wml.tag.object(item))
 
 		-- Place updated unit back onto the map.
