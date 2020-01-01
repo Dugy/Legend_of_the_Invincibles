@@ -22,6 +22,7 @@ loti.put_unit = function(unit)
 	if not proxy then
 		-- Unit hasn't been created in the game yet,
 		-- e.g. this is WML of the updated unit in update_stats()
+		wesnoth.put_recall_unit(unit)
 		return
 	end
 
