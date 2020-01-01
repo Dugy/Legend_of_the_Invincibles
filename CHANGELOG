@@ -1,5 +1,12 @@
 Changelog
 
+3.2.6 (development)
+Rewrote the item drop system, altering the probabilities of items to drop
+Items hidden in scenarios come from different pools than random drops
+Some items can now only be found in remote cornders of scenarios
+Deathblade Inheritance is no longer available as a crafted item, but is a randomly dropped axe now
+Fixed some bugs
+
 3.2.5 (development/maintenance)
 Inventory has a new UI
 Added 15 new items

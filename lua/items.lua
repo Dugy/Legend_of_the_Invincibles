@@ -294,6 +294,66 @@ end
 -- loti.item.on_the_ground: methods to work with items lying on the ground
 -------------------------------------------------------------------------------
 
+local item_generation_lists = {} -- Lazy loaded
+
+local function randomly_pick_one(choices)
+	 return choices[wesnoth.random(#choices)]
+end
+
+-- Randomly generates an item of the given group (each item has to be explicitly defined as part of some group) of one of the item types in the given table
+-- Nil as a table does not discriminate by types, a subtable in the table triggers another selection recursively (if picked)
+loti.item.on_the_ground.generate = function(group, item_types)
+	local sort_selected = nil
+	if item_types then
+		sort_selected = randomly_pick_one(item_types)
+	end
+	if type(sort_selected) == "table" then
+		return loti.item.on_the_ground.generate(group, sort_selected)
+	else
+		if not item_generation_lists[group] then
+			item_generation_lists[group] = {}
+		end
+		if type(sort_selected) == "string" then
+			if not item_generation_lists[group][sort_selected] then
+				local made = {}
+				local all_known_types = helper.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
+
+				for _, item in ipairs(all_known_types) do
+					if item[2][group] and item[2].sort == sort_selected then
+						for i = 1,item[2][group] do
+							table.insert(made, item[2].number)
+						end
+					end
+				end
+				item_generation_lists[group][sort_selected] = made
+				return randomly_pick_one(made)
+			else
+				return randomly_pick_one(item_generation_lists[group][sort_selected])
+			end
+		else
+			-- It's nil
+			if #item_generation_lists[group] == 0 then
+				local all_known_types = helper.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
+				local made = item_generation_lists[group]
+
+				for _, item in ipairs(all_known_types) do
+					if item[2][group] then
+						for i = 1,item[2][group] do
+							table.insert(made, item[2].number)
+						end
+					end
+				end
+				if #item_generation_lists[group] > 0 then
+					return randomly_pick_one(made)
+				end
+			else
+				return randomly_pick_one(item_generation_lists[group])
+			end
+		end
+	end
+	return 0 --Zero item means failure
+end
+
 -- Place item on the ground at coordinates (x,y).
 -- Optional parameter crafted_sort: if present, overrides item_sort of the item.
 loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
@@ -735,4 +795,27 @@ end
 -- after all [describe_object] tags (they change item descriptions in item_list).
 function wesnoth.wml_actions.clear_item_list_cache()
 	loti.item.type._reload()
+	item_generation_lists = nil
+end
+
+function wesnoth.wml_actions.random_item(cfg)
+	local item_types = nil
+	local item_types_wml = helper.get_child(cfg, "types")
+	if item_types_wml then
+		item_types = {}
+		for sort_name, possibilities in pairs(item_types_wml) do
+			local sort_group = {}
+			for sort_subgroup in string.gmatch(possibilities, '([^,]+)') do
+				table.insert(sort_group, sort_subgroup)
+			end
+			table.insert(item_types, sort_group)
+		end
+	end
+	local group_name = cfg.group or "drop"
+	local generated = loti.item.on_the_ground.generate(group_name, item_types)
+	if cfg.variable then
+		wesnoth.set_variable(cfg.variable, generated)
+	else
+		loti.item.on_the_ground.add(generated, cfg.x, cfg.y)
+	end
 end
