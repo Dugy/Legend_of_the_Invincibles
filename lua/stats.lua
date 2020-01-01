@@ -252,7 +252,7 @@ function wesnoth.update_stats(original)
 			weapon_type = "knife"
 		elseif wn == "mace" or wn == "mace-spiked" or wn == "morning star" or wn == "club" or wn == "flail" or wn == "scourge" or wn == "mace_berserk" or wn == "hammer" or wn == "hammer-runic" then
 			weapon_type = "mace"
-		elseif wn == "spear" or wn == "javelin" or wn == "lance" or wn == "spike" or wn == "pike" or wn == "trident" or wn == "trident" or wn == "trident-blade" then
+		elseif wn == "spear" or wn == "javelin" or wn == "lance" or wn == "spike" or wn == "pike" or wn == "trident" or wn == "trident" or wn == "trident-blade" or wn == "pitchfork" then
 			weapon_type = "spear"
 		elseif wn == "war talon" or wn == "war blade" then
 			weapon_type = "exotic"
