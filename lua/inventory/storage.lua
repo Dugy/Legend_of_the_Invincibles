@@ -486,7 +486,6 @@ local function unequip()
 	end
 
 	unequip_internal()
-	inventory_dialog.catch_enter_or_ok(listbox_id, function() end)
 	inventory_dialog.goto_tab("items_tab")
 end
 

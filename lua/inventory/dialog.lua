@@ -74,6 +74,9 @@ end
 -- 1) tab_id - string (e.g. "inventory"), must be one of the IDs in tabs[] array.
 -- 2) Any additional parameters (if any) are passed to "onshow" callback.
 inventory_dialog.goto_tab = function(tab_id, ...)
+	-- If we switched to another tab, then the old Enter callback is no longer actual.
+	enter_or_ok_catcher = nil
+
 	if not tab_id then
 		tab_id = "items_tab"
 	end
