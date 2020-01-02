@@ -1,9 +1,10 @@
 local helper = wesnoth.require "lua/helper.lua"
 
--- First, parse data into suitable structures
+loti.flavours_table = { "chivalrous", "wizardly", "dark", "criminal", "warlike", "sneaky", "brutish", "ghostly" }
 
-title_table = {}
-flavours_table = { "chivalrous", "wizardly", "dark", "criminal", "warlike", "sneaky", "brutish", "ghostly" }
+-- First, parse data into suitable structures
+local title_table = {}
+local flavours_table = loti.flavours_table
 
 local title_data = helper.get_child(wesnoth.unit_types["Title Data Loader"].__cfg, "advancement")
 for i = 1,#title_data do
@@ -18,13 +19,13 @@ for i = 1,#title_data do
 	end
 end
 
-function get_unit_flavour(u)
+function loti.util.get_unit_flavour(u)
 	-- Check its properties to calculate its flavour
 	wesnoth.wml_actions.unit{ type = u.type, to_variable = "lua_unit_to_get_flavour"}
 	local data = wesnoth.get_variable("lua_unit_to_get_flavour")
 	wesnoth.set_variable("lua_unit_to_get_flavour", nil)
 
-	local has_attack = loti_util_list_attacks(u)
+	local has_attack = loti.util.list_attacks(u)
 
 	local function has_special(special_name)
 		local has = false
@@ -82,7 +83,7 @@ function get_unit_flavour(u)
 	local terrains = 0
 	local defences = helper.get_child(data, "defense")
 	if defences then
-		for k,v in pairs(defences) do
+		for _, v in pairs(defences) do
 			defence = defence + v
 			terrains = terrains + 1
 		end
@@ -96,7 +97,7 @@ function get_unit_flavour(u)
 	end
 
 	-- Calculate its flavour
-	flavour = {}
+	local flavour = {}
 	for i = 1,#flavours_table do
 		flavour[flavours_table[i]] = 0
 	end
@@ -207,7 +208,7 @@ function get_unit_flavour(u)
 	return flavour
 end
 
-function normalise_flavour(flavour)
+function loti.util.normalise_flavour(flavour)
 	local flavour_sum = 0
 	for i = 1,#flavours_table do
 		flavour_sum = flavour_sum + flavour[flavours_table[i]]
@@ -218,7 +219,7 @@ function normalise_flavour(flavour)
 	return flavour
 end
 
-function assign_title(name, female, flavour)
+function loti.util.assign_title(name, female, flavour)
 	-- First, set up some functions
 
 	local function parse_nonterminal(str)
@@ -346,4 +347,4 @@ function assign_title(name, female, flavour)
 	return assign_nonterminal("main", name, female, flavour)
 end
 
--- wesnoth.dbms(assign_title("Joe", false, { dark=3, brutish=7 }))
+-- wesnoth.dbms(loti.util.assign_title("Joe", false, { dark=3, brutish=7 }))

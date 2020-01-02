@@ -150,7 +150,7 @@ local function onshow(unit)
 
 		if allowed or not attack_only then
 			table.insert(retaliation_checkboxes, index)
-			checkbox_id = #retaliation_checkboxes
+			local checkbox_id = #retaliation_checkboxes
 
 			local text = attack.description .. ": " .. attack.damage .. "-" .. attack.number .. " " .. attack.type
 

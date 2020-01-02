@@ -318,7 +318,7 @@ end
 -- Parameter "item" is an [object] tag.
 -- Optional parameter: if count>1, it will be shown that we have more than 1 of these items.
 -- Optional parameter: set_items is an array of item numbers of all currently equipped items (used to show active set bonuses).
-function get_item_description(item, count, set_items)
+local function get_item_description(item, count, set_items)
 	local text = "<span font-weight='bold'>" .. item.name .. "</span>"
 	if count and count > 1 then
 		text = text .. " (" .. count .. ")"
@@ -391,7 +391,7 @@ local function onshow(unit, item_sort)
 
 	-- Remember whether the items of this sort can be equipped.
 	type_is_equippable = true
-	if not loti_util_list_equippable_sorts(unit)[item_sort] then
+	if not loti.util.list_equippable_sorts(unit)[item_sort] then
 		type_is_equippable = false
 	end
 
