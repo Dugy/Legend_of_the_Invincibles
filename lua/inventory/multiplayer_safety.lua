@@ -40,8 +40,13 @@ function mpsafety:queue(operation)
 	-- Encode certain values, so that operation would be a valid WML table.
 	local unit = operation.unit
 	if unit then
-		operation.x = unit.x
-		operation.y = unit.y
+		if unit.valid == "map" then
+			operation.x = unit.x
+			operation.y = unit.y
+		elseif unit.valid == "recall" then
+			operation.recall_unit_id = unit.id
+		end
+
 		operation.unit = nil
 	end
 
@@ -54,6 +59,8 @@ function mpsafety:run_immediately(operation)
 	-- Unencode certain values, e.g. unit from coordinates.
 	if operation.x then
 		operation.unit = wesnoth.get_unit(operation.x, operation.y)
+	elseif operation.recall_unit_id then
+		operation.unit = wesnoth.get_recall_units({ id = operation.recall_unit_id })[1]
 	end
 
 	-- Run the requested command
