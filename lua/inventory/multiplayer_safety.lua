@@ -31,12 +31,6 @@ end
 -- Queue "operation" to be performed for all players.
 -- Immediately runs it for the current player.
 function mpsafety:queue(operation)
-	self:run_immediately(operation)
-
-	-- Remember that it was this player who used the Inventory dialog,
-	-- so that synchronize() wouldn't do anything for this player.
-	self.this_player_already_did_it = true
-
 	-- Encode certain values, so that operation would be a valid WML table.
 	local unit = operation.unit
 	if unit then
@@ -52,6 +46,11 @@ function mpsafety:queue(operation)
 
 	-- Record this operation in the log. Will later be provided to other players.
 	table.insert(self.todo, wml.tag.operation(operation))
+
+	-- Perform this operation immediately. Also remember that this player is the one who used
+	-- the Inventory dialog, so that synchronize() wouldn't repeat this operation.
+	self:run_immediately(wesnoth.deepcopy(operation))
+	self.this_player_already_did_it = true
 end
 
 -- Execute "operation" for the current player.
