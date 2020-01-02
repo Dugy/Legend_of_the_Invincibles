@@ -342,7 +342,7 @@ function assign_title(name, female, flavour)
 			return "(error)"
 		end
 	end
-	
+
 	return assign_nonterminal("main", name, female, flavour)
 end
 

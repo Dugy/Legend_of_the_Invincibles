@@ -559,7 +559,7 @@ return function(provided_inventory_dialog)
 
 		-- Callback for "Close" button.
 		wesnoth.set_dialog_callback(
-			function() 
+			function()
 				inventory_dialog.catch_enter_or_ok(listbox_id, function() end)
 				if overrides.close_storage then
 					overrides.close_storage()

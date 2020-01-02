@@ -60,7 +60,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 						id = "gui_gem_icon"
 					}
 				},
-			   	wml.tag.column {
+				wml.tag.column {
 					grow_factor = 1,
 					border = "all",
 					border_size = 10,
@@ -177,7 +177,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 				end
 
 				local returned = wesnoth.show_dialog(get_dialog(), preshow)
-				
+
 				if returned ~= -2 then
 					return { picked = picked }
 				end
@@ -192,7 +192,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 		gem_quantities[chosen] = gem_quantities[chosen] - transmutables[chosen].amount
 		local obtained = loti.gem.random()
 		gem_quantities[obtained] = gem_quantities[obtained] + 1
-		wesnoth.wml_actions.object( loti.item.type[520 + obtained] ) 
+		wesnoth.wml_actions.object( loti.item.type[520 + obtained] )
 		loti.gem.set_counts(gem_quantities)
 
 		-- Update the gem counts in the Crafting dialog (which is currently open).
@@ -652,7 +652,7 @@ loti.gem.show_crafting_window = function(x, y)
 					end
 				end
 			end
-					
+
 			if returned ~= -2 then
 				return { sort = sort_chosen, recipe = recipe_chosen }
 			else

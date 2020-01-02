@@ -563,7 +563,7 @@ loti.item.describe_item = function(number, sort, set_items)
 
 			table.insert(desc, "<span color='green'>" .. math.abs(variable) .. ending .. " </span>")
 		end
-	end	
+	end
 	if is_weapon then
 		describe_attacks_modification(item.attacks,
 			_"% more attacks", _"% more attacks", _"% fewer attacks", _"% fewer attacks")

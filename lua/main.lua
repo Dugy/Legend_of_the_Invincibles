@@ -786,7 +786,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 			u.name = nameless_generator()
 		end
 	end
-	
+
 	local flavour = get_unit_flavour(u)
 
 	-- Make legacy affect flavour, even unset one
@@ -817,9 +817,9 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 			check_legacy(name, "legacy_of_the_free", { criminal = 5, sneaky = 5 })
 		end
 	end
-	
+
 	-- Normalise flavour to have sum equal to 10
-	flavour = normalise_flavour(flavour)	
+	flavour = normalise_flavour(flavour)
 
 	-- Finalise
 	u.name = assign_title(u.name, u.gender, flavour)
@@ -848,7 +848,7 @@ function wesnoth.wml_actions.pick_random_item(cfg)
 
 	-- Comma-separated list for helper.rand()
 	local options = droppable_items
-	
+
 	local blacklist = wesnoth.get_variable("droppable_items_blacklist")
 	if blacklist then
 		-- Remove each blacklisted number from "options" string
@@ -856,7 +856,7 @@ function wesnoth.wml_actions.pick_random_item(cfg)
 		for item in string.gmatch(blacklist, "[^,]*") do
 			options = options:gsub("," .. item .. ",", ",")
 		end
-		
+
 		-- Strip leading/trailing commas.
 		-- If all items were excluded, ignore the blacklist (allow all items to be dropped).
 		options = options:gsub("^,", ""):gsub(",$", ""):gsub("^$", droppable_items)
