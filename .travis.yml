@@ -65,9 +65,12 @@ after_success:
         ADDON=Legend_of_the_Invincibles_beta &&
         mv Legend_of_the_Invincibles $ADDON &&
         find $ADDON -type f | xargs sed -i "s@add-ons/Legend_of_the_Invincibles@add-ons/$ADDON@g" &&
+        for WESNOTH_VERSION in "1.15.x" "1.14.x"; do
         python wesnoth_tools/wesnoth_addon_manager
         -u $ADDON
+        --port $WESNOTH_VERSION
         --pbl $ADDON/beta.pbl
         --pbl-key passphrase $PBL_PASSPHRASE
         --pbl-key email $PBL_EMAIL
         --pbl-key version $(git describe HEAD --tags | tr '-' '.')
+        done
