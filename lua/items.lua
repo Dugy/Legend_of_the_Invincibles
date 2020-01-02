@@ -795,7 +795,7 @@ end
 -- after all [describe_object] tags (they change item descriptions in item_list).
 function wesnoth.wml_actions.clear_item_list_cache()
 	loti.item.type._reload()
-	item_generation_lists = nil
+	item_generation_lists = {}
 end
 
 function wesnoth.wml_actions.random_item(cfg)
