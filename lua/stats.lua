@@ -371,6 +371,9 @@ function wesnoth.update_stats(original)
 	end
 
 	remade.hitpoints = remade.max_hitpoints * hitpoints_ratio
+	if remade.hitpoints > remade.max_hitpoints then
+		remade.hitpoints = remade.max_hitpoints
+	end
 
 	-- PART VI: Apply additional effects
 
