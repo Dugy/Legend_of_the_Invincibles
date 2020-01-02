@@ -18,19 +18,14 @@ end
 
 -- Places a unit back to the game, on the map or to the recall list
 loti.put_unit = function(unit)
-	local proxy = wesnoth.get_unit(unit.id) or wesnoth.get_recall_units({ id = unit.id })[1]
-	if not proxy then
-		-- Unit hasn't been created in the game yet,
-		-- e.g. this is WML of the updated unit in update_stats()
-		return
-	end
-
-	local valid = proxy.valid
-	if valid == "map" then
+	if wesnoth.get_unit(unit.id) then
 		wesnoth.put_unit(unit)
-	elseif valid == "recall" then
+	elseif wesnoth.get_recall_units({ id = unit.id })[1] then
 		wesnoth.put_recall_unit(unit)
 	end
+
+	-- Nothing to do: unit hasn't been created in the game yet,
+	-- e.g. this is WML of the updated unit in update_stats()
 end
 
 -- Gets a unit and removes it from the game (usually to be placed later), from the map or from the recall list
