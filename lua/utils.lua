@@ -1,5 +1,3 @@
-local helper = wesnoth.require "lua/helper.lua"
-
 -- Useful function taken from elsewhere, can be done also by copying it to WML and getting back, though this is probably faster
 function wesnoth.deepcopy(orig)
     local orig_type = type(orig)

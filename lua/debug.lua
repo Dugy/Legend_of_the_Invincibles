@@ -1,5 +1,3 @@
-local helper = wesnoth.require "lua/helper.lua"
-
 --This was pasted from Wesnoth lua pack and is crazy useful
 
 function wesnoth.dbms(lua_var, clear, name, onscreen, wrap, only_return)

@@ -803,7 +803,7 @@ function wesnoth.wml_actions.random_item(cfg)
 	local item_types_wml = helper.get_child(cfg, "types")
 	if item_types_wml then
 		item_types = {}
-		for sort_name, possibilities in pairs(item_types_wml) do
+		for _, possibilities in pairs(item_types_wml) do
 			local sort_group = {}
 			for sort_subgroup in string.gmatch(possibilities, '([^,]+)') do
 				table.insert(sort_group, sort_subgroup)

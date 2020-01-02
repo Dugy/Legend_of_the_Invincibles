@@ -4,7 +4,6 @@
 --
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 
 local listbox_id = "recall_listbox"
 local inventory_dialog -- Set below

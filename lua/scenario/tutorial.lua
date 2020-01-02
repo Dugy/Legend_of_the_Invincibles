@@ -6,7 +6,6 @@
 -------------------------------------------------------------------------------
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 
 local crafting_done = false
 
@@ -30,7 +29,7 @@ end
 
 local original_slot_callback = loti.config.inventory.slot_callback
 local original_button_callbacks = {}
-for idx, button in ipairs(loti.config.inventory.action_buttons) do
+for _, button in ipairs(loti.config.inventory.action_buttons) do
 	if button.id then
 		original_button_callbacks[button.id] = { onsubmit = button.onsubmit, onclick = button.onclick }
 	end
@@ -135,7 +134,6 @@ local function inventory_step1()
 				Efraim_says(_"I do not need to retaliate, I have allies to do that while I flee.")
 			end
 		elseif button.id == "crafting" then
-			local crafting_button = button
 			button.onsubmit = nil
 			button.onclick = function()
 				if crafting_done == false then
@@ -231,7 +229,6 @@ local function inventory_step6()
 				Efraim_says(_"She would become ugly if she tried to retaliate.")
 			end
 		elseif button.id == "storage" then
-			local crafting_button = button
 			button.onsubmit = nil
 			button.onclick = function()
 				if wesnoth.get_variable("tutorial.proceed") == 0 then
@@ -241,7 +238,6 @@ local function inventory_step6()
 				end
 			end
 		elseif button.id == "crafting" then
-			local crafting_button = button
 			button.onsubmit = nil
 			button.onclick = function()
 				Delly_says(_"Do I look like a mere blacksmith to you?")
@@ -290,13 +286,11 @@ local function inventory_step7()
 				Delly_says(_"Yes, yes, I never thought you would be such a good person to give me something new.")
 			end
 		elseif button.id == "crafting" then
-			local crafting_button = button
 			button.onsubmit = nil
 			button.onclick = function()
 				Efraim_says(_"Who cares about crafting now...")
 			end
 		elseif button.id == "retaliation" then
-			local crafting_button = button
 			button.onsubmit = nil
 			button.onclick = function()
 				Delly_says(_"Nobody will think about attacking her when I am done.")

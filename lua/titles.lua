@@ -226,7 +226,6 @@ function loti.util.assign_title(name, female, flavour)
 		-- Parse the string in form: (name) the (something) who (does_something)
 		local parts = {}
 		local are_nonterminals = {}
-		local translated = tostring(str)
 		local length = tostring(str):len()
 		local byte_string = {string.byte(tostring(str), 1, length)}
 		local starting = string.byte("(")

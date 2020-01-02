@@ -362,9 +362,7 @@ local wml_based_implementation = {
 }
 
 -- Implementation that efficiently stores items, effects, etc. in Lua array.
-local lua_based_implementation = {
-	-- TODO: implement same methods as in wml_based_implementation.
-}
+-- local lua_based_implementation = {} -- TODO: implement same methods as in wml_based_implementation.
 
 -- Default implementation: WML based.
 loti.unit = wml_based_implementation

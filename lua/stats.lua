@@ -660,7 +660,7 @@ function wesnoth.update_stats(original)
 		end
 	end
 	local sorts_owned = {}
-	for index, obj in loti.unit.items(remade) do
+	for _, obj in loti.unit.items(remade) do
 		if obj.sort then
 			sorts_owned[obj.sort] = true
 		end

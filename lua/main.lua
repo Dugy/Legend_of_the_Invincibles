@@ -272,7 +272,6 @@ local function unit_information_part_1()
     local max_lesser_redeem_count = wesnoth.get_variable("unit.variables.max_lesser_redeem_count")
     local lesser_redeem_count = wesnoth.get_variable("unit.variables.lesser_redeem_count")
     local starving = wesnoth.get_variable("unit.variables.starving")
-    local wrath_intensity = wesnoth.get_variable("unit.variables.wrath_intensity")
     local from_the_ashes_used = wesnoth.get_variable("unit.variables.from_the_ashes_used")
     local from_the_ashes_cooldown = wesnoth.get_variable("unit.variables.from_the_ashes_cooldown")
     local wrath = wesnoth.get_variable("unit.variables.wrath_intensity")
@@ -347,12 +346,6 @@ local function unit_information_part_2()
     -- attacks.  By using string.format we can make sure that everything lines
     -- up nicely regardless of whether an attack deals <10 or >=10 damage.
     local function get_attack_damage_summary(attack)
-      local function round(number)
-        if number > 0 and number < 1 then
-          return 1
-        end
-        return math.floor(number)
-      end
       local damage = attack["damage"]
       local number = attack["number"]
       local format_string = "<span font_family='monospace' font_weight='bold'>%4d"
@@ -470,7 +463,7 @@ local function unit_information_part_2()
     local function list_attacks()
       local attacks = helper.get_variable_array("unit.attack")
       local result = ""
-      for i, v in ipairs(attacks) do
+      for _, v in ipairs(attacks) do
         result = result .. list_one_attack(v)
       end
 
@@ -535,7 +528,7 @@ local function unit_information_part_4()
     local penetrate = 0
     local resistances = helper.get_variable_array("unit.abilities.resistance")
 
-    for i, v in ipairs(resistances) do
+    for _, v in ipairs(resistances) do
       if (v["id"] == type .. "_penetrate") then
         penetrate = v["sub"]
       end
@@ -603,32 +596,6 @@ function wesnoth.wml_actions.unit_information_parts_1_to_5()
 end
 
 function wesnoth.wml_actions.unit_information_part_6()
-    -- This table transforms an array like {'a', 'b', 'a'} into a table of
-    -- counts like {'a': 2, 'b': 1}
-    local function count(t)
-      local result = {}
-      for _, v in ipairs(t) do
-        v = tostring(v)
-        if result[v] ~= nil then
-          result[v] = result[v] + 1
-        else
-          result[v] = 1
-        end
-      end
-      return result
-    end
-
-    -- Create a nice string representation of a table of counts (produced by
-    -- the counts function above)
-    local function summarize_counts(t)
-      local result = ""
-      for abil, count in pairs(t) do
-        result = result .. "<span font_family='monospace' font_weight='bold' color='#60A0FF'>    "
-        .. string.format("%2dx ", math.floor(count)) .. "</span>" .. abil .. " \n"
-      end
-      return result
-    end
-
     -- Main function for this block: create a nicely formatted list of all of a
     -- unit's advancements and the number of times it took each of them.
     -- AMLA advancements, and soul eating choices
@@ -687,7 +654,7 @@ function wesnoth.wml_actions.pre_advance_stuff(cfg)
         if a ~= nil and a.id == "backup_amla" then
             unit = clear_advancements(unit)
             local u = wesnoth.create_unit { type = "Advancing" .. unit.type }
-            for i, v in ipairs(u.__cfg) do
+            for _, v in ipairs(u.__cfg) do
                 if v[1] == "advancement" then
                     table.insert(unit, v)
                 end
@@ -843,7 +810,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	u.name = loti.util.assign_title(u.name, u.gender, flavour)
 
 	if cfg.variable then
-		u = wesnoth.set_variable(cfg.variable, u)
+		wesnoth.set_variable(cfg.variable, u)
 	else
 		wesnoth.put_unit(u)
 	end

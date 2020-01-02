@@ -4,8 +4,6 @@
 --
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
-local util = wesnoth.require "./misc.lua"
 
 local listbox_id = "storage_listbox"
 local inventory_dialog -- Set below
