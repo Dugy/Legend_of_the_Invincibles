@@ -930,7 +930,7 @@ function loti.util.list_equippable_sorts(unit)
 		elseif attack == "spear" or attack == "javelin"
 			or attack == "lance" or attack == "spike"
 			or attack == "pike" or attack == "trident"
-			or attack == "trident-blade"
+			or attack == "trident-blade" or attack == "pitchfork"
 				then can_equip.spear = 1
 		end
 	end
