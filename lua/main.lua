@@ -366,7 +366,7 @@ local function unit_information_part_2()
       local name = tostring(attack["name"])
       local result = "<span color='#60A0FF' font_weight='bold'>" .. name .. "</span>"
       if description then
-      	result = "<span color='#60A0FF' font_weight='bold'>" .. description .. "</span>"
+        result = "<span color='#60A0FF' font_weight='bold'>" .. description .. "</span>"
       end
       return result
     end
