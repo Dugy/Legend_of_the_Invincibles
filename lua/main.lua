@@ -280,7 +280,6 @@ local function unit_information_part_1()
     local span = "<span font_weight='bold'>"
     result = result .. span .. _"Hitpoints:</span> "
     .. string.format("%u/%u", wesnoth.get_variable("unit.hitpoints"), wesnoth.get_variable("unit.max_hitpoints")) .. " \n"
-    local span = "<span font_weight='bold'>"
     result = result .. span .. _"Experience:</span> "
     .. string.format("%u/%u", wesnoth.get_variable("unit.experience"), wesnoth.get_variable("unit.max_experience")) .. " \n"
     if max_devour_count ~= nil and max_devour_count > 0 then
