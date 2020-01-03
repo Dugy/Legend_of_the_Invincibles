@@ -425,7 +425,6 @@ function wesnoth.update_stats(original)
 					if eff.force_original_attack then
 						if eff.force_original_attack == atk.name then
 							strongest_attack = atk
-							strongest_damage = 100000000000
 							break
 						end
 					end
