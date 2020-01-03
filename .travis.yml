@@ -47,7 +47,7 @@ script:
 # 1 - there are warnings (shouldn't cause Travis build to fail),
 # 2 - some serious errors (syntax errors, etc.),
 # 3 - luacheck failed for whatever reason (file not found, etc.).
-  - luacheck Legend_of_the_Invincibles/ --std lua53 --globals loti wesnoth wml T || [[ $? -le 1 ]]
+  - luacheck Legend_of_the_Invincibles/ || [[ $? -le 1 ]]
 
 # wmllint (part of Wesnoth itself) is a static analyzer of WML files.
 # It is known for false positives (which can later be countered with special comments),
