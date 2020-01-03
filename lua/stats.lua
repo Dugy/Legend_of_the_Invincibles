@@ -491,6 +491,7 @@ function wesnoth.update_stats(original)
 					table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
 				else
 					-- This should not happen
+					wesnoth.log("warning", "Couldn't find right animation for unit " .. tostring(remade.id))
 				end
 			end
 			strongest_attack.name = eff.name

@@ -139,7 +139,6 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					damage_multiplier = damage_multiplier - tod_bonus
 				elseif alignment == "liminal" then
 					damage_multiplier = damage_multiplier - math.abs( tod_bonus )
-				else -- neutral, do nothing
 				end
 				local resistance_modified = resistance * modifier
 				damage_multiplier = damage_multiplier * resistance_modified
