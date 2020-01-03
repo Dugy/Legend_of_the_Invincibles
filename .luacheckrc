@@ -4,7 +4,18 @@ max_line_length = false -- May enable later. Have too many lines with 150+ symbo
 -- These global variables are allowed.
 globals = {
 	"loti", -- All non-local LoTI functions are placed here, e.g. loti.item.on_unit.list()
-	"T" -- Shortcut for wml.tag
+	"T", -- Shortcut for wml.tag,
+
+	-- FIXME: these globals should be moved somewhere within loti[] array
+	"damage_type_list",
+	"melee_type_list",
+	"ranged_type_list",
+	"resist_penetrate_descriptions",
+	"resist_penetrate_list",
+	"resist_type_descriptions",
+	"resist_type_list",
+	"sort_list",
+	"weapon_type_list"
 }
 
 -- These global variables are allowed, but can't be modified (with the exception of some fields).
