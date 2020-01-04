@@ -139,7 +139,6 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					damage_multiplier = damage_multiplier - tod_bonus
 				elseif alignment == "liminal" then
 					damage_multiplier = damage_multiplier - math.abs( tod_bonus )
-				else -- neutral, do nothing
 				end
 				local resistance_modified = resistance * modifier
 				damage_multiplier = damage_multiplier * resistance_modified
@@ -280,7 +279,6 @@ local function unit_information_part_1()
     local span = "<span font_weight='bold'>"
     result = result .. span .. _"Hitpoints:</span> "
     .. string.format("%u/%u", wesnoth.get_variable("unit.hitpoints"), wesnoth.get_variable("unit.max_hitpoints")) .. " \n"
-    local span = "<span font_weight='bold'>"
     result = result .. span .. _"Experience:</span> "
     .. string.format("%u/%u", wesnoth.get_variable("unit.experience"), wesnoth.get_variable("unit.max_experience")) .. " \n"
     if max_devour_count ~= nil and max_devour_count > 0 then
@@ -367,7 +365,7 @@ local function unit_information_part_2()
       local name = tostring(attack["name"])
       local result = "<span color='#60A0FF' font_weight='bold'>" .. name .. "</span>"
       if description then
-      	result = "<span color='#60A0FF' font_weight='bold'>" .. description .. "</span>"
+        result = "<span color='#60A0FF' font_weight='bold'>" .. description .. "</span>"
       end
       return result
     end

@@ -4,7 +4,18 @@ max_line_length = false -- May enable later. Have too many lines with 150+ symbo
 -- These global variables are allowed.
 globals = {
 	"loti", -- All non-local LoTI functions are placed here, e.g. loti.item.on_unit.list()
-	"T" -- Shortcut for wml.tag
+	"T", -- Shortcut for wml.tag,
+
+	-- FIXME: these globals should be moved somewhere within loti[] array
+	"damage_type_list",
+	"melee_type_list",
+	"ranged_type_list",
+	"resist_penetrate_descriptions",
+	"resist_penetrate_list",
+	"resist_type_descriptions",
+	"resist_type_list",
+	"sort_list",
+	"weapon_type_list"
 }
 
 -- These global variables are allowed, but can't be modified (with the exception of some fields).
@@ -38,16 +49,28 @@ read_globals = {
 
 codes = true -- Show luacheck's error/warning codes. Useful for adding exceptions (see below).
 
--- Ignore "unused argument unit" (W212) in onclick callbacks of Inventory dialog:
--- keeping the unused parameter for readability (to demonstrate that callback receives it).
-files["**/inventory/items.lua"] = { ignore = { "212" } }
+-- We ignore the following codes:
+-- * W212 ("unused argument") in onclick callbacks of Inventory dialog, where we are keeping
+-- the unused parameter for readability (to demonstrate that callback receives it).
+-- * W213 ("unused loop variable") in loops where we can't use "_" (common naming convention
+-- for "unused variable"), because these loops either use gettext function (which is called "_"),
+-- or are nested within another loop where "_" is already the index, or for some other reason.
+files["**/lua/inventory/items.lua"] = { ignore = {
+	"212", -- "unused argument unit"
+} }
 
--- Ignore "unused loop variable idx" (W213) in loops that use gettext function (which is called "_"),
--- where we can't rename "idx" to "_" (a common naming convention for "unused variable").
-files["**/stats.lua"] = { ignore = { "213" } }
+files["**/lua/items.lua"] = { ignore = {
+	"213" -- "unused loop variable i"
+} }
 
--- Same as above.
-files["**/scenario/tutorial.lua"] = { ignore = { "212", "213" } }
+files["**/lua/stats.lua"] = { ignore = {
+	"213" -- "unused loop variable index"
+} }
+
+files["**/lua/scenario/tutorial.lua"] = { ignore = {
+	"212", -- "unused argument item_sort"
+	"213" -- "unused loop variable idx"
+} }
 
 -- Ignore "unused argument self" (W212) in mpsafety:constructor() and mpsafety:run_immediately().
 self = false

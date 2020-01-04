@@ -425,7 +425,6 @@ function wesnoth.update_stats(original)
 					if eff.force_original_attack then
 						if eff.force_original_attack == atk.name then
 							strongest_attack = atk
-							strongest_damage = 100000000000
 							break
 						end
 					end
@@ -473,7 +472,7 @@ function wesnoth.update_stats(original)
 							local filter = helper.get_child(inner_eff, "filter")
 							if not filter or not filter.gender or filter.gender == remade.gender then
 								for anim in helper.child_range(inner_eff, "attack_anim") do
-									local filter = helper.get_child(anim, "filter_attack")
+									filter = helper.get_child(anim, "filter_attack")
 									if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
 										right_anim = anim
 									end
@@ -492,6 +491,7 @@ function wesnoth.update_stats(original)
 					table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
 				else
 					-- This should not happen
+					wesnoth.log("warning", "Couldn't find right animation for unit " .. tostring(remade.id))
 				end
 			end
 			strongest_attack.name = eff.name
