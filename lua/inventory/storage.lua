@@ -412,7 +412,25 @@ local function onshow(unit, item_sort)
 	-- Show all stored items of the selected item_sort.
 	if not is_too_progressed() or item_sort == "potion" or item_sort == "limited" then
 		local types = loti.item.storage.list_items(item_sort)
-		for item_number, count in pairs(types) do
+
+		-- Sort the items by name by creating { item_name = item_number, ... } table,
+		-- then creating an array of { item_name1, item_name2, ... },
+		-- then sorting this array alphabetically,
+		-- and then obtaining the correct order of item numbers from the table.
+		local item_name_to_number = {}
+		local item_names = {}
+		for item_number in pairs(types) do
+			local name = loti.item.type[item_number].name
+			item_name_to_number[name] = item_number
+			table.insert(item_names, name)
+		end
+
+		table.sort(item_names)
+
+		for _, item_name in ipairs(item_names) do
+			local item_number = item_name_to_number[item_name]
+			local count = types[item_number]
+
 			listbox_row = listbox_row + 1
 
 			local text = get_item_description(loti.item.type[item_number], count, set_items)
