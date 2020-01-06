@@ -500,6 +500,17 @@ function wesnoth.wml_actions.loti_item_storage_add(cfg)
 	loti.item.storage.add(cfg.number, cfg.sort)
 end
 
+-- Tag [loti_item_on_unit_add] does the same as loti.item.on_unit.add().
+-- Parameters: cfg.number, cfg.sort AND filtering parameters of wesnoth.get_unit().
+function wesnoth.wml_actions.loti_item_on_unit_add(cfg)
+	local units = wesnoth.get_units(cfg)
+	if #units < 1 then
+		helper.wml_error("[loti_item_on_unit_add]: no units found, may need find_in= parameter.")
+	end
+
+	loti.item.on_unit.add(units[1], cfg.number, cfg.sort)
+end
+
 -------------------------------------------------------------------------------
 -- Generate item desciptions
 -------------------------------------------------------------------------------
