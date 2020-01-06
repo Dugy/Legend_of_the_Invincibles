@@ -222,8 +222,14 @@ local lua_based_implementation = {
 		find_storage_for(unit).advancements = {}
 	end,
 
-	remove_all_items = function(unit)
-		find_storage_for(unit).items = {}
+	remove_all_items = function(unit, filter_func)
+		local storage = find_storage_for(unit)
+
+		for idx = #storage.items, 1, -1 do
+			if not filter_func or filter_func(storage.items[idx]) then
+				table.remove(storage.items, idx)
+			end
+		end
 	end,
 
 	add_item = function(unit, item_number, item_sort)

@@ -356,6 +356,33 @@ for unit_form, get_unit in pairs({
 		prepare_unit()
 		loti.unit.remove_item(unit, 535, "gauntlets")
 		assert_item_was_deleted(4)
+
+		-- Try remove_all_items(unit) without callback
+		prepare_unit()
+		loti.unit.remove_all_items(unit)
+		test_iterator(unit, "items", {})
+
+		-- Try remove_all_items(unit) with callback: remove only cloaks and spears.
+		prepare_unit()
+		loti.unit.remove_all_items(unit, function(result)
+			return result.sort == "cloak" or result.sort == "spear"
+		end)
+		test_iterator(unit, "items", {
+			original_array[1],
+			original_array[3],
+			original_array[4]
+		})
+
+		-- Try remove_all_items(unit) with callback: remove only swords and items with #535.
+		prepare_unit()
+		loti.unit.remove_all_items(unit, function(result)
+			return result.sort == "sword" or result.number == 535
+		end)
+
+		test_iterator(unit, "items", {
+			original_array[2],
+			original_array[5]
+		})
 	end
 
 	tests['list effects' .. subtest_name] = function()
