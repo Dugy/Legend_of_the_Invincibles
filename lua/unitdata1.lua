@@ -139,7 +139,19 @@ local lua_based_implementation = {
 		)
 	end,
 
-	advancements = function(unit) return nextval(find_storage_for(unit).advancements) end,
+	advancements = function(unit)
+		local proxy = wesnoth.get_unit(unit.id or unit) -- FIXME: ugly. What about items on recall list?
+		if not proxy then
+			return function() end
+		end
+
+		return nextval(
+			find_storage_for(unit).advancements,
+			function(elem)
+				return loti.util.get_type_advancement(proxy.type, elem.id)
+			end
+		)
+	end,
 
 	-- Iterator over ALL objects of this item, including items, advancements, etc.
 	effect_containers = function(unit)
@@ -197,13 +209,7 @@ local lua_based_implementation = {
 	end,
 
 	add_advancement = function(unit, advancement_id)
-		local proxy = wesnoth.get_unit(unit.id or unit) -- FIXME: ugly. What about items on recall list?
-		if not proxy then
-			return
-		end
-
-		local adv = loti.util.get_type_advancement(proxy.type, advancement_id)
-		table.insert(find_storage_for(unit).advancements, adv)
+		table.insert(find_storage_for(unit).advancements, { id = advancement_id })
 	end,
 
 	-- Remove advancement from unit.
@@ -233,17 +239,13 @@ local lua_based_implementation = {
 	end,
 
 	add_item = function(unit, item_number, item_sort)
-		local storage = find_storage_for(unit)
-
-		local item = wesnoth.deepcopy(loti.item.type[item_number])
-		if item_sort then
-			item.sort = item_sort
-		end
+		table.insert(find_storage_for(unit).items, {
+			number = item_number,
+			sort = item_sort or loti.item.type[item_number].sort
+		})
 
 		-- TODO: call on_equip(), like in WML implementation.
 		-- FIXME: calling on_equip() should be an external function that we'll call here!
-
-		table.insert(storage.items, item)
 	end,
 
 	remove_item = function(unit, item_number, item_sort)
