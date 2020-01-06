@@ -35,6 +35,12 @@ read_globals = {
 				other_fields = true
 			},
 
+			-- wesnoth.persistent_tags[something] is supposed to be modified
+			persistent_tags = {
+				read_only = false,
+				other_fields = true
+			},
+
 			-- Various utility/debug functions
 			deepcopy = { read_only = false },
 			dbms = { read_only = false },

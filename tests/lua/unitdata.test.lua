@@ -37,7 +37,7 @@ local function test_iterator(unit, api_function_name, expected_array)
 		table.insert(obtained_array, elem)
 	end
 
-	if api_function_name == "effects" then
+	if api_function_name == "effects" or api_function_name == "effect_containers" then
 		-- API of effects() doesn't guarantee the order of results,
 		-- and this order is different in WML and Lua implementations (which is OK).
 		-- Therefore the testsuite shouldn't check the order of effects(), only their presence.
@@ -636,6 +636,88 @@ for unit_form, get_unit in pairs({
 				assert(bonus.cold == -5)
 				assert(bonus.fire == -5)
 			end,
+		})
+	end
+
+	tests['list effect_containers' .. subtest_name] = function()
+		local unit = get_unit()
+
+		-- Empty (newly created) unit doesn't have any modifications.
+		-- (assuming random_traits="no" when creating the unit).
+		test_iterator(unit, "effect_containers", {})
+
+		unit = add_trait(unit, {
+			name = "strong",
+			{ "effect", {
+				apply_to = "attack",
+				increase_damage = 1,
+				range = "melee"
+			} },
+			{ "effect", {
+				apply_to = "hitpoints",
+				increase_total = 1
+			} }
+		})
+
+		loti.unit.add_advancement(unit, "sword1") -- "Better with the sword" advancement
+		loti.unit.add_item(unit, 100) -- Cunctator's sword
+		loti.unit.add_item(unit, 209) -- Cunctator's Helmet
+		loti.unit.add_item(unit, 249) -- Redshirt Armour
+		loti.unit.add_advancement(unit, "dodge") -- "Harder to hit" advancement
+		loti.unit.add_item(unit, 327) -- Eidolon's Coat
+		loti.unit.add_item(unit, 535, "armour")
+		loti.unit.add_item(unit, 535, "gauntlets")
+		loti.unit.add_item(unit, 562, "spear")
+
+		-- Now check values returned by loti.unit.effect_containers(unit) here.
+		-- NOTE: test_iterator() sorts these containers alphabetically.
+		test_iterator(unit, "effect_containers", {
+			function(obj)
+				assert(obj.id == "dodge")
+			end,
+
+			function(obj)
+				assert(obj.id == "sword1")
+			end,
+
+			function(obj)
+				assert(obj.number == 562)
+				assert(obj.sort == "spear")
+			end,
+
+			function(obj)
+				assert(obj.number == 535)
+				assert(obj.sort == "armour")
+			end,
+
+			function(obj)
+				assert(obj.number == 535)
+				assert(obj.sort == "gauntlets")
+			end,
+
+			function(obj)
+				assert(obj.number == 249)
+				assert(obj.sort == "armour")
+			end,
+
+			function(obj)
+				assert(obj.number == 209)
+				assert(obj.sort == "helm")
+			end,
+
+			function(obj)
+				assert(obj.number == 100)
+				assert(obj.sort == "sword")
+			end,
+
+			function(obj)
+				assert(obj.number == 327)
+				assert(obj.sort == "cloak")
+			end,
+
+			function(obj)
+				assert(obj.name == "strong")
+			end
 		})
 	end
 end

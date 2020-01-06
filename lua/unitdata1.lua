@@ -22,17 +22,17 @@ G = global_storage -- FIXME: Temporarily (for debugging), remove once not needed
 -- Analyze "unit" parameter, which can be WML table or unit ID.
 -- Returns its storage (Lua table).
 local function find_storage_for(unit)
-	unit = unit.id or unit
+	local unit_id = unit.id or unit
 
-	if not global_storage[unit] then
-		global_storage[unit] = {
+	if not global_storage[unit_id] then
+		global_storage[unit_id] = {
 			items = {},
 			advancements = {},
 			other = {}
 		}
 	end
 
-	return global_storage[unit]
+	return global_storage[unit_id]
 end
 
 -- When saving the game: serialize "global_storage" variable into the proper WML.
@@ -94,16 +94,17 @@ end
 
 -- Returns stateful function that provides the next effect found in modifications_array.
 -- Parameter: modifications_array - Lua array of elements that can have "effects" key.
--- Note: unlike normal iterators, returned function does NOT return the index, only the value.
 local function next_effect(modifications_array)
 	local next_effect_internal = function() end
 	local next_modification = nextval(modifications_array)
 
+	local idx = 0
 	return function()
 		while true do
 			local _, effect = next_effect_internal()
 			if effect then
-				return effect -- Found another effect
+				idx = idx + 1
+				return idx, effect -- Found another effect
 			end
 
 			-- Try next modification
@@ -140,31 +141,51 @@ local lua_based_implementation = {
 
 	advancements = function(unit) return nextval(find_storage_for(unit).advancements) end,
 
-	effects = function(unit)
-		local storage = find_storage_for(unit)
+	-- Iterator over ALL objects of this item, including items, advancements, etc.
+	effect_containers = function(unit)
+		local next_item = lua_based_implementation.items(unit)
+		local next_advancement = lua_based_implementation.advancements(unit)
+		local next_other = nextval(find_storage_for(unit).other)
 
-		-- TODO: avoid recalculation of items_with_set_effects[].
-		-- This should be cached, and the cache should be invalidated in add_()/remove_() functions.
-		local items_with_set_effects = {}
-		for _, item in lua_based_implementation.items(unit) do
-			table.insert(items_with_set_effects, item)
+		local next_wml_object = function() end
+
+		local proxy = wesnoth.get_unit(unit.id or unit) -- FIXME: ugly (need normalize function like in WML implementation). What about items on recall list?
+		if proxy then
+			next_wml_object = nextval(helper.child_array(proxy.__cfg, "modifications"))
 		end
-
-		local item_effect = next_effect(items_with_set_effects)
-		local adv_effect = next_effect(storage.advancements)
-		local other_effect = next_effect(storage.other)
-
-		local unit_wml = wesnoth.get_unit(unit.id or unit) -- FIXME: ugly (need normalize function like in WML implementation). What about items on recall list?
-		local wml_based_effect = next_effect(helper.get_child(unit_wml.__cfg, "modifications"))
 
 		local idx = 0
 		return function()
-			local val = wml_based_effect() or adv_effect() or item_effect() or other_effect()
+			local _, val = next_wml_object()
+
+			if val then
+				if not val[1] then -- WML sometimes has empty [modification] tags, skip them
+					val = nil
+				else
+					-- Remove the WML wrapper over the tag:
+					-- must return { id=something }, not { [1] = { "trait", { id=something... } } }
+					val = val[1][2]
+				end
+			end
+
+			if not val then _, val = next_advancement() end
+			if not val then _, val = next_item() end
+			if not val then _, val = next_other() end
+
 			if val then
 				idx = idx + 1
 				return idx, val
 			end
 		end
+	end,
+
+	effects = function(unit)
+		local containers = {}
+		for _, object in lua_based_implementation.effect_containers(unit) do
+			table.insert(containers, object)
+		end
+
+		return next_effect(containers)
 	end,
 
 	list_unit_item_numbers = function(unit)
@@ -175,11 +196,13 @@ local lua_based_implementation = {
 		return retval
 	end,
 
-	-- TODO: effect_containers(unit) - ? (not documented in original API)
-
 	add_advancement = function(unit, advancement_id)
-		local unit_type = wesnoth.get_unit(unit.id or unit).type -- FIXME: ugly. What about items on recall list?
-		local adv = loti.util.get_type_advancement(unit_type, advancement_id)
+		local proxy = wesnoth.get_unit(unit.id or unit) -- FIXME: ugly. What about items on recall list?
+		if not proxy then
+			return
+		end
+
+		local adv = loti.util.get_type_advancement(proxy.type, advancement_id)
 		table.insert(find_storage_for(unit).advancements, adv)
 	end,
 
