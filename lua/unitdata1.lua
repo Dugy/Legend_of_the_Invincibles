@@ -11,10 +11,12 @@ local wml_based_implementation = wesnoth.require("./unitdata0.lua") -- Will be u
 --	unit_id1 = { items = { item1, item2, ... }, advancements = { adv1, adv2, ... }, other = { other1, other2, ... } },
 --	unit_id2 = ...
 -- }
--- Note that this array is internal to Lua and is NOT a valid WML table.
+-- Note that this array is internal to Lua and is NOT a valid WML table,
+-- but the elements "item1", 'adv1", "other1", etc. MUST BE valid WML tables.
 local global_storage = {}
 
 G = global_storage -- FIXME: Temporarily (for debugging), remove once not needed
+
 
 -- Helper function.
 -- Analyze "unit" parameter, which can be WML table or unit ID.
@@ -31,6 +33,37 @@ local function find_storage_for(unit)
 	end
 
 	return global_storage[unit]
+end
+
+-- When saving the game: serialize "global_storage" variable into the proper WML.
+function wesnoth.persistent_tags.unitdata.write(add)
+	if not next(global_storage) then
+		return -- Empty (nothing to save), e.g. when WML implementation of unitdata is used.
+	end
+
+	for unit_id, storage in pairs(global_storage) do
+		local serialized = { id = unit_id } -- Proper WML
+
+		for category, elements in pairs(storage) do
+			for _, element in ipairs(elements) do
+				table.insert(serialized, wml.tag[category](element))
+			end
+		end
+
+		add(serialized)
+	end
+end
+
+-- When loading a save: populate "global_storage" variable from contents of save file.
+function wesnoth.persistent_tags.unitdata.read(cfg)
+	local storage = find_storage_for(cfg.id)
+
+	for _, element in ipairs(cfg) do
+		local category = element[1]
+		local contents = element[2]
+
+		table.insert(storage[category], contents)
+	end
 end
 
 -- Utility function. Returns stateful version of next() for { number => value } array.
