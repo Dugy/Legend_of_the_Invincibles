@@ -37,6 +37,18 @@ local function test_iterator(unit, api_function_name, expected_array)
 		table.insert(obtained_array, elem)
 	end
 
+	if api_function_name == "effects" then
+		-- API of effects() doesn't guarantee the order of results,
+		-- and this order is different in WML and Lua implementations (which is OK).
+		-- Therefore the testsuite shouldn't check the order of effects(), only their presence.
+		table.sort(obtained_array, function(a, b)
+			if(type(a) == 'table') then a = wml.tostring(a) end
+			if(type(b) == 'table') then b = wml.tostring(b) end
+
+			return a < b
+		end)
+	end
+
 	assert(#expected_array == #obtained_array,
 		where .. " returned " .. #obtained_array .. " elements (expected: " .. #expected_array .. ")")
 
@@ -427,20 +439,8 @@ for unit_form, get_unit in pairs({
 		end
 
 		-- Now check values returned by loti.unit.effects(unit) here.
+		-- NOTE: test_iterator() sorts the effects (alphabetically by their wml.tostring(effect)).
 		test_iterator(unit, "effects", {
-			-- Trait "strong": +1 to melee damage.
-			function(effect)
-				assert(effect.apply_to == "attack")
-				assert(effect.increase_damage == 1)
-				assert(effect.range == "melee")
-			end,
-
-			-- Trait "strong": +1 to hitpoints.
-			function(effect)
-				assert(effect.apply_to == "hitpoints")
-				assert(effect.increase_total == 1)
-			end,
-
 			-- Advancement "Better with the sword": +1 damage to "sword" attack.
 			function(effect)
 				assert(effect.apply_to == "attack")
@@ -448,93 +448,11 @@ for unit_form, get_unit in pairs({
 				assert(effect.increase_damage == 1)
 			end,
 
-			-- Level-up (receiving the advancement "Better with the sword")
-			-- caused unit to completely heal and get +3 max hp.
+			-- Trait "strong": +1 to melee damage.
 			function(effect)
-				assert(effect.apply_to == "hitpoints")
-				assert(effect.increase_total == 3)
-				assert(effect.heal_full)
-			end,
-
-			-- Level-up (receiving the advancement "Better with the sword")
-			-- caused Efraim (Demigod unit) to need 35 more xp for next advancement,
-			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
-			function(effect)
-				assert(effect.apply_to == "max_experience")
-				assert(effect.increase == 35)
-			end,
-
-			-- Level-up (receiving the advancement "Better with the sword")
-			-- caused Efraim (Demigod unit) to need 9% more xp for next advancement,
-			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
-			function(effect)
-				assert(effect.apply_to == "max_experience")
-				assert(effect.increase == '9%')
-			end,
-
-			function(effect)
-				-- Cunctator's sword (item #100):
-				-- set bonus from requires Cunctator's Helmet (item #209) also being present.
-				-- Plus 5% resistance to arcane, cold and fire.
-				assert(effect.apply_to == "resistance")
-				assert(effect.number_required == 209)
-				assert(not effect.replace)
-
-				local bonus = helper.child_array(effect, "resistance")[1]
-				assert(bonus.arcane == -5)
-				assert(bonus.cold == -5)
-				assert(bonus.fire == -5)
-			end,
-
-			function(effect)
-				-- Cunctator's Helmet (item #209).
-				-- Despair 15 (affects adjacent enemies)
-				assert_adds_ability(effect, function(tag, ability)
-					assert(tag == "leadership")
-					assert(ability.id == "despair")
-					assert(ability.value == -15)
-					assert(ability.affect_enemies)
-					assert(not ability.affect_allies)
-					assert(not ability.affect_self)
-					assert(not ability.cumulative)
-
-					local filter = helper.child_array(ability, "affect_adjacent")[1]
-					assert(filter.adjacent == "n,ne,se,s,sw,nw")
-				end)
-			end,
-
-			function(effect)
-				-- Cunctator's Helmet (item #209):
-				-- set bonus from requires Cunctator's sword (item #100) also being present.
-				-- Resistance +10 (up to a maximum of 80) when defending
-				assert_adds_ability(effect, function(tag, ability)
-					assert(tag == "resistance")
-					assert(ability.id == "careful")
-					assert(ability.add == 10)
-					assert(ability.max_value == 80)
-					assert(ability.affect_self)
-					assert(ability.active_on == "defense")
-
-					local filter = helper.child_array(ability, "filter_base_value")[1]
-					assert(filter.less_than == 80)
-				end)
-			end,
-
-			function(effect)
-				-- Redshirt Armour (item #249).
-				-- Movement +1
-				assert(effect.apply_to == "movement")
-				assert(effect.increase == 1)
-			end,
-
-			function(effect)
-				-- Redshirt Armour (item #249).
-				-- absorbs (1)
-				assert_adds_ability(effect, function(tag, ability)
-					assert(tag == "dummy")
-					assert(ability.id == "absorb")
-					assert(ability.value == 1)
-				end)
+				assert(effect.apply_to == "attack")
+				assert(effect.increase_damage == 1)
+				assert(effect.range == "melee")
 			end,
 
 			-- Advancement "Harder to hit": +1-2 defense on different terrains.
@@ -560,12 +478,50 @@ for unit_form, get_unit in pairs({
 				assert(bonus.sand == -2)
 			end,
 
+			-- Level-up (receiving the advancement "Better with the sword")
+			-- caused unit to completely heal and get +3 max hp.
+			function(effect)
+				assert(effect.apply_to == "hitpoints")
+				assert(effect.increase_total == 3)
+				assert(effect.heal_full)
+			end,
+
 			-- Level-up (receiving the advancement "Harder to hit")
 			-- caused unit to completely heal and get +3 max hp.
 			function(effect)
 				assert(effect.apply_to == "hitpoints")
 				assert(effect.increase_total == 3)
 				assert(effect.heal_full)
+			end,
+
+			-- Trait "strong": +1 to hitpoints.
+			function(effect)
+				assert(effect.apply_to == "hitpoints")
+				assert(effect.increase_total == 1)
+			end,
+
+			-- Level-up (receiving the advancement "Better with the sword")
+			-- caused Efraim (Demigod unit) to need 9% more xp for next advancement,
+			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
+			function(effect)
+				assert(effect.apply_to == "max_experience")
+				assert(effect.increase == '9%')
+			end,
+
+			-- Level-up (receiving the advancement "Harder to hit")
+			-- caused Efraim (Demigod unit) to need 9% more xp for next advancement,
+			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
+			function(effect)
+				assert(effect.apply_to == "max_experience")
+				assert(effect.increase == '9%')
+			end,
+
+			-- Level-up (receiving the advancement "Better with the sword")
+			-- caused Efraim (Demigod unit) to need 35 more xp for next advancement,
+			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
+			function(effect)
+				assert(effect.apply_to == "max_experience")
+				assert(effect.increase == 35)
 			end,
 
 			-- Level-up (receiving the advancement "Harder to hit")
@@ -576,12 +532,38 @@ for unit_form, get_unit in pairs({
 				assert(effect.increase == 35)
 			end,
 
-			-- Level-up (receiving the advancement "Harder to hit")
-			-- caused Efraim (Demigod unit) to need 9% more xp for next advancement,
-			-- as defined by IMPROVED_AMLA_DEFAULT_BONUSES.
 			function(effect)
-				assert(effect.apply_to == "max_experience")
-				assert(effect.increase == '9%')
+				-- Redshirt Armour (item #249).
+				-- Movement +1
+				assert(effect.apply_to == "movement")
+				assert(effect.increase == 1)
+			end,
+
+			function(effect)
+				-- Cunctator's Helmet (item #209):
+				-- set bonus from requires Cunctator's sword (item #100) also being present.
+				-- Resistance +10 (up to a maximum of 80) when defending
+				assert_adds_ability(effect, function(tag, ability)
+					assert(tag == "resistance")
+					assert(ability.id == "careful")
+					assert(ability.add == 10)
+					assert(ability.max_value == 80)
+					assert(ability.affect_self)
+					assert(ability.active_on == "defense")
+
+					local filter = helper.child_array(ability, "filter_base_value")[1]
+					assert(filter.less_than == 80)
+				end)
+			end,
+
+			function(effect)
+				-- Redshirt Armour (item #249).
+				-- absorbs (1)
+				assert_adds_ability(effect, function(tag, ability)
+					assert(tag == "dummy")
+					assert(ability.id == "absorb")
+					assert(ability.value == 1)
+				end)
 			end,
 
 			function(effect)
@@ -611,6 +593,23 @@ for unit_form, get_unit in pairs({
 			end,
 
 			function(effect)
+				-- Cunctator's Helmet (item #209).
+				-- Despair 15 (affects adjacent enemies)
+				assert_adds_ability(effect, function(tag, ability)
+					assert(tag == "leadership")
+					assert(ability.id == "despair")
+					assert(ability.value == -15)
+					assert(ability.affect_enemies)
+					assert(not ability.affect_allies)
+					assert(not ability.affect_self)
+					assert(not ability.cumulative)
+
+					local filter = helper.child_array(ability, "affect_adjacent")[1]
+					assert(filter.adjacent == "n,ne,se,s,sw,nw")
+				end)
+			end,
+
+			function(effect)
 				-- Unimpalability (item #562).
 				-- frail tide (15): -15% physical resistance to adjacent enemies
 				assert_adds_frail_tide_15(effect)
@@ -623,12 +622,29 @@ for unit_form, get_unit in pairs({
 				-- frail tide (15): -15% physical resistance to adjacent enemies
 				assert_adds_frail_tide_15(effect)
 			end,
+
+			function(effect)
+				-- Cunctator's sword (item #100):
+				-- set bonus from requires Cunctator's Helmet (item #209) also being present.
+				-- Plus 5% resistance to arcane, cold and fire.
+				assert(effect.apply_to == "resistance")
+				assert(effect.number_required == 209)
+				assert(not effect.replace)
+
+				local bonus = helper.child_array(effect, "resistance")[1]
+				assert(bonus.arcane == -5)
+				assert(bonus.cold == -5)
+				assert(bonus.fire == -5)
+			end,
 		})
 	end
 end
 
 -- To simplify debugging, uncomment the following line to run only ONE test named below:
--- tests = { tests['list effects (on WML table)'] }
+--tests = { tests['add/list items (on WML table)'] }
+--tests = { tests['add/list advancements (on WML table)'],  tests['add/list advancements (on unit ID)'] }
+--tests = { tests['list effects (on unit ID)'] }
+--tests = { tests['list effects (on WML table)'] }
 
 -- Provide the list of tests, will be used by loti.testsuite().
 return tests
