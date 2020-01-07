@@ -350,7 +350,8 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 	local record = {
 		type = item_number,
 		x = x,
-		y = y
+		y = y,
+		turn = wesnoth.get_variable("turn_number")
 	}
 	if crafted_sort then
 		record.sort = crafted_sort
