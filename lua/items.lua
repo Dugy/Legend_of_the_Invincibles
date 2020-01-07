@@ -210,7 +210,12 @@ setmetatable(loti.item.type, {
 			"loti.item.type[" .. tostring(item_number) .. "]: not found in item_list."
 		)
 	end,
-	__newindex = function() error("loti.item.type[] array is read-only.") end
+	__newindex = function() error("loti.item.type[] array is read-only.") end,
+
+	-- Support "for item_number, item in pairs(loti.item.type)"
+	__pairs = function(self)
+		return next, self._load(), nil
+	end
 })
 
 -------------------------------------------------------------------------------
@@ -307,51 +312,36 @@ loti.item.on_the_ground.generate = function(group, item_types)
 	if item_types then
 		sort_selected = randomly_pick_one(item_types)
 	end
+
 	if type(sort_selected) == "table" then
 		return loti.item.on_the_ground.generate(group, sort_selected)
-	else
-		if not item_generation_lists[group] then
-			item_generation_lists[group] = {}
-		end
-		if type(sort_selected) == "string" then
-			if not item_generation_lists[group][sort_selected] then
-				local made = {}
-				local all_known_types = helper.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
+	end
 
-				for _, item in ipairs(all_known_types) do
-					if item[2][group] and item[2].sort == sort_selected then
-						for i = 1,item[2][group] do
-							table.insert(made, item[2].number)
-						end
-					end
-				end
-				item_generation_lists[group][sort_selected] = made
-				return randomly_pick_one(made)
-			else
-				return randomly_pick_one(item_generation_lists[group][sort_selected])
-			end
-		else
-			-- It's nil
-			if #item_generation_lists[group] == 0 then
-				local all_known_types = helper.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
-				local made = item_generation_lists[group]
+	if not sort_selected then
+		sort_selected = 'ANY'
+	end
 
-				for _, item in ipairs(all_known_types) do
-					if item[2][group] then
-						for i = 1,item[2][group] do
-							table.insert(made, item[2].number)
-						end
-					end
+	if not item_generation_lists[group] then
+		-- This list is not yet calculated. Calculate it now.
+		item_generation_lists[group] = { ANY = {} }
+
+		for _, item in pairs(loti.item.type) do
+			if item[group] then
+				if not item_generation_lists[group][item.sort] then
+					item_generation_lists[group][item.sort] = {}
 				end
-				if #item_generation_lists[group] > 0 then
-					return randomly_pick_one(made)
-				end
-			else
-				return randomly_pick_one(item_generation_lists[group])
+
+				table.insert(item_generation_lists[group][item.sort], item.number)
+				table.insert(item_generation_lists[group]['ANY'], item.number)
 			end
 		end
 	end
-	return 0 --Zero item means failure
+
+	if #item_generation_lists[group][sort_selected] == 0 then
+		return 0 --Zero item means failure
+	end
+
+	return randomly_pick_one(item_generation_lists[group][sort_selected])
 end
 
 -- Place item on the ground at coordinates (x,y).
