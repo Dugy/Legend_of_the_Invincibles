@@ -332,16 +332,18 @@ loti.item.on_the_ground.generate = function(group, item_types)
 				end
 
 				table.insert(item_generation_lists[group][item.sort], item.number)
-				table.insert(item_generation_lists[group]['ANY'], item.number)
+				table.insert(item_generation_lists[group].ANY, item.number)
 			end
 		end
 	end
 
-	if #item_generation_lists[group][sort_selected] == 0 then
-		return 0 --Zero item means failure
+	local candidates = item_generation_lists[group][sort_selected]
+	if not candidates then
+		wesnoth.log("warning", "Couldn't find possible drops of sort=" .. tostring(sort_selected) .. " in drop group=" .. tostring(group))
+		candidates = item_generation_lists[group].ANY
 	end
 
-	return randomly_pick_one(item_generation_lists[group][sort_selected])
+	return randomly_pick_one(candidates)
 end
 
 -- Place item on the ground at coordinates (x,y).
