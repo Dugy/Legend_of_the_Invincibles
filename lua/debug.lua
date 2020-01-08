@@ -1,3 +1,5 @@
+loti.debug = {}
+
 --This was pasted from Wesnoth lua pack and is crazy useful
 
 function wesnoth.dbms(lua_var, clear, name, onscreen, wrap, only_return)
@@ -198,4 +200,30 @@ loti.testsuite = function()
 	end
 
 	print("Test results: passed: " .. passed_count .. ", failed: " .. failed_count .. ".")
+end
+
+-- Double-check the chances of certain items being dropped.
+-- See loti.item.on_the_ground.generate() for description of parameters.
+--
+-- Sample usage:
+-- loti.debug.check_drop_distribution("gem")
+-- loti.debug.check_drop_distribution("drop", "sword")
+function loti.debug.check_drop_distribution(group, item_types, repetitions)
+	local stats = {}
+
+	repetitions = repetitions or 1000
+	group = group or "gem"
+
+	for _ = 1,repetitions do
+		local gem = loti.item.type[loti.item.on_the_ground.generate(group, item_types)].name
+		if not stats[gem] then
+			stats[gem] = 0
+		end
+
+		stats[gem] = stats[gem] + 1
+	end
+
+	for gem, count in pairs(stats) do
+		print(string.format('%s: %.2f %%', gem, 100 * count / repetitions))
+	end
 end
