@@ -209,21 +209,26 @@ end
 -- loti.debug.check_drop_distribution("gem")
 -- loti.debug.check_drop_distribution("drop", "sword")
 function loti.debug.check_drop_distribution(group, item_types, repetitions)
-	local stats = {}
-
 	repetitions = repetitions or 1000
 	group = group or "gem"
 
+	local stats = {} -- { item_name1 = number_of_times_dropped, ... }
+	local sorted_names = {} -- { item_name1, item_name2, ... }
+
 	for _ = 1,repetitions do
-		local gem = loti.item.type[loti.item.on_the_ground.generate(group, item_types)].name
-		if not stats[gem] then
-			stats[gem] = 0
+		local name = loti.item.type[loti.item.on_the_ground.generate(group, item_types)].name
+		if not stats[name] then
+			stats[name] = 0
+			table.insert(sorted_names, name)
 		end
 
-		stats[gem] = stats[gem] + 1
+		stats[name] = stats[name] + 1
 	end
 
-	for gem, count in pairs(stats) do
-		print(string.format('%s: %.2f %%', gem, 100 * count / repetitions))
+	-- Sort items by frequency of them being dropped
+	table.sort(sorted_names, function(a, b) return stats[b] < stats[a] end)
+
+	for _, name in ipairs(sorted_names) do
+		print(string.format('%s: %.2f %%', name, 100 * stats[name] / repetitions))
 	end
 end
