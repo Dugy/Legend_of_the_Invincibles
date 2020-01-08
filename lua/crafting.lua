@@ -29,15 +29,7 @@ loti.gem.set_counts = function(gem_quantities)
 end
 
 loti.gem.random = function()
-	local distributions = helper.get_variable_array("gem_probabilities")
-	local index = 1
-	local chosen = "higher"
-	while chosen == "higher" do
-		chosen = helper.rand(distributions[index].distribution)
-		index = index + 1
-	end
-	chosen = tonumber(chosen) - 520
-	return chosen
+	return loti.item.on_the_ground.generate("gem") - 520
 end
 
 loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
