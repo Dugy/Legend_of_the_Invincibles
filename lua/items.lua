@@ -308,10 +308,6 @@ end
 -- Randomly generates an item of the given group (each item has to be explicitly defined as part of some group) of one of the item types in the given table
 -- Nil as a table does not discriminate by types, a subtable in the table triggers another selection recursively (if picked)
 loti.item.on_the_ground.generate = function(group, item_types)
-	if group == "gem" then
-		return loti.gem.random() + 520 -- Gems are numbered 521, 522, etc., starting with obsidian
-	end
-
 	local sort_selected = nil
 	if item_types then
 		sort_selected = randomly_pick_one(item_types)
@@ -335,8 +331,12 @@ loti.item.on_the_ground.generate = function(group, item_types)
 					item_generation_lists[group][item.sort] = {}
 				end
 
-				table.insert(item_generation_lists[group][item.sort], item.number)
-				table.insert(item_generation_lists[group].ANY, item.number)
+				local weight = item[group]
+
+				for _ = 1,weight do
+					table.insert(item_generation_lists[group][item.sort], item.number)
+					table.insert(item_generation_lists[group].ANY, item.number)
+				end
 			end
 		end
 	end
