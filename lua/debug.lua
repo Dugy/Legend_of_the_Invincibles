@@ -207,7 +207,7 @@ end
 --
 -- Sample usage:
 -- loti.debug.check_drop_distribution("gem")
--- loti.debug.check_drop_distribution("drop", "sword")
+-- loti.debug.check_drop_distribution("drop", {"sword", "spear"})
 function loti.debug.check_drop_distribution(group, item_types, repetitions)
 	repetitions = repetitions or 1000
 	group = group or "gem"
