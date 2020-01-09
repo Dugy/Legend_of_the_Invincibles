@@ -308,22 +308,15 @@ end
 -- Randomly generates an item of the given group (each item has to be explicitly defined as part of some group) of one of the item types in the given table
 -- Nil as a table does not discriminate by types, a subtable in the table triggers another selection recursively (if picked)
 loti.item.on_the_ground.generate = function(group, item_types)
-	local sort_selected = nil
-	if item_types then
-		sort_selected = randomly_pick_one(item_types)
+	while type(item_types) == "table" do
+		item_types = randomly_pick_one(item_types)
 	end
 
-	if type(sort_selected) == "table" then
-		return loti.item.on_the_ground.generate(group, sort_selected)
-	end
-
-	if not sort_selected then
-		sort_selected = 'ANY'
-	end
+	local sort_selected = item_types or '_any'
 
 	if not item_generation_lists[group] then
 		-- This list is not yet calculated. Calculate it now.
-		item_generation_lists[group] = { ANY = {} }
+		item_generation_lists[group] = { _any = {} }
 
 		for _, item in pairs(loti.item.type) do
 			if item[group] then
@@ -335,7 +328,7 @@ loti.item.on_the_ground.generate = function(group, item_types)
 
 				for _ = 1,weight do
 					table.insert(item_generation_lists[group][item.sort], item.number)
-					table.insert(item_generation_lists[group].ANY, item.number)
+					table.insert(item_generation_lists[group]._any, item.number)
 				end
 			end
 		end
@@ -344,7 +337,7 @@ loti.item.on_the_ground.generate = function(group, item_types)
 	local candidates = item_generation_lists[group][sort_selected]
 	if not candidates then
 		wesnoth.log("warning", "Couldn't find possible drops of sort=" .. tostring(sort_selected) .. " in drop group=" .. tostring(group))
-		candidates = item_generation_lists[group].ANY
+		candidates = item_generation_lists[group]._any
 	end
 
 	return randomly_pick_one(candidates)
