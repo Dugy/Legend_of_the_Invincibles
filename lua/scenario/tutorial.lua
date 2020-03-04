@@ -101,7 +101,7 @@ local function tutorial_craft()
 			wesnoth.set_variable("tutorial.proceed", 1)
 
 			-- Drop "Sword of Krux" to the ground, then give new sword to Efraim.
-			-- Note: Efraim doesn't really have "Sword of Krux" in his inventory, so we don't remove it.
+			loti.item.on_unit.remove(unit, old_sword.number, old_sword.sort)
 			loti.item.on_the_ground.add(old_sword.number, unit.x, unit.y, old_sword.sort)
 			loti.item.on_unit.add(unit, item.number, item.sort)
 
