@@ -153,6 +153,11 @@ local function inventory_step1()
 			button.onclick = function()
 				Efraim_says(_"No, no, I do not want her to see so soon how I missed my exercise recently.")
 			end
+		elseif button.id == "ground_items" then
+			button.onsubmit = nil
+			button.onclick = function()
+				Delly_says(_"No Kubrick stares, please!")
+			end
 		end
 	end
 
@@ -190,6 +195,11 @@ local function inventory_step4()
 			button.onsubmit = nil
 			button.onclick = function()
 				Delly_says(_"No, those muscles of yours will not impress me.")
+			end
+		elseif button.id == "ground_items" then
+			button.onsubmit = nil
+			button.onclick = function()
+				Delly_says(_"Do not pretend you are looking at the ground. I know where you are looking!")
 			end
 		end
 	end
@@ -252,6 +262,11 @@ local function inventory_step6()
 			button.onclick = function()
 				Delly_says(_"Definitely no.")
 			end
+		elseif button.id == "ground_items" then
+			button.onsubmit = nil
+			button.onclick = function()
+				Delly_says(_"No, I will not look down to give you an opportunity to play some prank on me.")
+			end
 		end
 	end
 
@@ -304,6 +319,11 @@ local function inventory_step7()
 			button.onsubmit = nil
 			button.onclick = function()
 				Efraim_says(_"I would prefer if she kept the sword. I keep my promises, after all.")
+			end
+		elseif button.id == "ground_items" then
+			button.onsubmit = nil
+			button.onclick = function()
+				Delly_says(_"I know this childish prank. Look down, thanks for bowing to me.")
 			end
 		end
 	end
