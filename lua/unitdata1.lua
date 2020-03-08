@@ -140,7 +140,7 @@ local lua_based_implementation = {
 	end,
 
 	advancements = function(unit)
-		local proxy = wesnoth.get_unit(unit.id or unit) -- FIXME: ugly. What about items on recall list?
+		local proxy = wesnoth.get_unit(unit.id or unit) or wesnoth.get_recall_units({ id = unit.id or unit })[1]
 		if not proxy then
 			return function() end
 		end
@@ -161,7 +161,7 @@ local lua_based_implementation = {
 
 		local next_wml_object = function() end
 
-		local proxy = wesnoth.get_unit(unit.id or unit) -- FIXME: ugly (need normalize function like in WML implementation). What about items on recall list?
+		local proxy = wesnoth.get_unit(unit.id or unit) or wesnoth.get_recall_units({ id = unit.id or unit })[1]
 		if proxy then
 			next_wml_object = nextval(helper.child_array(proxy.__cfg, "modifications"))
 		end
