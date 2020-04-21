@@ -1,4 +1,4 @@
-local helper = wesnoth.require "lua/helper.lua"
+loti.debug = {}
 
 --This was pasted from Wesnoth lua pack and is crazy useful
 
@@ -48,10 +48,10 @@ function wesnoth.dbms(lua_var, clear, name, onscreen, wrap, only_return)
 			local current_key_type = type(current_key)
 			local current_key_to_string = tostring(current_key)
 			local current_type = type(current_value)
-			local function no_wml_table(expected, index, type)
-				if not index then index = current_key_to_string end
+			local function no_wml_table(expected, index2, type)
+				if not index2 then index2 = current_key_to_string end
 				if not type then type = current_type end
-				wml_table_error = string.format("value at %s[%s]: %s expected, got %s", indices, index, expected, type)
+				wml_table_error = string.format("value at %s[%s]: %s expected, got %s", indices, index2, expected, type)
 				is_wml_table = false
 			end
 
@@ -149,8 +149,8 @@ function wesnoth.dbms(lua_var, clear, name, onscreen, wrap, only_return)
 		if wrap then wesnoth.wml_actions.message({ speaker = "narrator", image = "wesnoth-icon.png", message = result })
 		else
 			local wlp_utils = wesnoth.require "~add-ons/Wesnoth_Lua_Pack/wlp_utils.lua"
-			local result = wlp_utils.message({ caption = "dbms", message = result })
-			if result == -2 then continue = false end
+			local ret = wlp_utils.message({ caption = "dbms", message = result })
+			if ret == -2 then continue = false end
 		end
 	end
 	if metatable and continue then
@@ -200,4 +200,35 @@ loti.testsuite = function()
 	end
 
 	print("Test results: passed: " .. passed_count .. ", failed: " .. failed_count .. ".")
+end
+
+-- Double-check the chances of certain items being dropped.
+-- See loti.item.on_the_ground.generate() for description of parameters.
+--
+-- Sample usage:
+-- loti.debug.check_drop_distribution("gem")
+-- loti.debug.check_drop_distribution("drop", {"sword", "spear"})
+function loti.debug.check_drop_distribution(group, item_types, repetitions)
+	repetitions = repetitions or 1000
+	group = group or "gem"
+
+	local stats = {} -- { item_name1 = number_of_times_dropped, ... }
+	local sorted_names = {} -- { item_name1, item_name2, ... }
+
+	for _ = 1,repetitions do
+		local name = loti.item.type[loti.item.on_the_ground.generate(group, item_types)].name
+		if not stats[name] then
+			stats[name] = 0
+			table.insert(sorted_names, name)
+		end
+
+		stats[name] = stats[name] + 1
+	end
+
+	-- Sort items by frequency of them being dropped
+	table.sort(sorted_names, function(a, b) return stats[b] < stats[a] end)
+
+	for _, name in ipairs(sorted_names) do
+		print(string.format('%s: %.2f %%', name, 100 * stats[name] / repetitions))
+	end
 end

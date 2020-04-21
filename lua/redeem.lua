@@ -298,7 +298,7 @@ known_ability_trees.soul_eater = {
 -- that have already been picked by this Unit.
 -- Parameter "ability_tree" can be "redeem" or "soul_eater".
 -- Returns the Lua table { firestorm = 1, lightning = 1, ... }.
-function loti_util_list_existing_upgrades(ability_tree, unit)
+local function loti_util_list_existing_upgrades(ability_tree, unit)
 	local known_upgrades = known_ability_trees[ability_tree]
 	local found = {}
 
@@ -315,7 +315,7 @@ end
 -- Display the menu that chooses between redeem upgrades available to certain Unit.
 -- Parameter "ability_tree" can be "redeem" or "soul_eater".
 -- Returns the selected upgrade (ID string), e.g. "particlestorm".
-function redeem_menu(ability_tree, unit)
+local function redeem_menu(ability_tree, unit)
 	local known_upgrades = known_ability_trees[ability_tree]
 	if not known_upgrades then
 		helper.wml_error("redeem_menu(): unknown ability tree. Try \"redeem\" or \"soul_eater\".");

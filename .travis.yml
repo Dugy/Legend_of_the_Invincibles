@@ -35,10 +35,6 @@ before_script:
                 # Download Wesnoth core (contains WML linter utility and its dependencies).
                 git clone -q --depth 1 https://github.com/wesnoth/wesnoth &&
 
-                # Apply pull request #3785 - required bugfix for wmllint.
-                # Remove this line after https://github.com/wesnoth/wesnoth/pull/3785 gets merged.
-                wget https://raw.githubusercontent.com/wesnoth/wesnoth/fbb79dc94f2af0840cff5ed44b419778fb4c6281/data/tools/wmllint -O wesnoth/data/tools/wmllint &&
-
                 # Save tools in the cache.
                 # Don't download the entire Wesnoth next time.
                 rm -rf wesnoth_tools && mv wesnoth/data/tools wesnoth_tools && touch wesnoth_tools/COMPLETE
@@ -51,12 +47,12 @@ script:
 # 1 - there are warnings (shouldn't cause Travis build to fail),
 # 2 - some serious errors (syntax errors, etc.),
 # 3 - luacheck failed for whatever reason (file not found, etc.).
-  - luacheck Legend_of_the_Invincibles/ --std lua53 --globals loti wesnoth wml || [[ $? -le 1 ]]
+  - luacheck Legend_of_the_Invincibles/ || [[ $? -le 1 ]]
 
 # wmllint (part of Wesnoth itself) is a static analyzer of WML files.
 # It is known for false positives (which can later be countered with special comments),
 # so for now its warnings shouldn't cause Travis build to fail.
-  - python wesnoth_tools/wmllint -v -d -K Legend_of_the_Invincibles
+  - python wesnoth_tools/wmllint -v -d -K Legend_of_the_Invincibles/{multiplayer,utils,units,scenarios*}
 
 after_success:
 # Upload the daily version of addon (only if we are in a Travis Cron Job or in Triggered Build, not on every commit).
@@ -69,9 +65,12 @@ after_success:
         ADDON=Legend_of_the_Invincibles_beta &&
         mv Legend_of_the_Invincibles $ADDON &&
         find $ADDON -type f | xargs sed -i "s@add-ons/Legend_of_the_Invincibles@add-ons/$ADDON@g" &&
+        for WESNOTH_VERSION in "1.15.x" "1.14.x"; do
         python wesnoth_tools/wesnoth_addon_manager
         -u $ADDON
+        --port $WESNOTH_VERSION
         --pbl $ADDON/beta.pbl
         --pbl-key passphrase $PBL_PASSPHRASE
         --pbl-key email $PBL_EMAIL
         --pbl-key version $(git describe HEAD --tags | tr '-' '.')
+        ; done

@@ -44,6 +44,8 @@ function wesnoth.update_stats(original)
 		return original -- Fake unit
 	end
 
+	local hitpoints_ratio = original.hitpoints / original.max_hitpoints
+
 	-- PART II: Cleanup
 	local vars = helper.get_child(original, "variables")
 	local visible_modifications = helper.get_child(original, "modifications") -- This is where modifićations actually affecting visuals belong
@@ -55,39 +57,6 @@ function wesnoth.update_stats(original)
 	loti.unit.remove_all_items(original, function(item)
 		return item.sort and (item.sort:match("gem") or item.sort:match("temporary"))
 	end)
-
-	-- Healing potions
-	local was_healing = false
-	if vars.healed or wesnoth.get_variable("healed") == 1 then -- TODO: equipping a healing potion should set a variable inside the unit instead
-		original.hitpoints = original.max_hitpoints
-		vars.healed = nil
-		was_healing = true
-		wesnoth.set_variable("healed", nil)
-	end
-	if vars.fully_healed or wesnoth.get_variable("fully_healed") == 1 then
-		original.hitpoints = original.max_hitpoints
-		original.moves = original.max_moves
-		original.attacks_left = original.max_attacks
-		for i = 1,#original do
-			if original[i][1] == "status" then
-				original[i][2] = {}
-				break
-			end
-		end
-
-		-- Remove all status conditions that are removed by full healing
-		-- (e.g. pseudo-items like "incinerated")
-		loti.unit.remove_all_items(original, function(item) return item.remove_on_heal end)
-
-		vars.fully_healed = nil
-		was_healing = true
-
-		wesnoth.set_variable("fully_healed", nil)
-	end
-	if was_healing then
-		table.insert(events_to_fire, "healed_by_potion")
-		vars.healed_this_turn = "yes" -- Used in ITEM_PICK macro
-	end
 
 	-- Check if geared and set the trait appropriately
 	local geared = #(loti.unit.list_unit_item_numbers(original)) > 0
@@ -283,7 +252,7 @@ function wesnoth.update_stats(original)
 			weapon_type = "knife"
 		elseif wn == "mace" or wn == "mace-spiked" or wn == "morning star" or wn == "club" or wn == "flail" or wn == "scourge" or wn == "mace_berserk" or wn == "hammer" or wn == "hammer-runic" then
 			weapon_type = "mace"
-		elseif wn == "spear" or wn == "javelin" or wn == "lance" or wn == "spike" or wn == "pike" or wn == "trident" or wn == "trident" or wn == "trident-blade" then
+		elseif wn == "spear" or wn == "javelin" or wn == "lance" or wn == "spike" or wn == "pike" or wn == "trident" or wn == "trident" or wn == "trident-blade" or wn == "pitchfork" then
 			weapon_type = "spear"
 		elseif wn == "war talon" or wn == "war blade" then
 			weapon_type = "exotic"
@@ -401,6 +370,11 @@ function wesnoth.update_stats(original)
 		end
 	end
 
+	remade.hitpoints = remade.max_hitpoints * hitpoints_ratio
+	if remade.hitpoints > remade.max_hitpoints then
+		remade.hitpoints = remade.max_hitpoints
+	end
+
 	-- PART VI: Apply additional effects
 
 	local visual_effects = {}
@@ -451,12 +425,11 @@ function wesnoth.update_stats(original)
 					if eff.force_original_attack then
 						if eff.force_original_attack == atk.name then
 							strongest_attack = atk
-							strongest_damage = 100000000000
 							break
 						end
 					end
 					if (not eff.range or eff.range == atk.range) and not atk.is_bonus_attack then
-						local damage = atk.damage * atk.number
+						local damage = math.floor(atk.damage) * math.floor(atk.number)
 						if eff.force_original_type and eff.force_original_type == atk.type then
 							damage = damage * 1000000
 						end
@@ -499,7 +472,7 @@ function wesnoth.update_stats(original)
 							local filter = helper.get_child(inner_eff, "filter")
 							if not filter or not filter.gender or filter.gender == remade.gender then
 								for anim in helper.child_range(inner_eff, "attack_anim") do
-									local filter = helper.get_child(anim, "filter_attack")
+									filter = helper.get_child(anim, "filter_attack")
 									if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
 										right_anim = anim
 									end
@@ -518,6 +491,7 @@ function wesnoth.update_stats(original)
 					table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
 				else
 					-- This should not happen
+					wesnoth.log("warning", "Couldn't find right animation for unit " .. tostring(remade.id))
 				end
 			end
 			strongest_attack.name = eff.name
@@ -686,7 +660,7 @@ function wesnoth.update_stats(original)
 		end
 	end
 	local sorts_owned = {}
-	for index, obj in loti.unit.items(remade) do
+	for _, obj in loti.unit.items(remade) do
 		if obj.sort then
 			sorts_owned[obj.sort] = true
 		end

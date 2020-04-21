@@ -12,3 +12,16 @@ The author of this campaign is Dugi (due to name uniqueness, the name is spelled
 Usage
 --------------
 The add-on is usually downloaded from the game's add-on server. If you wish to use the version from GitHub, look at https://wiki.wesnoth.org/EditingWesnoth to see how to use it.
+
+Code style
+--------------
+Lua code uses snake case and tab indentation. The breaking of long lines is not decided on.
+
+WML code uses the generally recommended code style, snake case for variable names, four spaces for indentation.
+
+Its usage of space indentation bears no advantage over tabs, but increases file size and is inconsistent with automatically generated and indented code by the game engine (that uses tabs). If you want to use tabs instead, you can have git filter the code for you, on your local repository only:
+
+* create a file `git/info/attributes` containing `*.cfg filter=tabspace`
+* use command `git config filter.tabspace.smudge 'unexpand --tabs=4 --first-only'`
+* use command `git config -filter.tabspace.clean 'expand --tabs=4 --initial'`
+* delete all files of type `.cfg` in the repository and use `git reset --hard`

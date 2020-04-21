@@ -92,6 +92,7 @@ loti.item.storage.add = function(item_number, crafted_sort)
 
 	table.sort(list, compare_entries)
 	wesnoth.set_variable("item_storage", list)
+	wesnoth.fire_event("added to storage")
 end
 
 -- Remove item_number from storage.
@@ -110,6 +111,7 @@ loti.item.storage.remove = function(item_number, crafted_sort)
 	end
 
 	wesnoth.set_variable("item_storage", list)
+	wesnoth.fire_event("removed from storage")
 end
 
 -- Get the list of all items in the storage.
@@ -208,7 +210,12 @@ setmetatable(loti.item.type, {
 			"loti.item.type[" .. tostring(item_number) .. "]: not found in item_list."
 		)
 	end,
-	__newindex = function() error("loti.item.type[] array is read-only.") end
+	__newindex = function() error("loti.item.type[] array is read-only.") end,
+
+	-- Support "for item_number, item in pairs(loti.item.type)"
+	__pairs = function(self)
+		return next, self._load(), nil
+	end
 })
 
 -------------------------------------------------------------------------------
@@ -236,6 +243,10 @@ loti.item.on_unit.list_regular = function(unit)
 		-- Items without name are likely fake/invisible/temporary items.
 		-- Also potions and books can't be unequipped, so we exclude them too.
 		local listed = item.name and item.sort ~= "limited" and not item.sort:find("potion")
+
+		if item.sort == "gem" or item.sort == "temporary" then
+			listed = false
+		end
 
 		if listed then
 			table.insert(items, item)
@@ -266,24 +277,6 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 	-- Store the fact "unit has this item".
 	loti.unit.add_item(unit.__cfg, item_number, crafted_sort)
 
-	-- Special handling for Foul Potion (#16): initialize starving counter.
-	if item_number == 16 then
-		unit.variables.starving = 0
-	end
-
-	-- Special handling for Book of Courage (#89): add "fearless" trait.
-	if item_number == 89 then
-		wesnoth.add_modification(unit, "trait", {
-			id = "fearless",
-			male_name = _"fearless",
-			female_name = _"female^fearless",
-			description = _"Fights normally during unfavorable times of day/night",
-			wml.tag.effect {
-				apply_to = "fearless"
-			}
-		})
-	end
-
 	-- Update stats (recalculate damages, etc.)
 	update_stats(unit)
 end
@@ -306,13 +299,58 @@ end
 -- loti.item.on_the_ground: methods to work with items lying on the ground
 -------------------------------------------------------------------------------
 
+local item_generation_lists = {} -- Lazy loaded
+
+local function randomly_pick_one(choices)
+	 return choices[wesnoth.random(#choices)]
+end
+
+-- Randomly generates an item of the given group (each item has to be explicitly defined as part of some group) of one of the item types in the given table
+-- Nil as a table does not discriminate by types, a subtable in the table triggers another selection recursively (if picked)
+loti.item.on_the_ground.generate = function(group, item_types)
+	while type(item_types) == "table" do
+		item_types = randomly_pick_one(item_types)
+	end
+
+	local sort_selected = item_types or '_any'
+
+	if not item_generation_lists[group] then
+		-- This list is not yet calculated. Calculate it now.
+		item_generation_lists[group] = { _any = {} }
+
+		for _, item in pairs(loti.item.type) do
+			if item[group] then
+				if not item_generation_lists[group][item.sort] then
+					item_generation_lists[group][item.sort] = {}
+				end
+
+				local weight = item[group]
+
+				for _ = 1,weight do
+					table.insert(item_generation_lists[group][item.sort], item.number)
+					table.insert(item_generation_lists[group]._any, item.number)
+				end
+			end
+		end
+	end
+
+	local candidates = item_generation_lists[group][sort_selected]
+	if not candidates then
+		wesnoth.log("warning", "Couldn't find possible drops of sort=" .. tostring(sort_selected) .. " in drop group=" .. tostring(group))
+		candidates = item_generation_lists[group]._any
+	end
+
+	return randomly_pick_one(candidates)
+end
+
 -- Place item on the ground at coordinates (x,y).
 -- Optional parameter crafted_sort: if present, overrides item_sort of the item.
 loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 	local record = {
 		type = item_number,
 		x = x,
-		y = y
+		y = y,
+		turn = wesnoth.get_variable("turn_number")
 	}
 	if crafted_sort then
 		record.sort = crafted_sort
@@ -359,6 +397,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 			}
 		}
 	}
+	wesnoth.fire_event("item drop", x, y)
 end
 
 -- Remove one item from the ground at coordinates (x,y).
@@ -430,6 +469,7 @@ end
 loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort, skip_update)
 	loti.item.on_unit.remove(unit, item_number, crafted_sort, skip_update)
 	loti.item.storage.add(item_number, crafted_sort)
+	wesnoth.fire_event("unequip", unit.x, unit.y)
 end
 
 -- Remove one item from storage, then open "Pick up item" dialog on behalf of unit.
@@ -513,7 +553,7 @@ loti.item.describe_item = function(number, sort, set_items)
 
 			table.insert(desc, "<span color='green'>" .. math.abs(variable) .. ending .. " </span>")
 		end
-	end	
+	end
 	if is_weapon then
 		describe_attacks_modification(item.attacks,
 			_"% more attacks", _"% more attacks", _"% fewer attacks", _"% fewer attacks")
@@ -745,4 +785,27 @@ end
 -- after all [describe_object] tags (they change item descriptions in item_list).
 function wesnoth.wml_actions.clear_item_list_cache()
 	loti.item.type._reload()
+	item_generation_lists = {}
+end
+
+function wesnoth.wml_actions.random_item(cfg)
+	local item_types = nil
+	local item_types_wml = helper.get_child(cfg, "types")
+	if item_types_wml then
+		item_types = {}
+		for _, possibilities in pairs(item_types_wml) do
+			local sort_group = {}
+			for sort_subgroup in string.gmatch(possibilities, '([^,]+)') do
+				table.insert(sort_group, sort_subgroup)
+			end
+			table.insert(item_types, sort_group)
+		end
+	end
+	local group_name = cfg.group or "drop"
+	local generated = loti.item.on_the_ground.generate(group_name, item_types)
+	if cfg.variable then
+		wesnoth.set_variable(cfg.variable, generated)
+	else
+		loti.item.on_the_ground.add(generated, cfg.x, cfg.y)
+	end
 end

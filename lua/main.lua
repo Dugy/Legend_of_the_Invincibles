@@ -1,6 +1,7 @@
 -- Some libraries place utility functions into this array,
 -- e.g. loti.item.storage.add()
 loti = {}
+loti.util = {}
 
 -- Syntax sugar to make GUI2 dialogs more compact, e.g. T.column, T.row, etc.
 T = wml.tag
@@ -8,6 +9,7 @@ T = wml.tag
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/utils.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/items.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/inventory/dialog.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/unitdata.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/crafting.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/titles.lua")
@@ -137,7 +139,6 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					damage_multiplier = damage_multiplier - tod_bonus
 				elseif alignment == "liminal" then
 					damage_multiplier = damage_multiplier - math.abs( tod_bonus )
-				else -- neutral, do nothing
 				end
 				local resistance_modified = resistance * modifier
 				damage_multiplier = damage_multiplier * resistance_modified
@@ -205,7 +206,9 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				end
 			end
 
-			wesnoth.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
+			if not unit_to_harm.hidden then
+				wesnoth.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
+			end
 
 			if unit_to_harm.hitpoints < 1 then
 				local uth_cfg = unit_to_harm.__cfg
@@ -258,9 +261,9 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 	end_var_scope("this_unit", this_unit)
 end
 
--- This is used in global_events.cfg, check there what it actually does
-
-function unit_information_part_1()
+-- Compute any "special" state that a unit may have.
+-- The vast majority of units won't have anything reported by this section.
+local function unit_information_part_1()
     local max_devour_count = wesnoth.get_variable("unit.variables.max_devour_count")
     local devour_count = wesnoth.get_variable("unit.variables.devour_count")
     local max_redeem_count = wesnoth.get_variable("unit.variables.max_redeem_count")
@@ -268,7 +271,6 @@ function unit_information_part_1()
     local max_lesser_redeem_count = wesnoth.get_variable("unit.variables.max_lesser_redeem_count")
     local lesser_redeem_count = wesnoth.get_variable("unit.variables.lesser_redeem_count")
     local starving = wesnoth.get_variable("unit.variables.starving")
-    local wrath_intensity = wesnoth.get_variable("unit.variables.wrath_intensity")
     local from_the_ashes_used = wesnoth.get_variable("unit.variables.from_the_ashes_used")
     local from_the_ashes_cooldown = wesnoth.get_variable("unit.variables.from_the_ashes_cooldown")
     local wrath = wesnoth.get_variable("unit.variables.wrath_intensity")
@@ -277,7 +279,6 @@ function unit_information_part_1()
     local span = "<span font_weight='bold'>"
     result = result .. span .. _"Hitpoints:</span> "
     .. string.format("%u/%u", wesnoth.get_variable("unit.hitpoints"), wesnoth.get_variable("unit.max_hitpoints")) .. " \n"
-    local span = "<span font_weight='bold'>"
     result = result .. span .. _"Experience:</span> "
     .. string.format("%u/%u", wesnoth.get_variable("unit.experience"), wesnoth.get_variable("unit.max_experience")) .. " \n"
     if max_devour_count ~= nil and max_devour_count > 0 then
@@ -313,8 +314,13 @@ function unit_information_part_1()
     wesnoth.set_variable("desc_prefix", result)
 end
 
-function unit_information_part_2()
-    function remove_duplicates(t)
+-- Some fairly tricky code to make a nicely formatted list of a unit's
+-- attacks.  Most of the code is straightforward, but the specials parsing
+-- requires some familiarity with the WML object to Lua table conversion
+-- described here:
+-- http://wiki.wesnoth.org/Luawml#Encoding_WML_objects_into_Lua_tables
+local function unit_information_part_2()
+    local function remove_duplicates(t)
       local new_table = {}
       local hash = {}
       for _, v in ipairs(t) do
@@ -327,7 +333,7 @@ function unit_information_part_2()
     end
 
     -- Count the number of pairs in a Lua table
-    function len(t)
+    local function len(t)
       local count = 0
       for _ in pairs(t) do count = count + 1 end
       return count
@@ -337,13 +343,7 @@ function unit_information_part_2()
     -- This function creates a 7 character monospace summary of the unit's
     -- attacks.  By using string.format we can make sure that everything lines
     -- up nicely regardless of whether an attack deals <10 or >=10 damage.
-    function get_attack_damage_summary(attack)
-      function round(number)
-        if number > 0 and number < 1 then
-          return 1
-        end
-        return math.floor(number)
-      end
+    local function get_attack_damage_summary(attack)
       local damage = attack["damage"]
       local number = attack["number"]
       local format_string = "<span font_family='monospace' font_weight='bold'>%4d"
@@ -360,12 +360,12 @@ function unit_information_part_2()
     -- If the name and description of an attack are different, this function
     -- will display them both.  This means that we don't have to worry about
     --  a unit having 3 attacks all of which are called "Dugi's Wrath"
-    function get_attack_name(attack)
+    local function get_attack_name(attack)
       local description = tostring(attack["description"])
       local name = tostring(attack["name"])
       local result = "<span color='#60A0FF' font_weight='bold'>" .. name .. "</span>"
       if description then
-      	result = "<span color='#60A0FF' font_weight='bold'>" .. description .. "</span>"
+        result = "<span color='#60A0FF' font_weight='bold'>" .. description .. "</span>"
       end
       return result
     end
@@ -374,7 +374,7 @@ function unit_information_part_2()
     --     * Is the attack ranged or melee?
     --     * Is the attack blade/pierce/...?
     --     * Can the attack only be used when attacking/defending/not at all?
-    function get_attack_range_and_type(attack)
+    local function get_attack_range_and_type(attack)
       local attack_weight = attack["attack_weight"]
       local defense_weight = attack["defense_weight"]
 
@@ -407,9 +407,8 @@ function unit_information_part_2()
     end
 
     -- An attack special is reported only if it has a valid "name" field.
-    function get_attack_specials(attack)
-      H = wesnoth.require "lua/helper.lua"
-      local specials = H.get_child(attack, "specials")
+    local function get_attack_specials(attack)
+      local specials = helper.get_child(attack, "specials")
       local result_table = {}
 
       for _, v in pairs(specials) do
@@ -449,7 +448,7 @@ function unit_information_part_2()
     end
 
     -- This is a simple helper function we use to summarize each individual attack
-    function list_one_attack(attack)
+    local function list_one_attack(attack)
       local result = get_attack_damage_summary(attack) .. " "
       .. get_attack_name(attack) .. ": "
       .. get_attack_range_and_type(attack) .. " \n"
@@ -459,11 +458,10 @@ function unit_information_part_2()
 
 
     -- The entry point for this code block: a function to list all of a unit's attacks.
-    function list_attacks()
-      H = wesnoth.require "lua/helper.lua"
-      local attacks = H.get_variable_array("unit.attack")
+    local function list_attacks()
+      local attacks = helper.get_variable_array("unit.attack")
       local result = ""
-      for i, v in ipairs(attacks) do
+      for _, v in ipairs(attacks) do
         result = result .. list_one_attack(v)
       end
 
@@ -480,8 +478,9 @@ function unit_information_part_2()
     wesnoth.set_variable("attacks_list", list_attacks())
 end
 
-function unit_information_part_3()
-    function list_one_ability(a)
+-- Creates a cleaned up list of a unit's abilities
+local function unit_information_part_3()
+    local function list_one_ability(a)
       local ability_info = a[2]
       -- Abilities without descriptions shouldn't be reported to the user,
       -- they're for internal purposes.
@@ -499,7 +498,7 @@ function unit_information_part_3()
       return result
     end
 
-    function list_abilities()
+    local function list_abilities()
       local abilities = wesnoth.get_variable("unit.abilities")
       local result_list = {}
       if abilities ~= nil then
@@ -518,14 +517,16 @@ function unit_information_part_3()
     wesnoth.set_variable("abilities_list", list_abilities())
 end
 
-function unit_information_part_4()
-  function form_one_line(type)
+-- Create the resistances and penetrations table.  Monospace fonts are key
+-- here to ensure that the columns of our "table" line up properly, since each
+-- character takes up the same amount of space.
+local function unit_information_part_4()
+  local function form_one_line(type)
     local resist = 100 - wesnoth.get_variable("unit.resistance." .. type)
     local penetrate = 0
-    H = wesnoth.require "lua/helper.lua"
-    local resistances = H.get_variable_array("unit.abilities.resistance")
+    local resistances = helper.get_variable_array("unit.abilities.resistance")
 
-    for i, v in ipairs(resistances) do
+    for _, v in ipairs(resistances) do
       if (v["id"] == type .. "_penetrate") then
         penetrate = v["sub"]
       end
@@ -548,8 +549,11 @@ function unit_information_part_4()
   wesnoth.set_variable("resistances_list", result)
 end
 
-function unit_information_part_5()
-  function form_one_line(type)
+-- Create the terrain resistance and defence table.  Monospace fonts are key
+-- here to ensure that the columns of our "table" line up properly, since each
+-- character takes up the same amount of space.
+local function unit_information_part_5()
+  local function form_one_line(type)
     local defence = 100 - (wesnoth.get_variable("unit.defense." .. type) or 0)
     local cost = wesnoth.get_variable("unit.movement_costs." .. type)
     if cost == nil then
@@ -581,39 +585,20 @@ function unit_information_part_5()
   wesnoth.set_variable("defences_list", result)
 end
 
-function unit_information_part_6()
-    -- This table transforms an array like {'a', 'b', 'a'} into a table of
-    -- counts like {'a': 2, 'b': 1}
-    function count(t)
-      local result = {}
-      for _, v in ipairs(t) do
-        v = tostring(v)
-        if result[v] ~= nil then
-          result[v] = result[v] + 1
-        else
-          result[v] = 1
-        end
-      end
-      return result
-    end
+function wesnoth.wml_actions.unit_information_parts_1_to_5()
+	unit_information_part_1()
+	unit_information_part_2()
+	unit_information_part_3()
+	unit_information_part_4()
+	unit_information_part_5()
+end
 
-    -- Create a nice string representation of a table of counts (produced by
-    -- the counts function above)
-    function summarize_counts(t)
-      local result = ""
-      for abil, count in pairs(t) do
-        result = result .. "<span font_family='monospace' font_weight='bold' color='#60A0FF'>    "
-        .. string.format("%2dx ", math.floor(count)) .. "</span>" .. abil .. " \n"
-      end
-      return result
-    end
-
+function wesnoth.wml_actions.unit_information_part_6()
     -- Main function for this block: create a nicely formatted list of all of a
     -- unit's advancements and the number of times it took each of them.
     -- AMLA advancements, and soul eating choices
-    function list_amla()
-      H = wesnoth.require "lua/helper.lua"
-      local advances = H.get_variable_array("unit.modifications.advancement")
+    local function list_amla()
+      local advances = helper.get_variable_array("unit.modifications.advancement")
       local result_amla = ""
       local result_soul = ""
       local result_table = {}
@@ -641,15 +626,14 @@ function unit_information_part_6()
       return result_amla, result_soul
     end
 
-    result_amla, result_soul = list_amla()
+    local result_amla, result_soul = list_amla()
     wesnoth.set_variable("advancements_taken", result_amla)
     wesnoth.set_variable("soul_eating", result_soul)
 end
 
-
-function clear_advancements(unit)
+local function clear_advancements(unit)
     for i = #unit, 1, -1 do
-        v = unit[i]
+        local v = unit[i]
         if v[1] == "advancement" then
             table.remove(unit, i)
         end
@@ -657,7 +641,7 @@ function clear_advancements(unit)
     return unit
 end
 
-loti_needs_advance = nil
+local loti_needs_advance = nil
 
 function wesnoth.wml_actions.pre_advance_stuff(cfg)
 --    wesnoth.message("pre_advance_stuff")
@@ -668,7 +652,7 @@ function wesnoth.wml_actions.pre_advance_stuff(cfg)
         if a ~= nil and a.id == "backup_amla" then
             unit = clear_advancements(unit)
             local u = wesnoth.create_unit { type = "Advancing" .. unit.type }
-            for i, v in ipairs(u.__cfg) do
+            for _, v in ipairs(u.__cfg) do
                 if v[1] == "advancement" then
                     table.insert(unit, v)
                 end
@@ -723,14 +707,14 @@ function wesnoth.wml_actions.advance_stuff(cfg)
     loti_needs_advance = nil
 end
 
-nameless_generator = wesnoth.name_generator("cfg", [[
+local nameless_generator = wesnoth.name_generator("cfg", [[
 main={prefix}{middle}{suffix}|{prefix}{suffix}
 prefix=Marth|Orgh|Vazz|Mal|Horgh|Thar|Aath|Bohr|Dur|Kurg|Nerh|Roeg|Xen
 middle=rho|maarg|vret|loeg|vurh|'gez|'eth|rug
 suffix=roth|mortus|vath|'deth|arth|uth|grus|bul
 ]])
 
-undead_names = wesnoth.name_generator("cfg", [[
+local undead_names = wesnoth.name_generator("cfg", [[
 main={title} {nickname}|{prefix}{suffix}
 title=Mister|Doctor|Lord|Baron|Old
 nickname=Bone|Skinny|Pale|Departed|Buried|von Bone|Dead|Boney|Holey|Phillip Marrow
@@ -783,11 +767,13 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 			u.name = nameless_generator()
 		end
 	end
-	
-	local flavour = get_unit_flavour(u)
+
+	local flavour = loti.util.get_unit_flavour(u)
 
 	-- Make legacy affect flavour, even unset one
 	local function check_legacy(advancement_name, legacy_name, legacy_flavour)
+		local flavours_table = loti.flavours_table
+
 		if advancement_name == legacy_name then
 			for i = 1,#flavours_table do
 				if legacy_flavour[flavours_table[i]] then
@@ -814,58 +800,23 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 			check_legacy(name, "legacy_of_the_free", { criminal = 5, sneaky = 5 })
 		end
 	end
-	
+
 	-- Normalise flavour to have sum equal to 10
-	flavour = normalise_flavour(flavour)	
+	flavour = loti.util.normalise_flavour(flavour)
 
 	-- Finalise
-	u.name = assign_title(u.name, u.gender, flavour)
+	u.name = loti.util.assign_title(u.name, u.gender, flavour)
 
 	if cfg.variable then
-		u = wesnoth.set_variable(cfg.variable, u)
+		wesnoth.set_variable(cfg.variable, u)
 	else
 		wesnoth.put_unit(u)
 	end
 end
 
--- Picks random item (numeric ID) of requested type (cfg.item_sort) from the
--- list of all droppable items, excluding the items that are not allowed in this scenario.
--- (e.g. Gladiators scenario excludes Woodland Cloak, because it has no forests)
--- Variables "droppable_items" and "droppable_items_blacklist" are comma-separated numbers.
-function wesnoth.wml_actions.pick_random_item(cfg)
-	local item_sort = cfg.item_sort or helper.wml_error "[pick_random_item] has no item sort specified"
-	local to_variable = cfg.to_variable or "item_type"
-
-	local droppable_items = wesnoth.get_variable("droppable_items")[item_sort]
-
-	-- Sanity check: available items should be listed in [item_list.cfg].
-	if not droppable_items then
-		helper.wml_error("pick_random_item(): no items of type [" .. item_sort .. "] were found in droppable_items variable.")
-	end
-
-	-- Comma-separated list for helper.rand()
-	local options = droppable_items
-	
-	local blacklist = wesnoth.get_variable("droppable_items_blacklist")
-	if blacklist then
-		-- Remove each blacklisted number from "options" string
-		options = "," .. options .. ","
-		for item in string.gmatch(blacklist, "[^,]*") do
-			options = options:gsub("," .. item .. ",", ",")
-		end
-		
-		-- Strip leading/trailing commas.
-		-- If all items were excluded, ignore the blacklist (allow all items to be dropped).
-		options = options:gsub("^,", ""):gsub(",$", ""):gsub("^$", droppable_items)
-	end
-
-	-- Provide the item ID - randomly chosen number from "options" list.
-	wesnoth.set_variable(to_variable, helper.rand(options));
-end
-
 -- Determine the list of item sorts (e.g. sword,staff,boots) that can be equipped by this unit.
 -- Returns the Lua table { sword = 1, armour = 1, ... }.
-function loti_util_list_equippable_sorts(unit)
+function loti.util.list_equippable_sorts(unit)
 	local unit_type = unit.type
 
 	-- Doppelganger can't equip anything (but can drink potions).
@@ -888,7 +839,7 @@ function loti_util_list_equippable_sorts(unit)
 	end
 
 	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
-	for attack in pairs(loti_util_list_attacks(unit)) do
+	for attack in pairs(loti.util.list_attacks(unit)) do
 		if attack:match("sword$") or attack == "saber"
 			or attack == "war talon" or attack == "war blade"
 			or attack == "mberserk" or attack == "whirlwind"
@@ -942,7 +893,7 @@ function loti_util_list_equippable_sorts(unit)
 		elseif attack == "spear" or attack == "javelin"
 			or attack == "lance" or attack == "spike"
 			or attack == "pike" or attack == "trident"
-			or attack == "trident-blade"
+			or attack == "trident-blade" or attack == "pitchfork"
 				then can_equip.spear = 1
 		end
 	end
@@ -982,7 +933,7 @@ function wesnoth.wml_actions.can_equip_item(cfg)
 	local item = wesnoth.get_variable("item_list.object[" .. cfg.item_number .. "]")
 	local result = 1
 
-	if not loti_util_list_equippable_sorts(unit)[item.sort] then
+	if not loti.util.list_equippable_sorts(unit)[item.sort] then
 		result = _"This unit can't equip this item."
 
 		-- More specific error
@@ -1043,7 +994,7 @@ end
 -- Returns the Lua table { attack_name = 1, another_attack_name = 1, ... },
 -- where attack names are untranslated (always English) and can therefore be used in conditionals.
 --
-function loti_util_list_attacks(unit)
+function loti.util.list_attacks(unit)
 	-- Normalize to Lua unit object (to get unit.attacks)
 	if type(unit) == "table" then
 		unit = wesnoth.get_unit(unit.id)
