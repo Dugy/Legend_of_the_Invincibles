@@ -259,7 +259,7 @@ local shown_items -- Lua array of item numbers currently displayed in listbox, e
 
 -- Check if the scenario has progressed enough to disable unstoring items
 local function is_too_progressed()
-	if wesnoth.get_variable("tutorial.progress") then
+	if loti.during_tutorial then
 		return false -- Unstoring is always allowed during the Tutorial
 	end
 
@@ -434,7 +434,7 @@ local function onshow(unit, item_sort)
 
 		-- Note: Drop/Destroy dropdown menu near Unequip button is not yet supported in Tutorial,
 		-- so we just leave it hidden.
-		if not wesnoth.get_variable("tutorial.progress") then
+		if not loti.during_tutorial then
 			wesnoth.set_dialog_visible(true, "unequip_dropdown_menu")
 		end
 	end
