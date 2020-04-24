@@ -6,8 +6,11 @@
 -------------------------------------------------------------------------------
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-
 local crafting_done = false
+
+-- Inform Inventory dialog that we are in Tutorial.
+-- (this allows access to Item Storage after turn 2, etc.)
+loti.during_tutorial = true
 
 -- Have Delenia say something
 local function Delly_says(text)

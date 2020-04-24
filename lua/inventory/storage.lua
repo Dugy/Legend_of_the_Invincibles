@@ -43,7 +43,7 @@ local function get_tab()
 		}
 	}
 
-	-- Equip button + dropdown menu with "Drop" and "Destroy" buttons
+	-- Equip button + dropdown menu with "Drop" and "Destroy" buttons (for item in storage)
 	local equip_dropdown_buttons = wml.tag.grid {
 		wml.tag.row {
 			wml.tag.column {
@@ -58,6 +58,32 @@ local function get_tab()
 				border_size = 2,
 				wml.tag.menu_button {
 					id = "storage_dropdown_menu",
+					definition = "dropdown_menu_thin",
+					wml.tag.option {
+						label = _"Drop to the ground"
+					},
+					wml.tag.option {
+						label = _"Destroy to get a random gem"
+					}
+				}
+			}
+		}
+	}
+
+	-- Unequip button + dropdown menu with "Drop" and "Destroy" buttons (for item on unit)
+	local unequip_dropdown_buttons = wml.tag.grid {
+		wml.tag.row {
+			wml.tag.column {
+				wml.tag.button {
+					id = "unequip",
+					label = _"Unequip"
+				}
+			},
+			wml.tag.column {
+				border = "left",
+				border_size = 2,
+				wml.tag.menu_button {
+					id = "unequip_dropdown_menu",
 					definition = "dropdown_menu_thin",
 					wml.tag.option {
 						label = _"Drop to the ground"
@@ -122,10 +148,7 @@ local function get_tab()
 				border = "all",
 				border_size = 5,
 				horizontal_alignment = "right",
-				wml.tag.button {
-					id = "unequip",
-					label = _"Unequip"
-				}
+				unequip_dropdown_buttons
 			}
 		},
 
@@ -236,7 +259,7 @@ local shown_items -- Lua array of item numbers currently displayed in listbox, e
 
 -- Check if the scenario has progressed enough to disable unstoring items
 local function is_too_progressed()
-	if wesnoth.get_variable("tutorial.progress") then
+	if loti.during_tutorial then
 		return false -- Unstoring is always allowed during the Tutorial
 	end
 
@@ -376,6 +399,7 @@ local function onshow(unit, item_sort)
 	-- Hide optional widgets until we know that they are needed.
 	wesnoth.set_dialog_visible(false, "current_item")
 	wesnoth.set_dialog_visible(false, "unequip")
+	wesnoth.set_dialog_visible(false, "unequip_dropdown_menu")
 	wesnoth.set_dialog_visible(false, "view")
 	wesnoth.set_dialog_visible(false, "noequip_reason")
 
@@ -407,6 +431,12 @@ local function onshow(unit, item_sort)
 		-- Show/hide fields related to current item
 		wesnoth.set_dialog_visible(true, "current_item")
 		wesnoth.set_dialog_visible(true, "unequip")
+
+		-- Note: Drop/Destroy dropdown menu near Unequip button is not yet supported in Tutorial,
+		-- so we just leave it hidden.
+		if not loti.during_tutorial then
+			wesnoth.set_dialog_visible(true, "unequip_dropdown_menu")
+		end
 	end
 
 	-- Show all stored items of the selected item_sort.
@@ -524,6 +554,21 @@ local function drop_item()
 	inventory_dialog.goto_tab("items_tab")
 end
 
+-- Same as drop_item(), but for items currently on unit.
+local function unequip_drop()
+	-- Remove item from unit and place it on the ground.
+	local unit = inventory_dialog.current_unit
+	local item = loti.item.on_unit.find(unit, shown_item_sort)
+
+	inventory_dialog.mpsafety:queue({
+		command = "unequip_drop",
+		unit = unit,
+		number = item.number,
+		sort = item.sort
+	})
+	inventory_dialog.goto_tab("items_tab")
+end
+
 -- Handler for "Destroy to get a random gem" button.
 local function destroy_item()
 	-- Remove item from storage, add 1 random gem.
@@ -532,6 +577,29 @@ local function destroy_item()
 		command = "destroy",
 		number = get_selected_item(),
 		sort = shown_item_sort,
+		gem = gem
+	})
+
+	-- Tell player which gem was picked.
+	-- TODO: move this into loti.gem.something() to avoid code duplication (see unequip_destroy)
+	local item = loti.item.type[520 + gem]
+	wesnoth.show_popup_dialog(item.name, item.description, item.image)
+
+	inventory_dialog.goto_tab("items_tab")
+end
+
+-- Same as destroy_item(), but for items currently on unit.
+local function unequip_destroy()
+	-- Remove item from unit, add 1 random gem.
+	local unit = inventory_dialog.current_unit
+	local item = loti.item.on_unit.find(unit, shown_item_sort)
+	local gem = loti.gem.random()
+
+	inventory_dialog.mpsafety:queue({
+		command = "unequip_destroy",
+		unit = unit,
+		number = item.number,
+		sort = item.sort,
 		gem = gem
 	})
 
@@ -586,7 +654,7 @@ return function(provided_inventory_dialog)
 			"close_storage"
 		)
 
-		-- Handler for dropdown menu actions: "Drop item" and "Destroy item".
+		-- Handler for Equip dropdown menu actions: "Drop item" and "Destroy item" (for item in storage).
 		wesnoth.set_dialog_callback(function()
 			-- Note: value of the "dropdown menu" widget with only 2 items
 			-- is false for option #1 and true for option #2.
@@ -606,5 +674,18 @@ return function(provided_inventory_dialog)
 				end
 			end
 		end, "storage_dropdown_menu")
+
+		-- Handler for dropdown menu actions: "Drop item" and "Destroy item" (for item on unit).
+		wesnoth.set_dialog_callback(function()
+			-- Note: value of the "dropdown menu" widget with only 2 items
+			-- is false for option #1 and true for option #2.
+			if not wesnoth.get_dialog_value("unequip_dropdown_menu") then
+				-- First option on the menu
+				unequip_drop()
+			else
+				-- Second option in the menu
+				unequip_destroy()
+			end
+		end, "unequip_dropdown_menu")
 	end)
 end
