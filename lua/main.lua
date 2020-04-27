@@ -744,10 +744,20 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 		return
 	end
 	unit_variables.been_given_title = true
+
+	-- If the unit has no name, give it one
+	if u.name == "" then
+		if not u.advances_to or u.advances_to == "null" or u.advances_to == "" then
+			if u.race == "undead" then
+				u.name = undead_names()
+			else
+				u.name = nameless_generator()
+			end
+		end
+	end
+
 	local deserves = false
-	if not u.advances_to or u.advances_to == "null" or u.advances_to == "" then
-		deserves = true
-	elseif u.canrecruit then
+	if u.canrecruit then
 		deserves = true
 	elseif (u.overlays and u.overlays:find("misc/hero%-icon%.png")) or (u.ellipse and u.ellipse:find("misc/ellipse%-hero")) then
 		deserves = true
@@ -755,57 +765,47 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	if u.race == "demon-loti" or u.race == "demon lord-loti" or u.race == "demon-loti-secret" or u.race == "imp-loti" then
 		deserves = false
 	end
-	if not deserves then
-		return
-	end
 
-	-- If the unit has no name, give it one
-	if u.name == "" then
-		if u.race == "undead" then
-			u.name = undead_names()
-		else
-			u.name = nameless_generator()
-		end
-	end
+	if deserves then
+		local flavour = loti.util.get_unit_flavour(u)
 
-	local flavour = loti.util.get_unit_flavour(u)
+		-- Make legacy affect flavour, even unset one
+		local function check_legacy(advancement_name, legacy_name, legacy_flavour)
+			local flavours_table = loti.flavours_table
 
-	-- Make legacy affect flavour, even unset one
-	local function check_legacy(advancement_name, legacy_name, legacy_flavour)
-		local flavours_table = loti.flavours_table
-
-		if advancement_name == legacy_name then
-			for i = 1,#flavours_table do
-				if legacy_flavour[flavours_table[i]] then
-					flavour[flavours_table[i]] = flavour[flavours_table[i]] + legacy_flavour[flavours_table[i]]
+			if advancement_name == legacy_name then
+				for i = 1,#flavours_table do
+					if legacy_flavour[flavours_table[i]] then
+						flavour[flavours_table[i]] = flavour[flavours_table[i]] + legacy_flavour[flavours_table[i]]
+					end
 				end
 			end
 		end
-	end
-	local modifications = helper.get_child(u, "modifications")
-	for i = 1,#modifications do
-		if modifications[i][1] == "advancement" then
-			local name = modifications[i][2].id
-			check_legacy(name, "fire_dragon_legacy", { chivalrous = 3, wizardly = 5, brutish = 2 })
-			check_legacy(name, "ice_dragon_legacy", { chivalrous = 3, wizardly = 5, brutish = 2 })
-			check_legacy(name, "dark_dragon_legacy", { dark = 5, wizardly = 5 })
-			check_legacy(name, "undead_legacy", { dark = 7, ghostly = 3 })
-			check_legacy(name, "legacy_of_kings", { chivalrous = 7, warlike = 3 })
-			check_legacy(name, "legacy_of_titans", { brutish = 10 })
-			check_legacy(name, "legacy_of_sorrow", { dark = 5, criminal = 5 })
-			check_legacy(name, "legacy_of_light", { chivalrous = 10 })
-			check_legacy(name, "legacy_of_phoenix", { chivalrous = 5, ghostly = 5 })
-			check_legacy(name, "legacy_of_exile", { criminal = 10 })
-			check_legacy(name, "legacy_of_the_freezing_north", { brutish = 3, dark = 3, warlike = 4 })
-			check_legacy(name, "legacy_of_the_free", { criminal = 5, sneaky = 5 })
+		local modifications = helper.get_child(u, "modifications")
+		for i = 1,#modifications do
+			if modifications[i][1] == "advancement" then
+				local name = modifications[i][2].id
+				check_legacy(name, "fire_dragon_legacy", { chivalrous = 3, wizardly = 5, brutish = 2 })
+				check_legacy(name, "ice_dragon_legacy", { chivalrous = 3, wizardly = 5, brutish = 2 })
+				check_legacy(name, "dark_dragon_legacy", { dark = 5, wizardly = 5 })
+				check_legacy(name, "undead_legacy", { dark = 7, ghostly = 3 })
+				check_legacy(name, "legacy_of_kings", { chivalrous = 7, warlike = 3 })
+				check_legacy(name, "legacy_of_titans", { brutish = 10 })
+				check_legacy(name, "legacy_of_sorrow", { dark = 5, criminal = 5 })
+				check_legacy(name, "legacy_of_light", { chivalrous = 10 })
+				check_legacy(name, "legacy_of_phoenix", { chivalrous = 5, ghostly = 5 })
+				check_legacy(name, "legacy_of_exile", { criminal = 10 })
+				check_legacy(name, "legacy_of_the_freezing_north", { brutish = 3, dark = 3, warlike = 4 })
+				check_legacy(name, "legacy_of_the_free", { criminal = 5, sneaky = 5 })
+			end
 		end
+
+		-- Normalise flavour to have sum equal to 10
+		flavour = loti.util.normalise_flavour(flavour)
+
+		-- Finalise
+		u.name = loti.util.assign_title(u.name, u.gender, flavour)
 	end
-
-	-- Normalise flavour to have sum equal to 10
-	flavour = loti.util.normalise_flavour(flavour)
-
-	-- Finalise
-	u.name = loti.util.assign_title(u.name, u.gender, flavour)
 
 	if cfg.variable then
 		wesnoth.set_variable(cfg.variable, u)
