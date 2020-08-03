@@ -448,6 +448,19 @@ function wesnoth.update_stats(original)
 			strongest_attack.is_bonus_attack = true
 			if eff.clone_anim then
 				local right_anim
+				local function get_best_anim(source)
+					for anim in helper.child_range(source, "attack_anim") do
+						local filter = helper.get_child(anim, "filter_attack")
+						if filter and filter.name == strongest_attack.name then
+							right_anim = anim
+							break -- priority
+						elseif filter and filter.range == strongest_attack.range then
+							right_anim = anim
+						elseif not filter then
+							right_anim = anim
+						end
+					end
+				end
 				local unit_type = wesnoth.unit_types[remade.type].__cfg
 				if remade.gender == "female" then
 					local female = helper.get_child(unit_type, "female")
@@ -455,15 +468,10 @@ function wesnoth.update_stats(original)
 						unit_type = female
 					end
 				end
-				for anim in helper.child_range(unit_type, "attack_anim") do
-					local filter = helper.get_child(anim, "filter_attack")
-					if filter and filter.name == strongest_attack.name then
-						right_anim = anim
-						break -- priority
-					elseif filter and filter.range == strongest_attack.range then
-						right_anim = anim
-					elseif not filter then
-						right_anim = anim
+				get_best_anim(unit_type)
+				for variation in helper.child_range(unit_type, "variation") do
+					if variation.variation_name == remade.variation then
+						get_best_anim(variation)
 					end
 				end
 				if not right_anim then
