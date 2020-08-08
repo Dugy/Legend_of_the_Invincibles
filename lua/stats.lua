@@ -612,7 +612,7 @@ function wesnoth.update_stats(original)
 		table.insert(specials, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	end
 
-	make_attacks_unique(remade)
+--	make_attacks_unique(remade) -- seems superfluous
 
 	-- PART VIII: Apply visual effects
 	if #visual_effects > 0 then
