@@ -378,11 +378,15 @@ function wesnoth.update_stats(original)
 	-- PART VI: Apply additional effects
 
 	local visual_effects = {}
+	local is_loyal
 
 	for index, eff in loti.unit.effects(remade) do
 		-- TODO: Add alignment, max_attacks and new_advancement using wesnoth.effects
 		if eff.apply_to == "alignment" then
 			remade.alignment = eff.alignment
+		end
+		if eff.apply_to == "loyal" then
+			is_loyal = true
 		end
 		if eff.apply_to == "attack" then
 			if eff.set_icon then
@@ -662,10 +666,21 @@ function wesnoth.update_stats(original)
 	end
 
 	local new_overlays = {}
+	local systematic_overlays = {"misc/fist-overlay.png", "misc/armour-overlay.png", "misc/sword-overlay.png", "misc/flamesword-overlay.png", "misc/shield-overlay.png", "misc/orb-overlay.png", "misc/loyal-icon.png"}
 	for overlay in string.gmatch(remade.overlays, "[^%s,][^,]*") do
-		if overlay ~= "misc/fist-overlay.png" and overlay ~= "misc/armour-overlay.png" and overlay ~= "misc/sword-overlay.png" and overlay ~= "misc/flamesword-overlay.png" and overlay ~= "misc/shield-overlay.png" and overlay ~= "misc/orb-overlay.png" then
+		local has_it = false
+		for i = 1, #systematic_overlays do
+			if systematic_overlays[i] == overlay then
+				has_it = true
+				break
+			end
+		end
+		if not has_it then
 			table.insert(new_overlays, overlay)
 		end
+	end
+	if is_loyal then
+		table.insert(new_overlays, "misc/loyal-icon.png")
 	end
 	local sorts_owned = {}
 	for _, obj in loti.unit.items(remade) do
