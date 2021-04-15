@@ -430,12 +430,15 @@ local function onshow(unit, item_sort)
 
 		-- Show/hide fields related to current item
 		wesnoth.set_dialog_visible(true, "current_item")
-		wesnoth.set_dialog_visible(true, "unequip")
+		
+		if not item_sort == "limited" and not item_sort == "potion" then
+			wesnoth.set_dialog_visible(true, "unequip")
 
-		-- Note: Drop/Destroy dropdown menu near Unequip button is not yet supported in Tutorial,
-		-- so we just leave it hidden.
-		if not loti.during_tutorial then
-			wesnoth.set_dialog_visible(true, "unequip_dropdown_menu")
+			-- Note: Drop/Destroy dropdown menu near Unequip button is not yet supported in Tutorial,
+			-- so we just leave it hidden.
+			if not loti.during_tutorial then
+				wesnoth.set_dialog_visible(true, "unequip_dropdown_menu")
+			end
 		end
 	end
 
