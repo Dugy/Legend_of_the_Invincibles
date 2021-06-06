@@ -840,60 +840,47 @@ function loti.util.list_equippable_sorts(unit)
 
 	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
 	for attack in pairs(loti.util.list_attacks(unit)) do
-		if attack:match("sword$") or attack == "saber"
-			or attack == "war talon" or attack == "war blade"
-			or attack == "mberserk" or attack == "whirlwind"
-			or attack == "spectral blades"
+		local weapon_type = loti.item.weapon_bindings[attack]
+		if weapon_type == "sword"
 				then can_equip.sword = 1
-
-		elseif attack:match("axe$") or attack == "berserker frenzy"
+		elseif weapon_type == "axe"
 			then can_equip.axe = 1
 
-		elseif attack:match("staff$")
+		elseif weapon_type == "staff"
 			then can_equip.staff = 1
 
-		elseif attack == "crossbow" or attack == "slurbow"
+		elseif weapon_type == "xbow"
 			then can_equip.xbow = 1
 
-		elseif attack:match("bow$")
+		elseif weapon_type == "bow"
 			then can_equip.bow = 1
 
-		elseif attack == "dagger"
+		elseif weapon_type == "dagger"
 			then can_equip.dagger = 1
 
-		elseif attack == "knife" or attack == "throwing knives"
+		elseif weapon_type == "knife"
 			then can_equip.knife = 1
 
-		elseif attack == "mace" or attack == "mace-spiked"
-			or attack == "morning star" or attack == "club"
-			or attack == "flail" or attack == "scourge"
-			or attack == "mace_berserk" or attack == "hammer"
-			or attack == "hammer_runic"
+		elseif weapon_type == "mace"
 				then can_equip.mace = 1
 
-		elseif attack == "halberd" or attack == "scythe"
-			or attack == "scythe-whirlwind"
+		elseif weapon_type == "polearm"
 				then can_equip.polearm = 1
 
-		elseif attack:match("claws$")
+		elseif weapon_type == "claws"
 			then can_equip.claws = 1
 
-		elseif attack == "sling" or attack == "bolas" or attack == "net"
+		elseif weapon_type == "sling"
 			then can_equip.sling = 1
 
-		elseif attack == "touch" or attack == "baneblade"
-			or attack == "faerie touch" or attack == "vine"
-			or attack == "torch"
+		elseif weapon_type == "essence"
 				then can_equip.essence = 1
 
-		elseif attack == "thunderstick" or attack == "dragonstaff"
+		elseif weapon_type == "thunderstick"
 			then can_equip.thunderstick = 1
 
 
-		elseif attack == "spear" or attack == "javelin"
-			or attack == "lance" or attack == "spike"
-			or attack == "pike" or attack == "trident"
-			or attack == "trident-blade" or attack == "pitchfork"
+		elseif weapon_type == "spear"
 				then can_equip.spear = 1
 		end
 	end

@@ -235,38 +235,7 @@ function wesnoth.update_stats(original)
 			table.insert(weap, specials)
 		end
 
-		-- TODO: This could be a WML resource file producing a table indexed by weapon name and receiving weapon type
-		if wn == "sword" or wn == "short sword" or wn == "greatsword" or wn == "battlesword" or wn == "saber" or wn == "mberserk" or wn == "whirlwind" or wn == "spectral blades" or wn == "lichsword" then
-			weapon_type = "sword"
-		elseif wn == "axe" or wn == "battle axe" or wn == "axe_whirlwind" or wn == "berserker frenzy" or wn == "cleaver" or wn == "hatchet" then
-			weapon_type = "axe"
-		elseif wn == "bow" or wn == "longbow" then
-			weapon_type = "bow"
-		elseif wn == "staff" or wn == "plague staff" then
-			weapon_type = "staff"
-		elseif wn == "crossbow" or wn == "slurbow" then
-			weapon_type = "xbow"
-		elseif wn == "dagger" then
-			weapon_type = "dagger"
-		elseif wn == "knife" or wn == "throwing knife" or wn == "throwing knives" then
-			weapon_type = "knife"
-		elseif wn == "mace" or wn == "mace-spiked" or wn == "morning star" or wn == "club" or wn == "flail" or wn == "scourge" or wn == "mace_berserk" or wn == "hammer" or wn == "hammer-runic" then
-			weapon_type = "mace"
-		elseif wn == "spear" or wn == "javelin" or wn == "lance" or wn == "spike" or wn == "pike" or wn == "trident" or wn == "trident" or wn == "trident-blade" or wn == "pitchfork" then
-			weapon_type = "spear"
-		elseif wn == "war talon" or wn == "war blade" then
-			weapon_type = "exotic"
-		elseif wn == "halberd" or wn == "scythe" or wn == "whirlwind-scythe" then
-			weapon_type = "polearm"
-		elseif wn == "claws" or wn == "battle claws" then
-			weapon_type = "claws"
-		elseif wn == "touch" or wn == "baneblade" or wn == "faerie touch" or wn == "vine" or wn == "torch" then
-			weapon_type = "essence"
-		elseif wn == "sling" or wn == "bolas" or wn == "net" then
-			weapon_type = "sling"
-		elseif wn == "thunderstick" or wn == "dragonstaff" then
-			weapon_type = "thunderstick"
-		end
+		weapon_type = loti.item.weapon_bindings[wn]
 
 		if not weapon_type then
 			if wn == "thorns" or wn == "gossamer" or wn == "entangle" or wn == "ensnare" or wn == "water spray" or wn == "ink" or wn == "magic blast" then
