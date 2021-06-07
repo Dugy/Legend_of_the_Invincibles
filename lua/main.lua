@@ -841,47 +841,8 @@ function loti.util.list_equippable_sorts(unit)
 	-- Analyze the list of attacks. Allow weapons that are logical for this unit.
 	for attack in pairs(loti.util.list_attacks(unit)) do
 		local weapon_type = loti.item.weapon_bindings[attack]
-		if weapon_type == "sword"
-				then can_equip.sword = 1
-		elseif weapon_type == "axe"
-			then can_equip.axe = 1
-
-		elseif weapon_type == "staff"
-			then can_equip.staff = 1
-
-		elseif weapon_type == "xbow"
-			then can_equip.xbow = 1
-
-		elseif weapon_type == "bow"
-			then can_equip.bow = 1
-
-		elseif weapon_type == "dagger"
-			then can_equip.dagger = 1
-
-		elseif weapon_type == "knife"
-			then can_equip.knife = 1
-
-		elseif weapon_type == "mace"
-				then can_equip.mace = 1
-
-		elseif weapon_type == "polearm"
-				then can_equip.polearm = 1
-
-		elseif weapon_type == "claws"
-			then can_equip.claws = 1
-
-		elseif weapon_type == "sling"
-			then can_equip.sling = 1
-
-		elseif weapon_type == "essence"
-				then can_equip.essence = 1
-
-		elseif weapon_type == "thunderstick"
-			then can_equip.thunderstick = 1
-
-
-		elseif weapon_type == "spear"
-				then can_equip.spear = 1
+		if weapon_type then
+			can_equip[weapon_type] = 1
 		end
 	end
 
