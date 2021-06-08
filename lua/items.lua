@@ -52,6 +52,7 @@ loti.item.type = {}
 loti.item.on_unit = {}
 loti.item.on_the_ground = {}
 loti.item.util = {}
+loti.item.weapon_bindings = {}
 
 -- Blinking animation on the ground hex if there is an item.
 loti.item.halo = "halo/misc/leadership-flare-1.png:20,halo/misc/leadership-flare-2.png:20," ..
@@ -808,4 +809,11 @@ function wesnoth.wml_actions.random_item(cfg)
 	else
 		loti.item.on_the_ground.add(generated, cfg.x, cfg.y)
 	end
+end
+
+-- Add a binding "weapon name -> weapon type
+function wesnoth.wml_actions.add_weapon_binding(cfg)
+	local name = cfg.name or helper.wml_error("[dadd_weapon_binding] lacks a required name= key")
+	local type = cfg.type or "exotic"
+	loti.item.weapon_bindings[name] = type
 end

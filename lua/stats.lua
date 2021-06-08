@@ -93,7 +93,7 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART III: Recreate the unit
-	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, goto_x = original.goto_x, goto_y = original.goto_y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", helper.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
+	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, goto_x = original.goto_x, goto_y = original.goto_y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, role = original.role, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", helper.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
 	vars = helper.get_child(remade, "variables")
 	visible_modifications = helper.get_child(remade, "modifications")
 	vars.updated = true
@@ -235,38 +235,7 @@ function wesnoth.update_stats(original)
 			table.insert(weap, specials)
 		end
 
-		-- TODO: This could be a WML resource file producing a table indexed by weapon name and receiving weapon type
-		if wn == "sword" or wn == "short sword" or wn == "greatsword" or wn == "battlesword" or wn == "saber" or wn == "mberserk" or wn == "whirlwind" or wn == "spectral blades" or wn == "lichsword" then
-			weapon_type = "sword"
-		elseif wn == "axe" or wn == "battle axe" or wn == "axe_whirlwind" or wn == "berserker frenzy" or wn == "cleaver" or wn == "hatchet" then
-			weapon_type = "axe"
-		elseif wn == "bow" or wn == "longbow" then
-			weapon_type = "bow"
-		elseif wn == "staff" or wn == "plague staff" then
-			weapon_type = "staff"
-		elseif wn == "crossbow" or wn == "slurbow" then
-			weapon_type = "xbow"
-		elseif wn == "dagger" then
-			weapon_type = "dagger"
-		elseif wn == "knife" or wn == "throwing knife" or wn == "throwing knives" then
-			weapon_type = "knife"
-		elseif wn == "mace" or wn == "mace-spiked" or wn == "morning star" or wn == "club" or wn == "flail" or wn == "scourge" or wn == "mace_berserk" or wn == "hammer" or wn == "hammer-runic" then
-			weapon_type = "mace"
-		elseif wn == "spear" or wn == "javelin" or wn == "lance" or wn == "spike" or wn == "pike" or wn == "trident" or wn == "trident" or wn == "trident-blade" or wn == "pitchfork" then
-			weapon_type = "spear"
-		elseif wn == "war talon" or wn == "war blade" then
-			weapon_type = "exotic"
-		elseif wn == "halberd" or wn == "scythe" or wn == "whirlwind-scythe" then
-			weapon_type = "polearm"
-		elseif wn == "claws" or wn == "battle claws" then
-			weapon_type = "claws"
-		elseif wn == "touch" or wn == "baneblade" or wn == "faerie touch" or wn == "vine" or wn == "torch" then
-			weapon_type = "essence"
-		elseif wn == "sling" or wn == "bolas" or wn == "net" then
-			weapon_type = "sling"
-		elseif wn == "thunderstick" or wn == "dragonstaff" then
-			weapon_type = "thunderstick"
-		end
+		weapon_type = loti.item.weapon_bindings[wn]
 
 		if not weapon_type then
 			if wn == "thorns" or wn == "gossamer" or wn == "entangle" or wn == "ensnare" or wn == "water spray" or wn == "ink" or wn == "magic blast" then
@@ -378,11 +347,15 @@ function wesnoth.update_stats(original)
 	-- PART VI: Apply additional effects
 
 	local visual_effects = {}
+	local is_loyal
 
 	for index, eff in loti.unit.effects(remade) do
 		-- TODO: Add alignment, max_attacks and new_advancement using wesnoth.effects
 		if eff.apply_to == "alignment" then
 			remade.alignment = eff.alignment
+		end
+		if eff.apply_to == "loyal" then
+			is_loyal = true
 		end
 		if eff.apply_to == "attack" then
 			if eff.set_icon then
@@ -448,6 +421,19 @@ function wesnoth.update_stats(original)
 			strongest_attack.is_bonus_attack = true
 			if eff.clone_anim then
 				local right_anim
+				local function get_best_anim(source)
+					for anim in helper.child_range(source, "attack_anim") do
+						local filter = helper.get_child(anim, "filter_attack")
+						if filter and filter.name == strongest_attack.name then
+							right_anim = anim
+							break -- priority
+						elseif filter and filter.range == strongest_attack.range then
+							right_anim = anim
+						elseif not filter then
+							right_anim = anim
+						end
+					end
+				end
 				local unit_type = wesnoth.unit_types[remade.type].__cfg
 				if remade.gender == "female" then
 					local female = helper.get_child(unit_type, "female")
@@ -455,15 +441,10 @@ function wesnoth.update_stats(original)
 						unit_type = female
 					end
 				end
-				for anim in helper.child_range(unit_type, "attack_anim") do
-					local filter = helper.get_child(anim, "filter_attack")
-					if filter and filter.name == strongest_attack.name then
-						right_anim = anim
-						break -- priority
-					elseif filter and filter.range == strongest_attack.range then
-						right_anim = anim
-					elseif not filter then
-						right_anim = anim
+				get_best_anim(unit_type)
+				for variation in helper.child_range(unit_type, "variation") do
+					if variation.variation_name == remade.variation then
+						get_best_anim(variation)
 					end
 				end
 				if not right_anim then
@@ -604,7 +585,7 @@ function wesnoth.update_stats(original)
 		table.insert(specials, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	end
 
-	make_attacks_unique(remade)
+--	make_attacks_unique(remade) -- seems superfluous
 
 	-- PART VIII: Apply visual effects
 	if #visual_effects > 0 then
@@ -654,10 +635,21 @@ function wesnoth.update_stats(original)
 	end
 
 	local new_overlays = {}
+	local systematic_overlays = {"misc/fist-overlay.png", "misc/armour-overlay.png", "misc/sword-overlay.png", "misc/flamesword-overlay.png", "misc/shield-overlay.png", "misc/orb-overlay.png", "misc/loyal-icon.png"}
 	for overlay in string.gmatch(remade.overlays, "[^%s,][^,]*") do
-		if overlay ~= "misc/fist-overlay.png" and overlay ~= "misc/armour-overlay.png" and overlay ~= "misc/sword-overlay.png" and overlay ~= "misc/flamesword-overlay.png" and overlay ~= "misc/shield-overlay.png" and overlay ~= "misc/orb-overlay.png" then
+		local has_it = false
+		for i = 1, #systematic_overlays do
+			if systematic_overlays[i] == overlay then
+				has_it = true
+				break
+			end
+		end
+		if not has_it then
 			table.insert(new_overlays, overlay)
 		end
+	end
+	if is_loyal then
+		table.insert(new_overlays, "misc/loyal-icon.png")
 	end
 	local sorts_owned = {}
 	for _, obj in loti.unit.items(remade) do

@@ -52,7 +52,9 @@ script:
 # wmllint (part of Wesnoth itself) is a static analyzer of WML files.
 # It is known for false positives (which can later be countered with special comments),
 # so for now its warnings shouldn't cause Travis build to fail.
-  - python wesnoth_tools/wmllint -v -d -K Legend_of_the_Invincibles/{multiplayer,utils,units,scenarios*}
+# Note: temporarily disabled: takes too long to run, and its output is not very useful until we suppress/fix
+# existing warnings (especially false positives), as those warnings make it almost impossible to notice real errors in the log.
+#  - python wesnoth_tools/wmllint -v -d -K Legend_of_the_Invincibles/{multiplayer,utils,units,scenarios*}
 
 after_success:
 # Upload the daily version of addon (only if we are in a Travis Cron Job or in Triggered Build, not on every commit).

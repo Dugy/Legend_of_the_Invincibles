@@ -219,7 +219,7 @@ function loti.util.normalise_flavour(flavour)
 	return flavour
 end
 
-function loti.util.assign_title(Name, Female, Flavour)
+function loti.util.assign_title(Name, Gender, Flavour)
 	-- First, set up some functions
 
 	local function parse_nonterminal(str)
@@ -343,7 +343,7 @@ function loti.util.assign_title(Name, Female, Flavour)
 		end
 	end
 
-	return assign_nonterminal("main", Name, Female, Flavour)
+	return assign_nonterminal("main", Name, Gender == "female", Flavour)
 end
 
 -- wesnoth.dbms(loti.util.assign_title("Joe", false, { dark=3, brutish=7 }))

@@ -1,0 +1,12 @@
+root = true
+
+[*.{wml,pbl}]
+indent_style = space
+indent_size = 4
+
+[*.lua]
+indent_style = tab
+
+[.travis.yml]
+indent_style = space
+indent_size = 2
