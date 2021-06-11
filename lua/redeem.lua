@@ -519,8 +519,11 @@ function wesnoth.wml_actions.show_redeem_menu(cfg)
 		helper.wml_error("[show_redeem_menu]: no units found, may need find_in= parameter.")
 	end
 
-	local result = redeem_menu(ability_tree, units[1])
-	wesnoth.set_variable(to_variable, result)
+	local result = wesnoth.synchronize_choice(_"Soul Eater", function()
+ 		local res = redeem_menu(ability_tree, units[1])
+ 		return {wml.tag.soul_eater_choice {choice = res}}
+ 	end)
+ 	wesnoth.set_variable(to_variable, result[1][2].choice)
 end
 
 -- Tag [count_redeem_upgrades] counts the number of existing redeem upgrades of current unit.
