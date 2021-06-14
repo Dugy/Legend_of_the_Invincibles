@@ -32,8 +32,10 @@ function loti.util.get_unit_flavour(u)
 		for i = 1,#data do
 			if data[i][1] == "attack" then
 				for j = 1,#data[i][2] do
-					if data[i][2][j][2].id == special_name then
-						has = true
+					for k = 1,#data[i][2][j][2] do
+						if data[i][2][j][2][k][2].id == special_name then
+							has = true
+						end
 					end
 				end
 			end
@@ -54,8 +56,10 @@ function loti.util.get_unit_flavour(u)
 			else
 				local is_spell = false
 				for j = 1,#data[i][2] do
-					if data[i][2][j][2].id == "magical" then
-						is_spell = true
+					for k = 1,#data[i][2][j][2] do
+						if data[i][2][j][2][k][2].id == "magical" then
+							is_spell = true
+						end
 					end
 				end
 				if is_spell then
@@ -204,7 +208,6 @@ function loti.util.get_unit_flavour(u)
 			end
 		end
 	end
-
 	return flavour
 end
 
