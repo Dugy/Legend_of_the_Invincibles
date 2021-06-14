@@ -76,6 +76,10 @@ function mpsafety:run_immediately(operation)
 		-- Remove item from storage, add this item to unit.
 		loti.item.storage.remove(operation.number, operation.sort)
 		loti.item.on_unit.add(unit, operation.number, operation.sort)
+	elseif command == "equip_ground" then
+		-- Equip an item lying on the ground
+		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
+		loti.item.on_unit.add(unit, operation.number, operation.sort)
 	elseif command == "drop" then
 		-- Remove item from storage, place it on the ground.
 		loti.item.storage.remove(operation.number, operation.sort)
@@ -87,18 +91,15 @@ function mpsafety:run_immediately(operation)
 	elseif command == "destroy" then
 		-- Remove item from storage, add one gem as compensation.
 		loti.item.storage.remove(operation.number, operation.sort)
-
-		-- TODO: fix code duplication: provide loti.gem.add(gem, count) in crafting.lua
-		local gems = loti.gem.get_counts()
-		gems[operation.gem] = gems[operation.gem] + 1
-		loti.gem.set_counts(gems)
+		loti.gem.add(operation.gem, 1)
 	elseif command == "unequip_destroy" then
 		-- Remove item from unit, add one gem as compensation.
 		loti.item.on_unit.remove(unit, operation.number, operation.sort)
-
-		local gems = loti.gem.get_counts()
-		gems[operation.gem] = gems[operation.gem] + 1
-		loti.gem.set_counts(gems)
+		loti.gem.add(operation.gem, 1)
+	elseif command == "destroy_ground" then
+		-- Remove item from the ground, add one gem as compensation.
+		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
+		loti.gem.add(operation.gem, 1)
 	else
 		helper.wml_error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
 	end

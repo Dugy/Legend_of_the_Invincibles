@@ -32,6 +32,13 @@ loti.gem.random = function()
 	return loti.item.on_the_ground.generate("gem") - 520
 end
 
+-- negative count is allowed
+loti.gem.add = function(gem, count)
+	local gems = loti.gem.get_counts()
+	gems[gem] = gems[gem] + count
+	loti.gem.set_counts(gems)
+end
+
 loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 	local gem_quantities = loti.gem.get_counts()
 	local transmutables = { { amount = 4, text = _"4 obsidians", picture = "items/obsidian.png" },
