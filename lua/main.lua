@@ -878,6 +878,9 @@ function wesnoth.wml_actions.can_equip_item(cfg)
 	end
 
 	local unit = units[1]
+	-- cfg.item_number is a number of the item IN THE ITEM LIST
+	-- not the actual number which is item.number
+	-- They might not coincide
 	local item = wesnoth.get_variable("item_list.object[" .. cfg.item_number .. "]")
 	local result = 1
 
@@ -930,8 +933,17 @@ function wesnoth.wml_actions.can_equip_item(cfg)
 		end
 	end
 
-	-- TODO: (when item.sort == "limited") check for "already has this book" here, not in WML
-
+	local objects = helper.get_variable_array("unit.modifications.object")
+	-- TODO: this disables picking a book twice from the ground but not from the storage
+	if item.sort == "limited" then
+		-- sneaky mistake: need __ instead of _ because _ is needed for translation...
+		for __, v in pairs(objects) do
+			if v.number == item.number then
+				result = _"This unit already has this limited item."
+				break
+			end
+		end
+	end
 	wesnoth.set_variable(to_variable, result);
 end
 
