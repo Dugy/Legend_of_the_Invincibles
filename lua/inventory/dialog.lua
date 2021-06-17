@@ -128,6 +128,9 @@ end
 for _, lua_plugin_file in ipairs(PLUGINS_LIST) do
 	wesnoth.require(lua_plugin_file)(inventory_dialog)
 end
+-- for mpsafety queue in crafting
+crafting = {}
+crafting.mpsafety = inventory_dialog.mpsafety
 
 -- Flag to avoid calling register_widgets() twice
 local widgets_registered = false

@@ -88,6 +88,16 @@ function mpsafety:run_immediately(operation)
 		-- Remove item from storage, place it on the ground.
 		loti.item.storage.remove(operation.number, operation.sort)
 		loti.item.on_the_ground.add(operation.number, unit.x, unit.y, operation.sort)
+	elseif command == "create_on_ground" then
+		-- Creates an item lying on the ground. Used for crafting
+		loti.item.on_the_ground.add(operation.number, unit.x, unit.y, operation.sort)
+	elseif command == "gem_transmute" then
+		-- Transmutation of gems
+		loti.gem.add(operation.old_gem, -operation.old_count)
+		loti.gem.add(operation.new_gem, operation.new_count)
+	elseif command == "gem_remove" then
+		-- When crafting
+		loti.gem.add(operation.gem, -operation.count)
 	elseif command == "unequip_drop" then
 		-- Remove item from unit, place it on the ground.
 		loti.item.on_unit.remove(unit, operation.number, operation.sort)

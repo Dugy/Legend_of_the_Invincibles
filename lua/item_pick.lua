@@ -108,6 +108,8 @@ function loti.util.item_pick_menu (mpsafety, unit)
 					sort = sort,
 					gem = gem
 				})
+				local gem_item = loti.item.type[520 + gem]
+				wesnoth.show_popup_dialog(gem_item.name, gem_item.description, gem_item.image)
 			end -- if res == 3, do nothing
 			if result ~= 3 then
 				-- used in campaign, chapters 5 and 9
