@@ -65,7 +65,7 @@ local inventory_config = {
 			id = "ground_items",
 			label = _"Pick up items on the ground",
 			onsubmit = function(unit)
-				wesnoth.fire_event("item_pick", unit.x, unit.y)
+				wesnoth.wml_actions.fire_event({name = "item_pick_inventory", { "primary_unit", { x=unit.x, y=unit.y } } })
 			end
 		}
 	},

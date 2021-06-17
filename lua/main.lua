@@ -9,6 +9,7 @@ T = wml.tag
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/debug.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/utils.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/items.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/item_pick.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/inventory/dialog.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/unitdata.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/crafting.lua")
@@ -864,89 +865,71 @@ function loti.util.list_equippable_sorts(unit)
 	return can_equip
 end
 
--- Check if certain unit can equip certain item.
--- Item is passed as cfg.item_number parameter (numeric ID of the item).
--- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
--- Result is either 1 (which means "can equip") or error string that explains why it can't be equipped.
--- Result is placed into Wesnoth variable cfg.to_variable.
-function wesnoth.wml_actions.can_equip_item(cfg)
-	local to_variable = cfg.to_variable or "can_take"
+function loti.util.can_equip_item(unit, number, sort)
+	local result = nil
 
-	local units = wesnoth.get_units(cfg)
-	if #units < 1 then
-		helper.wml_error("[can_equip_item]: no units found, may need find_in= parameter.")
-	end
-
-	local unit = units[1]
-	-- cfg.item_number is a number of the item IN THE ITEM LIST
-	-- not the actual number which is item.number
-	-- They might not coincide
-	local item = wesnoth.get_variable("item_list.object[" .. cfg.item_number .. "]")
-	local result = 1
-
-	if not loti.util.list_equippable_sorts(unit)[item.sort] then
+	if not loti.util.list_equippable_sorts(unit)[sort] then
 		result = _"This unit can't equip this item."
 
 		-- More specific error
-		if item.sort == "armour"
+		if sort == "armour"
 			then result = _"This unit cannot wear armours."
-		elseif item.sort == "helm"
+		elseif sort == "helm"
 			then result = _"This unit cannot wear armours, not even helms."
-		elseif item.sort == "gauntlet"
+		elseif sort == "gauntlet"
 			then result = _"This unit cannot wear armours, not even gauntlets."
-		elseif item.sort == "boots"
+		elseif sort == "boots"
 			then result = _"This unit cannot wear armours, not even boots. It's a sad person, having to walk barefoot all the time..."
-		elseif item.sort == "ring"
+		elseif sort == "ring"
 			then result = _"This unit cannot wear rings. It might make marriage problematic."
-		elseif item.sort == "amulet"
+		elseif sort == "amulet"
 			then result = _"This unit cannot wear amulets."
-		elseif item.sort == "cloak"
+		elseif sort == "cloak"
 			then result = _"This unit cannot wear cloaks. Winter is not coming, fortunately."
-		elseif item.sort == "sword"
+		elseif sort == "sword"
 			then result = _"This unit cannot use swords."
-		elseif item.sort == "axe"
+		elseif sort == "axe"
 			then result = _"This unit cannot use axes."
-		elseif item.sort == "bow"
+		elseif sort == "bow"
 			then result = _"This unit cannot use bows."
-		elseif item.sort == "staff"
+		elseif sort == "staff"
 			then result = _"This unit cannot use staves."
-		elseif item.sort == "xbow"
+		elseif sort == "xbow"
 			then result = _"This unit cannot use crossbows."
-		elseif item.sort == "dagger"
+		elseif sort == "dagger"
 			then result = _"This unit cannot use daggers. Probably prefers more honest combat tactics."
-		elseif item.sort == "knife"
+		elseif sort == "knife"
 			then result = _"This unit cannot throw knives."
-		elseif item.sort == "mace"
+		elseif sort == "mace"
 			then result = _"This unit cannot use maces."
-		elseif item.sort == "polearm"
+		elseif sort == "polearm"
 			then result = _"This unit cannot use polearms."
-		elseif item.sort == "claws"
+		elseif sort == "claws"
 			then result = _"This unit cannot use metal claws."
-		elseif item.sort == "sling"
+		elseif sort == "sling"
 			then result = _"This unit cannot use slings."
-		elseif item.sort == "essence"
+		elseif sort == "essence"
 			then result = _"This unit cannot use otherworldly essences."
-		elseif item.sort == "thunderstick"
+		elseif sort == "thunderstick"
 			then result = _"This unit cannot use weapons that are so advanced."
-		elseif item.sort == "spear"
+		elseif sort == "spear"
 			then result = _"This unit cannot use spears. Seems to prefer more advanced weapons."
 		end
 	end
 
 	local objects = helper.get_variable_array("unit.modifications.object")
 	-- TODO: this disables picking a book twice from the ground but not from the storage
-	if item.sort == "limited" then
+	if sort == "limited" then
 		-- sneaky mistake: need __ instead of _ because _ is needed for translation...
 		for __, v in pairs(objects) do
-			if v.number == item.number then
+			if v.number == number then
 				result = _"This unit already has this limited item."
 				break
 			end
 		end
 	end
-	wesnoth.set_variable(to_variable, result);
+	return result
 end
-
 --
 -- Utility function for [can_equip_item] and get_unit_flavour().
 -- List the names of all attacks (e.g. "chill tempest") of a certain unit.

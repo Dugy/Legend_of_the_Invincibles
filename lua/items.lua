@@ -77,6 +77,12 @@ loti.item.storage.add = function(item_number, crafted_sort)
 		side.gold = side.gold + item.gold_quantity
 		return
 	end
+	
+	if item.sort == "gem" then
+		-- Special case: gem is added into appropriate variable
+		loti.gem.add (item_number - 520, 1)
+		return
+	end
 
 	local list = wesnoth.get_variable("item_storage") or {}
 
@@ -282,6 +288,23 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 	update_stats(unit)
 end
 
+-- The same as add but unequips items of this sort if there any
+loti.item.on_unit.add_with_replace = function(unit, item_number, crafted_sort)
+	local sort = loti.item.type[item_number]
+	if crafted_sort then
+		sort = crafted_sort
+	end
+	local equipped = loti.item.on_unit.find(unit, sort)
+	if equipped then
+		loti.item.util.take_item_from_unit(unit, equipped.number, sort)
+	end
+	-- Store the fact "unit has this item".
+	loti.unit.add_item(unit.__cfg, item_number, crafted_sort)
+
+	-- Update stats (recalculate damages, etc.)
+	update_stats(unit)
+end
+
 -- Remove one item from the unit.
 -- Optional parameter "crafted_sort" requires that only item of this sort gets removed.
 -- (needed for crafted items: e.g. crafted armour/gauntlets have the same item_number)
@@ -409,14 +432,16 @@ loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
 
 	local index_to_remove = nil
 	for index, elem in ipairs(list) do
-		if elem.x == x and elem.y == y and elem.type == item_number then
-			if not crafted_sort or elem.sort == crafted_sort then
+		if (elem.x == x) and (elem.y == y) and (elem.type == item_number) then
+			-- here is the change in order to be able to pass crafted_sort even for non crafted items
+			-- simplifies logic a bit
+			if (loti.item.type[elem.type].sort == crafted_sort) or (elem.sort == crafted_sort) then
 				index_to_remove = index
 				same_items_found = same_items_found + 1
 			end
 		end
 	end
-
+	
 	if not index_to_remove then
 		return
 	end
@@ -444,6 +469,25 @@ loti.item.on_the_ground.list = function(x, y)
 	for _, elem in ipairs(list) do
 		if elem.x == x and elem.y == y then
 			table.insert(results, elem.type)
+		end
+	end
+
+	return results
+end
+
+-- The same but returns sorts, useful for manipulating crafted items without workarounds
+-- Returns: Lua array, each element is {item_number, sort}
+loti.item.on_the_ground.list_with_sorts = function(x, y)
+	local list = helper.get_variable_array("items")
+	local results = {}
+
+	for _, elem in ipairs(list) do
+		if elem.x == x and elem.y == y then
+			local item_sort = elem.sort
+			if item_sort == nil then
+				item_sort = loti.item.type[elem.type].sort
+			end
+			table.insert(results, {number = elem.type, sort = item_sort})
 		end
 	end
 

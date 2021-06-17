@@ -76,10 +76,14 @@ function mpsafety:run_immediately(operation)
 		-- Remove item from storage, add this item to unit.
 		loti.item.storage.remove(operation.number, operation.sort)
 		loti.item.on_unit.add(unit, operation.number, operation.sort)
+	elseif command == "store" then
+		-- Store an item lying on the ground
+		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
+		loti.item.storage.add(operation.number, operation.sort)
 	elseif command == "equip_ground" then
 		-- Equip an item lying on the ground
 		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
-		loti.item.on_unit.add(unit, operation.number, operation.sort)
+		loti.item.on_unit.add_with_replace(unit, operation.number, operation.sort)
 	elseif command == "drop" then
 		-- Remove item from storage, place it on the ground.
 		loti.item.storage.remove(operation.number, operation.sort)
