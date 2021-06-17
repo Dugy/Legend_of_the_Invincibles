@@ -8,6 +8,7 @@ local _ = wesnoth.textdomain "wesnoth-loti"
 
 loti.gem = {}
 
+
 -- Machine-readable names of gems.
 loti.gem.types = { "obsidians", "topazes", "opals", "pearls", "diamonds", "rubies", "emeralds", "amethysts", "sapphires", "black_pearls" }
 
@@ -188,11 +189,16 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 			break
 		end
 
-		gem_quantities[chosen] = gem_quantities[chosen] - transmutables[chosen].amount
 		local obtained = loti.gem.random()
-		gem_quantities[obtained] = gem_quantities[obtained] + 1
+		crafting.mpsafety:queue({
+			command = "gem_transmute",
+			old_gem = chosen,
+			old_count = transmutables[chosen].amount,
+			new_gem = obtained,
+			new_count = 1
+		})
+		gem_quantities = loti.gem.get_counts()
 		wesnoth.wml_actions.object( loti.item.type[520 + obtained] )
-		loti.gem.set_counts(gem_quantities)
 
 		-- Update the gem counts in the Crafting dialog (which is currently open).
 		if selected_recipe then
@@ -660,11 +666,23 @@ loti.gem.show_crafting_window = function(x, y)
 		end
 	)
 	if chose.sort then
-		loti.item.on_the_ground.add(chose.recipe, x, y, chose.sort)
+		crafting.mpsafety:queue({
+			command = "create_on_ground",
+			number = chose.recipe,
+			sort = chose.sort,
+			x = x,
+			y = y
+		})
 		for i = 1,#loti.gem.types do
-			gem_quantities[i] = gem_quantities[i] - loti.item.type[chose.recipe][loti.gem.types[i]]
+			if loti.item.type[chose.recipe][loti.gem.types[i]] > 0 then
+				crafting.mpsafety:queue({
+					command = "gem_remove",
+					gem = i,
+					count = loti.item.type[chose.recipe][loti.gem.types[i]]
+				})
+			end
 		end
-		loti.gem.set_counts(gem_quantities)
+		gem_quantities = loti.gem.get_counts()
 		wesnoth.wml_actions.fire_event{ name="item_pick_inventory", { "primary_unit", { x=x, y=y } } }
 	end
 end
