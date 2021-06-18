@@ -288,15 +288,17 @@ loti.item.on_unit.add = function(unit, item_number, crafted_sort)
 	update_stats(unit)
 end
 
--- The same as add but unequips items of this sort if there any
+-- The same as add but unequips items of this sort if there any (and sort is unequippable)
 loti.item.on_unit.add_with_replace = function(unit, item_number, crafted_sort)
 	local sort = loti.item.type[item_number]
 	if crafted_sort then
 		sort = crafted_sort
 	end
-	local equipped = loti.item.on_unit.find(unit, sort)
-	if equipped then
-		loti.item.util.take_item_from_unit(unit, equipped.number, sort)
+	if (sort ~= "potion") and (sort ~= "limited") then
+		local equipped = loti.item.on_unit.find(unit, sort)
+		if equipped then
+			loti.item.util.take_item_from_unit(unit, equipped.number, sort)
+		end
 	end
 	-- Store the fact "unit has this item".
 	loti.unit.add_item(unit.__cfg, item_number, crafted_sort)
