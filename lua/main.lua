@@ -560,7 +560,11 @@ local function unit_information_part_5()
     if cost == nil then
 	return "    none      inaccessible</span> \n"
     end
-    return string.format("%6d%%       %6d</span> \n", math.floor(defence), math.floor(cost))
+    if defence > 100 then -- def cap
+	    return string.format("%6d%% cap   %6d</span> \n", math.floor(200 - defence), math.floor(cost))
+    else
+	    return string.format("%6d%%       %6d</span> \n", math.floor(defence), math.floor(cost))
+    end
   end
 
   local result = _"<span font_family='monospace' weight='bold' color='#60A0FF'>"
