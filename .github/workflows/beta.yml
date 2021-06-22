@@ -1,0 +1,33 @@
+name: Upload beta to Wesnoth addon server
+
+# Runs daily.
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  upload-beta:
+    runs-on: ubuntu-20.04
+    env:
+      PBL_PASSPHRASE: ${{ secrets.PBL_PASSPHRASE }}
+      PBL_EMAIL: ${{ secrets.PBL_EMAIL }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Fetching up to the commit with the latest release is necessary to use "git describe"
+
+      - uses: actions/cache@v2
+        with:
+          path: wesnoth_tools
+          key: buildcache-
+
+      - name: Install dependencies
+        run: sudo apt-get install -y luarocks && sudo luarocks install luacheck
+
+      # Don't fail if the exit code is 1 (which means "there were warnings, but no errors"),
+      # only on exit code 2 ("there were errors").
+      - name: RUN -- luacheck .
+        run: luacheck --no-color . || [[ $? -le 1 ]]
+
+      # If luacheck hasn't failed, then upload the addon.
+      - run: .github/scripts/upload_beta_addon.sh
