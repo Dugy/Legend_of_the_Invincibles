@@ -4,9 +4,9 @@ local item_picker = {} -- for its own mp safety queue
 wesnoth.require("inventory/multiplayer_safety")(item_picker)
 function loti.util.item_pick_menu (mpsafety, unit)
 	local hex_items = loti.item.on_the_ground.list_with_sorts (unit.x, unit.y)
---	
+--
 	for __, elem in ipairs(hex_items) do
-		
+
 		local number = elem.number
 		local sort = elem.sort
 		local item = loti.item.type[elem.number]
@@ -46,7 +46,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 						title = item.name,
 						portrait = item.image,
 						message = description .. "\n\n" .. _"Use this potion?"
-					}, {_"Use it.", _"Store it. Currently having "..count.._" ssuch items stored.", _"Leave it on the ground."})
+					}, {_"Use it.", _"Store it. Currently having "..count.._" such items stored.", _"Leave it on the ground."})
 					if res == 1 then
 						return 0
 					elseif res == 2 then
@@ -80,7 +80,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 				else
 					return 3
 				end
-					
+
 			end
 			local result = show_picking_dialogue(item, sort, replaced_item, why_cant_equip, count)
 			if result == 0 then
