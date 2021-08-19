@@ -5,6 +5,7 @@
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
+local mpsafety
 
 -- Ordered array of indexes of attacks (positions in unit.attacks array)
 -- for attacks affected by the shown checkboxes.
@@ -177,36 +178,34 @@ local function onsave(unit)
 		is_selected[checkbox_id] = 1
 	end
 
-	-- Save changes (if any) and go back to the Items tab.
-	local disabled_defences = {}
+	-- Enqueue changed to the mpsafety and go back to the Items tab.
+	local operation = {}
 	for checkbox_id, attack_index in ipairs(retaliation_checkboxes) do
+		local weight_cycle = 0
 		if is_selected[checkbox_id] then
-			unit.attacks[attack_index].defense_weight = 1
-		else
-			unit.attacks[attack_index].defense_weight = 0
-
-			-- Add to unit.variables.disabled_defences, so that we would later know
-			-- that this is not an "attack only by design" weapon.
-			table.insert(disabled_defences, {
-				name = unit.attacks[attack_index].name,
-				order = attack_index - 1 -- Backward compatibility with WML dialog
-			})
+			weight_cycle = 1
 		end
+		table.insert(operation, wml.tag.attack{
+			index = attack_index,
+			weight = weight_cycle
+		})
 	end
-
-	helper.set_variable_array("disabled_defences", disabled_defences, unit)
+	operation.command = "set_attacks_retal"
+	operation.unit = unit
+	mpsafety:queue(operation)
 end
 
 
 -- Add this tab to the dialog.
 
 return function(inventory_dialog)
+	mpsafety = inventory_dialog.mpsafety
 	inventory_dialog.add_tab {
 		id = "retaliation_tab",
 		grid = get_tab,
 		onshow = onshow
 	}
-
+	
 	inventory_dialog.install_callbacks(function()
 		-- Callback for "Save" button.
 		wesnoth.set_dialog_callback(function()

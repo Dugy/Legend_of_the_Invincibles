@@ -114,6 +114,26 @@ function mpsafety:run_immediately(operation)
 		-- Remove item from the ground, add one gem as compensation.
 		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
 		loti.gem.add(operation.gem, 1)
+	elseif command == "set_attacks_retal" then
+		-- Enabling/disabling attack for retaliation
+		local disabled_defences = {}
+		for _, attack_tag in ipairs(operation) do
+			local attack_index = attack_tag[2].index
+			local weight = attack_tag[2].weight
+			if weight == 1 then
+				unit.attacks[attack_index].defense_weight = 1
+			else
+				unit.attacks[attack_index].defense_weight = 0
+				
+				-- Add to unit.variables.disabled_defences, so that we would later know
+				-- that this is not an "attack only by design" weapon.
+				table.insert(disabled_defences, {
+					name = unit.attacks[attack_index].name,
+					order = attack_index - 1 -- Backward compatibility with WML dialog
+				})
+			end
+		end
+		helper.set_variable_array("disabled_defences", disabled_defences, unit)
 	else
 		helper.wml_error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
 	end
