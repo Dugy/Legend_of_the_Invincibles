@@ -1,6 +1,5 @@
 --! #textdomain "wesnoth-loti"
 
-local helper = wesnoth.require "lua/helper.lua"
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 -- TODO: rename/regroup these functions to have well-structured names (as in items.lua),

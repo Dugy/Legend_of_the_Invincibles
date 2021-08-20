@@ -1,7 +1,11 @@
 --! #textdomain "wesnoth-loti"
+
+local helper = wesnoth.require "lua/helper.lua"
 local _ = wesnoth.textdomain "wesnoth-loti"
+
 local item_picker = {} -- for its own mp safety queue
 wesnoth.require("inventory/multiplayer_safety")(item_picker)
+
 function loti.util.item_pick_menu (mpsafety, unit)
 	local hex_items = loti.item.on_the_ground.list_with_sorts (unit.x, unit.y)
 --
