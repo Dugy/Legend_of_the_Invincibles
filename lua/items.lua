@@ -507,7 +507,7 @@ loti.item.on_the_ground.list = function(x, y)
 end
 
 -- The same but returns sorts, useful for manipulating crafted items without workarounds
--- Returns: Lua array, each element is {item_number, sort}
+-- Returns: Lua array, each element is {number = ..., sort = ...}
 loti.item.on_the_ground.list_with_sorts = function(x, y)
 	local list = helper.get_variable_array("items")
 	local results = {}
@@ -567,7 +567,7 @@ function wesnoth.wml_actions.loti_item_storage_add(cfg)
 end
 
 -------------------------------------------------------------------------------
--- Generate item desciptions
+-- Generate item descriptions
 -------------------------------------------------------------------------------
 
 -- Generate the description of an item

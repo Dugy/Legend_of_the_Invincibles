@@ -178,7 +178,7 @@ local function onsave(unit)
 		is_selected[checkbox_id] = 1
 	end
 
-	-- Enqueue changed to the mpsafety and go back to the Items tab.
+	-- Enqueue changes to the mpsafety and go back to the Items tab.
 	local operation = {}
 	for checkbox_id, attack_index in ipairs(retaliation_checkboxes) do
 		local weight_cycle = 0
