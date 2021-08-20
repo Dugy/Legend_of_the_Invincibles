@@ -275,7 +275,7 @@ local function open_inventory_dialog(unit)
 		-- Tell other players what changed (which items were equipped, etc.).
 		return inventory_dialog.mpsafety:export()
 	end)
-	
+
 	-- Re-run the same operations (e.g. Equip/Unequip) for all other players.
 	inventory_dialog.mpsafety:synchronize(result)
 end
@@ -288,7 +288,6 @@ function wesnoth.wml_actions.show_inventory(cfg)
 		helper.wml_error("[show_inventory]: no units found.")
 	end
 	open_inventory_dialog(units[1])
-		
 end
 
 function wesnoth.wml_actions.item_pick_menu_inventory(cfg)
@@ -296,8 +295,7 @@ function wesnoth.wml_actions.item_pick_menu_inventory(cfg)
 	if #units < 1 then
 		helper.wml_error("[item_pick_menu_inventory]: no units found.")
 	end
-	
+
 	-- just add actions to mpsafety queue
 	loti.util.item_pick_menu(inventory_dialog.mpsafety, units[1])
-
 end

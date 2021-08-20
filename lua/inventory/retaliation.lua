@@ -205,7 +205,7 @@ return function(inventory_dialog)
 		grid = get_tab,
 		onshow = onshow
 	}
-	
+
 	inventory_dialog.install_callbacks(function()
 		-- Callback for "Save" button.
 		wesnoth.set_dialog_callback(function()

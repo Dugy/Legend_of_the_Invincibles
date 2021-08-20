@@ -124,7 +124,7 @@ function mpsafety:run_immediately(operation)
 				unit.attacks[attack_index].defense_weight = 1
 			else
 				unit.attacks[attack_index].defense_weight = 0
-				
+
 				-- Add to unit.variables.disabled_defences, so that we would later know
 				-- that this is not an "attack only by design" weapon.
 				table.insert(disabled_defences, {

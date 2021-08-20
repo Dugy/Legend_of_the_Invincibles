@@ -77,7 +77,7 @@ loti.item.storage.add = function(item_number, crafted_sort)
 		side.gold = side.gold + item.gold_quantity
 		return
 	end
-	
+
 	if item.sort == "gem" then
 		-- Special case: gem is added into appropriate variable
 		loti.gem.add (item_number - 520, 1)
@@ -450,7 +450,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 				}
 			}
 		}
-		
+
 	end
 	wesnoth.fire_event("item drop", x, y) -- where is it used?
 end
@@ -472,7 +472,7 @@ loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
 			end
 		end
 	end
-	
+
 	if not index_to_remove then
 		return
 	end
