@@ -4,6 +4,7 @@ max_line_length = false -- May enable later. Have too many lines with 150+ symbo
 -- These global variables are allowed.
 globals = {
 	"loti", -- All non-local LoTI functions are placed here, e.g. loti.item.on_unit.list()
+	"crafting", -- Non-local state of Crafting dialog
 	"T", -- Shortcut for wml.tag,
 
 	-- FIXME: these globals should be moved somewhere within loti[] array
