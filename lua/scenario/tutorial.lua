@@ -226,7 +226,7 @@ local function inventory_step4()
 	end
 
 	config.destroy_item = function()
-		Delly_says(_"Were you listening to the song where they yelled <i>We were built for destrouction</i> too often?")
+		Delly_says(_"Were you listening to the song where they yelled <i>We were built for destruction</i> too often?")
 	end
 end
 
@@ -311,7 +311,7 @@ local function inventory_step7()
 		elseif button.id == "retaliation" then
 			button.onsubmit = nil
 			button.onclick = function()
-				Delly_says(_"Nobody will think about attacking her when I am done.")
+				Efraim_says(_"Nobody will think about attacking her when I am done.")
 			end
 		elseif button.id == "unit_information" then
 			button.onsubmit = nil
