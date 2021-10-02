@@ -32,6 +32,21 @@ local function make_attacks_unique(unit)
 	end
 end
 
+loti.legacy_list = {"fire_dragon_legacy", "ice_dragon_legacy", "dark_dragon_legacy", "undead_legacy", "legacy_of_kings", "legacy_of_titans", "legacy_of_sorrow", "legacy_of_light", "legacy_of_phoenix", "legacy_of_exile", "legacy_of_the_freezing_north", "legacy_of_the_free"}
+
+local function get_random_seed_from_unit(unit)
+	local seed = unit.x
+	seed = (seed >> 3) ~ unit.y -- bit shift 3 and xor
+	if unit.type and string.len(unit.type) > 0 then
+		seed = (seed >> 3) ~ string.byte(unit.type)
+	end
+	if unit.race and string.len(unit.race) > 0 then
+		seed = (seed >> 3) ~ string.byte(unit.race)
+	end
+	seed = wesnoth.get_variable("base_seed") ~ seed
+	return seed
+end
+
 -- This will need more edits once that WML intercompatibility is not needed
 -- Parameter: original - WML table of [unit] tag.
 -- Returns: modified WML table of [unit] tag.
@@ -58,9 +73,10 @@ function wesnoth.update_stats(original)
 		return item.sort and (item.sort:match("gem") or item.sort:match("temporary"))
 	end)
 
-	-- Check if geared and set the trait appropriately
+	-- Check if geared and has legacy and adjust modifications appropriately
 	local geared = #(loti.unit.list_unit_item_numbers(original)) > 0
-	local marked_as_geared
+	local marked_as_geared = false
+	local has_legacy = false
 
 	for i, modif in ipairs(visible_modifications) do
 		if modif[1] == "trait" and modif[2].id == "geared" then
@@ -69,11 +85,19 @@ function wesnoth.update_stats(original)
 			else
 				marked_as_geared = true
 			end
-			break
+		end
+		
+		if modif[1] == "advancement" and modif[2].id and string.find(modif[2].id, "legacy") then
+			has_legacy = true
 		end
 	end
 	if geared and not marked_as_geared then
 		table.insert(visible_modifications, { "trait", { id = "geared", name = _"GEARED", description = _"Geared: This unit is equipped with items. This is just to easily identify it on the recall list."}})
+	end
+	if not has_legacy and original.race ~= "undead" then
+		local seed = get_random_seed_from_unit(original)
+		local index = seed % #loti.legacy_list
+		table.insert(visible_modifications, { "advancement", { id = loti.legacy_list[index + 1] }})
 	end
 
 	-- Remove objects providing visual effects
