@@ -53,6 +53,43 @@ function wesnoth.wml_actions.get_unit_resistance(cfg)
 	end
 end
 
+function wesnoth.wml_actions.award_extra_experience(cfg)
+	local units = wesnoth.get_units(cfg)
+	local added = cfg.experience
+	if cfg.death_of_level then
+		if cfg.death_of_level == 0 then
+			added = 4
+		else
+			added = cfg.death_of_level * 8
+		end
+	end
+	if not added then
+		helper.wml_error "[award_extra_experience] missing mandatory experience= variable"
+	end
+	if added == 0 then
+		return
+	end
+	for i = 1,#units do
+		local unit = units[i].__cfg
+		if cfg.defer then
+			local variables = helper.get_child(unit, "variables")
+			if variables.lua_delayed_exp then
+				variables.lua_delayed_exp = variables.lua_delayed_exp + added
+			else
+				variables.lua_delayed_exp = added
+			end -- The exp will be added by an event when combat ends
+		else
+			unit.experience = unit.experience + added
+		end
+		wesnoth.put_unit(unit)
+		if unit.experience >= unit.max_experience then
+			wesnoth.wml_actions.store_unit{ { "filter", { id = unit.id }}, variable = "level_store" }
+			wesnoth.wml_actions.unstore_unit{ variable = "level_store", find_vacant = false }
+			wesnoth.wml_actions.clear_variable{ name = "level_store" }
+		end
+	end
+end
+
 function wesnoth.wml_actions.harm_unit_loti(cfg)
 	-- Most of this is pasted from core, but I needed to do some edits that could not have been done without this unpleasant violation of the DRY (Don't Repeat Yourself) rule
 	-- To be honest, there are parts I don't even understand
@@ -213,34 +250,11 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 			if unit_to_harm.hitpoints < 1 then
 				local uth_cfg = unit_to_harm.__cfg
-				local added_exp
-				if uth_cfg.level > 0 then
-					added_exp = uth_cfg.level * 8
-				else
-					added_exp = 4
-				end
 				if harmer then
-					wesnoth.wml_actions.store_unit { { "filter", { id = harmer.id } }, variable = "Lua_store_unit", kill = false }
-					local harmer_variables = helper.get_child(harmer.__cfg, "variables")
-					if harmer_variables.lua_delayed_exp then
-						wesnoth.wml_actions.set_variable { name="Lua_store_unit.variables.lua_delayed_exp", add = added_exp }
-					else
-						wesnoth.wml_actions.set_variable { name="Lua_store_unit.variables.lua_delayed_exp", value = added_exp }
-					end -- The exp will be added when combat ends
-					wesnoth.wml_actions.unstore_unit { variable = "Lua_store_unit",
-									find_vacant = false,
-									animate = toboolean( animate ),
-									fire_event = toboolean(fire_event) }
-					wesnoth.set_variable ( "Lua_store_unit", nil )
+					wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
 				end
 				wesnoth.wml_actions.kill({
 					id = unit_to_harm.id,
-					{ "filter_second", {
-						id=harmer.id
-					}},
-					{ "secondary_unit", {
-						id=harmer.id
-					}},
 					animate = toboolean( animate ),
 					fire_event = toboolean(toboolean(fire_event))
 				})
