@@ -43,7 +43,11 @@ local function get_random_seed_from_unit(unit)
 	if unit.race and string.len(unit.race) > 0 then
 		seed = (seed >> 3) ~ string.byte(unit.race)
 	end
-	seed = wesnoth.get_variable("base_seed") ~ seed
+	local base_seed = wesnoth.get_variable("base_seed")
+	if not base_seed then
+		base_seed = 0
+	end
+	seed = base_seed ~ seed
 	return seed
 end
 
