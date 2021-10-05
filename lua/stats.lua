@@ -36,12 +36,12 @@ loti.legacy_list = {"fire_dragon_legacy", "ice_dragon_legacy", "dark_dragon_lega
 
 local function get_random_seed_from_unit(unit)
 	local seed = unit.x
-	seed = (seed >> 3) ~ unit.y -- bit shift 3 and xor
+	seed = (seed << 3) ~ unit.y -- bit shift 3 and xor
 	if unit.type and string.len(unit.type) > 0 then
-		seed = (seed >> 3) ~ string.byte(unit.type)
+		seed = (seed << 3) ~ string.byte(unit.type)
 	end
 	if unit.race and string.len(unit.race) > 0 then
-		seed = (seed >> 3) ~ string.byte(unit.race)
+		seed = (seed << 3) ~ string.byte(unit.race)
 	end
 	local base_seed = wesnoth.get_variable("base_seed")
 	if not base_seed then
