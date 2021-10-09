@@ -598,7 +598,7 @@ function wesnoth.update_stats(original)
 			remade.halo = "misc/berserk-1.png:100,misc/berserk-2.png:100,misc/berserk-3.png:100,misc/berserk-2.png:100"
 		elseif name == "damage" and ability.id == "charge_leadership" then
 			remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
-		elseif name = "poison" and ability.id == "poison_leadership" then
+		elseif name == "poison" and ability.id == "poison_leadership" then
 			remade.halo = "misc/poison-1.png:200,misc/poison-2.png:200,misc/poison-3.png:200,misc/poison-2.png:200"
 		elseif name == "firststrike" and ability.id == "firststrike_leadership" then
 			remade.halo = "misc/firststrike-1.png:100,misc/firststrike-2.png:100,misc/firststrike-3.png:100"
