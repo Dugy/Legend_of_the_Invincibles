@@ -244,7 +244,7 @@ local function inventory_step6()
 		elseif button.id == "storage" then
 			button.onsubmit = nil
 			button.onclick = function()
-				if wesnoth.get_variable("tutorial.proceed") == 0 then
+				if wml.variables["tutorial.proceed"] == 0 then
 					original_button_callbacks.storage.onclick()
 				else
 					Delly_says(_"Oh, yes, carry on giving me stuff. I would like money now. Preferably a lot of them. Sharing is caring, you know that?")
@@ -333,7 +333,7 @@ local function inventory_step7()
 
 	config.slot_callback = function(item_sort)
 		if item_sort == "armour" then
-			if wesnoth.get_variable("tutorial.proceed") == 0 then
+			if wml.variables["tutorial.proceed"] == 0 then
 				original_slot_callback("armour")
 			else
 				Delly_says(_"Enough!")

@@ -313,7 +313,7 @@ local wml_based_implementation = {
 			local variable = on_equip.variable or "armed"
 			wesnoth.set_variable(variable, unit)
 			loti.execute(on_equip)
-			unit = wesnoth.get_variable(variable)
+			unit = wml.variables[variable]
 			wesnoth.set_variable(variable, nil)
 		end
 

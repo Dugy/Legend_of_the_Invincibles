@@ -5,7 +5,7 @@ local _ = wesnoth.textdomain "wesnoth-loti"
 local function call_event_on_unit(u, name)
 	wesnoth.set_variable("updated", u)
 	wesnoth.wml_actions.fire_event{ name = name }
-	u = wesnoth.get_variable("updated")
+	u = wml.variables["updated"]
 	return u
 end
 
@@ -43,7 +43,7 @@ local function get_random_seed_from_unit(unit)
 	if unit.race and string.len(unit.race) > 0 then
 		seed = (seed << 3) ~ string.byte(unit.race)
 	end
-	local base_seed = wesnoth.get_variable("base_seed")
+	local base_seed = wml.variables["base_seed"]
 	if not base_seed then
 		base_seed = 0
 	end

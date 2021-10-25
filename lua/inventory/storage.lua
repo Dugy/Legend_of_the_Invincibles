@@ -269,7 +269,7 @@ local function is_too_progressed()
 		return false
 	end
 
-	if wesnoth.get_variable("turn_number") <= 2 then
+	if wml.variables["turn_number"] <= 2 then
 		return false
 	end
 
