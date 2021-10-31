@@ -594,18 +594,6 @@ function wesnoth.update_stats(original)
 		if best_backstab then
 			table.insert(specials, best_backstab)
 		end
-		-- Add latent weapon specials
-		if not best_backstab then
-			table.insert(specials, { "damage", { id = "latent_backstab", multiply = 2, { "filter_opponent", { formula = "enemy_of(self, flanker) and not flanker.petrified" }}, active_on = "offense", { "filter_self", { { "filter_adjacent", { ability = "backstab_leadership", is_enemy = false }}}}}})
-		end
-		table.insert(specials, { "damage", { id = "latent_charge", multiply = 1.5, apply_to = "both", active_on = "offense", { "filter_self", { { "filter_adjacent", { ability = "charge_leadership", is_enemy = false }}}}}})
-		table.insert(specials, { "berserk", { id = "latent_berserk", value = 30, { "filter_self", { { "filter_adjacent", { ability = "berserk_leadership", is_enemy = false }}}}}})
-		table.insert(specials, { "drains", { id = "latent_drain", value = 25, { "filter_self", { { "filter_adjacent", { ability = "drain_leadership", is_enemy = false }}}}}})
-		if atk.range == "ranged" then
-			table.insert(specials, { "chance_to_hit", { id = "latent_marksman", value = 60, cumulative = true, active_on = "offense", { "filter_self", { { "filter_adjacent", { ability = "marksman_leadership", is_enemy = false }}}}}})
-		end
-		table.insert(specials, { "firststrike", { id = "latent_firststrike", { "filter_self", { { "filter_adjacent", { ability = "firststrike_leadership", is_enemy = false }}}}}})
-		table.insert(specials, { "poison", { id = "latent_poison", { "filter_self", { { "filter_adjacent", { ability = "poison_leadership", is_enemy = false }}}}}})
 		local wrath_intensity = 0
 		if vars.wrath == true then
 			wrath_intensity = vars.wrath_intensity
@@ -634,30 +622,22 @@ function wesnoth.update_stats(original)
 			elseif ability.value < 0 then
 				remade.halo = "halo/darkens-aura.png"
 			end
-		elseif name == "dummy" then
-			if ability.id == "berserk_leadership" then
-				remade.halo = "misc/berserk-1.png:100,misc/berserk-2.png:100,misc/berserk-3.png:100,misc/berserk-2.png:100"
-			elseif ability.id == "charge_leadership" then
-				remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
-			elseif ability.id == "poison_leadership" then
-				remade.halo = "misc/poison-1.png:200,misc/poison-2.png:200,misc/poison-3.png:200,misc/poison-2.png:200"
-			elseif ability.id == "firststrike_leadership" then
-				remade.halo = "misc/firststrike-1.png:100,misc/firststrike-2.png:100,misc/firststrike-3.png:100"
-			elseif ability.id == "backstab_leadership" then
-				remade.halo = "misc/backstab-1.png:200,misc/backstab-2.png:200,misc/backstab-3.png:200,misc/backstab-2.png:200"
-			elseif ability.id == "marksman_leadership" then
-				remade.halo = "misc/marksman-1.png:100,misc/marksman-2.png:100,misc/marksman-3.png:100,misc/marksman-2.png:100"
-			elseif ability.id == "drain_leadership" then
-				remade.halo = "misc/drain-1.png:200,misc/drain-2.png:200,misc/drain-3.png:200,misc/drain-2.png:200"
-			elseif ability.id == "northfrost aura" then
-				remade.halo = "halo/blizzard-1.png~O(40%):100,halo/blizzard-2.png~O(40%):100,halo/blizzard-3.png~O(40%):100"
-			elseif ability.id == "charge_leadership" then
-				remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
-			elseif ability.id == "charge_leadership" then
-				remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
-			elseif ability.id == "charge_leadership" then
-				remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
-			end
+		elseif name == "berserk" and ability.id == "berserk_leadership" then
+			remade.halo = "misc/berserk-1.png:100,misc/berserk-2.png:100,misc/berserk-3.png:100,misc/berserk-2.png:100"
+		elseif name == "damage" and ability.id == "charge_leadership" then
+			remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
+		elseif name == "poison" and ability.id == "poison_leadership" then
+			remade.halo = "misc/poison-1.png:200,misc/poison-2.png:200,misc/poison-3.png:200,misc/poison-2.png:200"
+		elseif name == "firststrike" and ability.id == "firststrike_leadership" then
+			remade.halo = "misc/firststrike-1.png:100,misc/firststrike-2.png:100,misc/firststrike-3.png:100"
+		elseif name == "damage" and ability.id == "backstab_leadership" then
+			remade.halo = "misc/backstab-1.png:200,misc/backstab-2.png:200,misc/backstab-3.png:200,misc/backstab-2.png:200"
+		elseif name == "chance_to_hit" and ability.id == "marksman_leadership" then
+			remade.halo = "misc/marksman-1.png:100,misc/marksman-2.png:100,misc/marksman-3.png:100,misc/marksman-2.png:100"
+		elseif name == "drains" and ability.id == "drain_leadership" then
+			remade.halo = "misc/drain-1.png:200,misc/drain-2.png:200,misc/drain-3.png:200,misc/drain-2.png:200"
+		elseif name == "dummy" and ability.id == "northfrost aura" then
+			remade.halo = "halo/blizzard-1.png~O(40%):100,halo/blizzard-2.png~O(40%):100,halo/blizzard-3.png~O(40%):100"
 
 		end
 	end
