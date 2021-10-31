@@ -17,7 +17,7 @@ loti.gem.translated_names = { _"obsidians", _"topazes", _"opals", _"pearls", _"d
 loti.gem.get_counts = function()
 	local gem_quantities = {}
 	for _, gem in ipairs(loti.gem.types) do
-		table.insert(gem_quantities, wesnoth.get_variable(gem) or 0)
+		table.insert(gem_quantities, wml.variables[gem] or 0)
 	end
 	return gem_quantities
 end

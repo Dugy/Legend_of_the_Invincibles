@@ -53,6 +53,43 @@ function wesnoth.wml_actions.get_unit_resistance(cfg)
 	end
 end
 
+function wesnoth.wml_actions.award_extra_experience(cfg)
+	local units = wesnoth.get_units(cfg)
+	local added = cfg.experience
+	if cfg.death_of_level then
+		if cfg.death_of_level == 0 then
+			added = 4
+		else
+			added = cfg.death_of_level * 8
+		end
+	end
+	if not added then
+		helper.wml_error "[award_extra_experience] missing mandatory experience= variable"
+	end
+	if added == 0 then
+		return
+	end
+	for i = 1,#units do
+		local unit = units[i].__cfg
+		if cfg.defer then
+			local variables = helper.get_child(unit, "variables")
+			if variables.lua_delayed_exp then
+				variables.lua_delayed_exp = variables.lua_delayed_exp + added
+			else
+				variables.lua_delayed_exp = added
+			end -- The exp will be added by an event when combat ends
+		else
+			unit.experience = unit.experience + added
+		end
+		wesnoth.put_unit(unit)
+		if unit.experience >= unit.max_experience then
+			wesnoth.wml_actions.store_unit{ { "filter", { id = unit.id }}, variable = "level_store" }
+			wesnoth.wml_actions.unstore_unit{ variable = "level_store", find_vacant = false }
+			wesnoth.wml_actions.clear_variable{ name = "level_store" }
+		end
+	end
+end
+
 function wesnoth.wml_actions.harm_unit_loti(cfg)
 	-- Most of this is pasted from core, but I needed to do some edits that could not have been done without this unpleasant violation of the DRY (Don't Repeat Yourself) rule
 	-- To be honest, there are parts I don't even understand
@@ -61,7 +98,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 	-- These two functions were copied from wml-tags.lua too
 	local function start_var_scope(name)
 		local var = helper.get_variable_array(name) --containers and arrays
-		if #var == 0 then var = wesnoth.get_variable(name) end --scalars (and nil/empty)
+		if #var == 0 then var = wml.variables[name] end --scalars (and nil/empty)
 		wesnoth.set_variable(name)
 		return var
 	end
@@ -213,34 +250,11 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 			if unit_to_harm.hitpoints < 1 then
 				local uth_cfg = unit_to_harm.__cfg
-				local added_exp
-				if uth_cfg.level > 0 then
-					added_exp = uth_cfg.level * 8
-				else
-					added_exp = 4
-				end
 				if harmer then
-					wesnoth.wml_actions.store_unit { { "filter", { id = harmer.id } }, variable = "Lua_store_unit", kill = false }
-					local harmer_variables = helper.get_child(harmer.__cfg, "variables")
-					if harmer_variables.lua_delayed_exp then
-						wesnoth.wml_actions.set_variable { name="Lua_store_unit.variables.lua_delayed_exp", add = added_exp }
-					else
-						wesnoth.wml_actions.set_variable { name="Lua_store_unit.variables.lua_delayed_exp", value = added_exp }
-					end -- The exp will be added when combat ends
-					wesnoth.wml_actions.unstore_unit { variable = "Lua_store_unit",
-									find_vacant = false,
-									animate = toboolean( animate ),
-									fire_event = toboolean(fire_event) }
-					wesnoth.set_variable ( "Lua_store_unit", nil )
+					wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
 				end
 				wesnoth.wml_actions.kill({
 					id = unit_to_harm.id,
-					{ "filter_second", {
-						id=harmer.id
-					}},
-					{ "secondary_unit", {
-						id=harmer.id
-					}},
 					animate = toboolean( animate ),
 					fire_event = toboolean(toboolean(fire_event))
 				})
@@ -265,23 +279,23 @@ end
 -- Compute any "special" state that a unit may have.
 -- The vast majority of units won't have anything reported by this section.
 local function unit_information_part_1()
-    local max_devour_count = wesnoth.get_variable("unit.variables.max_devour_count")
-    local devour_count = wesnoth.get_variable("unit.variables.devour_count")
-    local max_redeem_count = wesnoth.get_variable("unit.variables.max_redeem_count")
-    local redeem_count = wesnoth.get_variable("unit.variables.redeem_count")
-    local max_lesser_redeem_count = wesnoth.get_variable("unit.variables.max_lesser_redeem_count")
-    local lesser_redeem_count = wesnoth.get_variable("unit.variables.lesser_redeem_count")
-    local starving = wesnoth.get_variable("unit.variables.starving")
-    local from_the_ashes_used = wesnoth.get_variable("unit.variables.from_the_ashes_used")
-    local from_the_ashes_cooldown = wesnoth.get_variable("unit.variables.from_the_ashes_cooldown")
-    local wrath = wesnoth.get_variable("unit.variables.wrath_intensity")
+    local max_devour_count = wml.variables["unit.variables.max_devour_count"]
+    local devour_count = wml.variables["unit.variables.devour_count"]
+    local max_redeem_count = wml.variables["unit.variables.max_redeem_count"]
+    local redeem_count = wml.variables["unit.variables.redeem_count"]
+    local max_lesser_redeem_count = wml.variables["unit.variables.max_lesser_redeem_count"]
+    local lesser_redeem_count = wml.variables["unit.variables.lesser_redeem_count"]
+    local starving = wml.variables["unit.variables.starving"]
+    local from_the_ashes_used = wml.variables["unit.variables.from_the_ashes_used"]
+    local from_the_ashes_cooldown = wml.variables["unit.variables.from_the_ashes_cooldown"]
+    local wrath = wml.variables["unit.variables.wrath_intensity"]
 
     local result = ""
     local span = "<span font_weight='bold'>"
     result = result .. span .. _"Hitpoints:</span> "
-    .. string.format("%u/%u", wesnoth.get_variable("unit.hitpoints"), wesnoth.get_variable("unit.max_hitpoints")) .. " \n"
+    .. string.format("%u/%u", wml.variables["unit.hitpoints"], wml.variables["unit.max_hitpoints"]) .. " \n"
     result = result .. span .. _"Experience:</span> "
-    .. string.format("%u/%u", wesnoth.get_variable("unit.experience"), wesnoth.get_variable("unit.max_experience")) .. " \n"
+    .. string.format("%u/%u", wml.variables["unit.experience"], wml.variables["unit.max_experience"]) .. " \n"
     if max_devour_count ~= nil and max_devour_count > 0 then
       result = result .. span .. _"Soul eater score:</span> "
       .. string.format("%u/%u", devour_count, max_devour_count) .. " \n"
@@ -500,7 +514,7 @@ local function unit_information_part_3()
     end
 
     local function list_abilities()
-      local abilities = wesnoth.get_variable("unit.abilities")
+      local abilities = wml.variables["unit.abilities"]
       local result_list = {}
       if abilities ~= nil then
         for _, v in ipairs(abilities) do
@@ -523,7 +537,7 @@ end
 -- character takes up the same amount of space.
 local function unit_information_part_4()
   local function form_one_line(type)
-    local resist = 100 - wesnoth.get_variable("unit.resistance." .. type)
+    local resist = 100 - wml.variables["unit.resistance." .. type]
     local penetrate = 0
     local resistances = helper.get_variable_array("unit.abilities.resistance")
 
@@ -555,8 +569,8 @@ end
 -- character takes up the same amount of space.
 local function unit_information_part_5()
   local function form_one_line(type)
-    local defence = 100 - (wesnoth.get_variable("unit.defense." .. type) or 0)
-    local cost = wesnoth.get_variable("unit.movement_costs." .. type)
+    local defence = 100 - (wml.variables["unit.defense." .. type] or 0)
+    local cost = wml.variables["unit.movement_costs." .. type]
     if cost == nil then
 	return "    none      inaccessible</span> \n"
     end
@@ -652,7 +666,7 @@ function wesnoth.wml_actions.pre_advance_stuff(cfg)
 --    wesnoth.message("pre_advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
     local a = helper.get_child(unit, "advancement")
-    local t = wesnoth.get_variable("side_number")
+    local t = wml.variables["side_number"]
     if t == unit.side then
         if a ~= nil and a.id == "backup_amla" then
             unit = clear_advancements(unit)
@@ -731,7 +745,7 @@ suffix=face|bones|tooth|skin|ribs|soul|scratch|knuckle|femur
 function wesnoth.wml_actions.check_unit_title(cfg)
 	local u
 	if cfg.variable then
-		u = wesnoth.get_variable(cfg.variable)
+		u = wml.variables[cfg.variable]
 	else
 		local units = wesnoth.get_units(cfg)
 		if #units < 1 then

@@ -84,7 +84,7 @@ loti.item.storage.add = function(item_number, crafted_sort)
 		return
 	end
 
-	local list = wesnoth.get_variable("item_storage") or {}
+	local list = wml.variables["item_storage"] or {}
 
 	table.insert(list, {
 		crafted_sort or item.sort,
@@ -106,7 +106,7 @@ end
 -- If storage has many identical items, only one gets removed.
 -- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
 loti.item.storage.remove = function(item_number, crafted_sort)
-	local list = wesnoth.get_variable("item_storage") or {}
+	local list = wml.variables["item_storage"] or {}
 
 	for index, elem in ipairs(list) do
 		if not crafted_sort or elem[1] == crafted_sort then
@@ -126,7 +126,7 @@ end
 -- Counts the number of items of each type.
 -- Returns: Lua array, e.g. { 100 => 1, 15 => 5 } (one Cunctator's sword (#100) and five Ice Armours (#15)).
 loti.item.storage.list_items = function(item_sort)
-	local list = wesnoth.get_variable("item_storage") or {}
+	local list = wml.variables["item_storage"] or {}
 	local results = {}
 
 	for _, elem in ipairs(list) do
@@ -147,7 +147,7 @@ end
 -- Counts the number of items of each sort.
 -- Returns: Lua array, e.g. { "sword" => 10, "bow" => 12, "armour" => 5, ... }.
 loti.item.storage.list_sorts = function()
-	local list = wesnoth.get_variable("item_storage") or {}
+	local list = wml.variables["item_storage"] or {}
 	local results = {}
 
 	for _, elem in ipairs(list) do
@@ -376,7 +376,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 		type = item_number,
 		x = x,
 		y = y,
-		turn = wesnoth.get_variable("turn_number")
+		turn = wml.variables["turn_number"]
 	}
 	if crafted_sort then
 		record.sort = crafted_sort
