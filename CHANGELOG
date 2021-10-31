@@ -1,5 +1,9 @@
 Changelog
 
+3.2.7 (maintenance)
+Fixed a lot of bugs
+Fixed the Out of Sync errors arising from the new UI
+
 3.2.6 (development)
 Rewrote the item drop system, altering the probabilities of items to drop
 Items hidden in scenarios come from different pools than random drops
