@@ -315,7 +315,7 @@ end
 -- Display the menu that chooses between redeem upgrades available to certain Unit.
 -- Parameter "ability_tree" can be "redeem" or "soul_eater".
 -- Returns the selected upgrade (ID string), e.g. "particlestorm".
-local function redeem_menu(ability_tree, unit)
+function redeem_menu(ability_tree, unit)
 	local known_upgrades = known_ability_trees[ability_tree]
 	if not known_upgrades then
 		helper.wml_error("redeem_menu(): unknown ability tree. Try \"redeem\" or \"soul_eater\".");
@@ -464,37 +464,39 @@ local function redeem_menu(ability_tree, unit)
 		}
 	}
 
-	local function get_selected_menu_item()
-		local index = wesnoth.get_dialog_value(listbox_id)
+	local function get_selected_menu_item(dialog)
+		local index = dialog[listbox_id].selected_index
 		return menu_items[index]
 	end
 
-	local function preshow()
+	local function preshow(dialog)
+		local listbox = dialog[listbox_id]
+
 		for index, menu_item in ipairs(menu_items) do
-			wesnoth.set_dialog_value(menu_item.image, listbox_id, index, "image")
-			wesnoth.set_dialog_value(menu_item.details, listbox_id, index, "upgrade_name")
+			listbox[index].image.label = menu_item.image
+			listbox[index].upgrade_name.label = menu_item.details
 
 			if not menu_item.allowed then
-				wesnoth.set_dialog_active(false, listbox_id, index, "upgrade_name")
+				listbox[index].upgrade_name.enabled = false
 			end
 		end
 
 		-- If user selects a non-allowed upgrade, OK button must become disabled.
 		-- If user then selects an allowed upgrade, OK button must become enabled.
 		local function toggle_ok_button()
-			return wesnoth.set_dialog_active(get_selected_menu_item().allowed, "ok")
+			dialog.ok.enabled = get_selected_menu_item(dialog).allowed
 		end
 
-		wesnoth.set_dialog_callback(toggle_ok_button, listbox_id)
-		wesnoth.set_dialog_focus(listbox_id)
+		listbox.on_modified = toggle_ok_button
+		listbox:focus()
 	end
 
 	local selected_menu_item = nil
-	local function postshow()
-		selected_menu_item = get_selected_menu_item()
+	local function postshow(dialog)
+		selected_menu_item = get_selected_menu_item(dialog)
 	end
 
-	wesnoth.show_dialog(dialog, preshow, postshow)
+	gui.show_dialog(dialog, preshow, postshow)
 
 	if not selected_menu_item.allowed then
 		-- Disabled menu item was somehow selected,
