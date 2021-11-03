@@ -430,7 +430,7 @@ function redeem_menu(ability_tree, unit)
 	}
 
 	-- 3) Top-level dialog, includes help message and listbox.
-	local dialog = {
+	local dialogDefinition = {
 		wml.tag.tooltip { id = "tooltip_large" },
 		wml.tag.helptip { id = "tooltip_large" },
 		wml.tag.grid {
@@ -496,7 +496,7 @@ function redeem_menu(ability_tree, unit)
 		selected_menu_item = get_selected_menu_item(dialog)
 	end
 
-	gui.show_dialog(dialog, preshow, postshow)
+	gui.show_dialog(dialogDefinition, preshow, postshow)
 
 	if not selected_menu_item.allowed then
 		-- Disabled menu item was somehow selected,
