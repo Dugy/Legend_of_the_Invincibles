@@ -273,7 +273,7 @@ end
 
 -- Callback that updates the "items on this unit" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
-local function onshow(unit)
+local function onshow(dialog, unit)
 	local equippable_sorts = loti.util.list_equippable_sorts(unit)
 
 	-- Determine sorts of equippable weapons, e.g. { "sword", "spear", "staff" }.

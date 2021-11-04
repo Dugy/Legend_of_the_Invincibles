@@ -95,24 +95,24 @@ inventory_dialog.goto_tab = function(tab_id, ...)
 	end
 
 	-- Show the new tab.
-	wesnoth.set_dialog_visible(true, tab_id)
+	currentlyOpenedDialog[tab_id].visible = true
 
 	-- Hide the other tabs.
 	for othertab_id in pairs(tabs) do
 		if othertab_id ~= tab_id then
-			wesnoth.set_dialog_visible(false, othertab_id)
+			currentlyOpenedDialog[othertab_id].visible = false
 		end
 	end
 
 	-- Recalculate all fields on this tab (via onshow callback),
 	-- plus the "unit name" field (which is global for all tabs).
-	tab.onshow(unit, ...)
+	tab.onshow(currentlyOpenedDialog,unit, ...)
 
 	-- Show "unit name" header everywhere except the blank and recall tabs.
 	if tab_id == "blank_tab" or tab_id == "recall_tab" then
-		wesnoth.set_dialog_visible(false, "unit_name")
+		currentlyOpenedDialog["unit_name"].visible = false
 	else
-		wesnoth.set_dialog_visible(true, "unit_name")
+		currentlyOpenedDialog["unit_name"].visible = true
 
 		local unit_name = "<span size='large' weight='bold'>" .. unit.name ..
 			"</span> <span color='#88FCA0' size='large'>" .. unit.__cfg['language_name'] .. "</span>"
@@ -120,7 +120,7 @@ inventory_dialog.goto_tab = function(tab_id, ...)
 			unit_name = unit_name .. " (" .. _"on the recall list" .. ")"
 		end
 
-		wesnoth.set_dialog_value(unit_name, "unit_name")
+		currentlyOpenedDialog["unit_name"].label = unit_name
 	end
 end
 
@@ -206,8 +206,9 @@ end
 inventory_dialog.reopen_unsynced = function(unit, ...)
 	local goto_tab_params = table.pack(...)
 
-	local function preshow()
+	local function preshow(dialog)
 		inventory_dialog.is_opened = true -- Following goto_tab() calls won't reopen the dialog
+		currentlyOpenedDialog = dialog
 
 		for _, func in ipairs(install_callback_functions) do
 			func()
@@ -221,7 +222,7 @@ inventory_dialog.reopen_unsynced = function(unit, ...)
 		inventory_dialog.goto_tab(table.unpack(goto_tab_params))
 	end
 
-	local function postshow()
+	local function postshow(dialog)
 		if enter_or_ok_catcher then
 			-- Ensure that "Enter or OK" callback receives the value of requested widget,
 			-- because the widget will no longer be available when this callback gets called
@@ -236,7 +237,7 @@ inventory_dialog.reopen_unsynced = function(unit, ...)
 		end
 	end
 
-	local retval = wesnoth.show_dialog(get_dialog_widget(), preshow, postshow)
+	local retval = gui.show_dialog(get_dialog_widget(), preshow, postshow)
 	inventory_dialog.is_opened = false -- Further attempts to open_tab() will reopen the dialog
 
 	unit = inventory_dialog.current_unit -- Allow "recall" tab to select another unit
