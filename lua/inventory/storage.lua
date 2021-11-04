@@ -388,7 +388,7 @@ end
 
 -- Callback that updates "Item storage" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
-local function onshow(unit, item_sort)
+local function onshow(dialog, unit, item_sort)
 	-- Clear the form. Keep the listbox hidden until populated.
 	wesnoth.set_dialog_visible(false, listbox_id)
 	if listbox_row > 0 then

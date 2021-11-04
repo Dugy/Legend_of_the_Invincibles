@@ -6,6 +6,7 @@
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
 local mpsafety
+local currentDialog = {}
 
 -- Ordered array of indexes of attacks (positions in unit.attacks array)
 -- for attacks affected by the shown checkboxes.
@@ -48,6 +49,7 @@ local function get_tab()
 				wml.tag.column {
 					horizontal_grow = true,
 					wml.tag.toggle_panel {
+						id = "attack_checkbox",
 						definition = "checklist",
 						listbox_template
 					}
@@ -124,11 +126,12 @@ end
 
 -- Callback that updates "Select weapons for retaliation" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
-local function onshow(unit)
+local function onshow(dialog,unit)
 	local listbox_id = "retaliation_listbox"
-
+	local listbox = dialog[listbox_id]
+	currentDialog = dialog
 	-- Ensure than no rows are selected.
-	wesnoth.set_dialog_value({}, listbox_id)
+	-- wesnoth.set_dialog_value({}, listbox_id)
 	retaliation_checkboxes = {}
 
 	for index, attack in ipairs(unit.attacks) do
@@ -155,12 +158,13 @@ local function onshow(unit)
 
 			local text = attack.description .. ": " .. attack.damage .. "-" .. attack.number .. " " .. attack.type
 
-			wesnoth.set_dialog_value(text, listbox_id, checkbox_id, "attack_name")
+			-- wesnoth.set_dialog_value(text, listbox_id, checkbox_id, "attack_name")
+			listbox[checkbox_id]["attack_name"].label = text
 
 			-- This is a multiselect listbox,
 			-- each set_dialog_value() selects an additional row.
 			if allowed then
-				wesnoth.set_dialog_value(checkbox_id, listbox_id)
+				listbox[checkbox_id]["attack_checkbox"].selected = true
 			end
 		end
 	end
@@ -173,9 +177,12 @@ local function onsave(unit)
 
 	-- Determine which checkboxes are selected.
 	-- This is a multiselect listbox, so get_dialog_value() has a second return value.
-	local _, listbox_values = wesnoth.get_dialog_value(listbox_id)
-	for _, checkbox_id in pairs(listbox_values) do
-		is_selected[checkbox_id] = 1
+	local listbox = currentDialog[listbox_id]
+	count = listbox.item_count
+	for checkbox_id = 1,listbox.item_count do
+		if listbox[checkbox_id]["attack_checkbox"].selected then
+			is_selected[checkbox_id] = 1
+		end
 	end
 
 	-- Enqueue changes to the mpsafety and go back to the Items tab.
