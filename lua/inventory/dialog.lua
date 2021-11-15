@@ -18,6 +18,9 @@ local PLUGINS_LIST = { "multiplayer_safety", "items", "retaliation", "storage", 
 -- Another tab can be opened via goto_tab("id_of_new_tab").
 local tabs = {}
 
+-- Wesnoth dialog object, available only in preshow() and postshow()
+local currentlyOpenedDialog
+
 -- Various callbacks that can be installed by plugins.
 local install_callback_functions = {}
 local register_widget_functions = {}

@@ -178,7 +178,6 @@ local function onsave(unit)
 	-- Determine which checkboxes are selected.
 	-- This is a multiselect listbox, so get_dialog_value() has a second return value.
 	local listbox = currentDialog[listbox_id]
-	count = listbox.item_count
 	for checkbox_id = 1,listbox.item_count do
 		if listbox[checkbox_id]["attack_checkbox"].selected then
 			is_selected[checkbox_id] = 1
