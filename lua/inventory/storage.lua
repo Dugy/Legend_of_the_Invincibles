@@ -279,26 +279,26 @@ end
 -- Unhide the main listbox and focus on it.
 -- Explain absence of listbox when Item Storage is empty.
 -- Note: it's good for performance for listbox to be hidden until completely populated,
--- so that it won't be unnecessarily redrawn on every set_dialog_value().
-local function unhide_listbox()
+-- so that it won't be unnecessarily redrawn on every modification of "label".
+local function unhide_listbox(dialog)
 	if not shown_items[1] then
 		if is_too_progressed() then
-			wesnoth.set_dialog_value(_"Cannot access item storage after turn 2 outside a castle.", "storage_header")
+			dialog.storage_header.label = _"Cannot access item storage after turn 2 outside a castle."
 		else
-			wesnoth.set_dialog_value(_"Item storage is empty.", "storage_header")
+			dialog.storage_header.label = _"Item storage is empty."
 		end
 		return
 	end
 
-	wesnoth.set_dialog_value(_"In the item storage:", "storage_header")
+	dialog.storage_header.label = _"In the item storage:"
 
 	-- Unhide/focus.
-	wesnoth.set_dialog_visible(true, listbox_id)
-	wesnoth.set_dialog_focus(listbox_id)
+	dialog[listbox_id].visible = true
+	dialog[listbox_id]:focus()
 end
 
 -- Show the menu that selects subsection of Item Storage: "sword", "spear", etc.
-local function show_item_sorts()
+local function show_item_sorts(dialog)
 	local sorts = loti.item.storage.list_sorts()
 	local too_progressed = is_too_progressed()
 	for item_sort, count in pairs(sorts) do
@@ -307,7 +307,7 @@ local function show_item_sorts()
 			local text = item_sort .. " (" .. count .. ")"
 
 			listbox_row = listbox_row + 1
-			wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
+			dialog[listbox_id][listbox_row].storage_text.label = text
 
 			-- For callback of "View" to know which item_sort was selected.
 			shown_items[listbox_row] = item_sort
@@ -315,15 +315,15 @@ local function show_item_sorts()
 	end
 
 	-- Listbox is completely populated, can show it now.
-	unhide_listbox()
+	unhide_listbox(dialog)
 
 	-- Unhide "View" button.
 	local empty = not shown_items[1]
-	wesnoth.set_dialog_visible(not empty, "view")
+	dialog.view.visible = not empty
 
 	-- Hide "Equip" button and dropdown menu (not applicable).
-	wesnoth.set_dialog_visible(false, "equip")
-	wesnoth.set_dialog_visible(false, "storage_dropdown_menu")
+	dialog.equip.visible = false
+	dialog.storage_dropdown_menu.visible = false
 
 	-- Handler for View button (shown in the menu of all item sorts,
 	-- navigates to specific section of Item Storage, e.g. "polearm").
@@ -390,25 +390,25 @@ end
 -- Note: see get_tab() for internal structure of this tab.
 local function onshow(dialog, unit, item_sort)
 	-- Clear the form. Keep the listbox hidden until populated.
-	wesnoth.set_dialog_visible(false, listbox_id)
+	dialog[listbox_id].visible = false
 	if listbox_row > 0 then
 		wesnoth.remove_dialog_item(1, 0, listbox_id)
 		listbox_row = 0
 	end
 
 	-- Hide optional widgets until we know that they are needed.
-	wesnoth.set_dialog_visible(false, "current_item")
-	wesnoth.set_dialog_visible(false, "unequip")
-	wesnoth.set_dialog_visible(false, "unequip_dropdown_menu")
-	wesnoth.set_dialog_visible(false, "view")
-	wesnoth.set_dialog_visible(false, "noequip_reason")
+	dialog.current_item.visible = false
+	dialog.unequip.visible = false
+	dialog.unequip_dropdown_menu.visible = false
+	dialog.view.visible = false
+	dialog.noequip_reason.visible = false
 
 	-- Record things that will be needed in Equip/Unequip callbacks.
 	shown_item_sort = item_sort
 	shown_items = {}
 
 	if not item_sort then
-		return show_item_sorts()
+		return show_item_sorts(dialog)
 	end
 
 	-- Remember whether the items of this sort can be equipped.
@@ -426,18 +426,18 @@ local function onshow(dialog, unit, item_sort)
 	local item = loti.item.on_unit.find(unit, item_sort)
 	if item then
 		local text = _"Currently equipped: " .. get_item_description(item, 1, set_items)
-		wesnoth.set_dialog_value(text, "current_item")
+		dialog.current_item.label = text
 
 		-- Show/hide fields related to current item
-		wesnoth.set_dialog_visible(true, "current_item")
+		dialog.current_item.visible = true
 
 		if not (item_sort == "limited") and not (item_sort == "potion") then
-			wesnoth.set_dialog_visible(true, "unequip")
+			dialog.unequip.visible = true
 
 			-- Note: Drop/Destroy dropdown menu near Unequip button is not yet supported in Tutorial,
 			-- so we just leave it hidden.
 			if not loti.during_tutorial then
-				wesnoth.set_dialog_visible(true, "unequip_dropdown_menu")
+				dialog.unequip_dropdown_menu.visible = true
 			end
 		end
 	end
@@ -467,7 +467,7 @@ local function onshow(dialog, unit, item_sort)
 			listbox_row = listbox_row + 1
 
 			local text = get_item_description(loti.item.type[item_number], count, set_items)
-			wesnoth.set_dialog_value(text, listbox_id, listbox_row, "storage_text")
+			dialog[listbox_id][listbox_row].storage_text.label = text
 
 			-- For callback of "Equip" to know which item was selected.
 			shown_items[listbox_row] = item_number
@@ -482,13 +482,13 @@ local function onshow(dialog, unit, item_sort)
 	-- True if Equip operation is allowed, false otherwise.
 	local can_equip = not empty and present and type_is_equippable or override_unequippability[item_sort] == true
 
-	wesnoth.set_dialog_visible(can_equip, "equip")
+	dialog.equip.visible = can_equip
 	if string.match(item_sort, "potion") then
-		wesnoth.set_dialog_value("Use", "equip")
+		dialog.equip.label = "Use"
 	else
-		wesnoth.set_dialog_value("Equip", "equip")
+		dialog.equip.label = "Equip"
 	end
-	wesnoth.set_dialog_visible(not empty and present, "storage_dropdown_menu")
+	dialog.storage_dropdown_menu.visible = not empty and present
 
 	if can_equip then
 		-- Handler for Equip button.
@@ -502,22 +502,18 @@ local function onshow(dialog, unit, item_sort)
 			pronoun = _"she"
 		end
 
-		wesnoth.set_dialog_value(
-			_"This unit is currently not on the battlefield,\nso " .. pronoun ..
-			_" can't take new items from the storage.",
-			"noequip_reason")
-		wesnoth.set_dialog_visible(true, "noequip_reason")
+		dialog.noequip_reason.label = _"This unit is currently not on the battlefield,\nso " .. pronoun ..
+			_" can't take new items from the storage."
+		dialog.noequip_reason.visible = true
 	elseif not type_is_equippable then
 		-- Explain that Equip is not allowed because this is a wrong type of weapon.
-		wesnoth.set_dialog_value(
-			_"This unit can't equip such items.\n" ..
-			_"They are unworthy of a mighty " .. unit.__cfg['language_name'] .. ".",
-			"noequip_reason")
-		wesnoth.set_dialog_visible(true, "noequip_reason")
+		dialog.noequip_reason.label = _"This unit can't equip such items.\n" ..
+			_"They are unworthy of a mighty " .. unit.__cfg['language_name'] .. "."
+		dialog.noequip_reason.visible = true
 	end
 
 	-- Listbox is completely populated, can show it now.
-	unhide_listbox()
+	unhide_listbox(dialog)
 end
 
 -- Handler for the "Unequip" button.
@@ -640,28 +636,23 @@ return function(provided_inventory_dialog)
 	local overrides = loti.config.inventory
 	overrides.override_unequippability = override_unequippability
 
-	inventory_dialog.install_callbacks(function()
+	inventory_dialog.install_callbacks(function(dialog)
 		-- Callback for Unequip button.
-		wesnoth.set_dialog_callback(overrides.unequip or unequip, "unequip")
+		dialog.unequip.on_button_click = overrides.unequip or unequip
 
 		-- Callback for "Close" button.
-		wesnoth.set_dialog_callback(
-			function()
-				inventory_dialog.catch_enter_or_ok(listbox_id, function() end)
-				if overrides.close_storage then
-					overrides.close_storage()
-				else
-					inventory_dialog.goto_tab("items_tab")
-				end
-			end,
-			"close_storage"
-		)
+		dialog.close_storage.on_button_click = function()
+			inventory_dialog.catch_enter_or_ok(listbox_id, function() end)
+			if overrides.close_storage then
+				overrides.close_storage()
+			else
+				inventory_dialog.goto_tab("items_tab")
+			end
+		end
 
 		-- Handler for Equip dropdown menu actions: "Drop item" and "Destroy item" (for item in storage).
-		wesnoth.set_dialog_callback(function()
-			-- Note: value of the "dropdown menu" widget with only 2 items
-			-- is false for option #1 and true for option #2.
-			if not wesnoth.get_dialog_value("storage_dropdown_menu") then
+		dialog.storage_dropdown_menu.on_modified = function()
+			if dialog.storage_dropdown_menu.selected_index == 1 then
 				-- First option on the menu
 				if overrides.drop_item then
 					overrides.drop_item()
@@ -676,19 +667,17 @@ return function(provided_inventory_dialog)
 					destroy_item()
 				end
 			end
-		end, "storage_dropdown_menu")
+		end
 
 		-- Handler for dropdown menu actions: "Drop item" and "Destroy item" (for item on unit).
-		wesnoth.set_dialog_callback(function()
-			-- Note: value of the "dropdown menu" widget with only 2 items
-			-- is false for option #1 and true for option #2.
-			if not wesnoth.get_dialog_value("unequip_dropdown_menu") then
+		dialog.unequip_dropdown_menu.on_modified = function()
+			if dialog.unequip_dropdown_menu.selected_index == 1 then
 				-- First option on the menu
 				unequip_drop()
 			else
 				-- Second option in the menu
 				unequip_destroy()
 			end
-		end, "unequip_dropdown_menu")
+		end
 	end)
 end

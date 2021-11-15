@@ -214,7 +214,7 @@ inventory_dialog.reopen_unsynced = function(unit, ...)
 		currentlyOpenedDialog = dialog
 
 		for _, func in ipairs(install_callback_functions) do
-			func()
+			func(dialog)
 		end
 
 		-- We don't set current_unit variable before this point,
