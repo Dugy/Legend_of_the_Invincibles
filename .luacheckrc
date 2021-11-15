@@ -22,6 +22,7 @@ globals = {
 -- These global variables are allowed, but can't be modified (with the exception of some fields).
 read_globals = {
 	"wml",
+	"gui",
 	wesnoth = {
 		fields = {
 			-- wesnoth.wml_actions[something] is supposed to be modified

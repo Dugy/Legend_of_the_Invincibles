@@ -580,9 +580,7 @@ local function destroy_item()
 	})
 
 	-- Tell player which gem was picked.
-	-- TODO: move this into loti.gem.something() to avoid code duplication (see unequip_destroy)
-	local item = loti.item.type[520 + gem]
-	wesnoth.show_popup_dialog(item.name, item.description, item.image)
+	loti.gem.show_gem_info_popup(gem)
 
 	inventory_dialog.goto_tab("items_tab")
 end
@@ -603,8 +601,7 @@ local function unequip_destroy()
 	})
 
 	-- Tell player which gem was picked.
-	local item = loti.item.type[520 + gem]
-	wesnoth.show_popup_dialog(item.name, item.description, item.image)
+	loti.gem.show_gem_info_popup(gem)
 
 	inventory_dialog.goto_tab("items_tab")
 end

@@ -32,6 +32,12 @@ loti.gem.random = function()
 	return loti.item.on_the_ground.generate("gem") - 520
 end
 
+-- Display popup that shows name/icon of this gem to player.
+loti.gem.show_gem_info_popup = function(gem)
+	local item = loti.item.type[520 + gem]
+	gui.show_popup(item.name, item.description, item.image)
+end
+
 -- negative count is allowed
 loti.gem.add = function(gem, count)
 	local gems = loti.gem.get_counts()
