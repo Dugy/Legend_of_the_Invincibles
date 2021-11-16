@@ -6,7 +6,6 @@
 local _ = wesnoth.textdomain "wesnoth-loti"
 local helper = wesnoth.require "lua/helper.lua"
 local mpsafety
-local currentDialog = {}
 
 -- Ordered array of indexes of attacks (positions in unit.attacks array)
 -- for attacks affected by the shown checkboxes.
@@ -126,12 +125,14 @@ end
 
 -- Callback that updates "Select weapons for retaliation" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
-local function onshow(dialog,unit)
-	local listbox_id = "retaliation_listbox"
-	local listbox = dialog[listbox_id]
-	currentDialog = dialog
+local function onshow(dialog, unit)
+	local listbox = dialog["retaliation_listbox"]
+
 	-- Ensure than no rows are selected.
-	-- wesnoth.set_dialog_value({}, listbox_id)
+	for i = listbox.item_count,1,-1 do
+		listbox:remove_items_at(i)
+	end
+
 	retaliation_checkboxes = {}
 
 	for index, attack in ipairs(unit.attacks) do
@@ -155,14 +156,10 @@ local function onshow(dialog,unit)
 		if allowed or not attack_only then
 			table.insert(retaliation_checkboxes, index)
 			local checkbox_id = #retaliation_checkboxes
-
 			local text = attack.description .. ": " .. attack.damage .. "-" .. attack.number .. " " .. attack.type
 
-			-- wesnoth.set_dialog_value(text, listbox_id, checkbox_id, "attack_name")
 			listbox[checkbox_id]["attack_name"].label = text
 
-			-- This is a multiselect listbox,
-			-- each set_dialog_value() selects an additional row.
 			if allowed then
 				listbox[checkbox_id]["attack_checkbox"].selected = true
 			end
@@ -171,24 +168,14 @@ local function onshow(dialog,unit)
 end
 
 -- Callback that submits the form of "Select weapons for retaliation" tab.
-local function onsave(unit)
-	local listbox_id = "retaliation_listbox"
-	local is_selected = {} -- { checkbox_id1 => 1, checkbox_id2 => 1, ... }
-
-	-- Determine which checkboxes are selected.
-	-- This is a multiselect listbox, so get_dialog_value() has a second return value.
-	local listbox = currentDialog[listbox_id]
-	for checkbox_id = 1,listbox.item_count do
-		if listbox[checkbox_id]["attack_checkbox"].selected then
-			is_selected[checkbox_id] = 1
-		end
-	end
+local function onsave(dialog, unit)
+	local listbox = dialog["retaliation_listbox"]
 
 	-- Enqueue changes to the mpsafety and go back to the Items tab.
 	local operation = {}
 	for checkbox_id, attack_index in ipairs(retaliation_checkboxes) do
 		local weight_cycle = 0
-		if is_selected[checkbox_id] then
+		if listbox[checkbox_id]["attack_checkbox"].selected then
 			weight_cycle = 1
 		end
 		table.insert(operation, wml.tag.attack{
@@ -201,7 +188,6 @@ local function onsave(unit)
 	mpsafety:queue(operation)
 end
 
-
 -- Add this tab to the dialog.
 
 return function(inventory_dialog)
@@ -212,14 +198,14 @@ return function(inventory_dialog)
 		onshow = onshow
 	}
 
-	inventory_dialog.install_callbacks(function()
+	inventory_dialog.install_callbacks(function(dialog)
 		-- Callback for "Save" button.
-		wesnoth.set_dialog_callback(function()
+		dialog.retaliation_save.on_button_click = function()
 			-- Unit is not yet known when the callback is installed,
 			-- but it will already be known when it is called.
-			onsave(inventory_dialog.current_unit)
+			onsave(dialog, inventory_dialog.current_unit)
 			inventory_dialog.goto_tab("items_tab")
-		end, "retaliation_save")
+		end
 	end)
 
 	inventory_dialog.register_widgets(register_checklist_widget)
