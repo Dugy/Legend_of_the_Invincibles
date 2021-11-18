@@ -125,6 +125,7 @@ function wesnoth.update_stats(original)
 	vars = helper.get_child(remade, "variables")
 	visible_modifications = helper.get_child(remade, "modifications")
 	vars.updated = true
+	vars.geared = geared
 
 	-- Remove temporary dummy attacks
 	for i = #remade,1,-1 do
