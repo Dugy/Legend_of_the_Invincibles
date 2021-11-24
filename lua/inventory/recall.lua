@@ -107,7 +107,7 @@ local function onshow(dialog)
 	wesnoth.remove_dialog_item(1, 0, listbox_id) -- Clear the listbox
 
 	-- List all units who have at least 1 item.
-	shown_units = wesnoth.get_recall_units({ trait = "geared" })
+	shown_units = wesnoth.units.find_on_recall({ trait = "geared" })
 
 	for listbox_line, unit in ipairs(shown_units) do
 		-- Show name/type of the geared unit.

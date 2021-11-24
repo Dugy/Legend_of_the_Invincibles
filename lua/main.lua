@@ -23,9 +23,9 @@ local _ = wesnoth.textdomain "wesnoth-loti"
 
 local helper = wesnoth.require "lua/helper.lua"
 
-local old_unit_status = wesnoth.theme_items.unit_status
-function wesnoth.theme_items.unit_status()
-     local u = wesnoth.get_displayed_unit()
+local old_unit_status = wesnoth.interface.game_display.unit_status
+function wesnoth.interface.game_display.unit_status()
+     local u = wesnoth.interface.get_displayed_unit()
      if not u then return {} end
      local s = old_unit_status()
      if u.status.infected then
@@ -57,7 +57,7 @@ function wesnoth.wml_actions.get_unit_resistance(cfg)
 end
 
 function wesnoth.wml_actions.award_extra_experience(cfg)
-	local units = wesnoth.get_units(cfg)
+	local units = wesnoth.units.find_on_map(cfg)
 	local added = cfg.experience
 	if cfg.death_of_level then
 		if cfg.death_of_level == 0 then
@@ -84,7 +84,7 @@ function wesnoth.wml_actions.award_extra_experience(cfg)
 		else
 			unit.experience = unit.experience + added
 		end
-		wesnoth.put_unit(unit)
+		wesnoth.units.to_map(unit)
 		if unit.experience >= unit.max_experience then
 			wesnoth.wml_actions.store_unit{ { "filter", { id = unit.id }}, variable = "level_store" }
 			wesnoth.wml_actions.unstore_unit{ variable = "level_store", find_vacant = false }
@@ -130,7 +130,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 	local this_unit = start_var_scope("this_unit")
 
-	for index, unit_to_harm in ipairs(wesnoth.get_units(filter)) do
+	for index, unit_to_harm in ipairs(wesnoth.units.find_on_map(filter)) do
 		if unit_to_harm.valid then
 			-- block to support $this_unit
 			wesnoth.set_variable ( "this_unit" ) -- clearing this_unit
@@ -143,7 +143,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			local secondary_attack = wml.get_child(cfg, "secondary_attack")
 			local harmer_filter = wml.get_child(cfg, "filter_second")
 			local resistance_multiplier = tonumber(cfg.resistance_multiplier) or 1
-			if harmer_filter then harmer = wesnoth.get_units(harmer_filter)[1] end
+			if harmer_filter then harmer = wesnoth.units.find_on_map(harmer_filter)[1] end
 			-- end of block to support $this_unit
 
 			if animate then
@@ -228,7 +228,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 			-- Extract unit and put it back to update animation if status was changed
 			wesnoth.extract_unit(unit_to_harm)
-			wesnoth.put_unit(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
+			wesnoth.units.to_map(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
 
 			if add_tab then
 				text = string.format("%s%s", "\t", text)
@@ -667,13 +667,13 @@ local loti_needs_advance = nil
 
 function wesnoth.wml_actions.pre_advance_stuff(cfg)
 --    wesnoth.message("pre_advance_stuff")
-    local unit = wesnoth.get_units(cfg)[1].__cfg
+    local unit = wesnoth.units.find_on_map(cfg)[1].__cfg
     local a = wml.get_child(unit, "advancement")
     local t = wml.variables["side_number"]
     if t == unit.side then
         if a ~= nil and a.id == "backup_amla" then
             unit = clear_advancements(unit)
-            local u = wesnoth.create_unit { type = "Advancing" .. unit.type }
+            local u = wesnoth.units.create { type = "Advancing" .. unit.type }
             for _, v in ipairs(u.__cfg) do
                 if v[1] == "advancement" then
                     table.insert(unit, v)
@@ -681,20 +681,20 @@ function wesnoth.wml_actions.pre_advance_stuff(cfg)
             end
             local v = wml.get_child(unit, "variables")
             v.achieved_amla = true
-            wesnoth.put_unit(unit)
+            wesnoth.units.to_map(unit)
             loti_needs_advance = true
         end
     else
         local v = wml.get_child(unit, "variables")
         v.may_need_respec = true
 	unit.hitpoints = unit.max_hitpoints
-        wesnoth.put_unit(unit)
+        wesnoth.units.to_map(unit)
     end
 end
 
 function wesnoth.wml_actions.advance_stuff(cfg)
 --    wesnoth.message("advance_stuff")
-    local unit = wesnoth.get_units(cfg)[1].__cfg
+    local unit = wesnoth.units.find_on_map(cfg)[1].__cfg
     local m = wml.get_child(unit, "modifications")
 
 	local function clear_potions()
@@ -714,7 +714,7 @@ function wesnoth.wml_actions.advance_stuff(cfg)
             }}
             table.insert(m, a)
 	    clear_potions()
-            wesnoth.put_unit(unit)
+            wesnoth.units.to_map(unit)
         end
         return
     end
@@ -725,7 +725,7 @@ function wesnoth.wml_actions.advance_stuff(cfg)
 		unit[i][2] = {}
 	end
     end
-    wesnoth.put_unit(unit)
+    wesnoth.units.to_map(unit)
     loti_needs_advance = nil
 end
 
@@ -750,7 +750,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	if cfg.variable then
 		u = wml.variables[cfg.variable]
 	else
-		local units = wesnoth.get_units(cfg)
+		local units = wesnoth.units.find_on_map(cfg)
 		if #units < 1 then
 			return
 		end
@@ -832,7 +832,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	if cfg.variable then
 		wml.variables[cfg.variable] = u
 	else
-		wesnoth.put_unit(u)
+		wesnoth.units.to_map(u)
 	end
 end
 
@@ -961,7 +961,7 @@ end
 function loti.util.list_attacks(unit)
 	-- Normalize to Lua unit object (to get unit.attacks)
 	if type(unit) == "table" then
-		unit = wesnoth.get_unit(unit.id)
+		unit = wesnoth.units.get(unit.id)
 	end
 
 	local has_attack = {}

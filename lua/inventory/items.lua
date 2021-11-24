@@ -49,7 +49,7 @@ local inventory_config = {
 			id = "unequip_all",
 			label = _"Unequip (store) all items",
 			onclick = function(unit)
-				if wesnoth.confirm(_"Are you sure? All items of this unit will be placed into the item storage.") then
+				if gui.confirm(_"Are you sure? All items of this unit will be placed into the item storage.") then
 					inventory_dialog.mpsafety:queue({ command = "undress", unit = unit })
 					inventory_dialog.goto_tab("items_tab") -- redraw, items are no longer in the slots
 				end
@@ -160,7 +160,7 @@ local function get_tab()
 		}
 	end
 
-	-- Prepare the layout structure for wesnoth.show_dialog().
+	-- Prepare the layout structure for gui.show_dialog().
 	local slots_grid = wml.tag.grid {
 		-- Slots (one per item_sort), arranged in a predetermined order
 		-- (e.g. helm is the top-middle item, and boots are bottom-middle).
@@ -374,7 +374,7 @@ local function onshow(dialog, unit)
 	end
 
 	-- Disable "Items on units on the recall list" if none of those units have items.
-	local geared_recall_units = wesnoth.get_recall_units({ trait = "geared" })
+	local geared_recall_units = wesnoth.units.find_on_recall({ trait = "geared" })
 	dialog.recall_list_items.enabled = ( #geared_recall_units > 0 )
 end
 
@@ -494,7 +494,7 @@ local function register_slot_widget()
 		}
 	}
 
-	wesnoth.add_widget_definition("button", "item_slot_button", definition)
+	gui.add_widget_definition("button", "item_slot_button", definition)
 end
 
 -- Register custom GUI widget "itemlabel": label with fixed width/height.
@@ -533,7 +533,7 @@ local function register_itemlabel_widget()
 		}
 	}
 
-	wesnoth.add_widget_definition("label", "itemlabel", definition)
+	gui.add_widget_definition("label", "itemlabel", definition)
 end
 
 -- Run onsubmit callback, assuming that the dialog was closed by click on the action button.

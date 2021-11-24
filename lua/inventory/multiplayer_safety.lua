@@ -10,9 +10,9 @@
 --
 -- So when Bob wants to run some operation, he uses mpsafety:queue(command).
 -- After the Inventory dialog is closed, Bob returns mpsafety:export()
--- from the callback of wesnoth.synchronize_choice().
+-- from the callback of wesnoth.sync.evaluate_single().
 -- Then another player Alice uses mpsafety:synchronize(result) to apply all operations,
--- where "result" is the value that was returned by wesnoth.synchronize_choice().
+-- where "result" is the value that was returned by wesnoth.sync.evaluate_single().
 -- For Bob, mpsafety:synchronize() does nothing, because we remember that it was Bob
 -- who used the Inventory dialog (so we know that Bob already did these operations).
 --
@@ -57,9 +57,9 @@ end
 function mpsafety:run_immediately(operation)
 	-- Unencode certain values, e.g. unit from coordinates.
 	if operation.x then
-		operation.unit = wesnoth.get_unit(operation.x, operation.y)
+		operation.unit = wesnoth.units.get(operation.x, operation.y)
 	elseif operation.recall_unit_id then
-		operation.unit = wesnoth.get_recall_units({ id = operation.recall_unit_id })[1]
+		operation.unit = wesnoth.units.find_on_recall({ id = operation.recall_unit_id })[1]
 	end
 
 	-- Run the requested command
@@ -139,7 +139,7 @@ function mpsafety:run_immediately(operation)
 	end
 end
 
--- Returns value that should be returned from wesnoth.synchronize_choice(),
+-- Returns value that should be returned from wesnoth.sync.evaluate_single(),
 -- then clears the existing log (because exported operations will immediately be done for all players),
 -- so that next open_inventory_dialog() would start with an empty log.
 function mpsafety:export()
@@ -150,7 +150,7 @@ function mpsafety:export()
 end
 
 -- Ensures that situation is synchronized for all players.
--- Parameter todo is the return value of wesnoth.synchronize_choice()
+-- Parameter todo is the return value of wesnoth.sync.evaluate_single()
 function mpsafety:synchronize(todo)
 	if not self.this_player_already_did_it then
 		for _, operation_tag in ipairs(todo) do

@@ -125,11 +125,11 @@ end
 
 
 function wesnoth.wml_actions.item_pick_menu(cfg)
-	local units = wesnoth.get_units(cfg)
+	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
 		helper.wml_error("[item_pick_menu]: no units found.")
 	end
-	local result = wesnoth.synchronize_choice(function()
+	local result = wesnoth.sync.evaluate_single(function()
 		loti.util.item_pick_menu(item_picker.mpsafety, units[1])
 
 		-- Tell other players what changed (which items were equipped, etc.).

@@ -41,7 +41,7 @@ end
 -- Simplified crafting dialog for Tutorial,
 -- where Efraim has to craft 1 sword from 3 obsidians, and can't do anything else.
 local function tutorial_craft()
-	local unit = wesnoth.get_units({ id = "Efraim_de_Ceise" })[1]
+	local unit = wesnoth.units.find_on_map({ id = "Efraim_de_Ceise" })[1]
 	local item = loti.item.type[606] -- Twinkling Sword
 
 	-- Efraim's old sword.
@@ -95,7 +95,7 @@ local function tutorial_craft()
 		-- When player clicks Craft.
 		wesnoth.set_dialog_callback(function()
 			-- "Are you sure" dialog, but can't refuse.
-			while not wesnoth.confirm(_"Are you sure you want to craft this item?") do
+			while not gui.confirm(_"Are you sure you want to craft this item?") do
 				Efraim_says(_"Wait, I actually want to craft it.")
 			end
 
@@ -113,7 +113,7 @@ local function tutorial_craft()
 		end, "ok")
 	end
 
-	wesnoth.show_dialog(loti.gem.get_crafting_dialog(), preshow)
+	gui.show_dialog(loti.gem.get_crafting_dialog(), preshow)
 	if not successfully_crafted then
 		-- Closed via Enter/Escape.
 		-- Reopen until the player clicks Craft.

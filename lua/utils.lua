@@ -16,9 +16,9 @@ end
 
 -- Places a unit back to the game, on the map or to the recall list
 loti.put_unit = function(unit)
-	if wesnoth.get_unit(unit.id) then
-		wesnoth.put_unit(unit)
-	elseif wesnoth.get_recall_units({ id = unit.id })[1] then
+	if wesnoth.units.get(unit.id) then
+		wesnoth.units.to_map(unit)
+	elseif wesnoth.units.find_on_recall({ id = unit.id })[1] then
 		wesnoth.put_recall_unit(unit)
 	end
 
@@ -29,10 +29,10 @@ end
 -- Gets a unit and removes it from the game (usually to be placed later), from the map or from the recall list
 loti.get_unit = function(unit)
 	if unit.x > 0 and unit.y > 0 then
-		unit = wesnoth.get_units{ id = unit.id }[1].__cfg
-		wesnoth.erase_unit(unit)
+		unit = wesnoth.units.find_on_map{ id = unit.id }[1].__cfg
+		wesnoth.units.erase(unit)
 	else
-		unit = wesnoth.get_recall_units{ id = unit.id }[1]
+		unit = wesnoth.units.find_on_recall{ id = unit.id }[1]
 		wesnoth.extract_unit(unit)
 		unit= unit.__cfg
 	end

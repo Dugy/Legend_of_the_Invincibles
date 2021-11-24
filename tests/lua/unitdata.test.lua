@@ -2,9 +2,9 @@
 
 -- Returns a new unit (WML table) for further testing.
 local function newunit()
-	local unit = wesnoth.create_unit { type = "Efraim_god", random_traits = "no" }
+	local unit = wesnoth.units.create { type = "Efraim_god", random_traits = "no" }
 
-	-- Unit must be on the map for tests, otherwise wesnoth.get_unit() won't find it by ID.
+	-- Unit must be on the map for tests, otherwise wesnoth.units.get() won't find it by ID.
 	unit:to_map(1, 1)
 
 	return unit.__cfg
@@ -84,7 +84,7 @@ local function add_trait(unit, trait)
 		form = "wml"
 	end
 
-	local lua_unit = wesnoth.get_unit(id)
+	local lua_unit = wesnoth.units.get(id)
 	lua_unit:add_modification("trait", trait)
 
 	if form == "wml" then

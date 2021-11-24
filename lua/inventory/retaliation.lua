@@ -119,7 +119,7 @@ local function register_checklist_widget()
 		}
 	}
 
-	wesnoth.add_widget_definition("toggle_panel", "checklist", definition)
+	gui.add_widget_definition("toggle_panel", "checklist", definition)
 end
 
 -- Callback that updates "Select weapons for retaliation" tab whenever it is shown.

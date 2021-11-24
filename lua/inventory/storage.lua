@@ -251,7 +251,7 @@ local function register_dropdown_widget()
 		}
 	}
 
-	wesnoth.add_widget_definition("menu_button", "dropdown_menu_thin", definition)
+	gui.add_widget_definition("menu_button", "dropdown_menu_thin", definition)
 end
 
 local listbox_row = 0
@@ -525,7 +525,7 @@ local function unequip()
 			_"If you unequip it, this unit won't be able to equip it again.\n\n" ..
 			_"Do you still want to unequip it?"
 
-		if not wesnoth.confirm(are_you_sure) then
+		if not gui.confirm(are_you_sure) then
 			return
 		end
 	end

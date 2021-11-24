@@ -49,7 +49,7 @@ inventory_dialog.install_callbacks = function(install_function)
 	table.insert(install_callback_functions, install_function)
 end
 
--- Queue register_function() to be called when it's good time to use wesnoth.add_widget_definition().
+-- Queue register_function() to be called when it's good time to use gui.add_widget_definition().
 inventory_dialog.register_widgets = function(register_function)
 	table.insert(register_widget_functions, register_function)
 end
@@ -64,7 +64,7 @@ end
 -- NOTE: this callback is deleted after use. You should call catch_enter_or_ok() from onshow().
 -- NOTE: this replaces the existing callback (if any).
 inventory_dialog.catch_enter_or_ok = function(field_id, enter_callback)
-	-- This will be used if wesnoth.show_dialog() exits with return value
+	-- This will be used if gui.show_dialog() exits with return value
 	-- that means either "OK was clicked" or "Enter was pressed".
 	enter_or_ok_catcher = {
 		field_id = field_id,
@@ -150,13 +150,13 @@ local function register_widgets()
 end
 
 -- NOTE: the only reason we call this function here is because it's very convenient for debugging
--- (any errors in add_widget_definition() are discovered before the map is even loaded)
+-- (any errors in gui.add_widget_definition() are discovered before the map is even loaded)
 -- When the widgets are completely implemented, this function will only be called from get_dialog_widget().
 register_widgets()
 
 -- Construct the unit-independent WML of Inventory dialog.
 -- Note: this only creates the widget. It gets populated with data in open_inventory_dialog().
--- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+-- Returns: WML table, as expected by the first parameter of gui.show_dialog().
 local function get_dialog_widget()
 	register_widgets()
 
@@ -273,7 +273,7 @@ end
 local function open_inventory_dialog(unit)
 	--inventory_dialog.mpsafety =
 
-	local result = wesnoth.synchronize_choice(function()
+	local result = wesnoth.sync.evaluate_single(function()
 		inventory_dialog.reopen_unsynced(unit)
 
 		-- Tell other players what changed (which items were equipped, etc.).
@@ -285,9 +285,9 @@ local function open_inventory_dialog(unit)
 end
 
 -- Tag [show_inventory] displays the inventory dialog for the unit.
--- Unit is identified by passing "cfg" parameter to wesnoth.get_units().
+-- Unit is identified by passing "cfg" parameter to wesnoth.units.find_on_map().
 function wesnoth.wml_actions.show_inventory(cfg)
-	local units = wesnoth.get_units(cfg)
+	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
 		helper.wml_error("[show_inventory]: no units found.")
 	end
@@ -295,7 +295,7 @@ function wesnoth.wml_actions.show_inventory(cfg)
 end
 
 function wesnoth.wml_actions.item_pick_menu_inventory(cfg)
-	local units = wesnoth.get_units(cfg)
+	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
 		helper.wml_error("[item_pick_menu_inventory]: no units found.")
 	end

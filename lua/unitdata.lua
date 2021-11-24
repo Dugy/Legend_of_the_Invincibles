@@ -16,7 +16,7 @@ local function normalize_unit_param(unit)
 	end
 
 	-- Unit ID
-	return wesnoth.get_unit(unit).__cfg
+	return wesnoth.units.get(unit).__cfg
 end
 
 -- Helper function.

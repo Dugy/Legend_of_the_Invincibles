@@ -119,7 +119,7 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART III: Recreate the unit
-	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, goto_x = original.goto_x, goto_y = original.goto_y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, role = original.role, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", wml.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
+	local remade = wesnoth.units.create{ type = original.type, side = original.side, x = original.x, y = original.y, goto_x = original.goto_x, goto_y = original.goto_y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, role = original.role, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", wml.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
 	vars = wml.get_child(remade, "variables")
 	visible_modifications = wml.get_child(remade, "modifications")
 	vars.updated = true
@@ -729,12 +729,12 @@ end
 
 -- WML tag
 function wesnoth.wml_actions.update_stats(cfg)
-	local units = wesnoth.get_units(cfg)
+	local units = wesnoth.units.find_on_map(cfg)
 	for i = 1,#units do
 		local unit = units[i].__cfg
 		if wml.get_child(unit, "resistance") and wml.get_child(unit, "movement_costs") and wml.get_child(unit, "defense") then
 			unit = wesnoth.update_stats(unit)
-			wesnoth.put_unit(unit)
+			wesnoth.units.to_map(unit)
 		end
 	end
 end

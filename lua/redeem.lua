@@ -389,7 +389,7 @@ function redeem_menu(ability_tree, unit)
 
 	table.sort(menu_items, menu_sort)
 
-	-- Prepare the layout structure for wesnoth.show_dialog().
+	-- Prepare the layout structure for gui.show_dialog().
 	local listbox_id = "redeem_menu_list"
 
 	-- 1) listbox_template: shows one possible upgrade (icon + description), e.g. Particle Storm.
@@ -516,12 +516,12 @@ function wesnoth.wml_actions.show_redeem_menu(cfg)
 	local to_variable = cfg.to_variable or "chose"
 	local ability_tree = cfg.ability_tree or "redeem"
 
-	local units = wesnoth.get_units(cfg)
+	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
 		helper.wml_error("[show_redeem_menu]: no units found, may need find_in= parameter.")
 	end
 
-	local result = wesnoth.synchronize_choice(_"Soul Eater", function()
+	local result = wesnoth.sync.evaluate_single(_"Soul Eater", function()
 		local res = redeem_menu(ability_tree, units[1])
 		return {wml.tag.soul_eater_choice {choice = res}}
 	end)
@@ -536,7 +536,7 @@ end
 function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	local to_variable = cfg.to_variable or "upgrade_count"
 
-	local units = wesnoth.get_units(cfg)
+	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
 		helper.wml_error("[show_redeem_menu]: no units found, may need find_in= parameter.")
 	end

@@ -53,7 +53,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 				{ amount = 1, text = _"1 pearl", picture = "items/pearl.png" } }
 
 	-- Construct the WML of Transmuting dialog.
-	-- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+	-- Returns: WML table, as expected by the first parameter of gui.show_dialog().
 	local function get_dialog()
 		-- One row of the listbox. [grid] widget.
 		local listbox_template = wml.tag.grid {
@@ -155,7 +155,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 	local can_transmute -- Set to true in gem_changed(), becomes false when non-existent gem is selected.
 
 	while chosen ~= 0 do
-		chosen = wesnoth.synchronize_choice(
+		chosen = wesnoth.sync.evaluate_single(
 			function()
 				local picked = chosen
 
@@ -181,7 +181,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 					wesnoth.set_dialog_focus("gui_gem_chosen")
 				end
 
-				local returned = wesnoth.show_dialog(get_dialog(), preshow)
+				local returned = gui.show_dialog(get_dialog(), preshow)
 
 				if returned ~= -2 then
 					return { picked = picked }
@@ -237,7 +237,7 @@ loti.gem.show_crafting_report = function(item_number, crafted_sort)
 end
 
 -- Construct the WML of Crafting dialog.
--- Returns: WML table, as expected by the first parameter of wesnoth.show_dialog().
+-- Returns: WML table, as expected by the first parameter of gui.show_dialog().
 loti.gem.get_crafting_dialog = function()
 	local basetype_listbox_template = wml.tag.grid {
 		wml.tag.row {
@@ -497,7 +497,7 @@ end
 loti.gem.show_crafting_window = function(x, y)
 	local gem_quantities = loti.gem.get_counts()
 
-	local chose = wesnoth.synchronize_choice(
+	local chose = wesnoth.sync.evaluate_single(
 		function()
 			local base_type, sort_chosen, recipe_chosen
 			local crafting_allowed -- Set to true or false in check_validity()
@@ -655,9 +655,9 @@ loti.gem.show_crafting_window = function(x, y)
 
 			local returned = -1
 			while returned == -1 do
-				returned = wesnoth.show_dialog(loti.gem.get_crafting_dialog(), preshow, postshow)
+				returned = gui.show_dialog(loti.gem.get_crafting_dialog(), preshow, postshow)
 				if returned == -1 and crafting_allowed then
-					if wesnoth.confirm(_"Are you sure you want to craft this item?") then
+					if gui.confirm(_"Are you sure you want to craft this item?") then
 						returned = 1
 					end
 				end
