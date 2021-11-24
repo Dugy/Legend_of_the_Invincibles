@@ -79,7 +79,7 @@ local inventory_config = {
 -- Array of slots, in order added via get_slot_widget().
 -- Each element is the item_sort of this slot.
 -- E.g. { "amulet", "weapon", "gauntlets", ... }
--- Element #5 can be found by id "slot5" in wesnoth.set_dialog_*() methods.
+-- Element #5 can be found as dialog["slot5"].
 -- NOTE: this array is unit-independent, meaning that exact weapons (e.g. sword or spear)
 -- are unknown. This array will list them as a pseudo-sort "weapon".
 -- Unit-specific weapon sort can be determined from the sort_by_slot_id[] array, see below.
@@ -310,11 +310,9 @@ local function onshow(dialog, unit)
 
 		-- Ensure that empty slots don't have any images.
 		-- This is needed when we redraw the dialog after "Unequip all items".
-		wesnoth.set_dialog_value("", slot_id, "item_image")
-
-		if wesnoth.set_dialog_tooltip then -- Not yet in Wesnoth 1.14
-			wesnoth.set_dialog_tooltip("", slot_id, "item_image")
-		end
+		local slot = dialog[slot_id]
+		slot.item_image.label = ''
+		slot.item_image.tooltip = ''
 
 		local default_text = ""
 		if equippable_sorts[item_sort] then
@@ -326,14 +324,14 @@ local function onshow(dialog, unit)
 				default_text = util.NO_ITEM_TEXT["default"]
 			end
 
-			wesnoth.set_dialog_visible(true, slot_id)
+			slot.visible = true
 		else
 			-- Can't equip this item (e.g. boots for a Ghost), so hide this slot.
 			-- Note: if this is a leftover slot, it will become visible later, but only if needed.
-			wesnoth.set_dialog_visible(false, slot_id)
+			slot.visible = false
 		end
 
-		wesnoth.set_dialog_value(default_text, slot_id, "item_name")
+		slot.item_name.label = default_text
 	end
 
 	-- Array of equipped items, can be passed to describe_item() to show set bonuses
@@ -353,34 +351,31 @@ local function onshow(dialog, unit)
 				", but the inventory screen doesn't have a slot for this type.")
 		end
 
-		wesnoth.set_dialog_value(item.name, slot_id, "item_name")
-		wesnoth.set_dialog_value(item.image, slot_id, "item_image")
-
-		if wesnoth.set_dialog_tooltip then -- Not yet in Wesnoth 1.14
-			local description = loti.item.describe_item(item.number, item.sort, set_items)
-			wesnoth.set_dialog_tooltip(description, slot_id, "item_image")
-		end
+		local slot = dialog[slot_id]
+		slot.item_name.label = item.name
+		slot.item_image.label = item.image
+		slot.item_image.tooltip = loti.item.describe_item(item.number, item.sort, set_items)
 
 		-- Unhide the slot (leftover slots are hidden by default).
-		wesnoth.set_dialog_visible(true, slot_id)
+		slot.visible = true
 	end
 
 	-- Disable action buttons that aren't applicable.
 	-- For example, units on recall list can't pick items from the ground.
 	local present = unit.valid ~= "recall"
 	for _, button_id in ipairs({ "storage", "crafting", "ground_items" }) do
-		wesnoth.set_dialog_active(present, button_id)
+		dialog[button_id].enabled = present
 	end
 
 	-- Disable "Pick up items on the ground" button if the unit isn't standing on any items.
 	if present then
 		local lying_items = loti.item.on_the_ground.list(unit.x, unit.y)
-		wesnoth.set_dialog_active(#lying_items > 0, "ground_items")
+		dialog.ground_items.enabled = ( #lying_items > 0 )
 	end
 
 	-- Disable "Items on units on the recall list" if none of those units have items.
 	local geared_recall_units = wesnoth.get_recall_units({ trait = "geared" })
-	wesnoth.set_dialog_active(#geared_recall_units > 0, "recall_list_items")
+	dialog.recall_list_items.enabled = ( #geared_recall_units > 0 )
 end
 
 -- Last button that was clicked. Note: buttons with "onclick" are intentionally ignored.
@@ -388,26 +383,24 @@ end
 local clicked_button_id = nil
 
 -- Install callbacks for all action buttons, slots, etc.
-local function callbacks_install_function()
+local function callbacks_install_function(dialog)
 	-- Callbacks of action buttons.
 	for _, button in ipairs(inventory_config.action_buttons) do
 		if not button.spacer then
 			if button.onsubmit then
 				-- onsubmit callbacks are only called after the dialog is closed.
 				-- The only thing we need here is to remember clicked_button_id.
-				wesnoth.set_dialog_callback(
-					function() clicked_button_id = button.id end,
-					button.id
-				)
+				dialog[button.id].on_button_click = function()
+					clicked_button_id = button.id
+				end
 			else
 				-- Normal onclick callback (this button doesn't close the dialog).
 				local callback = button.onclick or inventory_config.default_button_callback
 
 				-- Note: we additionally pass Unit and button ID as parameters to callback.
-				wesnoth.set_dialog_callback(
-					function() callback(inventory_dialog.current_unit, button.id) end,
-					button.id
-				)
+				dialog[button.id].on_button_click = function()
+					callback(inventory_dialog.current_unit, button.id)
+				end
 			end
 		end
 	end
@@ -416,15 +409,15 @@ local function callbacks_install_function()
 	for index, _ in ipairs(slots) do
 		local slot_id = "slot" .. index
 
-		-- When we call set_dialog_callback(), we don't yet know the exact item_sort,
+		-- When we set "on_button_click", we don't yet know the exact item_sort,
 		-- because for different units the "weapon" slot means different item_sorts,
 		-- and we don't yet know which unit will be displayed.
 		-- So we'll determine item_sort later, when the callback gets called,
 		-- because at this point sort_by_slot_id[] array will be populated.
-		wesnoth.set_dialog_callback(function()
+		dialog[slot_id].item_image.on_button_click = function()
 			local item_sort = sort_by_slot_id[slot_id]
 			inventory_config.slot_callback(item_sort)
-		end, slot_id, "item_image")
+		end
 	end
 end
 
