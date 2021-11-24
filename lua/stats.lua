@@ -1,5 +1,3 @@
-local helper = wesnoth.require "lua/helper.lua"
-
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 local function call_event_on_unit(u, name)
@@ -59,15 +57,15 @@ function wesnoth.update_stats(original)
 --	wesnoth.dbms{original.x, original.y}
 	original = loti.get_unit(original)
 	original = call_event_on_unit(original, "pre stats update")
-	if not helper.get_child(original, "resistance") or not helper.get_child(original, "movement_costs") or not helper.get_child(original, "defense") then
+	if not wml.get_child(original, "resistance") or not wml.get_child(original, "movement_costs") or not wml.get_child(original, "defense") then
 		return original -- Fake unit
 	end
 
 	local hitpoints_ratio = original.hitpoints / original.max_hitpoints
 
 	-- PART II: Cleanup
-	local vars = helper.get_child(original, "variables")
-	local visible_modifications = helper.get_child(original, "modifications") -- This is where modifićations actually affecting visuals belong
+	local vars = wml.get_child(original, "variables")
+	local visible_modifications = wml.get_child(original, "modifications") -- This is where modifićations actually affecting visuals belong
 	local events_to_fire = {}
 	local set_items = loti.unit.list_unit_item_numbers(original)
 
@@ -121,9 +119,9 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART III: Recreate the unit
-	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, goto_x = original.goto_x, goto_y = original.goto_y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, role = original.role, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", helper.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
-	vars = helper.get_child(remade, "variables")
-	visible_modifications = helper.get_child(remade, "modifications")
+	local remade = wesnoth.create_unit{ type = original.type, side = original.side, x = original.x, y = original.y, goto_x = original.goto_x, goto_y = original.goto_y, experience = original.experience, canrecruit = original.canrecruit, variation = original.variation, id = original.id, role = original.role, moves = original.moves, hitpoints = original.hitpoints, attacks_left = original.attacks_left, gender = original.gender, name = original.name, facing = original.facing, extra_recruit = original.extra_recruit, underlying_id = original.underlying_id, unrenamable = original.unrenamable, overlays = original.overlays, random_traits = false, { "status", wml.get_child(original, "status")}, { "variables", vars}, { "modifications", visible_modifications}}.__cfg
+	vars = wml.get_child(remade, "variables")
+	visible_modifications = wml.get_child(remade, "modifications")
 	vars.updated = true
 	vars.geared = geared
 
@@ -207,7 +205,7 @@ function wesnoth.update_stats(original)
 				if obj.name then
 					target.name = obj.name
 				end
-				local specials = helper.get_child(obj, "specials")
+				local specials = wml.get_child(obj, "specials")
 				if specials then
 					for j = 1,#specials do
 						table.insert(target.specials, specials[j])
@@ -238,7 +236,7 @@ function wesnoth.update_stats(original)
 				end
 			end
 			local function add_specials(name, list)
-				local specials = helper.get_child(obj, name)
+				local specials = wml.get_child(obj, name)
 				if specials then
 					for j = 1,#specials do
 						for k = 1,#list do
@@ -254,11 +252,11 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART V: Apply item properties
-	for weap in helper.child_range(remade, "attack") do
+	for weap in wml.child_range(remade, "attack") do
 		local wn = weap.name -- Is used really a lot, so the name is better short
 		local weapon_type
 
-		local specials = helper.get_child(weap, "specials")
+		local specials = wml.get_child(weap, "specials")
 		if not specials then
 			specials = { "specials", {}}
 			table.insert(weap, specials)
@@ -312,15 +310,15 @@ function wesnoth.update_stats(original)
 				weap.description = bonuses.name
 			end
 			if bonuses.devastating_blow > 0 then
-				table.insert(helper.get_child(weap, "specials"), { "dummy", { id = "devastating_blow", devastating_blow = bonuses.devastating_blow }})
+				table.insert(wml.get_child(weap, "specials"), { "dummy", { id = "devastating_blow", devastating_blow = bonuses.devastating_blow }})
 			end
 			for k = 1,#bonuses.specials do
-				table.insert(helper.get_child(weap, "specials"), bonuses.specials[k])
+				table.insert(wml.get_child(weap, "specials"), bonuses.specials[k])
 			end
 		end
 	end
 
-	local remade_resistance = helper.get_child(remade, "resistance")
+	local remade_resistance = wml.get_child(remade, "resistance")
 	for i = 1,#damage_type_list do
 		remade_resistance[damage_type_list[i]] = remade_resistance[damage_type_list[i]] - resistances[damage_type_list[i]]
 	end
@@ -342,7 +340,7 @@ function wesnoth.update_stats(original)
 
 	remade.vision = remade.max_moves + vision
 
-	local remade_abilities = helper.get_child(remade, "abilities")
+	local remade_abilities = wml.get_child(remade, "abilities")
 	if not remade_abilities then
 		remade_abilities = { "abilities", {}}
 		table.insert(remade, remade_abilities)
@@ -354,7 +352,7 @@ function wesnoth.update_stats(original)
 		end
 	end
 
-	local remade_defences = helper.get_child(remade, "defense")
+	local remade_defences = wml.get_child(remade, "defense")
 	if not remade_defences then
 		remade_defences = { "defense", {}}
 		table.insert(remade, remade_defences)
@@ -390,7 +388,7 @@ function wesnoth.update_stats(original)
 			if eff.set_icon then
 				local function set_if_same(property) -- Warning, this makes the change only very roughly
 					if eff[property] then
-						for atk in helper.child_range(remade, "attack") do
+						for atk in wml.child_range(remade, "attack") do
 							if atk[property] == eff[property] then
 								atk.icon = eff.set_icon
 							end
@@ -451,8 +449,8 @@ function wesnoth.update_stats(original)
 			if eff.clone_anim then
 				local right_anim
 				local function get_best_anim(source)
-					for anim in helper.child_range(source, "attack_anim") do
-						local filter = helper.get_child(anim, "filter_attack")
+					for anim in wml.child_range(source, "attack_anim") do
+						local filter = wml.get_child(anim, "filter_attack")
 						if filter and filter.name == strongest_attack.name then
 							right_anim = anim
 							break -- priority
@@ -465,13 +463,13 @@ function wesnoth.update_stats(original)
 				end
 				local unit_type = wesnoth.unit_types[remade.type].__cfg
 				if remade.gender == "female" then
-					local female = helper.get_child(unit_type, "female")
+					local female = wml.get_child(unit_type, "female")
 					if female then
 						unit_type = female
 					end
 				end
 				get_best_anim(unit_type)
-				for variation in helper.child_range(unit_type, "variation") do
+				for variation in wml.child_range(unit_type, "variation") do
 					if variation.variation_name == remade.variation then
 						get_best_anim(variation)
 					end
@@ -479,10 +477,10 @@ function wesnoth.update_stats(original)
 				if not right_anim then
 					for _, inner_eff in loti.unit.effects(remade) do
 						if inner_eff.apply_to == "new_animation" then
-							local filter = helper.get_child(inner_eff, "filter")
+							local filter = wml.get_child(inner_eff, "filter")
 							if not filter or not filter.gender or filter.gender == remade.gender then
-								for anim in helper.child_range(inner_eff, "attack_anim") do
-									filter = helper.get_child(anim, "filter_attack")
+								for anim in wml.child_range(inner_eff, "attack_anim") do
+									filter = wml.get_child(anim, "filter_attack")
 									if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
 										right_anim = anim
 									end
@@ -494,7 +492,7 @@ function wesnoth.update_stats(original)
 
 				if right_anim then
 					right_anim = wesnoth.deepcopy(right_anim)
-					local filter = helper.get_child(right_anim, "filter_attack")
+					local filter = wml.get_child(right_anim, "filter_attack")
 					if filter.name then
 						filter.name = eff.name
 					end
@@ -550,10 +548,10 @@ function wesnoth.update_stats(original)
 			elseif strongest_attack.number < 1 then
 				strongest_attack.number = 1
 			end
-			local specials = helper.get_child(eff, "specials")
+			local specials = wml.get_child(eff, "specials")
 			if specials then
 				for k = 1,#specials do
-					table.insert(helper.get_child(strongest_attack, "specials"), specials[k])
+					table.insert(wml.get_child(strongest_attack, "specials"), specials[k])
 				end
 			end
 			table.insert(remade, { "attack", strongest_attack})
@@ -561,13 +559,13 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART VII: Modify attacks
-	for atk in helper.child_range(remade, "attack") do
-		local specials = helper.get_child(atk, "specials")
+	for atk in wml.child_range(remade, "attack") do
+		local specials = wml.get_child(atk, "specials")
 		-- Redeem must need recharging
 		if atk.name == "redeem" then
 			atk.damage = 1
 			atk.number = 1
-			local status = helper.get_child(remade, "status")
+			local status = wml.get_child(remade, "status")
 			if status.redeem_waiting then
 				atk.attack_weight = 0
 			end
@@ -684,8 +682,8 @@ function wesnoth.update_stats(original)
 	local has_leadership_item = false
 	for _, eff in loti.unit.effects(remade) do
 		if eff.apply_to == "new_ability" then
-			local abilities = helper.get_child(eff, "abilities")
-			if abilities and helper.get_child(abilities, "leadership") then
+			local abilities = wml.get_child(eff, "abilities")
+			if abilities and wml.get_child(abilities, "leadership") then
 				has_leadership_item = true
 			end
 		end
@@ -699,7 +697,7 @@ function wesnoth.update_stats(original)
 	for i = #vars,1,-1 do
 		if vars[i][1] == "disabled_defences" then
 			local found = false
-			for atk in helper.child_range(remade, "attack") do
+			for atk in wml.child_range(remade, "attack") do
 				if atk.name == vars[i][2].name then
 					atk.defense_weight = 0
 					found = true
@@ -734,7 +732,7 @@ function wesnoth.wml_actions.update_stats(cfg)
 	local units = wesnoth.get_units(cfg)
 	for i = 1,#units do
 		local unit = units[i].__cfg
-		if helper.get_child(unit, "resistance") and helper.get_child(unit, "movement_costs") and helper.get_child(unit, "defense") then
+		if wml.get_child(unit, "resistance") and wml.get_child(unit, "movement_costs") and wml.get_child(unit, "defense") then
 			unit = wesnoth.update_stats(unit)
 			wesnoth.put_unit(unit)
 		end

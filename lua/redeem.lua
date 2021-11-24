@@ -302,8 +302,8 @@ local function loti_util_list_existing_upgrades(ability_tree, unit)
 	local known_upgrades = known_ability_trees[ability_tree]
 	local found = {}
 
-	local modifications = helper.get_child(unit.__cfg, "modifications")
-	for _, advancement in ipairs(helper.child_array(modifications, "advancement")) do
+	local modifications = wml.get_child(unit.__cfg, "modifications")
+	for _, advancement in ipairs(wml.child_array(modifications, "advancement")) do
 		if known_upgrades[advancement.id] then
 			found[advancement.id] = 1
 		end

@@ -1,7 +1,5 @@
 -- Automated test for [unitdata.lua] library.
 
-local helper = wesnoth.require "lua/helper.lua"
-
 -- Returns a new unit (WML table) for further testing.
 local function newunit()
 	local unit = wesnoth.create_unit { type = "Efraim_god", random_traits = "no" }
@@ -421,7 +419,7 @@ for unit_form, get_unit in pairs({
 				assert(not ability.affect_allies)
 				assert(not ability.affect_self)
 
-				local filter = helper.child_array(ability, "affect_adjacent")[1]
+				local filter = wml.child_array(ability, "affect_adjacent")[1]
 				assert(filter.adjacent == "n,ne,se,s,sw,nw")
 			end)
 		end
@@ -480,7 +478,7 @@ for unit_form, get_unit in pairs({
 				assert(effect.number_required == 209)
 				assert(not effect.replace)
 
-				local bonus = helper.child_array(effect, "resistance")[1]
+				local bonus = wml.child_array(effect, "resistance")[1]
 				assert(bonus.arcane == -5)
 				assert(bonus.cold == -5)
 				assert(bonus.fire == -5)
@@ -498,7 +496,7 @@ for unit_form, get_unit in pairs({
 					assert(not ability.affect_self)
 					assert(not ability.cumulative)
 
-					local filter = helper.child_array(ability, "affect_adjacent")[1]
+					local filter = wml.child_array(ability, "affect_adjacent")[1]
 					assert(filter.adjacent == "n,ne,se,s,sw,nw")
 				end)
 			end,
@@ -515,7 +513,7 @@ for unit_form, get_unit in pairs({
 					assert(ability.affect_self)
 					assert(ability.active_on == "defense")
 
-					local filter = helper.child_array(ability, "filter_base_value")[1]
+					local filter = wml.child_array(ability, "filter_base_value")[1]
 					assert(filter.less_than == 80)
 				end)
 			end,
@@ -542,7 +540,7 @@ for unit_form, get_unit in pairs({
 				assert(effect.apply_to == "defense")
 				assert(not effect.replace)
 
-				local bonus = helper.child_array(effect, "defense")[1]
+				local bonus = wml.child_array(effect, "defense")[1]
 				assert(bonus.frozen == -2)
 				assert(bonus.shallow_water == -2)
 				assert(bonus.deep_water == -2)
@@ -595,7 +593,7 @@ for unit_form, get_unit in pairs({
 						assert(ability.affect_allies)
 						assert(not ability.affect_self)
 						assert(ability.poison == "cured")
-						assert(helper.child_array(ability, "affect_adjacent")[1]) -- Empty but present
+						assert(wml.child_array(ability, "affect_adjacent")[1]) -- Empty but present
 					end,
 					function(tag, ability)
 						-- Heals +8
@@ -605,7 +603,7 @@ for unit_form, get_unit in pairs({
 						assert(not ability.affect_self)
 						assert(ability.poison == "slowed")
 						assert(ability.value == 8)
-						assert(helper.child_array(ability, "affect_adjacent")[1]) -- Empty but present
+						assert(wml.child_array(ability, "affect_adjacent")[1]) -- Empty but present
 					end
 				})
 			end,

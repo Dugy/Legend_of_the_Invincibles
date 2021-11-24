@@ -179,7 +179,7 @@ loti.item.type = {
 	-- Returns Lua table { item_number1 = object1, ... }
 	_reload = function()
 		local cache = {}
-		local all_known_types = helper.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
+		local all_known_types = wml.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
 
 		for _, item in ipairs(all_known_types) do
 			cache[item[2].number] = item[2]
@@ -382,9 +382,9 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 		record.sort = crafted_sort
 	end
 
-	local list = helper.get_variable_array("items")
+	local list = wml.array_access.get("items")
 	table.insert(list, record)
-	helper.set_variable_array("items", list)
+	wml.array_access.set("items", list)
 
 	-- Draw the image of this item on the ground,
 	-- plus rare blinking animation (halo) on the same hex.
@@ -458,7 +458,7 @@ end
 -- Remove one item from the ground at coordinates (x,y).
 -- Optional parameter crafted_sort: if present, only item with this item_sort will be removed.
 loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
-	local list = helper.get_variable_array("items")
+	local list = wml.array_access.get("items")
 	local same_items_found = 0 -- Count the number of items on the same hex.
 
 	local index_to_remove = nil
@@ -478,7 +478,7 @@ loti.item.on_the_ground.remove = function(item_number, x, y, crafted_sort)
 	end
 
 	table.remove(list, index_to_remove)
-	helper.set_variable_array("items", list)
+	wml.array_access.set("items", list)
 
 	-- Remove the image from the map,
 	-- but only if this hex doesn't have other items of the same type.
@@ -494,7 +494,7 @@ end
 -- Get the list of all items on the ground at coordinates (x,y).
 -- Returns: Lua array, each element is item_number.
 loti.item.on_the_ground.list = function(x, y)
-	local list = helper.get_variable_array("items")
+	local list = wml.array_access.get("items")
 	local results = {}
 
 	for _, elem in ipairs(list) do
@@ -509,7 +509,7 @@ end
 -- The same but returns sorts, useful for manipulating crafted items without workarounds
 -- Returns: Lua array, each element is {number = ..., sort = ...}
 loti.item.on_the_ground.list_with_sorts = function(x, y)
-	local list = helper.get_variable_array("items")
+	local list = wml.array_access.get("items")
 	local results = {}
 
 	for _, elem in ipairs(list) do
@@ -685,7 +685,7 @@ loti.item.describe_item = function(number, sort, set_items)
 	end
 
 	local function add_specials(tag, ending)
-		local specials = helper.get_child(item, tag)
+		local specials = wml.get_child(item, tag)
 		if specials then
 			for i = 1,#specials do
 				if specials[i][2].name then
@@ -721,7 +721,7 @@ loti.item.describe_item = function(number, sort, set_items)
 			line = effect.desc -- Mostly for [latent] properties
 		elseif item[i][2].apply_to then
 			if effect.apply_to == "new_ability" then
-				local abilities = helper.get_child(effect, "abilities")
+				local abilities = wml.get_child(effect, "abilities")
 				if abilities then
 					for j = 1,#abilities do
 						if abilities[j][2].name then
@@ -758,8 +758,8 @@ loti.item.describe_item = function(number, sort, set_items)
 						line = _"<span color='#60A0FF'>" .. tostring(effect.increase_total * -1) .. _" fewer hitpoints" .. ending
 					end
 				end
-			elseif effect.apply_to == "defense" and helper.get_child(effect, "defense") then
-				local def = helper.get_child(effect, "defense")
+			elseif effect.apply_to == "defense" and wml.get_child(effect, "defense") then
+				local def = wml.get_child(effect, "defense")
 				local function describe(tag, text)
 					if def[tag] then
 						if def[tag] > 0 then
@@ -785,8 +785,8 @@ loti.item.describe_item = function(number, sort, set_items)
 				describe("sand", _"on sands")
 				describe("unwalkable", _"above unwalkable places")
 				describe("impassable", _"inside impassable walls")
-			elseif effect.apply_to == "movement_costs" and helper.get_child(effect, "movement_costs") then
-				local mov = helper.get_child(effect, "movement_costs")
+			elseif effect.apply_to == "movement_costs" and wml.get_child(effect, "movement_costs") then
+				local mov = wml.get_child(effect, "movement_costs")
 				local function describe(tag, text)
 					if mov[tag] then
 						if line then
@@ -866,7 +866,7 @@ end
 
 function wesnoth.wml_actions.random_item(cfg)
 	local item_types = nil
-	local item_types_wml = helper.get_child(cfg, "types")
+	local item_types_wml = wml.get_child(cfg, "types")
 	if item_types_wml then
 		item_types = {}
 		for _, possibilities in pairs(item_types_wml) do

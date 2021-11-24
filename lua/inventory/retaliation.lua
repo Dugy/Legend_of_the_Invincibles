@@ -4,7 +4,6 @@
 --
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 local mpsafety
 
 -- Ordered array of indexes of attacks (positions in unit.attacks array)
@@ -143,7 +142,7 @@ local function onshow(dialog, unit)
 			-- Double-check that this attack was disabled via this dialog.
 			-- If not, this is likely an attack like whirlwind or redeem,
 			-- and we shouldn't show it on the list at all.
-			for _, disable_record in ipairs(helper.get_variable_array("disabled_defences", unit)) do
+			for _, disable_record in ipairs(wml.array_access.get("disabled_defences", unit)) do
 				-- Note when comparing: "index" is Lua array index (starts with 1),
 				-- while order is C++ array index (starts with 0).
 				if disable_record.order + 1 == index then

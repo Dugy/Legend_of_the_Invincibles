@@ -6,7 +6,7 @@ loti.flavours_table = { "chivalrous", "wizardly", "dark", "criminal", "warlike",
 local title_table = {}
 local flavours_table = loti.flavours_table
 
-local title_data = helper.get_child(wesnoth.unit_types["Title Data Loader"].__cfg, "advancement")
+local title_data = wml.get_child(wesnoth.unit_types["Title Data Loader"].__cfg, "advancement")
 for i = 1,#title_data do
 	if title_data[i][1] == "nonterminal" then
 		local made = {}
@@ -85,7 +85,7 @@ function loti.util.get_unit_flavour(u)
 
 	local defence = 0
 	local terrains = 0
-	local defences = helper.get_child(data, "defense")
+	local defences = wml.get_child(data, "defense")
 	if defences then
 		for _, v in pairs(defences) do
 			defence = defence + v
@@ -94,7 +94,7 @@ function loti.util.get_unit_flavour(u)
 		defence = defence / terrains
 	end
 
-	local resistances = helper.get_child(data, "resistance")
+	local resistances = wml.get_child(data, "resistance")
 	local resistance = 100
 	if resistances then
 		resistance = (resistances.blade + resistances.impact + resistances.pierce) / 3
@@ -134,7 +134,7 @@ function loti.util.get_unit_flavour(u)
 	end
 
 	-- Abilities and some other properties
-	local abilities = helper.get_child(data, "abilities")
+	local abilities = wml.get_child(data, "abilities")
 	for i = 1,#abilities do
 		if abilities[i][1] == "leadership" then
 			flavour.warlike = flavour.warlike + 10
@@ -188,7 +188,7 @@ function loti.util.get_unit_flavour(u)
 	end
 
 	-- Traits
-	local modifications = helper.get_child(u, "modifications")
+	local modifications = wml.get_child(u, "modifications")
 	for i = 1,#modifications do
 		if modifications[i][1] == "trait" then
 			if modifications[i][2].id == "loyal" then

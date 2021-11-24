@@ -72,7 +72,7 @@ function wesnoth.wml_actions.award_extra_experience(cfg)
 	for i = 1,#units do
 		local unit = units[i].__cfg
 		if cfg.defer then
-			local variables = helper.get_child(unit, "variables")
+			local variables = wml.get_child(unit, "variables")
 			if variables.lua_delayed_exp then
 				variables.lua_delayed_exp = variables.lua_delayed_exp + added
 			else
@@ -97,7 +97,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 	-- These two functions were copied from wml-tags.lua too
 	local function start_var_scope(name)
-		local var = helper.get_variable_array(name) --containers and arrays
+		local var = wml.array_access.get(name) --containers and arrays
 		if #var == 0 then var = wml.variables[name] end --scalars (and nil/empty)
 		wesnoth.set_variable(name)
 		return var
@@ -105,13 +105,13 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 	local function end_var_scope(name, var)
 		wesnoth.set_variable(name)
 		if type(var) == "table" then
-			helper.set_variable_array(name, var)
+			wml.array_access.set(name, var)
 		else
 			wesnoth.set_variable(name, var)
 		end
 	end
 
-	local filter = helper.get_child(cfg, "filter") or helper.wml_error("[harm_unit_loti] missing required [filter] tag")
+	local filter = wml.get_child(cfg, "filter") or helper.wml_error("[harm_unit_loti] missing required [filter] tag")
 	-- we need to use shallow_literal field, to avoid raising an error if $this_unit (not yet assigned) is used
 	if not cfg.__shallow_literal.amount then helper.wml_error("[harm_unit_loti] has missing required amount= attribute") end
 	local variable = cfg.variable -- kept out of the way to avoid problems
@@ -136,9 +136,9 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			local animate = cfg.animate -- attacker and defender are special values
 			local delay = cfg.delay or 500
 			local fire_event = cfg.fire_event
-			local primary_attack = helper.get_child(cfg, "primary_attack")
-			local secondary_attack = helper.get_child(cfg, "secondary_attack")
-			local harmer_filter = helper.get_child(cfg, "filter_second")
+			local primary_attack = wml.get_child(cfg, "primary_attack")
+			local secondary_attack = wml.get_child(cfg, "secondary_attack")
+			local harmer_filter = wml.get_child(cfg, "filter_second")
 			local resistance_multiplier = tonumber(cfg.resistance_multiplier) or 1
 			if harmer_filter then harmer = wesnoth.get_units(harmer_filter)[1] end
 			-- end of block to support $this_unit
@@ -423,7 +423,7 @@ local function unit_information_part_2()
 
     -- An attack special is reported only if it has a valid "name" field.
     local function get_attack_specials(attack)
-      local specials = helper.get_child(attack, "specials")
+      local specials = wml.get_child(attack, "specials")
       local result_table = {}
 
       for _, v in pairs(specials) do
@@ -474,7 +474,7 @@ local function unit_information_part_2()
 
     -- The entry point for this code block: a function to list all of a unit's attacks.
     local function list_attacks()
-      local attacks = helper.get_variable_array("unit.attack")
+      local attacks = wml.array_access.get("unit.attack")
       local result = ""
       for _, v in ipairs(attacks) do
         result = result .. list_one_attack(v)
@@ -539,7 +539,7 @@ local function unit_information_part_4()
   local function form_one_line(type)
     local resist = 100 - wml.variables["unit.resistance." .. type]
     local penetrate = 0
-    local resistances = helper.get_variable_array("unit.abilities.resistance")
+    local resistances = wml.array_access.get("unit.abilities.resistance")
 
     for _, v in ipairs(resistances) do
       if (v["id"] == type .. "_penetrate") then
@@ -617,7 +617,7 @@ function wesnoth.wml_actions.unit_information_part_6()
     -- unit's advancements and the number of times it took each of them.
     -- AMLA advancements, and soul eating choices
     local function list_amla()
-      local advances = helper.get_variable_array("unit.modifications.advancement")
+      local advances = wml.array_access.get("unit.modifications.advancement")
       local result_amla = ""
       local result_soul = ""
       local result_table = {}
@@ -627,7 +627,7 @@ function wesnoth.wml_actions.unit_information_part_6()
             .. tostring(v.description) .. " <span color='#A0A0A0'>"
             --.. "(" .. tostring(v.id) .. ")"
 	    .. "</span>\n"
-        elseif result_amla ~= "" or (helper.get_child(v, "effect") and helper.get_child(v, "effect").name == "redeem") then
+        elseif result_amla ~= "" or (wml.get_child(v, "effect") and wml.get_child(v, "effect").name == "redeem") then
             -- We wait until result_amla is not empty, because some soul eating
             -- advancements are automatically set when Preserved Liches are
             -- created (scenarios1/10_The_Poison, scenarios6/01_The_Awakening)
@@ -665,7 +665,7 @@ local loti_needs_advance = nil
 function wesnoth.wml_actions.pre_advance_stuff(cfg)
 --    wesnoth.message("pre_advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
-    local a = helper.get_child(unit, "advancement")
+    local a = wml.get_child(unit, "advancement")
     local t = wml.variables["side_number"]
     if t == unit.side then
         if a ~= nil and a.id == "backup_amla" then
@@ -676,13 +676,13 @@ function wesnoth.wml_actions.pre_advance_stuff(cfg)
                     table.insert(unit, v)
                 end
             end
-            local v = helper.get_child(unit, "variables")
+            local v = wml.get_child(unit, "variables")
             v.achieved_amla = true
             wesnoth.put_unit(unit)
             loti_needs_advance = true
         end
     else
-        local v = helper.get_child(unit, "variables")
+        local v = wml.get_child(unit, "variables")
         v.may_need_respec = true
 	unit.hitpoints = unit.max_hitpoints
         wesnoth.put_unit(unit)
@@ -692,7 +692,7 @@ end
 function wesnoth.wml_actions.advance_stuff(cfg)
 --    wesnoth.message("advance_stuff")
     local unit = wesnoth.get_units(cfg)[1].__cfg
-    local m = helper.get_child(unit, "modifications")
+    local m = wml.get_child(unit, "modifications")
 
 	local function clear_potions()
 		for i = #m, 1, -1 do
@@ -756,7 +756,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	if not u or not u.race or u.race == "" then
 		return
 	end
-	local unit_variables = helper.get_child(u, "variables")
+	local unit_variables = wml.get_child(u, "variables")
 
 	-- Check if the unit should be given a title
 	if unit_variables.been_given_title or u.unrenamable then
@@ -800,7 +800,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 				end
 			end
 		end
-		local modifications = helper.get_child(u, "modifications")
+		local modifications = wml.get_child(u, "modifications")
 		for i = 1,#modifications do
 			if modifications[i][1] == "advancement" then
 				local name = modifications[i][2].id
@@ -935,7 +935,7 @@ function loti.util.can_equip_item(unit, number, sort)
 		end
 	end
 
-	local objects = helper.get_variable_array("unit.modifications.object")
+	local objects = wml.array_access.get("unit.modifications.object")
 	-- TODO: this disables picking a book twice from the ground but not from the storage
 	if sort == "limited" then
 		-- sneaky mistake: need __ instead of _ because _ is needed for translation...

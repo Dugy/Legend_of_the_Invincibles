@@ -31,8 +31,8 @@ end
 local function wml_modification_iterator(unit, tag, filter)
 	unit = normalize_unit_param(unit)
 
-	local modifications = helper.get_child(unit, "modifications")
-	local elements = helper.child_array(modifications, tag)
+	local modifications = wml.get_child(unit, "modifications")
+	local elements = wml.child_array(modifications, tag)
 
 	local idx = 0
 	return function()
@@ -65,7 +65,7 @@ local function get_type_advancement(unit_type, advancement_id)
 		helper.wml_error("get_type_advancement(): unit type " .. unit_type .. " is not found.")
 	end
 
-	for adv in helper.child_range(model.__cfg, "advancement") do
+	for adv in wml.child_range(model.__cfg, "advancement") do
 		if adv.id == advancement_id then
 			return adv
 		end
@@ -87,7 +87,7 @@ local wml_based_implementation = {
 		unit = normalize_unit_param(unit)
 
 		local retval = {}
-		local mods = helper.get_child(unit, "modifications")
+		local mods = wml.get_child(unit, "modifications")
 		for i = 1,#mods do
 			if mods[i][1] == "object" and mods[i][2].number then
 				table.insert(retval, mods[i][2].number)
@@ -175,7 +175,7 @@ local wml_based_implementation = {
 
 		-- List of all modifications of this unit.
 		-- Includes items, advancements, traits, etc.
-		local modifications = helper.get_child(unit, "modifications")
+		local modifications = wml.get_child(unit, "modifications")
 		local modif_idx = 0
 
 		-- Effects of only one modification (modification we are currently processing)
@@ -209,7 +209,7 @@ local wml_based_implementation = {
 
 				-- New effects[] array.
 				-- Further calls to effects() iterator will return its values until this array is depleted.
-				effects = helper.child_array(contents, "effect")
+				effects = wml.child_array(contents, "effect")
 				effect_idx = 1
 			end
 
@@ -227,7 +227,7 @@ local wml_based_implementation = {
 
 		-- List of all modifications of this unit.
 		-- Includes items, advancements, traits, etc.
-		local modifications = helper.get_child(unit, "modifications")
+		local modifications = wml.get_child(unit, "modifications")
 		local modif_idx = 0
 
 		return function()
@@ -256,7 +256,7 @@ local wml_based_implementation = {
 	-- Add advancement to unit.
 	add_advancement = function(unit, advancement_id)
 		unit = normalize_unit_param(unit)
-		local mods = helper.get_child(unit, "modifications")
+		local mods = wml.get_child(unit, "modifications")
 		local advancement = get_type_advancement(unit.type, advancement_id)
 
 		if not advancement then
@@ -273,7 +273,7 @@ local wml_based_implementation = {
 	-- Remove advancement from unit.
 	remove_advancement = function(unit, advancement_id)
 		unit = normalize_unit_param(unit)
-		local mods = helper.get_child(unit, "modifications")
+		local mods = wml.get_child(unit, "modifications")
 		for i = 1,#mods do
 			if mods[i][1] == "advancement" and mods[i][2].id == advancement_id then
 				table.remove(mods, i)
@@ -288,7 +288,7 @@ local wml_based_implementation = {
 	-- Remove all advancements from unit.
 	remove_all_advancements = function(unit)
 		unit = normalize_unit_param(unit)
-		local mods = helper.get_child(unit, "modifications")
+		local mods = wml.get_child(unit, "modifications")
 		for i = #mods,1,-1 do
 			if mods[i][1] == "advancement" then
 				table.remove(mods, i)
@@ -308,7 +308,7 @@ local wml_based_implementation = {
 			item.sort = item_sort
 		end
 
-		local on_equip = helper.get_child(item, "on_equip")
+		local on_equip = wml.get_child(item, "on_equip")
 		if on_equip then
 			local variable = on_equip.variable or "armed"
 			wesnoth.set_variable(variable, unit)
@@ -317,7 +317,7 @@ local wml_based_implementation = {
 			wesnoth.set_variable(variable, nil)
 		end
 
-		local modifications = helper.get_child(unit, "modifications")
+		local modifications = wml.get_child(unit, "modifications")
 		table.insert(modifications, wml.tag.object(item))
 
 		-- Place updated unit back onto the map.
@@ -327,7 +327,7 @@ local wml_based_implementation = {
 	-- Remove item from unit.
 	remove_item = function(unit, item_number, item_sort)
 		unit = normalize_unit_param(unit)
-		local mods = helper.get_child(unit, "modifications")
+		local mods = wml.get_child(unit, "modifications")
 		for i = 1,#mods do
 			if mods[i][1] == "object" and mods[i][2].number == item_number and (not item_sort or mods[i][2].sort == item_sort) then
 				table.remove(mods, i)
@@ -347,7 +347,7 @@ local wml_based_implementation = {
 	remove_all_items = function(unit, filter_func)
 		unit = normalize_unit_param(unit)
 
-		local mods = helper.get_child(unit, "modifications")
+		local mods = wml.get_child(unit, "modifications")
 		for i = #mods,1,-1 do
 			if mods[i][1] == "object" then
 				if not filter_func or filter_func(mods[i][2]) then

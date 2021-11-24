@@ -133,7 +133,7 @@ function mpsafety:run_immediately(operation)
 				})
 			end
 		end
-		helper.set_variable_array("disabled_defences", disabled_defences, unit)
+		wml.array_access.set("disabled_defences", disabled_defences, unit)
 	else
 		helper.wml_error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
 	end
