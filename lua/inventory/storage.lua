@@ -264,7 +264,7 @@ local function is_too_progressed()
 	end
 
 	local unit = inventory_dialog.current_unit
-	local terrain = wesnoth.get_terrain(unit.x, unit.y)
+	local terrain = wesnoth.current.map[unit]
 	if string.sub(terrain, 1, 1) == "C" or string.sub(terrain, 1, 1) == "K" then
 		return false
 	end
