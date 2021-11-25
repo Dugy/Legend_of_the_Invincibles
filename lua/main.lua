@@ -46,10 +46,13 @@ end
 function wesnoth.wml_actions.get_unit_resistance(cfg)
 	local damage_type = cfg.damage_type or helper.wml_error "[get_unit_resistance] has no damage type specified"
 	local to_variable = cfg.to_variable or "resistance_obtained"
-	local unit = wesnoth.get_units(cfg)[1] or wesnoth.set_variable( to_variable , 100 ) --It's mainly used for weapon specials, and the target might be already killed
+	local unit = wesnoth.units.find_on_map(cfg)[1]
 	if unit then
 		local result = wesnoth.unit_resistance( unit, damage_type )
-		wesnoth.set_variable( to_variable , result )
+		wml.variables[to_variable] = result
+	else
+		--It's mainly used for weapon specials, and the target might be already killed
+		wml.variables[to_variable] = 100
 	end
 end
 
@@ -326,7 +329,7 @@ local function unit_information_part_1()
       end
     end
 
-    wesnoth.set_variable("desc_prefix", result)
+    wml.variables["desc_prefix"] = result
 end
 
 -- Some fairly tricky code to make a nicely formatted list of a unit's
@@ -490,7 +493,7 @@ local function unit_information_part_2()
       return result
     end
 
-    wesnoth.set_variable("attacks_list", list_attacks())
+    wml.variables["attacks_list"] = list_attacks()
 end
 
 -- Creates a cleaned up list of a unit's abilities
@@ -529,7 +532,7 @@ local function unit_information_part_3()
       end
     end
 
-    wesnoth.set_variable("abilities_list", list_abilities())
+    wml.variables["abilities_list"] = list_abilities()
 end
 
 -- Create the resistances and penetrations table.  Monospace fonts are key
@@ -561,7 +564,7 @@ local function unit_information_part_4()
   -- Remove the last newline, just to make things compact
   result = string.sub(tostring(result), 1, -2)
 
-  wesnoth.set_variable("resistances_list", result)
+  wml.variables["resistances_list"] = result
 end
 
 -- Create the terrain resistance and defence table.  Monospace fonts are key
@@ -601,7 +604,7 @@ local function unit_information_part_5()
 
   -- Remove the last newline, just to make things compact
   result = string.sub(tostring(result), 1, -2)
-  wesnoth.set_variable("defences_list", result)
+  wml.variables["defences_list"] = result
 end
 
 function wesnoth.wml_actions.unit_information_parts_1_to_5()
@@ -646,8 +649,8 @@ function wesnoth.wml_actions.unit_information_part_6()
     end
 
     local result_amla, result_soul = list_amla()
-    wesnoth.set_variable("advancements_taken", result_amla)
-    wesnoth.set_variable("soul_eating", result_soul)
+    wml.variables["advancements_taken"] = result_amla
+    wml.variables["soul_eating"] = result_soul
 end
 
 local function clear_advancements(unit)
@@ -827,7 +830,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	end
 
 	if cfg.variable then
-		wesnoth.set_variable(cfg.variable, u)
+		wml.variables[cfg.variable] = u
 	else
 		wesnoth.put_unit(u)
 	end

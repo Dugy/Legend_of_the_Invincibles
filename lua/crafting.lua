@@ -24,7 +24,7 @@ end
 
 loti.gem.set_counts = function(gem_quantities)
 	for idx, gem in ipairs(loti.gem.types) do
-		wesnoth.set_variable(gem, gem_quantities[idx])
+		wml.variables[gem] = gem_quantities[idx]
 	end
 end
 

@@ -1,7 +1,7 @@
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 local function call_event_on_unit(u, name)
-	wesnoth.set_variable("updated", u)
+	wml.variables["updated"] = u
 	wesnoth.wml_actions.fire_event{ name = name }
 	u = wml.variables["updated"]
 	return u

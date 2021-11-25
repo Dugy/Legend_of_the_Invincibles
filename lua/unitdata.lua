@@ -311,10 +311,10 @@ local wml_based_implementation = {
 		local on_equip = wml.get_child(item, "on_equip")
 		if on_equip then
 			local variable = on_equip.variable or "armed"
-			wesnoth.set_variable(variable, unit)
+			wml.variables[variable] = unit
 			loti.execute(on_equip)
 			unit = wml.variables[variable]
-			wesnoth.set_variable(variable, nil)
+			wml.variables[variable] = nil
 		end
 
 		local modifications = wml.get_child(unit, "modifications")

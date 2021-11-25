@@ -98,7 +98,7 @@ loti.item.storage.add = function(item_number, crafted_sort)
 	end
 
 	table.sort(list, compare_entries)
-	wesnoth.set_variable("item_storage", list)
+	wml.variables["item_storage"] = list
 	wesnoth.fire_event("added to storage")
 end
 
@@ -117,7 +117,7 @@ loti.item.storage.remove = function(item_number, crafted_sort)
 		end
 	end
 
-	wesnoth.set_variable("item_storage", list)
+	wml.variables["item_storage"] = list
 	wesnoth.fire_event("removed from storage")
 end
 
@@ -853,7 +853,7 @@ function wesnoth.wml_actions.describe_object(cfg)
 	local sort = cfg.sort or "unspecified"
 	local output = cfg.output or "object_description"
 	local result = loti.item.describe_item(number, sort)
-	wesnoth.set_variable(output, result)
+	wml.variables[output] = result
 end
 
 -- Invalidate cache of loti.item.type[].
@@ -880,7 +880,7 @@ function wesnoth.wml_actions.random_item(cfg)
 	local group_name = cfg.group or "drop"
 	local generated = loti.item.on_the_ground.generate(group_name, item_types)
 	if cfg.variable then
-		wesnoth.set_variable(cfg.variable, generated)
+		wml.variables[cfg.variable] = generated
 	else
 		loti.item.on_the_ground.add(generated, cfg.x, cfg.y)
 	end

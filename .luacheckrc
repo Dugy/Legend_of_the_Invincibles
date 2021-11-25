@@ -21,7 +21,16 @@ globals = {
 
 -- These global variables are allowed, but can't be modified (with the exception of some fields).
 read_globals = {
-	"wml",
+	wml = {
+		fields = {
+			-- wml.variables[something] is supposed to be modified
+			variables = {
+				read_only = false,
+				other_fields = true
+			}
+		},
+		other_fields = true
+	},
 	"gui",
 	wesnoth = {
 		fields = {

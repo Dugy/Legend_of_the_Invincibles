@@ -23,7 +23,7 @@ function loti.util.get_unit_flavour(u)
 	-- Check its properties to calculate its flavour
 	wesnoth.wml_actions.unit{ type = u.type, to_variable = "lua_unit_to_get_flavour"}
 	local data = wml.variables["lua_unit_to_get_flavour"]
-	wesnoth.set_variable("lua_unit_to_get_flavour", nil)
+	wml.variables["lua_unit_to_get_flavour"] = nil
 
 	local has_attack = loti.util.list_attacks(u)
 

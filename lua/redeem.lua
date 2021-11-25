@@ -525,7 +525,7 @@ function wesnoth.wml_actions.show_redeem_menu(cfg)
 		local res = redeem_menu(ability_tree, units[1])
 		return {wml.tag.soul_eater_choice {choice = res}}
 	end)
-	wesnoth.set_variable(to_variable, result[1][2].choice)
+	wml.variables[to_variable] = result[1][2].choice
 end
 
 -- Tag [count_redeem_upgrades] counts the number of existing redeem upgrades of current unit.
@@ -544,5 +544,5 @@ function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	local count = 0
 	for _ in pairs(loti_util_list_existing_upgrades("redeem", units[1])) do count = count + 1 end
 
-	wesnoth.set_variable(to_variable, count)
+	wml.variables[to_variable] = count
 end

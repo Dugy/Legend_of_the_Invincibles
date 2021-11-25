@@ -100,8 +100,8 @@ local function tutorial_craft()
 			end
 
 			-- Remove 3 obsidians
-			wesnoth.set_variable("obsidians", 0)
-			wesnoth.set_variable("tutorial.proceed", 1)
+			wml.variables["obsidians"] = 0
+			wml.variables["tutorial.proceed"] = 1
 
 			-- Drop "Sword of Krux" to the ground, then give new sword to Efraim.
 			loti.item.on_unit.remove(unit, old_sword.number, old_sword.sort)
