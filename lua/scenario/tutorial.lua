@@ -54,16 +54,16 @@ local function tutorial_craft()
 	local successfully_crafted = false
 
 	-- Populate the normal crafting dialog with Tutorial-related data.
-	local function show_selected_item()
-		loti.gem.show_crafting_report(item.number)
+	local function show_selected_item(dialog)
+		loti.gem.show_crafting_report(dialog, item.number)
 
 		wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", 1, "gui_recipe_name")
 		wesnoth.set_dialog_value("icons/unit-groups/era_default_knalgan_alliance_30-pressed.png", "gui_recipe_chosen", 1, "gui_recipe_icon")
 	end
 
 	-- Install callbacks, etc. in the crafting dialog.
-	local function preshow()
-		show_selected_item()
+	local function preshow(dialog)
+		show_selected_item(dialog)
 
 		-- Hide type chooser (Sword/Spear/etc.), sword is the only thing we craft.
 		wesnoth.set_dialog_visible(false, "gui_type_chosen")

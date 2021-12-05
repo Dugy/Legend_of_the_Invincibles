@@ -45,7 +45,7 @@ loti.gem.add = function(gem, count)
 	loti.gem.set_counts(gems)
 end
 
-loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
+loti.gem.show_transmuting_window = function(crafting_dialog, selected_recipe, selected_sort)
 	local gem_quantities = loti.gem.get_counts()
 	local transmutables = { { amount = 4, text = _"4 obsidians", picture = "items/obsidian.png" },
 				{ amount = 2, text = _"2 topazes", picture = "items/topaz.png" },
@@ -54,7 +54,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 
 	-- Construct the WML of Transmuting dialog.
 	-- Returns: WML table, as expected by the first parameter of gui.show_dialog().
-	local function get_dialog()
+	local function get_dialog_definition()
 		-- One row of the listbox. [grid] widget.
 		local listbox_template = wml.tag.grid {
 			wml.tag.row {
@@ -159,29 +159,29 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 			function()
 				local picked = chosen
 
-				local function gem_changed()
-					picked = wesnoth.get_dialog_value("gui_gem_chosen")
+				local function gem_changed(dialog)
+					picked = dialog.gui_gem_chosen.selected_index
 
 					can_transmute = gem_quantities[picked] >= transmutables[picked].amount
-					wesnoth.set_dialog_active(can_transmute, "ok")
+					dialog.ok.enabled = can_transmute
 				end
 
-				local function preshow()
+				local function preshow(dialog)
 					for i = 1,#transmutables do
-						wesnoth.set_dialog_value(transmutables[i].text, "gui_gem_chosen", i, "gui_gem_name")
-						wesnoth.set_dialog_value(transmutables[i].picture, "gui_gem_chosen", i, "gui_gem_icon")
+						dialog.gui_gem_chosen[i].gui_gem_name.label = transmutables[i].text
+						dialog.gui_gem_chosen[i].gui_gem_icon.label = transmutables[i].picture
 						if gem_quantities[i] < transmutables[i].amount then
-							wesnoth.set_dialog_active(false, "gui_gem_chosen", i, "gui_gem_name")
+							dialog.gui_gem_chosen[i].gui_gem_name.enabled = false
 						end
 					end
-					wesnoth.set_dialog_value(picked, "gui_gem_chosen")
-					wesnoth.set_dialog_callback(gem_changed, "gui_gem_chosen")
-					gem_changed()
+					dialog.gui_gem_chosen.selected_index = picked
+					dialog.gui_gem_chosen.on_modified = function() gem_changed(dialog) end
+					gem_changed(dialog)
 
-					wesnoth.set_dialog_focus("gui_gem_chosen")
+					dialog.gui_gem_chosen:focus()
 				end
 
-				local returned = gui.show_dialog(get_dialog(), preshow)
+				local returned = gui.show_dialog(get_dialog_definition(), preshow)
 
 				if returned ~= -2 then
 					return { picked = picked }
@@ -207,7 +207,7 @@ loti.gem.show_transmuting_window = function(selected_recipe, selected_sort)
 
 		-- Update the gem counts in the Crafting dialog (which is currently open).
 		if selected_recipe then
-			loti.gem.show_crafting_report(selected_recipe, selected_sort)
+			loti.gem.show_crafting_report(crafting_dialog, selected_recipe, selected_sort)
 		end
 	end
 end
@@ -216,7 +216,7 @@ end
 -- how many gems are currently available,
 -- how many gems are needed to craft "item_number",
 -- and the description of this item.
-loti.gem.show_crafting_report = function(item_number, crafted_sort)
+loti.gem.show_crafting_report = function(dialog, item_number, crafted_sort)
 	local item = loti.item.type[item_number]
 	local available = loti.gem.get_counts()
 
@@ -232,8 +232,8 @@ loti.gem.show_crafting_report = function(item_number, crafted_sort)
 		end
 	end
 
-	wesnoth.set_dialog_value(report, "gui_gems_owned")
-	wesnoth.set_dialog_value(loti.item.describe_item(item.number, crafted_sort or item.sort), "gui_item_description")
+	dialog.gui_gems_owned.label = report
+	dialog.gui_item_description.label = loti.item.describe_item(item.number, crafted_sort or item.sort)
 end
 
 -- Construct the WML of Crafting dialog.
@@ -516,13 +516,13 @@ loti.gem.show_crafting_window = function(x, y)
 				return true
 			end
 
-			local function check_validity()
+			local function check_validity(dialog)
 				local function is_valid()
 					if not sort_chosen then
 						return false
 					end
 
-					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
+					recipe_chosen = selectable_recipes[dialog.gui_recipe_chosen.selected_index]
 					if not recipe_chosen then
 						return false
 					end
@@ -535,27 +535,28 @@ loti.gem.show_crafting_window = function(x, y)
 				end
 
 				crafting_allowed = is_valid()
-				wesnoth.set_dialog_active(crafting_allowed, "ok")
+				dialog.ok.enabled = crafting_allowed
 			end
 
-			local function preshow()
+			local function preshow(dialog)
 				local function type_or_recipe_selected()
-					recipe_chosen = selectable_recipes[wesnoth.get_dialog_value("gui_recipe_chosen")]
-					sort_chosen = selectable_sorts[wesnoth.get_dialog_value("gui_type_chosen")]
+					recipe_chosen = selectable_recipes[dialog.gui_recipe_chosen.selected_index]
+					sort_chosen = selectable_sorts[dialog.gui_type_chosen.selected_index]
 
-					loti.gem.show_crafting_report(recipe_chosen, sort_chosen)
-					check_validity()
+					loti.gem.show_crafting_report(dialog, recipe_chosen, sort_chosen)
+					check_validity(dialog)
 				end
 
 				local function basetype_changed()
 					selectable_sorts = {}
 					selectable_recipes = {}
 
-					base_type = wesnoth.get_dialog_value("gui_basetype_chosen")
+					base_type = dialog.gui_basetype_chosen.selected_index
 					local order = 1
 					local function populate_item(text, image, sort)
-						wesnoth.set_dialog_value(text, "gui_type_chosen", order, "gui_type_name")
-						wesnoth.set_dialog_value(image, "gui_type_chosen", order, "gui_type_icon")
+						dialog.gui_type_chosen[order].gui_type_name.label = text
+						dialog.gui_type_chosen[order].gui_type_icon.label = image
+
 						order = order + 1
 						table.insert(selectable_sorts, sort)
 					end
@@ -600,13 +601,13 @@ loti.gem.show_crafting_window = function(x, y)
 					order = 1
 					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to + 1)) do
 						local item = loti.item.type[i]
-						wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", order, "gui_recipe_name")
+						dialog.gui_recipe_chosen[order].gui_recipe_name.label = item.name
 						if can_craft(i) then
-							wesnoth.set_dialog_value("../../../images/icons/unit-groups/era_default_knalgan_alliance_30-pressed.png", "gui_recipe_chosen", order, "gui_recipe_icon")
-							wesnoth.set_dialog_active(true, "gui_recipe_chosen", order, "gui_recipe_name")
+							dialog.gui_recipe_chosen[order].gui_recipe_icon.label = "../../../images/icons/unit-groups/era_default_knalgan_alliance_30-pressed.png"
+							dialog.gui_recipe_chosen[order].gui_recipe_name.enabled = true
 						else
-							wesnoth.set_dialog_value("../../../images/icons/unit-groups/cross_30.png", "gui_recipe_chosen", order, "gui_recipe_icon")
-							wesnoth.set_dialog_active(false, "gui_recipe_chosen", order, "gui_recipe_name")
+							dialog.gui_recipe_chosen[order].gui_recipe_icon.label = "../../../images/icons/unit-groups/cross_30.png"
+							dialog.gui_recipe_chosen[order].gui_recipe_name.enabled = false
 						end
 						selectable_recipes[order] = i
 						order = order + 1
@@ -619,7 +620,7 @@ loti.gem.show_crafting_window = function(x, y)
 							break
 						end
 					end
-					wesnoth.set_dialog_value(position, "gui_type_chosen")
+					dialog.gui_type_chosen.selected_index = position
 
 					position = 1
 					for i = 1,#selectable_recipes do
@@ -628,29 +629,29 @@ loti.gem.show_crafting_window = function(x, y)
 							break
 						end
 					end
-					wesnoth.set_dialog_value(position, "gui_recipe_chosen")
+					dialog.gui_recipe_chosen.selected_index = position
 
 					type_or_recipe_selected()
-					check_validity()
+					check_validity(dialog)
 
-					wesnoth.set_dialog_focus("gui_recipe_chosen")
+					dialog.gui_recipe_chosen:focus()
 				end
 
-				wesnoth.set_dialog_callback(basetype_changed, "gui_basetype_chosen")
-				wesnoth.set_dialog_callback(type_or_recipe_selected, "gui_type_chosen")
-				wesnoth.set_dialog_callback(type_or_recipe_selected, "gui_recipe_chosen")
-				wesnoth.set_dialog_callback(function()
+				dialog.gui_basetype_chosen.on_modified = basetype_changed
+				dialog.gui_type_chosen.on_modified = type_or_recipe_selected
+				dialog.gui_recipe_chosen.on_modified = type_or_recipe_selected
+				dialog.transmute.on_button_click = function()
 					-- Pass the number of selected recipe to Transmuting dialog,
 					-- so that it could update the report on needed/available gem counts
 					-- after each transmutation.
-					loti.gem.show_transmuting_window(recipe_chosen, sort_chosen)
-				end, "transmute")
+					loti.gem.show_transmuting_window(dialog, recipe_chosen, sort_chosen)
+				end
 
 				basetype_changed()
 			end
 
-			local function postshow()
-				check_validity()
+			local function postshow(dialog)
+				check_validity(dialog)
 			end
 
 			local returned = -1
