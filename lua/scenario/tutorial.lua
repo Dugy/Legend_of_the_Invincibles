@@ -57,8 +57,8 @@ local function tutorial_craft()
 	local function show_selected_item(dialog)
 		loti.gem.show_crafting_report(dialog, item.number)
 
-		wesnoth.set_dialog_value(item.name, "gui_recipe_chosen", 1, "gui_recipe_name")
-		wesnoth.set_dialog_value("icons/unit-groups/era_default_knalgan_alliance_30-pressed.png", "gui_recipe_chosen", 1, "gui_recipe_icon")
+		dialog.gui_recipe_chosen[1].gui_recipe_name.label = item.name
+		dialog.gui_recipe_chosen[1].gui_recipe_icon.label = "icons/unit-groups/era_default_knalgan_alliance_30-pressed.png"
 	end
 
 	-- Install callbacks, etc. in the crafting dialog.
@@ -66,34 +66,34 @@ local function tutorial_craft()
 		show_selected_item(dialog)
 
 		-- Hide type chooser (Sword/Spear/etc.), sword is the only thing we craft.
-		wesnoth.set_dialog_visible(false, "gui_type_chosen")
---		wesnoth.set_dialog_visible(false, "gui_choose_type_label")
+		dialog.gui_type_chosen.enabled = false
+		-- dialog.gui_choose_type_label.enabled = false
 
 		-- Select "Weapon" in "choose base type" listbox
-		wesnoth.set_dialog_value(2, "gui_basetype_chosen")
+		dialog.gui_basetype_chosen.selected_index = 2
 
 		-- Don't allow to select "Armour" in "choose base type" listbox
-		wesnoth.set_dialog_callback(function()
-			if wesnoth.get_dialog_value("gui_basetype_chosen") == 1 then
+		dialog.gui_basetype_chosen.on_modified = function()
+			if dialog.gui_basetype_chosen.selected_index == 1 then
 				Delly_says(_"I am sorry, I do not remember any crafting constellation for an armour. Try to make a sword instead.")
 
 				-- Select "Weapon" basetype again.
-				wesnoth.set_dialog_value(2, "gui_basetype_chosen")
+				dialog.gui_basetype_chosen.selected_index = 2
 			end
-		end, "gui_basetype_chosen")
+		end
 
 		-- When player clicks Exit.
-		wesnoth.set_dialog_callback(function()
+		dialog.cancel.on_button_click = function()
 			Delly_says(_"Do not give up easily.")
-		end, "cancel")
+		end
 
 		-- When player clicks Transmute.
-		wesnoth.set_dialog_callback(function()
+		dialog.transmute.on_button_click = function()
 			Delly_says(_"Alchemy is great, but we don't have enough gems for that.")
-		end, "transmute")
+		end
 
 		-- When player clicks Craft.
-		wesnoth.set_dialog_callback(function()
+		dialog.ok.on_button_click = function()
 			-- "Are you sure" dialog, but can't refuse.
 			while not gui.confirm(_"Are you sure you want to craft this item?") do
 				Efraim_says(_"Wait, I actually want to craft it.")
@@ -110,7 +110,7 @@ local function tutorial_craft()
 
 			-- This part of the tutorial is completed.
 			successfully_crafted = true
-		end, "ok")
+		end
 	end
 
 	gui.show_dialog(loti.gem.get_crafting_dialog(), preshow)
