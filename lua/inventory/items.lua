@@ -34,9 +34,9 @@ local inventory_config = {
 			onsubmit = function(unit)
 				-- This may be a unit on recall list, so make sure that "unit" variable
 				-- (which is needed in unit_information_part_1()) gets populated anyway.
-				wesnoth.set_variable("unit", unit.__cfg)
+				wml.variables["unit"] = unit.__cfg
 				wesnoth.fire_event("unit information", unit)
-				wesnoth.set_variable("unit", nil)
+				wml.variables["unit"] = nil
 			end,
 		},
 		{ spacer = true },

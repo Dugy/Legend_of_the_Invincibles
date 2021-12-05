@@ -102,15 +102,15 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 	local function start_var_scope(name)
 		local var = wml.array_access.get(name) --containers and arrays
 		if #var == 0 then var = wml.variables[name] end --scalars (and nil/empty)
-		wesnoth.set_variable(name)
+		wml.variables[name] = nil
 		return var
 	end
 	local function end_var_scope(name, var)
-		wesnoth.set_variable(name)
+		wml.variables[name] = nil
 		if type(var) == "table" then
 			wml.array_access.set(name, var)
 		else
-			wesnoth.set_variable(name, var)
+			wml.variables[name] = var
 		end
 	end
 
@@ -133,8 +133,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 	for index, unit_to_harm in ipairs(wesnoth.units.find_on_map(filter)) do
 		if unit_to_harm.valid then
 			-- block to support $this_unit
-			wesnoth.set_variable ( "this_unit" ) -- clearing this_unit
-			wesnoth.set_variable("this_unit", unit_to_harm.__cfg) -- cfg field needed
+			wml.variables["this_unit"] = unit_to_harm.__cfg -- cfg field needed
 			local amount = tonumber(cfg.amount)
 			local animate = cfg.animate -- attacker and defender are special values
 			local delay = cfg.delay or 500
@@ -268,14 +267,15 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			end
 
 			if variable then
-				wesnoth.set_variable(string.format("%s[%d]", variable, math.floor(index - 1)), { harm_amount = damage })
+				local variable_name = string.format("%s[%d]", variable, math.floor(index - 1))
+				wml.variables[variable_name] = { harm_amount = damage }
 			end
 		end
 
 		wesnoth.wml_actions.redraw {}
 	end
 
-	wesnoth.set_variable ( "this_unit" ) -- clearing this_unit
+	wml.variables["this_unit"] = nil -- clearing this_unit
 	end_var_scope("this_unit", this_unit)
 end
 
