@@ -23,7 +23,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 				sort = sort
 			})
 			-- will show info with gold, do we need it?
-			wesnoth.show_popup_dialog(item.name, item.flavour or item.description, item.image)
+			gui.show_popup(item.name, item.flavour or item.description, item.image)
 			-- do we need to trigger it here? it's the original behaviour though
 			wesnoth.wml_actions.fire_event{ name="item picked", { "primary_unit", { x=unit.x, y=unit.y } } }
 		else
@@ -46,7 +46,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 			local show_picking_dialogue = function(item, sort, replaced_item, cant_equip, count)
 				local description = loti.item.describe_item(item.number, sort)
 				if item.sort == "potion" then
-					local res = wesnoth.show_message_dialog ({
+					local res = gui.show_narration ({
 						title = item.name,
 						portrait = item.image,
 						message = description .. "\n\n" .. _"Use this potion?"
@@ -60,7 +60,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 					end
 				end
 				if cant_equip then
-					local res = wesnoth.show_message_dialog ({
+					local res = gui.show_narration ({
 						title = item.name,
 						portrait = item.image,
 						message = description .. "\n\n" .. "<span color='red'>" .. cant_equip .. "</span>"
@@ -74,7 +74,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 					end
 				end
 				--in case we can equip
-				local res = wesnoth.show_message_dialog ({
+				local res = gui.show_narration ({
 						title = item.name,
 						portrait = item.image,
 						message = description .. "\n\n" .. _ "Item of the same type that will be unequipped: " .. replaced_item .. "\n" .. _"Take this item?"
@@ -95,7 +95,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 					sort = sort
 				})
 				local description = loti.item.describe_item(item.number, sort)
-				wesnoth.show_popup_dialog(item.name, description, item.image)
+				gui.show_popup(item.name, description, item.image)
 			elseif result == 1 then
 				mpsafety:queue({
 					command = "store",
@@ -113,7 +113,7 @@ function loti.util.item_pick_menu (mpsafety, unit)
 					gem = gem
 				})
 				local gem_item = loti.item.type[520 + gem]
-				wesnoth.show_popup_dialog(gem_item.name, gem_item.description, gem_item.image)
+				gui.show_popup(gem_item.name, gem_item.description, gem_item.image)
 			end -- if res == 3, do nothing
 			if result ~= 3 then
 				-- used in campaign, chapters 5 and 9

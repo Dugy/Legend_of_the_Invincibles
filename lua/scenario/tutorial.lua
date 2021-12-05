@@ -14,7 +14,7 @@ loti.during_tutorial = true
 
 -- Have Delenia say something
 local function Delly_says(text)
-	wesnoth.show_message_dialog({
+	gui.show_narration({
 		speaker = "Delenia",
 		portrait = "portraits/humans/thief+female.png",
 		message = text
@@ -23,7 +23,7 @@ end
 
 -- Have Efraim say something
 local function Efraim_says(text)
-	wesnoth.show_message_dialog({
+	gui.show_narration({
 		speaker = "Efraim_de_Ceise",
 		portrait = "portraits/Efraim.png",
 		message = text
