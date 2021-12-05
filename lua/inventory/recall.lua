@@ -104,7 +104,8 @@ local shown_units -- Lua array of units currently displayed in listbox
 -- Callback that updates "Items on units on the recall list" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
 local function onshow(dialog)
-	wesnoth.remove_dialog_item(1, 0, listbox_id) -- Clear the listbox
+	local listbox = dialog[listbox_id]
+	listbox:remove_items_at(1, 0) -- Clear the listbox
 
 	-- List all units who have at least 1 item.
 	shown_units = wesnoth.units.find_on_recall({ trait = "geared" })
@@ -123,7 +124,7 @@ local function onshow(dialog)
 			end
 		end
 
-		dialog[listbox_id][listbox_line].recall_list_line.label = text
+		listbox[listbox_line].recall_list_line.label = text
 	end
 
 	-- Handler for "View" button.
@@ -134,7 +135,7 @@ local function onshow(dialog)
 	end)
 
 	-- Allow player to use up/down buttons without clicking on listbox.
-	dialog[listbox_id]:focus()
+	listbox:focus()
 end
 
 -- Add this tab to the dialog.

@@ -128,9 +128,7 @@ local function onshow(dialog, unit)
 	local listbox = dialog["retaliation_listbox"]
 
 	-- Ensure than no rows are selected.
-	for i = listbox.item_count,1,-1 do
-		listbox:remove_items_at(i)
-	end
+	listbox:remove_items_at(1, 0)
 
 	retaliation_checkboxes = {}
 

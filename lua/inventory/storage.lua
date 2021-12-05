@@ -389,10 +389,12 @@ end
 -- Callback that updates "Item storage" tab whenever it is shown.
 -- Note: see get_tab() for internal structure of this tab.
 local function onshow(dialog, unit, item_sort)
+	local listbox = dialog[listbox_id]
+
 	-- Clear the form. Keep the listbox hidden until populated.
-	dialog[listbox_id].visible = false
+	listbox.visible = false
 	if listbox_row > 0 then
-		wesnoth.remove_dialog_item(1, 0, listbox_id)
+		listbox:remove_items_at(1, 0)
 		listbox_row = 0
 	end
 
@@ -467,7 +469,7 @@ local function onshow(dialog, unit, item_sort)
 			listbox_row = listbox_row + 1
 
 			local text = get_item_description(loti.item.type[item_number], count, set_items)
-			dialog[listbox_id][listbox_row].storage_text.label = text
+			listbox[listbox_row].storage_text.label = text
 
 			-- For callback of "Equip" to know which item was selected.
 			shown_items[listbox_row] = item_number

@@ -562,7 +562,7 @@ loti.gem.show_crafting_window = function(x, y)
 					end
 
 					-- Clear the type listbox
-					wesnoth.remove_dialog_item(1, 0, "gui_type_chosen")
+					dialog.gui_type_chosen:remove_items_at(1, 0)
 
 					local word_from, word_to
 					if base_type == 1 then
@@ -596,7 +596,7 @@ loti.gem.show_crafting_window = function(x, y)
 					end
 
 					-- Clear the recipe listbox
-					wesnoth.remove_dialog_item(1, 0, "gui_recipe_chosen")
+					dialog.gui_recipe_chosen:remove_items_at(1, 0)
 
 					order = 1
 					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to + 1)) do
