@@ -536,18 +536,18 @@ end
 
 -- Determine selected element of the listbox.
 -- Used in handlers of "Equip" and "View" buttons.
-local function get_selected_item()
-	local selected_index = wesnoth.get_dialog_value(listbox_id)
+local function get_selected_item(dialog)
+	local selected_index = dialog[listbox_id].selected_index
 	return shown_items[selected_index]
 end
 
 -- Handler for "Drop to the ground" button.
-local function drop_item()
+local function drop_item(dialog)
 	-- Remove item from storage and place it on the ground.
 	inventory_dialog.mpsafety:queue({
 		command = "drop",
 		unit = inventory_dialog.current_unit, -- Only for coordinates where to drop
-		number = get_selected_item(),
+		number = get_selected_item(dialog),
 		sort = shown_item_sort
 	})
 	inventory_dialog.goto_tab("items_tab")
@@ -569,12 +569,12 @@ local function unequip_drop()
 end
 
 -- Handler for "Destroy to get a random gem" button.
-local function destroy_item()
+local function destroy_item(dialog)
 	-- Remove item from storage, add 1 random gem.
 	local gem = loti.gem.random()
 	inventory_dialog.mpsafety:queue({
 		command = "destroy",
-		number = get_selected_item(),
+		number = get_selected_item(dialog),
 		sort = shown_item_sort,
 		gem = gem
 	})
@@ -652,16 +652,16 @@ return function(provided_inventory_dialog)
 			if dialog.storage_dropdown_menu.selected_index == 1 then
 				-- First option on the menu
 				if overrides.drop_item then
-					overrides.drop_item()
+					overrides.drop_item(dialog)
 				else
-					drop_item()
+					drop_item(dialog)
 				end
 			else
 				-- Second option in the menu
 				if overrides.destroy_item then
-					overrides.destroy_item()
+					overrides.destroy_item(dialog)
 				else
-					destroy_item()
+					destroy_item(dialog)
 				end
 			end
 		end

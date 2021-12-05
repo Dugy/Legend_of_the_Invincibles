@@ -44,7 +44,7 @@ inventory_dialog.add_tab = function(tab)
 	tabs[tab.id] = { grid = tab.grid, onshow = tab.onshow }
 end
 
--- Queue install_function() to be called when it's good time to use wesnoth.set_dialog_callback(inventory_dialog).
+-- Queue install_function() to be called when it's good time to set callbacks for buttons, etc.
 inventory_dialog.install_callbacks = function(install_function)
 	table.insert(install_callback_functions, install_function)
 end
@@ -151,13 +151,13 @@ end
 
 -- NOTE: the only reason we call this function here is because it's very convenient for debugging
 -- (any errors in gui.add_widget_definition() are discovered before the map is even loaded)
--- When the widgets are completely implemented, this function will only be called from get_dialog_widget().
+-- When the widgets are completely implemented, this function will only be called from get_dialog_definition().
 register_widgets()
 
 -- Construct the unit-independent WML of Inventory dialog.
 -- Note: this only creates the widget. It gets populated with data in open_inventory_dialog().
 -- Returns: WML table, as expected by the first parameter of gui.show_dialog().
-local function get_dialog_widget()
+local function get_dialog_definition()
 	register_widgets()
 
 	-- Get widget that contains all tabs.
@@ -231,7 +231,7 @@ inventory_dialog.reopen_unsynced = function(unit, ...)
 			-- because the widget will no longer be available when this callback gets called
 			-- (we won't know that Enter was pressed until show_dialog() returns,
 			-- but the dialog will already be closed when this happens).
-			local param = wesnoth.get_dialog_value(enter_or_ok_catcher.field_id)
+			local param = dialog[enter_or_ok_catcher.field_id].selected_index
 			local orig_callback = enter_or_ok_catcher.callback
 
 			enter_or_ok_catcher.callback = function()
@@ -240,7 +240,7 @@ inventory_dialog.reopen_unsynced = function(unit, ...)
 		end
 	end
 
-	local retval = gui.show_dialog(get_dialog_widget(), preshow, postshow)
+	local retval = gui.show_dialog(get_dialog_definition(), preshow, postshow)
 	inventory_dialog.is_opened = false -- Further attempts to open_tab() will reopen the dialog
 
 	unit = inventory_dialog.current_unit -- Allow "recall" tab to select another unit
