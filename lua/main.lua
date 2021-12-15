@@ -781,8 +781,32 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	local deserves = false
 	if u.canrecruit then
 		deserves = true
-	elseif (u.overlays and u.overlays:find("misc/hero%-icon%.png")) or (u.ellipse and u.ellipse:find("misc/ellipse%-hero")) then
-		deserves = true
+	else
+		for i = 1,#u.modifications do
+			if u.modifications[i][1] == "object" then
+				for j = 1,#u.modifications[i][2] do
+					if u.modifications[i][2][j][1] == "effect" then
+						local effect = u.modifications[i][2][j][2]
+						if u.modifications[i][2][j][2].apply_to == "overlay" then
+							local overlays;
+							if effect.add then
+								overlays = effect.add
+							end
+							if effect.replace then
+								overlays = effect.replace
+							end
+							if overlays:find("misc/hero%-icon%.png") then
+								deserves = true
+							end
+						end
+					end
+				end
+			end
+		end
+	
+		if u.ellipse and u.ellipse:find("misc/ellipse%-hero") then
+			deserves = true
+		end
 	end
 	if u.race == "demon-loti" or u.race == "demon lord-loti" or u.race == "demon-loti-secret" or u.race == "imp-loti" then
 		deserves = false
