@@ -781,7 +781,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	local deserves = false
 	if u.canrecruit then
 		deserves = true
-	else
+	elseif u.modifications then
 		for i = 1,#u.modifications do
 			if u.modifications[i][1] == "object" then
 				for j = 1,#u.modifications[i][2] do
