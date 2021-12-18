@@ -65,7 +65,8 @@ function wesnoth.update_stats(original)
 
 	-- PART II: Cleanup
 	local vars = wml.get_child(original, "variables")
-	local visible_modifications = wml.get_child(original, "modifications") -- This is where modifićations actually affecting visuals belong
+	vars.update_started = true -- Prevent recursion in unit_placed
+	local visible_modifications = wml.get_child(original, "modifications") -- This is where modifications actually affecting visuals belong
 	local events_to_fire = {}
 	local set_items = loti.unit.list_unit_item_numbers(original)
 
