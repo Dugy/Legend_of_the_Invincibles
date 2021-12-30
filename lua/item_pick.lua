@@ -55,8 +55,9 @@ end
 
 function loti.util.item_pick_menu (mpsafety, unit)
 	local hex_items = loti.item.on_the_ground.list_with_sorts (unit.x, unit.y)
+	local label_item_irrelevant = _"irrelevant"
 --
-	for __, elem in ipairs(hex_items) do
+	for _, elem in ipairs(hex_items) do
 
 		local number = elem.number
 		local sort = elem.sort
@@ -76,18 +77,15 @@ function loti.util.item_pick_menu (mpsafety, unit)
 		else
 			-- if we can equip, will be nil
 			local why_cant_equip = loti.util.can_equip_item (unit, number, sort)
-			local replaced_item = _"irrelevant"
+			local replaced_item = label_item_irrelevant
 			if (why_cant_equip == nil) and (sort ~= "limited") and (sort ~= "potion") then
 				local r_item = loti.item.on_unit.find (unit, sort)
 				if r_item then
 					replaced_item = r_item.name
 				end
 			end
-			local count = 0
-			local this_sort = loti.item.storage.list_items (sort)
-			if this_sort[number] then
-				count = this_sort[number]
-			end
+
+			local count = loti.item.storage.list_items(sort)[number] or 0
 
 			local result = show_picking_dialogue(item, sort, replaced_item, why_cant_equip, count)
 			if result == 0 then

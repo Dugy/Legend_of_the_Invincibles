@@ -803,7 +803,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 				end
 			end
 		end
-	
+
 		if u.ellipse and u.ellipse:find("misc/ellipse%-hero") then
 			deserves = true
 		end
@@ -963,12 +963,12 @@ function loti.util.can_equip_item(unit, number, sort)
 	end
 
 	local objects = wml.array_access.get("unit.modifications.object")
-	-- TODO: this disables picking a book twice from the ground but not from the storage
+	-- TODO: this disables picking a book twice from the ground, but not from the storage
 	if sort == "limited" then
-		-- sneaky mistake: need __ instead of _ because _ is needed for translation...
-		for __, v in pairs(objects) do
+		local error_limited = _"This unit already has this limited item."
+		for _, v in pairs(objects) do
 			if v.number == number then
-				result = _"This unit already has this limited item."
+				result = error_limited
 				break
 			end
 		end

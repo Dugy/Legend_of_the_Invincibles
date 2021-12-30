@@ -7,29 +7,6 @@ local function call_event_on_unit(u, name)
 	return u
 end
 
--- Rename duplicate attacks within the [unit] WML table,
--- adding numbers 2, 3, etc. to them to make them unique.
-local function make_attacks_unique(unit)
-	-- This array records the attack names that were already used.
-	-- E.g. { "chill tempest" => 1, "bow" => 1 }.
-	local attack_seen = {}
-
-	-- Find all attacks of this unit.
-	for _, data in ipairs(unit) do
-		if data[1] == "attack" then
-			local name = data[2].name
-			while attack_seen[name] do
-				-- Duplicate found. Rename this attack, e.g. "bow",
-				-- to "bowN", where N is a random number between 2 and 999.
-				name = data[2].name .. wesnoth.random(2, 999)
-			end
-
-			data[2].name = name
-			attack_seen[name] = 1
-		end
-	end
-end
-
 loti.legacy_list = {"fire_dragon_legacy", "ice_dragon_legacy", "dark_dragon_legacy", "undead_legacy", "legacy_of_kings", "legacy_of_titans", "legacy_of_sorrow", "legacy_of_light", "legacy_of_phoenix", "legacy_of_exile", "legacy_of_the_freezing_north", "legacy_of_the_free"}
 
 local function get_random_seed_from_unit(unit)
@@ -89,7 +66,7 @@ function wesnoth.update_stats(original)
 				marked_as_geared = true
 			end
 		end
-		
+
 		if modif[1] == "advancement" and modif[2].id and string.find(modif[2].id, "legacy") then
 			has_legacy = true
 		end
@@ -601,8 +578,6 @@ function wesnoth.update_stats(original)
 		table.insert(specials, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	end
 
---	make_attacks_unique(remade) -- seems superfluous
-
 	-- PART VIII: Apply visual effects
 	if #visual_effects > 0 then
 		local visual_obj = { visual_provider = true }
@@ -681,7 +656,7 @@ function wesnoth.update_stats(original)
 	end
 	local overlays_object = { "object", { visual_provider = true, { "effect", { apply_to = "overlay", add = table.concat(new_overlays, ",")}}}}
 	table.insert(visible_modifications, overlays_object)
-	
+
 
 	-- PART IX: Some final changes
 	for i = #vars,1,-1 do

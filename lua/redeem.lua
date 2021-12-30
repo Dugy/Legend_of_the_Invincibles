@@ -315,7 +315,7 @@ end
 -- Display the menu that chooses between redeem upgrades available to certain Unit.
 -- Parameter "ability_tree" can be "redeem" or "soul_eater".
 -- Returns the selected upgrade (ID string), e.g. "particlestorm".
-function redeem_menu(ability_tree, unit)
+local function redeem_menu(ability_tree, unit)
 	local known_upgrades = known_ability_trees[ability_tree]
 	if not known_upgrades then
 		helper.wml_error("redeem_menu(): unknown ability tree. Try \"redeem\" or \"soul_eater\".");
@@ -418,7 +418,7 @@ function redeem_menu(ability_tree, unit)
 	}
 
 	-- 2) listbox_widget: shows a list of all upgrades.
-	local listbox = wml.tag.listbox { id = listbox_id,
+	local listboxDefinition = wml.tag.listbox { id = listbox_id,
 		wml.tag.list_definition {
 			wml.tag.row {
 				wml.tag.column {
@@ -450,7 +450,7 @@ function redeem_menu(ability_tree, unit)
 
 			-- Listbox, where each row shows ONE of the possible upgrades (e.g. "particlestorm")
 			wml.tag.row {
-				wml.tag.column { horizontal_grow = true, listbox }
+				wml.tag.column { horizontal_grow = true, listboxDefinition }
 			},
 
 			-- OK button

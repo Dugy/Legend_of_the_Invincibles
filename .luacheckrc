@@ -46,6 +46,22 @@ read_globals = {
 				other_fields = true
 			},
 
+			-- "wesnoth.interface.game_display.unit_status" is supposed to be modified
+			interface = {
+				fields = {
+					game_display = {
+						fields = {
+							unit_status = {
+								read_only = false,
+								other_fields = true
+							}
+						},
+						other_fields = true
+					}
+				},
+				other_fields = true
+			},
+
 			-- Various utility/debug functions
 			deepcopy = { read_only = false },
 			dbms = { read_only = false },
