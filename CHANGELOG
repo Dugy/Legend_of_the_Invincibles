@@ -1,5 +1,9 @@
 Changelog
 
+3.2.7b (maintenance)
+Fixed more bugs
+Ported campaign to Wesnoth 1.16
+
 3.2.7 (maintenance)
 Fixed a lot of bugs
 Fixed the Out of Sync errors arising from the new UI
