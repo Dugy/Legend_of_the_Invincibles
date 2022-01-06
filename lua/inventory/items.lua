@@ -16,7 +16,7 @@ local inventory_config = {
 		{
 			id = "storage",
 			label = _"Item storage",
-			onclick = function(unit)
+			onclick = function(unit) -- luacheck: ignore 212/unit
 				inventory_dialog.goto_tab("storage_tab")
 			end
 		},
@@ -42,7 +42,7 @@ local inventory_config = {
 		{
 			id = "retaliation",
 			label = _"Select weapons for retaliation",
-			onclick = function(unit) inventory_dialog.goto_tab("retaliation_tab") end
+			onclick = function(unit) inventory_dialog.goto_tab("retaliation_tab") end -- luacheck: ignore 212/unit
 		},
 		{
 			id = "unequip_all",
@@ -57,7 +57,7 @@ local inventory_config = {
 		{
 			id = "recall_list_items",
 			label = _"Items on units on the recall list",
-			onclick = function(unit) inventory_dialog.goto_tab("recall_tab") end
+			onclick = function(unit) inventory_dialog.goto_tab("recall_tab") end -- luacheck: ignore 212/unit
 		},
 		{ spacer = true },
 		{
@@ -70,7 +70,7 @@ local inventory_config = {
 	},
 
 	-- Called when clicking on action_buttons which don't have onsubmit/onclick callbacks.
-	default_button_callback = function(unit, button_id)
+	default_button_callback = function(unit, button_id) -- luacheck: ignore 212/unit
 		wml.error("Button " .. button_id .. " is not yet implemented.")
 	end
 }

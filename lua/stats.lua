@@ -129,7 +129,7 @@ function wesnoth.update_stats(original)
 	local defence = 100
 	local dodge = 100
 
-	for index, obj in loti.unit.effect_containers(remade) do
+	for _, obj in loti.unit.effect_containers(remade) do
 		if obj.defence then
 			defence = defence * (100 - obj.defence) / 100
 		end
@@ -354,7 +354,7 @@ function wesnoth.update_stats(original)
 	local visual_effects = {}
 	local is_loyal
 
-	for index, eff in loti.unit.effects(remade) do
+	for index, eff in loti.unit.effects(remade) do -- luacheck: ignore 213/index
 		-- TODO: Add alignment, max_attacks and new_advancement using wesnoth.effects
 		if eff.apply_to == "alignment" then
 			remade.alignment = eff.alignment

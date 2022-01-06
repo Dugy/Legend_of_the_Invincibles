@@ -126,7 +126,7 @@ end
 local function inventory_step1()
 	local config = loti.config.inventory
 
-	for idx, button in ipairs(config.action_buttons) do
+	for idx, button in ipairs(config.action_buttons) do -- luacheck: ignore 213/idx
 		if button.id == "storage" then
 			button.onclick = function()
 				Delly_says(_"No looking into your backpack, there is nothing relevant there anyway.")
@@ -164,7 +164,7 @@ local function inventory_step1()
 		end
 	end
 
-	config.slot_callback = function(item_sort)
+	config.slot_callback = function(item_sort) -- luacheck: ignore 212/item_sort
 		Delly_says(_"I think you will not sweat too much while crafting, so you do not need to remove anything you are wearing. Not that you ever did anything that could make you sweat anyway...")
 	end
 end
@@ -174,7 +174,7 @@ end
 local function inventory_step4()
 	local config = loti.config.inventory
 
-	for idx, button in ipairs(config.action_buttons) do
+	for idx, button in ipairs(config.action_buttons) do -- luacheck: ignore 213/idx
 		if button.id == "storage" then
 			button.onclick = function()
 				Delly_says(_"Why... why do you still insist to look for something in your backpack?")
@@ -235,7 +235,7 @@ end
 local function inventory_step6()
 	local config = loti.config.inventory
 
-	for idx, button in ipairs(config.action_buttons) do
+	for idx, button in ipairs(config.action_buttons) do -- luacheck: ignore 213/idx
 		if button.id == "retaliation" then
 			button.onsubmit = nil
 			button.onclick = function()
@@ -273,7 +273,7 @@ local function inventory_step6()
 		end
 	end
 
-	config.slot_callback = function(item_sort)
+	config.slot_callback = function(item_sort) -- luacheck: ignore 212/item_sort
 		Delly_says(_"No, no, no, no...")
 	end
 
@@ -297,7 +297,7 @@ end
 local function inventory_step7()
 	local config = loti.config.inventory
 
-	for idx, button in ipairs(config.action_buttons) do
+	for idx, button in ipairs(config.action_buttons) do -- luacheck: ignore 213/idx
 		if button.id == "storage" then
 			button.onsubmit = nil
 			button.onclick = function()
