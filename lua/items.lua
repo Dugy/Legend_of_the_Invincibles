@@ -178,10 +178,10 @@ loti.item.type = {
 	-- Returns Lua table { item_number1 = object1, ... }
 	_reload = function()
 		local cache = {}
-		local all_known_types = wml.get_child(wesnoth.unit_types["Item Data Loader"].__cfg, "advancement")
 
+		local all_known_types = wml.array_access.get('item_list.object')
 		for _, item in ipairs(all_known_types) do
-			cache[item[2].number] = item[2]
+			cache[item.number] = item
 		end
 
 		rawset(loti.item.type, "_cache", cache)
@@ -857,12 +857,10 @@ end
 
 function wesnoth.wml_actions.describe_all_objects(cfg)
 	local arrayVar = cfg.array or wml.error("[describe_all_objects] lacks a required array= key")
-	local array = wml.array_access.get(arrayVar)
+	local array = wml.array_access.get_proxy(arrayVar)
 	for _, item in ipairs(array) do
 		item.description = loti.item.describe_item(item.number, item.sort)
 	end
-
-	wml.array_access.set(arrayVar, array)
 end
 
 -- Invalidate cache of loti.item.type[].
