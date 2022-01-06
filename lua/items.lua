@@ -847,12 +847,14 @@ loti.item.describe_item = function(number, sort, set_items)
 	return result
 end
 
-function wesnoth.wml_actions.describe_object(cfg)
-	local number = cfg.number or wml.error("[describe_object] lacks a required number= key")
-	local sort = cfg.sort or "unspecified"
-	local output = cfg.output or "object_description"
-	local result = loti.item.describe_item(number, sort)
-	wml.variables[output] = result
+function wesnoth.wml_actions.describe_all_objects(cfg)
+	local arrayVar = cfg.array or wml.error("[describe_all_objects] lacks a required array= key")
+	local array = wml.array_access.get(arrayVar)
+	for _, item in ipairs(array) do
+		item.description = loti.item.describe_item(item.number, item.sort)
+	end
+
+	wml.array_access.set(arrayVar, array)
 end
 
 -- Invalidate cache of loti.item.type[].
