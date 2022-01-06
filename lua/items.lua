@@ -328,7 +328,7 @@ end
 local item_generation_lists = {} -- Lazy loaded
 
 local function randomly_pick_one(choices)
-	 return choices[wesnoth.random(#choices)]
+	 return choices[mathx.random(#choices)]
 end
 
 -- Randomly generates an item of the given group (each item has to be explicitly defined as part of some group) of one of the item types in the given table

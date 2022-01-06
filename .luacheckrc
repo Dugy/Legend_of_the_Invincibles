@@ -32,6 +32,7 @@ read_globals = {
 		other_fields = true
 	},
 	"gui",
+	"mathx",
 	wesnoth = {
 		fields = {
 			-- wesnoth.wml_actions[something] is supposed to be modified

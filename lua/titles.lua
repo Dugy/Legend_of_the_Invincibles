@@ -325,7 +325,7 @@ function loti.util.assign_title(Name, Gender, Flavour)
 					end
 				end
 			end
-			local chosen = accepted[wesnoth.random(#accepted)]
+			local chosen = accepted[mathx.random(#accepted)]
 			local parts, are_nonterminals = parse_nonterminal(chosen)
 			local result = ""
 			for i = 1,#parts do
