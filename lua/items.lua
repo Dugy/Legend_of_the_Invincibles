@@ -224,6 +224,14 @@ setmetatable(loti.item.type, {
 	end
 })
 
+-- WML action [loti_item_type] writes information from loti.item.type[number] into a WML variable.
+function wesnoth.wml_actions.loti_item_type(cfg)
+	local number = cfg.number or wml.error("[loti_item_type] lacks a required number= key")
+	local to_variable = cfg.to_variable or "item_info"
+
+	wml.variables[to_variable] = loti.item.type[number]
+end
+
 -------------------------------------------------------------------------------
 -- loti.item.on_unit: methods to work with items that are equipped by some unit
 -------------------------------------------------------------------------------
