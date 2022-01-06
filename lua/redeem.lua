@@ -326,7 +326,7 @@ local function redeem_menu(ability_tree, unit)
 		existing_upgrades = loti_util_list_existing_upgrades(ability_tree, unit)
 	end
 
-	-- Menu items, as expected by wesnoth.show_menu()
+	-- Menu items, as expected by gui.show_menu()
 	local menu_items = {}
 
 	for id, upgrade in pairs(known_upgrades) do
@@ -360,7 +360,7 @@ local function redeem_menu(ability_tree, unit)
 			end
 
 			table.insert(menu_items, {
-				-- Fields with the same meaning as in wesnoth.show_menu()
+				-- Fields with the same meaning as in gui.show_menu()
 				image = upgrade.image,
 				details = label,
 

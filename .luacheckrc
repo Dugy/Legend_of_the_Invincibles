@@ -31,6 +31,7 @@ read_globals = {
 		},
 		other_fields = true
 	},
+	"filesystem",
 	"gui",
 	"mathx",
 	wesnoth = {

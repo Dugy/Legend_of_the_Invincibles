@@ -140,9 +140,9 @@ function wesnoth.dbms(lua_var, clear, name, onscreen, wrap, only_return)
 		result = string.format("warning: WML table inconsistently predicted, script says %s , engine %s \n%s", tostring(is_wml_table), tostring(engine_is_wml_table), result)
 	end
 
-	if clear and wesnoth then wesnoth.clear_messages() end
+	if clear and wesnoth then wesnoth.interface.clear_chat_messages() end
 	if not only_return then
-		if wesnoth then wesnoth.message("dbms", result) end; print(result)
+		if wesnoth then wesnoth.interface.add_chat_message("dbms", result) end; print(result)
 	end
 	local continue = true
 	if onscreen and wesnoth and not only_return then
@@ -181,7 +181,7 @@ loti.testsuite = function()
 
 	-- Find the tests.
 	local testdir = "~/add-ons/Legend_of_the_Invincibles/tests/lua"
-	for _, filename in ipairs(wesnoth.read_file(testdir)) do
+	for _, filename in ipairs(filesystem.read_file(testdir)) do
 		if filename:match("%.test%.lua$") then
 			print("Testsuite: running " .. filename)
 

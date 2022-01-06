@@ -46,7 +46,7 @@ function wesnoth.wml_actions.get_unit_resistance(cfg)
 	local to_variable = cfg.to_variable or "resistance_obtained"
 	local unit = wesnoth.units.find_on_map(cfg)[1]
 	if unit then
-		local result = wesnoth.unit_resistance( unit, damage_type )
+		local result = wesnoth.units.resistance_against( unit, damage_type )
 		wml.variables[to_variable] = result
 	else
 		--It's mainly used for weapon specials, and the target might be already killed
@@ -145,13 +145,13 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 			if animate then
 				if animate ~= "defender" and harmer and harmer.valid then
-					wesnoth.scroll_to_tile(harmer.x, harmer.y, true)
+					wesnoth.interface.scroll_to_hex(harmer.x, harmer.y, true)
 					wesnoth.wml_actions.animate_unit( { flag = "attack", hits = true, { "filter", { id = harmer.id } },
 						{ "primary_attack", primary_attack },
 						{ "secondary_attack", secondary_attack }, with_bars = true,
 						{ "facing", { x = unit_to_harm.x, y = unit_to_harm.y } } } )
 				end
-				wesnoth.scroll_to_tile(unit_to_harm.x, unit_to_harm.y, true)
+				wesnoth.interface.scroll_to_hex(unit_to_harm.x, unit_to_harm.y, true)
 			end
 
 			-- the two functions below are taken straight from the C++ engine, util.cpp and actions.cpp, with a few unuseful parts removed
@@ -187,7 +187,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			local damage = calculate_damage( amount,
 							 ( cfg.alignment or "neutral" ),
 							 wesnoth.get_time_of_day( { unit_to_harm.x, unit_to_harm.y, true } ).lawful_bonus,
-							 wesnoth.unit_resistance( unit_to_harm, cfg.damage_type or "dummy" ),
+							 wesnoth.units.resistance_against( unit_to_harm, cfg.damage_type or "dummy" ),
 							 resistance_multiplier
 						       )
 
@@ -212,7 +212,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				add_tab = true
 
 				if animate and sound then -- for unhealable, that has no sound
-					wesnoth.play_sound (sound)
+					wesnoth.audio.play(sound)
 				end
 			end
 
@@ -224,7 +224,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			set_status("unhealable", _"unhealable", _"female^unhealable")
 
 			-- Extract unit and put it back to update animation if status was changed
-			wesnoth.extract_unit(unit_to_harm)
+			wesnoth.units.extract(unit_to_harm)
 			wesnoth.units.to_map(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
 
 			if add_tab then
@@ -245,7 +245,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			end
 
 			if not unit_to_harm.hidden then
-				wesnoth.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
+				wesnoth.interface.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
 			end
 
 			if unit_to_harm.hitpoints < 1 then
@@ -261,7 +261,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			end
 
 			if animate then
-				wesnoth.delay(delay)
+				wesnoth.interface.delay(delay)
 			end
 
 			if variable then
@@ -664,7 +664,7 @@ end
 local loti_needs_advance = nil
 
 function wesnoth.wml_actions.pre_advance_stuff(cfg)
---    wesnoth.message("pre_advance_stuff")
+--    wesnoth.interface.add_chat_message("pre_advance_stuff")
     local unit = wesnoth.units.find_on_map(cfg)[1].__cfg
     local a = wml.get_child(unit, "advancement")
     local t = wml.variables["side_number"]
@@ -691,7 +691,7 @@ function wesnoth.wml_actions.pre_advance_stuff(cfg)
 end
 
 function wesnoth.wml_actions.advance_stuff(cfg)
---    wesnoth.message("advance_stuff")
+--    wesnoth.interface.add_chat_message("advance_stuff")
     local unit = wesnoth.units.find_on_map(cfg)[1].__cfg
     local m = wml.get_child(unit, "modifications")
 
@@ -705,7 +705,7 @@ function wesnoth.wml_actions.advance_stuff(cfg)
 
     if loti_needs_advance == nil then
         if unit.type == "Elvish Assassin" then
---	    wesnoth.message("is assassin")
+--	    wesnoth.interface.add_chat_message("is assassin")
             local a = { "advancement", { max_times = 1, always_display = true, id = "execution", image = "attacks/bow-elven-magic.png", strict_amla = true, require_amla="",
                 { "effect", { apply_to = "remove_attack", name = "execution" }},
                 { "effect", { apply_to = "bonus_attack", name = "execution", description = _"execution", icon = "attacks/bow-elven-magic.png", range = "ranged", defense_weight = "0", damage = "-40", merge = true, force_original_attack = "longbow" }}

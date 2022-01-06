@@ -243,13 +243,13 @@ function loti.util.assign_title(Name, Gender, Flavour)
 		for i = 1,#byte_string do
 			if byte_string[i] == starting then
 				if reading_nonterminal == true then
-					wesnoth.message("Error parsing title string " .. string)
+					wesnoth.interface.add_chat_message("Error parsing title string " .. string)
 				end
 				finish_writing(false)
 				reading_nonterminal = true
 			elseif byte_string[i] == ending then
 				if reading_nonterminal == false then
-					wesnoth.message("Error parsing title string " .. string)
+					wesnoth.interface.add_chat_message("Error parsing title string " .. string)
 				end
 				finish_writing(true)
 				reading_nonterminal = false

@@ -19,7 +19,7 @@ loti.put_unit = function(unit)
 	if wesnoth.units.get(unit.id) then
 		wesnoth.units.to_map(unit)
 	elseif wesnoth.units.find_on_recall({ id = unit.id })[1] then
-		wesnoth.put_recall_unit(unit)
+		wesnoth.units.to_recall(unit)
 	end
 
 	-- Nothing to do: unit hasn't been created in the game yet,
@@ -33,7 +33,7 @@ loti.get_unit = function(unit)
 		wesnoth.units.erase(unit)
 	else
 		unit = wesnoth.units.find_on_recall{ id = unit.id }[1]
-		wesnoth.extract_unit(unit)
+		wesnoth.units.extract(unit)
 		unit= unit.__cfg
 	end
 	return unit
