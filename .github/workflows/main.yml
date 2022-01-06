@@ -11,7 +11,6 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -y luarocks && sudo luarocks install luacheck
 
-      # Don't fail if the exit code is 1 (which means "there were warnings, but no errors"),
-      # only on exit code 2 ("there were errors").
       - name: RUN -- luacheck .
-        run: luacheck --no-color . || [[ $? -le 1 ]]
+        run: luacheck --no-color .
+
