@@ -1,5 +1,3 @@
-local helper = wesnoth.require "lua/helper.lua"
-
 loti.flavours_table = { "chivalrous", "wizardly", "dark", "criminal", "warlike", "sneaky", "brutish", "ghostly" }
 
 -- First, parse data into suitable structures
@@ -317,7 +315,7 @@ function loti.util.assign_title(Name, Gender, Flavour)
 					end
 				end
 				suitable[best_score] = nil
-				helper.shuffle(best)
+				mathx.shuffle(best)
 				for i = 1,#best do
 					if depth > 0 then
 						table.insert(accepted, best[i])

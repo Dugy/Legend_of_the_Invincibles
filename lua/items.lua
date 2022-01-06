@@ -31,7 +31,6 @@
 -------------------------------------------------------------------------------
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 
 -- Setup useful item-related constants
 sort_list = { "armour", "helm", "boots", "gauntlets", "boots", "gauntlets", "limited", "amulet", "ring", "cloak", "sword", "bow", "axe", "xbow", "dagger", "knife", "spear", "mace", "staff", "polearm", "sling", "exotic", "thunderstick", "claws", "essence" }
@@ -213,7 +212,7 @@ end
 -- E.g. loti.item.type[100] returns { number = 100, name = "Cunctator's sword", sort = "sword", ... }
 setmetatable(loti.item.type, {
 	__index = function(self, item_number)
-		return self._load()[item_number] or helper.wml_error(
+		return self._load()[item_number] or wml.error(
 			"loti.item.type[" .. tostring(item_number) .. "]: not found in item_list."
 		)
 	end,
@@ -849,7 +848,7 @@ loti.item.describe_item = function(number, sort, set_items)
 end
 
 function wesnoth.wml_actions.describe_object(cfg)
-	local number = cfg.number or helper.wml_error("[describe_object] lacks a required number= key")
+	local number = cfg.number or wml.error("[describe_object] lacks a required number= key")
 	local sort = cfg.sort or "unspecified"
 	local output = cfg.output or "object_description"
 	local result = loti.item.describe_item(number, sort)
@@ -888,7 +887,7 @@ end
 
 -- Add a binding "weapon name -> weapon type
 function wesnoth.wml_actions.add_weapon_binding(cfg)
-	local name = cfg.name or helper.wml_error("[dadd_weapon_binding] lacks a required name= key")
+	local name = cfg.name or wml.error("[dadd_weapon_binding] lacks a required name= key")
 	local type = cfg.type or "exotic"
 	loti.item.weapon_bindings[name] = type
 end

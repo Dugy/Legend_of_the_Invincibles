@@ -4,7 +4,6 @@
 --
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 
 local known_ability_trees = {}
 
@@ -318,7 +317,7 @@ end
 local function redeem_menu(ability_tree, unit)
 	local known_upgrades = known_ability_trees[ability_tree]
 	if not known_upgrades then
-		helper.wml_error("redeem_menu(): unknown ability tree. Try \"redeem\" or \"soul_eater\".");
+		wml.error("redeem_menu(): unknown ability tree. Try \"redeem\" or \"soul_eater\".");
 	end
 
 	-- Unit is optional, so that we can test UI of redeem_menu() separately from everything else.
@@ -518,7 +517,7 @@ function wesnoth.wml_actions.show_redeem_menu(cfg)
 
 	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
-		helper.wml_error("[show_redeem_menu]: no units found, may need find_in= parameter.")
+		wml.error("[show_redeem_menu]: no units found, may need find_in= parameter.")
 	end
 
 	local result = wesnoth.sync.evaluate_single(_"Soul Eater", function()
@@ -538,7 +537,7 @@ function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 
 	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
-		helper.wml_error("[show_redeem_menu]: no units found, may need find_in= parameter.")
+		wml.error("[show_redeem_menu]: no units found, may need find_in= parameter.")
 	end
 
 	local count = 0

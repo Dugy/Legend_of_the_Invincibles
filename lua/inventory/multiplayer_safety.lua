@@ -17,7 +17,6 @@
 -- who used the Inventory dialog (so we know that Bob already did these operations).
 --
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 
 local mpsafety = {}
 mpsafety.__index = mpsafety
@@ -135,7 +134,7 @@ function mpsafety:run_immediately(operation)
 		end
 		wml.array_access.set("disabled_defences", disabled_defences, unit)
 	else
-		helper.wml_error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
+		wml.error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
 	end
 end
 

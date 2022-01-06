@@ -4,7 +4,6 @@
 --
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 local util = wesnoth.require "./misc.lua"
 
 local inventory_dialog -- Set below
@@ -72,7 +71,7 @@ local inventory_config = {
 
 	-- Called when clicking on action_buttons which don't have onsubmit/onclick callbacks.
 	default_button_callback = function(unit, button_id)
-		helper.wml_error("Button " .. button_id .. " is not yet implemented.")
+		wml.error("Button " .. button_id .. " is not yet implemented.")
 	end
 }
 
@@ -119,7 +118,7 @@ local function get_tab()
 	-- so the slots can't be used to show orbs or books (they need another widget).
 	local function get_slot_widget(item_sort)
 		if item_sort == "limited" then
-			helper.wml_error("get_slot_widget(): books/orbs are not supported.")
+			wml.error("get_slot_widget(): books/orbs are not supported.")
 		end
 
 		table.insert(slots, item_sort)
@@ -320,7 +319,7 @@ local function onshow(dialog, unit)
 			default_text = util.NO_ITEM_TEXT[item_sort]
 
 			if not default_text then
-				helper.wml_error("NO_ITEM_TEXT is not defined for item_sort=" .. item_sort)
+				wml.error("NO_ITEM_TEXT is not defined for item_sort=" .. item_sort)
 				default_text = util.NO_ITEM_TEXT["default"]
 			end
 
@@ -347,7 +346,7 @@ local function onshow(dialog, unit)
 
 		local slot_id = slot_id_by_sort[item.sort]
 		if not slot_id then
-			helper.wml_error("Error: found item of type=" .. item.sort ..
+			wml.error("Error: found item of type=" .. item.sort ..
 				", but the inventory screen doesn't have a slot for this type.")
 		end
 

@@ -4,7 +4,6 @@
 --
 
 local _ = wesnoth.textdomain "wesnoth-loti"
-local helper = wesnoth.require "lua/helper.lua"
 
 -- These Lua files are loaded as plugins.
 -- They receive an "inventory_dialog" object as parameter,
@@ -34,11 +33,11 @@ local inventory_dialog = {}
 inventory_dialog.add_tab = function(tab)
 	-- Sanity checks.
 	if not tab.id then
-		helper.wml_error('inventory_dialog.add_tab: missing parameter "id"')
+		wml.error('inventory_dialog.add_tab: missing parameter "id"')
 	elseif type(tab.grid) ~= "function" then
-		helper.wml_error('inventory_dialog.add_tab: parameter "grid" is not a function.')
+		wml.error('inventory_dialog.add_tab: parameter "grid" is not a function.')
 	elseif type(tab.onshow) ~= "function" then
-		helper.wml_error('inventory_dialog.add_tab: parameter "onshow" is not a function.')
+		wml.error('inventory_dialog.add_tab: parameter "onshow" is not a function.')
 	end
 
 	tabs[tab.id] = { grid = tab.grid, onshow = tab.onshow }
@@ -94,7 +93,7 @@ inventory_dialog.goto_tab = function(tab_id, ...)
 	local tab = tabs[tab_id]
 	if not tab then
 		-- Trying to hide ALL widgets in a dialog would crash Wesnoth.
-		helper.wml_error("Error: goto_tab: tab \"" .. tab_id .. "\" doesn't exist.")
+		wml.error("Error: goto_tab: tab \"" .. tab_id .. "\" doesn't exist.")
 	end
 
 	-- Show the new tab.
@@ -170,7 +169,7 @@ local function get_dialog_definition()
 		for tab_id, tab in pairs(tabs) do
 			local grid = tab.grid()
 			if type(grid) ~= "table" or grid[1] ~= "grid" then
-				helper.wml_error("tab " .. tab_id .. ": grid() function didn't return a [grid] tag.")
+				wml.error("tab " .. tab_id .. ": grid() function didn't return a [grid] tag.")
 			end
 
 			table.insert(row_wrapped_tabs, wml.tag.row { wml.tag.column {
@@ -289,7 +288,7 @@ end
 function wesnoth.wml_actions.show_inventory(cfg)
 	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
-		helper.wml_error("[show_inventory]: no units found.")
+		wml.error("[show_inventory]: no units found.")
 	end
 	open_inventory_dialog(units[1])
 end
@@ -297,7 +296,7 @@ end
 function wesnoth.wml_actions.item_pick_menu_inventory(cfg)
 	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
-		helper.wml_error("[item_pick_menu_inventory]: no units found.")
+		wml.error("[item_pick_menu_inventory]: no units found.")
 	end
 
 	-- just add actions to mpsafety queue

@@ -21,8 +21,6 @@ wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/stats.lua")
 
 local _ = wesnoth.textdomain "wesnoth-loti"
 
-local helper = wesnoth.require "lua/helper.lua"
-
 local old_unit_status = wesnoth.interface.game_display.unit_status
 function wesnoth.interface.game_display.unit_status()
      local u = wesnoth.interface.get_displayed_unit()
@@ -44,7 +42,7 @@ function wesnoth.interface.game_display.unit_status()
 end
 
 function wesnoth.wml_actions.get_unit_resistance(cfg)
-	local damage_type = cfg.damage_type or helper.wml_error "[get_unit_resistance] has no damage type specified"
+	local damage_type = cfg.damage_type or wml.error "[get_unit_resistance] has no damage type specified"
 	local to_variable = cfg.to_variable or "resistance_obtained"
 	local unit = wesnoth.units.find_on_map(cfg)[1]
 	if unit then
@@ -67,7 +65,7 @@ function wesnoth.wml_actions.award_extra_experience(cfg)
 		end
 	end
 	if not added then
-		helper.wml_error "[award_extra_experience] missing mandatory experience= variable"
+		wml.error "[award_extra_experience] missing mandatory experience= variable"
 	end
 	if added == 0 then
 		return
@@ -114,9 +112,9 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 		end
 	end
 
-	local filter = wml.get_child(cfg, "filter") or helper.wml_error("[harm_unit_loti] missing required [filter] tag")
+	local filter = wml.get_child(cfg, "filter") or wml.error("[harm_unit_loti] missing required [filter] tag")
 	-- we need to use shallow_literal field, to avoid raising an error if $this_unit (not yet assigned) is used
-	if not cfg.__shallow_literal.amount then helper.wml_error("[harm_unit_loti] has missing required amount= attribute") end
+	if not cfg.__shallow_literal.amount then wml.error("[harm_unit_loti] has missing required amount= attribute") end
 	local variable = cfg.variable -- kept out of the way to avoid problems
 	local _ = wesnoth.textdomain "wesnoth"
 	local harmer

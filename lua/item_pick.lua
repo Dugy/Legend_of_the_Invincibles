@@ -1,6 +1,5 @@
 --! #textdomain "wesnoth-loti"
 
-local helper = wesnoth.require "lua/helper.lua"
 local _ = wesnoth.textdomain "wesnoth-loti"
 
 local item_picker = {} -- for its own mp safety queue
@@ -128,7 +127,7 @@ end
 function wesnoth.wml_actions.item_pick_menu(cfg)
 	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
-		helper.wml_error("[item_pick_menu]: no units found.")
+		wml.error("[item_pick_menu]: no units found.")
 	end
 	local result = wesnoth.sync.evaluate_single(function()
 		loti.util.item_pick_menu(item_picker.mpsafety, units[1])

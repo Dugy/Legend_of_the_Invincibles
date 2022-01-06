@@ -4,8 +4,6 @@
 -- Note: parameter "unit" can accept both WML table and unit ID (string).
 --
 
-local helper = wesnoth.require "lua/helper.lua"
-
 -- Helper function.
 -- Analyze "unit" parameter, which can be WML table or unit ID.
 -- Returns WML table.
@@ -62,7 +60,7 @@ end
 local function get_type_advancement(unit_type, advancement_id)
 	local model = wesnoth.unit_types["Advancing" .. unit_type] or wesnoth.unit_types[unit_type]
 	if not model then
-		helper.wml_error("get_type_advancement(): unit type " .. unit_type .. " is not found.")
+		wml.error("get_type_advancement(): unit type " .. unit_type .. " is not found.")
 	end
 
 	for adv in wml.child_range(model.__cfg, "advancement") do
@@ -125,7 +123,7 @@ local wml_based_implementation = {
 				local has = 0
 				local required = latent.required or latent.number_required
 				if not required then
-					helper.wml_error("[latent] of item " .. tostring(item.number) .. " lacks the necessary required= attribute")
+					wml.error("[latent] of item " .. tostring(item.number) .. " lacks the necessary required= attribute")
 				end
 				for t in string.gmatch(required, "[^%s,][^,]*") do
 					local needed = tonumber(t)
@@ -260,7 +258,7 @@ local wml_based_implementation = {
 		local advancement = get_type_advancement(unit.type, advancement_id)
 
 		if not advancement then
-			helper.wml_error("Trying to add non-existent advancement \"" .. tostring(advancement_id) ..
+			wml.error("Trying to add non-existent advancement \"" .. tostring(advancement_id) ..
 				" to unit " .. unit.id)
 		end
 
