@@ -46,7 +46,7 @@ function wesnoth.wml_actions.get_unit_resistance(cfg)
 	local to_variable = cfg.to_variable or "resistance_obtained"
 	local unit = wesnoth.units.find_on_map(cfg)[1]
 	if unit then
-		local result = wesnoth.units.resistance_against( unit, damage_type )
+		local result = 100 - wesnoth.units.resistance_against( unit, damage_type )
 		wml.variables[to_variable] = result
 	else
 		--It's mainly used for weapon specials, and the target might be already killed
@@ -187,7 +187,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			local damage = calculate_damage( amount,
 							 ( cfg.alignment or "neutral" ),
 							 wesnoth.get_time_of_day( { unit_to_harm.x, unit_to_harm.y, true } ).lawful_bonus,
-							 wesnoth.units.resistance_against( unit_to_harm, cfg.damage_type or "dummy" ),
+							 100 - wesnoth.units.resistance_against( unit_to_harm, cfg.damage_type or "dummy" ),
 							 resistance_multiplier
 						       )
 
