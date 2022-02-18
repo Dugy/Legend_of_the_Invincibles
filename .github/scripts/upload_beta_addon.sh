@@ -23,7 +23,7 @@ fi
 rsync --exclude .git --exclude wesnoth_tools -a . $ADDON
 find $ADDON -type f | xargs sed -i "s@add-ons/Legend_of_the_Invincibles@add-ons/$ADDON@g"
 
-for WESNOTH_VERSION in "1.16.x"; do
+for WESNOTH_VERSION in "1.16.x" "1.17.x"; do
 	python wesnoth_tools/wesnoth_addon_manager \
 		-u $ADDON \
 		--port $WESNOTH_VERSION \
