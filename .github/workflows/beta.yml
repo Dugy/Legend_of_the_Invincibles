@@ -19,7 +19,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: wesnoth_tools
-          key: buildcache-
+          key: buildcache-feb2022
 
       - name: Install dependencies
         run: sudo apt-get install -y luarocks && sudo luarocks install luacheck
