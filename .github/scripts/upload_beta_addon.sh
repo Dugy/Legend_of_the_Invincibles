@@ -12,6 +12,7 @@ ADDON=Legend_of_the_Invincibles_beta
 	rm -rf wesnoth_tools
 	mv wesnoth/data/tools wesnoth_tools
 
+	rm -rf wesnoth
 	touch wesnoth_tools/COMPLETE
 )
 
