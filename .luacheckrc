@@ -48,6 +48,12 @@ read_globals = {
 				other_fields = true
 			},
 
+			-- wesnoth.sides[number] is supposed to be modified
+			sides = {
+				read_only = false,
+				other_fields = true
+			},
+
 			-- "wesnoth.interface.game_display.unit_status" is supposed to be modified
 			interface = {
 				fields = {

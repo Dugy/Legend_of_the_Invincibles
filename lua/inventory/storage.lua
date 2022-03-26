@@ -433,7 +433,7 @@ local function onshow(dialog, unit, item_sort)
 		-- Show/hide fields related to current item
 		dialog.current_item.visible = true
 
-		if not (item_sort == "limited") and not (item_sort == "potion") then
+		if item_sort ~= "limited" and item_sort ~= "potion" then
 			dialog.unequip.visible = true
 
 			-- Note: Drop/Destroy dropdown menu near Unequip button is not yet supported in Tutorial,
