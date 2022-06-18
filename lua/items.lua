@@ -766,7 +766,7 @@ loti.item.describe_item = function(number, sort, set_items)
 					if effect.increase_total > 0 then
 						line = _"<span color='#60A0FF'>" .. tostring(effect.increase_total) .. _" more hitpoints" .. ending
 					else
-						line = _"<span color='#60A0FF'>" .. tostring(effect.increase_total * -1) .. _" fewer hitpoints" .. ending
+						line = _"<span color='#FF60A0'>" .. tostring(effect.increase_total * -1) .. _" fewer hitpoints" .. ending
 					end
 				end
 			elseif effect.apply_to == "defense" and wml.get_child(effect, "defense") then
@@ -774,7 +774,7 @@ loti.item.describe_item = function(number, sort, set_items)
 				local function describe(tag, text)
 					if def[tag] then
 						if def[tag] > 0 then
-							line = "<span color='#60A0FF'>" .. _"Chance to get hit " .. text .. _" increased by " .. tostring(def[tag]) .. "</span>"
+							line = "<span color='#FF60A0'>" .. _"Chance to get hit " .. text .. _" increased by " .. tostring(def[tag]) .. "</span>"
 						else
 							line = "<span color='#60A0FF'>" .. _"Chance to get hit " .. text .. _" decreased by " .. tostring(def[tag] * -1) .. "</span>"
 						end
