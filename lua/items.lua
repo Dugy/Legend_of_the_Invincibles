@@ -594,7 +594,7 @@ loti.item.describe_item = function(number, sort, set_items)
 		if defence > 0 then
 			table.insert(desc, "<span color='#60A0FF'>" .. _"Increases physical resistances by " .. tostring(defence) .. "% </span>")
 		else
-			table.insert(desc, "<span color='#60A0FF'>" .. _"Decreases physical resistances by " .. tostring(defence * -1) .. "% </span>")
+			table.insert(desc, "<span color='#FF60A0'>" .. _"Decreases physical resistances by " .. tostring(defence * -1) .. "% </span>")
 		end
 	end
 
@@ -603,7 +603,7 @@ loti.item.describe_item = function(number, sort, set_items)
 			if variable > 0 then
 				table.insert(desc, "<span color='green'>" .. _"Damage increased by " .. tostring(variable) .. ending)
 			else
-				table.insert(desc, "<span color='green'>" .. _"Damage decreased by " .. tostring(variable * -1) .. ending)
+				table.insert(desc, "<span color='red'>" .. _"Damage decreased by " .. tostring(variable * -1) .. ending)
 			end
 		end
 	end
@@ -626,15 +626,19 @@ loti.item.describe_item = function(number, sort, set_items)
 	local function describe_attacks_modification(variable, ending_more, ending_plus_one, ending_fewer, ending_minus_one)
 		if variable then
 			local ending = ending_fewer
+			local color = "red"
 			if variable > 1 then
 				ending = ending_more
+				color = "green"
 			elseif variable == 1 then
 				ending = ending_plus_one
+				color = "green"
 			elseif variable == -1 then
 				ending = ending_minus_one
+				color = "red"
 			end
 
-			table.insert(desc, "<span color='green'>" .. math.abs(variable) .. ending .. " </span>")
+			table.insert(desc, "<span color='" .. color .. "'>" .. math.abs(variable) .. ending .. " </span>")
 		end
 	end
 	if is_weapon then
@@ -679,14 +683,14 @@ loti.item.describe_item = function(number, sort, set_items)
 			if item[resist_type_list[i]] > 0 then
 				table.insert(desc, "<span color='#60A0FF'>" .. resist_type_descriptions[i] .. _" increased by " .. tostring(item[resist_type_list[i]]) .. _"%" .. "</span>")
 			else
-				table.insert(desc, "<span color='#60A0FF'>" .. resist_type_descriptions[i] .. _" decreased by " .. tostring(item[resist_type_list[i]] * -1) .. _"%" .. "</span>")
+				table.insert(desc, "<span color='#FF60A0'>" .. resist_type_descriptions[i] .. _" decreased by " .. tostring(item[resist_type_list[i]] * -1) .. _"%" .. "</span>")
 			end
 		end
 		if item[resist_penetrate_list[i]] then
 			if item[resist_penetrate_list[i]] > 0 then
 				table.insert(desc, "<span color='green'>" .. resist_penetrate_descriptions[i] .. _" decreased by " .. tostring(item[resist_penetrate_list[i]]) .. _"%" .. "</span>")
 			else
-				table.insert(desc, "<span color='green'>" .. resist_penetrate_descriptions[i] .. _" increased by " .. tostring(item[resist_penetrate_list[i]] * -1) .. _"%" .. "</span>")
+				table.insert(desc, "<span color='red'>" .. resist_penetrate_descriptions[i] .. _" increased by " .. tostring(item[resist_penetrate_list[i]] * -1) .. _"%" .. "</span>")
 			end
 		end
 	end
@@ -717,7 +721,7 @@ loti.item.describe_item = function(number, sort, set_items)
 		if item.vision > 0 then
 			table.insert(desc, "<span color='#FF99CC'>" .. _"Increases vision range by " .. tostring(item.vision) .. "</span>")
 		else
-			table.insert(desc, "<span color='#FF99CC'>" .. _"Decreases vision range by " .. tostring(item.vision * -1) .. "</span>")
+			table.insert(desc, "<span color='#804866'>" .. _"Decreases vision range by " .. tostring(item.vision * -1) .. "</span>")
 		end
 	end
 
@@ -747,9 +751,9 @@ loti.item.describe_item = function(number, sort, set_items)
 				elseif effect.increase > 1 then
 					line = "<span color='#FF99CC'>" .. tostring(effect.increase) .. _" more movement points" .. "</span>"
 				elseif effect.increase == -1 then
-					line = "<span color='#FF99CC'>" .. _"1 less movement point " .. "</span>"
+					line = "<span color='#804866'>" .. _"1 less movement point " .. "</span>"
 				else
-					line = "<span color='#FF99CC'>" .. tostring(effect.increase * -1) .. _" fewer movement points" .. "</span>"
+					line = "<span color='#804866'>" .. tostring(effect.increase * -1) .. _" fewer movement points" .. "</span>"
 				end
 			elseif effect.apply_to == "hitpoints" then
 				local ending
