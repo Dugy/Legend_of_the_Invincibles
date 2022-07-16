@@ -7,7 +7,7 @@ function wesnoth.deepcopy(orig)
 	for orig_key, orig_value in next, orig, nil do
 	    copy[wesnoth.deepcopy(orig_key)] = wesnoth.deepcopy(orig_value)
 	end
-	setmetatable(copy, wesnoth.deepcopy(getmetatable(orig)))
+	setmetatable(copy, {wesnoth.deepcopy(getmetatable(orig))})
     else -- number, string, boolean, and so on
 	copy = orig
     end
