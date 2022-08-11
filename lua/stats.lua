@@ -18,6 +18,9 @@ local function get_random_seed_from_unit(unit)
 	if unit.race and string.len(unit.race) > 0 then
 		seed = (seed << 3) ~ string.byte(unit.race)
 	end
+	if unit.id and string.len(unit.id) > 0 then
+		seed = (seed << 3) ~ string.byte(unit.id,string.len(unit.id))
+	end
 	local base_seed = wml.variables["base_seed"]
 	if not base_seed then
 		base_seed = 0
