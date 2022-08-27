@@ -10,7 +10,7 @@ local known_ability_trees = {}
 known_ability_trees.redeem = {
 	spirit = {
 		image = "attacks/spirit.png",
-		label =_ "Spiritual transformation (a very powerful combat technique)",
+		label =_ "Spiritual transformation (only for attacking, a very powerful combat technique)",
 		requires = { "absorb", "weapons" },
 
 		-- Short names are used in "Requires: [upgrade1], [upgrade2], ..." lists.
@@ -18,7 +18,7 @@ known_ability_trees.redeem = {
 	},
 	particlestorm = {
 		image = "attacks/particle-storm.png",
-		label =_ "Particle Storm (a very powerful offensive spell)",
+		label =_ "Particle Storm (only for attacking, a very powerful offensive spell)",
 		requires = { "blizzard", "firestorm", "entropy" },
 		short_name =_ "Particle Storm"
 	},
@@ -30,13 +30,13 @@ known_ability_trees.redeem = {
 	},
 	firestorm = {
 		image = "attacks/firestorm.png",
-		label =_ "Firestorm (great damage and range)",
+		label =_ "Firestorm (only for attacking, great damage and range)",
 		requires = { "fireblast" },
 		short_name =_ "Firestorm"
 	},
 	blizzard = {
 		image = "attacks/blizzard.png",
-		label =_ "Blizzard (slows a lot of units, moves them over the place)",
+		label =_ "Blizzard (only for attacking, slows a lot of units, moves them over the place)",
 		requires = { "arcticblast" },
 		short_name =_ "Blizzard"
 	},
@@ -54,7 +54,7 @@ known_ability_trees.redeem = {
 	},
 	fireblast = {
 		image = "attacks/fire-blast.png",
-		label =_ "Fire Blast (quite powerful fiery attack)",
+		label =_ "Fire Blast (only for attacking, quite powerful fiery attack)",
 		requires = {},
 		short_name =_ "Fire Blast"
 	},
@@ -65,7 +65,7 @@ known_ability_trees.redeem = {
 	},
 	arcticblast = {
 		image = "attacks/ice-blast.png",
-		label =_ "Arctic Blast (capable to slow a lot of units)",
+		label =_ "Arctic Blast (only for attacking, capable to slow a lot of units)",
 		requires = {},
 		short_name =_ "Arctic Blast"
 	},
