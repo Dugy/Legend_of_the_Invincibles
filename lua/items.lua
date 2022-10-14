@@ -899,7 +899,7 @@ end
 
 -- Add a binding "weapon name -> weapon type
 function wesnoth.wml_actions.add_weapon_binding(cfg)
-	local name = cfg.name or wml.error("[dadd_weapon_binding] lacks a required name= key")
+	local name = cfg.name or wml.error("[add_weapon_binding] lacks a required name= key")
 	local type = cfg.type or "exotic"
 	loti.item.weapon_bindings[name] = type
 end
