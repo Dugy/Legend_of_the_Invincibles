@@ -438,7 +438,8 @@ local function unit_information_part_2()
          elseif special_name == "dummy" and special_data["suck"] ~= nil then
            if attack["type"] == "blade"
            or attack["type"] == "pierce"
-           or attack["type"] == "impact" then
+           or attack["type"] == "impact"
+           or attack["type"] == "arcane"  then
              special = "suck " .. tostring(special_data["suck"])
            end
          elseif special_name == "dummy" and special_data["devastating_blow"] ~= nil then
