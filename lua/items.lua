@@ -580,7 +580,7 @@ end
 -- Generate the description of an item
 loti.item.describe_item = function(number, sort, set_items)
 	local item = loti.unit.item_with_set_effects(number, set_items, sort)
-	if item.description then
+	if item.description and not (sort or set_items) then
 		-- This item has constant (non-calculated) description.
 		-- For example, this can be a gem or an item like Book of Courage
 		-- ("Unit becomes fearless" instead of the calculated description).
