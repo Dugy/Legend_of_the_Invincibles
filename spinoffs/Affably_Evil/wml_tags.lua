@@ -1,5 +1,4 @@
 local helper = wesnoth.require "lua/helper.lua"
-local T = helper.set_wml_tag_metatable {}
 
 function wesnoth.wml_actions.repeating_message(cfg)
 	local message = cfg.message or ""
@@ -72,7 +71,7 @@ function wesnoth.wml_actions.repeating_message(cfg)
 		end
 		-- Repeat forever if options can repeat
 		if repeat_options == true then
-			repetition = 1
+			length = length + 1
 		end
 	end
 
