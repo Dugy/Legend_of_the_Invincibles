@@ -1,5 +1,3 @@
-local helper = wesnoth.require "lua/helper.lua"
-
 function wesnoth.wml_actions.repeating_message(cfg)
 	local message = cfg.message or ""
 	local first = cfg.first or message
