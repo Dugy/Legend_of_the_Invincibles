@@ -26,3 +26,7 @@ Its usage of space indentation bears no advantage over tabs, but increases file 
 * use command `git config -filter.tabspace.clean 'expand --tabs=4 --initial'`
 * delete all files of type `.cfg` in the repository and use `git reset --hard`
 * edit the editorconfig file and untrack it `git update-index --assume-unchanged .editorconfig`
+
+Enabling spinoffs
+--------------
+Wesnoth will not look for add-ons within an add-on, so in order to get it running, you need to create links in the add-ons folder to these. On Windows, you can make links simply by right clicking the file and choosing _Make shortcut._ On Linux, this option might not be present in the file manager, so you have to navigate into the add-ons folder and make commands like `ln -s Legend_of_the_Invincibles/spinoffs/Affably_Evil/ Affably_evil`.

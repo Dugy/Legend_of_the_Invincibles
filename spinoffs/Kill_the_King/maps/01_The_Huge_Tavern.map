@@ -1,0 +1,23 @@
+border_size=1
+usage=map
+
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Iwr, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Xol, Iwr, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Ket, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Iwr, Iwr, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Ket, 1 Ket, Ket, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Iwr, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Ket, Xol, Ket, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol, Iwr, Iwr, Iwr, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Xol, Iwr, Xol, Xol, Iwr, Iwr, Iwr, Xol, Iwr, Iwr, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Iwr, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Xol, Iwr, Iwr, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Iwr, Xol, Iwr, Iwr, Iwr, Iwr, Iwr, Iwr, Xol, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Iwr, Ce^Kov, Iwr, Ce^Kov, Iwr, Ce^Kov, Iwr, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Ce^Kov, 3 Ce^Kov, Ce^Kov, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol
+Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Ce^Kov, Ce, Ce^Kov, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol, Xol

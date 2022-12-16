@@ -1,0 +1,47 @@
+items/gold-coins-large.png
+~BLIT(
+	items/gold-coins-large.png~CROP(0,0,72,42)
+,0,30)
+~BLIT(
+	units/human-magi/white-cleric-mace-1.png~RC(magenta>black)
+	~BLIT(halo/undead/black-magic-4.png
+		~CROP(45,0,62,52)
+	,10,20)
+	~CROP(24,18,50,56)
+)
+~BLIT(
+	units/human-peasants/peasant-defend.png~RC(magenta>green)~CROP(15,16,57,56)~O(40%)
+)
+~BLIT(
+	units/human-peasants/peasant-defend.png~RC(magenta>green)~CROP(12,12,60,60)~O(50%)
+)
+~BLIT(
+	units/human-peasants/peasant-defend.png~RC(magenta>green)~CROP(9,8,63,64)~O(65%)
+)
+~BLIT(
+	units/human-peasants/peasant-defend.png~RC(magenta>green)~CROP(6,4,66,68)~O(85%)
+)
+~BLIT(
+	units/human-peasants/peasant-defend.png~RC(magenta>green)~CROP(3,0,69,72)
+)
+~BLIT(
+	halo/undead/black-magic-4.png~CROP(55,0,45,52)~O(50%)
+)
+~BLIT(
+	units/human-magi/white-cleric.png~RC(magenta>black)
+	~BLIT(
+		units/human-outlaws/assassin-throwknife1.png~RC(magenta>black)~CROP(32,23,8,9)
+	,32,20)
+~CROP(0,15,49,57),23,0)
+~BLIT(
+	units/human-magi/white-mage+female-magic-2.png~RC(magenta>black)~CROP(30,0,17,57)
+,0,15)
+~BLIT(
+	units/human-loyalists/master-at-arms-recover-1.png~CROP(42,0,27,57)
+,18,7)
+~BLIT(
+	units/human-loyalists/halberdier-pierce-n.png~RC(magenta>red)~CROP(0,0,47,62)
+,25,10)
+~BLIT(
+	units/human-loyalists/master-at-arms-melee-3-3.png~RC(magenta>red)~FL(horiz)~CROP(0,0,62,42)
+,10,30)

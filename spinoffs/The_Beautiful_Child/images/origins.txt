@@ -1,0 +1,9 @@
+Blood Rain - drawn by Dugi
+Burning Ground - created from core files by Dugi
+Rain schedule - created by Dugi from a core file
+Shuja - baseframe from 1.13 core files, animation by Dugi
+Cabinet - drawn by Dugi (using Blender)
+Reezer - drawn by Dugi
+Ziggurat - drawn by Dugi (using Blender)
+Campaign image - drawn by Dugi (using Blender)
+Stairs - not quite sure from which add-on it comes from

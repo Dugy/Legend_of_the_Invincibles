@@ -1,0 +1,34 @@
+1.0.1f
+Fixed a bug causing merchants in scenario Goonville to be hostile to some sides
+
+1.0.1b
+Fixed a possibly fatal bug that could cause an infinite army of wolves spawn to help the player, filling the map and crashing the game
+
+1.0.1
+Fixed some older bugs
+
+1.0.0
+No longer calling the campaign beta because it seems quite stable
+
+0.1.5 Beta
+Changed the dialogues' wording replacing the word 'taxes' to 'tithes' when appropriate
+When returning to Farborough, the enemies trying to capture the player near the tavern will not erroneously reappear anymore
+When returning to Faithdome, the conversation about looking for the Hidden Valley will not erroneously replay
+Fixed a bug causing the transition labels in Goonville appear wrong before meeting Burke
+
+0.1.4 Beta
+Fixed some bugs
+
+0.1.3 Beta
+When entering some easy areas after completing far harder quests, new enemies appear to return some challenge to the area
+Clarified some dialogue lines
+When seeing the first waypoint, a description what do the waypoints do appears
+
+0.1.2 Beta
+Fixed a huge bug preventing any units from using items
+
+0.1.1 Beta
+Fixed a huge bug causing units's death messages activate if they join the player's side after being defeated, preventing them from being automatically recalled
+
+0.1.0 Beta
+Initial release, all scenarios done
