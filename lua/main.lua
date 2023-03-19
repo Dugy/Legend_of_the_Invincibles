@@ -548,17 +548,17 @@ local function unit_information_part_4()
         penetrate = v["sub"]
       end
     end
-    return string.format("%6d%%       %6d%%</span> \n", math.floor(resist), math.floor(penetrate))
+    return string.format("%6d%%				%6d%%</span> \n", math.floor(resist), math.floor(penetrate))
   end
 
   local result = _"<span font_family='monospace' weight='bold' color='#60A0FF'>"
-  ..                               _"    Damage      Resistance    Penetration</span> \n"
-  .. _"<span font_family='monospace'>    Blade       " .. form_one_line("blade")
-  .. _"<span font_family='monospace'>    Pierce      " .. form_one_line("pierce")
-  .. _"<span font_family='monospace'>    Impact      " .. form_one_line("impact")
-  .. _"<span font_family='monospace'>    Fire        " .. form_one_line("fire")
-  .. _"<span font_family='monospace'>    Cold        " .. form_one_line("cold")
-  .. _"<span font_family='monospace'>    Arcane      " .. form_one_line("arcane")
+  ..                               _"	Damage		Resistance		Penetration</span> \n"
+  .. _"<span font_family='monospace'>	Blade				" .. form_one_line("blade")
+  .. _"<span font_family='monospace'>	Pierce				" .. form_one_line("pierce")
+  .. _"<span font_family='monospace'>	Impact				" .. form_one_line("impact")
+  .. _"<span font_family='monospace'>	Fire				" .. form_one_line("fire")
+  .. _"<span font_family='monospace'>	Cold				" .. form_one_line("cold")
+  .. _"<span font_family='monospace'>	Arcane				" .. form_one_line("arcane")
 
   -- Remove the last newline, just to make things compact
   result = string.sub(tostring(result), 1, -2)
@@ -574,32 +574,32 @@ local function unit_information_part_5()
     local defence = 100 - (wml.variables["unit.defense." .. type] or 0)
     local cost = wml.variables["unit.movement_costs." .. type]
     if cost == nil then
-	return "    none      inaccessible</span> \n"
+	return "  none		inaccessible</span> \n"
     end
     if defence > 100 then -- def cap
-	    return string.format("%6d%% cap   %6d</span> \n", math.floor(200 - defence), math.floor(cost))
+	    return string.format("%6d%% cap		%6d</span> \n", math.floor(200 - defence), math.floor(cost))
     else
-	    return string.format("%6d%%       %6d</span> \n", math.floor(defence), math.floor(cost))
+	    return string.format("%6d%%			%6d</span> \n", math.floor(defence), math.floor(cost))
     end
   end
 
   local result = _"<span font_family='monospace' weight='bold' color='#60A0FF'>"
-  ..                               _"    Location              Defence     Movement cost</span> \n"
-  .. _"<span font_family='monospace'>In forests              " .. form_one_line("forest")
-  .. _"<span font_family='monospace'>In frozen places        " .. form_one_line("frozen")
-  .. _"<span font_family='monospace'>On flat terrains        " .. form_one_line("flat")
-  .. _"<span font_family='monospace'>In caves                " .. form_one_line("cave")
-  .. _"<span font_family='monospace'>In mushroom grooves     " .. form_one_line("fungus")
-  .. _"<span font_family='monospace'>In villages             " .. form_one_line("village")
-  .. _"<span font_family='monospace'>In castles              " .. form_one_line("castle")
-  .. _"<span font_family='monospace'>In shallow waters       " .. form_one_line("shallow_water")
-  .. _"<span font_family='monospace'>On coastal reefs        " .. form_one_line("reef")
-  .. _"<span font_family='monospace'>In deep water           " .. form_one_line("deep_water")
-  .. _"<span font_family='monospace'>On hills                " .. form_one_line("hills")
-  .. _"<span font_family='monospace'>On mountains            " .. form_one_line("mountains")
-  .. _"<span font_family='monospace'>On sands                " .. form_one_line("sand")
-  .. _"<span font_family='monospace'>Above unwalkable places " .. form_one_line("unwalkable")
-  .. _"<span font_family='monospace'>Inside impassable walls " .. form_one_line("impassable")
+  ..                               _"	Location				Defence			Movement cost</span> \n"
+  .. _"<span font_family='monospace'>In forests					" .. form_one_line("forest")
+  .. _"<span font_family='monospace'>In frozen places			" .. form_one_line("frozen")
+  .. _"<span font_family='monospace'>On flat terrains			" .. form_one_line("flat")
+  .. _"<span font_family='monospace'>In caves					" .. form_one_line("cave")
+  .. _"<span font_family='monospace'>In mushroom grooves		" .. form_one_line("fungus")
+  .. _"<span font_family='monospace'>In villages					" .. form_one_line("village")
+  .. _"<span font_family='monospace'>In castles					" .. form_one_line("castle")
+  .. _"<span font_family='monospace'>In shallow waters			" .. form_one_line("shallow_water")
+  .. _"<span font_family='monospace'>On coastal reefs			" .. form_one_line("reef")
+  .. _"<span font_family='monospace'>In deep water				" .. form_one_line("deep_water")
+  .. _"<span font_family='monospace'>On hills					" .. form_one_line("hills")
+  .. _"<span font_family='monospace'>On mountains				" .. form_one_line("mountains")
+  .. _"<span font_family='monospace'>On sands					" .. form_one_line("sand")
+  .. _"<span font_family='monospace'>Above unwalkable places	" .. form_one_line("unwalkable")
+  .. _"<span font_family='monospace'>Inside impassable walls	" .. form_one_line("impassable")
 
   -- Remove the last newline, just to make things compact
   result = string.sub(tostring(result), 1, -2)
