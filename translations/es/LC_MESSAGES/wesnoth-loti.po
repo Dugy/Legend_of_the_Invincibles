@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
-"POT-Creation-Date: 2023-03-20 02:20 UTC\n"
-"PO-Revision-Date: 2023-03-20 03:33+0100\n"
+"POT-Creation-Date: 2023-03-20 05:11 UTC\n"
+"PO-Revision-Date: 2023-03-20 06:15+0100\n"
 "Last-Translator: Toranks <toranksmervat@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -97,7 +97,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/amla.cfg:4676
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5646
 msgid "lightning"
-msgstr ""
+msgstr "rayo"
 
 #. [campaign]: id=Legend_of_the_Invincibles_I
 #. [campaign]: id=Legend_of_the_Invincibles_VI
@@ -438,56 +438,57 @@ msgstr "Garras de metal"
 #. [lua]: populate_item
 #: Legend_of_the_Invincibles/lua/crafting.lua:592
 msgid "Otherworldly essence (for touch attacks, baneblade, ...)"
-msgstr "Esencia de otro mundo (para ataques de toque, baneblade, ...)"
+msgstr "Esencia de otro mundo"
 
 #. [lua]: postshow
 #. [lua]: dialog.ok.on_button_click
 #: Legend_of_the_Invincibles/lua/crafting.lua:661
 #: Legend_of_the_Invincibles/lua/scenario/tutorial.lua:98
 msgid "Are you sure you want to craft this item?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres fabricar este objeto?"
 
 #. [lua]: inventory_dialog.goto_tab
 #: Legend_of_the_Invincibles/lua/inventory/dialog.lua:122
 msgid "on the recall list"
-msgstr ""
+msgstr "en la lista de reincorporación"
 
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:18
 msgid "Item storage"
-msgstr ""
+msgstr "Inventario"
 
 #. [lua]: onsubmit
 #. [set_menu_item]: id=xx_unit_info
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:32
 #: Legend_of_the_Invincibles/utils/global_events.cfg:863
 msgid "Unit information"
-msgstr ""
+msgstr "Información de unidad"
 
 #. [lua]: onsubmit
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:44
 msgid "Select weapons for retaliation"
-msgstr ""
+msgstr "Armas de represalia"
 
 #. [lua]: onsubmit
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:49
 msgid "Unequip (store) all items"
-msgstr ""
+msgstr "Desequipar y guardar todo"
 
 #. [lua]: onclick
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:51
 msgid ""
 "Are you sure? All items of this unit will be placed into the item storage."
 msgstr ""
+"¿Está seguro? Todos los objetos de esta unidad se colocarán en el inventario."
 
 #. [lua]: onclick
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:59
 msgid "Items on units on the recall list"
-msgstr ""
+msgstr "Objetos en reincorporación"
 
 #. [lua]: onclick
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:65
 msgid "Pick up items on the ground"
-msgstr ""
+msgstr "Coger objetos del suelo"
 
 #. [lua]: util.make_close_button
 #. [lua]: get_tab
@@ -495,192 +496,192 @@ msgstr ""
 #: Legend_of_the_Invincibles/lua/inventory/recall.lua:59
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:126
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:30
 msgid "[no item]"
-msgstr ""
+msgstr "[sin objeto]"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:31
 msgid "no ring"
-msgstr ""
+msgstr "sin anillo"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:32
 msgid "no amulet"
-msgstr ""
+msgstr "sin amuleto"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:33
 msgid "no cloak"
-msgstr ""
+msgstr "sin capa"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:34
 msgid "no armour"
-msgstr ""
+msgstr "sin armadura"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:35
 msgid "no helm"
-msgstr ""
+msgstr "sin casco"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:36
 msgid "no gauntlets"
-msgstr ""
+msgstr "sin guantes"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:37
 msgid "no boots"
-msgstr ""
+msgstr "sin botas"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:38
 msgid "no sword"
-msgstr ""
+msgstr "sin espada"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:39
 msgid "no axe"
-msgstr ""
+msgstr "sin hacha"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:40
 msgid "no staff"
-msgstr ""
+msgstr "sin bastón"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:41
 msgid "no crossbow"
-msgstr ""
+msgstr "sin ballesta"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:42
 msgid "no bow"
-msgstr ""
+msgstr "sin arco"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:43
 msgid "no dagger"
-msgstr ""
+msgstr "sin daga"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:44
 msgid "no knife"
-msgstr ""
+msgstr "sin cuchillo"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:45
 msgid "no mace"
-msgstr ""
+msgstr "sin maza"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:46
 msgid "no polearm"
-msgstr ""
+msgstr "sin asta"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:47
 msgid "no metal claws"
-msgstr ""
+msgstr "sin garras"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:48
 msgid "no sling"
-msgstr ""
+msgstr "sin honda"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:49
 msgid "no essence"
-msgstr ""
+msgstr "sin esencia"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:50
 msgid "no thunderstick"
-msgstr ""
+msgstr "sin fusil"
 
 #. [lua]: util.make_close_button
 #: Legend_of_the_Invincibles/lua/inventory/misc.lua:51
 msgid "no spear"
-msgstr ""
+msgstr "sin lanza"
 
 #. [lua]: get_tab
 #: Legend_of_the_Invincibles/lua/inventory/recall.lua:51
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:118
 msgid "View"
-msgstr ""
+msgstr "Ver"
 
 #. [lua]: get_tab
 #: Legend_of_the_Invincibles/lua/inventory/recall.lua:75
 msgid "These units on recall list have items:"
-msgstr ""
+msgstr "Estas unidades en la lista de reincorporación tienen objetos:"
 
 #. [lua]: get_tab
 #: Legend_of_the_Invincibles/lua/inventory/retaliation.lua:65
 msgid "Which attacks do you allow to use for retaliation?"
-msgstr ""
+msgstr "¿Qué ataques quieres usar en represalia?"
 
 #. [lua]: get_tab
 #. [lua]: menu_sort
 #: Legend_of_the_Invincibles/lua/inventory/retaliation.lua:79
 #: Legend_of_the_Invincibles/lua/redeem.lua:460
 msgid "OK"
-msgstr ""
+msgstr "Aceptar"
 
 #. [lua]: get_tab
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:52
 msgid "Equip"
-msgstr ""
+msgstr "Equipar"
 
 #. [lua]: get_tab
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:63
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:89
 msgid "Drop to the ground"
-msgstr ""
+msgstr "Soltar en el suelo"
 
 #. [lua]: get_tab
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:66
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:92
 msgid "Destroy to get a random gem"
-msgstr ""
+msgstr "Destruir para obtener una gema aleatoria"
 
 #. [lua]: get_tab
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:79
 msgid "Unequip"
-msgstr ""
+msgstr "Desequipar"
 
 #. [lua]: unhide_listbox
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:286
 msgid "Cannot access item storage after turn 2 outside a castle."
-msgstr ""
+msgstr "No puedes acceder al inventario tras el turno 2 fuera de un castillo"
 
 #. [lua]: unhide_listbox
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:288
 msgid "Item storage is empty."
-msgstr ""
+msgstr "El inventario está vacío."
 
 #. [lua]: unhide_listbox
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:293
 msgid "In the item storage:"
-msgstr ""
+msgstr "En el inventario:"
 
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:430
 msgid "Currently equipped: "
-msgstr ""
+msgstr "Actualmente equipado: "
 
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:502
 msgid "he"
-msgstr ""
+msgstr "él"
 
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:504
 msgid "she"
-msgstr ""
+msgstr "ella"
 
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:507
@@ -688,26 +689,28 @@ msgid ""
 "This unit is currently not on the battlefield,\n"
 "so "
 msgstr ""
+"Esta unidad no está en combate,\n"
+"así que "
 
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:508
 msgid " can't take new items from the storage."
-msgstr ""
+msgstr " no puede obtener nuevos objetos del inventario."
 
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:512
 msgid "This unit can't equip such items.\n"
-msgstr ""
+msgstr "Esta unidad no puede equipar esos objetos.\n"
 
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:513
 msgid "They are unworthy of a mighty "
-msgstr ""
+msgstr "Son indignos de un poderoso "
 
 #. [lua]: unequip
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:525
 msgid "WARNING:"
-msgstr ""
+msgstr "ADVERTENCIA:"
 
 #. [lua]: unequip
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:526
@@ -715,42 +718,44 @@ msgid ""
 "this item is purely nostalgic (from the good old times when this unit needed "
 "it).\n"
 msgstr ""
+"este artículo es puramente nostálgico (de los buenos viejos tiempos cuando "
+"esta unidad lo necesitaba).\n"
 
 #. [lua]: unequip
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:527
 msgid ""
 "If you unequip it, this unit won't be able to equip it again.\n"
 "\n"
-msgstr ""
+msgstr "Si lo desequipas, esta unidad no podrá volver a equiparlo.\n"
 
 #. [lua]: unequip
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:528
 msgid "Do you still want to unequip it?"
-msgstr ""
+msgstr "¿Aún quieres desequiparlo?"
 
 #. [lua]: show_picking_dialogue
 #: Legend_of_the_Invincibles/lua/item_pick.lua:16
 msgid "Use this potion?"
-msgstr ""
+msgstr "¿Usar esta poción?"
 
 #. [lua]: show_picking_dialogue
 #: Legend_of_the_Invincibles/lua/item_pick.lua:17
 msgid "Use it."
-msgstr ""
+msgstr "Úsala."
 
 #. [lua]: show_picking_dialogue
 #: Legend_of_the_Invincibles/lua/item_pick.lua:17
 #: Legend_of_the_Invincibles/lua/item_pick.lua:32
 #: Legend_of_the_Invincibles/lua/item_pick.lua:47
 msgid "Store it. Currently having "
-msgstr ""
+msgstr "Guárdalo. Actualmente tienes "
 
 #. [lua]: show_picking_dialogue
 #: Legend_of_the_Invincibles/lua/item_pick.lua:17
 #: Legend_of_the_Invincibles/lua/item_pick.lua:32
 #: Legend_of_the_Invincibles/lua/item_pick.lua:47
 msgid " such items stored."
-msgstr ""
+msgstr " de estos objetos."
 
 #. [lua]: show_picking_dialogue
 #. [option]
@@ -761,7 +766,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:634
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:907
 msgid "Leave it on the ground."
-msgstr ""
+msgstr "Déjalo en el suelo."
 
 #. [lua]: show_picking_dialogue
 #. [option]
@@ -770,17 +775,17 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:373
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:625
 msgid "Smash it to get a random gem."
-msgstr ""
+msgstr "Romperlo para obtener una gema aleatoria."
 
 #. [lua]: show_picking_dialogue
 #: Legend_of_the_Invincibles/lua/item_pick.lua:46
 msgid "Item of the same type that will be unequipped: "
-msgstr ""
+msgstr "Objeto del mismo tipo que será desequipado: "
 
 #. [lua]: show_picking_dialogue
 #: Legend_of_the_Invincibles/lua/item_pick.lua:46
 msgid "Take this item?"
-msgstr ""
+msgstr "¿Coger este objeto?"
 
 #. [lua]: show_picking_dialogue
 #. [option]
@@ -789,12 +794,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:610
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:892
 msgid "Take it."
-msgstr ""
+msgstr "Cógelo"
 
 #. [lua]: loti.util.item_pick_menu
 #: Legend_of_the_Invincibles/lua/item_pick.lua:57
 msgid "irrelevant"
-msgstr ""
+msgstr "irrelevante"
 
 #: Legend_of_the_Invincibles/lua/items.lua:44
 msgid "Resistance to blade"
@@ -1285,6 +1290,340 @@ msgid ""
 "by a healer or by standing on a village."
 msgstr ""
 
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:298
+msgid "Hitpoints:</span> "
+msgstr "Puntos de vida:</span> "
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:300
+msgid "Experience:</span> "
+msgstr "Experiencia:</span> "
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:303
+msgid "Soul eater score:</span> "
+msgstr ""
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:307
+msgid "Redeem score:</span> "
+msgstr ""
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:311
+msgid "Lesser redeem score:</span> "
+msgstr ""
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:315
+msgid "Starving:</span> "
+msgstr ""
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:319
+msgid "Turns until From The Ashes will be usable:</span> "
+msgstr ""
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:324
+msgid "Wrath increasing damage by:</span> "
+msgstr ""
+
+#. [lua]: unit_information_part_1
+#: Legend_of_the_Invincibles/lua/main.lua:327
+msgid "Lethargy reducing damage by:</span> "
+msgstr ""
+
+#. [lua]: get_attack_range_and_type
+#: Legend_of_the_Invincibles/lua/main.lua:402
+msgid ", inactive"
+msgstr ", inactivo"
+
+#. [lua]: get_attack_range_and_type
+#: Legend_of_the_Invincibles/lua/main.lua:404
+msgid ", defense only"
+msgstr ", solo defensa"
+
+#. [lua]: get_attack_range_and_type
+#: Legend_of_the_Invincibles/lua/main.lua:406
+msgid ", attack only"
+msgstr ", solo ataque"
+
+#. [lua]: get_attack_range_and_type
+#: Legend_of_the_Invincibles/lua/main.lua:410
+msgid "werd damage type"
+msgstr ""
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:561
+msgid "\tDamage\t\t\tResistance\t\t\tPenetration</span> \n"
+msgstr "\tDaño\t\t\tResistencia\t\tPenetración</span> \n"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:562
+msgid "Blade\t\t\t\t"
+msgstr "Corte\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:563
+msgid "Pierce\t\t\t\t"
+msgstr "Penetración\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:564
+msgid "Impact\t\t\t\t"
+msgstr "Impacto\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:565
+msgid "Fire\t\t\t\t"
+msgstr "Fuego\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:566
+msgid "Cold\t\t\t\t"
+msgstr "Frío\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:567
+msgid "Arcane\t\t\t\t"
+msgstr "Arcano\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:593
+msgid "\tLocation\t\t\t\tDefence\t\tMovement cost</span> \n"
+msgstr "\tTerreno\t\t\t\tDefensa\t\tCoste de movimiento</span> \n"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:594
+msgid "In forests\t\t\t\t"
+msgstr "Bosques\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:595
+msgid "In frozen places\t\t"
+msgstr "Congelado\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:596
+msgid "On flat terrains\t\t"
+msgstr "Llanos\t\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:597
+msgid "In caves\t\t\t\t\t"
+msgstr "Cuevas\t\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:598
+msgid "In mushroom grooves\t"
+msgstr "Setas\t\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:599
+msgid "In villages\t\t\t\t"
+msgstr "Aldeas\t\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:600
+msgid "In castles\t\t\t\t"
+msgstr "Castillos\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:601
+msgid "In shallow waters\t\t"
+msgstr "Aguas someras\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:602
+msgid "On coastal reefs\t\t"
+msgstr "Arrecifes\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:603
+msgid "In deep water\t\t\t"
+msgstr "Aguas profundas\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:604
+msgid "On hills\t\t\t\t\t"
+msgstr "Colinas\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:605
+msgid "On mountains\t\t\t\t"
+msgstr "Montañas\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:606
+msgid "On sands\t\t\t\t\t"
+msgstr "Arenas\t\t\t\t\t\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:607
+msgid "Above unwalkable places"
+msgstr "Sobre intransitable\t"
+
+#. [lua]: form_one_line
+#: Legend_of_the_Invincibles/lua/main.lua:608
+msgid "Inside impassable walls"
+msgstr "Tras impenetrable\t\t"
+
+#. [lua]: clear_potions
+#. [effect]
+#. [attack]: type=pierce
+#: Legend_of_the_Invincibles/lua/main.lua:718
+#: Legend_of_the_Invincibles/scenarios6/test_scenario.cfg:137
+#: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:60
+#: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:344
+#: Legend_of_the_Invincibles/units/Predator.cfg:248
+#: Legend_of_the_Invincibles/utils/global_events.cfg:363
+msgid "execution"
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:922
+msgid "This unit can't equip this item."
+msgstr "Esta unidad no puede equipar este objeto."
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:926
+msgid "This unit cannot wear armours."
+msgstr "Esta unidad no puede equipar armaduras."
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:928
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot wear armours, not even helms."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:930
+msgid "This unit cannot wear armours, not even gauntlets."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:932
+msgid ""
+"This unit cannot wear armours, not even boots. It's a sad person, having to "
+"walk barefoot all the time..."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:934
+msgid "This unit cannot wear rings. It might make marriage problematic."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:936
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot wear amulets."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:938
+msgid "This unit cannot wear cloaks. Winter is not coming, fortunately."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:940
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use swords."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:942
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use axes."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:944
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use bows."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:946
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use staves."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:948
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use crossbows."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:950
+msgid ""
+"This unit cannot use daggers. Probably prefers more honest combat tactics."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:952
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot throw knives."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:954
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use maces."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:956
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use polearms."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:958
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use metal claws."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:960
+#, fuzzy
+#| msgid "This unit can't equip such items.\n"
+msgid "This unit cannot use slings."
+msgstr "Esta unidad no puede equipar esos objetos.\n"
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:962
+msgid "This unit cannot use otherworldly essences."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:964
+msgid "This unit cannot use weapons that are so advanced."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:966
+msgid "This unit cannot use spears. Seems to prefer more advanced weapons."
+msgstr ""
+
+#. [lua]: loti.util.can_equip_item
+#: Legend_of_the_Invincibles/lua/main.lua:973
+msgid "This unit already has this limited item."
+msgstr ""
+
 #: Legend_of_the_Invincibles/lua/redeem.lua:13
 msgid ""
 "Spiritual transformation (only for attacking, a very powerful combat "
@@ -1518,7 +1857,7 @@ msgstr ""
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:226
 msgid "Shadow wave"
-msgstr ""
+msgstr "Ola sombría"
 
 #. [lua]: redeem_menu
 #: Legend_of_the_Invincibles/lua/redeem.lua:347
@@ -1533,7 +1872,7 @@ msgstr ""
 #. [lua]: wesnoth.wml_actions.show_redeem_menu
 #: Legend_of_the_Invincibles/lua/redeem.lua:523
 msgid "Soul Eater"
-msgstr ""
+msgstr "Comealmas"
 
 #. [lua]: dialog.gui_basetype_chosen.on_modified
 #: Legend_of_the_Invincibles/lua/scenario/tutorial.lua:78
@@ -1767,14 +2106,14 @@ msgstr ""
 #. [lua]: wesnoth.update_stats
 #: Legend_of_the_Invincibles/lua/stats.lua:78
 msgid "GEARED"
-msgstr ""
+msgstr "equipado"
 
 #. [lua]: wesnoth.update_stats
 #: Legend_of_the_Invincibles/lua/stats.lua:78
 msgid ""
 "Geared: This unit is equipped with items. This is just to easily identify it "
 "on the recall list."
-msgstr ""
+msgstr "Equipado: Esta unidad está equipada con objetos."
 
 #. [lua]: set_if_same
 #. [attack]: type=pierce
@@ -1794,17 +2133,17 @@ msgstr ""
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:5
 msgid "Choose gender."
-msgstr ""
+msgstr "Elegir género."
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:9
 msgid "Male"
-msgstr ""
+msgstr "Masculino"
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:15
 msgid "Female"
-msgstr ""
+msgstr "Femenino"
 
 #. [multiplayer]: id=LotI-Gladiators
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:24
@@ -1882,14 +2221,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/06_Gladiatrix.cfg:51
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:74
 msgid "Opponents"
-msgstr ""
+msgstr "Oponentes"
 
 #. [side]: id=emperor, type=Demon Infiltrator Prophet
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:184
 #: Legend_of_the_Invincibles/scenarios8/06_Gladiatrix.cfg:66
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:89
 msgid "Observers"
-msgstr ""
+msgstr "Observadores"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:425
@@ -2174,41 +2513,41 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:782
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:2323
 msgid "Very hard"
-msgstr ""
+msgstr "Muy duro"
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:788
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:2329
 msgid "Quite hard"
-msgstr ""
+msgstr "Bastante duro"
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:794
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:2335
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:800
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:2341
 msgid "Rather easy"
-msgstr ""
+msgstr "Bastante fácil"
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:806
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:2347
 msgid "Very easy"
-msgstr ""
+msgstr "Muy Fácil"
 
 #. [message]: speaker=moderator
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:835
 msgid "The combat will start soon!"
-msgstr ""
+msgstr "¡El combate comenzará pronto!"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:842
 msgid "Gladiators"
-msgstr ""
+msgstr "Gladiadores"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:845
@@ -2508,7 +2847,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:499
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1107
 msgid "Irongut Helmet"
-msgstr ""
+msgstr "Casco de tripadura"
 
 #. [message]: speaker=trader2
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:985
@@ -3901,7 +4240,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:45
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9549
 msgid "Twinkling Sword"
-msgstr ""
+msgstr "Espada centelleante"
 
 #. [object]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:28
@@ -4070,7 +4409,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios2/06_The_Army_of_Darkness.cfg:273
 #: Legend_of_the_Invincibles/utils/item_list.cfg:175
 msgid "Leather Armour"
-msgstr ""
+msgstr "Armadura de cuero"
 
 #. [side]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:253
@@ -4133,7 +4472,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:658
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9539
 msgid "Sword of Krux"
-msgstr ""
+msgstr "Espada de Krux"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:350
@@ -4152,7 +4491,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:616
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:898
 msgid "Store it."
-msgstr ""
+msgstr "Guárdalo"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:368
@@ -4256,7 +4595,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/global_events.cfg:615
 #: Legend_of_the_Invincibles/utils/help.cfg:2596
 msgid "Items"
-msgstr ""
+msgstr "Objetos"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:549
@@ -24402,7 +24741,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:266
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:270
 msgid "nightstalk"
-msgstr ""
+msgstr "acecho"
 
 #. [hides]: id=nightstalk
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:208
@@ -24421,7 +24760,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:212
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:271
 msgid "female^nightstalk"
-msgstr ""
+msgstr "acecho"
 
 #. [message]: speaker=unit
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:388
@@ -25105,7 +25444,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/25_Prison.cfg:170
 #: Legend_of_the_Invincibles/utils/item_list.cfg:934
 msgid "Nightstalker"
-msgstr ""
+msgstr "Acechador"
 
 #. [message]: speaker=trader
 #. [object]
@@ -29065,16 +29404,6 @@ msgstr ""
 #. [set_menu_item]: id=jrfdscx
 #: Legend_of_the_Invincibles/scenarios6/test_scenario.cfg:77
 msgid "Advance"
-msgstr ""
-
-#. [effect]
-#. [attack]: type=pierce
-#: Legend_of_the_Invincibles/scenarios6/test_scenario.cfg:137
-#: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:60
-#: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:344
-#: Legend_of_the_Invincibles/units/Predator.cfg:248
-#: Legend_of_the_Invincibles/utils/global_events.cfg:363
-msgid "execution"
 msgstr ""
 
 #. [side]: type=Dragon Rider, id=Morzan
@@ -36319,7 +36648,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/amla.cfg:398
 #: Legend_of_the_Invincibles/utils/amla.cfg:4512
 msgid "shadow wave"
-msgstr ""
+msgstr "ola sombría"
 
 #. [trait]: id=craving
 #: Legend_of_the_Invincibles/scenarios8/08_The_Desert.cfg:550
@@ -36407,7 +36736,7 @@ msgstr ""
 #. [message]: speaker=trader
 #: Legend_of_the_Invincibles/scenarios8/08_The_Desert.cfg:824
 msgid "The Gloomy Amulet"
-msgstr ""
+msgstr "Amuleto sombrío"
 
 #. [message]: speaker=trader
 #. [object]
@@ -44101,7 +44430,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:18
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2483
 msgid "Fencer"
-msgstr ""
+msgstr "Esgrimidor"
 
 #. [unit_type]: id=09 Fencer, race=human
 #. [unit_type]: id=Demon Infiltrator Fencer, race=demon-loti
@@ -44138,7 +44467,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1939
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1981
 msgid "saber"
-msgstr ""
+msgstr "sable"
 
 #. [advancement]: id=sword
 #. [advancement]: id=sword2
@@ -44247,7 +44576,7 @@ msgstr ""
 #. [variation]: race=human
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:453
 msgid "Duelist"
-msgstr ""
+msgstr "Duelista"
 
 #. [variation]: race=human
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:469
@@ -44285,7 +44614,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:436
 #: Legend_of_the_Invincibles/utils/items.cfg:70
 msgid "crossbow"
-msgstr ""
+msgstr "ballesta"
 
 #. [advancement]: id=crossbow
 #. [advancement]: id=crossbow2
@@ -44308,7 +44637,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Orcish_Strafer.cfg:419
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:736
 msgid "better with crossbow"
-msgstr ""
+msgstr "mejor con ballesta"
 
 #. [advancement]: id=block2
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:824
@@ -44319,7 +44648,7 @@ msgstr ""
 #. [variation]: race=human
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:857
 msgid "Master at Arms"
-msgstr ""
+msgstr "Maestro de armas"
 
 #. [variation]: race=human
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:872
@@ -44370,7 +44699,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1152
 #: Legend_of_the_Invincibles/utils/items.cfg:61
 msgid "staff"
-msgstr ""
+msgstr "bastón"
 
 #. [attack]: type=fire
 #. [effect]: type=fire
@@ -44406,7 +44735,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5460
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9098
 msgid "fireball"
-msgstr ""
+msgstr "bola de fuego"
 
 #. [unit_type]: id=Abaddon, race=demon-loti
 #: Legend_of_the_Invincibles/units/Abaddon.cfg:4
@@ -44426,7 +44755,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Dwarvish_Hero.cfg:111
 #: Legend_of_the_Invincibles/units/Siege_Troll.cfg:34
 msgid "hammer"
-msgstr ""
+msgstr "martillo"
 
 #. [attack]: type=cold
 #. [effect]: type=cold
@@ -44435,7 +44764,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:150
 #: Legend_of_the_Invincibles/units/demons_race.cfg:868
 msgid "infernal chill"
-msgstr ""
+msgstr "ola de frío"
 
 #. [unit_type]: id=Abomination, race=undead
 #: Legend_of_the_Invincibles/units/Abomination.cfg:4
@@ -44460,7 +44789,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Flies.cfg:39
 #: Legend_of_the_Invincibles/units/Ice_Dragon.cfg:52
 msgid "bite"
-msgstr ""
+msgstr "mordisco"
 
 #. [advancement]: id=bite1
 #. [advancement]: id=bite3
@@ -44515,7 +44844,7 @@ msgstr ""
 #. [set_specials]
 #: Legend_of_the_Invincibles/units/Abomination.cfg:244
 msgid "Ghoul"
-msgstr ""
+msgstr "Gul"
 
 #. [advancement]: id=despair
 #. [advancement]: id=despair2
@@ -44609,7 +44938,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Werewolf_Rider.cfg:332
 #: Legend_of_the_Invincibles/units/Zombie_Rider.cfg:290
 msgid "faster"
-msgstr ""
+msgstr "rápido"
 
 #. [unit_type]: id=Akula, race=human
 #. [unit_type]: id=Efraim_lich_weakened, race=undead
@@ -44618,7 +44947,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Efraim_lich-weakened.cfg:4
 #: Legend_of_the_Invincibles/utils/utils.cfg:1118
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #. [unit_type]: id=Akula, race=human
 #: Legend_of_the_Invincibles/units/Akula.cfg:63
@@ -44687,7 +45016,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1889
 #: Legend_of_the_Invincibles/utils/items.cfg:55
 msgid "sword"
-msgstr ""
+msgstr "espada"
 
 #. [advancement]: id=sword
 #. [advancement]: id=sword2
@@ -44845,7 +45174,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Spell_Eater.cfg:57
 #: Legend_of_the_Invincibles/units/Zombie_Rider.cfg:43
 msgid "touch"
-msgstr ""
+msgstr "toque"
 
 #. [attack]: type=cold
 #. [effect]: type=cold
@@ -45886,7 +46215,7 @@ msgstr ""
 #. [advancement]: id=knife1
 #: Legend_of_the_Invincibles/units/Delly_lich.cfg:636
 msgid "dealing more damage with knives"
-msgstr ""
+msgstr "más daño con cuchillos"
 
 #. [advancement]: id=knife2
 #. [advancement]: id=knife
@@ -45900,7 +46229,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Efraim_lich.cfg:1378
 #: Legend_of_the_Invincibles/units/Exterminator.cfg:381
 msgid "faster with knives"
-msgstr ""
+msgstr "más rápido con cuchillos"
 
 #. [advancement]: id=knife3
 #. [advancement]: id=knives2_precision
@@ -45909,7 +46238,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Efraim_lich-weakened.cfg:573
 #: Legend_of_the_Invincibles/units/Efraim_lich.cfg:1280
 msgid "more precise with knives"
-msgstr ""
+msgstr "más preciso con cuchillos"
 
 #. [advancement]: id=knife4
 #. [advancement]: id=knife2
@@ -45935,7 +46264,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Efraim_lich.cfg:1363
 #: Legend_of_the_Invincibles/units/Exterminator.cfg:413
 msgid "better with knives"
-msgstr ""
+msgstr "mejor con cuchillos"
 
 #. [advancement]: id=nightstalk
 #: Legend_of_the_Invincibles/units/Delly_lich.cfg:696
@@ -45963,7 +46292,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Vritra.cfg:1569
 #: Legend_of_the_Invincibles/units/Vritra_later.cfg:1027
 msgid "better at defending"
-msgstr ""
+msgstr "mejor defendiendo"
 
 #. [advancement]: id=parry
 #: Legend_of_the_Invincibles/units/Delly_lich.cfg:818
@@ -45983,7 +46312,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Swordmaster.cfg:209
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1194
 msgid "parry"
-msgstr ""
+msgstr "desviar"
 
 #. [advancement]: id=parry2
 #: Legend_of_the_Invincibles/units/Delly_lich.cfg:842
@@ -45992,12 +46321,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:828
 #: Legend_of_the_Invincibles/units/Swordmaster.cfg:226
 msgid "parrying better"
-msgstr ""
+msgstr "desviar mejor"
 
 #. [unit_type]: id=Delly_start, race=human
 #: Legend_of_the_Invincibles/units/Delly_start.cfg:4
 msgid "Princess of Shadows"
-msgstr ""
+msgstr "Princesa de sombras"
 
 #. [unit_type]: id=Delly_start, race=human
 #: Legend_of_the_Invincibles/units/Delly_start.cfg:18
@@ -46058,7 +46387,7 @@ msgstr ""
 #. [unit_type]: id=Demon, race=demon-loti
 #: Legend_of_the_Invincibles/units/Demon.cfg:4
 msgid "Demon"
-msgstr ""
+msgstr "Demonio"
 
 #. [unit_type]: id=Demon, race=demon-loti
 #. [unit_type]: id=Demon Despot, race=demon-loti
@@ -52760,12 +53089,12 @@ msgstr ""
 #. [resistance]: id=adamant
 #: Legend_of_the_Invincibles/utils/abilities.cfg:20
 msgid "adamant"
-msgstr ""
+msgstr "duro"
 
 #. [resistance]: id=adamant
 #: Legend_of_the_Invincibles/utils/abilities.cfg:21
 msgid "female^adamant"
-msgstr ""
+msgstr "dura"
 
 #. [resistance]: id=adamant
 #: Legend_of_the_Invincibles/utils/abilities.cfg:22
@@ -52791,12 +53120,12 @@ msgstr ""
 #. [resistance]: id=exile
 #: Legend_of_the_Invincibles/utils/abilities.cfg:52
 msgid "exile"
-msgstr ""
+msgstr "exilio"
 
 #. [resistance]: id=exile
 #: Legend_of_the_Invincibles/utils/abilities.cfg:53
 msgid "female^exile"
-msgstr ""
+msgstr "exilio"
 
 #. [resistance]: id=exile
 #: Legend_of_the_Invincibles/utils/abilities.cfg:54
@@ -52815,12 +53144,12 @@ msgstr ""
 #. [resistance]: id=zeal
 #: Legend_of_the_Invincibles/utils/abilities.cfg:95
 msgid "zeal"
-msgstr ""
+msgstr "celo"
 
 #. [resistance]: id=zeal
 #: Legend_of_the_Invincibles/utils/abilities.cfg:96
 msgid "female^zeal"
-msgstr ""
+msgstr "celo"
 
 #. [resistance]: id=zeal
 #: Legend_of_the_Invincibles/utils/abilities.cfg:97
@@ -52832,12 +53161,12 @@ msgstr ""
 #. [resistance]: id=careful
 #: Legend_of_the_Invincibles/utils/abilities.cfg:107
 msgid "careful"
-msgstr ""
+msgstr "cuidadoso"
 
 #. [resistance]: id=careful
 #: Legend_of_the_Invincibles/utils/abilities.cfg:108
 msgid "female^careful"
-msgstr ""
+msgstr "cuidadosa"
 
 #. [resistance]: id=careful
 #: Legend_of_the_Invincibles/utils/abilities.cfg:109
@@ -52878,12 +53207,12 @@ msgstr ""
 #. [resistance]: id=shield
 #: Legend_of_the_Invincibles/utils/abilities.cfg:140
 msgid "shield ("
-msgstr ""
+msgstr "blindado ("
 
 #. [resistance]: id=shield
 #: Legend_of_the_Invincibles/utils/abilities.cfg:141
 msgid "female^shield ("
-msgstr ""
+msgstr "blindada ("
 
 #. [resistance]: id=shield
 #: Legend_of_the_Invincibles/utils/abilities.cfg:142
@@ -52900,12 +53229,12 @@ msgstr ""
 #. [resistance]: id=antimagic
 #: Legend_of_the_Invincibles/utils/abilities.cfg:159
 msgid "antimagic ("
-msgstr ""
+msgstr "antimágico ("
 
 #. [resistance]: id=antimagic
 #: Legend_of_the_Invincibles/utils/abilities.cfg:160
 msgid "female^antimagic ("
-msgstr ""
+msgstr "antimágica ("
 
 #. [resistance]: id=antimagic
 #: Legend_of_the_Invincibles/utils/abilities.cfg:161
@@ -52937,12 +53266,12 @@ msgstr ""
 #. [leadership]: id=anathema
 #: Legend_of_the_Invincibles/utils/abilities.cfg:205
 msgid "anathema"
-msgstr ""
+msgstr "anatema"
 
 #. [leadership]: id=anathema
 #: Legend_of_the_Invincibles/utils/abilities.cfg:206
 msgid "female^anathema"
-msgstr ""
+msgstr "anatema"
 
 #. [leadership]: id=anathema
 #: Legend_of_the_Invincibles/utils/abilities.cfg:207
@@ -52955,12 +53284,12 @@ msgstr ""
 #. [leadership]: id=antisocial
 #: Legend_of_the_Invincibles/utils/abilities.cfg:221
 msgid "antisocial"
-msgstr ""
+msgstr "antisocial"
 
 #. [leadership]: id=antisocial
 #: Legend_of_the_Invincibles/utils/abilities.cfg:222
 msgid "female^antisocial"
-msgstr ""
+msgstr "antisocial"
 
 #. [leadership]: id=antisocial
 #: Legend_of_the_Invincibles/utils/abilities.cfg:223
@@ -52979,12 +53308,12 @@ msgstr ""
 #. [leadership]: id=lesser antisocial
 #: Legend_of_the_Invincibles/utils/abilities.cfg:238
 msgid "lesser antisocial"
-msgstr ""
+msgstr "menos antisocial"
 
 #. [leadership]: id=lesser antisocial
 #: Legend_of_the_Invincibles/utils/abilities.cfg:239
 msgid "female^lesser antisocial"
-msgstr ""
+msgstr "menos antisocial"
 
 #. [leadership]: id=lesser antisocial
 #: Legend_of_the_Invincibles/utils/abilities.cfg:240
@@ -52996,12 +53325,12 @@ msgstr ""
 #. [leadership]: id=despair
 #: Legend_of_the_Invincibles/utils/abilities.cfg:254
 msgid "despair ("
-msgstr ""
+msgstr "desesperado ("
 
 #. [leadership]: id=despair
 #: Legend_of_the_Invincibles/utils/abilities.cfg:255
 msgid "female^despair ("
-msgstr ""
+msgstr "desesperada ("
 
 #. [leadership]: id=despair
 #: Legend_of_the_Invincibles/utils/abilities.cfg:256
@@ -53018,12 +53347,12 @@ msgstr ""
 #. [resistance]: id=conviction
 #: Legend_of_the_Invincibles/utils/abilities.cfg:271
 msgid "conviction ("
-msgstr ""
+msgstr "convición ("
 
 #. [resistance]: id=conviction
 #: Legend_of_the_Invincibles/utils/abilities.cfg:272
 msgid "female^conviction ("
-msgstr ""
+msgstr "convición ("
 
 #. [resistance]: id=conviction
 #: Legend_of_the_Invincibles/utils/abilities.cfg:273
@@ -53043,12 +53372,12 @@ msgstr ""
 #. [resistance]: id=frail tide
 #: Legend_of_the_Invincibles/utils/abilities.cfg:289
 msgid "frail tide ("
-msgstr ""
+msgstr "frágil marea ("
 
 #. [resistance]: id=frail tide
 #: Legend_of_the_Invincibles/utils/abilities.cfg:290
 msgid "female^frail tide ("
-msgstr ""
+msgstr "frágil marea ("
 
 #. [resistance]: id=frail tide
 #: Legend_of_the_Invincibles/utils/abilities.cfg:291
@@ -53061,7 +53390,7 @@ msgstr ""
 #. [berserk]: id=lesser berserk {COUNT}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:304
 msgid "lesser berserk ("
-msgstr ""
+msgstr "menos frenesí ("
 
 #. [berserk]: id=lesser berserk {COUNT}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:305
@@ -53078,12 +53407,12 @@ msgstr ""
 #. [illuminates]: id=darkens
 #: Legend_of_the_Invincibles/utils/abilities.cfg:317
 msgid "darkens"
-msgstr ""
+msgstr "oscurece"
 
 #. [illuminates]: id=darkens
 #: Legend_of_the_Invincibles/utils/abilities.cfg:318
 msgid "female^darkens"
-msgstr ""
+msgstr "oscurece"
 
 #. [illuminates]: id=darkens
 #: Legend_of_the_Invincibles/utils/abilities.cfg:319
@@ -53221,7 +53550,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:440
 #: Legend_of_the_Invincibles/utils/abilities.cfg:490
 msgid "chaotic"
-msgstr ""
+msgstr "caótico"
 
 #. [damage]: id=chaotic
 #: Legend_of_the_Invincibles/utils/abilities.cfg:441
@@ -53232,7 +53561,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:465
 #: Legend_of_the_Invincibles/utils/abilities.cfg:501
 msgid "lawful"
-msgstr ""
+msgstr "legal"
 
 #. [damage]: id=lawful
 #: Legend_of_the_Invincibles/utils/abilities.cfg:466
@@ -53365,7 +53694,7 @@ msgstr ""
 #. [chance_to_hit]: id=focused
 #: Legend_of_the_Invincibles/utils/abilities.cfg:610
 msgid "focused"
-msgstr ""
+msgstr "enfocado"
 
 #. [chance_to_hit]: id=focused
 #: Legend_of_the_Invincibles/utils/abilities.cfg:611
@@ -53375,7 +53704,7 @@ msgstr ""
 #. [chance_to_hit]: id=guided
 #: Legend_of_the_Invincibles/utils/abilities.cfg:619
 msgid "guided"
-msgstr ""
+msgstr "guiado"
 
 #. [chance_to_hit]: id=guided
 #: Legend_of_the_Invincibles/utils/abilities.cfg:620
@@ -53400,7 +53729,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:640
 #: Legend_of_the_Invincibles/utils/abilities.cfg:641
 msgid "imprecise"
-msgstr ""
+msgstr "impreciso"
 
 #. [chance_to_hit]: id=imprecise
 #: Legend_of_the_Invincibles/utils/abilities.cfg:642
@@ -53710,7 +54039,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:961
 #: Legend_of_the_Invincibles/utils/abilities.cfg:962
 msgid "lesser nightstalk"
-msgstr ""
+msgstr "acecho menor"
 
 #. [hides]: id=lesser nightstalk
 #: Legend_of_the_Invincibles/utils/abilities.cfg:963
@@ -53868,12 +54197,12 @@ msgstr ""
 #. [dummy]: id=cowardice
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1088
 msgid "cowardice"
-msgstr ""
+msgstr "cobarde"
 
 #. [dummy]: id=cowardice
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1089
 msgid "female^cowardice"
-msgstr ""
+msgstr "cobarde"
 
 #. [dummy]: id=cowardice
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1090
@@ -53935,12 +54264,12 @@ msgstr ""
 #. [dummy]: id=lethargy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1125
 msgid "lethargy"
-msgstr ""
+msgstr "letargo"
 
 #. [dummy]: id=lethargy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1126
 msgid "female^lethargy"
-msgstr ""
+msgstr "letargo"
 
 #. [dummy]: id=lethargy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1127
@@ -54004,12 +54333,12 @@ msgstr ""
 #. [dummy]: id=innocence
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1157
 msgid "innocence"
-msgstr ""
+msgstr "inocente"
 
 #. [dummy]: id=innocence
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1158
 msgid "female^innocence"
-msgstr ""
+msgstr "inocente"
 
 #. [dummy]: id=innocence
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1159
@@ -54083,7 +54412,7 @@ msgstr ""
 #. [dummy]: id=pierce
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1201
 msgid "pierce"
-msgstr ""
+msgstr "penetración"
 
 #. [dummy]: id=pierce
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1202
@@ -61865,7 +62194,7 @@ msgstr ""
 #. [set_menu_item]: id=8respec
 #: Legend_of_the_Invincibles/utils/global_events.cfg:642
 msgid "Alter advancement"
-msgstr ""
+msgstr "Cambiar avance"
 
 #. [then]
 #: Legend_of_the_Invincibles/utils/global_events.cfg:710
@@ -61884,7 +62213,7 @@ msgstr ""
 #. [set_menu_item]: id=9help
 #: Legend_of_the_Invincibles/utils/global_events.cfg:821
 msgid "Campaign help"
-msgstr ""
+msgstr "Ayuda de campaña"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/global_events.cfg:825
@@ -61895,17 +62224,17 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/global_events.cfg:829
 msgid "Interface"
-msgstr ""
+msgstr "Interfaz"
 
 #. [option]
 #: Legend_of_the_Invincibles/utils/global_events.cfg:837
 msgid "Walkthroughs"
-msgstr ""
+msgstr "Guía"
 
 #. [option]
 #: Legend_of_the_Invincibles/utils/global_events.cfg:845
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Preguntas más frecuentes"
 
 #. [option]
 #: Legend_of_the_Invincibles/utils/global_events.cfg:853
@@ -61923,7 +62252,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/help.cfg:2581
 #: Legend_of_the_Invincibles/utils/help.cfg:2768
 msgid "Exit"
-msgstr ""
+msgstr "Salir"
 
 #. [then]
 #: Legend_of_the_Invincibles/utils/global_events.cfg:949
@@ -61961,6 +62290,32 @@ msgid ""
 "$advancements_taken\n"
 "$soul_eating"
 msgstr ""
+"\n"
+"<span size='xx-large' weight='bold' underline='single'>$unit.name</"
+"span><span color='#88FCA0' size='x-large'> ($unit.language_name)</span>\n"
+"$desc_prefix\n"
+"<span size='large' weight='bold'>Ataques:</span>\n"
+"$attacks_list\n"
+"\n"
+"<span size='large' weight='bold'>Habilidades:</span>\n"
+"$abilities_list\n"
+"\n"
+"<span size='large' weight='bold'>Resistencias y penetraciones:</span>\n"
+"$resistances_list\n"
+"\n"
+"<span size='large' weight='bold'>Defensas de terreno y costes de movimiento:"
+"</span>\n"
+"$defences_list\n"
+"\n"
+"<span size='large' weight='bold'>Pociones activas:</span>\n"
+"$potions_list\n"
+"\n"
+"<span size='large' weight='bold'>Libros leídos y objetos fijos:</span>\n"
+"$limited_items_list\n"
+"\n"
+"<span size='large' weight='bold'>Avances obtenidos:</span>\n"
+"$advancements_taken\n"
+"$soul_eating"
 
 #. [value]: id=healthy
 #. [trait]: id=healthy
@@ -65320,7 +65675,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1030
 msgid "Steel Helmet"
-msgstr ""
+msgstr "Casco de acero"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1041
@@ -66129,7 +66484,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2354
 msgid "The gloomy Cloak"
-msgstr ""
+msgstr "Capa sombría"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2367
@@ -66152,7 +66507,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2381
 msgid "The gloomy Ring"
-msgstr ""
+msgstr "Anillo sombrío"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2392
@@ -66176,7 +66531,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2410
 msgid "The gloomy Amulet"
-msgstr ""
+msgstr "Amuleto sombrío"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2421
@@ -66778,7 +67133,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3362
 msgid "Blade of Turisas"
-msgstr ""
+msgstr "Hoja de Turisas"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3374
@@ -66892,7 +67247,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3554
 msgid "Coward's Bow"
-msgstr ""
+msgstr "Arco del cobarde"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3566
@@ -67092,7 +67447,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3875
 msgid "Vanquisher's Mithral Armour"
-msgstr ""
+msgstr "Armadura de mithril del vencedor"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3890
@@ -68622,7 +68977,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:6286
 msgid "Rigor Mortis"
-msgstr ""
+msgstr "Rigor mortis"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:6299
@@ -69084,7 +69439,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7199
 msgid "Righteous Cause"
-msgstr ""
+msgstr "Causa justa"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7214
@@ -69094,7 +69449,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7217
 msgid "Unrighteous Cause"
-msgstr ""
+msgstr "Causa injusta"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7227
@@ -70290,62 +70645,62 @@ msgstr ""
 #. [armour]
 #: Legend_of_the_Invincibles/utils/items.cfg:43
 msgid "armour"
-msgstr ""
+msgstr "armadura"
 
 #. [helm]
 #: Legend_of_the_Invincibles/utils/items.cfg:46
 msgid "helm"
-msgstr ""
+msgstr "casco"
 
 #. [gauntlets]
 #: Legend_of_the_Invincibles/utils/items.cfg:49
 msgid "gauntlets"
-msgstr ""
+msgstr "guantes"
 
 #. [boots]
 #: Legend_of_the_Invincibles/utils/items.cfg:52
 msgid "boots"
-msgstr ""
+msgstr "botas"
 
 #. [polearm]
 #: Legend_of_the_Invincibles/utils/items.cfg:82
 msgid "polearm"
-msgstr ""
+msgstr "asta"
 
 #. [claws]
 #: Legend_of_the_Invincibles/utils/items.cfg:91
 msgid "metal claws"
-msgstr ""
+msgstr "garras"
 
 #. [essence]
 #: Legend_of_the_Invincibles/utils/items.cfg:94
 msgid "otherworldly essence"
-msgstr ""
+msgstr "esencia"
 
 #. [amulet]
 #: Legend_of_the_Invincibles/utils/items.cfg:97
 msgid "amulet"
-msgstr ""
+msgstr "amuleto"
 
 #. [ring]
 #: Legend_of_the_Invincibles/utils/items.cfg:100
 msgid "ring"
-msgstr ""
+msgstr "anillo"
 
 #. [cloak]
 #: Legend_of_the_Invincibles/utils/items.cfg:103
 msgid "cloak"
-msgstr ""
+msgstr "capa"
 
 #. [limited]
 #: Legend_of_the_Invincibles/utils/items.cfg:106
 msgid "limited"
-msgstr ""
+msgstr "limitado"
 
 #. [potion]
 #: Legend_of_the_Invincibles/utils/items.cfg:109
 msgid "potion"
-msgstr ""
+msgstr "poción"
 
 #. [damage]: id=redeem 1
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:5
@@ -71435,7 +71790,7 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:492
 msgid "Luminous"
-msgstr ""
+msgstr "Luminoso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:496
@@ -71450,7 +71805,7 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:505
 msgid "Anarchic"
-msgstr ""
+msgstr "Anárquico"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:509
@@ -71465,7 +71820,7 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:517
 msgid "Enchanted"
-msgstr ""
+msgstr "Encantado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:522
@@ -71490,7 +71845,7 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:542
 msgid "Righteous"
-msgstr ""
+msgstr "Justo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:547
@@ -71530,7 +71885,7 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:583
 msgid "Mysterious"
-msgstr ""
+msgstr "Misterioso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:592
@@ -71575,7 +71930,7 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:636
 msgid "Temples"
-msgstr ""
+msgstr "Templos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:641
@@ -71680,22 +72035,22 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:745
 msgid "Vanquisher"
-msgstr ""
+msgstr "Vencedor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:746
 msgid "female^Vanquisher"
-msgstr ""
+msgstr "Vencedora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:753
 msgid "Punisher"
-msgstr ""
+msgstr "Castigador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:754
 msgid "female^Punisher"
-msgstr ""
+msgstr "Castigadora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:757
@@ -71710,12 +72065,12 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:761
 msgid "Liquidator"
-msgstr ""
+msgstr "Liquidador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:762
 msgid "female^Liquidator"
-msgstr ""
+msgstr "Liquidadora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:765
@@ -72200,7 +72555,7 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1119
 msgid "the Righteous"
-msgstr ""
+msgstr "el Justo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1122
