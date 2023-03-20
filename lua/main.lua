@@ -332,6 +332,7 @@ local function unit_information_part_1()
     wml.variables["desc_prefix"] = result
 end
 
+
 -- Some fairly tricky code to make a nicely formatted list of a unit's
 -- attacks.  Most of the code is straightforward, but the specials parsing
 -- requires some familiarity with the WML object to Lua table conversion
@@ -406,10 +407,10 @@ local function unit_information_part_2()
       end
 
       local range
+      local dmgType = _"werd damage type"
+      local _ = wesnoth.textdomain "wesnoth"
       if attack["range"] == "melee" then range = _"melee"
       elseif attack["range"] == "ranged" then range = _"ranged" end
-
-      local dmgType = _"werd damage type"
       if attack["type"] == "blade" then dmgType = _"blade"
       elseif attack["type"] == "impact" then dmgType = _"impact"
       elseif attack["type"] == "pierce" then dmgType = _"pierce"
@@ -539,6 +540,9 @@ end
 -- Create the resistances and penetrations table.  Monospace fonts are key
 -- here to ensure that the columns of our "table" line up properly, since each
 -- character takes up the same amount of space.
+
+local _ = wesnoth.textdomain "wesnoth-loti"
+
 local function unit_information_part_4()
   local function form_one_line(type)
     local resist = 100 - wml.variables["unit.resistance." .. type]
@@ -554,7 +558,7 @@ local function unit_information_part_4()
   end
 
   local result = "<span font_family='monospace' weight='bold' color='#60A0FF'>"
-  ..                               _"	Damage			Resistance		Penetration</span> \n"
+  ..                               _"	Damage			Resistance			Penetration</span> \n"
   .. "<span font_family='monospace'>	" .. _"Blade				" .. form_one_line("blade")
   .. "<span font_family='monospace'>	" .. _"Pierce				" .. form_one_line("pierce")
   .. "<span font_family='monospace'>	" .. _"Impact				" .. form_one_line("impact")
@@ -576,7 +580,7 @@ local function unit_information_part_5()
     local defence = 100 - (wml.variables["unit.defense." .. type] or 0)
     local cost = wml.variables["unit.movement_costs." .. type]
     if cost == nil then
-	return "  none		inaccessible</span> \n"
+	return "   none		inaccessible</span> \n"
     end
     if defence > 100 then -- def cap
 	    return string.format("%6d%% cap		%6d</span> \n", math.floor(200 - defence), math.floor(cost))
@@ -587,21 +591,21 @@ local function unit_information_part_5()
 
   local result = "<span font_family='monospace' weight='bold' color='#60A0FF'>"
   ..                               _"	Location				Defence		Movement cost</span> \n"
-  .. "<span font_family='monospace'>" .. _"In forests					" .. form_one_line("forest")
-  .. "<span font_family='monospace'>" .. _"In frozen places			" .. form_one_line("frozen")
-  .. "<span font_family='monospace'>" .. _"On flat terrains			" .. form_one_line("flat")
+  .. "<span font_family='monospace'>" .. _"In forests				" .. form_one_line("forest")
+  .. "<span font_family='monospace'>" .. _"In frozen places		" .. form_one_line("frozen")
+  .. "<span font_family='monospace'>" .. _"On flat terrains		" .. form_one_line("flat")
   .. "<span font_family='monospace'>" .. _"In caves					" .. form_one_line("cave")
-  .. "<span font_family='monospace'>" .. _"In mushroom grooves		" .. form_one_line("fungus")
-  .. "<span font_family='monospace'>" .. _"In villages					" .. form_one_line("village")
-  .. "<span font_family='monospace'>" .. _"In castles					" .. form_one_line("castle")
-  .. "<span font_family='monospace'>" .. _"In shallow waters			" .. form_one_line("shallow_water")
-  .. "<span font_family='monospace'>" .. _"On coastal reefs			" .. form_one_line("reef")
-  .. "<span font_family='monospace'>" .. _"In deep water				" .. form_one_line("deep_water")
+  .. "<span font_family='monospace'>" .. _"In mushroom grooves	" .. form_one_line("fungus")
+  .. "<span font_family='monospace'>" .. _"In villages				" .. form_one_line("village")
+  .. "<span font_family='monospace'>" .. _"In castles				" .. form_one_line("castle")
+  .. "<span font_family='monospace'>" .. _"In shallow waters		" .. form_one_line("shallow_water")
+  .. "<span font_family='monospace'>" .. _"On coastal reefs		" .. form_one_line("reef")
+  .. "<span font_family='monospace'>" .. _"In deep water			" .. form_one_line("deep_water")
   .. "<span font_family='monospace'>" .. _"On hills					" .. form_one_line("hills")
   .. "<span font_family='monospace'>" .. _"On mountains				" .. form_one_line("mountains")
   .. "<span font_family='monospace'>" .. _"On sands					" .. form_one_line("sand")
-  .. "<span font_family='monospace'>" .. _"Above unwalkable places	" .. form_one_line("unwalkable")
-  .. "<span font_family='monospace'>" .. _"Inside impassable walls	" .. form_one_line("impassable")
+  .. "<span font_family='monospace'>" .. _"Above unwalkable places" .. form_one_line("unwalkable")
+  .. "<span font_family='monospace'>" .. _"Inside impassable walls" .. form_one_line("impassable")
 
   -- Remove the last newline, just to make things compact
   result = string.sub(tostring(result), 1, -2)
