@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2023-03-20 05:11 UTC\n"
-"PO-Revision-Date: 2023-03-20 06:15+0100\n"
+"PO-Revision-Date: 2023-03-21 02:15+0100\n"
 "Last-Translator: Toranks <toranksmervat@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -305,11 +305,13 @@ msgid ""
 "You can transmute some number of gems\n"
 "to get a new random gem"
 msgstr ""
+"Puedes transmutar una cierta cantidad de gemas\n"
+"para obtener una nueva gema aleatoria"
 
 #. [lua]: loti.gem.get_crafting_dialog
 #: Legend_of_the_Invincibles/lua/crafting.lua:267
 msgid "Choose between armour and weapon"
-msgstr ""
+msgstr "Elige entre armadura y arma"
 
 #. [lua]: loti.gem.get_crafting_dialog
 #: Legend_of_the_Invincibles/lua/crafting.lua:282
@@ -348,7 +350,7 @@ msgstr "Transmutar gemas"
 #: Legend_of_the_Invincibles/lua/inventory/items.lua:25
 #: Legend_of_the_Invincibles/utils/help.cfg:2632
 msgid "Crafting"
-msgstr "Fabricando"
+msgstr "Fabricar"
 
 #. [lua]: populate_item
 #: Legend_of_the_Invincibles/lua/crafting.lua:570
@@ -705,7 +707,7 @@ msgstr "Esta unidad no puede equipar esos objetos.\n"
 #. [lua]: onshow
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:513
 msgid "They are unworthy of a mighty "
-msgstr "Son indignos de un poderoso "
+msgstr "No pueden ser manejados por "
 
 #. [lua]: unequip
 #: Legend_of_the_Invincibles/lua/inventory/storage.lua:525
@@ -803,206 +805,206 @@ msgstr "irrelevante"
 
 #: Legend_of_the_Invincibles/lua/items.lua:44
 msgid "Resistance to blade"
-msgstr ""
+msgstr "Resistencia a corte"
 
 #: Legend_of_the_Invincibles/lua/items.lua:44
 msgid "Resistance to pierce"
-msgstr ""
+msgstr "Resistencia a penetración"
 
 #: Legend_of_the_Invincibles/lua/items.lua:44
 msgid "Resistance to impact"
-msgstr ""
+msgstr "Resistencia a impacto"
 
 #: Legend_of_the_Invincibles/lua/items.lua:44
 msgid "Resistance to fire"
-msgstr ""
+msgstr "Resistencia al fuego"
 
 #: Legend_of_the_Invincibles/lua/items.lua:44
 msgid "Resistance to cold"
-msgstr ""
+msgstr "Resistencia al frío"
 
 #: Legend_of_the_Invincibles/lua/items.lua:44
 msgid "Resistance to arcane"
-msgstr ""
+msgstr "Resistencia a arcano"
 
 #: Legend_of_the_Invincibles/lua/items.lua:46
 msgid "Enemy resistances to blade"
-msgstr ""
+msgstr "Resistencia del enemigo a corte"
 
 #: Legend_of_the_Invincibles/lua/items.lua:46
 msgid "Enemy resistances to pierce"
-msgstr ""
+msgstr "Resistencia del enemigo a penetración"
 
 #: Legend_of_the_Invincibles/lua/items.lua:46
 msgid "Enemy resistances to impact"
-msgstr ""
+msgstr "Resistencia del enemigo a impacto"
 
 #: Legend_of_the_Invincibles/lua/items.lua:46
 msgid "Enemy resistances to fire"
-msgstr ""
+msgstr "Resistencia del enemigo a fuego"
 
 #: Legend_of_the_Invincibles/lua/items.lua:46
 msgid "Enemy resistances to cold"
-msgstr ""
+msgstr "Resistencia del enemigo a frío"
 
 #: Legend_of_the_Invincibles/lua/items.lua:46
 msgid "Enemy resistances to arcane"
-msgstr ""
+msgstr "Resistencia del enemigo a arcano"
 
 #. [lua]: loti.item.describe_item
 #: Legend_of_the_Invincibles/lua/items.lua:595
 msgid "Increases physical resistances by "
-msgstr ""
+msgstr "Aumenta resistencia física en "
 
 #. [lua]: loti.item.describe_item
 #: Legend_of_the_Invincibles/lua/items.lua:597
 msgid "Decreases physical resistances by "
-msgstr ""
+msgstr "Disminuye resistencia física en "
 
 #. [lua]: describe_damage_modification
 #: Legend_of_the_Invincibles/lua/items.lua:604
 msgid "Damage increased by "
-msgstr ""
+msgstr "Daño aumentado en "
 
 #. [lua]: describe_damage_modification
 #: Legend_of_the_Invincibles/lua/items.lua:606
 msgid "Damage decreased by "
-msgstr ""
+msgstr "Daño disminuido en "
 
 #. [lua]: describe_damage_modification
 #: Legend_of_the_Invincibles/lua/items.lua:612
 msgid "% (melee weapons only)"
-msgstr ""
+msgstr "% (sólo armas melé)"
 
 #. [lua]: describe_damage_modification
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:613
 #: Legend_of_the_Invincibles/lua/items.lua:709
 msgid " (melee weapons only)"
-msgstr ""
+msgstr "(sólo armas melé)"
 
 #. [lua]: describe_damage_modification
 #: Legend_of_the_Invincibles/lua/items.lua:614
 msgid "% (ranged weapons only)"
-msgstr ""
+msgstr "% (sólo armas a distancia)"
 
 #. [lua]: describe_damage_modification
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:615
 #: Legend_of_the_Invincibles/lua/items.lua:710
 msgid " (ranged weapons only)"
-msgstr ""
+msgstr "(sólo armas a distancia)"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:646
 msgid "% more attacks"
-msgstr ""
+msgstr "% más ataques"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:646
 msgid "% fewer attacks"
-msgstr ""
+msgstr "% menos ataques"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " more attacks"
-msgstr ""
+msgstr " más golpes"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " more attack"
-msgstr ""
+msgstr " más ataque"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " fewer attacks"
-msgstr ""
+msgstr " menos golpes"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " fewer attack"
-msgstr ""
+msgstr " menos ataque"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:656
 msgid "Merges attacks"
-msgstr ""
+msgstr "Fusiona ataques"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:660
 msgid "Sets weapon damage type to fire"
-msgstr ""
+msgstr "Cambia el tipo de daño del arma a fuego"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:661
 msgid "Sets weapon damage type to cold"
-msgstr ""
+msgstr "Cambia el tipo de daño del arma a frío"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:662
 msgid "Sets weapon damage type to arcane"
-msgstr ""
+msgstr "Cambia el tipo de daño del arma a arcano"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:663
 msgid "Sets weapon damage type to blade"
-msgstr ""
+msgstr "Cambia el tipo de daño del arma a corte"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:664
 msgid "Sets weapon damage type to impact"
-msgstr ""
+msgstr "Cambia el tipo de daño del arma a impacto"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:665
 msgid "Sets weapon damage type to pierce"
-msgstr ""
+msgstr "Cambia el tipo de daño del arma a penetración"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:666
 msgid "Sets weapon damage type to lightning"
-msgstr ""
+msgstr "Cambia el tipo de daño del arma a rayo"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:670
 msgid "Sucks "
-msgstr ""
+msgstr "Absorbe "
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:670
 #: Legend_of_the_Invincibles/lua/items.lua:674
 msgid " health from targets with each hit"
-msgstr ""
+msgstr " de vida de los objetivos con cada golpe"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:674
 msgid "Spells suck "
-msgstr ""
+msgstr "Hechizo que absorbe "
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:678
 msgid "% chance to strike a devastating blow"
-msgstr ""
+msgstr "% de probabilidad de asestar un golpe devastador"
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:703
 msgid "New weapon special: "
-msgstr ""
+msgstr "Nuevo especial de arma: "
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:713
 msgid "Damage of spells increased by "
-msgstr ""
+msgstr "El daño de hechizos aumentado en "
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:713
 #: Legend_of_the_Invincibles/lua/items.lua:717
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:717
@@ -1022,7 +1024,7 @@ msgstr ""
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:739
 msgid "New ability: "
-msgstr ""
+msgstr "Nueva habilidad: "
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:750
@@ -1032,7 +1034,7 @@ msgstr ""
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:752
 msgid " more movement points"
-msgstr ""
+msgstr " más puntos de movimiento"
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:754
@@ -1062,7 +1064,7 @@ msgstr ""
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:767
 msgid " more hitpoints"
-msgstr ""
+msgstr " más PV"
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:769
@@ -1072,7 +1074,7 @@ msgstr ""
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:769
 msgid " fewer hitpoints"
-msgstr ""
+msgstr " menos PV"
 
 #. [lua]: describe
 #: Legend_of_the_Invincibles/lua/items.lua:777
@@ -1358,7 +1360,7 @@ msgstr ""
 #. [lua]: form_one_line
 #: Legend_of_the_Invincibles/lua/main.lua:561
 msgid "\tDamage\t\t\tResistance\t\t\tPenetration</span> \n"
-msgstr "\tDaño\t\t\tResistencia\t\tPenetración</span> \n"
+msgstr "\tDaño\t\t\tResistencia\t\t\tPenetración</span> \n"
 
 #. [lua]: form_one_line
 #: Legend_of_the_Invincibles/lua/main.lua:562
@@ -1480,7 +1482,7 @@ msgstr "Tras impenetrable\t\t"
 #: Legend_of_the_Invincibles/units/Predator.cfg:248
 #: Legend_of_the_Invincibles/utils/global_events.cfg:363
 msgid "execution"
-msgstr ""
+msgstr "ejecución"
 
 #. [lua]: loti.util.can_equip_item
 #: Legend_of_the_Invincibles/lua/main.lua:922
@@ -1853,7 +1855,7 @@ msgstr ""
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:224
 msgid "Shadow wave (can become a powerful draining ability)"
-msgstr ""
+msgstr "a"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:226
 msgid "Shadow wave"
@@ -2282,14 +2284,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:485
 #: Legend_of_the_Invincibles/units/Champion.cfg:4
 msgid "Champion"
-msgstr ""
+msgstr "Campeón"
 
 #. [option]
 #. [unit_type]: id=Champion Bowman, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:492
 #: Legend_of_the_Invincibles/units/Champion_Bowman.cfg:4
 msgid "Champion Bowman"
-msgstr ""
+msgstr "Campeón arquero"
 
 #. [option]
 #. [unit_type]: id=Chaos Rider, race=human
@@ -2459,7 +2461,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:666
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:4
 msgid "Shadowalker"
-msgstr ""
+msgstr "Andabrumas"
 
 #. [option]
 #. [unit_type]: id=Shadow Prince, race=human
@@ -2794,7 +2796,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:497
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2102
 msgid "Rherraent's Armour"
-msgstr ""
+msgstr "Armadura de Rherraent"
 
 #. [message]: speaker=trader2
 #. [message]: speaker=trader
@@ -4265,7 +4267,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Uria_avatar.cfg:358
 #: Legend_of_the_Invincibles/utils/items.cfg:73
 msgid "knife"
-msgstr ""
+msgstr "cuchillo"
 
 #. [scenario]: id=00_Tutorial
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:72
@@ -18129,7 +18131,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios3/10_Gehenna.cfg:100
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1468
 msgid "absorbs (1)"
-msgstr ""
+msgstr "absorbe (1)"
 
 #. [damage]: id=achilles absorb
 #: Legend_of_the_Invincibles/scenarios3/10_Gehenna.cfg:101
@@ -48438,7 +48440,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Grim_Knight.cfg:235
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1073
 msgid "knockback"
-msgstr ""
+msgstr "empujón"
 
 #. [advancement]: id=axe
 #. [advancement]: id=axe2
@@ -50244,7 +50246,7 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:311
 msgid "female^Shadowalker"
-msgstr ""
+msgstr "Andabrumas"
 
 #. [advancement]: id=magic
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:581
@@ -54560,7 +54562,7 @@ msgstr ""
 #. [dummy]: id=lesser evisceration
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1299
 msgid "lesser evisceration"
-msgstr ""
+msgstr "evisceración menor"
 
 #. [dummy]: id=lesser evisceration
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1300
@@ -54572,7 +54574,7 @@ msgstr ""
 #. [dummy]: id=evisceration
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1306
 msgid "evisceration"
-msgstr ""
+msgstr "evisceración"
 
 #. [dummy]: id=evisceration
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1307
@@ -54584,7 +54586,7 @@ msgstr ""
 #. [dummy]: id=greater evisceration
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1313
 msgid "greater evisceration"
-msgstr ""
+msgstr "gran evisceración"
 
 #. [dummy]: id=greater evisceration
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1314
@@ -54603,7 +54605,7 @@ msgstr ""
 #. [dummy]: id=flaming radiance
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1327
 msgid "flaming radiance"
-msgstr ""
+msgstr "llameante"
 
 #. [dummy]: id=flaming radiance
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1328
@@ -54629,7 +54631,7 @@ msgstr ""
 #. [dummy]: id=immune to poison
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1341
 msgid "immune to poison"
-msgstr ""
+msgstr "inmune a veneno"
 
 #. [dummy]: id=immune to poison
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1342
@@ -65203,7 +65205,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:123
 msgid "Iron Armour"
-msgstr ""
+msgstr "Armadura de hierro"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:135
@@ -65339,7 +65341,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:410
 msgid "Flaming Sword"
-msgstr ""
+msgstr "Espada llameante"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:421
@@ -66255,7 +66257,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2065
 msgid "Rherraent's Sword"
-msgstr ""
+msgstr "Espada de Rherraent"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2079
@@ -66313,7 +66315,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2151
 msgid "Rherraent's Helm"
-msgstr ""
+msgstr "Casco de Rherraent"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2167
@@ -66337,7 +66339,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2182
 msgid "Rherraent's Ring"
-msgstr ""
+msgstr "Anillo de Rherraent"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2192
@@ -66769,7 +66771,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2822
 msgid "Mountain Trek"
-msgstr ""
+msgstr "Botas de montaña"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2843
@@ -67729,7 +67731,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4373
 msgid "Steps to Perdition"
-msgstr ""
+msgstr "Pasos a la perdición"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4391
@@ -67741,7 +67743,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4394
 msgid "Relentless Fury"
-msgstr ""
+msgstr "Furia implacable"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4409
@@ -67817,7 +67819,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4518
 msgid "False Paradise"
-msgstr ""
+msgstr "Falso paraíso"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4536
@@ -67841,7 +67843,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4564
 msgid "Cursed Memories"
-msgstr ""
+msgstr "Memorias malditas"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4578
@@ -67991,7 +67993,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4813
 msgid "Fist of Anarchy"
-msgstr ""
+msgstr "Puño de anarquía"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4826
@@ -68011,7 +68013,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4848
 msgid "Dark Sarcasm"
-msgstr ""
+msgstr "Sarcasmo oscuro"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4863
@@ -68033,7 +68035,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4883
 msgid "Avenging Fire"
-msgstr ""
+msgstr "Fuego vengador"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4899
@@ -68057,7 +68059,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4926
 msgid "Black Raptor"
-msgstr ""
+msgstr "Rapaz negra"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4944
@@ -68096,7 +68098,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4982
 msgid "Iridium"
-msgstr ""
+msgstr "Iridio"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4992
@@ -68108,7 +68110,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4995
 msgid "Potion of Sacrifice"
-msgstr ""
+msgstr "Poción de sacrificio"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4997
@@ -68126,7 +68128,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5012
 msgid "Rationality"
-msgstr ""
+msgstr "Racionalidad"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5022
@@ -68148,7 +68150,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5040
 msgid "Redshirt Armour"
-msgstr ""
+msgstr "Armadura roja"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5062
@@ -69621,7 +69623,7 @@ msgstr ""
 #. [effect]: type=fire
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7512
 msgid "flaming sword"
-msgstr ""
+msgstr "lespada llameante"
 
 #. [effect]: type=cold
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7525
@@ -69636,7 +69638,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7538
 msgid "Violent Mage's Staff"
-msgstr ""
+msgstr "Bastón de mago violento"
 
 #. [effect]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7553
@@ -69660,7 +69662,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7571
 msgid "Violent Mage's Cloak"
-msgstr ""
+msgstr "Capa de mago violento"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7583
@@ -69679,7 +69681,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7592
 msgid "Violent Mage's Armour"
-msgstr ""
+msgstr "Armadura de mago violento"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7610
