@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2023-03-20 05:11 UTC\n"
-"PO-Revision-Date: 2023-03-24 08:08+0100\n"
+"PO-Revision-Date: 2023-03-27 06:31+0200\n"
 "Last-Translator: Toranks <toranksmervat@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -2232,14 +2232,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:456
 #: Legend_of_the_Invincibles/units/Ancient_Lich.cfg:4
 msgid "Ancient Lich"
-msgstr ""
+msgstr "Liche antiguo"
 
 #. [option]
 #. [unit_type]: id=Arch Necromancer, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:463
 #: Legend_of_the_Invincibles/units/Arch_Necromancer.cfg:4
 msgid "Arch Necromancer"
-msgstr ""
+msgstr "Archinigromante"
 
 #. [option]
 #. [unit_type]: id=Blackguard, race=human
@@ -2248,7 +2248,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Blackguard.cfg:4
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:136
 msgid "Blackguard"
-msgstr ""
+msgstr "Guardia negro"
 
 #. [option]
 #. [unit_type]: id=Celestial Messenger, race=human
@@ -2257,7 +2257,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:4
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:828
 msgid "Celestial Messenger"
-msgstr ""
+msgstr "Mensajero celestial"
 
 #. [option]
 #. [unit_type]: id=Champion, race=human
@@ -2278,14 +2278,14 @@ msgstr "Campeón arquero"
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:499
 #: Legend_of_the_Invincibles/units/Chaos_Rider.cfg:4
 msgid "Chaos Rider"
-msgstr ""
+msgstr "Jinete del caos"
 
 #. [option]
 #. [unit_type]: id=Demilich, race=undead
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:506
 #: Legend_of_the_Invincibles/units/Demilich.cfg:4
 msgid "Demilich"
-msgstr ""
+msgstr "Semiliche"
 
 #. [option]
 #. [unit_type]: id=Destroyer, race=human
@@ -2294,84 +2294,84 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Destroyer.cfg:4
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2391
 msgid "Destroyer"
-msgstr ""
+msgstr "Destructor"
 
 #. [option]
 #. [unit_type]: id=Duelist Wizard, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:520
 #: Legend_of_the_Invincibles/units/Duelist_Wizard.cfg:4
 msgid "Duelist Wizard"
-msgstr ""
+msgstr "Mago duelista"
 
 #. [option]
 #. [unit_type]: id=Dwarvish Battlerager, race=dwarf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:528
 #: Legend_of_the_Invincibles/units/Dwarvish_Battlerager.cfg:4
 msgid "Dwarvish Battlerager"
-msgstr ""
+msgstr "Batallador enano"
 
 #. [option]
 #. [unit_type]: id=Dwarvish Hero, race=dwarf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:535
 #: Legend_of_the_Invincibles/units/Dwarvish_Hero.cfg:56
 msgid "Dwarvish Hero"
-msgstr ""
+msgstr "Héroe enano"
 
 #. [option]
 #. [unit_type]: id=Dwarvish Protector, race=dwarf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:542
 #: Legend_of_the_Invincibles/units/Dwarvish_Protector.cfg:4
 msgid "Dwarvish Protector"
-msgstr ""
+msgstr "Protector enano"
 
 #. [option]
 #. [unit_type]: id=Dwarvish Technocrat, race=dwarf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:549
 #: Legend_of_the_Invincibles/units/Dwarvish_Technocrat.cfg:4
 msgid "Dwarvish Technocrat"
-msgstr ""
+msgstr "Tecnócrata enano"
 
 #. [option]
 #. [unit_type]: id=Elvish Assassin, race=elf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:556
 #: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:4
 msgid "Elvish Assassin"
-msgstr ""
+msgstr "Asesino elfo"
 
 #. [option]
 #. [unit_type]: id=Elvish Gryphon Rider, race=elf	#The elf is important, not the bird. I want them to have ELVISH names.
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:564
 #: Legend_of_the_Invincibles/units/Elvish_Gryphon_Rider.cfg:4
 msgid "Elvish Gryphon Rider"
-msgstr ""
+msgstr "Jinete de grifo elfo"
 
 #. [option]
 #. [unit_type]: id=Elvish Juggernaut, race=elf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:572
 #: Legend_of_the_Invincibles/units/Elvish_Juggernaut.cfg:4
 msgid "Elvish Juggernaut"
-msgstr ""
+msgstr "Elfo imparable"
 
 #. [option]
 #. [unit_type]: id=Elvish Nightprowler, race=elf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:579
 #: Legend_of_the_Invincibles/units/Elvish_Nightprowler.cfg:4
 msgid "Elvish Nightprowler"
-msgstr ""
+msgstr "Elfo merodeador"
 
 #. [option]
 #. [unit_type]: id=Elvish Overlord, race=elf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:587
 #: Legend_of_the_Invincibles/units/Elvish_Overlord.cfg:4
 msgid "Elvish Overlord"
-msgstr ""
+msgstr "Señor supremo élfico"
 
 #. [option]
 #. [unit_type]: id=Exterminator, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:594
 #: Legend_of_the_Invincibles/units/Exterminator.cfg:4
 msgid "Exterminator"
-msgstr ""
+msgstr "Exterminador"
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:602
@@ -2383,42 +2383,42 @@ msgstr "Encarnación feérica"
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:609
 #: Legend_of_the_Invincibles/units/Forester.cfg:5
 msgid "Forester"
-msgstr ""
+msgstr "Guardabosque"
 
 #. [option]
 #. [unit_type]: id=Infernal Knight, race=undead
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:616
 #: Legend_of_the_Invincibles/units/Infernal_Knight.cfg:4
 msgid "Infernal Knight"
-msgstr ""
+msgstr "Caballero infernal"
 
 #. [option]
 #. [unit_type]: id=Orcish Strafer, race=orc
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:623
 #: Legend_of_the_Invincibles/units/Orcish_Strafer.cfg:4
 msgid "Orcish Strafer"
-msgstr ""
+msgstr "Ametrallador orco"
 
 #. [option]
 #. [unit_type]: id=Orcish Warmonger base, race=orc
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:630
 #: Legend_of_the_Invincibles/units/Orcish_Warmonger.cfg:14
 msgid "Orcish Warmonger"
-msgstr ""
+msgstr "Instigador orco"
 
 #. [option]
 #. [unit_type]: id=Pilum Master, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:637
 #: Legend_of_the_Invincibles/units/Pilum_Master.cfg:4
 msgid "Pilum Master"
-msgstr ""
+msgstr "Maestro de pilum"
 
 #. [option]
 #. [unit_type]: id=Predator, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:644
 #: Legend_of_the_Invincibles/units/Predator.cfg:5
 msgid "Predator"
-msgstr ""
+msgstr "Depredador"
 
 #. [option]
 #. [unit_type]: id=Prophet, race=human
@@ -2427,14 +2427,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Prophet.cfg:4
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:1307
 msgid "Prophet"
-msgstr ""
+msgstr "Profeta"
 
 #. [option]
 #. [unit_type]: id=Scythemaster, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:659
 #: Legend_of_the_Invincibles/units/Scythemaster.cfg:4
 msgid "Scythemaster"
-msgstr ""
+msgstr "Maestro de guadañas"
 
 #. [option]
 #. [unit_type]: id=Shadowalker, race=human
@@ -2448,48 +2448,48 @@ msgstr "Andabrumas"
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:674
 #: Legend_of_the_Invincibles/units/Shadow_Prince.cfg:4
 msgid "Shadow Prince"
-msgstr ""
+msgstr "Príncipe de las sombras"
 
 #. [option]
 #. [unit_type]: id=Siege Troll, race=troll
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:682
 #: Legend_of_the_Invincibles/units/Siege_Troll.cfg:4
 msgid "Siege Troll"
-msgstr ""
+msgstr "Troll de asedio"
 
 #. [option]
 #. [unit_type]: id=Snow Hunter, race=elf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:689
 #: Legend_of_the_Invincibles/units/Snow_Hunter.cfg:5
 msgid "Snow Hunter"
-msgstr ""
+msgstr "Cazador de las nieves"
 
 #. [option]
 #. [unit_type]: id=Swordmaster, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:697
 #: Legend_of_the_Invincibles/units/Swordmaster.cfg:4
 msgid "Swordmaster"
-msgstr ""
+msgstr "Espadachín"
 
 #. [option]
 #. [unit_type]: id=Warlock, race=human
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:704
 #: Legend_of_the_Invincibles/units/Warlock.cfg:4
 msgid "Warlock"
-msgstr ""
+msgstr "Brujo"
 
 #. [option]
 #. [unit_type]: id=Werewolf Rider, race=wolf
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:712
 #: Legend_of_the_Invincibles/units/Werewolf_Rider.cfg:4
 msgid "Werewolf Rider"
-msgstr ""
+msgstr "Jinete de hombre lobo"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:778
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:2319
 msgid "Which difficulty do you prefer?"
-msgstr ""
+msgstr "¿Qué dificultad prefieres?"
 
 #. [option]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:782
@@ -2760,7 +2760,7 @@ msgstr "Nada"
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2652
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9998
 msgid "Ancient Armour of the Power of the Ancients"
-msgstr ""
+msgstr "Armadura ancestral de poder"
 
 #. [message]: speaker=trader2
 #. [object]
@@ -2768,7 +2768,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:496
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1443
 msgid "Hell Warlord's Armour"
-msgstr ""
+msgstr "Armadura de señor del infierno"
 
 #. [message]: speaker=trader2
 #. [object]
@@ -2785,7 +2785,7 @@ msgstr "Armadura de Rherraent"
 #: Legend_of_the_Invincibles/scenarios8/08_The_Desert.cfg:828
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2757
 msgid "Greater Guardsman's Leather Armour"
-msgstr ""
+msgstr "Gran armadura de cuero de guardia"
 
 #. [message]: speaker=trader2
 #. [message]: speaker=trader
@@ -2802,7 +2802,7 @@ msgstr "Armadura de hielo"
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:498
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1189
 msgid "Wanderlust"
-msgstr ""
+msgstr "Pasión de viajar"
 
 #. [message]: speaker=trader2
 #. [object]
@@ -2834,21 +2834,21 @@ msgstr "Casco de tripadura"
 #. [message]: speaker=trader2
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:985
 msgid "Dark Helmet of Destruction"
-msgstr ""
+msgstr "Casco oscuro de destrucción"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:986
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2516
 msgid "Shako"
-msgstr ""
+msgstr "Chacó"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:987
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1427
 msgid "Mask of Insanity"
-msgstr ""
+msgstr "Máscara de locura"
 
 #. [message]: speaker=trader2
 #. [object]
@@ -2856,59 +2856,59 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:500
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1146
 msgid "Quick Gauntlets"
-msgstr ""
+msgstr "Guanteletes de rapidez"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:989
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2560
 msgid "Draingloves"
-msgstr ""
+msgstr "Guantes drenadores"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:990
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1173
 msgid "Hellslash"
-msgstr ""
+msgstr "Corte infernal"
 
 #. [message]: speaker=trader2
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:991
 msgid "Mighty gauntlets"
-msgstr ""
+msgstr "Guanteletes poderosos"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:992
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4121
 msgid "Cunctator's Armour"
-msgstr ""
+msgstr "Armadura de Cunctator"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:993
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3232
 msgid "Leechward"
-msgstr ""
+msgstr "Antichupasangre"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:994
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4086
 msgid "Brawler's Triumph"
-msgstr ""
+msgstr "Triunfo del luchador"
 
 #. [message]: speaker=trader2
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:995
 msgid "Hand of Sorrow"
-msgstr ""
+msgstr "Mano de tristeza"
 
 #. [message]: speaker=trader2
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:996
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4171
 msgid "Cunctator's Helmet"
-msgstr ""
+msgstr "Casco de Cunctator"
 
 #. [message]: speaker=trader3
 #. [object]
@@ -2916,7 +2916,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:526
 #: Legend_of_the_Invincibles/utils/item_list.cfg:317
 msgid "Ring of Health"
-msgstr ""
+msgstr "Anillo de vitalidad"
 
 #. [message]: speaker=trader3
 #. [object]
@@ -2924,7 +2924,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:527
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1463
 msgid "Demon Core"
-msgstr ""
+msgstr "Núcleo de demonio"
 
 #. [message]: speaker=trader3
 #. [object]
@@ -2932,26 +2932,26 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:528
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2580
 msgid "Cloak of Koschei"
-msgstr ""
+msgstr "Capa de Koschei"
 
 #. [message]: speaker=trader3
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:1026
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1761
 msgid "Dazzling Ring"
-msgstr ""
+msgstr "Anillo deslumbrante"
 
 #. [message]: speaker=trader3
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:1027
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3015
 msgid "Ring of the King"
-msgstr ""
+msgstr "Anillo del rey"
 
 #. [message]: speaker=trader3
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:1028
 msgid "Gloomy Amulet"
-msgstr ""
+msgstr "Amuleto sombrío"
 
 #. [message]: speaker=trader3
 #. [message]: speaker=trader
@@ -2960,7 +2960,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/08_The_Desert.cfg:826
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2605
 msgid "Lucky Farmer's Amulet"
-msgstr ""
+msgstr "Amuleto del granjero afortunado"
 
 #. [message]: speaker=trader3
 #. [object]
@@ -2968,7 +2968,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/09_Gladiatrix-The_Path_to_Glory.cfg:531
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1867
 msgid "Guide to Lycanthropy"
-msgstr ""
+msgstr "Guía de licantropía"
 
 #. [message]: speaker=trader3
 #. [object]
@@ -2989,14 +2989,14 @@ msgstr "Poción de los vientos del norte"
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:1033
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3680
 msgid "Precious Eagle Cactus Fruit"
-msgstr ""
+msgstr "Preciosa fruta de cactus aguileño"
 
 #. [message]: speaker=trader3
 #. [object]
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:1034
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3588
 msgid "Heart of Darkness"
-msgstr ""
+msgstr "Corazón de oscuridad"
 
 #. [message]: speaker=trader4
 #: Legend_of_the_Invincibles/multiplayer/Gladiators.cfg:1058
@@ -3500,7 +3500,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios10/12_Rush.cfg:444
 #: Legend_of_the_Invincibles/scenarios2/10_Lilith.cfg:417
 msgid "Stormrider"
-msgstr ""
+msgstr "Jinete de la tormenta"
 
 #. [side]: id=Stormrider, type=Stormrider
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:953
@@ -3539,21 +3539,21 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:1002
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:2971
 msgid "Cave Guardian"
-msgstr ""
+msgstr "Guardián cavernario"
 
 #. [side]: type=Corrupted Elvish Champion, id=Forest Guardian
 #. [chat]
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:1052
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3019
 msgid "Forest Guardian"
-msgstr ""
+msgstr "Guardián forestal"
 
 #. [side]: type=Ice Dragon, id=Ice Guardian
 #. [chat]
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:1069
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3121
 msgid "Ice Guardian"
-msgstr ""
+msgstr "Guardián de hielo"
 
 #. [side]: type=Fire Dragon loti, id=Fire Guardian
 #. [chat]
@@ -3564,7 +3564,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Chaos_Rider.cfg:304
 #: Legend_of_the_Invincibles/units/corruption.cfg:4090
 msgid "Fire Guardian"
-msgstr ""
+msgstr "Guardián de fuego"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:1127
@@ -3858,7 +3858,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3302
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3316
 msgid "Orcish Seal Guardian"
-msgstr ""
+msgstr "Guardián del sello orco"
 
 #. [unit]: type=Corrupted Elvish Nightprowler, id=Elvish Seal Guardian
 #. [chat]
@@ -3866,7 +3866,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3398
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3412
 msgid "Elvish Seal Guardian"
-msgstr ""
+msgstr "Guardián del sello elfo"
 
 #. [chat]: speaker=Stormrider
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3175
@@ -3882,14 +3882,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3350
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3364
 msgid "Naga Seal Guardian"
-msgstr ""
+msgstr "Guardián del sello naga"
 
 #. [unit]: type=Destroyer, id=Dark Seal Guardian
 #. [chat]
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3193
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3460
 msgid "Dark Seal Guardian"
-msgstr ""
+msgstr "Guardián oscuro del sello"
 
 #. [chat]: speaker=Efraim
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3254
@@ -3980,7 +3980,7 @@ msgstr ""
 #. [chat]
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3467
 msgid "$second_unit.name"
-msgstr ""
+msgstr "$second_unit.name"
 
 #. [chat]
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3468
@@ -4004,28 +4004,28 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/03_United.cfg:1277
 #: Legend_of_the_Invincibles/units/demons_race.cfg:40
 msgid "brutal"
-msgstr ""
+msgstr "brutal"
 
 #. [trait]: id=brutal
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3546
 #: Legend_of_the_Invincibles/scenarios8/03_United.cfg:1278
 #: Legend_of_the_Invincibles/units/demons_race.cfg:41
 msgid "female^brutal"
-msgstr ""
+msgstr "brutal"
 
 #. [trait]: id=cruel
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3558
 #: Legend_of_the_Invincibles/scenarios8/03_United.cfg:1291
 #: Legend_of_the_Invincibles/units/demons_race.cfg:25
 msgid "cruel"
-msgstr ""
+msgstr "cruel"
 
 #. [trait]: id=cruel
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3559
 #: Legend_of_the_Invincibles/scenarios8/03_United.cfg:1292
 #: Legend_of_the_Invincibles/units/demons_race.cfg:26
 msgid "female^cruel"
-msgstr ""
+msgstr "cruel"
 
 #. [trait]: id=perverted
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3571
@@ -4033,7 +4033,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:85
 #: Legend_of_the_Invincibles/units/demons_race.cfg:835
 msgid "perverted"
-msgstr ""
+msgstr "pervertido"
 
 #. [trait]: id=perverted
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3572
@@ -4041,14 +4041,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:86
 #: Legend_of_the_Invincibles/units/demons_race.cfg:836
 msgid "female^perverted"
-msgstr ""
+msgstr "pervertida"
 
 #. [unit]: type=Dragon Rider, id=Death Overlord
 #. [chat]
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3588
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3880
 msgid "Death Overlord"
-msgstr ""
+msgstr "Señor de la muerte"
 
 #. [chat]: speaker=Argan
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3639
@@ -4066,7 +4066,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3963
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:4030
 msgid "Shadowlord"
-msgstr ""
+msgstr "Señor de las sombras"
 
 #. [chat]: speaker=Lethalia
 #: Legend_of_the_Invincibles/multiplayer/Hordes_of_the_Other_World.cfg:3711
@@ -4252,7 +4252,7 @@ msgstr "cuchillo"
 #. [scenario]: id=00_Tutorial
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:72
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 #. [time]: id=lit_indoors
 #. [time]: id=dark_indoors
@@ -4267,7 +4267,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios9/37_Catacombs_of_Prolonged_Agony.cfg:14
 #: Legend_of_the_Invincibles/scenarios9/42_Passage_of_Detriment.cfg:14
 msgid "Indoors"
-msgstr ""
+msgstr "Interiores"
 
 #. [scenario]: id=00_Tutorial
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:85
@@ -4383,7 +4383,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/02_The_Assassination.cfg:60
 #: Legend_of_the_Invincibles/scenarios6/test_scenario.cfg:186
 msgid "Loyalists"
-msgstr ""
+msgstr "Leales"
 
 #. [object]
 #. [message]: speaker=trader
@@ -4396,7 +4396,7 @@ msgstr "Armadura de cuero"
 #. [side]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:253
 msgid "Outlaws"
-msgstr ""
+msgstr "Forajidos"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:260
@@ -4404,16 +4404,18 @@ msgid ""
 "Skip the tutorial? This isn't recommended if it's your first time playing "
 "this campaign."
 msgstr ""
+"¿Omitir el tutorial? No se recomienda si es la primera vez que juegas esta "
+"campaña."
 
 #. [option]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:262
 msgid "Play it"
-msgstr ""
+msgstr "Jugar"
 
 #. [option]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:270
 msgid "Skip it"
-msgstr ""
+msgstr "Omitir"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:310
@@ -4850,7 +4852,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/01_An_Orcish_Assault.cfg:92
 #: Legend_of_the_Invincibles/scenarios1/02_The_Assassination.cfg:50
 msgid "Lord Redain"
-msgstr ""
+msgstr "Señor Redain"
 
 #. [side]: id=Gromar, type=Orcish Warrior
 #. [side]: id=Gromar, type=Goblin Trainer
@@ -5366,7 +5368,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:911
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:929
 msgid "Evil"
-msgstr ""
+msgstr "Malos"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/01_An_Orcish_Assault.cfg:169
@@ -6565,7 +6567,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios9/50_The_Last_Crusade.cfg:26
 #: Legend_of_the_Invincibles/scenarios9/50s_Epilogue.cfg:24
 msgid "Good"
-msgstr ""
+msgstr "Buenos"
 
 #. [side]: id=Mrud, type=Orcish Warlord
 #: Legend_of_the_Invincibles/scenarios1/05_Shatter_the_Defilers.cfg:171
@@ -6587,14 +6589,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios1/05_Shatter_the_Defilers.cfg:296
 #: Legend_of_the_Invincibles/units/Goblin_Trainer.cfg:11
 msgid "loyal"
-msgstr ""
+msgstr "leal"
 
 #. [value]: id=loyal
 #. [trait]: id=loyal
 #: Legend_of_the_Invincibles/scenarios1/05_Shatter_the_Defilers.cfg:297
 #: Legend_of_the_Invincibles/units/Goblin_Trainer.cfg:12
 msgid "female^loyal"
-msgstr ""
+msgstr "leal"
 
 #. [value]: id=loyal
 #. [trait]: id=loyal
@@ -7481,7 +7483,7 @@ msgstr ""
 #. [unit]: type=Fire Dragon loti, id=dragon
 #: Legend_of_the_Invincibles/scenarios1/08_Where_the_Sun_Does_not_Shine.cfg:420
 msgid "Hephaestus"
-msgstr ""
+msgstr "Hefesto"
 
 #. [message]: speaker=Lethalia
 #: Legend_of_the_Invincibles/scenarios1/08_Where_the_Sun_Does_not_Shine.cfg:450
@@ -7922,6 +7924,8 @@ msgid ""
 "Note: Efraim can enslave a unit if it dies in the same turn as it was struck "
 "by him or his thrall."
 msgstr ""
+"Nota: Efraim puede esclavizar a una unidad si esa muere en el mismo turno en "
+"que fue golpeada por él o su esclavo."
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:44
@@ -8044,56 +8048,56 @@ msgstr ""
 #. [side]: type=Wraith, id=Spirit_of_Efraim
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:99
 msgid "Spirit of Efraim"
-msgstr ""
+msgstr "Espíritu de Efraim"
 
 #. [side]: type=Ghost, id=Sredain
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:114
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:118
 msgid "Spirit of lord Redain"
-msgstr ""
+msgstr "Espíritu de lord Redain"
 
 #. [side]: type=Ghost, id=Smargund
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:123
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:127
 msgid "Spirit of Margund"
-msgstr ""
+msgstr "Espíritu de Margrund"
 
 #. [side]: type=Ghost, id=Sgrub
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:132
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:136
 msgid "Spirit of Grub Drung"
-msgstr ""
+msgstr "Espíritu de Grub Drung"
 
 #. [side]: type=Ghost, id=Sdrgor
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:141
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:145
 msgid "Spirit of Drgor"
-msgstr ""
+msgstr "Espíritu de Drgor"
 
 #. [side]: type=Ghost, id=Sspider
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:150
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:154
 msgid "Powerful spirit of a Cave Spider"
-msgstr ""
+msgstr "Espíritu poderoso de una araña cavernaria"
 
 #. [side]: type=Ghost, id=Smasardor
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:159
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:163
 msgid "Spirit of Masardor"
-msgstr ""
+msgstr "Espíritu de Masardor"
 
 #. [side]: type=Ghost, id=Svronar
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:168
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:172
 msgid "Spirit of Vronar"
-msgstr ""
+msgstr "Espíritu de Vronar"
 
 #. [side]
 #. [unit]: type=Spectre, id=Sdragon
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:178
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:215
 msgid "Spirit of Hephaestus"
-msgstr ""
+msgstr "Espíritu de Hefesto"
 
 #. [message]: speaker=Spirit_of_Efraim
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:186
@@ -8164,7 +8168,7 @@ msgstr ""
 #. [set_variable]
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:343
 msgid "Enslaved "
-msgstr ""
+msgstr "Esclavizado"
 
 #. [message]: speaker=Spirit_of_Efraim
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:351
@@ -8191,7 +8195,7 @@ msgstr ""
 #. [unit]: type=Spectre, id=ESdragon
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:399
 msgid "Enslaved spirit of Hephaestus"
-msgstr ""
+msgstr "Espíritu esclavizado de Hefesto"
 
 #. [scenario]: id=12_Toxic_Sun
 #: Legend_of_the_Invincibles/scenarios1/12_Toxic_Sun.cfg:4
@@ -35367,14 +35371,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:283
 #: Legend_of_the_Invincibles/units/demons_race.cfg:938
 msgid "blackened"
-msgstr ""
+msgstr "ennegrecido"
 
 #. [trait]: id=blackened
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:666
 #: Legend_of_the_Invincibles/units/demons_race.cfg:284
 #: Legend_of_the_Invincibles/units/demons_race.cfg:939
 msgid "female^blackened"
-msgstr ""
+msgstr "ennegrecida"
 
 #. [trait]: id=blackened
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:667
@@ -35386,13 +35390,13 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:675
 #: Legend_of_the_Invincibles/units/demons_race.cfg:112
 msgid "ghostly"
-msgstr ""
+msgstr "fantasmal"
 
 #. [trait]: id=ghostly
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:676
 #: Legend_of_the_Invincibles/units/demons_race.cfg:113
 msgid "female^ghostly"
-msgstr ""
+msgstr "fantasmal"
 
 #. [trait]: id=ghostly
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:677
@@ -35403,13 +35407,13 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:722
 #: Legend_of_the_Invincibles/units/demons_race.cfg:231
 msgid "fiery"
-msgstr ""
+msgstr "fogoso"
 
 #. [trait]: id=fiery
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:723
 #: Legend_of_the_Invincibles/units/demons_race.cfg:232
 msgid "female^fiery"
-msgstr ""
+msgstr "fogosa"
 
 #. [trait]: id=fiery
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:725
@@ -35422,13 +35426,13 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:746
 #: Legend_of_the_Invincibles/units/demons_race.cfg:332
 msgid "persistent"
-msgstr ""
+msgstr "persistente"
 
 #. [trait]: id=persistent
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:747
 #: Legend_of_the_Invincibles/units/demons_race.cfg:333
 msgid "female^persistent"
-msgstr ""
+msgstr "persistente"
 
 #. [trait]: id=persistent
 #: Legend_of_the_Invincibles/scenarios8/04_Kidnapped.cfg:748
@@ -44255,76 +44259,76 @@ msgstr ""
 #: Legend_of_the_Invincibles/terrain.cfg:47
 #: Legend_of_the_Invincibles/terrain.cfg:48
 msgid "Arctic Wasteland"
-msgstr ""
+msgstr "Páramo ártico"
 
 #. [terrain_type]: id=icy_cavewall
 #: Legend_of_the_Invincibles/terrain.cfg:56
 msgid "Icy Cave Wall"
-msgstr ""
+msgstr "Pared helada de cueva"
 
 #. [terrain_type]: id=ice_shards
 #: Legend_of_the_Invincibles/terrain.cfg:64
 msgid "Ice Crystals"
-msgstr ""
+msgstr "Cristales de hielo"
 
 #. [terrain_type]: id=volcanic_wasteland
 #: Legend_of_the_Invincibles/terrain.cfg:72
 #: Legend_of_the_Invincibles/terrain.cfg:73
 msgid "Volcanic Wasteland"
-msgstr ""
+msgstr "Páramo volcánico"
 
 #. [terrain_type]: id=power_source_blue_flame
 #: Legend_of_the_Invincibles/terrain.cfg:81
 #: Legend_of_the_Invincibles/terrain.cfg:82
 msgid "Power Source"
-msgstr ""
+msgstr "Fuente de poder"
 
 #. [terrain_type]: id=wasteland_loti
 #: Legend_of_the_Invincibles/terrain.cfg:92
 #: Legend_of_the_Invincibles/terrain.cfg:93
 msgid "Wasteland"
-msgstr ""
+msgstr "Páramo"
 
 #. [terrain_type]: id=weird_landscape
 #: Legend_of_the_Invincibles/terrain.cfg:101
 #: Legend_of_the_Invincibles/terrain.cfg:102
 msgid "Weird Landscape"
-msgstr ""
+msgstr "Paisaje extraño"
 
 #. [terrain_type]: id=weird_eye
 #: Legend_of_the_Invincibles/terrain.cfg:110
 #: Legend_of_the_Invincibles/terrain.cfg:111
 msgid "Weird Eye"
-msgstr ""
+msgstr "Ojo extraño"
 
 #. [terrain_type]: id=weird_eyes
 #: Legend_of_the_Invincibles/terrain.cfg:119
 #: Legend_of_the_Invincibles/terrain.cfg:120
 msgid "Weird Eyes"
-msgstr ""
+msgstr "Ojos extraños"
 
 #. [terrain_type]: id=weird_tentacle
 #: Legend_of_the_Invincibles/terrain.cfg:128
 #: Legend_of_the_Invincibles/terrain.cfg:129
 msgid "Weird Tentacle"
-msgstr ""
+msgstr "Tentáculo extraño"
 
 #. [terrain_type]: id=weird_tentacles
 #: Legend_of_the_Invincibles/terrain.cfg:137
 #: Legend_of_the_Invincibles/terrain.cfg:138
 msgid "Weird Tentacles"
-msgstr ""
+msgstr "Tentáculos extraños"
 
 #. [terrain_type]: id=ice_shards
 #: Legend_of_the_Invincibles/terrain.cfg:146
 msgid "Demonic Cemetery"
-msgstr ""
+msgstr "Cementerio demoníaco"
 
 #. [terrain_type]: id=infernal_forest
 #: Legend_of_the_Invincibles/terrain.cfg:156
 #: Legend_of_the_Invincibles/terrain.cfg:157
 msgid "Infernal Forest"
-msgstr ""
+msgstr "Bosque infernal"
 
 #. [terrain_type]: id=rainforest_loti_old
 #. [terrain_type]: id=rainforest_loti_impassable
@@ -44337,7 +44341,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/terrain.cfg:259
 #: Legend_of_the_Invincibles/terrain.cfg:281
 msgid "Forest"
-msgstr ""
+msgstr "Bosque"
 
 #. [terrain_type]: id=rainforest_loti_old
 #: Legend_of_the_Invincibles/terrain.cfg:168
@@ -44347,7 +44351,7 @@ msgstr ""
 #. [terrain_type]: id=rainforest_loti_impassable
 #: Legend_of_the_Invincibles/terrain.cfg:179
 msgid "Rainforest"
-msgstr ""
+msgstr "Selva tropical"
 
 #. [terrain_type]: id=palm_forest_loti_old
 #: Legend_of_the_Invincibles/terrain.cfg:192
@@ -44367,7 +44371,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/terrain.cfg:316
 #: Legend_of_the_Invincibles/utils/titles.cfg:602
 msgid "Hills"
-msgstr ""
+msgstr "Colinas"
 
 #. [terrain_type]: id=palms_on_hills_loti_old
 #: Legend_of_the_Invincibles/terrain.cfg:203
@@ -44392,7 +44396,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/terrain.cfg:236
 #: Legend_of_the_Invincibles/terrain.cfg:304
 msgid "Savanna"
-msgstr ""
+msgstr "Sabana"
 
 #. [terrain_type]: id=savanna_loti_old_loti_old
 #. [terrain_type]: id=savanna_loti_old
@@ -44522,7 +44526,7 @@ msgstr "sable"
 #: Legend_of_the_Invincibles/units/Warlock.cfg:758
 #: Legend_of_the_Invincibles/units/Warlock.cfg:787
 msgid "better with sword"
-msgstr ""
+msgstr "mejor con espadas"
 
 #. [advancement]: id=magic
 #. [advancement]: id=magic2
@@ -44546,14 +44550,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Shadow_Prince.cfg:280
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:750
 msgid "better with magic"
-msgstr ""
+msgstr "mejor con magia"
 
 #. [advancement]: id=block
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:421
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:754
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:1388
 msgid "much better at defending"
-msgstr ""
+msgstr "mucho mejor defendiendo"
 
 #. [variation]: race=human
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:453
@@ -44625,7 +44629,7 @@ msgstr "mejor con ballesta"
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:824
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:1476
 msgid "ridiculously good at defending"
-msgstr ""
+msgstr "ridículamente bueno defendiendo"
 
 #. [variation]: race=human
 #: Legend_of_the_Invincibles/units/09_Fencer.cfg:857
@@ -44722,7 +44726,7 @@ msgstr "bola de fuego"
 #. [unit_type]: id=Abaddon, race=demon-loti
 #: Legend_of_the_Invincibles/units/Abaddon.cfg:4
 msgid "Arch-Demon"
-msgstr ""
+msgstr "Archidemonio"
 
 #. [unit_type]: id=Abaddon, race=demon-loti
 #: Legend_of_the_Invincibles/units/Abaddon.cfg:25
@@ -44788,7 +44792,7 @@ msgstr "mordisco"
 #: Legend_of_the_Invincibles/units/Werewolf_Rider.cfg:236
 #: Legend_of_the_Invincibles/units/Werewolf_Rider.cfg:286
 msgid "biting better"
-msgstr ""
+msgstr "muerde mejor"
 
 #. [advancement]: id=bite2
 #. [advancement]: id=fangs2
@@ -44798,7 +44802,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Skeletal_Dragon.cfg:301
 #: Legend_of_the_Invincibles/units/Werewolf_Rider.cfg:251
 msgid "biting faster"
-msgstr ""
+msgstr "muerde más rápido"
 
 #. [advancement]: id=bite2-leech
 #. [advancement]: id=fangs2-leech
@@ -45178,7 +45182,7 @@ msgstr "toque"
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:564
 #: Legend_of_the_Invincibles/utils/amla.cfg:4389
 msgid "chill tempest"
-msgstr ""
+msgstr "ola de frío"
 
 #. [advancement]: id=melee2
 #. [advancement]: id=melee3
@@ -45254,7 +45258,7 @@ msgstr ""
 #. [unit_type]: id=Ancient Warrior, race=human
 #: Legend_of_the_Invincibles/units/Ancient_Warrior.cfg:39
 msgid "Ancient Warrior"
-msgstr ""
+msgstr "Ancestro guerrero"
 
 #. [unit_type]: id=Ancient Warrior, race=human
 #: Legend_of_the_Invincibles/units/Ancient_Warrior.cfg:53
@@ -45278,7 +45282,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Necromancer.cfg:37
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1455
 msgid "plague staff"
-msgstr ""
+msgstr "bastón de plaga"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/Arch_Necromancer.cfg:193
@@ -45324,7 +45328,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Efraim_lich.cfg:66
 #: Legend_of_the_Invincibles/units/Lethalia_evil.cfg:57
 msgid "Preserved Lich"
-msgstr ""
+msgstr "Liche preservado"
 
 #. [unit_type]: id=Argan_lich, race=undead
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:91
@@ -45340,7 +45344,7 @@ msgstr ""
 #. [attack]: type=arcane
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:120
 msgid "lichsword"
-msgstr ""
+msgstr "espada liche"
 
 #. [advancement]: id=sword1_speed
 #. [advancement]: id=sword5_speed
@@ -45365,7 +45369,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Vritra_later.cfg:513
 #: Legend_of_the_Invincibles/units/Warlock.cfg:772
 msgid "faster with sword"
-msgstr ""
+msgstr "más rápido con la espada"
 
 #. [advancement]: id=sword2_marksman
 #. [advancement]: id=sword2_focused
@@ -45377,25 +45381,25 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Krux_later.cfg:552
 #: Legend_of_the_Invincibles/units/Vritra.cfg:1003
 msgid "more precise with sword"
-msgstr ""
+msgstr "más preciso con la espada"
 
 #. [advancement]: id=sword4_plague
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:820
 #: Legend_of_the_Invincibles/units/Efraim_lich.cfg:1013
 msgid "raising undead with sword"
-msgstr ""
+msgstr "levanta no muertos con la espada"
 
 #. [advancement]: id=xbow
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:883
 msgid "better and faster with crossbow"
-msgstr ""
+msgstr "mejor y más rápido con la ballesta"
 
 #. [advancement]: id=xbow_marksman
 #. [advancement]: id=xbow-marksman
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:899
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:962
 msgid "striking more precisely with the crossbow"
-msgstr ""
+msgstr "dispara más preciso con la ballesta"
 
 #. [advancement]: id=xbow2_speed
 #. [advancement]: id=crossbow
@@ -45410,12 +45414,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Orcish_Strafer.cfg:369
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:566
 msgid "faster with crossbow"
-msgstr ""
+msgstr "más rápido con la ballesta"
 
 #. [advancement]: id=block
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:1010
 msgid "blocking attacks better (2 % better defence)"
-msgstr ""
+msgstr "bloquea mejor los ataques (2% más defensa)"
 
 #. [advancement]: id=armour
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:1052
@@ -45424,19 +45428,19 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Dwarvish_Protector.cfg:299
 #: Legend_of_the_Invincibles/units/Orcish_Warmonger.cfg:481
 msgid "better protected from physical blows (3% better resistances)"
-msgstr ""
+msgstr "mejor protegido de golpes físicos (3% mejor resistencia)"
 
 #. [advancement]: id=armour
 #: Legend_of_the_Invincibles/units/Argan_lich.cfg:1070
 #: Legend_of_the_Invincibles/units/Lethalia_lich-weakened.cfg:516
 #: Legend_of_the_Invincibles/units/Lethalia_lich.cfg:2087
 msgid "better protected from magical attacks (4% better resistances)"
-msgstr ""
+msgstr "mejor protegido de ataques mágicos (4% mejor resistencia)"
 
 #. [unit_type]: id=Beelzebub, race=demon-loti
 #: Legend_of_the_Invincibles/units/Beelzebub.cfg:4
 msgid "Lord of the Flies"
-msgstr ""
+msgstr "Señor de las moscas"
 
 #. [unit_type]: id=Beelzebub, race=demon-loti
 #: Legend_of_the_Invincibles/units/Beelzebub.cfg:56
@@ -45454,7 +45458,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Beelzebub.cfg:93
 #: Legend_of_the_Invincibles/utils/amla.cfg:5767
 msgid "particle storm"
-msgstr ""
+msgstr "tormenta de partículas"
 
 #. [unit_type]: id=Black Army Bowman, race=human
 #: Legend_of_the_Invincibles/units/Black_Army_Bowman.cfg:4
@@ -45479,7 +45483,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Elvish_Gryphon_Rider.cfg:54
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1898
 msgid "longbow"
-msgstr ""
+msgstr "arco largo"
 
 #. [unit_type]: id=Black Army Mage, race=human
 #: Legend_of_the_Invincibles/units/Black_Army_Mage.cfg:4
@@ -45514,7 +45518,7 @@ msgstr ""
 #. [attack]: type=pierce
 #: Legend_of_the_Invincibles/units/Black_Army_Pikeman.cfg:41
 msgid "pike"
-msgstr ""
+msgstr "pica"
 
 #. [unit_type]: id=Black Army Swordsman, race=human
 #: Legend_of_the_Invincibles/units/Black_Army_Swordsman.cfg:4
@@ -45538,7 +45542,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2962
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:469
 msgid "longsword"
-msgstr ""
+msgstr "espada larga"
 
 #. [unit_type]: id=Blackguard, race=human
 #: Legend_of_the_Invincibles/units/Blackguard.cfg:19
@@ -45557,7 +45561,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Destroyer.cfg:28
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2417
 msgid "scourge"
-msgstr ""
+msgstr "azote"
 
 #. [advancement]: id=scourge
 #. [advancement]: id=scourge3
@@ -45593,7 +45597,7 @@ msgstr ""
 #. [unit_type]: id=Catapult, race=mechanical
 #: Legend_of_the_Invincibles/units/Catapult.cfg:4
 msgid "Catapult"
-msgstr ""
+msgstr "Catapulta"
 
 #. [unit_type]: id=Catapult, race=mechanical
 #: Legend_of_the_Invincibles/units/Catapult.cfg:16
@@ -45626,7 +45630,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3778
 #: Legend_of_the_Invincibles/utils/items.cfg:76
 msgid "mace"
-msgstr ""
+msgstr "mazo"
 
 #. [attack]: type=arcane
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:154
@@ -45637,7 +45641,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:1377
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:209
 msgid "lightbeam"
-msgstr ""
+msgstr "rayo de luz"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:339
@@ -45652,17 +45656,17 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Shadow_Prince.cfg:264
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:652
 msgid "faster with magic"
-msgstr ""
+msgstr "más rápido con magia"
 
 #. [advancement]: id=mace
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:547
 msgid "faster with mace"
-msgstr ""
+msgstr "más rápido con maza"
 
 #. [advancement]: id=mace2
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:562
 msgid "better with mace"
-msgstr ""
+msgstr "mejor con maza"
 
 #. [advancement]: id=heal
 #. [advancement]: id=heal2
@@ -45689,44 +45693,51 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/amla.cfg:6412
 #: Legend_of_the_Invincibles/utils/amla.cfg:6434
 msgid "able to heal allies better"
-msgstr ""
+msgstr "permite curar mejor a los aliados"
 
 #. [advancement]: id=conviction
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:643
 msgid ""
 "able to make enemies feel their guilt (-15% to non-physical resistances)"
 msgstr ""
+"capaz de hacer que los enemigos sientan culpa (-15% a las resistencias no "
+"físicas)"
 
 #. [advancement]: id=conviction2
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:659
 msgid ""
 "making enemies feel their guilt stronger (-25% to non-physical resistances)"
 msgstr ""
+"hace que los enemigos sientan aún más culpa (-25% a las resistencias no "
+"físicas)"
 
 #. [advancement]: id=conviction3
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:681
 msgid ""
 "making enemies feel their guilt stronger  (-33% to non-physical resistances)"
 msgstr ""
+"hace que los enemigos sientan una intensa culpa (-33% a las resistencias no "
+"físicas)"
 
 #. [advancement]: id=guilt
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:703
 msgid "making enemies' sins burn them from inside (-16 enemy heal)"
 msgstr ""
+"hace que sus enemigos sientan sus pecados quemarles desde dentro (-16 vida)"
 
 #. [advancement]: id=aura_illuminate
 #. [advancement]: id=aura_illuminate2
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:719
 #: Legend_of_the_Invincibles/units/Stormrider.cfg:680
 msgid "able to illuminate even the day"
-msgstr ""
+msgstr "permite iluminar incluso el día"
 
 #. [advancement]: id=aura_illuminate2
 #. [advancement]: id=aura_illuminate3
 #: Legend_of_the_Invincibles/units/Celestial_Messenger.cfg:741
 #: Legend_of_the_Invincibles/units/Stormrider.cfg:702
 msgid "illuminating everything around better"
-msgstr ""
+msgstr "ilumina mejor todo a su alrededor"
 
 #. [unit_type]: id=Champion, race=human
 #: Legend_of_the_Invincibles/units/Champion.cfg:17
@@ -45820,7 +45831,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Champion_Bowman.cfg:232
 #: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:495
 msgid "arrow storm"
-msgstr ""
+msgstr "tormenta de flechas"
 
 #. [advancement]: id=arrowstorm2
 #: Legend_of_the_Invincibles/units/Champion_Bowman.cfg:249
@@ -45892,12 +45903,12 @@ msgstr ""
 #. [attack]: type=fire
 #: Legend_of_the_Invincibles/units/Chaos_Rider.cfg:41
 msgid "flamesword"
-msgstr ""
+msgstr "espada ardiente"
 
 #. [attack]: type=impact
 #: Legend_of_the_Invincibles/units/Chaos_Rider.cfg:50
 msgid "stomp"
-msgstr ""
+msgstr "pisotón"
 
 #. [advancement]: id=sword-incinerate
 #. [advancement]: id=sword4_flames
@@ -45944,7 +45955,7 @@ msgstr ""
 #. [unit_type]: id=Dark Dragon, race=monster
 #: Legend_of_the_Invincibles/units/Dark_Dragon.cfg:4
 msgid "Dark Dragon"
-msgstr ""
+msgstr "Dragón oscuro"
 
 #. [unit_type]: id=Dark Dragon, race=monster
 #: Legend_of_the_Invincibles/units/Dark_Dragon.cfg:21
@@ -45999,12 +46010,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Sky_Goblin.cfg:67
 #: Legend_of_the_Invincibles/units/Werewolf_Rider.cfg:47
 msgid "claws"
-msgstr ""
+msgstr "garras"
 
 #. [attack]: type=arcane
 #: Legend_of_the_Invincibles/units/Dark_Shade.cfg:86
 msgid "soul sip"
-msgstr ""
+msgstr "sorber alma"
 
 #. [advancement]: id=claws
 #. [advancement]: id=claws2
@@ -46017,7 +46028,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Reaper.cfg:352
 #: Legend_of_the_Invincibles/units/Skeletal_Dragon.cfg:332
 msgid "clawing better"
-msgstr ""
+msgstr "golpear mejor con las garras"
 
 #. [advancement]: id=claws3
 #. [advancement]: id=claws2
@@ -46025,30 +46036,30 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Reaper.cfg:337
 #: Legend_of_the_Invincibles/units/Skeletal_Dragon.cfg:347
 msgid "clawing faster"
-msgstr ""
+msgstr "golpear más rápido con las garras"
 
 #. [advancement]: id=sip
 #. [advancement]: id=sip4
 #: Legend_of_the_Invincibles/units/Dark_Shade.cfg:291
 #: Legend_of_the_Invincibles/units/Dark_Shade.cfg:336
 msgid "draining enemies better"
-msgstr ""
+msgstr "drenar mejor a los enemigos"
 
 #. [advancement]: id=sip2
 #: Legend_of_the_Invincibles/units/Dark_Shade.cfg:305
 msgid "draining enemies faster"
-msgstr ""
+msgstr "drenar más rápido a los enemigos"
 
 #. [advancement]: id=sip3
 #: Legend_of_the_Invincibles/units/Dark_Shade.cfg:319
 msgid ""
 "draining more from living, able to drain a bit from the non-living as well"
-msgstr ""
+msgstr "drenar más de los vivos, y drenar un poco de los no vivos también"
 
 #. [unit_type]: id=Deathlord, race=undead
 #: Legend_of_the_Invincibles/units/Deathlord.cfg:4
 msgid "Deathlord"
-msgstr ""
+msgstr "Señor de la muerte"
 
 #. [unit_type]: id=Deathlord, race=undead
 #: Legend_of_the_Invincibles/units/Deathlord.cfg:18
@@ -46080,7 +46091,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:427
 #: Legend_of_the_Invincibles/utils/items.cfg:58
 msgid "axe"
-msgstr ""
+msgstr "hacha"
 
 #. [advancement]: id=doom
 #: Legend_of_the_Invincibles/units/Deathlord.cfg:194
@@ -46099,7 +46110,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Swordmaster.cfg:249
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1222
 msgid "doom"
-msgstr ""
+msgstr "perdición"
 
 #. [advancement]: id=doom2
 #: Legend_of_the_Invincibles/units/Deathlord.cfg:218
@@ -46107,7 +46118,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Orcish_Warmonger.cfg:271
 #: Legend_of_the_Invincibles/units/Swordmaster.cfg:266
 msgid "crippling enemies better"
-msgstr ""
+msgstr "paralizar mejor a los enemigos"
 
 #. [advancement]: id=block
 #: Legend_of_the_Invincibles/units/Deathlord.cfg:233
@@ -46120,7 +46131,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Orcish_Strafer.cfg:352
 #: Legend_of_the_Invincibles/units/Orcish_Warmonger.cfg:314
 msgid "shooting poisonous arrows"
-msgstr ""
+msgstr "disparar flechas venenosas"
 
 #. [advancement]: id=armour
 #: Legend_of_the_Invincibles/units/Deathlord.cfg:320
@@ -46130,7 +46141,7 @@ msgstr ""
 #. [unit_type]: id=Deathshroom, race=monster
 #: Legend_of_the_Invincibles/units/Deathshroom.cfg:4
 msgid "Deathshroom"
-msgstr ""
+msgstr "Seta de la muerte"
 
 #. [unit_type]: id=Deathshroom, race=monster
 #: Legend_of_the_Invincibles/units/Deathshroom.cfg:17
@@ -46144,7 +46155,7 @@ msgstr ""
 #. [regenerate]: id=symbiosis 24
 #: Legend_of_the_Invincibles/units/Deathshroom.cfg:24
 msgid "symbiosis (24)"
-msgstr ""
+msgstr "simbiosis (24)"
 
 #. [regenerate]: id=symbiosis 24
 #: Legend_of_the_Invincibles/units/Deathshroom.cfg:25
@@ -46163,7 +46174,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Deathshroom.cfg:47
 #: Legend_of_the_Invincibles/units/Hatredshroom.cfg:48
 msgid "drains"
-msgstr ""
+msgstr "drena"
 
 #. [drains]: id=drains
 #: Legend_of_the_Invincibles/units/Deathshroom.cfg:48
@@ -46393,39 +46404,39 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/Demon.cfg:204
 msgid "Demoness"
-msgstr ""
+msgstr "Demonia"
 
 #. [unit_type]: id=Demon Despot, race=demon-loti
 #: Legend_of_the_Invincibles/units/Demon_Despot.cfg:4
 msgid "Demon Despot"
-msgstr ""
+msgstr "Demonio déspota"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/Demon_Despot.cfg:215
 msgid "Demoness Despot"
-msgstr ""
+msgstr "Demonia déspota"
 
 #. [female]
 #. [unit_type]: id=Demon Lord, race=demon lord-loti
 #: Legend_of_the_Invincibles/units/Demon_Lord.cfg:172
 #: Legend_of_the_Invincibles/units/Demon_Lord.cfg:4
 msgid "Demon Lord"
-msgstr ""
+msgstr "Señor demonio"
 
 #. [trait]: id=disastrous
 #: Legend_of_the_Invincibles/units/Demon_Lord.cfg:40
 msgid "disastrous"
-msgstr ""
+msgstr "desastroso"
 
 #. [trait]: id=disastrous
 #: Legend_of_the_Invincibles/units/Demon_Lord.cfg:41
 msgid "female^disastrous"
-msgstr ""
+msgstr "desastrosa"
 
 #. [trait]: id=disastrous
 #: Legend_of_the_Invincibles/units/Demon_Lord.cfg:42
 msgid "cleaves"
-msgstr ""
+msgstr "rajar"
 
 #. [unit_type]: id=Demon Lord, race=demon lord-loti
 #. [race]: id=demon lord-loti
@@ -46440,7 +46451,7 @@ msgstr ""
 #. [attack]: type=blade
 #: Legend_of_the_Invincibles/units/Demon_Lord.cfg:65
 msgid "glaive"
-msgstr ""
+msgstr "guja"
 
 #. [unit_type]: id=Demon Manowar, race=demon-loti
 #: Legend_of_the_Invincibles/units/Demon_Manowar.cfg:4
@@ -46510,7 +46521,7 @@ msgstr ""
 #. [attack]: type=arcane
 #: Legend_of_the_Invincibles/units/Demonologist.cfg:34
 msgid "noctum"
-msgstr ""
+msgstr "noctum"
 
 #. [unit_type]: id=Destroyer, race=human
 #: Legend_of_the_Invincibles/units/Destroyer.cfg:20
@@ -46541,7 +46552,7 @@ msgstr ""
 #. [effect]: type=impact
 #: Legend_of_the_Invincibles/units/Destroyer.cfg:203
 msgid "frenzy"
-msgstr ""
+msgstr "delirio"
 
 #. [advancement]: id=berserk2
 #: Legend_of_the_Invincibles/units/Destroyer.cfg:220
@@ -46551,7 +46562,7 @@ msgstr ""
 #. [unit_type]: id=Doom Imp, race=imp-loti
 #: Legend_of_the_Invincibles/units/Doom_Imp.cfg:4
 msgid "Doom Imp"
-msgstr ""
+msgstr "Diablillo maldito"
 
 #. [unit_type]: id=Doom Imp, race=imp-loti
 #: Legend_of_the_Invincibles/units/Doom_Imp.cfg:17
@@ -46563,7 +46574,7 @@ msgstr ""
 #. [unit_type]: id=Dracolich, race=undead
 #: Legend_of_the_Invincibles/units/Dracolich.cfg:4
 msgid "Dracolich"
-msgstr ""
+msgstr "Dracoliche"
 
 #. [unit_type]: id=Dracolich, race=undead
 #: Legend_of_the_Invincibles/units/Dracolich.cfg:32
@@ -46578,7 +46589,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Dracolich.cfg:36
 #: Legend_of_the_Invincibles/units/Skeletal_Dragon.cfg:31
 msgid "jaw"
-msgstr ""
+msgstr "mandíbula"
 
 #. [unit_type]: id=Dragon Rider, race=human
 #: Legend_of_the_Invincibles/units/Dragon_Rider.cfg:4
@@ -46603,7 +46614,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Stormrider.cfg:124
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:1366
 msgid "lance"
-msgstr ""
+msgstr "lanza"
 
 #. [attack]: type=fire
 #. [effect]: type=fire
@@ -46613,7 +46624,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/amla.cfg:1172
 #: Legend_of_the_Invincibles/utils/amla.cfg:2153
 msgid "fire breath"
-msgstr ""
+msgstr "aliento de fuego"
 
 #. [advancement]: id=bite
 #: Legend_of_the_Invincibles/units/Dragon_Rider.cfg:252
@@ -46732,12 +46743,12 @@ msgstr ""
 #. [attack]: type=fire
 #: Legend_of_the_Invincibles/units/Duelist_Wizard.cfg:115
 msgid "missile"
-msgstr ""
+msgstr "misil"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/Duelist_Wizard.cfg:297
 msgid "female^Duelist Wizard"
-msgstr ""
+msgstr "Maga duelista"
 
 #. [advancement]: id=missile
 #. [advancement]: id=missile3
@@ -46815,7 +46826,7 @@ msgstr ""
 #. [unit_type]: id=Duke, race=human
 #: Legend_of_the_Invincibles/units/Duke.cfg:4
 msgid "Duke"
-msgstr ""
+msgstr "Duque"
 
 #. [unit_type]: id=Duke, race=human
 #: Legend_of_the_Invincibles/units/Duke.cfg:34
@@ -46925,12 +46936,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Sprite.cfg:45
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:555
 msgid "battle axe"
-msgstr ""
+msgstr "hacha de batalla"
 
 #. [attack]: type=blade
 #: Legend_of_the_Invincibles/units/Dwarvish_Hero.cfg:123
 msgid "hatchet"
-msgstr ""
+msgstr "hacha de mano"
 
 #. [advancement]: id=axe
 #: Legend_of_the_Invincibles/units/Dwarvish_Hero.cfg:243
@@ -47053,7 +47064,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:115
 #: Legend_of_the_Invincibles/utils/items.cfg:79
 msgid "spear"
-msgstr ""
+msgstr "lanza"
 
 #. [attack]: type=pierce
 #: Legend_of_the_Invincibles/units/Dwarvish_Protector.cfg:58
@@ -47063,7 +47074,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:74
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:126
 msgid "javelin"
-msgstr ""
+msgstr "jabalina"
 
 #. [advancement]: id=spear
 #. [advancement]: id=spear3
@@ -47102,7 +47113,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Voracious_Herb.cfg:54
 #: Legend_of_the_Invincibles/utils/abilities.cfg:177
 msgid "charge"
-msgstr ""
+msgstr "carga"
 
 #. [advancement]: id=adamant
 #: Legend_of_the_Invincibles/units/Dwarvish_Protector.cfg:251
@@ -47133,14 +47144,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:771
 #: Legend_of_the_Invincibles/utils/items.cfg:67
 msgid "dagger"
-msgstr ""
+msgstr "daga"
 
 #. [attack]: type=pierce
 #. [thunderstick]
 #: Legend_of_the_Invincibles/units/Dwarvish_Technocrat.cfg:45
 #: Legend_of_the_Invincibles/utils/items.cfg:88
 msgid "thunderstick"
-msgstr ""
+msgstr "fusil"
 
 #. [advancement]: id=gun
 #. [advancement]: id=gun2
@@ -47179,7 +47190,7 @@ msgstr ""
 #. [effect]
 #: Legend_of_the_Invincibles/units/Dwarvish_Technocrat.cfg:311
 msgid "bullet storm"
-msgstr ""
+msgstr "tormenta de balas"
 
 #. [advancement]: id=storm2
 #: Legend_of_the_Invincibles/units/Dwarvish_Technocrat.cfg:324
@@ -47258,7 +47269,7 @@ msgstr ""
 #. [unit_type]: id=Efraim_god, race=half god_loti
 #: Legend_of_the_Invincibles/units/Efraim_god.cfg:66
 msgid "Demigod"
-msgstr ""
+msgstr "Semidiós"
 
 #. [unit_type]: id=Efraim_god, race=half god_loti
 #. [unit_type]: id=Lethalia_god, race=half god_loti
@@ -47292,7 +47303,7 @@ msgstr "redención"
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1556
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1557
 msgid "whirlwind"
-msgstr ""
+msgstr "torbellino"
 
 #. [advancement]: id=sword1_speed
 #. [advancement]: id=sword5_speed
@@ -47320,7 +47331,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Vritra_later.cfg:550
 #: Legend_of_the_Invincibles/utils/amla.cfg:1446
 msgid "fury (3)"
-msgstr ""
+msgstr "furia (3)"
 
 #. [advancement]: id=berserk3
 #: Legend_of_the_Invincibles/units/Efraim_god.cfg:1285
@@ -47338,7 +47349,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Vritra_later.cfg:574
 #: Legend_of_the_Invincibles/utils/amla.cfg:1467
 msgid "fury (5)"
-msgstr ""
+msgstr "furia (5)"
 
 #. [advancement]: id=berserk1_damage
 #. [advancement]: id=berserk3_damage
@@ -47364,7 +47375,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Phantom.cfg:262
 #: Legend_of_the_Invincibles/units/Shadowalker.cfg:789
 msgid "whirling better"
-msgstr ""
+msgstr "mejor torbellino"
 
 #. [advancement]: id=knives1_backstab
 #: Legend_of_the_Invincibles/units/Efraim_god.cfg:1397
@@ -47439,7 +47450,7 @@ msgstr ""
 #. [effect]: type=cold
 #: Legend_of_the_Invincibles/units/Efraim_god.cfg:1711
 msgid "iceball"
-msgstr ""
+msgstr "bola de hielo"
 
 #. [advancement]: id=iceball2
 #. [advancement]: id=iceball5
@@ -47484,7 +47495,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Efraim_lich-weakened.cfg:109
 #: Legend_of_the_Invincibles/units/Efraim_lich.cfg:195
 msgid "wave of fear"
-msgstr ""
+msgstr "oleada de terror"
 
 #. [advancement]: id=knives1
 #: Legend_of_the_Invincibles/units/Efraim_lich-weakened.cfg:524
@@ -47580,7 +47591,7 @@ msgstr ""
 #. [unit_type]: id=Elder Mage LotI, race=human
 #: Legend_of_the_Invincibles/units/Elder_Mage.cfg:85
 msgid "Elder Mage"
-msgstr ""
+msgstr "Mago anciano"
 
 #. [unit_type]: id=Elder Mage LotI, race=human
 #: Legend_of_the_Invincibles/units/Elder_Mage.cfg:104
@@ -47603,7 +47614,7 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/Elder_Mage.cfg:441
 msgid "female^Elder Mage"
-msgstr ""
+msgstr "Maga anciana"
 
 #. [advancement]: id=fire-penetrate
 #: Legend_of_the_Invincibles/units/Elder_Mage.cfg:679
@@ -47669,7 +47680,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Phoenix.cfg:44
 #: Legend_of_the_Invincibles/utils/amla.cfg:4858
 msgid "fire blast"
-msgstr ""
+msgstr "Explosión ígnea"
 
 #. [advancement]: id=fireblast2
 #. [advancement]: id=fireblast3
@@ -47704,7 +47715,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Elder_Mage.cfg:924
 #: Legend_of_the_Invincibles/utils/amla.cfg:1972
 msgid "curse"
-msgstr ""
+msgstr "maldición"
 
 #. [unit_type]: id=Elvish Assassin, race=elf
 #: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:19
@@ -47720,7 +47731,7 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/Elvish_Assassin.cfg:359
 msgid "female^Elvish Assassin"
-msgstr ""
+msgstr "Asesina elfa"
 
 #. [advancement]: id=bow
 #. [advancement]: id=bow3
@@ -48099,7 +48110,7 @@ msgstr ""
 #. [attack]: type=blade
 #: Legend_of_the_Invincibles/units/Exterminator.cfg:51
 msgid "scythe"
-msgstr ""
+msgstr "guadaña"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/Exterminator.cfg:192
@@ -48178,7 +48189,7 @@ msgstr ""
 #. [unit_type]: id=Fire Dragon loti, race=monster
 #: Legend_of_the_Invincibles/units/Fire_Dragon.cfg:6
 msgid "Fire Dragon"
-msgstr ""
+msgstr "Dragón de fuego"
 
 #. [unit_type]: id=Fire Dragon loti, race=monster
 #: Legend_of_the_Invincibles/units/Fire_Dragon.cfg:24
@@ -48247,7 +48258,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Flower_of_Evil.cfg:67
 #: Legend_of_the_Invincibles/units/Incarnation.cfg:70
 msgid "ensnare"
-msgstr ""
+msgstr "entrampar"
 
 #. [chance_to_hit]: id=marksman
 #: Legend_of_the_Invincibles/units/Flower_of_Evil.cfg:74
@@ -48400,7 +48411,7 @@ msgstr ""
 #. [unit_type]: id=Grim Knight, race=undead
 #: Legend_of_the_Invincibles/units/Grim_Knight.cfg:4
 msgid "Grim Knight"
-msgstr ""
+msgstr "Caballero siniestro"
 
 #. [unit_type]: id=Grim Knight, race=undead
 #: Legend_of_the_Invincibles/units/Grim_Knight.cfg:21
@@ -48527,7 +48538,7 @@ msgstr ""
 #. [unit_type]: id=Ice Spirit, race=monster
 #: Legend_of_the_Invincibles/units/Ice_Spirit.cfg:4
 msgid "Ice Spirit"
-msgstr ""
+msgstr "Espíritu de hielo"
 
 #. [unit_type]: id=Ice Spirit, race=monster
 #: Legend_of_the_Invincibles/units/Ice_Spirit.cfg:33
@@ -48542,18 +48553,18 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Ice_Spirit.cfg:36
 #: Legend_of_the_Invincibles/units/Ice_Wraith.cfg:62
 msgid "icy claws"
-msgstr ""
+msgstr "garras heladas"
 
 #. [attack]: type=cold
 #: Legend_of_the_Invincibles/units/Ice_Spirit.cfg:45
 #: Legend_of_the_Invincibles/units/Ice_Wraith.cfg:71
 msgid "freezing breath"
-msgstr ""
+msgstr "aliento congelante"
 
 #. [unit_type]: id=Ice Wraith, race=monster
 #: Legend_of_the_Invincibles/units/Ice_Wraith.cfg:4
 msgid "Ice Wraith"
-msgstr ""
+msgstr "Espectro de hielo"
 
 #. [unit_type]: id=Ice Wraith, race=monster
 #: Legend_of_the_Invincibles/units/Ice_Wraith.cfg:59
@@ -48568,7 +48579,7 @@ msgstr ""
 #. [unit_type]: id=Imp, race=imp-loti
 #: Legend_of_the_Invincibles/units/Imp.cfg:4
 msgid "Imp"
-msgstr ""
+msgstr "Diablillo"
 
 #. [unit_type]: id=Imp, race=imp-loti
 #: Legend_of_the_Invincibles/units/Imp.cfg:16
@@ -48614,14 +48625,14 @@ msgstr ""
 #. [attack]: type=impact
 #: Legend_of_the_Invincibles/units/Incarnation.cfg:57
 msgid "vine whip"
-msgstr ""
+msgstr "látigo de vid"
 
 #. [attack]: type=pierce
 #. [dummy]: id=thorns
 #: Legend_of_the_Invincibles/units/Incarnation.cfg:83
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1264
 msgid "thorns"
-msgstr ""
+msgstr "espinas"
 
 #. [advancement]: id=melee
 #: Legend_of_the_Invincibles/units/Incarnation.cfg:370
@@ -49152,7 +49163,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Uria.cfg:113
 #: Legend_of_the_Invincibles/units/Uria_avatar.cfg:89
 msgid "gossamer"
-msgstr ""
+msgstr "telaraña"
 
 #. [advancement]: id=staff1_marksman
 #. [advancement]: id=staff2_focused
@@ -49336,7 +49347,7 @@ msgstr ""
 #. [unit_type]: id=Lethalia_lich, race=undead
 #: Legend_of_the_Invincibles/units/Lethalia_lich.cfg:55
 msgid "female^Preserved Lich"
-msgstr ""
+msgstr "Liche preservada"
 
 #. [unit_type]: id=Lethalia_lich, race=undead
 #: Legend_of_the_Invincibles/units/Lethalia_lich.cfg:89
@@ -50070,7 +50081,7 @@ msgstr ""
 #. [unit_type]: id=Elvish Seer, race=elf
 #: Legend_of_the_Invincibles/units/Seer.cfg:4
 msgid "female^Elvish Seer"
-msgstr ""
+msgstr "Vidente élfica"
 
 #. [unit_type]: id=Elvish Seer, race=elf
 #: Legend_of_the_Invincibles/units/Seer.cfg:20
@@ -50297,7 +50308,7 @@ msgstr ""
 #. [unit_type]: id=Skeletal Dragon LotI, race=undead
 #: Legend_of_the_Invincibles/units/Skeletal_Dragon.cfg:4
 msgid "Skeletal Dragon"
-msgstr ""
+msgstr "Dragón esquelético"
 
 #. [unit_type]: id=Skeletal Dragon LotI, race=undead
 #: Legend_of_the_Invincibles/units/Skeletal_Dragon.cfg:24
@@ -53012,7 +53023,7 @@ msgstr ""
 #. [plague]: id=plague({TYPE}), type={TYPE}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:5
 msgid "plague ("
-msgstr ""
+msgstr "plaga ("
 
 #. [plague]: id=plague({TYPE}), type={TYPE}
 #. [resistance]: id=increase_resistance_{POWER}
@@ -53051,7 +53062,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:828
 #: Legend_of_the_Invincibles/utils/utils.cfg:1529
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #. [plague]: id=plague({TYPE}), type={TYPE}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:6
@@ -53836,7 +53847,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:740
 #: Legend_of_the_Invincibles/utils/abilities.cfg:741
 msgid "spiritual attack"
-msgstr ""
+msgstr "ataque espiritual"
 
 #. [damage]: id=spiritual attack
 #: Legend_of_the_Invincibles/utils/abilities.cfg:742
@@ -53895,12 +53906,12 @@ msgstr ""
 #. [heals]: id=unholybane_{INTENSITY}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:810
 msgid "unholybane ("
-msgstr ""
+msgstr "profana ("
 
 #. [heals]: id=unholybane_{INTENSITY}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:811
 msgid "female^unholybane ("
-msgstr ""
+msgstr "profana ("
 
 #. [heals]: id=unholybane_{INTENSITY}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:812
@@ -54040,7 +54051,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:982
 #: Legend_of_the_Invincibles/utils/abilities.cfg:983
 msgid "nocturnal ambush"
-msgstr ""
+msgstr "emboscada nocturna"
 
 #. [hides]: id=nocturnal ambush
 #: Legend_of_the_Invincibles/utils/abilities.cfg:984
@@ -54062,7 +54073,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1003
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1004
 msgid "distant attack"
-msgstr ""
+msgstr "ataque distante"
 
 #. [attacks]: id=distant attack
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1005
@@ -54073,7 +54084,7 @@ msgstr ""
 #. [attacks]: id=anger
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1015
 msgid "anger"
-msgstr ""
+msgstr "ira"
 
 #. [attacks]: id=anger
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1016
@@ -54086,7 +54097,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1027
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1028
 msgid "quickstrike"
-msgstr ""
+msgstr "escaramuza"
 
 #. [attacks]: id=quickstrike
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1029
@@ -54098,7 +54109,7 @@ msgstr ""
 #. [dummy]: id=dazzle
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1038
 msgid "dazzle"
-msgstr ""
+msgstr "deslumbra"
 
 #. [dummy]: id=dazzle
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1039
@@ -54109,7 +54120,7 @@ msgstr ""
 #. [dummy]: id=mind raid
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1045
 msgid "mind raid"
-msgstr ""
+msgstr "incursión mental"
 
 #. [dummy]: id=mind raid
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1046
@@ -54131,7 +54142,7 @@ msgstr ""
 #. [poison]: id=infect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1059
 msgid "infect"
-msgstr ""
+msgstr "infecta"
 
 #. [poison]: id=infect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1060
@@ -54144,7 +54155,7 @@ msgstr ""
 #. [poison]: id=greater infect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1066
 msgid "greater infect"
-msgstr ""
+msgstr "gran infección"
 
 #. [poison]: id=greater infect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1067
@@ -54164,12 +54175,12 @@ msgstr ""
 #. [dummy]: id=necromancy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1080
 msgid "necromancy"
-msgstr ""
+msgstr "necromancia"
 
 #. [dummy]: id=necromancy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1081
 msgid "female^necromancy"
-msgstr ""
+msgstr "necromancia"
 
 #. [dummy]: id=necromancy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1082
@@ -54196,7 +54207,7 @@ msgstr ""
 #. [dummy]: id=triggerable
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1096
 msgid "triggerable"
-msgstr ""
+msgstr "activable"
 
 #. [dummy]: id=triggerable
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1097
@@ -54208,7 +54219,7 @@ msgstr ""
 #. [dummy]: id=vindictive
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1103
 msgid "vindictive"
-msgstr ""
+msgstr "vengativo"
 
 #. [dummy]: id=vindictive
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1104
@@ -54229,12 +54240,12 @@ msgstr ""
 #. [dummy]: id=wrath
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1117
 msgid "wrath"
-msgstr ""
+msgstr "cólera"
 
 #. [dummy]: id=wrath
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1118
 msgid "female^wrath"
-msgstr ""
+msgstr "cólera"
 
 #. [dummy]: id=wrath
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1119
@@ -54263,12 +54274,12 @@ msgstr ""
 #. [dummy]: id=lesser lethargy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1133
 msgid "lesser lethargy"
-msgstr ""
+msgstr "letargo menor"
 
 #. [dummy]: id=lesser lethargy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1134
 msgid "female^lesser lethargy"
-msgstr ""
+msgstr "letargo menor"
 
 #. [dummy]: id=lesser lethargy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1135
@@ -54280,12 +54291,12 @@ msgstr ""
 #. [dummy]: id=hate speech
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1141
 msgid "hate speech"
-msgstr ""
+msgstr "humilla"
 
 #. [dummy]: id=hate speech
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1142
 msgid "female^hate speech"
-msgstr ""
+msgstr "humilla"
 
 #. [dummy]: id=hate speech
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1143
@@ -54297,12 +54308,12 @@ msgstr ""
 #. [dummy]: id=martyrdom
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1149
 msgid "martyrdom"
-msgstr ""
+msgstr "martirio"
 
 #. [dummy]: id=martyrdom
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1150
 msgid "female^martyrdom"
-msgstr ""
+msgstr "martirio"
 
 #. [dummy]: id=martyrdom
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1151
@@ -54350,7 +54361,7 @@ msgstr ""
 #. [dummy]: id=unholy hunger
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1173
 msgid "unholy hunger"
-msgstr ""
+msgstr "hambre impía"
 
 #. [dummy]: id=unholy hunger
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1174
@@ -54366,7 +54377,7 @@ msgstr ""
 #. [dummy]: id=incinerate
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1180
 msgid "incinerate"
-msgstr ""
+msgstr "incinera"
 
 #. [dummy]: id=incinerate
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1181
@@ -54379,7 +54390,7 @@ msgstr ""
 #. [dummy]: id=hit and run
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1187
 msgid "hit and run"
-msgstr ""
+msgstr "ataca y corre"
 
 #. [dummy]: id=hit and run
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1188
@@ -54427,7 +54438,7 @@ msgstr ""
 #. [dummy]: id=cone
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1229
 msgid "cone"
-msgstr ""
+msgstr "cono"
 
 #. [dummy]: id=cone
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1230
@@ -54441,7 +54452,7 @@ msgstr ""
 #. [dummy]: id=hose
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1236
 msgid "hose"
-msgstr ""
+msgstr "regar"
 
 #. [dummy]: id=hose
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1237
@@ -54466,7 +54477,7 @@ msgstr ""
 #. [dummy]: id=wardrums
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1250
 msgid "wardrums"
-msgstr ""
+msgstr "tambores"
 
 #. [dummy]: id=wardrums
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1251
@@ -54478,7 +54489,7 @@ msgstr ""
 #. [dummy]: id=push
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1257
 msgid "push"
-msgstr ""
+msgstr "empujar"
 
 #. [dummy]: id=push
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1258
@@ -54497,7 +54508,7 @@ msgstr ""
 #. [dummy]: id=lesser redeem
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1271
 msgid "lesser redeem"
-msgstr ""
+msgstr "redención menor"
 
 #. [dummy]: id=lesser redeem
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1272
@@ -54510,7 +54521,7 @@ msgstr ""
 #. [dummy]: id=mockery
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1278
 msgid "mockery"
-msgstr ""
+msgstr "mofa"
 
 #. [dummy]: id=mockery
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1279
@@ -54921,7 +54932,7 @@ msgstr ""
 #. [damage]: id=explosive slow
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1528
 msgid "explosive slow"
-msgstr ""
+msgstr "ralentización explosiva"
 
 #. [damage]: id=explosive slow
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1529
@@ -54931,7 +54942,7 @@ msgstr ""
 #. [damage]: id=explosive
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1535
 msgid "explosive"
-msgstr ""
+msgstr "explosivo"
 
 #. [damage]: id=explosive
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1536
@@ -54945,7 +54956,7 @@ msgstr ""
 #. [damage]: id=explosive unprotected
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1542
 msgid "explosive unprotected"
-msgstr ""
+msgstr "explosivo desprotegido"
 
 #. [damage]: id=explosive unprotected
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1543
@@ -54958,7 +54969,7 @@ msgstr ""
 #. [damage]: id=explosive damage enemy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1549
 msgid "explosive damage"
-msgstr ""
+msgstr "daño explosivo"
 
 #. [damage]: id=explosive damage enemy
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1550
@@ -54979,7 +54990,7 @@ msgstr ""
 #. [chance_to_hit]: id=chaos
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1567
 msgid "chaos"
-msgstr ""
+msgstr "caos"
 
 #. [chance_to_hit]: id=chaos
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1568
@@ -54995,7 +55006,7 @@ msgstr ""
 #. [dummy]: id=purify
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1579
 msgid "purify"
-msgstr ""
+msgstr "purifica"
 
 #. [dummy]: id=purify
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1580
@@ -55008,12 +55019,12 @@ msgstr ""
 #. [dummy]: id=penetrate
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1586
 msgid "penetrates"
-msgstr ""
+msgstr "penetra"
 
 #. [dummy]: id=penetrate
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1587
 msgid "female^penetrates"
-msgstr ""
+msgstr "penetra"
 
 #. [dummy]: id=penetrate
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1588
@@ -55025,7 +55036,7 @@ msgstr ""
 #. [dummy]: id=retribution
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1595
 msgid "female^retribution"
-msgstr ""
+msgstr "retribuye"
 
 #. [dummy]: id=retribution
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1596
@@ -55037,12 +55048,12 @@ msgstr ""
 #. [dummy]: id=weak reflect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1602
 msgid "weak reflect"
-msgstr ""
+msgstr "débil reflejo"
 
 #. [dummy]: id=weak reflect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1603
 msgid "female^weak reflect"
-msgstr ""
+msgstr "débil reflejo"
 
 #. [dummy]: id=weak reflect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1604
@@ -55054,12 +55065,12 @@ msgstr ""
 #. [dummy]: id=reflect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1610
 msgid "reflect"
-msgstr ""
+msgstr "refleja"
 
 #. [dummy]: id=reflect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1611
 msgid "female^reflect"
-msgstr ""
+msgstr "refleja"
 
 #. [dummy]: id=reflect
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1612
@@ -55071,12 +55082,12 @@ msgstr ""
 #. [dummy]: id=soul eater
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1618
 msgid "soul eater"
-msgstr ""
+msgstr "comealmas"
 
 #. [dummy]: id=soul eater
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1619
 msgid "female^soul eater"
-msgstr ""
+msgstr "comealmas"
 
 #. [dummy]: id=soul eater
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1620
@@ -55088,12 +55099,12 @@ msgstr ""
 #. [dummy]: id=freezing
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1626
 msgid "freezing aura"
-msgstr ""
+msgstr "aura congelante"
 
 #. [dummy]: id=freezing
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1627
 msgid "female^freezing aura"
-msgstr ""
+msgstr "aura congelante"
 
 #. [dummy]: id=freezing
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1628
@@ -55161,12 +55172,12 @@ msgstr ""
 #. [dummy]: id=northfrost aura
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1659
 msgid "northfrost aura"
-msgstr ""
+msgstr "aura de escarcha"
 
 #. [dummy]: id=northfrost aura
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1660
 msgid "female^northfrost aura"
-msgstr ""
+msgstr "aura de escarcha"
 
 #. [dummy]: id=northfrost aura
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1661
@@ -62304,14 +62315,14 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/global_events.cfg:1065
 #: Legend_of_the_Invincibles/utils/utils.cfg:316
 msgid "highlander"
-msgstr ""
+msgstr "montañés"
 
 #. [value]: id=healthy
 #. [trait]: id=healthy
 #: Legend_of_the_Invincibles/utils/global_events.cfg:1066
 #: Legend_of_the_Invincibles/utils/utils.cfg:317
 msgid "female^highlander"
-msgstr ""
+msgstr "montañesa"
 
 #. [value]: id=healthy
 #. [trait]: id=healthy
@@ -64928,7 +64939,7 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/help.cfg:2647
 msgid "Soul eater ability"
-msgstr ""
+msgstr "Habilidad comealmas"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2651
@@ -65622,7 +65633,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:953
 msgid "Dagger of Shielding"
-msgstr ""
+msgstr "Daga de protección"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:966
@@ -65632,7 +65643,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:969
 msgid "Dagger of Sicarii"
-msgstr ""
+msgstr "Daga de sicarios"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:992
@@ -65914,7 +65925,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1568
 msgid "Dagger of Craving"
-msgstr ""
+msgstr "Daga del anhelo"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1582
@@ -66195,7 +66206,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1984
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9985
 msgid "Glowing Flight"
-msgstr ""
+msgstr "Vuelo brillante"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1993
@@ -66226,7 +66237,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2047
 msgid "Dragonslayer"
-msgstr ""
+msgstr "Cazadragones"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2062
@@ -66558,7 +66569,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2468
 msgid "Dagger of Surprises"
-msgstr ""
+msgstr "Daga de sorpresas"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2480
@@ -68598,7 +68609,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5792
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9877
 msgid "Taxes"
-msgstr ""
+msgstr "Impuestos"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5808
@@ -68621,7 +68632,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5830
 msgid "The Killer of Great Magi"
-msgstr ""
+msgstr "Asesino de grandes magos"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5845
@@ -68633,7 +68644,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5848
 msgid "The Cannon"
-msgstr ""
+msgstr "El cañón"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5861
@@ -69454,7 +69465,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7249
 msgid "Diadem of the Dark Headmaster"
-msgstr ""
+msgstr "Diadema del gran maestro oscuro"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7260
@@ -70602,12 +70613,12 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:10074
 msgid "Deathblade Inheritance"
-msgstr ""
+msgstr "Herencia de espada de la muerte"
 
 #. [specials]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:10083
 msgid "Deathblade"
-msgstr ""
+msgstr "Espada de la muerte"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:10087
@@ -70687,7 +70698,7 @@ msgstr "poción"
 #. [damage]: id=redeem 1
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:5
 msgid "redeem (1)"
-msgstr ""
+msgstr "redención (1)"
 
 #. [damage]: id=redeem 1
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:6
@@ -70704,7 +70715,7 @@ msgstr ""
 #. [damage]: id=redeem 2
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:12
 msgid "redeem (2)"
-msgstr ""
+msgstr "redención (2)"
 
 #. [damage]: id=redeem 2
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:13
@@ -70721,7 +70732,7 @@ msgstr ""
 #. [damage]: id=redeem 3
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:19
 msgid "redeem (3)"
-msgstr ""
+msgstr "redención (3)"
 
 #. [damage]: id=redeem 3
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:20
@@ -70739,7 +70750,7 @@ msgstr ""
 #. [damage]: id=redeem 4
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:26
 msgid "redeem (4)"
-msgstr ""
+msgstr "redención (4)"
 
 #. [damage]: id=redeem 4
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:27
@@ -70757,7 +70768,7 @@ msgstr ""
 #. [damage]: id=redeem 5
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:33
 msgid "redeem (5)"
-msgstr ""
+msgstr "redención (5)"
 
 #. [damage]: id=redeem 5
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:34
@@ -70777,7 +70788,7 @@ msgstr ""
 #. [damage]: id=redeem 6
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:40
 msgid "redeem (6)"
-msgstr ""
+msgstr "redención (6)"
 
 #. [damage]: id=redeem 6
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:41
@@ -70797,7 +70808,7 @@ msgstr ""
 #. [damage]: id=redeem 7
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:47
 msgid "redeem (7)"
-msgstr ""
+msgstr "redención (7)"
 
 #. [damage]: id=redeem 7
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:48
@@ -70817,7 +70828,7 @@ msgstr ""
 #. [damage]: id=redeem 8
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:54
 msgid "redeem (8)"
-msgstr ""
+msgstr "redención (8)"
 
 #. [damage]: id=redeem 8
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:55
@@ -70837,7 +70848,7 @@ msgstr ""
 #. [damage]: id=redeem 9
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:61
 msgid "redeem (9)"
-msgstr ""
+msgstr "redención (9)"
 
 #. [damage]: id=redeem 9
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:62
@@ -70858,7 +70869,7 @@ msgstr ""
 #. [damage]: id=redeem 10
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:68
 msgid "redeem (10)"
-msgstr ""
+msgstr "redención (10)"
 
 #. [damage]: id=redeem 10
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:69
@@ -70879,7 +70890,7 @@ msgstr ""
 #. [damage]: id=redeem 11
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:75
 msgid "redeem (11)"
-msgstr ""
+msgstr "redención (11)"
 
 #. [damage]: id=redeem 11
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:76
@@ -70900,7 +70911,7 @@ msgstr ""
 #. [damage]: id=redeem 12
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:82
 msgid "redeem (12)"
-msgstr ""
+msgstr "redención (12)"
 
 #. [damage]: id=redeem 12
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:83
@@ -70923,7 +70934,7 @@ msgstr ""
 #. [damage]: id=redeem 13
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:89
 msgid "redeem (13)"
-msgstr ""
+msgstr "redención (13)"
 
 #. [damage]: id=redeem 13
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:90
@@ -70946,7 +70957,7 @@ msgstr ""
 #. [damage]: id=redeem 14
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:96
 msgid "redeem (14)"
-msgstr ""
+msgstr "redención (14)"
 
 #. [damage]: id=redeem 14
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:97
@@ -70969,7 +70980,7 @@ msgstr ""
 #. [damage]: id=redeem 15
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:103
 msgid "redeem (15)"
-msgstr ""
+msgstr "redención (15)"
 
 #. [damage]: id=redeem 15
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:104
@@ -70992,7 +71003,7 @@ msgstr ""
 #. [damage]: id=redeem 16
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:110
 msgid "redeem (16)"
-msgstr ""
+msgstr "redención (16)"
 
 #. [damage]: id=redeem 16
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:111
@@ -71015,7 +71026,7 @@ msgstr ""
 #. [damage]: id=redeem 17
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:117
 msgid "redeem (17)"
-msgstr ""
+msgstr "redención (17)"
 
 #. [damage]: id=redeem 17
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:118
@@ -71038,7 +71049,7 @@ msgstr ""
 #. [damage]: id=redeem 18
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:124
 msgid "redeem (18)"
-msgstr ""
+msgstr "redención (18)"
 
 #. [damage]: id=redeem 18
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:125
@@ -71061,7 +71072,7 @@ msgstr ""
 #. [damage]: id=redeem 19
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:131
 msgid "redeem (19)"
-msgstr ""
+msgstr "redención (19)"
 
 #. [damage]: id=redeem 19
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:132
@@ -71084,7 +71095,7 @@ msgstr ""
 #. [damage]: id=redeem 20
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:138
 msgid "redeem (20)"
-msgstr ""
+msgstr "redención (20)"
 
 #. [damage]: id=redeem 20
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:139
@@ -71107,1142 +71118,1142 @@ msgstr ""
 #. [floating_text]
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:466
 msgid "Redeem failed!"
-msgstr ""
+msgstr "¡Redención fallada!"
 
 #. [unstore_unit]
 #: Legend_of_the_Invincibles/utils/redeeming.cfg:1261
 msgid "Redeem recharged!"
-msgstr ""
+msgstr "¡Redención recargada!"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:17
 #: Legend_of_the_Invincibles/utils/titles.cfg:18
 msgid "(name) the (nicknames_property) (nickname_noun)"
-msgstr ""
+msgstr "(name) el (nicknames_property) (nickname_noun)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:21
 msgid "(name) from (place_property) (origin)"
-msgstr ""
+msgstr "(name) de (place_property) (origin)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:24
 msgid "(name) from (places_property) (origins)"
-msgstr ""
+msgstr "(name) de los (places_property) (origins)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:27
 msgid "(name) from where (happening_in_origin)"
-msgstr ""
+msgstr "(name) de donde (happening_in_origin)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:30
 msgid "(name) the (doer_inverse) (of_something_inverse)"
-msgstr ""
+msgstr "(name) el (doer_inverse) (of_something_inverse)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:33
 msgid "(name) who (does_something) (does_in_some_way)"
-msgstr ""
+msgstr "(name) el que (does_something) (does_in_some_way)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:44
 msgid " the (units_property)"
-msgstr ""
+msgstr " el (units_property)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:45
 msgid "female^ the (units_property)"
-msgstr ""
+msgstr " la (units_property)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:48
 msgid " the (short_nickname)"
-msgstr ""
+msgstr " el (short_nickname)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:49
 msgid "female^ the (short_nickname)"
-msgstr ""
+msgstr " la (short_nickname)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:52
 msgid " who (short_activity)"
-msgstr ""
+msgstr " quien (short_activity)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:53
 msgid "female^ who (short_activity)"
-msgstr ""
+msgstr " quien (short_activity)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:60
 msgid "Depraved"
-msgstr ""
+msgstr "depravado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:61
 msgid "female^Depraved"
-msgstr ""
+msgstr "depravada"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:66
 msgid "Vicious"
-msgstr ""
+msgstr "vicioso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:67
 msgid "female^Vicious"
-msgstr ""
+msgstr "viciosa"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:72
 msgid "Lightless"
-msgstr ""
+msgstr "sin luz"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:73
 msgid "female^Lightless"
-msgstr ""
+msgstr "sin luz"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:77
 msgid "Enlightened"
-msgstr ""
+msgstr "ilustrado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:78
 msgid "female^Enlightened"
-msgstr ""
+msgstr "ilustrada"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:83
 msgid "Silent"
-msgstr ""
+msgstr "silencioso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:84
 msgid "female^Silent"
-msgstr ""
+msgstr "silenciosa"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:88
 msgid "Unrelenting"
-msgstr ""
+msgstr "implacable"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:89
 msgid "female^Unrelenting"
-msgstr ""
+msgstr "implacable"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:94
 msgid "Grandiose"
-msgstr ""
+msgstr "grandioso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:95
 msgid "female^Grandiose"
-msgstr ""
+msgstr "grandiosa"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:100
 #: Legend_of_the_Invincibles/utils/titles.cfg:963
 msgid "Ethereal"
-msgstr ""
+msgstr "etéreo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:101
 #: Legend_of_the_Invincibles/utils/titles.cfg:964
 msgid "female^Ethereal"
-msgstr ""
+msgstr "etérea"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:105
 msgid "Noble"
-msgstr ""
+msgstr "noble"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:106
 msgid "female^Noble"
-msgstr ""
+msgstr "noble"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:111
 msgid "Lunatic"
-msgstr ""
+msgstr "lunático"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:112
 msgid "female^Lunatic"
-msgstr ""
+msgstr "lunática"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:118
 msgid "Lawless"
-msgstr ""
+msgstr "sin ley"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:119
 msgid "female^Lawless"
-msgstr ""
+msgstr "sin ley"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:123
 msgid "Humongous"
-msgstr ""
+msgstr "inmenso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:124
 msgid "female^Humongous"
-msgstr ""
+msgstr "inmensa"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:128
 msgid "Vile"
-msgstr ""
+msgstr "vil"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:129
 msgid "female^Vile"
-msgstr ""
+msgstr "vil"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:135
 msgid "Truculent"
-msgstr ""
+msgstr "truculento"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:136
 msgid "female^Truculent"
-msgstr ""
+msgstr "truculenta"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:141
 msgid "Shining"
-msgstr ""
+msgstr "brillante"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:142
 msgid "female^Shining"
-msgstr ""
+msgstr "brillante"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:146
 msgid "Shadowy"
-msgstr ""
+msgstr "sombrío"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:147
 msgid "female^Shadowy"
-msgstr ""
+msgstr "sombría"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:152
 msgid "Stenchful"
-msgstr ""
+msgstr "hediondo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:153
 msgid "female^Stenchful"
-msgstr ""
+msgstr "hedionda"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:158
 msgid "Eerie"
-msgstr ""
+msgstr "inquietante"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:159
 msgid "female^Eerie"
-msgstr ""
+msgstr "inquietante"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:164
 msgid "Flatulent"
-msgstr ""
+msgstr "flatulento"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:165
 msgid "female^Flatulent"
-msgstr ""
+msgstr "flatulenta"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:169
 msgid "Exalted"
-msgstr ""
+msgstr "exaltado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:170
 msgid "female^Exalted"
-msgstr ""
+msgstr "exaltada"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:175
 msgid "Blind"
-msgstr ""
+msgstr "ciego"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:176
 msgid "female^Blind"
-msgstr ""
+msgstr "ciega"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:181
 msgid "Mighty"
-msgstr ""
+msgstr "poderoso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:182
 msgid "female^Mighty"
-msgstr ""
+msgstr "poderosa"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:189
 msgid "Twisted"
-msgstr ""
+msgstr "retorcido"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:190
 msgid "female^Twisted"
-msgstr ""
+msgstr "retorcida"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:195
 msgid "Devious"
-msgstr ""
+msgstr "tortuoso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:196
 msgid "female^Devious"
-msgstr ""
+msgstr "tortuosa"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:202
 msgid "Unyielding"
-msgstr ""
+msgstr "inflexible"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:203
 msgid "female^Unyielding"
-msgstr ""
+msgstr "inflexible"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:212
 #: Legend_of_the_Invincibles/utils/titles.cfg:1051
 msgid "Brute"
-msgstr ""
+msgstr "bruto"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:213
 #: Legend_of_the_Invincibles/utils/titles.cfg:1052
 msgid "female^Brute"
-msgstr ""
+msgstr "bruta"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:217
 msgid "Warrior"
-msgstr ""
+msgstr "guerrero"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:218
 msgid "female^Warrior"
-msgstr ""
+msgstr "guerrera"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:223
 msgid "Spellbinder"
-msgstr ""
+msgstr "orador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:224
 msgid "female^Spellbinder"
-msgstr ""
+msgstr "oradora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:228
 msgid "Sorcerer"
-msgstr ""
+msgstr "hechicero"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:229
 msgid "female^Sorcerer"
-msgstr ""
+msgstr "hechicera"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:234
 msgid "nickname^Destroyer"
-msgstr ""
+msgstr "destructor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:235
 msgid "nickname_female^Destroyer"
-msgstr ""
+msgstr "destructora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:241
 msgid "Killer"
-msgstr ""
+msgstr "homicida"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:242
 msgid "female^Killer"
-msgstr ""
+msgstr "homicida"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:247
 #: Legend_of_the_Invincibles/utils/titles.cfg:769
 msgid "Executioner"
-msgstr ""
+msgstr "ejecutor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:248
 #: Legend_of_the_Invincibles/utils/titles.cfg:770
 msgid "female^Executioner"
-msgstr ""
+msgstr "ejecutora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:253
 #: Legend_of_the_Invincibles/utils/titles.cfg:749
 msgid "Annihilator"
-msgstr ""
+msgstr "aniquilador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:254
 #: Legend_of_the_Invincibles/utils/titles.cfg:750
 msgid "female^Annihilator"
-msgstr ""
+msgstr "aniquiladora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:261
 msgid "Soul"
-msgstr ""
+msgstr "alma"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:262
 msgid "female^Soul"
-msgstr ""
+msgstr "alma"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:266
 msgid "Murderer"
-msgstr ""
+msgstr "matador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:267
 msgid "female^Murderer"
-msgstr ""
+msgstr "matadora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:272
 msgid "Butcher"
-msgstr ""
+msgstr "carnicero"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:273
 msgid "female^Butcher"
-msgstr ""
+msgstr "carnicera"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:279
 msgid "Benefactor"
-msgstr ""
+msgstr "benefactor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:280
 msgid "female^Benefactor"
-msgstr ""
+msgstr "benefactora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:285
 msgid "Horror"
-msgstr ""
+msgstr "horror"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:286
 msgid "female^Horror"
-msgstr ""
+msgstr "horror"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:290
 msgid "Force"
-msgstr ""
+msgstr "fuerza"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:291
 msgid "female^Force"
-msgstr ""
+msgstr "fuerza"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:296
 msgid "Tormentor"
-msgstr ""
+msgstr "atormentador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:297
 msgid "female^Tormentor"
-msgstr ""
+msgstr "atormentadora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:303
 msgid "nickname^Creep"
-msgstr ""
+msgstr "reptador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:304
 msgid "female_nickname^Creep"
-msgstr ""
+msgstr "reptadora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:309
 msgid "Renegade"
-msgstr ""
+msgstr "renegado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:310
 msgid "female^Renegade"
-msgstr ""
+msgstr "renegada"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:319
 msgid "place_property^Bloody"
-msgstr ""
+msgstr "sangriento"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:324
 msgid "place_property^Nether"
-msgstr ""
+msgstr "inferior"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:329
 msgid "place_property^Grim"
-msgstr ""
+msgstr "siniestro"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:333
 msgid "place_property^Sunlit"
-msgstr ""
+msgstr "soleado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:337
 #: Legend_of_the_Invincibles/utils/titles.cfg:355
 msgid "place_property^Unseen"
-msgstr ""
+msgstr "oculto"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:341
 msgid "place_property^Gory"
-msgstr ""
+msgstr "cruento"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:346
 msgid "place_property^Accursed"
-msgstr ""
+msgstr "maldito"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:351
 msgid "place_property^Lawless"
-msgstr ""
+msgstr "sin ley"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:359
 msgid "place_property^Regal"
-msgstr ""
+msgstr "regio"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:364
 msgid "place_property^Twilit"
-msgstr ""
+msgstr "crepúsculo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:369
 msgid "place_property^Hidden"
-msgstr ""
+msgstr "escondido"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:374
 msgid "place_property^Unforgiving"
-msgstr ""
+msgstr "implacable"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:379
 msgid "place_property^Bewitched"
-msgstr ""
+msgstr "embrujado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:384
 msgid "place_property^Astral"
-msgstr ""
+msgstr "astral"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:393
 msgid "nickname_place^Castle"
-msgstr ""
+msgstr "castillo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:398
 msgid "nickname_place^Ruin"
-msgstr ""
+msgstr "ruina"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:403
 msgid "nickname_place^Swamp"
-msgstr ""
+msgstr "pantano"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:409
 msgid "nickname_place^Mountain"
-msgstr ""
+msgstr "montaña"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:413
 msgid "nickname_place^Grave"
-msgstr ""
+msgstr "tumba"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:418
 msgid "nickname_place^Hideout"
-msgstr ""
+msgstr "escondite"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:423
 msgid "nickname_place^Trench"
-msgstr ""
+msgstr "trinchera"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:427
 msgid "nickname_place^Syndicate"
-msgstr ""
+msgstr "sindicato"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:431
 msgid "nickname_place^Shadow"
-msgstr ""
+msgstr "sombra"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:436
 msgid "nickname_place^Order"
-msgstr ""
+msgstr "orden"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:441
 msgid "nickname_place^Necropolis"
-msgstr ""
+msgstr "necrópolis"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:446
 msgid "nickname_place^Darkness"
-msgstr ""
+msgstr "oscuridad"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:451
 msgid "nickname_place^Mead Hall"
-msgstr ""
+msgstr "taberna"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:457
 msgid "nickname_place^Stronghold"
-msgstr ""
+msgstr "fortaleza"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:462
 msgid "nickname_place^Watch"
-msgstr ""
+msgstr "atalaya"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:468
 msgid "nickname_place^Cave"
-msgstr ""
+msgstr "cueva"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:473
 msgid "nickname_place^Prison"
-msgstr ""
+msgstr "prisión"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:478
 msgid "nickname_place^City"
-msgstr ""
+msgstr "ciudad"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:483
 msgid "nickname_place^Academy"
-msgstr ""
+msgstr "academia"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:492
 msgid "Luminous"
-msgstr "Luminoso"
+msgstr "luminosos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:496
 msgid "Hellish"
-msgstr ""
+msgstr "infernales"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:500
 msgid "Foul"
-msgstr ""
+msgstr "sucios"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:505
 msgid "Anarchic"
-msgstr "Anárquico"
+msgstr "anárquicos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:509
 msgid "Fortified"
-msgstr ""
+msgstr "fortificados"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:513
 msgid "Otherwordly"
-msgstr ""
+msgstr "ultramundanos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:517
 msgid "Enchanted"
-msgstr "Encantado"
+msgstr "encantados"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:522
 msgid "Savage"
-msgstr ""
+msgstr "salvajes"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:527
 msgid "Concealed"
-msgstr ""
+msgstr "encubiertos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:532
 msgid "Unruly"
-msgstr ""
+msgstr "indomables"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:537
 msgid "Perverted"
-msgstr ""
+msgstr "perversos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:542
 msgid "Righteous"
-msgstr "Justo"
+msgstr "justos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:547
 msgid "Rebellious"
-msgstr ""
+msgstr "rebeldes"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:553
 msgid "Translucent"
-msgstr ""
+msgstr "translúcidos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:558
 msgid "Menacing"
-msgstr ""
+msgstr "amenazadores"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:563
 msgid "Ominous"
-msgstr ""
+msgstr "ominosos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:568
 msgid "Bloodied"
-msgstr ""
+msgstr "sangrientos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:573
 msgid "Ancient"
-msgstr ""
+msgstr "antiguos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:578
 msgid "Clandestine"
-msgstr ""
+msgstr "clandestinos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:583
 msgid "Mysterious"
-msgstr "Misterioso"
+msgstr "misteriosos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:592
 msgid "Fortresses"
-msgstr ""
+msgstr "fortalezas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:597
 msgid "Meadows"
-msgstr ""
+msgstr "prados"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:607
 msgid "Marshes"
-msgstr ""
+msgstr "marismas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:613
 msgid "Mires"
-msgstr ""
+msgstr "lodazales"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:618
 msgid "Woods"
-msgstr ""
+msgstr "bosques"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:623
 msgid "Sewers"
-msgstr ""
+msgstr "alcantarillas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:627
 msgid "Legions"
-msgstr ""
+msgstr "legiones"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:631
 msgid "Crypts"
-msgstr ""
+msgstr "criptas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:636
 msgid "Temples"
-msgstr "Templos"
+msgstr "templos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:641
 msgid "Webs"
-msgstr ""
+msgstr "telarañas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:646
 msgid "Cells"
-msgstr ""
+msgstr "celdas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:651
 msgid "Pits"
-msgstr ""
+msgstr "fosas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:656
 msgid "Lakes"
-msgstr ""
+msgstr "lagos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:670
 msgid "(good_men) Die"
-msgstr ""
+msgstr "(good_men) muere"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:675
 msgid "(crime) Is (punished)"
-msgstr ""
+msgstr "(crime) es (punished)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:679
 msgid "(nobody) Is Seen"
-msgstr ""
+msgstr "(nobody) es visto"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:684
 msgid "(good_men) Scream"
-msgstr ""
+msgstr "(good_men) grita"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:689
 msgid "(knowledge) Flows"
-msgstr ""
+msgstr "(knowledge) fluye"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:694
 msgid "(crime) Is (everywhere)"
-msgstr ""
+msgstr "(crime) es (everywhere)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:699
 msgid "(virtue) Is (punished)"
-msgstr ""
+msgstr "(virtue) es (punished)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:703
 msgid "(body_parts) Are Teared"
-msgstr ""
+msgstr "(body_parts) despedazadas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:708
 msgid "(secrets) Are Unveiled"
-msgstr ""
+msgstr "(secrets) revelados"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:713
 msgid "(knowledge) Lies (forgotten)"
-msgstr ""
+msgstr "(knowledge) acaba (forgotten)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:718
 msgid "(good_men) Assemble"
-msgstr ""
+msgstr "(good_men) convoca"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:723
 msgid "(nobody) Ever Comes"
-msgstr ""
+msgstr "(nobody) nunca viene"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:728
 msgid "(corpses) are (everywhere)"
-msgstr ""
+msgstr "(corpses) son (everywhere)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:733
 msgid "(weakness) is (punished)"
-msgstr ""
+msgstr "(weakness) es (punished)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:741
 msgid "profession^Destroyer"
-msgstr ""
+msgstr "destructor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:742
 msgid "profession_female^Destroyer"
-msgstr ""
+msgstr "destructor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:745
 msgid "Vanquisher"
-msgstr "Vencedor"
+msgstr "vencedor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:746
 msgid "female^Vanquisher"
-msgstr "Vencedora"
+msgstr "vencedora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:753
 msgid "Punisher"
-msgstr "Castigador"
+msgstr "castigador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:754
 msgid "female^Punisher"
-msgstr "Castigadora"
+msgstr "castigadora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:757
 msgid "Slayer"
-msgstr ""
+msgstr "asesino"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:758
 msgid "female^Slayer"
-msgstr ""
+msgstr "asesina"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:761
 msgid "Liquidator"
-msgstr "Liquidador"
+msgstr "liquidador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:762
 msgid "female^Liquidator"
-msgstr "Liquidadora"
+msgstr "liquidadora"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:765
 msgid "Hater"
-msgstr ""
+msgstr "resentido"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:766
 msgid "female^Hater"
-msgstr ""
+msgstr "resentida"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:777
 msgid "of (crime)"
-msgstr ""
+msgstr "del (crime)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:782
 msgid "of (good_men)"
-msgstr ""
+msgstr "de (good_men)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:787
 msgid "of the Careless"
-msgstr ""
+msgstr "de los despreocupados"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:791
 msgid "of the Corporeal"
-msgstr ""
+msgstr "del corpóreo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:796
 msgid "of Evil Souls"
-msgstr ""
+msgstr "de malignas almas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:801
 msgid "of (kings)"
-msgstr ""
+msgstr "de (kings)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:806
 msgid "of the Unwise"
-msgstr ""
+msgstr "de los insensatos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:810
 msgid "of Legions"
-msgstr ""
+msgstr "de legiones"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:815
 msgid "of the Puny"
-msgstr ""
+msgstr "de los pobres"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:819
 msgid "of the Weak"
-msgstr ""
+msgstr "de los débiles"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:824
 msgid "of the Undeserving"
-msgstr ""
+msgstr "de los indignos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:829
 msgid "of Nightwalkers"
-msgstr ""
+msgstr "de los andasombras"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:837
 msgid "Kills"
-msgstr ""
+msgstr "mata"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:840
 msgid "Destroys"
-msgstr ""
+msgstr "destruye"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:843
 msgid "Wrecks"
-msgstr ""
+msgstr "arruina"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:846
 msgid "Devastates"
-msgstr ""
+msgstr "devasta"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:849
 msgid "Slays"
-msgstr ""
+msgstr "asesina"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:852
 msgid "Rends"
-msgstr ""
+msgstr "desgarra"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:855
 msgid "Spreads Destruction"
-msgstr ""
+msgstr "propaga destrucción"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:861
 msgid "Without (virtue_absence)"
-msgstr ""
+msgstr "sin (virtue_absence)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:864
 msgid "With (power)"
-msgstr ""
+msgstr "con (power)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:867
 msgid "Unstoppably"
-msgstr ""
+msgstr "imparable"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:870
 msgid "Without Parley"
-msgstr ""
+msgstr "sin parlamento"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:873
 msgid "Without a Second Thought"
-msgstr ""
+msgstr "sin pensarlo dos veces"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:876
 msgid "Enthusiastically"
-msgstr ""
+msgstr "entusiastamente"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:879
 msgid "With (joy)"
-msgstr ""
+msgstr "con (joy)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:886
 msgid "Bold"
-msgstr ""
+msgstr "valiente"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:887
 msgid "female^Bold"
-msgstr ""
+msgstr "valiente"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:892
 msgid "Wise"
-msgstr ""
+msgstr "sabio"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:893
 msgid "female^Wise"
-msgstr ""
+msgstr "sabia"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:898
 msgid "Strong"
-msgstr ""
+msgstr "fuerte"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:899
 msgid "female^Strong"
-msgstr ""
+msgstr "fuerte"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:904
 msgid "Powerful"
-msgstr ""
+msgstr "poderoso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:905
 msgid "female^Powerful"
-msgstr ""
+msgstr "poderosa"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:909
 msgid "Hidden"
-msgstr ""
+msgstr "oculto"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:910
 msgid "female^Hidden"
-msgstr ""
+msgstr "oculta"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:914
@@ -72537,169 +72548,169 @@ msgstr ""
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1119
 msgid "the Righteous"
-msgstr "el Justo"
+msgstr "el justo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1122
 msgid "Good Men"
-msgstr ""
+msgstr "buen hombre"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1125
 msgid "Heroes"
-msgstr ""
+msgstr "héroe"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1128
 msgid "the Virtuous"
-msgstr ""
+msgstr "el virtuoso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1134
 msgid "of^Murder"
-msgstr ""
+msgstr "asesinato"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1137
 msgid "of^Theft"
-msgstr ""
+msgstr "robo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1140
 msgid "of^Evil"
-msgstr ""
+msgstr "mal"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1146
 msgid "Banned"
-msgstr ""
+msgstr "proscrito"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1149
 msgid "Prosecuted"
-msgstr ""
+msgstr "enjuiciado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1152
 msgid "Punished"
-msgstr ""
+msgstr "castigado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1158
 msgid "No Man"
-msgstr ""
+msgstr "no hombre"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1161
 msgid "Nobody"
-msgstr ""
+msgstr "nadie"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1164
 msgid "Not a Person"
-msgstr ""
+msgstr "no persona"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1170
 msgid "Wisdom"
-msgstr ""
+msgstr "sabiduría"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1173
 msgid "Knowledge"
-msgstr ""
+msgstr "conocimiento"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1182
 msgid "Omnipresent"
-msgstr ""
+msgstr "omnipresente"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1185
 msgid "Widespread"
-msgstr ""
+msgstr "extenso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1188
 msgid "Everywhere"
-msgstr ""
+msgstr "todas partes"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1194
 msgid "without^Compassion"
-msgstr ""
+msgstr "compasión"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1197
 msgid "without^Mercy"
-msgstr ""
+msgstr "piedad"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1200
 msgid "without^Virtue"
-msgstr ""
+msgstr "virtud"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1206
 #: Legend_of_the_Invincibles/utils/titles.cfg:1317
 msgid "Compassion"
-msgstr ""
+msgstr "compasión"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1209
 #: Legend_of_the_Invincibles/utils/titles.cfg:1314
 msgid "Mercy"
-msgstr ""
+msgstr "piedad"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1212
 msgid "Virtue"
-msgstr ""
+msgstr "virtud"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1218
 msgid "Limbs"
-msgstr ""
+msgstr "miembros"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1221
 msgid "Heads"
-msgstr ""
+msgstr "cabezas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1224
 msgid "Guts"
-msgstr ""
+msgstr "vísceras"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1230
 msgid "nickname_part^Mysteries"
-msgstr ""
+msgstr "misterios"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1233
 msgid "nickname_part^Untold Things"
-msgstr ""
+msgstr "cosas no dichas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1236
 msgid "nickname_part^Secrets"
-msgstr ""
+msgstr "secretos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1242
 msgid "adjective_nickname^Lost"
-msgstr ""
+msgstr "perdido"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1245
 msgid "adjective_nickname^Forgotten"
-msgstr ""
+msgstr "olvidado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1248
 msgid "adjective_nickname^Abandoned"
-msgstr ""
+msgstr "abandonado"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles/utils/titles.cfg:1254
