@@ -648,7 +648,7 @@ function wesnoth.wml_actions.unit_information_part_6()
         end
       end
       if result_soul ~= "" then
-        result_soul = "<span size='large' weight='bold'>Soul eating/redeem/books advancement paths:</span>\n" .. result_soul
+        result_soul = _"<span size='large' weight='bold'>Soul eating/redeem/books advancement paths:</span>\n" .. result_soul
       end
       return result_amla, result_soul
     end
