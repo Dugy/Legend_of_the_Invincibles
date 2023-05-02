@@ -772,17 +772,6 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	end
 	unit_variables.been_given_title = true
 
-	-- If the unit has no name, give it one
-	if u.name == "" then
-		if not u.advances_to or u.advances_to == "null" or u.advances_to == "" then
-			if u.race == "undead" then
-				u.name = undead_names()
-			else
-				u.name = nameless_generator()
-			end
-		end
-	end
-
 	local deserves = false
 	if u.canrecruit then
 		deserves = true
@@ -818,6 +807,15 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 	end
 
 	if deserves then
+		-- If the unit has no name, give it one
+		if u.name == "" then
+			if u.race == "undead" then
+				u.name = undead_names()
+			else
+				u.name = nameless_generator()
+			end
+		end
+		
 		local flavour = loti.util.get_unit_flavour(u)
 
 		-- Make legacy affect flavour, even unset one
