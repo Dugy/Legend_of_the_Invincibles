@@ -815,7 +815,7 @@ function wesnoth.wml_actions.check_unit_title(cfg)
 				u.name = nameless_generator()
 			end
 		end
-		
+
 		local flavour = loti.util.get_unit_flavour(u)
 
 		-- Make legacy affect flavour, even unset one
