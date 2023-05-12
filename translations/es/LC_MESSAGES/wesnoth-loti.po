@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2023-05-08 08:09 UTC\n"
-"PO-Revision-Date: 2023-05-10 02:45+0200\n"
+"PO-Revision-Date: 2023-05-12 17:39+0200\n"
 "Last-Translator: Toranks <toranksmervat@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1735,7 +1735,7 @@ msgstr "Explosión ártica"
 #: Legend_of_the_Invincibles/lua/redeem.lua:74
 #: Legend_of_the_Invincibles/lua/redeem.lua:219
 msgid "Cold resistance penetration"
-msgstr ""
+msgstr "Penetración de resistencia al frío"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:79
 msgid "Entropy (a powerful arcane attack, good for retaliation)"
@@ -1748,27 +1748,27 @@ msgstr "Entropía"
 #: Legend_of_the_Invincibles/lua/redeem.lua:85
 #: Legend_of_the_Invincibles/lua/redeem.lua:230
 msgid "Arcane resistance penetration"
-msgstr ""
+msgstr "Penetración de resistencia a arcano"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:90
 #: Legend_of_the_Invincibles/lua/redeem.lua:235
 msgid "Resist fire"
-msgstr ""
+msgstr "Resiste fuego"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:95
 #: Legend_of_the_Invincibles/lua/redeem.lua:240
 msgid "Resist cold"
-msgstr ""
+msgstr "Resiste frío"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:100
 #: Legend_of_the_Invincibles/lua/redeem.lua:245
 msgid "Resist arcane"
-msgstr ""
+msgstr "Resiste arcano"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:105
 #: Legend_of_the_Invincibles/lua/redeem.lua:250
 msgid "Health (+10 to HP advancements)"
-msgstr ""
+msgstr "Salud (+10 HP en avances de salud)"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:107
 #: Legend_of_the_Invincibles/lua/redeem.lua:252
@@ -1788,36 +1788,36 @@ msgstr "Curar a otros"
 #: Legend_of_the_Invincibles/lua/redeem.lua:121
 #: Legend_of_the_Invincibles/lua/redeem.lua:266
 msgid "Blade resistance penetration"
-msgstr ""
+msgstr "Penetración de resistencia a corte"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:126
 #: Legend_of_the_Invincibles/lua/redeem.lua:271
 msgid "Impact resistance penetration"
-msgstr ""
+msgstr "Penetración de resistencia a impacto"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:131
 #: Legend_of_the_Invincibles/lua/redeem.lua:276
 msgid "Pierce resistance penetration"
-msgstr ""
+msgstr "Penetración de resistencia a penetración"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:136
 #: Legend_of_the_Invincibles/lua/redeem.lua:281
 msgid "Resist blade"
-msgstr ""
+msgstr "Resiste filo"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:141
 #: Legend_of_the_Invincibles/lua/redeem.lua:286
 msgid "Resist pierce"
-msgstr ""
+msgstr "Resiste penetración"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:146
 #: Legend_of_the_Invincibles/lua/redeem.lua:291
 msgid "Resist impact"
-msgstr ""
+msgstr "Resiste impacto"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:151
 msgid "Weapons (improved advancements to weapons' damage)"
-msgstr ""
+msgstr "Armas (mejorados avances de daño de armas)"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:153
 msgid "Weapons"
@@ -1825,7 +1825,7 @@ msgstr "Armas"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:157
 msgid "Magic (improved advancements to magical damage)"
-msgstr ""
+msgstr "Magia (mejorados avances de daño mágico)"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:159
 msgid "Magic"
@@ -1833,7 +1833,7 @@ msgstr "Magia"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:166
 msgid "Spiritual transformation (a very powerful combat technique)"
-msgstr ""
+msgstr "Transformación espiritual (una técnica de combate muy poderosa)"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:190
 msgid ""
@@ -4349,6 +4349,8 @@ msgid ""
 "<i>Believe me. We have to escape by any means necessary. I do not want to "
 "die here.</i> -Lethalia, Queen of Wesnoth"
 msgstr ""
+"<i>Créeme. Tenemos que escapar por cualquier medio necesario. No quiero "
+"morir aquí.</i> -Lethalia, reina de Wesnoth"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:89
@@ -4358,6 +4360,10 @@ msgid ""
 "mountains surrounding them that caused the orcs to choose more accessible "
 "targets."
 msgstr ""
+"Al noreste del bosque de Lintanir, lejos del imperio wesnodiano, se "
+"encuentra un pueblo llamado Ogira. La vida allí era bastante pacífica debido "
+"a las montañas casi infranqueables que la rodeaban, lo que hacía que los "
+"orcos eligiesen objetivos más accesibles."
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:93
@@ -4369,6 +4375,12 @@ msgid ""
 "from a well fortified base. People started to be afraid of the impending "
 "destruction of their homes."
 msgstr ""
+"Pero un día los buenos tiempos llegaron a su fin. Los orcos destruyeron todo "
+"lo que había alrededor y no tenían otros objetivos en su lado de las "
+"montañas. Así que decidieron atravesar las montañas para asaltar y destruir "
+"todo lo que había allí. Capturaron un grupo de fortificaciones en las "
+"montañas y comenzaron a asaltar desde una base bien fortificada. La gente "
+"empezó a tener miedo de la inminente destrucción de sus hogares."
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:97
@@ -4378,46 +4390,50 @@ msgid ""
 "his chest. Although most competent with the sword, his spells sometimes "
 "happened to be useful as well."
 msgstr ""
+"Efraim de Ceise era un noble esgrimista que también dominaba la magia. Había "
+"estudiado magia en unos libros que guardaba en secreto bajo el doble fondo "
+"de su baúl. Aunque era más competente con la espada, sus hechizos a veces "
+"también resultaban útiles."
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:108
 msgid "Pick up the sword"
-msgstr ""
+msgstr "Coge la espada"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:118
 msgid "Collect the gems"
-msgstr ""
+msgstr "Recolecta las gemas"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:128
 msgid "Craft another sword"
-msgstr ""
+msgstr "Fabrica otra espada"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:138
 msgid "Store the sword"
-msgstr ""
+msgstr "Guarda la espada"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:148
 msgid "Take the first sword"
-msgstr ""
+msgstr "Coge la primera espada"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:158
 msgid "Unstore the other sword and give it to Delenia"
-msgstr ""
+msgstr "Saca la otra espada y dásela a Delenia"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:168
 msgid "Make Delenia unequip her armour"
-msgstr ""
+msgstr "Haz que Delenia desequipe su armadura"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:178
 msgid "Drink the potion"
-msgstr ""
+msgstr "Bebe la poción"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:188
@@ -4439,7 +4455,7 @@ msgstr "Vence a Delenia"
 #: Legend_of_the_Invincibles/scenarios1/09_Escape_from_Oblivion.cfg:63
 #: Legend_of_the_Invincibles/scenarios3/15_Nightmare.cfg:87
 msgid "Efraim de Ceise"
-msgstr ""
+msgstr "Efraim de Ceise"
 
 #. [side]: type=09 Fencer, id=Efraim_de_Ceise
 #. [side]: id=Efraim_de_Ceise, type=09 Fencer
@@ -4494,7 +4510,7 @@ msgstr "Omitir"
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:310
 msgid "Hello. I was just walking around, and I decided to see you."
-msgstr ""
+msgstr "Hola. Estaba paseando por aquí y decidí venir a verte."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:314
@@ -4502,11 +4518,13 @@ msgid ""
 "Hello, Delenia. I was thinking about you. You are a leader of a load of "
 "thieves now, am I right?"
 msgstr ""
+"Hola, Delenia. Estaba pensando en ti. Eres la líder de una banda de ladrones "
+"ahora, ¿verdad?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:318
 msgid "Yes. Do you need something stolen?"
-msgstr ""
+msgstr "Sí. ¿Necesitas algo robado?"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:322
@@ -4516,11 +4534,15 @@ msgid ""
 "command them properly. Can you teach me a few things, in case those accursed "
 "orcs attack?"
 msgstr ""
+"No exactamente. Con tu apoyo, me he vuelto un poco más poderoso de lo que "
+"era antes, y ahora tengo algunos soldados propios. Pero no tengo idea de "
+"cómo comandarlos apropiadamente. ¿Puedes enseñarme algunas cosas, en caso de "
+"que esos malditos orcos ataquen?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:326
 msgid "That will be easy. Take that sword there first."
-msgstr ""
+msgstr "Eso será fácil. Toma esa espada de allí primero."
 
 #. [message]: speaker=narrator
 #. [object]
@@ -4543,18 +4565,25 @@ msgid ""
 "\n"
 "Take this item?"
 msgstr ""
+"<span color='#60A0FF'>Aumenta la resistencia a filo en un 15 %</span>\n"
+"<span color='green'>Daño aumentado en 3</span>\n"
+"<span color='green'>Aumenta todo el daño mágico en un 20%</span>\n"
+"<span color='#808080'><i>Krux nunca fue un gran guerrero, la diplomacia del "
+"engaño era su arma favorita.</i></span>\n"
+"\n"
+"¿Coger este objeto?"
 
 #. [option]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:364
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:616
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:898
 msgid "Store it."
-msgstr "Guárdalo"
+msgstr "Guárdala"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:368
 msgid "I told you to take it into your hands, not into your pack."
-msgstr ""
+msgstr "Te dije que la tomaras en tus manos, no en tu mochila."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:377
@@ -4562,13 +4591,15 @@ msgid ""
 "No... I should not break it, it is one of the few things that remind me of "
 "my father..."
 msgstr ""
+"No... no debería romperla, es una de las pocas cosas que me recuerdan a mi "
+"padre..."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:386
 msgid ""
 "I told you to take it! You are just soo lazy... Without me, you would be "
 "nobody!"
-msgstr ""
+msgstr "¡Te dije que la tomaras! Eres tan flojo... ¡Sin mí, no serías nadie!"
 
 #. [object]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:400
@@ -4580,6 +4611,11 @@ msgid ""
 "<span color='#808080'><i>Krux has never been a great warrior, deceptive "
 "diplomacy was his favourite weapon.</i></span>"
 msgstr ""
+"<span color='#60A0FF'>Aumenta la resistencia a filo en un 15 %</span>\n"
+"<span color='green'>Daño aumentado en 3</span>\n"
+"<span color='green'>Aumenta todo el daño mágico en un 20%</span>\n"
+"<span color='#808080'><i>Krux nunca fue un gran guerrero, la diplomacia del "
+"engaño era su arma favorita.</i></span>"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:419
@@ -4587,6 +4623,8 @@ msgid ""
 "Fine, fine. Now, take one of the countless swords laying around, for example "
 "your previous sword, and bind some magic into it."
 msgstr ""
+"Bien, bien. Ahora, toma una de las innumerables espadas que hay por ahí, por "
+"ejemplo, tu espada anterior, e insúflala con un poco de magia."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:423
@@ -4594,17 +4632,22 @@ msgid ""
 "I have some knowledge of magic, but all I know are just some spells, not how "
 "to enchant items."
 msgstr ""
+"Tengo algunos conocimientos de magia, pero todo lo que sé son solo algunos "
+"hechizos, no cómo encantar objetos."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:427
 msgid ""
 "You have to insert some precious gems into it in special constellations."
 msgstr ""
+"Tienes que insertar algunas gemas preciosas en constelaciones especiales."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:431
 msgid "So I have to drill some holes into it and try to find a good position?"
 msgstr ""
+"Entonces, ¿tengo que taladrar algunos agujeros y tratar de encontrar una "
+"buena posición?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:435
@@ -4617,6 +4660,13 @@ msgid ""
 "the line that connects them, on the opposite side of the sword. First, "
 "collect these pieces of obsidian."
 msgstr ""
+"No. Eso llevaría demasiado tiempo. Tengo un libro sobre eso en alguna parte, "
+"lo traeré más tarde. Algunos de ellos requieren componentes dignos del "
+"tesoro de un rey, algunos de ellos son bastante baratos de hacer, pero por "
+"lo general, cuanto más caro es, mejor es. El que recuerdo requiere solo tres "
+"obsidianas. Pon dos de ellas en un lado de la espada y coloca la último en "
+"el medio de la línea que los conecta, en el lado opuesto de la espada. "
+"Primero, recolecta estas piezas de obsidiana."
 
 #. [object]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:457
@@ -4625,6 +4675,9 @@ msgid ""
 "Although this gem looks interesting in appearance, its magical power is "
 "limited. However, in combination with other gems, it can find some use."
 msgstr ""
+"Aunque esta gema parece interesante en apariencia, su poder mágico es "
+"limitado. Sin embargo, en combinación con otras gemas, se le puede encontrar "
+"buen uso."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:494
@@ -4633,6 +4686,9 @@ msgid ""
 "sword, and place the last one into the middle of the line that connects "
 "them, on the opposite side of the sword."
 msgstr ""
+"Ahora, ya has encontrado suficientes de ellas. Pon dos en un lado de la "
+"espada y coloca la última en el medio de la línea que los conecta, en el "
+"lado opuesto de la espada."
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:499
@@ -4640,6 +4696,8 @@ msgid ""
 "Click on Efraim with the right mouse button and select the newly added menu "
 "item, and then select the crafting option."
 msgstr ""
+"Haz clic en Efraim con el botón derecho del ratón, selecciona el nuevo "
+"elemento del menú, y selecciona la opción de Fabricar."
 
 #. [set_menu_item]: id=3dropping
 #. [option]
@@ -4658,7 +4716,7 @@ msgstr "Objetos"
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:549
 msgid "I was not going to pick it up at the moment."
-msgstr ""
+msgstr "No iba a recogerlo en este momento."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:556
@@ -4666,6 +4724,8 @@ msgid ""
 "This sword is not bad, but I prefer the old one. I’ll keep it at hand, "
 "though; somebody else might use it."
 msgstr ""
+"Esta espada no está mal, pero prefiero la antigua. Sin embargo, la mantendré "
+"a mano; alguien más podría usarla."
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:561
@@ -4673,11 +4733,13 @@ msgid ""
 "Click on Efraim with the right mouse button, select the items menu item, "
 "then click on the sword and choose the Unequip option."
 msgstr ""
+"Haz clic en Efraim con el botón derecho del ratón, selecciona el menú de "
+"Objetos, luego haz clic en la espada y elige la opción Desequipar."
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:584
 msgid "Now, walk over the sword and pick it up."
-msgstr ""
+msgstr "Ahora, camina hacia la espada y recógela."
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:603
@@ -4689,31 +4751,38 @@ msgid ""
 "diplomacy was his favourite weapon.</i></span>\n"
 "Take this item?"
 msgstr ""
+"<span color='#60A0FF'>Aumenta la resistencia a filo en un 15 %</span>\n"
+"<span color='green'>Daño aumentado en 3</span>\n"
+"<span color='green'>Aumenta todo el daño mágico en un 20%</span>\n"
+"<span color='#808080'><i>Krux nunca fue un gran guerrero, la diplomacia del "
+"engaño era su arma favorita.</i></span>\n"
+"\n"
+"¿Coger este objeto?"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:620
 msgid "I want to wield that sword in my hands."
-msgstr ""
+msgstr "Quiero empuñar esta espada en mis manos."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:629
 msgid "That would be a waste."
-msgstr ""
+msgstr "Eso sería un desperdicio."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:638
 msgid "You should be strong enough to be able to carry it..."
-msgstr ""
+msgstr "Debes ser lo suficientemente fuerte para poder cargarlo..."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:681
 msgid "What are you trying to look at?"
-msgstr ""
+msgstr "¿Qué estás tratando de mirar?"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:703
 msgid "I want you to take the sword, as a reward for the lesson."
-msgstr ""
+msgstr "Quiero que tomes la espada, como recompensa por la lección."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:707
@@ -4721,6 +4790,7 @@ msgid ""
 "I do not use swords, I prefer daggers. But I could sell it for a handsome "
 "sum."
 msgstr ""
+"No uso espadas, prefiero dagas. Pero podría venderla por una buena suma."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:711
@@ -4728,6 +4798,8 @@ msgid ""
 "With a sword, you can hit much harder. And you can also use it to attack "
 "somebody from behind using the element of surprise."
 msgstr ""
+"Con una espada, puedes golpear mucho más fuerte. Y también puedes usarla "
+"para atacar a alguien por la espalda usando el elemento sorpresa."
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:716
@@ -4735,6 +4807,8 @@ msgid ""
 "Click on Delenia with the right mouse button, select the newly items menu "
 "item, hit item storage and choose to unstore the Twinkling sword."
 msgstr ""
+"Haz clic en Delenia con el botón derecho del ratón, selecciona el menú "
+"Objetos, pulsa en el Inventario y elige eliminar la espada centelleante."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:753
@@ -4744,6 +4818,10 @@ msgid ""
 "agree to take items they are not used to carry. They can hurt themselves "
 "with them easily."
 msgstr ""
+"Bueno, si la llevo conmigo, pero no en mis manos, obtendré algunos "
+"beneficios de sus propiedades mágicas que otorgan un movimiento más rápido. "
+"Pero ninguna otra unidad aceptará llevar objetos que no suelen llevar. "
+"Pueden hacerse daño con ellos fácilmente."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:757
@@ -4751,26 +4829,28 @@ msgid ""
 "Use the sword to fight, it is much better. You do not need to conceal your "
 "weapon, most people know you."
 msgstr ""
+"Usa la espada para luchar, es mucho mejor. No necesitas ocultar tu arma, la "
+"mayoría de la gente te conoce."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:761
 msgid "Hm, maybe..."
-msgstr ""
+msgstr "Mmm, tal vez..."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:765
 msgid "Hm... How about telling her to take that Leather Armour away?"
-msgstr ""
+msgstr "Hum... ¿Qué tal si le dices que se lleve esa armadura de cuero?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:804
 msgid "This was not meant to be a part of this lesson."
-msgstr ""
+msgstr "Esto no se suponía que fuese parte de la lección."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:808
 msgid "I need to learn this too."
-msgstr ""
+msgstr "Yo también necesito aprender esto."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:812
@@ -4778,6 +4858,7 @@ msgid ""
 "Do you want to do this with more female comrades? It would be the best way "
 "to get defeated."
 msgstr ""
+"¿Quieres hacer eso con más mujeres? Sería la mejor manera de ser derrotado."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:816
@@ -4788,21 +4869,27 @@ msgid ""
 "armours the archers have on the melee fighters. And I should not fail at it, "
 "am I right?"
 msgstr ""
+"Supongamos que estamos atacando a un grupo de guerreros orcos. Tenemos "
+"luchadores cuerpo a cuerpo y arqueros, y es probable que los guerreros "
+"enemigos no golpeen a los arqueros que están protegidos por luchadores "
+"cuerpo a cuerpo. Sería útil mover cualquier armadura que los arqueros tengan "
+"sobre los luchadores cuerpo a cuerpo. Es un movimiento ganador, ¿estoy en lo "
+"correcto?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:820
 msgid "I guess your argument is valid, but..."
-msgstr ""
+msgstr "Supongo que tu argumento es válido, pero..."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:833
 msgid "Do not delay or I will attack!"
-msgstr ""
+msgstr "¡No te demores o atacaré!"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:839
 msgid "Take it down!"
-msgstr ""
+msgstr "¡Quítatela!"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:844
@@ -4810,27 +4897,29 @@ msgid ""
 "You look much better now. Good looking enough to manipulate every noble... "
 "and you even chose to use a sword now..."
 msgstr ""
+"Te ves mucho mejor ahora. Lo suficientemente guapa como para manipular a "
+"todos los nobles... e incluso elegiste usar una espada ahora..."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:848
 msgid ""
 "Because it will be easier to smite you with this sword than with a dagger!"
-msgstr ""
+msgstr "¡Porque será más fácil herirte con esta espada que con una daga!"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:852
 msgid "You cannot use your stealth abilities here."
-msgstr ""
+msgstr "No puedes usar tus habilidades de sigilo aquí."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:856
 msgid "But I am stronger than you."
-msgstr ""
+msgstr "Pero soy más fuerte que tú."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:860
 msgid "Wait, let me take that potion there..."
-msgstr ""
+msgstr "Espera, déjame tomar esta poción..."
 
 #. [message]: speaker=narrator
 #. [object]
@@ -4852,16 +4941,24 @@ msgid ""
 "<b>Tutorial Information: The effects of potions wear off as soon as the unit "
 "advances, no matter how many scenarios pass.</b>"
 msgstr ""
+"<span color='orange'>Aumenta las resistencias físicas en un 25%</span>\n"
+"<span color='#808080'><i>Solo la magia puede hacer que el acero se doble "
+"fácilmente cuando sea necesario. ¿O no?</i></span>\n"
+"\n"
+"¿Coger este objeto?\n"
+"\n"
+"<b>Información del tutorial: los efectos de las pociones desaparecen en "
+"cuanto la unidad avanza, sin importar cuántos escenarios pasen.</b>"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:902
 msgid "Haha, and you wanted to fight me?"
-msgstr ""
+msgstr "Jaja, ¿y querías pelear conmigo?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:911
 msgid "Heh, you will lose."
-msgstr ""
+msgstr "Eh, pues vas a perder."
 
 #. [object]
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:925
@@ -4870,21 +4967,24 @@ msgid ""
 "<span color='#808080'><i>Only magic can make steel bend easily only when "
 "needed. Or not?</i></span>"
 msgstr ""
+"<span color='orange'>Aumenta las resistencias físicas en un 25%</span>\n"
+"<span color='#808080'><i>Solo la magia puede hacer que el acero se doble "
+"fácilmente cuando sea necesario. ¿O no?</i></span>"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:960
 msgid "It is too late to switch gear now!"
-msgstr ""
+msgstr "¡Ya es demasiado tarde para cambiar de arma!"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:966
 msgid "En garde!"
-msgstr ""
+msgstr "¡En guardia!"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:975
 msgid "Take her armour down, not mine."
-msgstr ""
+msgstr "Quita su armadura, no la mía."
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:987
@@ -4892,17 +4992,19 @@ msgid ""
 "Are you such a narcissist that you want to gift me by giving a sword to "
 "yourself?"
 msgstr ""
+"¿Eres tan narcisista que quieres regalarme dándote una espada a ti mismo?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:1016
 msgid "Do you need to take a refreshing drink?"
-msgstr ""
+msgstr "¿Necesitas tomar una bebida refrescante?"
 
 #. [message]: speaker=Delenia
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:1030
 msgid ""
 "Something is going on, we should better stop fighting and go to check it out."
 msgstr ""
+"Algo está pasando, será mejor que dejemos de pelear y vayamos a comprobarlo."
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/00_Tutorial.cfg:1040
@@ -4910,6 +5012,9 @@ msgid ""
 "Oh, no! This should not be happening! The bell you can hear sounds like the "
 "signal of an orcish invasion. It seems that your lessons will be very useful."
 msgstr ""
+"¡Oh, no! ¡Esto no debería estar pasando! La campana que puedes escuchar "
+"suena como la señal de una invasión orca. Parece que tus lecciones serán muy "
+"útiles."
 
 #. [scenario]: id=01_An_Orcish_Assault
 #: Legend_of_the_Invincibles/scenarios1/01_An_Orcish_Assault.cfg:4
@@ -4919,7 +5024,7 @@ msgstr "Un asalto orco"
 #. [side]: id=Mario, type=Peasant_Mario
 #: Legend_of_the_Invincibles/scenarios1/01_An_Orcish_Assault.cfg:62
 msgid "Mario"
-msgstr ""
+msgstr "Mario"
 
 #. [side]: id=Lord_Redain, type=General
 #. [side]: type=General, id=Lord_Redain
@@ -4933,7 +5038,7 @@ msgstr "Señor Redain"
 #: Legend_of_the_Invincibles/scenarios1/01_An_Orcish_Assault.cfg:113
 #: Legend_of_the_Invincibles/scenarios6/test_scenario.cfg:287
 msgid "Gromar"
-msgstr ""
+msgstr "Gromar"
 
 #. [side]: id=Gromar, type=Orcish Warrior
 #. [side]: id=Margund, type=Orcish Warlord
