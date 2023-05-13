@@ -404,7 +404,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 
 	if wml.variables["allied_sides"] then
 		wesnoth.add_event_handler {
-			id = "ie" .. x .. y,
+			id = "ie" .. x .. "|" .. y,
 			name = "moveto",
 			first_time_only = "no",
 			wml.tag.filter {
@@ -432,7 +432,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 	-- (see PLACE_ITEM_EVENT for WML version)
 	-- this is a LEGACY version, which uses the "controller" side filter
 		wesnoth.add_event_handler {
-			id = "ie" .. x .. y,
+			id = "ie" .. x .. "|" .. y,
 			name = "moveto",
 			first_time_only = "no",
 			wml.tag.filter {
