@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2023-05-08 08:09 UTC\n"
-"PO-Revision-Date: 2023-05-12 17:39+0200\n"
+"PO-Revision-Date: 2023-06-11 11:48+0200\n"
 "Last-Translator: Toranks <toranksmervat@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. [about]
 #: Legend_of_the_Invincibles/_main.cfg:9
@@ -1338,7 +1338,7 @@ msgstr "Experiencia:</span> "
 #. [lua]: unit_information_part_1
 #: Legend_of_the_Invincibles/lua/main.lua:303
 msgid "Soul eater score:</span> "
-msgstr "Puntos Comealmas</span> "
+msgstr "Puntos Comealmas:</span> "
 
 #. [lua]: unit_information_part_1
 #: Legend_of_the_Invincibles/lua/main.lua:307
@@ -5752,7 +5752,7 @@ msgstr "El asesinato"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/02_The_Assassination.cfg:71
 msgid "Kill Lord Redain"
-msgstr ""
+msgstr "Mata a Lord Redain"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios1/02_The_Assassination.cfg:75
@@ -6092,7 +6092,7 @@ msgstr "Desterrados"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/03_Banished.cfg:27
 msgid "Explore the woods"
-msgstr ""
+msgstr "Explora los bosques"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/03_Banished.cfg:37
@@ -6205,7 +6205,7 @@ msgstr "Vence a Margrund"
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios1/03_Banished.cfg:224
 msgid "Tuns run out"
-msgstr ""
+msgstr "Los turnos se acaban"
 
 #. [message]: speaker=Efraim_de_Ceise
 #: Legend_of_the_Invincibles/scenarios1/03_Banished.cfg:238
@@ -7267,7 +7267,7 @@ msgstr "El retorno"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/07_The_Return.cfg:27
 msgid "Get Efraim to the signpost in the northeast corner of the map"
-msgstr ""
+msgstr "Lleva a Efraim al poste indicador en la esquina noreste del mapa"
 
 #. [side]
 #. [side]: type=Highwayman, id=Bardor
@@ -7444,7 +7444,7 @@ msgstr "Donde el sol no brilla"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/08_Where_the_Sun_Does_not_Shine.cfg:25
 msgid "Escape to the south with Efraim"
-msgstr ""
+msgstr "Escapa al sur con Efraim"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios1/08_Where_the_Sun_Does_not_Shine.cfg:37
@@ -7783,7 +7783,7 @@ msgstr "Escape del olvido"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/09_Escape_from_Oblivion.cfg:25
 msgid "Explore the caves"
-msgstr ""
+msgstr "Explora las cuevas"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/09_Escape_from_Oblivion.cfg:35
@@ -8090,13 +8090,13 @@ msgstr "Ascensión"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:24
 msgid "Enslave the spirits"
-msgstr ""
+msgstr "Esclaviza los espíritus"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:28
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:251
 msgid "Enslavement of Efraim's spirit"
-msgstr ""
+msgstr "El espíritu de Efraim es esclavizado"
 
 #. [objectives]
 #: Legend_of_the_Invincibles/scenarios1/11_Ascension.cfg:31
@@ -8385,7 +8385,7 @@ msgstr "Sol tóxico"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios1/12_Toxic_Sun.cfg:25
 msgid "Find the exit from the caves"
-msgstr ""
+msgstr "Encuentra la salida de las cuevas"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios1/12_Toxic_Sun.cfg:29
@@ -9397,7 +9397,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/01_Despair.cfg:63
 msgid "Reach the northern edge of the map with a leader"
-msgstr ""
+msgstr "Alcanza el borde norte del mapa con un líder"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios10/01_Despair.cfg:67
@@ -9979,7 +9979,7 @@ msgstr "Fimbulinvierno"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/03_Fimbulwinter.cfg:90
 msgid "Reach the western edge of the map with a leader"
-msgstr ""
+msgstr "Alcanza el borde occidental del mapa con un líder"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios10/03_Fimbulwinter.cfg:94
@@ -10298,18 +10298,18 @@ msgstr "Traidores de la humanidad"
 #: Legend_of_the_Invincibles/scenarios10/04_Betrayers_of_Humankind.cfg:34
 #: Legend_of_the_Invincibles/scenarios10/05_The_Chase.cfg:44
 msgid "Deliria"
-msgstr ""
+msgstr "Deliria"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/04_Betrayers_of_Humankind.cfg:91
 msgid "Kill a demon"
-msgstr ""
+msgstr "Mata un demonio"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/04_Betrayers_of_Humankind.cfg:101
 #: Legend_of_the_Invincibles/scenarios10/05_The_Chase.cfg:89
 msgid "Defeat Princess Deliria"
-msgstr ""
+msgstr "Vence a la princesa Deliria"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios10/04_Betrayers_of_Humankind.cfg:115
@@ -10557,7 +10557,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios10/05_The_Chase.cfg:99
 #: Legend_of_the_Invincibles/scenarios8/10_Ruins_of_Wesnoth.cfg:92
 msgid "Defeat the enemies"
-msgstr ""
+msgstr "Vence a los enemigos"
 
 #. [message]: speaker=Vritra
 #: Legend_of_the_Invincibles/scenarios10/05_The_Chase.cfg:150
@@ -11112,7 +11112,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/07_Borders.cfg:182
 msgid "Defeat the enemy leader and take over his keep"
-msgstr ""
+msgstr "Derrota al líder enemigo y captura su torreón"
 
 #. [message]: speaker=Gumbrul
 #: Legend_of_the_Invincibles/scenarios10/07_Borders.cfg:237
@@ -11510,12 +11510,12 @@ msgstr "Imperio del crepúsculo"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/08_Empire_of_Twilight.cfg:228
 msgid "Reach the western border of the map"
-msgstr ""
+msgstr "Alcanza el borde occidental del mapa"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/08_Empire_of_Twilight.cfg:232
 msgid "Find the entrance to the cave where trolls dwell (bonus)"
-msgstr ""
+msgstr "Encuentra la entrada a la cueva donde los troles habitan (bonus)"
 
 #. [message]: speaker=Gumbrul
 #: Legend_of_the_Invincibles/scenarios10/08_Empire_of_Twilight.cfg:272
@@ -11857,7 +11857,7 @@ msgstr "Pueblo corrupto"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/09_Corrupted_Town.cfg:263
 msgid "Reach the temple on northwest"
-msgstr ""
+msgstr "Alcanza el templo en el noroeste"
 
 #. [label]
 #: Legend_of_the_Invincibles/scenarios10/09_Corrupted_Town.cfg:278
@@ -12019,7 +12019,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/10_Idols_Falling.cfg:67
 msgid "Kill everything that moves"
-msgstr ""
+msgstr "Mata todo lo que se mueve"
 
 #. [message]: speaker=Krux
 #: Legend_of_the_Invincibles/scenarios10/10_Idols_Falling.cfg:117
@@ -12448,7 +12448,7 @@ msgstr "Carrera"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/12_Rush.cfg:51
 msgid "Reach the central part of the laboratory"
-msgstr ""
+msgstr "Alcanza la parte central del laboratorio"
 
 #. [message]: speaker=Vritra
 #: Legend_of_the_Invincibles/scenarios10/12_Rush.cfg:476
@@ -12631,7 +12631,7 @@ msgstr "Almas negras"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios10/13_Black_Souls.cfg:110
 msgid "Escape through the caves"
-msgstr ""
+msgstr "Escapa a través de las cuevas"
 
 #. [message]: speaker=Vritra
 #: Legend_of_the_Invincibles/scenarios10/13_Black_Souls.cfg:215
@@ -17138,7 +17138,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1658
 #: Legend_of_the_Invincibles/utils/global_events.cfg:721
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #. [option]
 #: Legend_of_the_Invincibles/scenarios3/01_Thirst_for_Adventures.cfg:495
@@ -17150,7 +17150,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1676
 #: Legend_of_the_Invincibles/utils/global_events.cfg:809
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #. [message]: speaker=Lethalia
 #: Legend_of_the_Invincibles/scenarios3/01_Thirst_for_Adventures.cfg:521
@@ -17177,10 +17177,9 @@ msgstr "Final de un gran héroe"
 
 #. [side]: type=Shadow Prince, id=Muerte
 #: Legend_of_the_Invincibles/scenarios3/01b_Bandits.cfg:54
-#, fuzzy
 #| msgid "Defeat Muerte"
 msgid "Muerte"
-msgstr "Vence a Muerte"
+msgstr "Muerte"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios3/01b_Bandits.cfg:79
@@ -18421,7 +18420,7 @@ msgstr "La venganza de Aquiles"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios3/11_Achilles_Revenge.cfg:269
 msgid "Get to the western border of the map (killing the orcs is optional)"
-msgstr ""
+msgstr "Alcanza el borde occidental del mapa (matar a los orcos es opcional)"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios3/11_Achilles_Revenge.cfg:313
@@ -18985,7 +18984,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios3/13_First_Confrontation.cfg:44
 msgid "Defeat the enemy leader and the dragon"
-msgstr ""
+msgstr "Derrota al líder enemigo y al dragón"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios3/13_First_Confrontation.cfg:133
@@ -19042,12 +19041,12 @@ msgstr "Muerte de Asheviere"
 #. [side]: type=Ancient Warrior, id=ancient_warrior
 #: Legend_of_the_Invincibles/scenarios3/14_Chasing_Dragons.cfg:80
 msgid "Arche"
-msgstr ""
+msgstr "Arche"
 
 #. [side]: type=Rogue, id=Asheviere
 #: Legend_of_the_Invincibles/scenarios3/14_Chasing_Dragons.cfg:164
 msgid "Asheviere"
-msgstr ""
+msgstr "Asheviere"
 
 #. [effect]: type=cold
 #. [attack]: type=cold
@@ -19369,7 +19368,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios3/15_Nightmare.cfg:74
 msgid "Aaaaa! Enemies everywhere!!!"
-msgstr ""
+msgstr "¡Aaaaah! ¡¡¡Enemigos por todas partes!!!"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios3/15_Nightmare.cfg:78
@@ -19510,7 +19509,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/01_He_Came_Down_From_The_Mountains.cfg:28
 msgid "Help Ekrathan to kill Vlad"
-msgstr ""
+msgstr "Ayuda a Ekrathan a matar a Vlad"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios4/01_He_Came_Down_From_The_Mountains.cfg:32
@@ -19547,17 +19546,17 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios4/01_He_Came_Down_From_The_Mountains.cfg:96
 #: Legend_of_the_Invincibles/scenarios4/01_He_Came_Down_From_The_Mountains.cfg:106
 msgid "Rebels"
-msgstr ""
+msgstr "Rebeldes"
 
 #. [side]: type=Huntsman, id=Ekrathan
 #: Legend_of_the_Invincibles/scenarios4/01_He_Came_Down_From_The_Mountains.cfg:101
 msgid "Ekrathan"
-msgstr ""
+msgstr "Ekrathan"
 
 #. [side]: id=Vlad, type=Vampire General
 #: Legend_of_the_Invincibles/scenarios4/01_He_Came_Down_From_The_Mountains.cfg:144
 msgid "Vlad"
-msgstr ""
+msgstr "Vlad"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios4/01_He_Came_Down_From_The_Mountains.cfg:167
@@ -19837,7 +19836,7 @@ msgstr "En nuestra tierra helada"
 #: Legend_of_the_Invincibles/scenarios4/07_Nemesis.cfg:258
 #: Legend_of_the_Invincibles/utils/item_list.cfg:8750
 msgid "Chaos"
-msgstr ""
+msgstr "Caos"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios4/02_Into_Our_Frozen_Land.cfg:129
@@ -20003,12 +20002,12 @@ msgstr "Comienza la revolución"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/03_Revolution_Begins.cfg:30
 msgid "Get to the castle at the centre of the city with Efraim"
-msgstr ""
+msgstr "Alcanza el castillo del centro de la ciudad con Efraim"
 
 #. [objectives]
 #: Legend_of_the_Invincibles/scenarios4/03_Revolution_Begins.cfg:41
 msgid "No gold will be carried into next scenario."
-msgstr ""
+msgstr "No se conservará el oro en el siguiente escenario"
 
 #. [side]
 #: Legend_of_the_Invincibles/scenarios4/03_Revolution_Begins.cfg:129
@@ -20574,7 +20573,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/05_Meeting_of_the_Ancients.cfg:30
 msgid "Find Malin Keshar"
-msgstr ""
+msgstr "Encuentra a Malin Keshar"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios4/05_Meeting_of_the_Ancients.cfg:38
@@ -20584,7 +20583,7 @@ msgstr "Destrucción de Malin Keshar"
 #. [objectives]
 #: Legend_of_the_Invincibles/scenarios4/05_Meeting_of_the_Ancients.cfg:45
 msgid "No gold will be carried over to next scenario."
-msgstr ""
+msgstr "No se conservará el oro en el siguiente escenario"
 
 #. [message]: speaker=Lethalia
 #: Legend_of_the_Invincibles/scenarios4/05_Meeting_of_the_Ancients.cfg:238
@@ -20600,7 +20599,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios4/15_The_Library.cfg:443
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:228
 msgid "The Prince"
-msgstr ""
+msgstr "El príncipe"
 
 #. [message]: speaker=The Prince
 #: Legend_of_the_Invincibles/scenarios4/05_Meeting_of_the_Ancients.cfg:261
@@ -21075,7 +21074,7 @@ msgstr "Némesis"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/07_Nemesis.cfg:33
 msgid "Kill Argan"
-msgstr ""
+msgstr "Mata a Argan"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios4/07_Nemesis.cfg:279
@@ -21686,7 +21685,7 @@ msgstr "Tratando con troles"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/10_Dealing_with_Trolls.cfg:44
 msgid "Get to the leader of the trolls killing as few trolls as possible"
-msgstr ""
+msgstr "Alcanza al líder de los troles matando cuanto menos troles sea posible"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios4/10_Dealing_with_Trolls.cfg:132
@@ -21805,7 +21804,7 @@ msgstr ""
 #. [scenario]: id=11_Invasion
 #: Legend_of_the_Invincibles/scenarios4/11_Invasion.cfg:4
 msgid "Invasion"
-msgstr ""
+msgstr "Invasión"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios4/11_Invasion.cfg:31
@@ -21842,12 +21841,12 @@ msgstr "Muerte del Jinete de la tormenta o Lendas"
 #. [side]: type=Elder Mage, id=Dhartuur
 #: Legend_of_the_Invincibles/scenarios4/11_Invasion.cfg:237
 msgid "Dhartuur"
-msgstr ""
+msgstr "Dhartuur"
 
 #. [side]: type=Grand Marshal, id=Zhelyezin
 #: Legend_of_the_Invincibles/scenarios4/11_Invasion.cfg:282
 msgid "Zhelyezin"
-msgstr ""
+msgstr "Zhelyezin"
 
 #. [message]: speaker=Lethalia
 #: Legend_of_the_Invincibles/scenarios4/11_Invasion.cfg:336
@@ -22212,7 +22211,7 @@ msgstr ""
 #. [scenario]: id=12_Bloodbath
 #: Legend_of_the_Invincibles/scenarios4/12_Bloodbath.cfg:4
 msgid "Bloodbath"
-msgstr ""
+msgstr "Baño de sangre"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios4/12_Bloodbath.cfg:69
@@ -22227,12 +22226,12 @@ msgstr ""
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios4/12_Bloodbath.cfg:86
 msgid "Death of Stormrider"
-msgstr ""
+msgstr "Muerte del Jinete de la tormenta"
 
 #. [objectives]
 #: Legend_of_the_Invincibles/scenarios4/12_Bloodbath.cfg:89
 msgid "No gold will be carried over to the next scenario."
-msgstr ""
+msgstr "No se conservará el oro en el siguiente escenario."
 
 #. [side]: type=Royal Warrior, id=boss
 #. [side]: id=royal1, type=Royal Warrior
@@ -22396,7 +22395,7 @@ msgstr ""
 #. [scenario]: id=13_The_Way_of_Assassins
 #: Legend_of_the_Invincibles/scenarios4/13_The_Way_of_Assassins.cfg:4
 msgid "The Way of Assassins"
-msgstr ""
+msgstr "El camino de los asesinos"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios4/13_The_Way_of_Assassins.cfg:122
@@ -22493,6 +22492,8 @@ msgid ""
 "Kill Lord Revan, Lord Roth and Lord Kartyn and get to the castle on the "
 "eastern border of the map"
 msgstr ""
+"Mata a Lord Revan, Lord Roth y Lord Kartyn y alcanza el castillo en el "
+"extremo este del mapa"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios4/13_The_Way_of_Assassins.cfg:357
@@ -22749,7 +22750,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios4/15_The_Library.cfg:4
 #: Legend_of_the_Invincibles/scenarios6/12_The_Library.cfg:5
 msgid "The Library"
-msgstr ""
+msgstr "La librería"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/15_The_Library.cfg:70
@@ -22757,6 +22758,8 @@ msgid ""
 "Find the central part of the library, where the important knowledge is kept, "
 "and defeat its guardian"
 msgstr ""
+"Encuentra la parte central de la biblioteca, donde se guarda el conocimiento "
+"importante, y derrota a su guardián"
 
 #. [message]: speaker=mage1
 #: Legend_of_the_Invincibles/scenarios4/15_The_Library.cfg:206
@@ -23051,12 +23054,12 @@ msgstr ""
 #. [scenario]: id=15s_The_Speech
 #: Legend_of_the_Invincibles/scenarios4/15s_The_Speech.cfg:5
 msgid "The Speech"
-msgstr ""
+msgstr "El discurso"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/15s_The_Speech.cfg:84
 msgid "Persuade the folks"
-msgstr ""
+msgstr "Persuade a la gente"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios4/15s_The_Speech.cfg:187
@@ -23188,27 +23191,27 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:40
 msgid "Find the supreme being and approach him with Lethalia"
-msgstr ""
+msgstr "Encuentra al ser supremo y acércate a él con Lethalia"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:44
 msgid "Kill the prince"
-msgstr ""
+msgstr "Mata al príncipe"
 
 #. [unit]: type=Elvish Overlord, id=native1
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:81
 msgid "Verderber"
-msgstr ""
+msgstr "Verderber"
 
 #. [unit]: type=Ancient Lich, id=native4
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:106
 msgid "Avar'eth"
-msgstr ""
+msgstr "Avar'eth"
 
 #. [unit]: type=Mermaid Siren, id=native5
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:113
 msgid "Luala"
-msgstr ""
+msgstr "Luala"
 
 #. [unit]: type=Shadowalker, id=native6
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:120
@@ -23218,7 +23221,7 @@ msgstr "Aquiles"
 #. [side]
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:145
 msgid "Prince"
-msgstr ""
+msgstr "Príncipe"
 
 #. [message]: speaker=Lethalia
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:168
@@ -24554,7 +24557,7 @@ msgstr ""
 #. [scenario]: id=02_Escape
 #: Legend_of_the_Invincibles/scenarios5/02_Escape.cfg:4
 msgid "Escape"
-msgstr ""
+msgstr "Escape"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios5/02_Escape.cfg:19
@@ -24564,7 +24567,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios5/02_Escape.cfg:27
 msgid "Move close to the ship with Efraim or Lethalia"
-msgstr ""
+msgstr "Acércate al barco con Efraim o Lethalia"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios5/02_Escape.cfg:108
@@ -24605,7 +24608,7 @@ msgstr ""
 #. [scenario]: id=03_Pirates
 #: Legend_of_the_Invincibles/scenarios5/03_Pirates.cfg:4
 msgid "Pirates"
-msgstr ""
+msgstr "Piratas"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios5/03_Pirates.cfg:23
@@ -24626,7 +24629,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios5/03_Pirates.cfg:51
 msgid "Defeat the enemy leader at the northeast part of the island"
-msgstr ""
+msgstr "Derrota al líder enemigo en la zona noreste de la isla"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios5/03_Pirates.cfg:227
@@ -24722,7 +24725,7 @@ msgstr ""
 #. [scenario]: id=04_Again
 #: Legend_of_the_Invincibles/scenarios5/04_Again.cfg:4
 msgid "Again"
-msgstr ""
+msgstr "De nuevo"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios5/04_Again.cfg:30
@@ -24907,24 +24910,24 @@ msgstr ""
 #. [scenario]: id=05_We_Walk_in_the_Shadows
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:4
 msgid "We Walk in the Shadows"
-msgstr ""
+msgstr "Caminamos en las sombras"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:66
 msgid "Get near Taruk the Mage without raising the alarm"
-msgstr ""
+msgstr "Acércate a Taruk el mago sin dar la alarma"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:76
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:609
 #: Legend_of_the_Invincibles/scenarios5/23_Akulas_Place.cfg:47
 msgid "Defeat Akula"
-msgstr ""
+msgstr "Derrota a Akula"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:86
 msgid "Get attacked by a guard"
-msgstr ""
+msgstr "Ser atacado por un guardia"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:185
@@ -25184,7 +25187,7 @@ msgstr ""
 #. [scenario]: id=06_The_Real_Enemy
 #: Legend_of_the_Invincibles/scenarios5/06_The_Real_Enemy.cfg:4
 msgid "The Real Enemy"
-msgstr ""
+msgstr "El verdadero enemigo"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios5/06_The_Real_Enemy.cfg:35
@@ -25660,7 +25663,7 @@ msgstr "Acechador"
 #: Legend_of_the_Invincibles/scenarios5/09_Northwestern_Storeroom.cfg:143
 #: Legend_of_the_Invincibles/utils/item_list.cfg:339
 msgid "Nocturnal Cloak"
-msgstr ""
+msgstr "Capa nocturna"
 
 #. [scenario]: id=09_Northwestern_Storeroom
 #. [scenario]: id=10_Guards_Quarters
@@ -25671,12 +25674,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/11_Northern_Guardian_Room.cfg:146
 #: Legend_of_the_Invincibles/scenarios5/12_Amplificator1.cfg:165
 msgid "Guards' Quarters"
-msgstr ""
+msgstr "Cuarteles de la guardia"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios5/10_Guards_Quarters.cfg:42
 msgid "Kill 50 soldiers (not your own)"
-msgstr ""
+msgstr "Mata 50 soldados (no de los tuyos)"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios5/10_Guards_Quarters.cfg:101
@@ -25711,7 +25714,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/26_Library.cfg:149
 #: Legend_of_the_Invincibles/scenarios5/28_War_Zone.cfg:192
 msgid "Amplificator 1"
-msgstr ""
+msgstr "Amplificador 1"
 
 #. [scenario]: id=10_Guards_Quarters
 #. [scenario]: id=11_Northern_Guardian_Room
@@ -25720,7 +25723,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/11_Northern_Guardian_Room.cfg:4
 #: Legend_of_the_Invincibles/scenarios5/23_Akulas_Place.cfg:1157
 msgid "Northern Guardian Room"
-msgstr ""
+msgstr "Cuarto norte de la guardia"
 
 #. [scenario]: id=11_Northern_Guardian_Room
 #. [scenario]: id=18_Eastern_Guardian_Room
@@ -25738,7 +25741,7 @@ msgstr ""
 #. [scenario]: id=12_Amplificator_1
 #: Legend_of_the_Invincibles/scenarios5/12_Amplificator1.cfg:4
 msgid "Magic Power Amplificator 1"
-msgstr ""
+msgstr "Amplificador de poder mágico 1"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios5/12_Amplificator1.cfg:45
@@ -25746,7 +25749,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/17_Amplificator3.cfg:42
 #: Legend_of_the_Invincibles/scenarios5/22_Amplificator4.cfg:42
 msgid "Destroy the power amplificator"
-msgstr ""
+msgstr "Destruye el amplificador de poder"
 
 #. [side]: id=amplificator, type=Amplificator
 #: Legend_of_the_Invincibles/scenarios5/12_Amplificator1.cfg:92
@@ -25754,7 +25757,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/17_Amplificator3.cfg:88
 #: Legend_of_the_Invincibles/scenarios5/22_Amplificator4.cfg:89
 msgid "Magic Power Amplificator"
-msgstr ""
+msgstr "Amplificador de poder mágico"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios5/12_Amplificator1.cfg:120
@@ -25943,7 +25946,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/item_list.cfg:253
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9927
 msgid "Ring of Unearthly Existence"
-msgstr ""
+msgstr "Anillo de existencia sobrenatural"
 
 #. [message]: speaker=trader
 #. [object]
@@ -26939,7 +26942,7 @@ msgstr ""
 #. [scenario]: id=01_The_Awakening
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:4
 msgid "The Awakening"
-msgstr ""
+msgstr "El despertar"
 
 #. [scenario]: id=01_The_Awakening
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:17
@@ -26951,13 +26954,13 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:24
 msgid "Find the friend"
-msgstr ""
+msgstr "Encuentra el amigo"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:34
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:303
 msgid "Escape the tomb"
-msgstr ""
+msgstr "Escapa de la tumba"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:67
@@ -27093,7 +27096,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:23
 msgid "Defeat the enemy"
-msgstr ""
+msgstr "Derrota al enemigo"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:33
@@ -30624,7 +30627,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/04_Last_Survivors.cfg:139
 msgid "Defeat the enemy leader blocking the way north"
-msgstr ""
+msgstr "Derrota al líder enemigo que bloquea el camino al norte"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios7/04_Last_Survivors.cfg:157
@@ -35076,7 +35079,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:128
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:36
 msgid "spectral"
-msgstr ""
+msgstr "espectral "
 
 #. [trait]: id=spectral
 #: Legend_of_the_Invincibles/scenarios8/03_United.cfg:1306
@@ -35086,7 +35089,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:129
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:37
 msgid "female^spectral"
-msgstr ""
+msgstr "espectral "
 
 #. [trait]: id=spectral
 #: Legend_of_the_Invincibles/scenarios8/03_United.cfg:1307
@@ -40829,7 +40832,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios9/33_Pandemonium.cfg:4
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:242
 msgid "Pandemonium"
-msgstr "Pandemonium"
+msgstr "Pandemonio"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios9/33_Pandemonium.cfg:233
@@ -45510,7 +45513,7 @@ msgstr "bastón de plaga"
 #. [female]
 #: Legend_of_the_Invincibles/units/Arch_Necromancer.cfg:193
 msgid "female^Arch Necromancer"
-msgstr ""
+msgstr "Archinigromanta"
 
 #. [advancement]: id=melee3
 #: Legend_of_the_Invincibles/units/Arch_Necromancer.cfg:325
@@ -46817,7 +46820,7 @@ msgstr "mandíbula"
 #. [unit_type]: id=Dragon Rider, race=human
 #: Legend_of_the_Invincibles/units/Dragon_Rider.cfg:4
 msgid "Dragon Rider"
-msgstr ""
+msgstr "Jinete de dragón"
 
 #. [unit_type]: id=Dragon Rider, race=human
 #: Legend_of_the_Invincibles/units/Dragon_Rider.cfg:45
@@ -47487,7 +47490,7 @@ msgstr "mejor en combate a distancia"
 #: Legend_of_the_Invincibles/units/Lilith_ally.cfg:812
 #: Legend_of_the_Invincibles/units/Warlock.cfg:995
 msgid "better at dodging (lowering the chance to be hit by 2%)"
-msgstr "mejor esquivando (reduce la probabilidad deser golpeado en 2%)"
+msgstr "mejor esquivando (reduce la probabilidad de ser golpeado en 2%)"
 
 #. [unit_type]: id=Efraim_god, race=half god_loti
 #: Legend_of_the_Invincibles/units/Efraim_god.cfg:66
@@ -47832,7 +47835,7 @@ msgstr ""
 #. [attack]: type=arcane
 #: Legend_of_the_Invincibles/units/Elder_Mage.cfg:128
 msgid "unearthly lightning"
-msgstr ""
+msgstr "relampago sobrenatural"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/Elder_Mage.cfg:441
@@ -48026,7 +48029,7 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/Elvish_Gryphon_Rider.cfg:221
 msgid "female^Elvish Gryphon Rider"
-msgstr ""
+msgstr "Jinete de grifo elfa"
 
 #. [advancement]: id=melee
 #. [advancement]: id=melee2
@@ -48183,7 +48186,7 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/Elvish_Nightprowler.cfg:159
 msgid "female^Elvish Nightprowler"
-msgstr ""
+msgstr "Merodeadora elfa"
 
 #. [advancement]: id=bow2
 #: Legend_of_the_Invincibles/units/Elvish_Nightprowler.cfg:253
@@ -49842,7 +49845,7 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/Necromancer.cfg:252
 msgid "female^Necromancer"
-msgstr ""
+msgstr "Nigromante"
 
 #. [unit_type]: id=Orcish Nightblade loti, race=orc
 #: Legend_of_the_Invincibles/units/Orcish_Nightblade.cfg:4
@@ -50406,7 +50409,7 @@ msgstr "explosión mágica"
 #. [female]
 #: Legend_of_the_Invincibles/units/Shadow_Prince.cfg:126
 msgid "Shadow Princess"
-msgstr ""
+msgstr "Princesa de las sombras"
 
 #. [advancement]: id=quarterstaff
 #. [advancement]: id=quarterstaff4
@@ -50714,7 +50717,7 @@ msgstr ""
 #. [unit_type]: id=Soul Shooter, race=undead
 #: Legend_of_the_Invincibles/units/Soul_Shooter.cfg:4
 msgid "Soul Shooter"
-msgstr ""
+msgstr "Disparaalmas"
 
 #. [unit_type]: id=Soul Shooter, race=undead
 #: Legend_of_the_Invincibles/units/Soul_Shooter.cfg:17
@@ -50758,7 +50761,7 @@ msgstr ""
 #. [unit_type]: id=Spell Eater, race=monster
 #: Legend_of_the_Invincibles/units/Spell_Eater.cfg:4
 msgid "Spell Eater"
-msgstr ""
+msgstr "Devorahechizos"
 
 #. [unit_type]: id=Spell Eater, race=monster
 #: Legend_of_the_Invincibles/units/Spell_Eater.cfg:17
@@ -50772,7 +50775,7 @@ msgstr ""
 #. [unit_type]: id=Spider Demon, race=demon-loti
 #: Legend_of_the_Invincibles/units/Spider_Demon.cfg:4
 msgid "Spider Demon"
-msgstr ""
+msgstr "Araña demonio"
 
 #. [unit_type]: id=Spider Demon, race=demon-loti
 #: Legend_of_the_Invincibles/units/Spider_Demon.cfg:42
@@ -50790,7 +50793,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:109
 #: Legend_of_the_Invincibles/units/demons_race.cfg:5
 msgid "powerful"
-msgstr ""
+msgstr "poderoso"
 
 #. [trait]: id=powerful
 #: Legend_of_the_Invincibles/units/Spider_Demon.cfg:50
@@ -50798,7 +50801,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:110
 #: Legend_of_the_Invincibles/units/demons_race.cfg:6
 msgid "female^powerful"
-msgstr ""
+msgstr "poderosa"
 
 #. [trait]: id=powerful
 #. [trait]: id=devastative
@@ -51618,7 +51621,7 @@ msgstr ""
 #. [unit_type]: id=Corrupted Elvish Nightprowler, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:793
 msgid "Corrupted Elvish Nightprowler"
-msgstr ""
+msgstr "Merodeador elfo corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Juggernaut, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:894
@@ -52853,12 +52856,12 @@ msgstr ""
 #. [race]: id=half god_loti
 #: Legend_of_the_Invincibles/units/half_god_race.cfg:4
 msgid "race^Half-god"
-msgstr ""
+msgstr "Semidiós"
 
 #. [race]: id=half god_loti
 #: Legend_of_the_Invincibles/units/half_god_race.cfg:5
 msgid "race^Half-gods"
-msgstr ""
+msgstr "Semidioses"
 
 #. [race]: id=half god_loti
 #: Legend_of_the_Invincibles/units/half_god_race.cfg:7
@@ -52871,7 +52874,7 @@ msgstr ""
 #. [unit_type]: id=Spearman_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:35
 msgid "Malefactor"
-msgstr ""
+msgstr "Malhechor"
 
 #. [unit_type]: id=Spearman_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:56
@@ -52887,7 +52890,7 @@ msgstr ""
 #. [unit_type]: id=Javelineer_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:84
 msgid "Scoundrel"
-msgstr ""
+msgstr "Canalla"
 
 #. [unit_type]: id=Javelineer_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:109
@@ -52907,7 +52910,7 @@ msgstr ""
 #. [unit_type]: id=Royal Guard_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:177
 msgid "Steel Scourge"
-msgstr ""
+msgstr "Azote de acero"
 
 #. [unit_type]: id=Royal Guard_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:207
@@ -52919,7 +52922,7 @@ msgstr ""
 #. [unit_type]: id=Lieutenant_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:386
 msgid "Enfant Terrible"
-msgstr ""
+msgstr "Enfant terrible"
 
 #. [unit_type]: id=Lieutenant_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:411
@@ -52931,7 +52934,7 @@ msgstr ""
 #. [unit_type]: id=General_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:437
 msgid "Offender"
-msgstr ""
+msgstr "Ofensor"
 
 #. [unit_type]: id=General_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:462
@@ -52944,7 +52947,7 @@ msgstr ""
 #. [unit_type]: id=Grand Marshal_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:488
 msgid "Antihero"
-msgstr ""
+msgstr "Antihéroe"
 
 #. [unit_type]: id=Grand Marshal_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:526
@@ -52954,7 +52957,7 @@ msgstr ""
 #. [unit_type]: id=Dark Adept_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:802
 msgid "Brat"
-msgstr ""
+msgstr "Mocoso"
 
 #. [unit_type]: id=Dark Adept_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:837
@@ -52966,7 +52969,7 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1026
 msgid "female^Brat"
-msgstr ""
+msgstr "Mocosa"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1030
@@ -52980,7 +52983,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1305
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1102
 msgid "Villain"
-msgstr ""
+msgstr "Villano"
 
 #. [unit_type]: id=Dark Sorcerer_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1132
@@ -52994,7 +52997,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1671
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1404
 msgid "Reprobate"
-msgstr ""
+msgstr "Réprobo"
 
 #. [unit_type]: id=Necromancer_steel, race=human
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1435
@@ -53017,7 +53020,7 @@ msgstr "Regresado"
 #. [unit_type]: id=Bowman_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1809
 msgid "Miscreant"
-msgstr ""
+msgstr "Facineroso"
 
 #. [unit_type]: id=Bowman_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1834
@@ -53028,7 +53031,7 @@ msgstr ""
 #. [unit_type]: id=Longbowman_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1858
 msgid "Crook"
-msgstr ""
+msgstr "Bandido"
 
 #. [unit_type]: id=Longbowman_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1883
@@ -53040,7 +53043,7 @@ msgstr ""
 #. [unit_type]: id=Fencer_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1907
 msgid "Culprit"
-msgstr ""
+msgstr "Culpable"
 
 #. [unit_type]: id=Fencer_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1932
@@ -53052,7 +53055,7 @@ msgstr ""
 #. [unit_type]: id=Duelist_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1949
 msgid "Felon"
-msgstr ""
+msgstr "Felón"
 
 #. [unit_type]: id=Duelist_steel
 #: Legend_of_the_Invincibles/units/hybrids_of_steel.cfg:1974
@@ -53065,7 +53068,7 @@ msgstr ""
 #. [unit_type]: id=Machine Drone, race=monster
 #: Legend_of_the_Invincibles/units/steelhive.cfg:4
 msgid "Machine Drone"
-msgstr ""
+msgstr "Máquina dron"
 
 #. [unit_type]: id=Machine Drone, race=monster
 #. [unit_type]: id=Machine Welder, race=monster
@@ -53154,12 +53157,12 @@ msgstr ""
 #. [trait]: id=ethereal
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:12
 msgid "ethereal"
-msgstr ""
+msgstr "etéreo"
 
 #. [trait]: id=ethereal
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:13
 msgid "female^ethereal"
-msgstr ""
+msgstr "etérea"
 
 #. [trait]: id=ethereal
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:14
@@ -53169,22 +53172,22 @@ msgstr ""
 #. [trait]: id=venomous
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:49
 msgid "venomous"
-msgstr ""
+msgstr "venenoso"
 
 #. [trait]: id=venomous
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:50
 msgid "female^venomous"
-msgstr ""
+msgstr "venenosa"
 
 #. [trait]: id=superior
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:76
 msgid "superior"
-msgstr ""
+msgstr "superior"
 
 #. [trait]: id=superior
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:77
 msgid "female^superior"
-msgstr ""
+msgstr "superiora"
 
 #. [trait]: id=superior
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:79
@@ -54754,7 +54757,7 @@ msgstr ""
 #. [dummy]: id=murderlust
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1285
 msgid "murderlust"
-msgstr ""
+msgstr "sed de matar"
 
 #. [dummy]: id=murderlust
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1286
@@ -54764,7 +54767,7 @@ msgstr ""
 #. [dummy]: id=killhunger
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1292
 msgid "killhunger"
-msgstr ""
+msgstr "saciar"
 
 #. [dummy]: id=killhunger
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1293
@@ -54911,7 +54914,7 @@ msgstr ""
 #. [dummy]: id=immune to drain
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1383
 msgid "immune to drain"
-msgstr "antirralentización"
+msgstr "antidrenado"
 
 #. [dummy]: id=immune to drain
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1384
@@ -55610,42 +55613,42 @@ msgstr ""
 #. [unstore_unit]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:190
 msgid "Infatuated"
-msgstr ""
+msgstr "Chiflado"
 
 #. [unstore_unit]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:191
 msgid "female^Infatuated"
-msgstr ""
+msgstr "Chiflada"
 
 #. [unstore_unit]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:396
 msgid "+3 max HP"
-msgstr ""
+msgstr "+3 máx PV"
 
 #. [unstore_unit]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:449
 msgid "-$starving[$i].variables.starving max HP"
-msgstr ""
+msgstr "-$starving[$i].variables.starving máx PV"
 
 #. [unstore_unit]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:3041
 msgid "+1 max HP"
-msgstr ""
+msgstr "-1 máx PV"
 
 #. [floating_text]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:3119
 msgid "-1 damage"
-msgstr ""
+msgstr "-1 daño"
 
 #. [floating_text]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:3159
 msgid "-5% defence"
-msgstr ""
+msgstr "-5% defensa"
 
 #. [floating_text]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:3191
 msgid "-5% all resistances"
-msgstr ""
+msgstr "-5% todas resistencias"
 
 #. [unstore_unit]
 #: Legend_of_the_Invincibles/utils/abilities_events.cfg:4143
@@ -57125,7 +57128,7 @@ msgstr "Nada."
 #. [option]
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:724
 msgid "("
-msgstr ""
+msgstr "("
 
 #. [option]
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:724
@@ -57161,7 +57164,7 @@ msgstr "Muerto andante"
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:845
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:2144
 msgid "Configure Autorecall"
-msgstr ""
+msgstr "Configurar autoreincorporación"
 
 #. [command]
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:868
@@ -57169,6 +57172,9 @@ msgid ""
 "Here is a list of all units you have set to be autorecalled. You can add any "
 "number of units, but only the first $max_autorecall units are autorecalled."
 msgstr ""
+"Aquí hay una lista de todas las unidades que ha configurado para que se "
+"autoreincorporen. Puedes agregar cualquier cantidad de unidades, pero solo "
+"se recuperan automáticamente las primeras $max_autorecall unidades."
 
 #. [option]
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:936
@@ -57186,7 +57192,7 @@ msgstr "¿Qué unidad quieres añadir?"
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:984
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:2287
 msgid "$unit_list[$i].name| ($unit_list[$i].language_name|)"
-msgstr ""
+msgstr "$unit_list[$i].name| ($unit_list[$i].language_name|)"
 
 #. [option]
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:1038
@@ -57204,7 +57210,7 @@ msgstr "¿Qué unidad quieres eliminar?"
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:1075
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:2379
 msgid "$to_autorecall.name| ($to_autorecall.language_name|)"
-msgstr ""
+msgstr "$to_autorecall.name| ($to_autorecall.language_name|)"
 
 #. [option]
 #: Legend_of_the_Invincibles/utils/chapter5_utils.cfg:1099
@@ -57269,7 +57275,7 @@ msgstr "Área con errores"
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1036
 #: Legend_of_the_Invincibles/utils/utils.cfg:134
 msgid "I have found some gold."
-msgstr ""
+msgstr "He encontrado algo de oro."
 
 #. [message]: speaker=Lethalia
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1212
@@ -57458,52 +57464,52 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1364
 msgid "Find out some information"
-msgstr ""
+msgstr "Descubre alguna información"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1374
 msgid "Locate and break the 4 seals"
-msgstr ""
+msgstr "Localiza y rompe los 4 sellos"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1384
 msgid "Locate and break the 3 remaining seals"
-msgstr ""
+msgstr "Localiza y rompe los 3 sellos restantes"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1394
 msgid "Locate and break the 2 remaining seals"
-msgstr ""
+msgstr "Localiza y rompe los 2 sellos restantes"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1404
 msgid "Locate and break the remaining seal"
-msgstr ""
+msgstr "Localiza y rompe el sello restante"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1414
 msgid "Invade Uria's Den in Pandemonium"
-msgstr ""
+msgstr "Invadir la guarida de Uria en Pandemonio"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1424
 msgid "Reach Uria"
-msgstr ""
+msgstr "Alcanza a Uria"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1434
 msgid "Kill Uria"
-msgstr ""
+msgstr "Mata a Uria"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1444
 msgid "Find and kill Yarae"
-msgstr ""
+msgstr "Encuentra y mata a Yarae"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1454
 msgid "Find a way to destroy Uria"
-msgstr ""
+msgstr "Encuentra una forma de destruir a Uria"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1476
@@ -57513,7 +57519,7 @@ msgstr "Mata a Lilith"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1486
 msgid "Destroy Lilith in Foul Pits"
-msgstr ""
+msgstr "Destruye a Lilith en fosas inmundas"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1496
@@ -57539,7 +57545,7 @@ msgstr ""
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1546
 msgid "Death of Lilith"
-msgstr ""
+msgstr "Muerte de Lilith"
 
 #. [objectives]
 #: Legend_of_the_Invincibles/utils/chapter9_utils.cfg:1561
@@ -65131,7 +65137,7 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/help.cfg:2618
 msgid "Item Storage"
-msgstr ""
+msgstr "Inventario"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2622
@@ -65191,7 +65197,7 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/help.cfg:2664
 msgid "Books"
-msgstr ""
+msgstr "Libros"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2668
@@ -65206,7 +65212,7 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/help.cfg:2678
 msgid "Legacies"
-msgstr ""
+msgstr "Legados"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2682
@@ -65222,7 +65228,7 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/help.cfg:2693
 msgid "Redeeming weapon special"
-msgstr ""
+msgstr "Especial de arma redención"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2697
@@ -65252,7 +65258,7 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/help.cfg:2713
 msgid "Specific calculations"
-msgstr ""
+msgstr "Cálculos específicos"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2717
@@ -65283,7 +65289,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/help.cfg:2733
 #: Legend_of_the_Invincibles/utils/utils.cfg:1280
 msgid "Beelzebub"
-msgstr ""
+msgstr "Beelzebub"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2737
@@ -65308,7 +65314,7 @@ msgstr ""
 #. [option]
 #: Legend_of_the_Invincibles/utils/help.cfg:2753
 msgid "Secrets"
-msgstr ""
+msgstr "Secretos"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/utils/help.cfg:2757
@@ -65325,12 +65331,13 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:21
 msgid "Glitch Item"
-msgstr ""
+msgstr "Item erróneo"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:26
 msgid "<span color='red'>New obligation: Report this bug on the forums</span>"
 msgstr ""
+"<span color='red'>Nueva obligación: Reportar este error en el foro</span>"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:31
@@ -65340,7 +65347,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:34
 msgid "Book of Magical Swordplay"
-msgstr ""
+msgstr "Libro de esgrima mágica"
 
 #. [effect]: id=BoMS
 #: Legend_of_the_Invincibles/utils/item_list.cfg:44
@@ -65356,7 +65363,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:49
 msgid "Book of Fireballs"
-msgstr ""
+msgstr "Libro de bolas de fuego"
 
 #. [effect]: id=BoF
 #: Legend_of_the_Invincibles/utils/item_list.cfg:60
@@ -65371,7 +65378,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:65
 msgid "Book of Herbal Tinctures and Malignancies"
-msgstr ""
+msgstr "Libro de tinturas herbales y malignidades"
 
 #. [effect]: id=BoHTaM
 #: Legend_of_the_Invincibles/utils/item_list.cfg:75
@@ -68493,7 +68500,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5243
 msgid "Stolen Potion"
-msgstr ""
+msgstr "Poción robada"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5245
@@ -68510,7 +68517,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5262
 msgid "Herod's Mithral Armour"
-msgstr ""
+msgstr "Armadura de mithril de Herod"
 
 #. [abilities]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5277
@@ -68519,7 +68526,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/item_list.cfg:8593
 #: Legend_of_the_Invincibles/utils/item_list.cfg:8721
 msgid "damage aura"
-msgstr ""
+msgstr "aura de daño"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5281
@@ -68553,7 +68560,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5311
 msgid "Hatred for Men"
-msgstr ""
+msgstr "Odio al hombre"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5331
@@ -68563,7 +68570,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5334
 msgid "Crapsack World"
-msgstr ""
+msgstr "Mundo de mierda"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5352
@@ -68590,7 +68597,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5377
 msgid "The Warmth"
-msgstr ""
+msgstr "Calidez"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5393
@@ -68602,7 +68609,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5396
 msgid "Apricity"
-msgstr ""
+msgstr "Apricia"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5409
@@ -68612,7 +68619,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5412
 msgid "Pyromancer's Sword"
-msgstr ""
+msgstr "Espada de piromante"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5424
@@ -68636,7 +68643,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5445
 msgid "Pyromancer's Ring"
-msgstr ""
+msgstr "Anillo de piromante"
 
 #. [latent]: type=fire
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5456
@@ -68662,7 +68669,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5500
 msgid "Pyromancer's Cloak"
-msgstr ""
+msgstr "Capa de piromante"
 
 #. [latent]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5511
@@ -68686,7 +68693,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5532
 msgid "Virtual Void"
-msgstr ""
+msgstr "Vacío virtual"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5543
@@ -68696,7 +68703,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5546
 msgid "Lake of Blood"
-msgstr ""
+msgstr "Lago de sangre"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5563
@@ -68708,7 +68715,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5566
 msgid "Paranoia"
-msgstr ""
+msgstr "Paranoia"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5582
@@ -68718,7 +68725,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5585
 msgid "The Parasite"
-msgstr ""
+msgstr "Parásito"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5604
@@ -68732,7 +68739,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5610
 msgid "Fire-Forged Friend"
-msgstr ""
+msgstr "Amigo forjado en fuego"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5612
@@ -68749,7 +68756,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5630
 msgid "Static Cast"
-msgstr ""
+msgstr "Hechizo estático"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5659
@@ -68761,7 +68768,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5662
 msgid "Shroud of Iron"
-msgstr ""
+msgstr "Mortaja de hierro"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5676
@@ -68785,7 +68792,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5696
 msgid "Winterclaw"
-msgstr ""
+msgstr "Garra invernal"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5709
@@ -68796,7 +68803,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5712
 msgid "Iron Sentinel"
-msgstr ""
+msgstr "Centinela de hierro"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5726
@@ -68808,7 +68815,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5729
 msgid "Beyond the Grasp of Men"
-msgstr ""
+msgstr "Más allá de los hombres"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5742
@@ -68820,7 +68827,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5745
 msgid "The Grim Butcher"
-msgstr ""
+msgstr "Carnicero sombrío"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5761
@@ -68840,7 +68847,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5778
 msgid "Sinister Lunacy"
-msgstr ""
+msgstr "Locura siniestra"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5789
@@ -68862,7 +68869,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5811
 msgid "Hellforge Armour of Forging"
-msgstr ""
+msgstr "Armadura de forja del infierno"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5827
@@ -68896,7 +68903,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5864
 msgid "Worshipper of Darkness"
-msgstr ""
+msgstr "Adorador de la oscuridad"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5880
@@ -68908,7 +68915,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5883
 msgid "Merciless Wake"
-msgstr ""
+msgstr "Estela despiadada"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5896
@@ -68920,7 +68927,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5899
 msgid "Thornsword"
-msgstr ""
+msgstr "Espada de espinas"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:5918
@@ -69607,7 +69614,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7087
 msgid "Absence of Purpose and Meaning"
-msgstr ""
+msgstr "Ausencia de propósito y significado"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7110
@@ -69617,7 +69624,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7113
 msgid "Townsend Dark Discharge"
-msgstr ""
+msgstr "Descarga oscura de Townsend"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7133
@@ -73039,18 +73046,24 @@ msgid ""
 "\n"
 "20% of finishing gold carried over to the next scenario."
 msgstr ""
+"\n"
+"20% del oro restante al finalizar añadido al siguiente escenario."
 
 #: Legend_of_the_Invincibles/utils/utils.cfg:42
 msgid ""
 "\n"
 "80% of finishing gold carried over to the next scenario."
 msgstr ""
+"\n"
+"80% del oro restante al finalizar añadido al siguiente escenario."
 
 #: Legend_of_the_Invincibles/utils/utils.cfg:46
 msgid ""
 "\n"
 "60% of finishing gold carried over to the next scenario."
 msgstr ""
+"\n"
+"60% del oro restante al finalizar añadido al siguiente escenario."
 
 #. [time]: id=hell
 #: Legend_of_the_Invincibles/utils/utils.cfg:153
