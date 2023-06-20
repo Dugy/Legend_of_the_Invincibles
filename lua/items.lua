@@ -602,7 +602,7 @@ loti.item.describe_item = function(number, sort, set_items)
 		if variable then
 			if variable > 0 then
 				table.insert(desc, "<span color='green'>" .. _"Damage increased by " .. tostring(variable) .. ending)
-			else
+			elseif variable < 0 then
 				table.insert(desc, "<span color='red'>" .. _"Damage decreased by " .. tostring(variable * -1) .. ending)
 			end
 		end
