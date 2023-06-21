@@ -486,9 +486,9 @@ local function onshow(dialog, unit, item_sort)
 
 	dialog.equip.visible = can_equip
 	if string.match(item_sort, "potion") then
-		dialog.equip.label = "Use"
+		dialog.equip.label = _"Use"
 	else
-		dialog.equip.label = "Equip"
+		dialog.equip.label = _"Equip"
 	end
 	dialog.storage_dropdown_menu.visible = not empty and present
 
