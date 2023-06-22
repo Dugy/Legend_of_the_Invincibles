@@ -301,7 +301,15 @@ end
 local function show_item_sorts(dialog)
 	local sorts = loti.item.storage.list_sorts()
 	local too_progressed = is_too_progressed()
-	for item_sort, count in pairs(sorts) do
+
+        local a = {}
+        for n in pairs(sorts) do table.insert(a, n) end
+        table.sort(a)
+
+	local item_sort, count
+        for i in ipairs(a) do
+	    item_sort=a[i]
+            count=sorts[a[i]]
 		if not too_progressed or item_sort == "potion" or item_sort == "limited" then
 			-- TODO: print human-readable translatable name of item_sort.
 			local text = item_sort .. " (" .. count .. ")"
@@ -447,6 +455,7 @@ local function onshow(dialog, unit, item_sort)
 	-- Show all stored items of the selected item_sort.
 	if not is_too_progressed() or item_sort == "potion" or item_sort == "limited" then
 		local types = loti.item.storage.list_items(item_sort)
+
 
 		-- Sort the items by name by creating { item_name = item_number, ... } table,
 		-- then creating an array of { item_name1, item_name2, ... },
