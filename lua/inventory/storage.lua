@@ -307,7 +307,7 @@ local function show_item_sorts(dialog)
         table.sort(a)
 
 	local item_sort, count
-        for i,n in ipairs(a) do 
+        for i in ipairs(a) do
 	    item_sort=a[i]
             count=sorts[a[i]]
 		if not too_progressed or item_sort == "potion" or item_sort == "limited" then

@@ -110,6 +110,9 @@ local function onshow(dialog)
 	-- List all units who have at least 1 item.
 	shown_units = wesnoth.units.find_on_recall({ trait = "geared" })
 
+	-- Simple sort by unit name
+        table.sort(shown_units, function (a, b) return a.name < b.name end )
+
 	for listbox_line, unit in ipairs(shown_units) do
 		-- Show name/type of the geared unit.
 		local text = unit.name .. " <span color='#88FCA0'>(" ..
@@ -117,6 +120,10 @@ local function onshow(dialog)
 
 		-- List items on this unit as text.
 		local items = loti.item.on_unit.list_regular(unit)
+
+		-- Sort items by name
+		table.sort(items, function (a, b) return a.name < b.name end )
+
 		for index, item in ipairs(items) do
 			text = text .. item.name
 			if index < #items then
