@@ -34,7 +34,7 @@ local inventory_config = {
 				-- This may be a unit on recall list, so make sure that "unit" variable
 				-- (which is needed in unit_information_part_1()) gets populated anyway.
 				wml.variables["unit"] = unit.__cfg
-				wesnoth.fire_event("unit information", unit)
+				wesnoth.game_events.fire("unit information", unit)
 				wml.variables["unit"] = nil
 			end,
 		},
@@ -64,7 +64,7 @@ local inventory_config = {
 			id = "ground_items",
 			label = _"Pick up items on the ground",
 			onsubmit = function(unit)
-				wesnoth.wml_actions.fire_event({name = "item_pick_inventory", { "primary_unit", { x=unit.x, y=unit.y } } })
+				wesnoth.game_events.fire("item_pick_inventory", unit)
 			end
 		}
 	},
