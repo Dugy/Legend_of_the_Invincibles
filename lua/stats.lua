@@ -365,6 +365,12 @@ function wesnoth.update_stats(original)
 		if eff.apply_to == "loyal" then
 			is_loyal = true
 		end
+		if eff.apply_to == "ellipse" then
+			is_loyal = false
+		end
+		if remade.canrecruit then
+			is_loyal = false
+		end
 		if eff.apply_to == "attack" then
 			if eff.set_icon then
 				local function set_if_same(property) -- Warning, this makes the change only very roughly
