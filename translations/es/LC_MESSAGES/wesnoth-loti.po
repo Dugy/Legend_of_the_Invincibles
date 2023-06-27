@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2023-05-08 08:09 UTC\n"
-"PO-Revision-Date: 2023-06-20 22:21+0200\n"
+"PO-Revision-Date: 2023-06-27 23:14+0200\n"
 "Last-Translator: Toranks <toranksmervat@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -180,8 +180,8 @@ msgid ""
 "the Light"
 msgstr ""
 "Continuará...\n"
-"Vaya a el menú principal de BpW > Campaña > Leyenda de los Invencibles, "
-"Parte II: Hacia la Luz"
+"Vaya a el menú principal de BpW > Campaña >\n"
+"Leyenda de los Invencibles, Parte II: Hacia la Luz"
 
 #. [campaign]: id=Legend_of_the_Invincibles_VI
 #: Legend_of_the_Invincibles/_main.cfg:121
@@ -927,36 +927,36 @@ msgstr " (sólo armas a distancia)"
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:646
 msgid "% more attacks"
-msgstr "% más ataques"
+msgstr "% más golpes"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:646
 msgid "% fewer attacks"
-msgstr "% menos ataques"
+msgstr "% menos golpes"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " more attacks"
-msgstr " más golpes"
+msgstr " golpes más"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " more attack"
-msgstr " ataque extra"
+msgstr " golpe más"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " fewer attacks"
-msgstr " menos golpes"
+msgstr " golpes menos"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:649
 #: Legend_of_the_Invincibles/lua/items.lua:653
 msgid " fewer attack"
-msgstr " menos ataque"
+msgstr " golpe menos"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:656
@@ -1083,12 +1083,12 @@ msgstr " por nivel"
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:763
 msgid "</span>"
-msgstr ""
+msgstr "</span>"
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:767
 msgid "<span color='#60A0FF'>"
-msgstr ""
+msgstr "<span color='#60A0FF'>"
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:767
@@ -1098,7 +1098,7 @@ msgstr " PV más"
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:769
 msgid "<span color='#FF60A0'>"
-msgstr ""
+msgstr "<span color='#FF60A0'>"
 
 #. [lua]: add_specials
 #: Legend_of_the_Invincibles/lua/items.lua:769
@@ -1722,7 +1722,7 @@ msgstr "Explosión ígnea"
 #: Legend_of_the_Invincibles/lua/redeem.lua:63
 #: Legend_of_the_Invincibles/lua/redeem.lua:208
 msgid "Fire resistance penetration"
-msgstr ""
+msgstr "Penetración de resistencia al fuego"
 
 #: Legend_of_the_Invincibles/lua/redeem.lua:68
 msgid "Arctic Blast (only for attacking, capable to slow a lot of units)"
@@ -14392,7 +14392,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/help.cfg:14
 #: Legend_of_the_Invincibles/utils/utils.cfg:297
 msgid "No."
-msgstr ""
+msgstr "No."
 
 #. [message]: speaker=Sshar
 #: Legend_of_the_Invincibles/scenarios2/02_Gods.cfg:943
@@ -18181,7 +18181,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios3/08_Lost.cfg:371
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:310
 msgid "Drakes"
-msgstr ""
+msgstr "Dracos"
 
 #. [message]: speaker=unit
 #: Legend_of_the_Invincibles/scenarios3/08_Lost.cfg:384
@@ -18206,7 +18206,7 @@ msgstr ""
 #. [modify_side]
 #: Legend_of_the_Invincibles/scenarios3/08_Lost.cfg:415
 msgid "Dragon"
-msgstr ""
+msgstr "Dragón"
 
 #. [message]: speaker=unit
 #: Legend_of_the_Invincibles/scenarios3/08_Lost.cfg:428
@@ -18216,7 +18216,7 @@ msgstr ""
 #. [modify_side]
 #: Legend_of_the_Invincibles/scenarios3/08_Lost.cfg:433
 msgid "Goblins"
-msgstr ""
+msgstr "Goblins"
 
 #. [message]: speaker=unit
 #: Legend_of_the_Invincibles/scenarios3/08_Lost.cfg:446
@@ -20852,7 +20852,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:150
 #: Legend_of_the_Invincibles/scenarios6/10_Heart_Mounains.cfg:86
 msgid "Reach the northern border of the map"
-msgstr ""
+msgstr "Alcanza el borde norte del mapa"
 
 #. [side]: type=Vampire General
 #: Legend_of_the_Invincibles/scenarios4/06_Castle_of_the_Wicked.cfg:64
@@ -23186,7 +23186,7 @@ msgstr ""
 #. [scenario]: id=16_Lost_in_Space
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:4
 msgid "Lost in Space"
-msgstr ""
+msgstr "Perdida en el espacio"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios4/16_Lost_in_Space.cfg:40
@@ -23766,7 +23766,7 @@ msgstr ""
 #. [scenario]: id=17_Any_Means_Necessary
 #: Legend_of_the_Invincibles/scenarios4/17_Any_Means_Necessary.cfg:4
 msgid "Any Means Necessary"
-msgstr ""
+msgstr "Cualquier método necesario"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios4/17_Any_Means_Necessary.cfg:56
@@ -23782,7 +23782,7 @@ msgstr ""
 #. [side]: type=Grand Marshal, id=ally
 #: Legend_of_the_Invincibles/scenarios4/17_Any_Means_Necessary.cfg:94
 msgid "Lord Pancax"
-msgstr ""
+msgstr "Lord Pancax"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios4/17_Any_Means_Necessary.cfg:231
@@ -24000,7 +24000,7 @@ msgstr ""
 #. [scenario]: id=01_Diplomacy
 #: Legend_of_the_Invincibles/scenarios5/01_Diplomacy.cfg:4
 msgid "Diplomacy"
-msgstr ""
+msgstr "Diplomacia"
 
 #. [scenario]: id=01_Diplomacy
 #: Legend_of_the_Invincibles/scenarios5/01_Diplomacy.cfg:15
@@ -24078,14 +24078,14 @@ msgstr ""
 #. [side]: type=Akula, id=Akula
 #: Legend_of_the_Invincibles/scenarios5/01_Diplomacy.cfg:154
 msgid "Akula"
-msgstr ""
+msgstr "Akula"
 
 #. [side]: id=Dantair, type=Royal Warrior
 #. [unit]: id=Dantair, type=Royal Warrior
 #: Legend_of_the_Invincibles/scenarios5/01_Diplomacy.cfg:166
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:517
 msgid "King Dantair"
-msgstr ""
+msgstr "Rey Dantair"
 
 #. [side]: id=Dantair, type=Royal Warrior
 #. [side]: id=mage_boss, type=09 Great Mage
@@ -24104,7 +24104,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:127
 #: Legend_of_the_Invincibles/scenarios5/05_We_Walk_in_the_Shadows.cfg:133
 msgid "Unwise Good"
-msgstr ""
+msgstr "Buenos imprudentes"
 
 #. [message]: speaker=Dantair
 #: Legend_of_the_Invincibles/scenarios5/01_Diplomacy.cfg:311
@@ -25723,7 +25723,7 @@ msgstr "Amplificador 1"
 #: Legend_of_the_Invincibles/scenarios5/11_Northern_Guardian_Room.cfg:4
 #: Legend_of_the_Invincibles/scenarios5/23_Akulas_Place.cfg:1157
 msgid "Northern Guardian Room"
-msgstr "Cuarto norte de la guardia"
+msgstr "Sala del guardián del norte"
 
 #. [scenario]: id=11_Northern_Guardian_Room
 #. [scenario]: id=18_Eastern_Guardian_Room
@@ -25736,7 +25736,7 @@ msgstr "Cuarto norte de la guardia"
 #: Legend_of_the_Invincibles/scenarios5/23_Akulas_Place.cfg:4
 #: Legend_of_the_Invincibles/scenarios5/24_Escape_Tunnel.cfg:83
 msgid "Akula's Place"
-msgstr "Lugar de Akula"
+msgstr "Posición de Akula"
 
 #. [scenario]: id=12_Amplificator_1
 #: Legend_of_the_Invincibles/scenarios5/12_Amplificator1.cfg:4
@@ -26764,12 +26764,12 @@ msgstr ""
 #. [scenario]: id=29_Armageddon
 #: Legend_of_the_Invincibles/scenarios5/29_Armageddon.cfg:5
 msgid "Armageddon"
-msgstr ""
+msgstr "Armagedón"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios5/29_Armageddon.cfg:17
 msgid "Avoid the apocalypse"
-msgstr ""
+msgstr "Evita el apocalipsis"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios5/29_Armageddon.cfg:110
@@ -26954,7 +26954,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:24
 msgid "Find the friend"
-msgstr "Encuentra el amigo"
+msgstr "Encuentra al amigo"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/01_The_Awakening.cfg:34
@@ -27091,7 +27091,7 @@ msgstr ""
 #. [scenario]: id=02_Who_Am_I
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:4
 msgid "Who Am I"
-msgstr ""
+msgstr "Quién soy"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:23
@@ -27101,18 +27101,18 @@ msgstr "Derrota al enemigo"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:33
 msgid "Find more clues about your past"
-msgstr ""
+msgstr "Encuentra más pistas sobre tu pasado"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:43
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:496
 msgid "Exit the cave to the northeast"
-msgstr ""
+msgstr "Sal de la cueva por el noreste"
 
 #. [side]: type=Ancient Lich, id=Antediluvian
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:129
 msgid "Quer'krath"
-msgstr ""
+msgstr "Quer'krath"
 
 #. [message]: speaker=Antediluvian
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:161
@@ -27290,7 +27290,7 @@ msgstr ""
 #. [floating_text]
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:353
 msgid "Feed! Eat his soul, like you always used to."
-msgstr ""
+msgstr "¡Aliméntate! Cómete su alma, como solías hacer"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:358
@@ -27300,7 +27300,7 @@ msgstr ""
 #. [floating_text]
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:370
 msgid "Feed!"
-msgstr ""
+msgstr "¡Alimenta!"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:375
@@ -27370,18 +27370,18 @@ msgstr ""
 #. [scenario]: id=03_Into_the_Light
 #: Legend_of_the_Invincibles/scenarios6/03_Into_the_Light.cfg:4
 msgid "Into the Light"
-msgstr ""
+msgstr "En la luz"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/03_Into_the_Light.cfg:22
 #: Legend_of_the_Invincibles/scenarios6/03_Into_the_Light.cfg:222
 msgid "Exit the cave to the north"
-msgstr ""
+msgstr "Sal de la cueva por el norte"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/03_Into_the_Light.cfg:32
 msgid "Destroy the demons and whatever brought them here"
-msgstr ""
+msgstr "Destruye a los demonios y lo que sea que los haya traído aquí"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios6/03_Into_the_Light.cfg:137
@@ -27393,7 +27393,7 @@ msgstr ""
 #. [unit]: type=Demon, id=demoness2
 #: Legend_of_the_Invincibles/scenarios6/03_Into_the_Light.cfg:142
 msgid "Athla"
-msgstr ""
+msgstr "Athla"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios6/03_Into_the_Light.cfg:151
@@ -27515,12 +27515,12 @@ msgstr ""
 #. [scenario]: id=04_I_Hate_You_I_Hate_You_Too
 #: Legend_of_the_Invincibles/scenarios6/04_I_Hate_You_I_Hate_You_Too.cfg:4
 msgid "I Hate You, I Hate You Too"
-msgstr ""
+msgstr "Te odio, yo te odio también"
 
 #. [side]: type=Swordmaster, id=enemy
 #: Legend_of_the_Invincibles/scenarios6/04_I_Hate_You_I_Hate_You_Too.cfg:82
 msgid "Other Good"
-msgstr ""
+msgstr "Otros buenos"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios6/04_I_Hate_You_I_Hate_You_Too.cfg:112
@@ -27678,7 +27678,7 @@ msgstr ""
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/04_I_Hate_You_I_Hate_You_Too.cfg:233
 msgid "You can chose whose path you want to follow."
-msgstr ""
+msgstr "Puedes elegir el camino que quieres seguir."
 
 #. [option]
 #: Legend_of_the_Invincibles/scenarios6/04_I_Hate_You_I_Hate_You_Too.cfg:235
@@ -27686,26 +27686,28 @@ msgid ""
 "The path of Efraim, trying to solve things by peaceful means of lies and "
 "subterfuge"
 msgstr ""
+"El camino de Efraim, tratando de resolver las cosas con pacíficas mentiras y "
+"subterfugios"
 
 #. [option]
 #: Legend_of_the_Invincibles/scenarios6/04_I_Hate_You_I_Hate_You_Too.cfg:241
 msgid "The path of Lethalia, the way of conquest and destruction"
-msgstr ""
+msgstr "El camino de Letalia, la vía de la conquista y la destrucción"
 
 #. [scenario]: id=05_Friends_No_More
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:4
 msgid "Friends No More"
-msgstr ""
+msgstr "No más amigos"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:21
 msgid "Fend Lethalia off"
-msgstr ""
+msgstr "Haz huir a Letalia"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:31
 msgid "Conquer the city"
-msgstr ""
+msgstr "Conquista la ciudad"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:106
@@ -27728,7 +27730,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:139
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:157
 msgid "A peasant"
-msgstr ""
+msgstr "Un aldeano"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:117
@@ -27746,7 +27748,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:127
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:163
 msgid "A woodsman"
-msgstr ""
+msgstr "Un leñador"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:129
@@ -27818,7 +27820,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:132
 #: Legend_of_the_Invincibles/scenarios6/15_Apologies.cfg:326
 msgid "Enemy"
-msgstr ""
+msgstr "Enemigo"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios6/05_Friends_No_More.cfg:369
@@ -27947,23 +27949,23 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/06_Tunnels.cfg:52
 #: Legend_of_the_Invincibles/utils/titles.cfg:661
 msgid "Tunnels"
-msgstr ""
+msgstr "Túneles"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/06_Tunnels.cfg:69
 msgid "Find the wise man"
-msgstr ""
+msgstr "Encuentra al hombre sabio"
 
 #. [side]
 #: Legend_of_the_Invincibles/scenarios6/06_Tunnels.cfg:142
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:346
 msgid "Enemies"
-msgstr ""
+msgstr "Enemigos"
 
 #. [side]: type=Silver Mage, id=Solomon
 #: Legend_of_the_Invincibles/scenarios6/06_Tunnels.cfg:150
 msgid "Solomon"
-msgstr ""
+msgstr "Solomón"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/06_Tunnels.cfg:160
@@ -28180,22 +28182,22 @@ msgstr ""
 #. [scenario]: id=07_World_Without_Amity
 #: Legend_of_the_Invincibles/scenarios6/07_World_Without_Amity.cfg:4
 msgid "World Without Amity"
-msgstr ""
+msgstr "Mundo sin amistad"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/07_World_Without_Amity.cfg:24
 msgid "Defeat the drake leader"
-msgstr ""
+msgstr "Derrota al líder draco"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/07_World_Without_Amity.cfg:34
 msgid "Defeat the leader of humans"
-msgstr ""
+msgstr "Derrota al líder de los humanos"
 
 #. [modify_side]
 #: Legend_of_the_Invincibles/scenarios6/07_World_Without_Amity.cfg:93
 msgid "Victims"
-msgstr ""
+msgstr "Víctimas"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios6/07_World_Without_Amity.cfg:106
@@ -28303,27 +28305,27 @@ msgstr ""
 #. [scenario]: id=08_Misguiding_Lives
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:4
 msgid "Misguiding Lives"
-msgstr ""
+msgstr "Vidas equivocadas"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:23
 msgid "Defeat Lethalia"
-msgstr ""
+msgstr "Derrota a Lethalia"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:33
 msgid "Defeat Efraim"
-msgstr ""
+msgstr "Derrota a Efraim"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:63
 msgid "Death of Phillip"
-msgstr ""
+msgstr "Muerte de Philip"
 
 #. [unit]: type=Arch Mage, id=Charles
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:139
 msgid "Charles"
-msgstr ""
+msgstr "Charles"
 
 #. [unit]: type=Duelist, id=Phillip
 #. [message]: speaker=narrator
@@ -28336,7 +28338,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:239
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:261
 msgid "Phillip"
-msgstr ""
+msgstr "Phillip"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:157
@@ -28396,7 +28398,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:215
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:227
 msgid "Counsellor Charles"
-msgstr ""
+msgstr "Consejero Charles"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/08_Misguiding_Lives.cfg:205
@@ -28582,7 +28584,7 @@ msgstr ""
 #. [scenario]: id=09_Across_the_Barren_Land
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:123
 msgid "Across the Barren Land"
-msgstr ""
+msgstr "A través de la tierra estéril"
 
 #. [objectives]
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:173
@@ -28592,6 +28594,10 @@ msgid ""
 "You can teleport all units to your leader once per ten turns (see option in "
 "the right-click menu)."
 msgstr ""
+"Nota: Sin mantenimiento ni ingresos sin importar lo que se muestre. Se puede "
+"encontrar oro adicional en los cofres.\n"
+"Puedes teletransportar todas las unidades a tu líder una vez cada diez "
+"turnos (ver opciones en el menú contextual)."
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:185
@@ -28603,7 +28609,7 @@ msgstr ""
 #. [abilities]
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:346
 msgid "rule"
-msgstr ""
+msgstr "dominio"
 
 #. [set_menu_item]: id=zz_ch6s9_teleport
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:588
@@ -28612,7 +28618,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios8/08_The_Desert.cfg:355
 #: Legend_of_the_Invincibles/scenarios8/15_Jungle_Hell.cfg:305
 msgid "Teleport units to leader"
-msgstr ""
+msgstr "Teletransportar unidades al líder"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:626
@@ -28640,14 +28646,14 @@ msgstr ""
 #. [message]: speaker=trader
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:751
 msgid "Gloomy Ring"
-msgstr ""
+msgstr "Anillo sombrío"
 
 #. [message]: speaker=trader
 #. [object]
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:752
 #: Legend_of_the_Invincibles/utils/item_list.cfg:1486
 msgid "Zealous Axe"
-msgstr ""
+msgstr "Hacha de celo"
 
 #. [message]: speaker=trader
 #. [object]
@@ -28661,7 +28667,7 @@ msgstr "Virtud de esperanza"
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:754
 #: Legend_of_the_Invincibles/utils/item_list.cfg:2030
 msgid "Ice Armour of Health"
-msgstr ""
+msgstr "Armadura de hielo de vitalidad"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/09_Across_the_Barren_Land.cfg:767
@@ -28691,7 +28697,7 @@ msgstr ""
 #. [scenario]: id=10_Heart_Mountains
 #: Legend_of_the_Invincibles/scenarios6/10_Heart_Mounains.cfg:5
 msgid "Heart Mountains"
-msgstr ""
+msgstr "Montañas corazón"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/10_Heart_Mounains.cfg:278
@@ -28708,18 +28714,18 @@ msgstr ""
 #. [scenario]: id=11_Axadria
 #: Legend_of_the_Invincibles/scenarios6/11_Axadria.cfg:5
 msgid "Axadria"
-msgstr ""
+msgstr "Axadria"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/11_Axadria.cfg:41
 msgid "Enter the Library"
-msgstr ""
+msgstr "Entra en la biblioteca"
 
 #. [modify_side]
 #: Legend_of_the_Invincibles/scenarios6/11_Axadria.cfg:113
 #: Legend_of_the_Invincibles/scenarios6/11_Axadria.cfg:119
 msgid "Alliance"
-msgstr ""
+msgstr "Alianza"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/11_Axadria.cfg:228
@@ -29115,23 +29121,23 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Phoenix.cfg:4
 #: Legend_of_the_Invincibles/units/Phoenix.cfg:166
 msgid "Phoenix"
-msgstr ""
+msgstr "Fénix"
 
 #. [time]: id=pyrophor
 #: Legend_of_the_Invincibles/scenarios6/13_Phoenix.cfg:17
 msgid "flaming skies"
-msgstr ""
+msgstr "cielos ardientes"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/13_Phoenix.cfg:29
 msgid "Defeat the phoenix"
-msgstr ""
+msgstr "Derrota al fénix"
 
 #. [objectives]
 #: Legend_of_the_Invincibles/scenarios6/13_Phoenix.cfg:56
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:55
 msgid "Note: No upkeep, no income, no matter what it shows."
-msgstr ""
+msgstr "Nota: Sin mantenimiento ni ingresos sin importar lo que se muestre."
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios6/13_Phoenix.cfg:85
@@ -29159,17 +29165,17 @@ msgstr ""
 #. [scenario]: id=14_Frozen_Land
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:5
 msgid "Frozen Land"
-msgstr ""
+msgstr "Tierra helada"
 
 #. [time]: id=Cool day
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:16
 msgid "Cool day"
-msgstr ""
+msgstr "Día fresco"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:28
 msgid "Smash the phoenix"
-msgstr ""
+msgstr "Aplasta al fénix"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:142
@@ -29188,22 +29194,22 @@ msgstr ""
 #. [scenario]: id=15_Apologies
 #: Legend_of_the_Invincibles/scenarios6/15_Apologies.cfg:5
 msgid "Apologies"
-msgstr ""
+msgstr "Disculpas"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/15_Apologies.cfg:20
 msgid "Hit Lethalia with Efraim"
-msgstr ""
+msgstr "Golpea a Lethalia con Efraim"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/15_Apologies.cfg:30
 msgid "Hit Efraim with Lethalia"
-msgstr ""
+msgstr "Golpea a Efraim con Lethalia"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios6/15_Apologies.cfg:40
 msgid "Destruction or death of Efraim or Lethalia"
-msgstr ""
+msgstr "Destrucción o muerte de Efraim o Lethalia"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios6/15_Apologies.cfg:57
@@ -29405,7 +29411,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/help.cfg:19
 #: Legend_of_the_Invincibles/utils/utils.cfg:265
 msgid "Yes."
-msgstr ""
+msgstr "Sí."
 
 #. [message]: speaker=Phillip
 #: Legend_of_the_Invincibles/scenarios6/15_Apologies.cfg:423
@@ -29626,7 +29632,7 @@ msgstr ""
 #. [scenario]: id=01_Another_Orcish_Assault
 #: Legend_of_the_Invincibles/scenarios7/01_Another_Orcish_Assault.cfg:4
 msgid "Another Orcish Assault"
-msgstr ""
+msgstr "Otro asalto orco"
 
 #. [scenario]: id=01_Another_Orcish_Assault
 #: Legend_of_the_Invincibles/scenarios7/01_Another_Orcish_Assault.cfg:16
@@ -30090,7 +30096,7 @@ msgstr ""
 #. [scenario]: id=02_Search_for_Elves
 #: Legend_of_the_Invincibles/scenarios7/02_Search_for_Elves.cfg:102
 msgid "Search for Elves"
-msgstr ""
+msgstr "La búsqueda de elfos"
 
 #. [side]: type=Corrupted Orcish Sovereign
 #. [side]
@@ -30174,6 +30180,8 @@ msgid ""
 "Note: No upkeep, no income, no matter what it shows. Additional gold can be "
 "found in chests."
 msgstr ""
+"Nota: Sin mantenimiento ni ingresos sin importar lo que se muestre. Se puede "
+"encontrar oro adicional en los cofres."
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios7/02_Search_for_Elves.cfg:365
@@ -30622,7 +30630,7 @@ msgstr ""
 #. [scenario]: id=04_Last_Survivors
 #: Legend_of_the_Invincibles/scenarios7/04_Last_Survivors.cfg:4
 msgid "Last Survivors"
-msgstr ""
+msgstr "Últimos supervivientes"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/04_Last_Survivors.cfg:139
@@ -30877,12 +30885,12 @@ msgstr ""
 #. [scenario]: id=05_Tundra
 #: Legend_of_the_Invincibles/scenarios7/05_Tundra.cfg:129
 msgid "Tundra"
-msgstr ""
+msgstr "Tundra"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/05_Tundra.cfg:236
 msgid "Exit the tundra to the north"
-msgstr ""
+msgstr "Sal de la tundra por el norte"
 
 #. [objectives]
 #: Legend_of_the_Invincibles/scenarios7/05_Tundra.cfg:243
@@ -30893,6 +30901,12 @@ msgid ""
 "You can build a keep anywhere for 50 gold (see options in the right-click "
 "menu)."
 msgstr ""
+"Nota: Sin mantenimiento ni ingresos sin importar lo que se muestre. Se puede "
+"encontrar oro adicional en los cofres.\n"
+"Puedes teletransportar todas las unidades a Efraim una vez cada diez "
+"turnos.\n"
+"Puedes construir un torreón en cualquier lugar por 50 de oro (ver opciones "
+"en el menú contextual)."
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios7/05_Tundra.cfg:284
@@ -31022,7 +31036,7 @@ msgstr ""
 #. [scenario]: id=06_Where_the_Flames_Freeze
 #: Legend_of_the_Invincibles/scenarios7/06_Where_the_Flames_Freeze.cfg:4
 msgid "Where the Flames Freeze"
-msgstr ""
+msgstr "Donde las llamas se congelan"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/06_Where_the_Flames_Freeze.cfg:90
@@ -31130,7 +31144,7 @@ msgstr ""
 #. [scenario]: id=07_Subterranean_War
 #: Legend_of_the_Invincibles/scenarios7/07_Subterranean_War.cfg:4
 msgid "Subterranean War"
-msgstr ""
+msgstr "Guerra subterránea"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/07_Subterranean_War.cfg:178
@@ -31444,7 +31458,7 @@ msgstr ""
 #. [scenario]: id=08_Eruption
 #: Legend_of_the_Invincibles/scenarios7/08_Eruption.cfg:4
 msgid "Eruption"
-msgstr ""
+msgstr "Erupción"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/08_Eruption.cfg:79
@@ -31536,7 +31550,7 @@ msgstr ""
 #. [scenario]: id=08s_Neighbours
 #: Legend_of_the_Invincibles/scenarios7/08s_Neighbours.cfg:4
 msgid "Neighbours"
-msgstr ""
+msgstr "Vecinos"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios7/08s_Neighbours.cfg:88
@@ -31763,7 +31777,7 @@ msgstr ""
 #. [scenario]: id=09_The_Den_of_Evil
 #: Legend_of_the_Invincibles/scenarios7/09_The_Den_of_Evil.cfg:4
 msgid "The Den of Evil"
-msgstr ""
+msgstr "La guarida del mal"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/09_The_Den_of_Evil.cfg:107
@@ -32443,7 +32457,7 @@ msgstr ""
 #. [scenario]: id=11_An_Old_Friend
 #: Legend_of_the_Invincibles/scenarios7/11_An_Old_Friend.cfg:4
 msgid "An Old F(r)iend"
-msgstr ""
+msgstr "Un viejo amigo"
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios7/11_An_Old_Friend.cfg:128
@@ -32560,7 +32574,7 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/11_An_Old_Friend.cfg:221
 msgid "Defeat Argan before he runs away"
-msgstr ""
+msgstr "Derrota a Argan antes de que escape"
 
 #. [message]: speaker=Efraim
 #: Legend_of_the_Invincibles/scenarios7/11_An_Old_Friend.cfg:250
@@ -32877,13 +32891,13 @@ msgstr ""
 #. [scenario]: id=12_The_Last_Enemy
 #: Legend_of_the_Invincibles/scenarios7/12_The_Last_Enemy.cfg:22
 msgid "The Last Enemy"
-msgstr ""
+msgstr "El último enemigo"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/12_The_Last_Enemy.cfg:85
 #: Legend_of_the_Invincibles/scenarios7/15_Annihilation.cfg:138
 msgid "Defeat the Queen of Darkness"
-msgstr ""
+msgstr "Vence a la reina de la oscuridad"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios7/12_The_Last_Enemy.cfg:118
@@ -33348,12 +33362,12 @@ msgid ""
 "You can build a keep anywhere for 50 gold, or a village for 10 gold. (see "
 "options in the right-click menu)"
 msgstr ""
-"Nota: Sin mantenimiento ni ingresos sin importa lo que se muestre. Se puede "
+"Nota: Sin mantenimiento ni ingresos sin importar lo que se muestre. Se puede "
 "encontrar oro adicional en los cofres.\n"
 "Puedes teletransportar todas las unidades a Efraim una vez cada diez "
 "turnos.\n"
-"Puedes construir una fortaleza en cualquier lugar por 50 de oro o una aldea "
-"por 10 de oro (ver opciones en el menú contextual)."
+"Puedes construir un torreón en cualquier lugar por 50 de oro o una aldea por "
+"10 de oro (ver opciones en el menú contextual)."
 
 #. [set_menu_item]: id=zz_ch7s14_village
 #: Legend_of_the_Invincibles/scenarios7/14_Arctic_Wastelands.cfg:537
@@ -36718,6 +36732,10 @@ msgid ""
 "You can teleport all units to Efraim once per ten turns. (see options in the "
 "right-click menu)"
 msgstr ""
+"Nota: Sin mantenimiento ni ingresos sin importar lo que se muestre. Se puede "
+"encontrar oro adicional en los cofres.\n"
+"Puedes teletransportar todas las unidades a Efraim una vez cada diez turnos "
+"(ver opciones en el menú contextual)."
 
 #. [part]
 #: Legend_of_the_Invincibles/scenarios8/08_The_Desert.cfg:420
@@ -38039,8 +38057,8 @@ msgid ""
 "right-click menu)\n"
 "Items left behind WILL BE put into the inventory."
 msgstr ""
-"Nota: Sin mantenimiento y sin ingresos sin importar lo que se muestre. Se "
-"puede encontrar oro adicional en los cofres.\n"
+"Nota: Sin mantenimiento ni ingresos sin importar lo que se muestre. Se puede "
+"encontrar oro adicional en los cofres.\n"
 "Puedes teletransportar todas las unidades a Efraim una vez cada diez turnos "
 "(ver opciones en el menú contextual).\n"
 "Los artículos que se dejen atrás serán colocados en el inventario."
@@ -48770,7 +48788,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Ice_Dragon.cfg:61
 #: Legend_of_the_Invincibles/utils/amla.cfg:2441
 msgid "icy breath"
-msgstr ""
+msgstr "aliento helado"
 
 #. [unit_type]: id=Ice Spirit, race=monster
 #: Legend_of_the_Invincibles/units/Ice_Spirit.cfg:4
@@ -50718,7 +50736,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Snow_Hunter.cfg:691
 #: Legend_of_the_Invincibles/utils/amla.cfg:5387
 msgid "blizzard"
-msgstr ""
+msgstr "ventisca"
 
 #. [advancement]: id=blizzard2
 #: Legend_of_the_Invincibles/units/Snow_Hunter.cfg:708
@@ -50757,7 +50775,7 @@ msgstr ""
 #. [effect]: type=arcane
 #: Legend_of_the_Invincibles/units/Soul_Shooter.cfg:267
 msgid "cursed arrow"
-msgstr ""
+msgstr "flecha maldita"
 
 #. [advancement]: id=arcane2
 #: Legend_of_the_Invincibles/units/Soul_Shooter.cfg:280
@@ -50831,7 +50849,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:121
 #: Legend_of_the_Invincibles/units/demons_race.cfg:15
 msgid "devastative"
-msgstr ""
+msgstr "devastador"
 
 #. [trait]: id=devastative
 #: Legend_of_the_Invincibles/units/Spider_Demon.cfg:62
@@ -50839,12 +50857,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:122
 #: Legend_of_the_Invincibles/units/demons_race.cfg:16
 msgid "female^devastative"
-msgstr ""
+msgstr "devastadora"
 
 #. [unit_type]: id=Elvish Sprite, race=elf
 #: Legend_of_the_Invincibles/units/Sprite.cfg:4
 msgid "female^Elvish Sprite"
-msgstr ""
+msgstr "Duende elfa"
 
 #. [unit_type]: id=Elvish Sprite, race=elf
 #: Legend_of_the_Invincibles/units/Sprite.cfg:20
@@ -68116,7 +68134,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4596
 msgid "The Humongously Enormous Megaspear"
-msgstr ""
+msgstr "Enorme y descomunal megalanza"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:4608
