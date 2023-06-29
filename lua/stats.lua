@@ -291,7 +291,7 @@ function wesnoth.update_stats(original)
 				weap.description = bonuses.name
 			end
 			if bonuses.devastating_blow > 0 then
-				table.insert(wml.get_child(weap, "specials"), { "dummy", { id = "devastating_blow", devastating_blow = bonuses.devastating_blow }})
+				table.insert(wml.get_child(weap, "specials"), { "dummy", { id = "devastating_blow", name = _"devastating blow", description = (_"$chance% chance that the enemy will lose 20% of their health on each hit"):vformat{chance = bonuses.devastating_blow}, devastating_blow = bonuses.devastating_blow }})
 			end
 			for k = 1,#bonuses.specials do
 				table.insert(wml.get_child(weap, "specials"), bonuses.specials[k])
