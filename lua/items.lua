@@ -560,7 +560,7 @@ end
 loti.item.util.get_item_from_storage = function(unit, item_number, crafted_sort)
 	loti.item.storage.remove(item_number, crafted_sort)
 	loti.item.on_the_ground.add(item_number, unit.x, unit.y, crafted_sort)
-	wesnoth.fire_event("item pick", unit)  
+	wesnoth.fire_event("item pick", unit)
 end
 
 -------------------------------------------------------------------------------
