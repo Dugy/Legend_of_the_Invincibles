@@ -117,7 +117,7 @@ loti.item.storage.remove = function(item_number, crafted_sort)
 	end
 
 	wml.variables["item_storage"] = list
-	wesnoth.fire_event("removed from storage")
+	wesnoth.fire_event("removed from storage") -- where is it used?
 end
 
 -- Get the list of all items in the storage.
@@ -431,7 +431,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 	-- Enable "pick item" event when some unit walks onto this hex.
 	-- (see PLACE_ITEM_EVENT for WML version)
 	-- this is a LEGACY version, which uses the "controller" side filter
-		wesnoth.add_event_handler {
+		wesnoth.game_events.add_wml {
 			id = "ie" .. x .. "|" .. y,
 			name = "moveto",
 			first_time_only = "no",
@@ -552,7 +552,7 @@ end
 loti.item.util.take_item_from_unit = function(unit, item_number, crafted_sort, skip_update)
 	loti.item.on_unit.remove(unit, item_number, crafted_sort, skip_update)
 	loti.item.storage.add(item_number, crafted_sort)
-	wesnoth.fire_event("unequip", unit.x, unit.y)
+	wesnoth.fire_event("unequip", unit)
 end
 
 -- Remove one item from storage, then open "Pick up item" dialog on behalf of unit.
@@ -560,7 +560,7 @@ end
 loti.item.util.get_item_from_storage = function(unit, item_number, crafted_sort)
 	loti.item.storage.remove(item_number, crafted_sort)
 	loti.item.on_the_ground.add(item_number, unit.x, unit.y, crafted_sort)
-	wesnoth.fire_event("item pick", unit.x, unit.y)
+	wesnoth.fire_event("item pick", unit)
 end
 
 -------------------------------------------------------------------------------
