@@ -532,12 +532,14 @@ end
 -- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
 -- NOTE: this is TEMPORARY (won't be needed in the future),
 -- because the WML code that needs this variable might be replaced by Lua.
+--
+-- NOTE: this is now used by ch8 United and ch9 Transporting Facility.
 function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	local to_variable = cfg.to_variable or "upgrade_count"
 
 	local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
-		wml.error("[show_redeem_menu]: no units found, may need find_in= parameter.")
+		wml.error("[count_redeem_upgrades]: no units found, may need find_in= parameter.")
 	end
 
 	local count = 0
