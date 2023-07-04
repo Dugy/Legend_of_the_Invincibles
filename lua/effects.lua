@@ -4,9 +4,8 @@
 -- increase=number or $formula
 -- set=number or $formula
 
--- luackeck: push ignore 122
+-- luacheck: push ignore 122
 function wesnoth.effects.level(unit, cfg)
--- luacheck: pop
     if cfg.set then
         unit.level = cfg.set
     elseif cfg.increase then
@@ -15,3 +14,4 @@ function wesnoth.effects.level(unit, cfg)
         wml.error("Invalid or missing key in [effect] apply_to=level")
     end
 end
+-- luacheck: pop
