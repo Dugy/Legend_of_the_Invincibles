@@ -4,7 +4,7 @@
 -- increase=number or $formula
 -- set=number or $formula
 
--- luackeck: push ignore 121
+-- luackeck: push ignore 122
 function wesnoth.effects.level(unit, cfg)
     if cfg.set then
         unit.level = cfg.set
