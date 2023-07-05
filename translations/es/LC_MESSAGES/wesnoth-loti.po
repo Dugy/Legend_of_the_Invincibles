@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2023-05-08 08:09 UTC\n"
-"PO-Revision-Date: 2023-06-27 23:14+0200\n"
+"PO-Revision-Date: 2023-07-06 00:25+0200\n"
 "Last-Translator: Toranks <toranksmervat@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -1393,7 +1393,7 @@ msgstr ""
 #. [lua]: form_one_line
 #: Legend_of_the_Invincibles/lua/main.lua:561
 msgid "\tDamage\t\t\tResistance\t\t\tPenetration</span> \n"
-msgstr "\tDaño\t\t\tResistencia\t\t\\Penetrabilidad</span> \n"
+msgstr "\tDaño\t\t\tResistencia\t\t\tPenetrabilidad</span> \n"
 
 #. [lua]: form_one_line
 #: Legend_of_the_Invincibles/lua/main.lua:562
@@ -27338,7 +27338,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:444
 #: Legend_of_the_Invincibles/utils/item_list.cfg:9495
 msgid "Lethalia's Staff"
-msgstr ""
+msgstr "Bastón de Lethalia"
 
 #. [latent]
 #: Legend_of_the_Invincibles/scenarios6/02_Who_Am_I.cfg:454
@@ -28869,27 +28869,27 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/12_The_Library.cfg:25
 msgid "Learn about the preserved liches"
-msgstr ""
+msgstr "Aprende sobre los liches preservados"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/12_The_Library.cfg:35
 msgid "Learn about phoenixes"
-msgstr ""
+msgstr "Aprende sobre los fénix"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/12_The_Library.cfg:45
 msgid "Learn how to find a phoenix"
-msgstr ""
+msgstr "Averigua cómo encontrar un fénix"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/12_The_Library.cfg:61
 msgid "Learn how to kill a phoenix"
-msgstr ""
+msgstr "Aprende cómo matar a un fénix"
 
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/12_The_Library.cfg:83
 msgid "Reach the summoning whirl"
-msgstr ""
+msgstr "Alcanza el torbellino de invocación"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/12_The_Library.cfg:200
@@ -29175,7 +29175,7 @@ msgstr "Día fresco"
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:28
 msgid "Smash the phoenix"
-msgstr "Aplasta al fénix"
+msgstr "Destruye el fénix"
 
 #. [message]: speaker=$leader_chosen
 #: Legend_of_the_Invincibles/scenarios6/14_Frozen_Land.cfg:142
@@ -29644,17 +29644,17 @@ msgstr ""
 #. [objective]: condition=win
 #: Legend_of_the_Invincibles/scenarios7/01_Another_Orcish_Assault.cfg:144
 msgid "Destroy 3 catapults"
-msgstr ""
+msgstr "Destruye 3 catapultas"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios7/01_Another_Orcish_Assault.cfg:152
 msgid "Death of the mage"
-msgstr ""
+msgstr "Muerte del mago"
 
 #. [objective]: condition=lose
 #: Legend_of_the_Invincibles/scenarios7/01_Another_Orcish_Assault.cfg:162
 msgid "Death of the orcish leader"
-msgstr ""
+msgstr "Muerte del líder orco"
 
 #. [message]: speaker=narrator
 #: Legend_of_the_Invincibles/scenarios7/01_Another_Orcish_Assault.cfg:193
@@ -48241,7 +48241,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/Werewolf_Rider.cfg:204
 #: Legend_of_the_Invincibles/utils/item_list.cfg:7278
 msgid "fury"
-msgstr ""
+msgstr "furia"
 
 #. [advancement]: id=berserk2
 #: Legend_of_the_Invincibles/units/Elvish_Nightprowler.cfg:411
@@ -51591,7 +51591,7 @@ msgstr ""
 #. [unit_type]: id=Corrupted Elvish Champion, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:70
 msgid "Corrupted Elvish Champion"
-msgstr ""
+msgstr "Campeón elfo corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Champion, race=elf
 #. [unit_type]: id=Corrupted Elvish Fighter, race=elf
@@ -51625,27 +51625,27 @@ msgstr ""
 #. [unit_type]: id=Corrupted Elvish Fighter, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:181
 msgid "Corrupted Elvish Fighter"
-msgstr ""
+msgstr "Luchador elfo corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Scout, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:342
 msgid "Corrupted Elvish Scout"
-msgstr ""
+msgstr "Explorador elfo corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Rider, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:455
 msgid "Corrupted Elvish Rider"
-msgstr ""
+msgstr "Explorador elfo corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Hero, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:572
 msgid "Corrupted Elvish Hero"
-msgstr ""
+msgstr "Héroe elfo corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Captain, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:671
 msgid "Corrupted Elvish Captain"
-msgstr ""
+msgstr "Capitán elfo corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Nightprowler, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:793
@@ -51655,42 +51655,42 @@ msgstr "Merodeador elfo corrupto"
 #. [unit_type]: id=Corrupted Elvish Juggernaut, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:894
 msgid "Corrupted Elvish Juggernaut"
-msgstr ""
+msgstr "Elfo imparable corrupto"
 
 #. [unit_type]: id=Corrupted Elvish Archer, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:1001
 msgid "Corrupted Elvish Archer"
-msgstr ""
+msgstr "Arquero elfo corrupto"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/corruption.cfg:1163
 msgid "female^Corrupted Elvish Archer"
-msgstr ""
+msgstr "Arquera elfa corrupta"
 
 #. [unit_type]: id=Corrupted Elvish Ranger, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:1247
 msgid "Corrupted Elvish Ranger"
-msgstr ""
+msgstr "Montaraz elfo corrupto"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/corruption.cfg:1416
 msgid "female^Corrupted Elvish Ranger"
-msgstr ""
+msgstr "Montaraz elfa corrupta"
 
 #. [unit_type]: id=Corrupted Snow Hunter, race=elf
 #: Legend_of_the_Invincibles/units/corruption.cfg:1496
 msgid "Corrupted Snow Hunter"
-msgstr ""
+msgstr "Cazador de las nieves corrupto"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/corruption.cfg:1599
 msgid "Corrupted Snow Huntress"
-msgstr ""
+msgstr "Cazadora de las nieves corrupta"
 
 #. [unit_type]: id=Corrupted Naga Fighter, race=naga
 #: Legend_of_the_Invincibles/units/corruption.cfg:1640
 msgid "Corrupted Naga Fighter"
-msgstr ""
+msgstr "Luchador naga corrupto"
 
 #. [unit_type]: id=Corrupted Naga Fighter, race=naga
 #. [unit_type]: id=Corrupted Naga Warrior, race=naga
@@ -51708,32 +51708,32 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/corruption.cfg:1791
 msgid "Corrupted Nagini Fighter"
-msgstr ""
+msgstr "Luchadora naga corrupta"
 
 #. [unit_type]: id=Corrupted Naga Warrior, race=naga
 #: Legend_of_the_Invincibles/units/corruption.cfg:1797
 msgid "Corrupted Naga Warrior"
-msgstr ""
+msgstr "Guerrero naga corrupto"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/corruption.cfg:1887
 msgid "Corrupted Nagini Warrior"
-msgstr ""
+msgstr "Guerrera naga corrupta"
 
 #. [unit_type]: id=Corrupted Naga Myrmidon, race=naga
 #: Legend_of_the_Invincibles/units/corruption.cfg:1893
 msgid "Corrupted Naga Myrmidon"
-msgstr ""
+msgstr "Mirmidón naga corrupto"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/corruption.cfg:1997
 msgid "Corrupted Nagini Myrmidon"
-msgstr ""
+msgstr "Mirmidona naga corrupta"
 
 #. [unit_type]: id=Corrupted Orcish Grunt, race=orc
 #: Legend_of_the_Invincibles/units/corruption.cfg:2003
 msgid "Corrupted Orcish Grunt"
-msgstr ""
+msgstr "Soldado orco corrupto"
 
 #. [unit_type]: id=Corrupted Orcish Grunt, race=orc
 #. [unit_type]: id=Corrupted Orcish Warrior, race=orc
@@ -51755,27 +51755,27 @@ msgstr ""
 #. [unit_type]: id=Corrupted Orcish Warrior, race=orc
 #: Legend_of_the_Invincibles/units/corruption.cfg:2139
 msgid "Corrupted Orcish Warrior"
-msgstr ""
+msgstr "Guerrero orco corrupto"
 
 #. [unit_type]: id=Corrupted Orcish Sovereign, race=orc
 #: Legend_of_the_Invincibles/units/corruption.cfg:2238
 msgid "Corrupted Orcish Sovereign"
-msgstr ""
+msgstr "Soberano orco corrupto"
 
 #. [unit_type]: id=Corrupted Orcish Assassin, race=orc
 #: Legend_of_the_Invincibles/units/corruption.cfg:2342
 msgid "Corrupted Orcish Assassin"
-msgstr ""
+msgstr "Asesino orco corrupto"
 
 #. [unit_type]: id=Corrupted Orcish Slayer, race=orc
 #: Legend_of_the_Invincibles/units/corruption.cfg:2535
 msgid "Corrupted Orcish Slayer"
-msgstr ""
+msgstr "Matador orco corrupto"
 
 #. [unit_type]: id=Corrupted Drake Fighter, race=drake
 #: Legend_of_the_Invincibles/units/corruption.cfg:2672
 msgid "Corrupted Drake Fighter"
-msgstr ""
+msgstr "Luchador draco corrupto"
 
 #. [unit_type]: id=Corrupted Drake Fighter, race=drake
 #. [unit_type]: id=Corrupted Drake Warrior, race=drake
@@ -51802,90 +51802,90 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/corruption.cfg:2708
 #: Legend_of_the_Invincibles/units/corruption.cfg:2817
 msgid "war blade"
-msgstr ""
+msgstr "espada de guerra"
 
 #. [unit_type]: id=Corrupted Drake Warrior, race=drake
 #: Legend_of_the_Invincibles/units/corruption.cfg:2781
 msgid "Corrupted Drake Warrior"
-msgstr ""
+msgstr "Guerrero draco corrupto"
 
 #. [unit_type]: id=Corrupted Drake Clasher, race=drake
 #: Legend_of_the_Invincibles/units/corruption.cfg:2883
 msgid "Corrupted Drake Clasher"
-msgstr ""
+msgstr "Retador draco corrupto"
 
 #. [attack]: type=blade
 #: Legend_of_the_Invincibles/units/corruption.cfg:2916
 #: Legend_of_the_Invincibles/units/corruption.cfg:3176
 #: Legend_of_the_Invincibles/units/corruption.cfg:3799
 msgid "war talon"
-msgstr ""
+msgstr "garra de guerra"
 
 #. [unit_type]: id=Corrupted Drake Thrasher, race=drake
 #: Legend_of_the_Invincibles/units/corruption.cfg:3144
 msgid "Corrupted Drake Thrasher"
-msgstr ""
+msgstr "Vapuleador draco corrupto"
 
 #. [attack]: type=impact
 #: Legend_of_the_Invincibles/units/corruption.cfg:3194
 #: Legend_of_the_Invincibles/units/corruption.cfg:3808
 msgid "ram"
-msgstr ""
+msgstr "embestida"
 
 #. [unit_type]: id=Corrupted Drake Arbiter, race=drake
 #: Legend_of_the_Invincibles/units/corruption.cfg:3414
 msgid "Corrupted Drake Arbiter"
-msgstr ""
+msgstr "Árbitro draco corrupto"
 
 #. [attack]: type=blade
 #. [attack]: type=pierce
 #: Legend_of_the_Invincibles/units/corruption.cfg:3453
 #: Legend_of_the_Invincibles/units/corruption.cfg:3462
 msgid "halberd"
-msgstr ""
+msgstr "alabarda"
 
 #. [unit_type]: id=Corrupted Drake Enforcer, race=drake
 #: Legend_of_the_Invincibles/units/corruption.cfg:3755
 msgid "Corrupted Drake Enforcer"
-msgstr ""
+msgstr "Comisario draco corrupto"
 
 #. [attack]: type=pierce
 #: Legend_of_the_Invincibles/units/corruption.cfg:3817
 msgid "trident"
-msgstr ""
+msgstr "tridente"
 
 #. [unit_type]: id=Corrupted Armageddon Drake, race=drake
 #: Legend_of_the_Invincibles/units/corruption.cfg:4026
 msgid "Corrupted Armageddon Drake"
-msgstr ""
+msgstr "Draco armagedón corrupto"
 
 #. [attack]: type=blade
 #: Legend_of_the_Invincibles/units/corruption.cfg:4072
 msgid "battle claws"
-msgstr ""
+msgstr "garras de batalla"
 
 #. [attack]: type=fire
 #: Legend_of_the_Invincibles/units/corruption.cfg:4081
 msgid "hellish breath"
-msgstr ""
+msgstr "aliento infernal"
 
 #. [unit_type]: id=Demon Infiltrator White Mage, race=demon-loti
 #. [unit_type]: id=Demon Infiltrator Unknown White Mage, race=demon-loti-secret
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:95
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:97
 msgid "White Mage"
-msgstr ""
+msgstr "Mago blanco"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:345
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:344
 msgid "female^White Mage"
-msgstr ""
+msgstr "Maga blanca"
 
 #. [unit_type]: id=Demon Infiltrator Mage of Light, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:462
 msgid "Mage of Light"
-msgstr ""
+msgstr "Mago de luz"
 
 #. [unit_type]: id=Demon Infiltrator Mage of Light, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:477
@@ -51902,12 +51902,12 @@ msgstr ""
 #. [attack]: type=impact
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:566
 msgid "morning star"
-msgstr ""
+msgstr "lucero del alba"
 
 #. [female]
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:700
 msgid "female^Mage of Light"
-msgstr ""
+msgstr "Maga de luz"
 
 #. [unit_type]: id=Demon Infiltrator Messenger, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:857
@@ -51926,7 +51926,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:1634
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:461
 msgid "Spearman"
-msgstr ""
+msgstr "Lancero"
 
 #. [unit_type]: id=Demon Infiltrator Spearman, race=demon-loti
 #. [unit_type]: id=Demon Infiltrator Unknown Spearman, race=demon-loti-secret
@@ -51939,13 +51939,19 @@ msgid ""
 "armed with a shield and a few javelins, spearmen are the staple of most "
 "armies, often thrown into the front lines with only the most basic training."
 msgstr ""
+"Las espadas son, para muchos, un costoso lujo, algo que los campesinos no "
+"pueden permitirse. Las lanzas son mucho más sencillas de construir y pueden "
+"utilizarse incluso sin punta, aunque la mayoría puede permitírsela. Vestidos "
+"con una armadura de cuero y frecuentemente armados con un escudo y algunas "
+"jabalinas, los lanceros son la base de la mayoría de los ejércitos, a menudo "
+"enviados al frente solamente con un entrenamiento básico."
 
 #. [unit_type]: id=Demon Infiltrator Swordsman, race=demon-loti
 #. [unit_type]: id=Demon Infiltrator Unknown Swordsman, race=demon-loti-secret
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:1806
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:777
 msgid "Swordsman"
-msgstr ""
+msgstr "Espadachín"
 
 #. [unit_type]: id=Demon Infiltrator Swordsman, race=demon-loti
 #. [unit_type]: id=Demon Infiltrator Unknown Swordsman, race=demon-loti-secret
@@ -51959,11 +51965,18 @@ msgid ""
 "behind. A sword is not without its own drawbacks, but is more versatile than "
 "a spear, and much better in close quarters."
 msgstr ""
+"Un soldado experimentado tiende a ahorrar lo suficiente como para equiparse "
+"con una armadura de escamas o una cota de malla y una larga y robusta "
+"espada. Aunque cambiar sus lanzas por espadas es un gran salto, muchos "
+"lanceros no dudan en hacerlo, conscientes de las limitaciones de sus "
+"anteriores armas. A pesar de que una espada tampoco está exenta de "
+"desventajas, es mucho más versátil que una lanza, y mucho más útil en las "
+"distancias cortas."
 
 #. [unit_type]: id=Demon Infiltrator Royal Guard, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:1896
 msgid "Royal Guard"
-msgstr ""
+msgstr "Guardia real"
 
 #. [unit_type]: id=Demon Infiltrator Royal Guard, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:1910
@@ -51977,13 +51990,22 @@ msgid ""
 "reliability and mastery of close combat are their best assets, for which "
 "they are well-renowned."
 msgstr ""
+"Los guardias reales se seleccionan entre los mejores espadachines de "
+"Wesnoth. Suelen trabajar como guardaespaldas de la más alta nobleza, "
+"sirviendo a menudo como distintivo de la posición de sus empleadores. Una "
+"facción especial de la guardia real se encuentra apostada en la capital, "
+"protegiendo las zonas del palacio y a la familia real. Debido a la relación "
+"de confianza que les une a sus superiores, suelen desplegarse en misiones de "
+"crucial importancia en vez de usar mercenarios. Su fiabilidad y la maestría "
+"que tienen en el combate cuerpo a cuerpo son sus mejores bazas, por las que "
+"alcanzan gran reconocimiento."
 
 #. [unit_type]: id=Demon Infiltrator Bowman, race=demon-loti
 #. [unit_type]: id=Demon Infiltrator Unknown Bowman, race=demon-loti-secret
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2015
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:633
 msgid "Bowman"
-msgstr ""
+msgstr "Arquero"
 
 #. [unit_type]: id=Demon Infiltrator Bowman, race=demon-loti
 #. [unit_type]: id=Demon Infiltrator Unknown Bowman, race=demon-loti-secret
@@ -51996,11 +52018,16 @@ msgid ""
 "woodsmen, military bowmen are trained to competence with both a bow and a "
 "short sword, and are very common on the battlefield."
 msgstr ""
+"El uso del arco para algo que no fuera la caza ha estado presente desde su "
+"concepción, y los arqueros han sido indispensables en la guerra desde "
+"tiempos inmemoriales. Éstos, a menudo de origen humilde, ya sean campesinos "
+"o leñadores, son entrenados para ser hábiles tanto con el arco como con la "
+"espada corta, y son muy comunes en el campo de batalla."
 
 #. [unit_type]: id=Demon Infiltrator Heavy Infantryman, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2159
 msgid "Heavy Infantryman"
-msgstr ""
+msgstr "Infantería pesada"
 
 #. [unit_type]: id=Demon Infiltrator Heavy Infantryman, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2178
@@ -52011,11 +52038,17 @@ msgid ""
 "positions. A few of these in battle line will stiffen it considerably, "
 "albeit at an obvious cost in tactical flexibility."
 msgstr ""
+"La infantería pesada son corpulentos luchadores embutidos en una armadura "
+"completa y llevando pesadas armas de impacto. Aunque su fuerza en la lucha "
+"cuerpo a cuerpo es inigualable, tienen una movilidad muy pobre y están mejor "
+"empleados en la defensa de posiciones fortificadas. Unos cuantos en la línea "
+"de batalla la refuerzan considerablemente, a pesar de tener un coste obvio "
+"en flexibilidad táctica."
 
 #. [unit_type]: id=Demon Infiltrator Shock Trooper, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2240
 msgid "Shock Trooper"
-msgstr ""
+msgstr "Infantería de choque"
 
 #. [unit_type]: id=Demon Infiltrator Shock Trooper, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2258
@@ -52029,12 +52062,12 @@ msgstr ""
 #. [attack]: type=impact
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2264
 msgid "flail"
-msgstr ""
+msgstr "mangual"
 
 #. [unit_type]: id=Demon Infiltrator Iron Mauler, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2323
 msgid "Iron Mauler"
-msgstr ""
+msgstr "Coloso"
 
 #. [unit_type]: id=Demon Infiltrator Iron Mauler, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2341
@@ -52054,7 +52087,7 @@ msgstr ""
 #. [unit_type]: id=Demon Infiltrator Cavalryman, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2801
 msgid "Cavalryman"
-msgstr ""
+msgstr "Soldado de caballería"
 
 #. [unit_type]: id=Demon Infiltrator Cavalryman, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2816
@@ -52068,11 +52101,21 @@ msgid ""
 "Cavalrymen are very useful for taking and holding positions on open ground, "
 "for screening friendly soldiers, and also for scouting work."
 msgstr ""
+"Los soldados de caballería se distinguen de los jinetes por sus tácticas y "
+"equipo. Un soldado de caballería viste una armadura más pesada, y lleva un "
+"escudo y una espada, en vez de una lanza. Sus tácticas no incluyen la carga; "
+"en lugar de eso maniobran para cortar con una espada, empleando tanto al "
+"caballo como a su jinete como una efectiva herramienta de combate cuerpo a "
+"cuerpo.\n"
+"\n"
+"Los soldados de caballería son muy útiles para tomar y mantener posiciones "
+"en terreno abierto, para dar protección a infantería aliada, y también para "
+"trabajos de exploración."
 
 #. [unit_type]: id=Demon Infiltrator General, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2916
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. [unit_type]: id=Demon Infiltrator General, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2936
@@ -52080,16 +52123,24 @@ msgid ""
 "As the leaders of their armies, Generals are responsible for the protection "
 "of large or important areas in the kingdoms to which they have sworn fealty."
 msgstr ""
+"Como líderes de sus ejércitos, los generales son los responsables de la "
+"protección de áreas extensas o importantes en los reinos a los que han "
+"jurado fidelidad. Buenos conocedores del arte de la guerra, los generales "
+"pueden dirigir incluso a los reclutas más novatos para golpear "
+"estratégicamente y surgir victoriosos con las más imponentes probabilidades "
+"en contra . Reconocidos tanto por los nobles como por la ciudadanía, van "
+"equipados con armaduras de placas ornamentadas y se les reserva el armamento "
+"de la mayor calidad que puede ofrecer un artesano humano."
 
 #. [abilities]
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:2958
 msgid "leadership"
-msgstr "lidera"
+msgstr "liderazgo"
 
 #. [unit_type]: id=Demon Infiltrator Thug, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3094
 msgid "Thug"
-msgstr ""
+msgstr "Proscrito"
 
 #. [unit_type]: id=Demon Infiltrator Thug, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3109
@@ -52100,12 +52151,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3126
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3397
 msgid "club"
-msgstr ""
+msgstr "garrote"
 
 #. [unit_type]: id=Demon Infiltrator Bandit, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3187
 msgid "Bandit"
-msgstr ""
+msgstr "Bandido"
 
 #. [unit_type]: id=Demon Infiltrator Bandit, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3200
@@ -52117,7 +52168,7 @@ msgstr ""
 #. [unit_type]: id=Demon Infiltrator Highwayman, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3278
 msgid "Highwayman"
-msgstr ""
+msgstr "Bandolero"
 
 #. [unit_type]: id=Demon Infiltrator Highwayman, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3292
@@ -52129,7 +52180,7 @@ msgstr ""
 #. [unit_type]: id=Demon Infiltrator Footpad, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3360
 msgid "Footpad"
-msgstr ""
+msgstr "Salteador"
 
 #. [unit_type]: id=Demon Infiltrator Footpad, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3380
@@ -52144,12 +52195,12 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3487
 msgid "female^Footpad"
-msgstr ""
+msgstr "Salteadora"
 
 #. [unit_type]: id=Demon Infiltrator Outlaw, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3558
 msgid "Outlaw"
-msgstr ""
+msgstr "Forajido"
 
 #. [unit_type]: id=Demon Infiltrator Outlaw, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3577
@@ -52161,12 +52212,12 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3673
 msgid "female^Outlaw"
-msgstr ""
+msgstr "Forajida"
 
 #. [unit_type]: id=Demon Infiltrator Fugitive, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3738
 msgid "Fugitive"
-msgstr ""
+msgstr "Fugitivo"
 
 #. [unit_type]: id=Demon Infiltrator Fugitive, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3758
@@ -52179,12 +52230,12 @@ msgstr ""
 #. [female]
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3859
 msgid "female^Fugitive"
-msgstr ""
+msgstr "Fugitiva"
 
 #. [unit_type]: id=Demon Infiltrator Poacher, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3924
 msgid "Poacher"
-msgstr ""
+msgstr "Cazador furtivo"
 
 #. [unit_type]: id=Demon Infiltrator Poacher, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:3938
@@ -52197,7 +52248,7 @@ msgstr ""
 #. [unit_type]: id=Demon Infiltrator Trapper, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:4059
 msgid "Trapper"
-msgstr ""
+msgstr "Trampero"
 
 #. [unit_type]: id=Demon Infiltrator Trapper, race=demon-loti
 #: Legend_of_the_Invincibles/units/demon_infiltrators.cfg:4072
@@ -52209,7 +52260,7 @@ msgstr ""
 #. [unit_type]: id=Bewitched Wolf, race=wolf
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:867
 msgid "Bewitched Wolf"
-msgstr ""
+msgstr "Lobo embrujado"
 
 #. [unit_type]: id=Bewitched Wolf, race=wolf
 #: Legend_of_the_Invincibles/units/demon_infiltrators_unidentified.cfg:881
@@ -52219,27 +52270,27 @@ msgstr ""
 #. [trait]: id=powerful
 #: Legend_of_the_Invincibles/units/demons_race.cfg:7
 msgid "extra attack,"
-msgstr ""
+msgstr "ataque extra"
 
 #. [trait]: id=devastative
 #: Legend_of_the_Invincibles/units/demons_race.cfg:17
 msgid "more damage overall,"
-msgstr ""
+msgstr "mayor daño"
 
 #. [trait]: id=putrid
 #: Legend_of_the_Invincibles/units/demons_race.cfg:57
 msgid "increased damage and poison"
-msgstr ""
+msgstr "daño aumentado y veneno"
 
 #. [trait]: id=scary
 #: Legend_of_the_Invincibles/units/demons_race.cfg:69
 msgid "scary"
-msgstr ""
+msgstr "aterrador"
 
 #. [trait]: id=scary
 #: Legend_of_the_Invincibles/units/demons_race.cfg:70
 msgid "female^scary"
-msgstr ""
+msgstr "aterradora"
 
 #. [trait]: id=scary
 #: Legend_of_the_Invincibles/units/demons_race.cfg:72
@@ -52250,13 +52301,13 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:97
 #: Legend_of_the_Invincibles/units/demons_race.cfg:847
 msgid "wicked"
-msgstr ""
+msgstr "malvado"
 
 #. [trait]: id=wicked
 #: Legend_of_the_Invincibles/units/demons_race.cfg:98
 #: Legend_of_the_Invincibles/units/demons_race.cfg:848
 msgid "female^wicked"
-msgstr ""
+msgstr "malvada"
 
 #. [trait]: id=wicked
 #: Legend_of_the_Invincibles/units/demons_race.cfg:99
@@ -52276,12 +52327,12 @@ msgstr ""
 #. [trait]: id=infernalchill
 #: Legend_of_the_Invincibles/units/demons_race.cfg:143
 msgid "cold"
-msgstr ""
+msgstr "frío"
 
 #. [trait]: id=infernalchill
 #: Legend_of_the_Invincibles/units/demons_race.cfg:144
 msgid "female^cold"
-msgstr ""
+msgstr "fría"
 
 #. [trait]: id=infernalchill
 #: Legend_of_the_Invincibles/units/demons_race.cfg:146
@@ -52294,13 +52345,13 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:210
 #: Legend_of_the_Invincibles/units/demons_race.cfg:926
 msgid "vengeful"
-msgstr ""
+msgstr "vengativo"
 
 #. [trait]: id=vengeful
 #: Legend_of_the_Invincibles/units/demons_race.cfg:211
 #: Legend_of_the_Invincibles/units/demons_race.cfg:927
 msgid "female^vengeful"
-msgstr ""
+msgstr "vengativa"
 
 #. [trait]: id=vengeful
 #: Legend_of_the_Invincibles/units/demons_race.cfg:212
@@ -52311,13 +52362,13 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:256
 #: Legend_of_the_Invincibles/units/demons_race.cfg:624
 msgid "blazing"
-msgstr ""
+msgstr "flameante"
 
 #. [trait]: id=blazing
 #: Legend_of_the_Invincibles/units/demons_race.cfg:257
 #: Legend_of_the_Invincibles/units/demons_race.cfg:625
 msgid "female^blazing"
-msgstr ""
+msgstr "flameante"
 
 #. [trait]: id=blazing
 #: Legend_of_the_Invincibles/units/demons_race.cfg:259
@@ -52333,12 +52384,12 @@ msgstr ""
 #. [trait]: id=physresist
 #: Legend_of_the_Invincibles/units/demons_race.cfg:302
 msgid "slimy"
-msgstr ""
+msgstr "viscoso"
 
 #. [trait]: id=physresist
 #: Legend_of_the_Invincibles/units/demons_race.cfg:303
 msgid "female^slimy"
-msgstr ""
+msgstr "viscosa"
 
 #. [trait]: id=physresist
 #: Legend_of_the_Invincibles/units/demons_race.cfg:304
@@ -52353,12 +52404,12 @@ msgstr ""
 #. [trait]: id=dishonest
 #: Legend_of_the_Invincibles/units/demons_race.cfg:359
 msgid "dishonest"
-msgstr ""
+msgstr "deshonesto"
 
 #. [trait]: id=dishonest
 #: Legend_of_the_Invincibles/units/demons_race.cfg:360
 msgid "female^dishonest"
-msgstr ""
+msgstr "deshonesta"
 
 #. [trait]: id=dishonest
 #: Legend_of_the_Invincibles/units/demons_race.cfg:361
@@ -52387,12 +52438,12 @@ msgstr ""
 #. [trait]: id=decrepifying
 #: Legend_of_the_Invincibles/units/demons_race.cfg:384
 msgid "decrepifying"
-msgstr ""
+msgstr "decrépito"
 
 #. [trait]: id=decrepifying
 #: Legend_of_the_Invincibles/units/demons_race.cfg:385
 msgid "female^decrepifying"
-msgstr ""
+msgstr "decrépita"
 
 #. [trait]: id=decrepifying
 #: Legend_of_the_Invincibles/units/demons_race.cfg:386
@@ -52595,12 +52646,12 @@ msgstr ""
 #. [trait]: id=reassembling
 #: Legend_of_the_Invincibles/units/demons_race.cfg:495
 msgid "reassembling"
-msgstr ""
+msgstr "reensambla"
 
 #. [trait]: id=reassembling
 #: Legend_of_the_Invincibles/units/demons_race.cfg:496
 msgid "female^reassembling"
-msgstr ""
+msgstr "reensambla"
 
 #. [trait]: id=reassembling
 #: Legend_of_the_Invincibles/units/demons_race.cfg:497
@@ -52612,12 +52663,12 @@ msgstr ""
 #: Legend_of_the_Invincibles/units/demons_race.cfg:513
 #: Legend_of_the_Invincibles/utils/abilities.cfg:1110
 msgid "unforgiving"
-msgstr ""
+msgstr "despiadado"
 
 #. [trait]: id=unforgiving
 #: Legend_of_the_Invincibles/units/demons_race.cfg:514
 msgid "female^unforgiving"
-msgstr ""
+msgstr "despiadada"
 
 #. [trait]: id=unforgiving
 #. [trait]: id=vengeful
@@ -52631,12 +52682,12 @@ msgstr ""
 #. [trait]: id=enthralling
 #: Legend_of_the_Invincibles/units/demons_race.cfg:525
 msgid "enthralling"
-msgstr ""
+msgstr "cautivador"
 
 #. [trait]: id=enthralling
 #: Legend_of_the_Invincibles/units/demons_race.cfg:526
 msgid "female^enthralling"
-msgstr ""
+msgstr "cautivadora"
 
 #. [trait]: id=enthralling
 #: Legend_of_the_Invincibles/units/demons_race.cfg:527
@@ -52646,12 +52697,12 @@ msgstr ""
 #. [trait]: id=cataclysmal
 #: Legend_of_the_Invincibles/units/demons_race.cfg:537
 msgid "cataclysmal"
-msgstr ""
+msgstr "cataclísmico"
 
 #. [trait]: id=cataclysmal
 #: Legend_of_the_Invincibles/units/demons_race.cfg:538
 msgid "female^cataclysmal"
-msgstr ""
+msgstr "cataclísmica"
 
 #. [trait]: id=cataclysmal
 #: Legend_of_the_Invincibles/units/demons_race.cfg:540
@@ -52668,22 +52719,22 @@ msgstr ""
 #. [trait]: id=sly, description=
 #: Legend_of_the_Invincibles/units/demons_race.cfg:563
 msgid "sly"
-msgstr ""
+msgstr "astuto"
 
 #. [trait]: id=sly, description=
 #: Legend_of_the_Invincibles/units/demons_race.cfg:564
 msgid "female^sly"
-msgstr ""
+msgstr "astuta"
 
 #. [trait]: id=scorching
 #: Legend_of_the_Invincibles/units/demons_race.cfg:573
 msgid "scorching"
-msgstr ""
+msgstr "abrasador"
 
 #. [trait]: id=scorching
 #: Legend_of_the_Invincibles/units/demons_race.cfg:574
 msgid "female^scorching"
-msgstr ""
+msgstr "abrasadora"
 
 #. [trait]: id=scorching
 #: Legend_of_the_Invincibles/units/demons_race.cfg:575
@@ -52693,12 +52744,12 @@ msgstr ""
 #. [trait]: id=debilitating
 #: Legend_of_the_Invincibles/units/demons_race.cfg:588
 msgid "debilitating"
-msgstr ""
+msgstr "debilitante"
 
 #. [trait]: id=debilitating
 #: Legend_of_the_Invincibles/units/demons_race.cfg:589
 msgid "female^debilitating"
-msgstr ""
+msgstr "debilitante"
 
 #. [trait]: id=debilitating
 #: Legend_of_the_Invincibles/units/demons_race.cfg:590
@@ -52779,12 +52830,12 @@ msgstr ""
 #. [trait]: id=gluttonous
 #: Legend_of_the_Invincibles/units/demons_race.cfg:714
 msgid "gluttonous"
-msgstr ""
+msgstr "goloso"
 
 #. [trait]: id=gluttonous
 #: Legend_of_the_Invincibles/units/demons_race.cfg:715
 msgid "female^gluttonous"
-msgstr ""
+msgstr "golosa"
 
 #. [trait]: id=gluttonous
 #: Legend_of_the_Invincibles/units/demons_race.cfg:716
@@ -52794,12 +52845,12 @@ msgstr ""
 #. [trait]: id=tormenting
 #: Legend_of_the_Invincibles/units/demons_race.cfg:735
 msgid "tormenting"
-msgstr ""
+msgstr "atormenta"
 
 #. [trait]: id=tormenting
 #: Legend_of_the_Invincibles/units/demons_race.cfg:736
 msgid "female^tormenting"
-msgstr ""
+msgstr "atormenta"
 
 #. [trait]: id=tormenting
 #: Legend_of_the_Invincibles/units/demons_race.cfg:737
@@ -52809,12 +52860,12 @@ msgstr ""
 #. [trait]: id=crushing
 #: Legend_of_the_Invincibles/units/demons_race.cfg:747
 msgid "crushing"
-msgstr ""
+msgstr "aplastante"
 
 #. [trait]: id=crushing
 #: Legend_of_the_Invincibles/units/demons_race.cfg:748
 msgid "female^crushing"
-msgstr ""
+msgstr "aplastante"
 
 #. [trait]: id=crushing
 #: Legend_of_the_Invincibles/units/demons_race.cfg:750
@@ -53167,12 +53218,12 @@ msgstr "filo vorpal"
 #. [race]: id=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:4
 msgid "race^Undead Demon"
-msgstr ""
+msgstr "Demonio no muerto"
 
 #. [race]: id=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:5
 msgid "race^Undead Demons"
-msgstr ""
+msgstr "Demonios no muertos"
 
 #. [race]: id=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:8
@@ -53226,17 +53277,17 @@ msgstr ""
 #. [trait]: id=misshapen
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:99
 msgid "misshapen"
-msgstr ""
+msgstr "deforme"
 
 #. [trait]: id=misshapen
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:100
 msgid "female^misshapen"
-msgstr ""
+msgstr "deforme"
 
 #. [unit_type]: id=Knight of Disaster, race=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:112
 msgid "Knight of Disaster"
-msgstr ""
+msgstr "Caballero del desastre"
 
 #. [unit_type]: id=Knight of Disaster, race=undead demon-loti
 #. [unit_type]: id=Doom Knight, race=undead demon-loti
@@ -53258,22 +53309,22 @@ msgstr ""
 #. [unit_type]: id=Doom Knight, race=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:297
 msgid "Doom Knight"
-msgstr ""
+msgstr "Caballero de fatalidad"
 
 #. [unit_type]: id=Knight of Oblivion, race=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:386
 msgid "Knight of Oblivion"
-msgstr ""
+msgstr "Caballero del olvido"
 
 #. [unit_type]: id=Knight of Annihilation, race=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:517
 msgid "Knight of Annihilation"
-msgstr ""
+msgstr "Caballero de aniquilación"
 
 #. [unit_type]: id=Knight of Pain, race=undead demon-loti
 #: Legend_of_the_Invincibles/units/undead_demons.cfg:730
 msgid "Knight of Pain"
-msgstr ""
+msgstr "Caballero del dolor"
 
 #. [plague]: id=plague({TYPE}), type={TYPE}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:5
@@ -53436,7 +53487,7 @@ msgstr ""
 #: Legend_of_the_Invincibles/utils/abilities.cfg:549
 #: Legend_of_the_Invincibles/utils/utils.cfg:1529
 msgid " ("
-msgstr ""
+msgstr " ("
 
 #. [resistance]: id=increase_resistance_{POWER}
 #: Legend_of_the_Invincibles/utils/abilities.cfg:124
@@ -67541,7 +67592,7 @@ msgstr ""
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3603
 msgid "Brightslash"
-msgstr ""
+msgstr "Corte brillante"
 
 #. [object]
 #: Legend_of_the_Invincibles/utils/item_list.cfg:3619
