@@ -532,8 +532,6 @@ end
 -- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
 -- NOTE: this is TEMPORARY (won't be needed in the future),
 -- because the WML code that needs this variable might be replaced by Lua.
---
--- NOTE: this is now used by ch8 United and ch9 Transporting Facility.
 function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	local to_variable = cfg.to_variable or "upgrade_count"
 
