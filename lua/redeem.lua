@@ -36,7 +36,7 @@ known_ability_trees.redeem = {
 	},
 	blizzard = {
 		image = "attacks/blizzard.png",
-		label =_ "Blizzard (only for attacking, slows a lot of units, moves them over the place)",
+		label =_ "Blizzard (only for attacking, slows a lot of units)",
 		requires = { "arcticblast" },
 		short_name =_ "Blizzard"
 	},
