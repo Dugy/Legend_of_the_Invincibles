@@ -535,7 +535,7 @@ end
 --
 function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	local to_variable = cfg.to_variable or "upgrade_count"
-	
+
         local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
 		wml.error("[count_redeem_upgrades]: no units found, may need find_in= parameter.")
