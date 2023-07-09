@@ -378,7 +378,8 @@ end
 
 -- Place item on the ground at coordinates (x,y).
 -- Optional parameter crafted_sort: if present, overrides item_sort of the item.
-loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
+-- Optional parameter turn: if present, overrides current turn.
+loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort, turn)
 	local record = {
 		type = item_number,
 		x = x,
@@ -387,6 +388,9 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort)
 	}
 	if crafted_sort then
 		record.sort = crafted_sort
+	end
+	if turn then
+		record.turn = turn
 	end
 
 	local list = wml.array_access.get("items")
@@ -893,7 +897,7 @@ function wesnoth.wml_actions.random_item(cfg)
 	if cfg.variable then
 		wml.variables[cfg.variable] = generated
 	else
-		loti.item.on_the_ground.add(generated, cfg.x, cfg.y)
+		loti.item.on_the_ground.add(generated, cfg.x, cfg.y, nil, cfg.turn)
 	end
 end
 
