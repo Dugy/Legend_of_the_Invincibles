@@ -319,7 +319,11 @@ function wesnoth.update_stats(original)
 	limit_resistance("pierce", 20);
 	limit_resistance("impact", 20);
 
-	remade.vision = remade.max_moves + vision
+	local base_vision = remade.vision
+	if base_vision < 0 then
+		base_vision = remade.max_moves
+	end
+	remade.vision = base_vision + vision
 
 	local remade_abilities = wml.get_child(remade, "abilities")
 	if not remade_abilities then
