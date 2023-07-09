@@ -36,7 +36,7 @@ known_ability_trees.redeem = {
 	},
 	blizzard = {
 		image = "attacks/blizzard.png",
-		label =_ "Blizzard (only for attacking, slows a lot of units)",
+		label =_ "Blizzard (only for attacking, slows a lot of units, moves them over the place)",
 		requires = { "arcticblast" },
 		short_name =_ "Blizzard"
 	},
@@ -532,10 +532,11 @@ end
 -- Unit is identified by cfg.find_in parameter (e.g. find_in=secondary_unit).
 -- NOTE: this is TEMPORARY (won't be needed in the future),
 -- because the WML code that needs this variable might be replaced by Lua.
+--
 function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	local to_variable = cfg.to_variable or "upgrade_count"
 
-	local units = wesnoth.units.find_on_map(cfg)
+        local units = wesnoth.units.find_on_map(cfg)
 	if #units < 1 then
 		wml.error("[count_redeem_upgrades]: no units found, may need find_in= parameter.")
 	end
@@ -544,4 +545,23 @@ function wesnoth.wml_actions.count_redeem_upgrades(cfg)
 	for _ in pairs(loti_util_list_existing_upgrades("redeem", units[1])) do count = count + 1 end
 
 	wml.variables[to_variable] = count
+end
+
+-- max_redeem_count_from_level gets the max redeem count for a redeem level.
+local function max_redeem_count_from_level(level)
+    -- max_redeem_count(n+1)=max_redeem_count(n)+floor(n*4/3), where n is redeem level
+    --   and max_redeem_count(1) = 6.
+    -- Instead of repeatedly calculating these values, they are presented here (with plenty of extras for future use)
+    local my_level = level or wml.error("max_redeem_count_from_level: missing input value (level)")
+    local max_redeem_count_list = {6, 8, 10, 13, 17, 22, 29, 38, 50, 66, 88, 117, 156, 208, 277, 369, 492, 656, 874, 1165, 1553, 2070, 2760, 3680, 4906, 6541, 8721, 11628, 15504, 20672, 27562, 36749, 48998, 65330, 87106, 116141, 154854, 206472, 275296, 367061}
+    return max_redeem_count_list[my_level]
+end
+
+-- Tag [max_redeem_count_from_level] gets the max redeem count for a redeem level.
+-- Result is placed into Wesnoth variable cfg.to_variable.
+-- Requires cfg.to_variable, cfg.level
+function wesnoth.wml_actions.max_redeem_count_from_level(cfg)
+    local to_variable = cfg.to_variable or wml.error("[max_redeem_from_level]: missing to_variable= .")
+    local level = cfg.level or wml.error("[max_redeem_from_level]: missing level= .")
+    wml.variables[to_variable] = max_redeem_count_from_level(level)
 end
