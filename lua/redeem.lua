@@ -565,4 +565,3 @@ function wesnoth.wml_actions.max_redeem_count_from_level(cfg)
     local level = cfg.level or wml.error("[max_redeem_from_level]: missing level= .")
     wml.variables[to_variable] = max_redeem_count_from_level(level)
 end
-
