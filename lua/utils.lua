@@ -45,3 +45,8 @@ loti.execute = function(code)
 		wesnoth.fire(code[i][1], code[i][2])
 	end
 end
+
+-- [deny_undo] tag to force disable undo
+function wesnoth.wml_actions.deny_undo()
+    wesnoth.allow_undo(false)
+end
