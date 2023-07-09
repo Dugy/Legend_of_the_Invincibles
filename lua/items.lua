@@ -435,7 +435,7 @@ loti.item.on_the_ground.add = function(item_number, x, y, crafted_sort, turn)
 	-- Enable "pick item" event when some unit walks onto this hex.
 	-- (see PLACE_ITEM_EVENT for WML version)
 	-- this is a LEGACY version, which uses the "controller" side filter
-		wesnoth.game_events.add_wml {
+		wesnoth.add_event_handler {
 			id = "ie" .. x .. "|" .. y,
 			name = "moveto",
 			first_time_only = "no",
