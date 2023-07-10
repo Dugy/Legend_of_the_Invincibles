@@ -613,6 +613,16 @@ local function unequip_destroy()
 
 	-- Tell player which gem was picked.
 	loti.gem.show_gem_info_popup(gem)
+	if (string.sub(tostring(item.name),1,6)) == "Lilith" then
+		local mrscrane = wesnoth.units.find_on_map{ id = "Lilith" }
+		if #mrscrane == 1 then
+			local lil_sez={"Why you little...", "I spent decades crafting that!",
+			"You'll pay for this mischief, in this world or the next",
+			"I'll tell you the truth! Your soul's gonna burn, in a lake of fire!"}
+			local rand=math.random(1,#lil_sez)
+			wml.fire("message", { speaker="Lilith", message= lil_sez[rand]})
+		end
+	end
 
 	inventory_dialog.goto_tab("items_tab")
 end

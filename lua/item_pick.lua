@@ -114,6 +114,15 @@ function loti.util.item_pick_menu (mpsafety, unit)
 				})
 				local gem_item = loti.item.type[520 + gem]
 				gui.show_popup(gem_item.name, gem_item.description, gem_item.image)
+				if (string.sub(tostring(item.name),1,6)) == "Lilith" then
+					local mrscrane = wesnoth.units.find_on_map{ id = "Lilith" }
+					if #mrscrane == 1 then
+						local lil_sez={" Right! I'll do you for that!", "I worked hard on that!",
+							"Don't force me to run you through!", "See, this is why we can't have nice things!"}
+						local rand=math.random(1,#lil_sez)
+						wml.fire("message", { speaker="Lilith", message= lil_sez[rand]})
+					end
+				end
 			end -- if res == 3, do nothing
 			if result ~= 3 then
 				-- used in campaign, chapters 5 and 9
