@@ -616,7 +616,7 @@ local function unequip_destroy()
 	if (string.sub(tostring(item.name),1,6)) == "Lilith" then
        		local mrscrane = wesnoth.units.find_on_map{ id = "Lilith" }
 		if #mrscrane == 1 then
-			local lil_sez={"Why you little...", "I spend decades crafting that!",
+			local lil_sez={"Why you little...", "I spent decades crafting that!",
 			"You'll pay for this mischief, in this world or the next",
 			"I'll tell you the truth! Your soul's gonna burn, in a lake of fire!"}
         		local rand=math.random(1,#lil_sez)
