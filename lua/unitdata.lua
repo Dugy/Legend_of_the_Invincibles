@@ -55,6 +55,17 @@ local function wml_modification_iterator(unit, tag, filter)
 	end
 end
 
+-- Check if the advancement's table has only the id key {id = adv_id} with no extra info
+
+local function is_bare_advancement(adv)
+	for k in pairs(adv) do
+		if k ~= "id" then
+			return false
+		end
+	end
+	return true
+end
+
 -- Helper function to obtain a unit type's advancement with a given id
 
 local function get_type_advancement(unit_type, advancement_id)
@@ -201,7 +212,7 @@ local wml_based_implementation = {
 				if modif_type == "object" and contents.number then
 					-- This is an item, therefore we must add "item set" effects (if any).
 					contents = loti.unit.item_with_set_effects(contents.number, set_items, contents.sort)
-				elseif modif_type == "advancement" then
+				elseif modif_type == "advancement" and is_bare_advancement(contents) then
 					contents = get_type_advancement(unit.type, contents.id)
 				end
 
@@ -242,7 +253,7 @@ local wml_based_implementation = {
 			if modif_type == "object" and contents.number then
 				-- This is an item, therefore we must add "item set" effects (if any).
 				contents = loti.unit.item_with_set_effects(contents.number, set_items, contents.sort)
-			elseif modif_type == "advancement" then
+			elseif modif_type == "advancement" and is_bare_advancement(contents) then
 				contents = get_type_advancement(unit.type, contents.id)
 			end
 
