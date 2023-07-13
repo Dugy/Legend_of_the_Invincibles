@@ -588,7 +588,11 @@ loti.item.describe_item = function(number, sort, set_items)
 		-- This item has constant (non-calculated) description.
 		-- For example, this can be a gem or an item like Book of Courage
 		-- ("Unit becomes fearless" instead of the calculated description).
-		return item.description_override
+		local descr = item.description_override
+		if item.flavour then
+			descr = descr .. "\n<span color='#808080'><i>" .. item.flavour .. "</i></span>"
+		end
+		return descr
 	end
 
 	local desc = {}
