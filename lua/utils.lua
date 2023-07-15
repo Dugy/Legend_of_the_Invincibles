@@ -50,3 +50,21 @@ end
 function wesnoth.wml_actions.deny_undo()
     wesnoth.allow_undo(false)
 end
+
+-- [is_in_list] tag checks to see if required string= is a member of a comma separated list=
+-- Returns true/false (yes/no in wml) in required to_variable.
+-- Does not handle empty entries ("" is NOT considered in "cat,,dog")
+function wesnoth.wml_actions.is_in_list(cfg)
+	local list=cfg.list or wml.error("[is_in_list]: missing required list=")
+	local string=tostring(cfg.string) or wml.error("[is_in_list]: missing required string=")
+	local to_variable=cfg.to_variable or wml.error("[is_in_list]: missing required to_variable=")
+
+	local ret=false
+	for w in string.gmatch(list, "[%w%s]+") do
+        	if (w == string) then
+			ret=true
+			break
+		end
+	end
+	wml.variables[to_variable]=ret
+end
