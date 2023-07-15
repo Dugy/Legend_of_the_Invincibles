@@ -324,6 +324,9 @@ function wesnoth.update_stats(original)
 		base_vision = remade.max_moves
 	end
 	remade.vision = base_vision + vision
+	if remade.vision < 0 then
+		remade.vision = 0
+	end
 
 	local remade_abilities = wml.get_child(remade, "abilities")
 	if not remade_abilities then
@@ -362,8 +365,8 @@ function wesnoth.update_stats(original)
 	local is_loyal
 
 	for index, eff in loti.unit.effects(remade) do -- luacheck: ignore 213/index
-		-- TODO: Add alignment, max_attacks and new_advancement using wesnoth.effects
-		if eff.apply_to == "alignment" then
+		-- LEGACY
+		if eff.apply_to == "alignment" and eff.alignment then
 			remade.alignment = eff.alignment
 		end
 		if eff.apply_to == "loyal" then
@@ -392,7 +395,8 @@ function wesnoth.update_stats(original)
 				set_if_same("type")
 			end
 		end
-		if eff.apply_to == "max_attacks" then
+		--LEGACY
+		if eff.apply_to == "max_attacks" and eff.add then
 			remade.max_attacks = remade.max_attacks + eff.add
 		end
 		if eff.apply_to == "new_advancement" then

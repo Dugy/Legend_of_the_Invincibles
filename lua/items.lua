@@ -835,10 +835,10 @@ loti.item.describe_item = function(number, sort, set_items)
 				describe("unwalkable", _"above unwalkable places")
 				describe("impassable", _"through impassable walls")
 			elseif effect.apply_to == "alignment" then
-				if effect.alignment == "chaotic" then line = "<span color='yellow'>" .. _"Sets alignment to chaotic" .. "</span>"
-				elseif effect.alignment == "liminal" then line = "<span color='yellow'>" .. _"Sets alignment to liminal" .. "</span>"
-				elseif effect.alignment == "lawful" then line = "<span color='yellow'>" .. _"Sets alignment to lawful" .. "</span>"
-				elseif effect.alignment == "neutral" then line = "<span color='yellow'>" .. _"Sets alignment to neutral" .. "</span>" end
+				if effect.set == "chaotic" then line = "<span color='yellow'>" .. _"Sets alignment to chaotic" .. "</span>"
+				elseif effect.set == "liminal" then line = "<span color='yellow'>" .. _"Sets alignment to liminal" .. "</span>"
+				elseif effect.set == "lawful" then line = "<span color='yellow'>" .. _"Sets alignment to lawful" .. "</span>"
+				elseif effect.set == "neutral" then line = "<span color='yellow'>" .. _"Sets alignment to neutral" .. "</span>" end
 			elseif effect.apply_to == "bonus_attack" then
 				line = "<span color='green'>" .. _"Bonus attack: " .. effect.description .. "</span>"
 			elseif effect.apply_to == "status" and effect.add == "not_living" then
