@@ -61,7 +61,7 @@ function wesnoth.wml_actions.is_in_list(cfg)
 
 	local ret=false
 	for w in string.gmatch(list, "[%w%s]+") do
-        	if (w == string) then
+		if (w == string) then
 			ret=true
 			break
 		end
