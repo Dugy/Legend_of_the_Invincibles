@@ -83,8 +83,8 @@ function wesnoth.wml_actions.sort_unit_list(cfg)
 	-- Sort units alphabetically with named units first as they are more likely to be used.
 	-- If two units share the same name (including/especially ""), sort them by unit type.
 	table.sort(ul, function (a, b)
-		local aname=string.format("%s",a.name)  -- sort gets mad if one name is translatable and the other is not
-		local bname=string.format("%s",b.name)  -- so compare aname/bname instead of a.name/b.name
+		local aname=tostring(a.name)  -- sort gets mad if one name is translatable and the other is not
+		local bname=tostring(b.name)  -- so compare aname/bname instead of a.name/b.name
 		if ((a.name ~= "") and (b.name ~= "")) then
 			return ((aname < bname) or ((aname == bname) and (a.language_name < b.language_name)))
 		elseif ((a.name ~= "") and (b.name == "")) then return true
