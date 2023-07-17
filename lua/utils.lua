@@ -68,3 +68,30 @@ function wesnoth.wml_actions.is_in_list(cfg)
 	end
 	wml.variables[to_variable]=ret
 end
+
+-- [sort_unit_list] Sorts array of units by name/type
+-- Requires unit_list=
+-- Returns sorted list in WML variable to_variable, or in unit_list if to_variable not supplied
+function wesnoth.wml_actions.sort_unit_list(cfg)
+	local unit_list=cfg.unit_list or wml.error("[sort_unit_list]: missing required unit_list=")
+	local to_variable=cfg.to_variable
+
+	if not to_variable then to_variable=unit_list end
+
+	local ul=wml.array_access.get(unit_list) or wml.error("[sort_unit_list]: error retrieving " .. unit_list)
+
+	-- Sort units alphabetically with named units first as they are more likely to be used.
+	-- If two units share the same name (including/especially ""), sort them by unit type.
+	table.sort(ul, function (a, b)
+		local aname=tostring(a.name)  -- sort gets mad if one name is translatable and the other is not
+		local bname=tostring(b.name)  -- so compare aname/bname instead of a.name/b.name
+		if ((a.name ~= "") and (b.name ~= "")) then
+			return ((aname < bname) or ((aname == bname) and (a.language_name < b.language_name)))
+		elseif ((a.name ~= "") and (b.name == "")) then return true
+		elseif ((a.name == "") and (b.name ~= "")) then return false
+		else return (a.language_name < b.language_name)
+		end
+	end )
+
+	wml.array_access.set(to_variable, ul)
+end
