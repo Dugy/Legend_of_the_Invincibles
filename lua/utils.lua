@@ -51,21 +51,31 @@ function wesnoth.wml_actions.deny_undo()
     wesnoth.allow_undo(false)
 end
 
--- [is_in_list] tag checks to see if required string= is a member of a comma separated list=
--- Returns true/false (yes/no in wml) in required to_variable.
--- Does not handle empty entries ("" is NOT considered in "cat,,dog")
-function wesnoth.wml_actions.is_in_list(cfg)
-	local list=cfg.list or wml.error("[is_in_list]: missing required list=")
-	local string=tostring(cfg.string) or wml.error("[is_in_list]: missing required string=")
-	local to_variable=cfg.to_variable or wml.error("[is_in_list]: missing required to_variable=")
+-- is_in_list checks to see if required cfg.string is a member of a comma separated l cfg.list
+-- Does not handle empty entries ("" is NOT considered to be in "cat,,dog")
+local function is_in_list(cfg)
+	local list=cfg.list or wml.error("is_in_list: missing required cfg.list")
+	local string=tostring(cfg.string) or wml.error("is_in_list: missing required cfg.string")
 
-	local ret=false
-	for w in string.gmatch(list, "[%w%s]+") do
+	for w in string.gmatch(list, "[%w%s%^]+") do
+		print(string.format("Comparing <%s> to <%s>",w,string))
 		if (w == string) then
-			ret=true
-			break
+			return true
 		end
 	end
+	return false
+end
+
+
+-- [is_in_list] tag checks to see if required string= is a member of a comma separated list=
+-- Returns true/false (yes/no in wml) in required to_variable.
+-- Does not handle empty entries ("" is NOT considered to be in "cat,,dog")
+function wesnoth.wml_actions.is_in_list(cfg)
+	local to_variable=cfg.to_variable or wml.error("[is_in_list]: missing required to_variable=")
+	if (cfg.list == nil) then wml.error("[is_in_list]: missing required list=") end
+	if (cfg.string == nil) then wml.error("[is_in_list]: missing required string=") end
+
+	local ret=is_in_list(cfg)
 	wml.variables[to_variable]=ret
 end
 
@@ -94,4 +104,45 @@ function wesnoth.wml_actions.sort_unit_list(cfg)
 	end )
 
 	wml.array_access.set(to_variable, ul)
+end
+
+-- [make_units_wander] Moves units randomly around the map
+function wesnoth.wml_actions.make_units_wander(cfg)
+	local min_x=0
+	if (cfg.min_x ~= nil) then min_x=cfg.min_x end
+	local max_x=cfg.max_x  -- should get default from map size
+	local min_y=0
+	if (cfg.min_y ~= nil) then min_y=cfg.min_y end
+	local max_y=cfg.max_y  -- should get default from map size
+	local avoid_terrain_list=cfg.avoid_terrain_list
+	local radius=3
+	if (cfg.radius ~= nil) then radius=cfg.radius end
+	local filter=wml.get_child(cfg, "filter")
+
+	local units=wesnoth.units.find_on_map(filter)
+	        if #units < 1 then
+                wml.error("[make_units_wander]: no units found, check [filter]")
+        end
+
+	for _, unit in pairs(units) do
+
+		--print(string.format("Considering unit %s, x,y=%d,%d",unit.id,unit.x,unit.y))
+		local moveto_x=unit.__cfg.x + math.random(0-radius,radius)
+		local moveto_y=unit.__cfg.y + math.random(0-radius,radius)
+
+		local target_terrain=wesnoth.current.map[{moveto_x,moveto_y}]
+
+		local doit=false
+		if ((moveto_x>min_x) and (moveto_x<=max_x) and (moveto_y>min_y) and (moveto_y<=max_y)) then doit=true end
+
+		if (avoid_terrain_list ~= nil) and (doit == true) then
+			if is_in_list({list=avoid_terrain_list,string=target_terrain}) then doit=false end
+		end
+
+		--if not doit then print(string.format("    not moving %s from %d,%d to %d,%d",unit.id,unit.x,unit.y,moveto_x,moveto_y)) end
+		if doit then
+			--print(string.format("    moving %s from %d,%d to %d,%d",unit.id,unit.x,unit.y,moveto_x,moveto_y))
+			wml.fire("move_unit",{id=unit.id, to_x=moveto_x, to_y=moveto_y})
+		end
+	end
 end
