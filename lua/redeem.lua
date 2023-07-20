@@ -574,6 +574,7 @@ local function redeem_hit_chance(redeem_level,target_level,distance)
 	local hit_chance = 0
 
 	if (distance < 0) or (distance > 1) then wml.error("does_redeem_hit:  distance must be 0 or 1") end
+	-- tables based on formulae that can be found at https://github.com/Dugy/Legend_of_the_Invincibles/blob/7397831e6b6693612bb455a8acb26acf8be4e69f/utils/redeeming.cfg#L264
 	local chance={ 	-- chance to sucessfully hit redeem defender
 			-- index = redeem level, value = table of probablity by target level (from 0)
 		{ 100, 100,  50,  25 },
