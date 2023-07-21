@@ -196,7 +196,7 @@ loti.item.type.numbers_between = function(start_number, end_number)
 	local numbers = {}
 	for item_number in pairs(loti.item.type._load()) do
 		if not start_number or item_number >= start_number then
-			if not end_number or item_number < end_number then
+			if not end_number or item_number <= end_number then
 				table.insert(numbers, item_number)
 			end
 		end
