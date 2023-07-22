@@ -3,6 +3,7 @@ local _ = wesnoth.textdomain "wesnoth-loti"
 
 --luacheck: ignore 211
 --luacheck: ignore 511
+--luacheck: ignore 241
 local function dump(o)
    if type(o) == 'table' then
       local s = '\n{ '
