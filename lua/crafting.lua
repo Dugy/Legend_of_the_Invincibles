@@ -599,7 +599,7 @@ loti.gem.show_crafting_window = function(x, y)
 					dialog.gui_recipe_chosen:remove_items_at(1, 0)
 
 					order = 1
-					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to + 1)) do
+					for _, i in ipairs(loti.item.type.numbers_between(word_from, word_to)) do
 						local item = loti.item.type[i]
 						dialog.gui_recipe_chosen[order].gui_recipe_name.label = item.name
 						if can_craft(i) then
