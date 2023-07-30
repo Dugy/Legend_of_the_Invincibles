@@ -42,6 +42,12 @@ read_globals = {
 				other_fields = true
 			},
 
+			-- wesnoth.effects[something] is supposed to be modified
+			effects = {
+				read_only = false,
+				other_fields = true
+			},
+
 			-- wesnoth.theme_units[something] is supposed to be modified
 			theme_items = {
 				read_only = false,
