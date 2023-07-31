@@ -5,15 +5,15 @@ function wesnoth.wml_actions.repeating_message(cfg)
 	local stop = {}
 	local length = 0
 	local repeat_options = false
-	local depth = wesnoth.get_variable("lua_repeating_message_depth") -- These should work when nested
+	local depth = wml.variables["lua_repeating_message_depth"] -- These should work when nested
 	if depth == nil then
-		wesnoth.set_variable("lua_repeating_message_depth", 1)
+		wml.variables["lua_repeating_message_depth"] = 1
 		depth = 0
 	else
-		wesnoth.set_variable("lua_repeating_message_depth", depth + 1)
+		wml.variables["lua_repeating_message_depth"] = depth + 1
 	end
 	if cfg.repeat_options == true then
-		wesnoth.set_variable("lua_repeating_message_do_repeat" .. tonumber(depth), true)
+		wml.variables["lua_repeating_message_do_repeat" .. tonumber(depth)] = true
 		cfg.repeat_options = nil
 		repeat_options = true
 	end
@@ -40,12 +40,12 @@ function wesnoth.wml_actions.repeating_message(cfg)
 	for repetition = 1,length do
 		if repetition == 1 then
 			cfg.message = first
-			wesnoth.set_variable("first_view", true) -- Set a variable that indicates that the message is viewed for the first time
+			wml.variables["first_view"] = true -- Set a variable that indicates that the message is viewed for the first time
 		else
 			cfg.message = message
 		end
-		wesnoth.fire("message" , cfg) -- Show it as [message]
-		local picked = wesnoth.get_variable("lua_repeating_message_option_chosen" .. tonumber(depth)) -- See what was picked
+		wml.fire("message" , cfg) -- Show it as [message]
+		local picked = wml.variables["lua_repeating_message_option_chosen" .. tonumber(depth)] -- See what was picked
 		-- Prevent it from being picked again if it's not disabled using [show_if]
 		local has_show_if = false
 		if picked == nil then -- Some error happened
@@ -61,7 +61,7 @@ function wesnoth.wml_actions.repeating_message(cfg)
 			table.insert(cfg[picked][2], { "show_if" , { {"and" , { { "variable", { name="lua_repeating_message_do_repeat" .. tonumber(depth), equals=true }}}}}} )
 		end
 		if repetition == 1 then
-			wesnoth.set_variable("first_view", nil) -- No longer the first view
+			wml.variables["first_view"] = nil -- No longer the first view
 		end
 		-- Apply the functionality of the [break] tag here
 		if stop[picked] == true then
@@ -74,11 +74,11 @@ function wesnoth.wml_actions.repeating_message(cfg)
 	end
 
 	-- Cleanup
-	wesnoth.set_variable("lua_repeating_message_do_repeat" .. tonumber(depth), nil)
-	wesnoth.set_variable("lua_repeating_message_option_chosen" .. tonumber(depth), nil)
+	wml.variables["lua_repeating_message_do_repeat" .. tonumber(depth)] = nil
+	wml.variables["lua_repeating_message_option_chosen" .. tonumber(depth)] = nil
 	if depth == 0 then
-		wesnoth.set_variable("lua_repeating_message_depth", nil)
+		wml.variables["lua_repeating_message_depth"] = nil
 	else
-		wesnoth.set_variable("lua_repeating_message_depth", depth)
+		wml.variables["lua_repeating_message_depth"] = depth
 	end
 end
