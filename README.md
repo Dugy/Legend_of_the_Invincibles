@@ -23,7 +23,7 @@ Its usage of space indentation bears no advantage over tabs, but increases file 
 
 * create a file `git/info/attributes` containing `*.cfg filter=tabspace`
 * use command `git config filter.tabspace.smudge 'unexpand --tabs=4 --first-only'`
-* use command `git config -filter.tabspace.clean 'expand --tabs=4 --initial'`
+* use command `git config filter.tabspace.clean 'expand --tabs=4 --initial'`
 * delete all files of type `.cfg` in the repository and use `git reset --hard`
 * edit the editorconfig file and untrack it `git update-index --assume-unchanged .editorconfig`
 
