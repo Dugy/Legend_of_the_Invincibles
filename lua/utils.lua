@@ -58,7 +58,6 @@ local function is_in_list(cfg)
 	local string=tostring(cfg.string) or wml.error("is_in_list: missing required cfg.string")
 
 	for w in string.gmatch(list, "[%w%s%^]+") do
-		print(string.format("Comparing <%s> to <%s>",w,string))
 		if (w == string) then
 			return true
 		end
