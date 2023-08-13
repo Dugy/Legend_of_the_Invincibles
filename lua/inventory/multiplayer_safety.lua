@@ -52,68 +52,70 @@ function mpsafety:queue(operation)
 	self.this_player_already_did_it = true
 end
 
--- Execute "operation" for the current player.
-function mpsafety:run_immediately(operation)
-	-- Unencode certain values, e.g. unit from coordinates.
-	if operation.x then
-		operation.unit = wesnoth.units.get(operation.x, operation.y)
-	elseif operation.recall_unit_id then
-		operation.unit = wesnoth.units.find_on_recall({ id = operation.recall_unit_id })[1]
-	end
-
-	-- Run the requested command
-	local command = operation.command
-	local unit = operation.unit
-
-	if command == "undress" then
+-- Handlers for all commands supported by mpsafety:run_immediately().
+local commands = {
+	undress = function(operation, unit) -- luacheck: ignore 212/operation
 		-- Remove all items from unit.
 		loti.item.util.undress_unit(unit)
-	elseif command == "unequip" then
+	end,
+	unequip = function(operation, unit)
 		-- Remove item from unit, add this item to storage.
 		loti.item.util.take_item_from_unit(unit, operation.number, operation.sort)
-	elseif command == "equip" then
+	end,
+	equip = function(operation, unit)
 		-- Remove item from storage, add this item to unit.
 		loti.item.storage.remove(operation.number, operation.sort)
 		loti.item.on_unit.add(unit, operation.number, operation.sort)
-	elseif command == "store" then
+	end,
+	store = function(operation, unit)
 		-- Store an item lying on the ground
 		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
 		loti.item.storage.add(operation.number, operation.sort)
-	elseif command == "equip_ground" then
+	end,
+	equip_ground = function(operation, unit)
 		-- Equip an item lying on the ground
 		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
 		loti.item.on_unit.add_with_replace(unit, operation.number, operation.sort)
-	elseif command == "drop" then
+	end,
+	drop = function(operation, unit)
 		-- Remove item from storage, place it on the ground.
 		loti.item.storage.remove(operation.number, operation.sort)
 		loti.item.on_the_ground.add(operation.number, unit.x, unit.y, operation.sort)
-	elseif command == "create_on_ground" then
+	end,
+	create_on_ground = function(operation, unit)
 		-- Creates an item lying on the ground. Used for crafting
 		loti.item.on_the_ground.add(operation.number, unit.x, unit.y, operation.sort)
-	elseif command == "gem_transmute" then
+	end,
+	gem_transmute = function(operation)
 		-- Transmutation of gems
 		loti.gem.add(operation.old_gem, -operation.old_count)
 		loti.gem.add(operation.new_gem, operation.new_count)
-	elseif command == "gem_remove" then
+	end,
+	gem_remove = function(operation)
 		-- When crafting
 		loti.gem.add(operation.gem, -operation.count)
-	elseif command == "unequip_drop" then
+	end,
+	unequip_drop = function(operation, unit)
 		-- Remove item from unit, place it on the ground.
 		loti.item.on_unit.remove(unit, operation.number, operation.sort)
 		loti.item.on_the_ground.add(operation.number, unit.x, unit.y, operation.sort)
-	elseif command == "destroy" then
+	end,
+	destroy = function(operation)
 		-- Remove item from storage, add one gem as compensation.
 		loti.item.storage.remove(operation.number, operation.sort)
 		loti.gem.add(operation.gem, 1)
-	elseif command == "unequip_destroy" then
+	end,
+	unequip_destroy = function(operation, unit)
 		-- Remove item from unit, add one gem as compensation.
 		loti.item.on_unit.remove(unit, operation.number, operation.sort)
 		loti.gem.add(operation.gem, 1)
-	elseif command == "destroy_ground" then
+	end,
+	destroy_ground = function(operation, unit)
 		-- Remove item from the ground, add one gem as compensation.
 		loti.item.on_the_ground.remove(operation.number, unit.x, unit.y, operation.sort)
 		loti.gem.add(operation.gem, 1)
-	elseif command == "set_attacks_retal" then
+	end,
+	set_attacks_retal = function(operation, unit)
 		-- Enabling/disabling attack for retaliation
 		local disabled_defences = {}
 		for _, attack_tag in ipairs(operation) do
@@ -133,9 +135,24 @@ function mpsafety:run_immediately(operation)
 			end
 		end
 		wml.array_access.set("disabled_defences", disabled_defences, unit)
-	else
-		wml.error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
 	end
+}
+
+-- Execute "operation" for the current player.
+function mpsafety:run_immediately(operation)
+	-- Unencode certain values, e.g. unit from coordinates.
+	local unit
+	if operation.x then
+		unit = wesnoth.units.get(operation.x, operation.y)
+	elseif operation.recall_unit_id then
+		unit = wesnoth.units.find_on_recall({ id = operation.recall_unit_id })[1]
+	end
+
+	-- Run the requested command
+	local command = operation.command
+	local handler = commands[command] or wml.error("mpsafety:run_immediately(): Unknown command: " .. tostring(command))
+
+	handler(operation, unit)
 end
 
 -- Returns value that should be returned from wesnoth.sync.evaluate_single(),
