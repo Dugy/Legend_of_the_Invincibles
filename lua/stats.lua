@@ -569,7 +569,7 @@ function wesnoth.update_stats(original)
 		local best_backstab_mult = 0
 		local best_backstab
 		for i = #specials,1,-1 do
-			if specials[i][1] == "damage" and string.match(specials[i][2].id, "backstab") then
+			if specials[i][1] == "damage" and specials[i][2].id and string.match(specials[i][2].id, "backstab") then
 				local quality = specials[i][2].multiply
 
 				if quality then
