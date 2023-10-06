@@ -620,19 +620,6 @@ function wesnoth.update_stats(original)
 		table.insert(visible_modifications, { "object", visual_obj})
 	end
 
-	-- Make some abilities have a visual effect
-	for i = 1,#remade_abilities do
-		local ability = remade_abilities[i][2]
-		local name = remade_abilities[i][1]
-		if name == "illuminates" then
-			if ability.value > 0 then
-				remade.halo = "halo/illuminates-aura.png"
-			elseif ability.value < 0 then
-				remade.halo = "halo/darkens-aura.png"
-			end
-		end
-	end
-
 	local new_overlays = {}
 	if is_loyal then
 		table.insert(new_overlays, "misc/loyal-icon.png")
