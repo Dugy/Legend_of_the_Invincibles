@@ -630,23 +630,6 @@ function wesnoth.update_stats(original)
 			elseif ability.value < 0 then
 				remade.halo = "halo/darkens-aura.png"
 			end
-		elseif name == "berserk" and ability.id == "berserk_leadership" then
-			remade.halo = "misc/berserk-1.png:100,misc/berserk-2.png:100,misc/berserk-3.png:100,misc/berserk-2.png:100"
-		elseif name == "damage" and ability.id == "charge_leadership" then
-			remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
-		elseif name == "poison" and ability.id == "poison_leadership" then
-			remade.halo = "misc/poison-1.png:200,misc/poison-2.png:200,misc/poison-3.png:200,misc/poison-2.png:200"
-		elseif name == "firststrike" and ability.id == "firststrike_leadership" then
-			remade.halo = "misc/firststrike-1.png:100,misc/firststrike-2.png:100,misc/firststrike-3.png:100"
-		elseif name == "damage" and ability.id == "backstab_leadership" then
-			remade.halo = "misc/backstab-1.png:200,misc/backstab-2.png:200,misc/backstab-3.png:200,misc/backstab-2.png:200"
-		elseif name == "chance_to_hit" and ability.id == "marksman_leadership" then
-			remade.halo = "misc/marksman-1.png:100,misc/marksman-2.png:100,misc/marksman-3.png:100,misc/marksman-2.png:100"
-		elseif name == "drains" and ability.id == "drain_leadership" then
-			remade.halo = "misc/drain-1.png:200,misc/drain-2.png:200,misc/drain-3.png:200,misc/drain-2.png:200"
-		elseif name == "dummy" and ability.id == "northfrost aura" then
-			remade.halo = "halo/blizzard-1.png~O(40%):100,halo/blizzard-2.png~O(40%):100,halo/blizzard-3.png~O(40%):100"
-
 		end
 	end
 
