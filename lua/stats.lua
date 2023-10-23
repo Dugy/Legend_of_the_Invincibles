@@ -645,18 +645,6 @@ function wesnoth.update_stats(original)
 	if sorts_owned.amulet or sorts_owned.ring or sorts_owned.cloak or sorts_owned.limited then
 		table.insert(new_overlays, "misc/orb-overlay.png")
 	end
-	local has_leadership_item = false
-	for _, eff in loti.unit.effects(remade) do
-		if eff.apply_to == "new_ability" then
-			local abilities = wml.get_child(eff, "abilities")
-			if abilities and wml.get_child(abilities, "leadership") then
-				has_leadership_item = true
-			end
-		end
-	end
-	if has_leadership_item then
-		table.insert(new_overlays, "misc/fist-overlay.png")
-	end
 	local overlays_object = { "object", { visual_provider = true, { "effect", { apply_to = "overlay", add = table.concat(new_overlays, ",")}}}}
 	table.insert(visible_modifications, overlays_object)
 
