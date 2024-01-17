@@ -573,7 +573,8 @@ loti.gem.show_crafting_window = function(x, y)
 						populate_item(_"Gauntlets", "icons/gauntlets.png", "gauntlets")
 
 						word_from = 531
-						word_to = 560
+						-- End number is +1 because numbers_between() returns a half-open interval
+						word_to = 560+1
 					else
 						-- Weapon
 						populate_item(_"Sword", "attacks/sword-steel.png", "sword")
@@ -592,7 +593,8 @@ loti.gem.show_crafting_window = function(x, y)
 						populate_item(_"Otherworldly essence (for touch attacks, baneblade, ...)", "attacks/touch-faerie.png", "essence")
 
 						word_from = 561
-						word_to = 600
+						-- End number is +1 because numbers_between() returns a half-open interval
+						word_to = 600+1
 					end
 
 					-- Clear the recipe listbox
