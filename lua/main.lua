@@ -186,7 +186,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 			local damage = calculate_damage( amount,
 							 ( cfg.alignment or "neutral" ),
-							 wesnoth.get_time_of_day( { unit_to_harm.x, unit_to_harm.y, true } ).lawful_bonus,
+							 wesnoth.schedule.get_illumination( { unit_to_harm.x, unit_to_harm.y } ).lawful_bonus,
 							 100 - wesnoth.units.resistance_against( unit_to_harm, cfg.damage_type or "dummy" ),
 							 resistance_multiplier
 						       )
