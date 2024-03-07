@@ -120,7 +120,7 @@ function wesnoth.wml_actions.make_units_wander(cfg)
 
 	local units=wesnoth.units.find_on_map(filter)
 	        if #units < 1 then
-                wml.error("[make_units_wander]: no units found, check [filter]")
+                wesnoth.log("debug", "[make_units_wander]: no units found, check [filter]")
         end
 
 	for _, unit in pairs(units) do
