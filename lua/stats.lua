@@ -334,9 +334,25 @@ function wesnoth.update_stats(original)
 		table.insert(remade, remade_abilities)
 	end
 
+	local has_penetrations = false
+	local penetrate_special = "penetrate_" .. original.id
 	for i = 1,#damage_type_list do
 		if penetrations[damage_type_list[i]] > 0 then
-			table.insert(remade_abilities, { "resistance", { id = resist_penetrate_list[i], sub = penetrations[damage_type_list[i]], max_value = 80, affect_enemies = true, affect_allies = false, affect_self = false, apply_to = damage_type_list[i], { "affect_adjacent", { adjacent = "n,ne,se,s,sw,nw" }}}})
+			table.insert(remade_abilities, { "resistance", { id = resist_penetrate_list[i], sub = penetrations[damage_type_list[i]], max_value = 80, affect_enemies = true, affect_allies = false, affect_self = false, apply_to = damage_type_list[i], { "affect_adjacent", { adjacent = "n,ne,se,s,sw,nw" }}, { "filter_second_weapon", { special_id = penetrate_special }}}})
+			has_penetrations = true
+		end
+	end
+	
+	if has_penetrations then
+		for i = 1,#remade do
+			if remade[i][1] == "attack" then
+				local specials = wml.get_child(remade[i][2], "specials")
+				if specials == nil then
+					table.insert(remade[i][2], {"specials", { }})
+					specials = wml.get_child(remade[i][2], "specials")
+				end
+				table.insert(specials, {"dummy", { id = penetrate_special}})
+			end
 		end
 	end
 
