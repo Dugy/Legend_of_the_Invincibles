@@ -1,5 +1,9 @@
 Changelog
 
+3.2.8 (maintenance)
+Changed the way resistance penetrate properties work, now they apply only to resistances against attacks of the wearer
+More bugfixes
+
 3.2.7d (maintenance)
 More bugfixes
 

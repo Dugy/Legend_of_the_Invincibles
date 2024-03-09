@@ -275,7 +275,7 @@ function wesnoth.update_stats(original)
 				weap.icon = bonuses.icon
 			end
 			if bonuses.suck > 0 then
-				table.insert(wml.get_child(weap, "specials"), { "dummy", { id = "suck", name = (_"suck ($amount)"):vformat{amount = bonuses.suck}, description = (_"Sucks $amount health on each successful hit."):vformat{amount = bonuses.suck}, suck = bonuses.suck }})
+				table.insert(wml.get_child(weap, "specials"), { "dummy", { id = "suck", name = (_"suck ($amount)"):vformat{amount = bonuses.suck}, description = (_"Sucks $amount health on each successful hit with blade, pierce, impact or arcane damage."):vformat{amount = bonuses.suck}, suck = bonuses.suck }})
 			end
 			if bonuses.merge == true then
 				weap.damage = weap.damage * weap.number
