@@ -342,7 +342,7 @@ function wesnoth.update_stats(original)
 			has_penetrations = true
 		end
 	end
-	
+
 	if has_penetrations then
 		for i = 1,#remade do
 			if remade[i][1] == "attack" then
