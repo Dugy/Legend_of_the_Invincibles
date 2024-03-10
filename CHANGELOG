@@ -2,6 +2,8 @@ Changelog
 
 3.2.8 (maintenance)
 Changed the way resistance penetrate properties work, now they apply only to resistances against attacks of the wearer
+Change Elvish Seer to be an advancement of Elvish Enchantress with more versatility and less damage
+Add AMLA options to Elvish Sylph, mostly focusing on damage
 More bugfixes
 
 3.2.7d (maintenance)
