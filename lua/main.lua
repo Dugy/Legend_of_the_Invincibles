@@ -194,7 +194,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 						       )
 
 			if unit_to_harm.hitpoints <= damage then
-				if kill then 
+				if kill then
 					damage = unit_to_harm.hitpoints
 				else
 					damage = unit_to_harm.hitpoints - 1
