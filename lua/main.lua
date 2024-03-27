@@ -136,6 +136,8 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			local animate = cfg.animate -- attacker and defender are special values
 			local delay = cfg.delay or 500
 			local fire_event = cfg.fire_event
+			local kill = true
+			if cfg.kill ~= nil then kill = cfg.kill end
 			local primary_attack = wml.get_child(cfg, "primary_attack")
 			local secondary_attack = wml.get_child(cfg, "secondary_attack")
 			local harmer_filter = wml.get_child(cfg, "filter_second")
@@ -192,7 +194,11 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 						       )
 
 			if unit_to_harm.hitpoints <= damage then
-				damage = unit_to_harm.hitpoints
+				if kill then 
+					damage = unit_to_harm.hitpoints
+				else
+					damage = unit_to_harm.hitpoints - 1
+				end
 			end
 
 			unit_to_harm.hitpoints = unit_to_harm.hitpoints - damage
