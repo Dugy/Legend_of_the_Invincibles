@@ -3,8 +3,6 @@
 loti = {}
 loti.util = {}
 
---fake change
-
 -- Syntax sugar to make GUI2 dialogs more compact, e.g. T.column, T.row, etc.
 T = wml.tag
 
