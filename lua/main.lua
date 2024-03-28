@@ -252,12 +252,19 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				local uth_cfg = unit_to_harm.__cfg
 				if harmer then
 					wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
+					wesnoth.wml_actions.kill({
+						id = unit_to_harm.id,
+						animate = toboolean( animate ),
+						fire_event = toboolean(toboolean(fire_event)),
+						{ "secondary_unit", { id=harmer.id }} 
+					})
+				else
+					wesnoth.wml_actions.kill({
+						id = unit_to_harm.id,
+						animate = toboolean( animate ),
+						fire_event = toboolean(toboolean(fire_event))
+					})
 				end
-				wesnoth.wml_actions.kill({
-					id = unit_to_harm.id,
-					animate = toboolean( animate ),
-					fire_event = toboolean(toboolean(fire_event))
-				})
 			end
 
 			if animate then
