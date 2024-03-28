@@ -186,10 +186,10 @@ loti.item.type = {
 	-- Returns Lua table { item_number1 = object1, ... }
 	_reload = function()
 		local cache = {}
-
-		local all_known_types = wml.array_access.get('item_list.object')
+		local data_loader = wesnoth.unit_types["Item Data Loader"].__cfg
+		local all_known_types = wml.get_child(data_loader, "advancement")
 		for _, item in ipairs(all_known_types) do
-			cache[item.number] = item
+			cache[item[2].number] = item[2]
 		end
 
 		rawset(loti.item.type, "_cache", cache)
