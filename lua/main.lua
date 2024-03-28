@@ -256,7 +256,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 						id = unit_to_harm.id,
 						animate = toboolean( animate ),
 						fire_event = toboolean(toboolean(fire_event)),
-						{ "secondary_unit", { id=harmer.id }} 
+						{ "secondary_unit", { id=harmer.id }}
 					})
 				else
 					wesnoth.wml_actions.kill({
