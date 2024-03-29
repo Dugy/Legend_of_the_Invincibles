@@ -708,6 +708,14 @@ function wesnoth.update_stats(original)
 	end
 	table.insert(events_to_fire, 1, "post stats update")
 
+	-- Ensure that the legacy advancements are unreachable before the proper advancement was chosen
+	for i = 1,#visible_modifications do
+		if visible_modifications[i][1] == "advancement" and visible_modifications[i][2].id == "awareness_dummy" then
+			table.insert(visible_modifications, {"advancement", { id = "awareness" }})
+			break
+		end
+	end
+
 	local new_advances_to = {}
 	for t in string.gmatch(remade.advances_to, "[^%s,][^,]*") do
 		if not string.match(t, "Advancing") then
