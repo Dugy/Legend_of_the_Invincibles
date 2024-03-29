@@ -192,6 +192,14 @@ loti.item.type = {
 			cache[item[2].number] = item[2]
 		end
 
+		-- Describing the items requires having them aready indexed
+		rawset(loti.item.type, "_cache", cache)
+
+		for _, item in pairs(cache) do
+			item.description = loti.item.describe_item(item.number, item.sort)
+		end
+
+		-- Save the described items
 		rawset(loti.item.type, "_cache", cache)
 		return cache
 	end
