@@ -620,36 +620,6 @@ function wesnoth.update_stats(original)
 		table.insert(visible_modifications, { "object", visual_obj})
 	end
 
-	-- Make some abilities have a visual effect
-	for i = 1,#remade_abilities do
-		local ability = remade_abilities[i][2]
-		local name = remade_abilities[i][1]
-		if name == "illuminates" then
-			if ability.value > 0 then
-				remade.halo = "halo/illuminates-aura.png"
-			elseif ability.value < 0 then
-				remade.halo = "halo/darkens-aura.png"
-			end
-		elseif name == "berserk" and ability.id == "berserk_leadership" then
-			remade.halo = "misc/berserk-1.png:100,misc/berserk-2.png:100,misc/berserk-3.png:100,misc/berserk-2.png:100"
-		elseif name == "damage" and ability.id == "charge_leadership" then
-			remade.halo = "misc/charge-1.png:100,misc/charge-2.png:100,misc/charge-3.png:100,misc/charge-2.png:100"
-		elseif name == "poison" and ability.id == "poison_leadership" then
-			remade.halo = "misc/poison-1.png:200,misc/poison-2.png:200,misc/poison-3.png:200,misc/poison-2.png:200"
-		elseif name == "firststrike" and ability.id == "firststrike_leadership" then
-			remade.halo = "misc/firststrike-1.png:100,misc/firststrike-2.png:100,misc/firststrike-3.png:100"
-		elseif name == "damage" and ability.id == "backstab_leadership" then
-			remade.halo = "misc/backstab-1.png:200,misc/backstab-2.png:200,misc/backstab-3.png:200,misc/backstab-2.png:200"
-		elseif name == "chance_to_hit" and ability.id == "marksman_leadership" then
-			remade.halo = "misc/marksman-1.png:100,misc/marksman-2.png:100,misc/marksman-3.png:100,misc/marksman-2.png:100"
-		elseif name == "drains" and ability.id == "drain_leadership" then
-			remade.halo = "misc/drain-1.png:200,misc/drain-2.png:200,misc/drain-3.png:200,misc/drain-2.png:200"
-		elseif name == "dummy" and ability.id == "northfrost aura" then
-			remade.halo = "halo/blizzard-1.png~O(40%):100,halo/blizzard-2.png~O(40%):100,halo/blizzard-3.png~O(40%):100"
-
-		end
-	end
-
 	local new_overlays = {}
 	if is_loyal then
 		table.insert(new_overlays, "misc/loyal-icon.png")
@@ -674,18 +644,6 @@ function wesnoth.update_stats(original)
 	end
 	if sorts_owned.amulet or sorts_owned.ring or sorts_owned.cloak or sorts_owned.limited then
 		table.insert(new_overlays, "misc/orb-overlay.png")
-	end
-	local has_leadership_item = false
-	for _, eff in loti.unit.effects(remade) do
-		if eff.apply_to == "new_ability" then
-			local abilities = wml.get_child(eff, "abilities")
-			if abilities and wml.get_child(abilities, "leadership") then
-				has_leadership_item = true
-			end
-		end
-	end
-	if has_leadership_item then
-		table.insert(new_overlays, "misc/fist-overlay.png")
 	end
 	local overlays_object = { "object", { visual_provider = true, { "effect", { apply_to = "overlay", add = table.concat(new_overlays, ",")}}}}
 	table.insert(visible_modifications, overlays_object)
