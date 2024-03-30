@@ -227,6 +227,10 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			wesnoth.units.extract(unit_to_harm)
 			wesnoth.units.to_map(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
 
+			if fire_event then
+				wesnoth.fire_event("attacker hits", harmer.x, harmer.y, unit_to_harm.x, unit_to_harm.y, primary_attack, secondary_attack)
+			end
+
 			if add_tab then
 				text = string.format("%s%s", "\t", text)
 			end
