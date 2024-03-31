@@ -15,6 +15,7 @@ wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/unitdata.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/crafting.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/titles.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/redeem.lua")
+wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/recall.lua")
 wesnoth.dofile("~add-ons/Legend_of_the_Invincibles/lua/stats.lua")
 
 --! #textdomain "wesnoth-loti"
