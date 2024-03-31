@@ -962,8 +962,6 @@ function wesnoth.wml_actions.describe_all_objects(cfg)
 end
 
 -- Invalidate cache of loti.item.type[].
--- Used at the end of GENERATE_ITEM_LIST macro,
--- after all [describe_object] tags (they change item descriptions in item_list).
 function wesnoth.wml_actions.clear_item_list_cache()
 	loti.item.type._reload()
 	item_generation_lists = {}
