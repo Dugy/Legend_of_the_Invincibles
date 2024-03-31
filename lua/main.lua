@@ -234,16 +234,18 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			wesnoth.units.extract(unit_to_harm)
 			wesnoth.units.to_map(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
 
-			local old_damage_inflicted = start_var_scope("damage_inflicted")
-			wml.variables["damage_inflicted"] = damage
-			if cfg.fire_attacker_hits then
-				wesnoth.game_events.fire("attacker hits", harmer.x, harmer.y, unit_to_harm.x, unit_to_harm.y, { wml.tag.first(primary_attack), wml.tag.second(secondary_attack) })
+			if harmer then
+				local old_damage_inflicted = start_var_scope("damage_inflicted")
+				wml.variables["damage_inflicted"] = damage
+				if cfg.fire_attacker_hits then
+					wesnoth.game_events.fire("attacker hits", harmer.x, harmer.y, unit_to_harm.x, unit_to_harm.y, { wml.tag.first(primary_attack), wml.tag.second(secondary_attack) })
+				end
+				if cfg.fire_defender_hits then
+					wesnoth.game_events.fire("defender hits", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y, { wml.tag.first(secondary_attack), wml.tag.second(primary_attack) })
+				end
+				wml.variables["damage_inflicted"] = nil
+				end_var_scope("damage_inflicted", old_damage_inflicted)
 			end
-			if cfg.fire_defender_hits then
-				wesnoth.game_events.fire("defender hits", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y, { wml.tag.first(secondary_attack), wml.tag.second(primary_attack) })
-			end
-			wml.variables["damage_inflicted"] = nil
-			end_var_scope("damage_inflicted", old_damage_inflicted)
 
 			if add_tab then
 				text = string.format("%s%s", "\t", text)
