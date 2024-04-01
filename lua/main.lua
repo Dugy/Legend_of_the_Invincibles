@@ -270,19 +270,18 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 			if unit_to_harm.hitpoints < 1 then
 				local uth_cfg = unit_to_harm.__cfg
+				local secondary_unit = nil
 				if harmer then
 					wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
+					secondary_unit = { "secondary_unit", { id=harmer.id }}
+				end
+				wesnoth.game_events.fire("last breath", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y)
+				if wesnoth.get_unit(unit_to_harm.id).hitpoints < 1 then -- For the case if something revived the unit
 					wesnoth.wml_actions.kill({
 						id = unit_to_harm.id,
 						animate = toboolean( animate ),
 						fire_event = toboolean(toboolean(fire_event)),
-						{ "secondary_unit", { id=harmer.id }}
-					})
-				else
-					wesnoth.wml_actions.kill({
-						id = unit_to_harm.id,
-						animate = toboolean( animate ),
-						fire_event = toboolean(toboolean(fire_event))
+						secondary_unit
 					})
 				end
 			end
