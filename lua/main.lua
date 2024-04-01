@@ -926,7 +926,7 @@ function loti.util.list_equippable_sorts(unit)
 	if unit_type == "Lich" or unit_type == "09 Ancient Lich" or unit_type == "Lich King"
 		or unit_type == "Demilich" or unit_type == "Infernal Knight"
 		or unit_type == "Dark Adept" or unit_type == "Elvish Shyde"
-		or unit_type == "Elvish Seer" or unit_type == "Elvish Sylph"
+		or unit_type == "Elvish Seer" or unit_type == "Elvish Sylph" or unit_type == "Elvish Sylph LotI"
 		or unit_type == "Celestial Messenger" or unit_type == "Prophet"
 		or unit_type == "Mage of Light" or unit_type == "Stormrider"
 		or unit_type == "Sword Mage" or unit_type == "Knight of Magic"
