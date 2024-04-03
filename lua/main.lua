@@ -205,7 +205,8 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			unit_to_harm.hitpoints = unit_to_harm.hitpoints - damage
 			local text = string.format("%d%s", math.floor(damage), "\n")
 			local add_tab = false
-			local gender = unit_to_harm.__cfg.gender
+			local unit_to_harm_copy = unit_to_harm.__cfg
+			local gender = unit_to_harm_copy.gender
 
 			local function set_status(name, male_string, female_string, sound)
 				if not cfg[name] or unit_to_harm.status[name] then return end
@@ -264,25 +265,27 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				end
 			end
 
-			if not unit_to_harm.hidden then
-				wesnoth.interface.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
-			end
-
-			if unit_to_harm.hitpoints < 1 then
-				local uth_cfg = unit_to_harm.__cfg
-				local secondary_unit = nil
-				if harmer then
-					wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
-					secondary_unit = { "secondary_unit", { id=harmer.id }}
+			if #wesnoth.units.find_on_map({ id = unit_to_harm_copy.id}) > 0 then -- Verify that the unit wasn't removed
+				if not unit_to_harm.hidden then
+					wesnoth.interface.float_label( unit_to_harm.x, unit_to_harm.y, string.format( "<span foreground='red'>%s</span>", text ) )
 				end
-				wesnoth.game_events.fire("last breath", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y)
-				if wesnoth.get_unit(unit_to_harm.id).hitpoints < 1 then -- For the case if something revived the unit
-					wesnoth.wml_actions.kill({
-						id = unit_to_harm.id,
-						animate = toboolean( animate ),
-						fire_event = toboolean(toboolean(fire_event)),
-						secondary_unit
-					})
+
+				if unit_to_harm.hitpoints < 1 then
+					local uth_cfg = unit_to_harm.__cfg
+					local secondary_unit = nil
+					if harmer then
+						wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
+						secondary_unit = { "secondary_unit", { id=harmer.id }}
+					end
+					wesnoth.game_events.fire("last breath", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y)
+					if wesnoth.get_unit(unit_to_harm.id).hitpoints < 1 then -- For the case if something revived the unit
+						wesnoth.wml_actions.kill({
+							id = unit_to_harm.id,
+							animate = toboolean( animate ),
+							fire_event = toboolean(toboolean(fire_event)),
+							secondary_unit
+						})
+					end
 				end
 			end
 
