@@ -7,8 +7,8 @@ wesnoth.require("inventory/multiplayer_safety")(item_picker)
 
 --- actions:
 --- 0 is equip/use, 1 is to store, 2 is to destroy, 3 is to leave on the ground
-local function show_picking_dialogue(item, sort, replaced_item, cant_equip, count)
-	local description = loti.item.describe_item(item.number, sort)
+local function show_picking_dialogue(item, sort, replaced_item, cant_equip, count, set_items)
+	local description = loti.item.describe_item(item.number, sort, set_items)
 	if item.sort == "potion" then
 		local res = gui.show_narration ({
 			title = item.name,
@@ -86,7 +86,8 @@ function loti.util.item_pick_menu (mpsafety, unit)
 
 			local count = loti.item.storage.list_items(sort)[number] or 0
 
-			local result = show_picking_dialogue(item, sort, replaced_item, why_cant_equip, count)
+			local set_items = loti.unit.list_unit_item_numbers(unit.__cfg)
+			local result = show_picking_dialogue(item, sort, replaced_item, why_cant_equip, count, set_items)
 			if result == 0 then
 				mpsafety:queue({
 					command = "equip_ground",
