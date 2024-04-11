@@ -430,8 +430,8 @@ local function redeem_menu(ability_tree, unit)
 
 	-- 3) Top-level dialog, includes help message and listbox.
 	local dialogDefinition = {
-		wml.tag.tooltip { id = "tooltip_large" },
-		wml.tag.helptip { id = "tooltip_large" },
+		wml.tag.tooltip { id = "tooltip" },
+		wml.tag.helptip { id = "tooltip" },
 		wml.tag.grid {
 			-- Header (1 row containing a [label] with help)
 			wml.tag.row {
@@ -447,9 +447,22 @@ local function redeem_menu(ability_tree, unit)
 				}
 			},
 
+			-- A unit preview panel, and
 			-- Listbox, where each row shows ONE of the possible upgrades (e.g. "particlestorm")
 			wml.tag.row {
-				wml.tag.column { horizontal_grow = true, listboxDefinition }
+				wml.tag.column {
+					wml.tag.grid {
+						wml.tag.row {
+							wml.tag.column {
+								border = "right",
+								border_size = 30,
+								wml.tag.unit_preview_pane { id = "unit_preview" }
+							},
+							wml.tag.column { horizontal_grow = true, listboxDefinition }
+						}
+					}
+				}
+
 			},
 
 			-- OK button
@@ -470,6 +483,7 @@ local function redeem_menu(ability_tree, unit)
 
 	local function preshow(dialog)
 		local listbox = dialog[listbox_id]
+		dialog.unit_preview.unit = unit
 
 		for index, menu_item in ipairs(menu_items) do
 			listbox[index].image.label = menu_item.image
