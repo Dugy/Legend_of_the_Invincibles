@@ -929,9 +929,9 @@ loti.item.describe_item = function(number, sort, set_items)
 				if effect.add == "unpoisonable" then line = "<span color='yellow'>" .. _"Immune to Poison" .. "</span>"
 				elseif effect.add == "unslowable" then line = "<span color='yellow'>" .. _"Immune to Slow" .. "</span>"
 				elseif effect.add == "undrainable" then line = "<span color='yellow'>" .. _"Immune to Drain" .. "</span>"
-				elseif effect.add == "unplaguable" then line = "<span color='yellow'>" .. _"Immune to Plague" .. "</span>" 
-				elseif effect.add == "unpretrifiable" then line = "<span color='yellow'>" .. _"Immune to Petrify" .. "</span>" 
-				elseif effect.add == "unhealable" then line = "<span color='yellow'>" .. _"Unhealable" .. "</span>" 
+				elseif effect.add == "unplaguable" then line = "<span color='yellow'>" .. _"Immune to Plague" .. "</span>"
+				elseif effect.add == "unpretrifiable" then line = "<span color='yellow'>" .. _"Immune to Petrify" .. "</span>"
+				elseif effect.add == "unhealable" then line = "<span color='yellow'>" .. _"Unhealable" .. "</span>"
 				elseif effect.add == "invulnerable" then line = "<span color='yellow'>" .. _"Invulnerable" .. "</span>" end
 			elseif effect.apply_to == "bonus_attack" then
 				line = "<span color='green'>" .. _"Bonus attack: " .. effect.description .. "</span>"
