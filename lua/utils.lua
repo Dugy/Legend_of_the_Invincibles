@@ -1,3 +1,6 @@
+-- luacheck: ignore 111
+-- luacheck: ignore 113
+
 -- Useful function taken from elsewhere, can be done also by copying it to WML and getting back, though this is probably faster
 function wesnoth.deepcopy(orig)
     local orig_type = type(orig)
@@ -126,7 +129,7 @@ function wesnoth.wml_actions.make_units_wander(cfg)
 	local units=wesnoth.units.find_on_map(filter)
         if #units < 1 then
 		wesnoth.log("debug", "[make_units_wander]: no units found, check [filter]")
-       	end
+	end
 
 	for _, unit in pairs(units) do
 

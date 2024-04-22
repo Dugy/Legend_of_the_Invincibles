@@ -112,6 +112,7 @@ function wesnoth.wml_actions.recall_from_variable(cfg)
 	wml.variables[to_var] = picked - 1
 end
 -- luacheck: ignore 113
+-- luacheck: ignore 211
 -- luacheck: ignore 612
 
 local chat = wesnoth.interface.add_chat_message
