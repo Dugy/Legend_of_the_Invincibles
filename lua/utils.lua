@@ -78,19 +78,12 @@ function wesnoth.wml_actions.is_in_list(cfg)
 	wml.variables[to_variable]=ret
 end
 
--- [sort_unit_list] Sorts array of units by name/type
--- Requires unit_list=
--- Returns sorted list in WML variable to_variable, or in unit_list if to_variable not supplied
-function wesnoth.wml_actions.sort_unit_list(cfg)
-	local unit_list=cfg.unit_list or wml.error("[sort_unit_list]: missing required unit_list=")
-	local to_variable=cfg.to_variable
-
-	if not to_variable then to_variable=unit_list end
-
-	local ul=wml.array_access.get(unit_list) or wml.error("[sort_unit_list]: error retrieving " .. unit_list)
-
+-- sort_unit_list() sorts a list of stored units by name (or by type when unit has no name)
+function sort_unit_list(l)
 	-- Sort units alphabetically with named units first as they are more likely to be used.
 	-- If two units share the same name (including/especially ""), sort them by unit type.
+	local ul = {}
+	for _,unit in ipairs(l) do table.insert(ul,unit) end
 	table.sort(ul, function (a, b)
 		local aname=tostring(a.name)  -- sort gets mad if one name is translatable and the other is not
 		local bname=tostring(b.name)  -- so compare aname/bname instead of a.name/b.name
@@ -101,8 +94,20 @@ function wesnoth.wml_actions.sort_unit_list(cfg)
 		else return (a.language_name < b.language_name)
 		end
 	end )
+	return ul
+end
 
-	wml.array_access.set(to_variable, ul)
+-- [sort_unit_list] Sorts array of units by name/type
+-- Requires unit_list=
+-- Returns sorted list in WML variable to_variable, or in unit_list if to_variable not supplied
+function wesnoth.wml_actions.sort_unit_list(cfg)
+	local unit_list=cfg.unit_list or wml.error("[sort_unit_list]: missing required unit_list=")
+	local to_variable=cfg.to_variable
+
+	if not to_variable then to_variable=unit_list end
+
+	local ul=wml.array_access.get(unit_list) or wml.error("[sort_unit_list]: error retrieving " .. unit_list)
+	wml.array_access.set(to_variable, sort_unit_list(ul))
 end
 
 -- [make_units_wander] Moves units randomly around the map
@@ -119,9 +124,9 @@ function wesnoth.wml_actions.make_units_wander(cfg)
 	local filter=wml.get_child(cfg, "filter")
 
 	local units=wesnoth.units.find_on_map(filter)
-	        if #units < 1 then
-                wesnoth.log("debug", "[make_units_wander]: no units found, check [filter]")
-        end
+        if #units < 1 then
+		wesnoth.log("debug", "[make_units_wander]: no units found, check [filter]")
+       	end
 
 	for _, unit in pairs(units) do
 
