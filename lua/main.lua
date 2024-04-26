@@ -42,13 +42,13 @@ function wesnoth.interface.game_display.unit_status()
      if u.status.unslowable then
 	 table.insert(s, { "element", {
 	     image = "misc/unslowable.png",
-	     tooltip = _"unslowable: This unit cannot be affected by the slowed status."
+	     tooltip = _"unslowable: This unit cannot be affected by slow."
 	} })
      end
      if u.status.unpoisonable then
 	 table.insert(s, { "element", {
 	     image = "misc/unpoisonable.png",
-	     tooltip = _"unpoisonable: This unit cannot be affected by the poisoned status."
+	     tooltip = _"unpoisonable: This unit cannot be affected by poison."
 	} })
      end
      if u.status.undrainable then
@@ -57,10 +57,10 @@ function wesnoth.interface.game_display.unit_status()
 	     tooltip = _"undrainable: This unit cannot be drained."
 	} })
      end
-     if u.status.unplaguable then
+     if u.status.unplagueable then
 	 table.insert(s, { "element", {
-	     image = "misc/unplaguable.png",
-	     tooltip = _"unplaguable: This unit will not return as undead when killed by a plague weapon special."
+	     image = "misc/unplagueable.png",
+	     tooltip = _"unplagueable: This unit will not return as undead when killed by a plague weapon special."
 	} })
      end
      return s
