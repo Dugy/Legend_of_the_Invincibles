@@ -39,6 +39,30 @@ function wesnoth.interface.game_display.unit_status()
 	     tooltip = _"in flames: This unit is in flames. It will lose 16 HP per turn, unless cured by a healer or by standing on a village."
 	} })
      end
+     if u.status.unslowable then
+	 table.insert(s, { "element", {
+	     image = "misc/unslowable.png",
+	     tooltip = _"unslowable: This unit cannot be affected by the slowed status."
+	} })
+     end
+     if u.status.unpoisonable then
+	 table.insert(s, { "element", {
+	     image = "misc/unpoisonable.png",
+	     tooltip = _"unpoisonable: This unit cannot be affected by the poisoned status."
+	} })
+     end
+     if u.status.undrainable then
+	 table.insert(s, { "element", {
+	     image = "misc/undrainable.png",
+	     tooltip = _"undrainable: This unit cannot be drained."
+	} })
+     end
+     if u.status.unplaguable then
+	 table.insert(s, { "element", {
+	     image = "misc/unplaguable.png",
+	     tooltip = _"unplaguable: This unit will not return as undead when killed by a plague weapon special."
+	} })
+     end
      return s
 end
 
