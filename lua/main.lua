@@ -262,12 +262,14 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			if harmer then
 				local old_damage_inflicted = start_var_scope("damage_inflicted")
 				wml.variables["damage_inflicted"] = damage
+				wml.variables["harm_unit_trigger"] = true
 				if cfg.fire_attacker_hits then
 					wesnoth.game_events.fire("attacker hits", harmer.x, harmer.y, unit_to_harm.x, unit_to_harm.y, { wml.tag.first(primary_attack), wml.tag.second(secondary_attack) })
 				end
 				if cfg.fire_defender_hits then
 					wesnoth.game_events.fire("defender hits", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y, { wml.tag.first(secondary_attack), wml.tag.second(primary_attack) })
 				end
+				wml.variables["harm_unit_trigger"] = nil
 				wml.variables["damage_inflicted"] = nil
 				end_var_scope("damage_inflicted", old_damage_inflicted)
 			end
@@ -297,6 +299,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				if unit_to_harm.hitpoints < 1 then
 					local uth_cfg = unit_to_harm.__cfg
 					local secondary_unit = nil
+					wml.variables["harm_unit_trigger"] = true
 					if harmer then
 						wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
 						secondary_unit = { "secondary_unit", { id=harmer.id }}
@@ -313,6 +316,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 							secondary_unit
 						})
 					end
+					wml.variables["harm_unit_trigger"] = nil
 				end
 			end
 
