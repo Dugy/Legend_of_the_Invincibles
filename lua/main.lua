@@ -307,7 +307,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					else
 						wesnoth.game_events.fire("last breath", unit_to_harm.x, unit_to_harm.y)
 					end
-					local after_events = wesnoth.get_unit(uth_cfg.id)
+					local after_events = wesnoth.units.find_on_map({ id = uth_cfg.id })[0]
 					if after_events and after_events.hitpoints < 1 then -- For the case if something revived the unit
 						wesnoth.wml_actions.kill({
 							id = unit_to_harm.id,
