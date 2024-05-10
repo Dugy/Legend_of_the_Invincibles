@@ -1060,3 +1060,21 @@ function loti.util.list_attacks(unit)
 
 	return has_attack
 end
+
+function wesnoth.wml_actions.set_wrath_intensity(cfg)
+	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
+	local unit = wesnoth.units.get(unit_id).__cfg
+	local vars = wml.get_child(unit, "variables")
+	local abilities = wml.get_child(unit, "abilities")
+	local wrath_intensity = 0
+	if vars.wrath == true then wrath_intensity = vars.wrath_intensity end
+	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
+	if latent_wrath_special == nil then
+		--wesnoth.interface.add_chat_message("Didn't find latent_wrath_special, creating")
+		table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
+	else
+		--wesnoth.interface.add_chat_message(string.format("Found latent_wrath_special, adding latent_wrath_special.add = %d",wrath_intensity))
+		latent_wrath_special.add = wrath_intensity
+	end
+	wesnoth.units.to_map(unit)
+end
