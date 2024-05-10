@@ -1097,10 +1097,10 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 
 	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
 	if latent_wrath_special == nil then
-		--wesnoth.interface.add_chat_message(string.format("Didn't find latent_wrath_special, creating with add = %d",wrath_intensity))
+		if debug then wesnoth.interface.add_chat_message(string.format("Didn't find latent_wrath_special, creating with add = %d",wrath_intensity)) end
 		table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	else
-		--wesnoth.interface.add_chat_message(string.format("Found latent_wrath_special, setting latent_wrath_special.add = %d",wrath_intensity))
+		if debug then wesnoth.interface.add_chat_message(string.format("Found latent_wrath_special, setting latent_wrath_special.add = %d",wrath_intensity)) end
 		latent_wrath_special.add = wrath_intensity
 	end
 	wesnoth.units.to_map(unit)
