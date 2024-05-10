@@ -1062,18 +1062,45 @@ function loti.util.list_attacks(unit)
 end
 
 function wesnoth.wml_actions.set_wrath_intensity(cfg)
+	local debug = cfg.debug or false
 	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
 	local unit = wesnoth.units.get(unit_id).__cfg
 	local vars = wml.get_child(unit, "variables")
 	local abilities = wml.get_child(unit, "abilities")
+
 	local wrath_intensity = 0
-	if vars.wrath == true then wrath_intensity = vars.wrath_intensity end
+	if vars.wrath == true then
+		wrath_intensity = vars.wrath_intensity or 0 -- Do these still need to be separate?
+		if debug then wesnoth.interface.add_chat_message(string.format("wrath_intensity was %d",wrath_intensity)) end
+		if cfg.set ~= nil then wrath_intensity = cfg.set end
+		if cfg.div ~= nil then
+			if math.abs(wrath_intensity) <= 1 then
+				wrath_intensity = 0
+			else
+				wrath_intensity = wrath_intensity / cfg.div
+				if wrath_intensity > 0 then
+					wrath_intensity = math.floor(wrath_intensity)
+				else
+					wrath_intensity = math.ceil(wrath_intensity)
+				end
+			end
+		end
+		if cfg.add ~= nil then wrath_intensity = wrath_intensity + cfg.add end
+		if cfg.sub ~= nil then wrath_intensity = wrath_intensity - cfg.sub end
+		vars.wrath_intensity = wrath_intensity
+		if debug then wesnoth.interface.add_chat_message(string.format("\twrath_intensity is %d",wrath_intensity)) end
+		if vars.wrath_intensity == 0 then
+			vars.wrath_intensity = nil
+			vars.wrath = nil
+		end
+	end
+
 	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
 	if latent_wrath_special == nil then
-		--wesnoth.interface.add_chat_message("Didn't find latent_wrath_special, creating")
+		--wesnoth.interface.add_chat_message(string.format("Didn't find latent_wrath_special, creating with add = %d",wrath_intensity))
 		table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	else
-		--wesnoth.interface.add_chat_message(string.format("Found latent_wrath_special, adding latent_wrath_special.add = %d",wrath_intensity))
+		--wesnoth.interface.add_chat_message(string.format("Found latent_wrath_special, setting latent_wrath_special.add = %d",wrath_intensity))
 		latent_wrath_special.add = wrath_intensity
 	end
 	wesnoth.units.to_map(unit)
