@@ -615,7 +615,7 @@ function wesnoth.update_stats(original)
 		if vars.wrath == true then wrath_intensity = vars.wrath_intensity end
 		table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	end
-	
+
 	-- PART IX: Apply visual effects
 	if #visual_effects > 0 then
 		local visual_obj = { visual_provider = true }
