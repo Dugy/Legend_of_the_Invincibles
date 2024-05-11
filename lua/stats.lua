@@ -607,13 +607,9 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART VIII: Abilities
-	local abilities = wml.get_child(remade, "abilities")
-	-- add latent_wrath to apply wrath/lethargy to all attacks
-	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
-	if latent_wrath_special == nil then
-		local wrath_intensity = 0
-		if vars.wrath == true then wrath_intensity = vars.wrath_intensity end
-		table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
+	local latent_wrath_special = wml.get_child(wml.get_child(original, "abilities"), "damage", "latent_wrath")
+	if latent_wrath_special ~= nil then
+		table.insert(wml.get_child(remade, "abilities"), { "damage", latent_wrath_special })
 	end
 
 	-- PART IX: Apply visual effects

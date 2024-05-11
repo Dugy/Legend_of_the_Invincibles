@@ -351,7 +351,9 @@ local function unit_information_part_1()
     local starving = wml.variables["unit.variables.starving"]
     local from_the_ashes_used = wml.variables["unit.variables.from_the_ashes_used"]
     local from_the_ashes_cooldown = wml.variables["unit.variables.from_the_ashes_cooldown"]
-    local wrath = wml.variables["unit.variables.wrath_intensity"]
+    local wrath = nil
+    local latent_wrath = wml.get_child(wml.get_child(wml.variables["unit"], "abilities"), "damage", "latent_wrath")
+    if latent_wrath ~= nil then wrath = latent_wrath.add end
 
     local result = ""
     local span = "<span font_weight='bold'>"
@@ -1065,43 +1067,48 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 	local debug = cfg.debug or false
 	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
 	local unit = wesnoth.units.get(unit_id).__cfg
-	local vars = wml.get_child(unit, "variables")
 	local abilities = wml.get_child(unit, "abilities")
-
+	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
 	local wrath_intensity = 0
-	if vars.wrath == true then
-		wrath_intensity = vars.wrath_intensity or 0 -- Do these still need to be separate?
-		if debug then wesnoth.interface.add_chat_message(string.format("wrath_intensity was %d",wrath_intensity)) end
-		if cfg.set ~= nil then wrath_intensity = cfg.set end
-		if cfg.div ~= nil then
-			if math.abs(wrath_intensity) <= 1 then
-				wrath_intensity = 0
+	if latent_wrath_special ~= nil then
+		wrath_intensity = latent_wrath_special.add
+	end
+	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity was %d",wrath_intensity)) end
+	if cfg.set ~= nil then wrath_intensity = cfg.set end
+	if cfg.div ~= nil then
+		if math.abs(wrath_intensity) <= 1 then
+			wrath_intensity = 0
+		else
+			wrath_intensity = wrath_intensity / cfg.div
+			if wrath_intensity > 0 then
+				wrath_intensity = math.floor(wrath_intensity)
 			else
-				wrath_intensity = wrath_intensity / cfg.div
-				if wrath_intensity > 0 then
-					wrath_intensity = math.floor(wrath_intensity)
-				else
-					wrath_intensity = math.ceil(wrath_intensity)
-				end
+				wrath_intensity = math.ceil(wrath_intensity)
 			end
 		end
-		if cfg.add ~= nil then wrath_intensity = wrath_intensity + cfg.add end
-		if cfg.sub ~= nil then wrath_intensity = wrath_intensity - cfg.sub end
-		vars.wrath_intensity = wrath_intensity
-		if debug then wesnoth.interface.add_chat_message(string.format("\twrath_intensity is %d",wrath_intensity)) end
-		if vars.wrath_intensity == 0 then
-			vars.wrath_intensity = nil
-			vars.wrath = nil
-		end
 	end
-
-	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
-	if latent_wrath_special == nil then
-		if debug then wesnoth.interface.add_chat_message(string.format("Didn't find latent_wrath_special, creating with add = %d",wrath_intensity)) end
-		table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
+	if cfg.add ~= nil then wrath_intensity = wrath_intensity + cfg.add end
+	if cfg.sub ~= nil then wrath_intensity = wrath_intensity - cfg.sub end
+	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: \twrath_intensity is %d",wrath_intensity)) end
+	if wrath_intensity == 0 then
+		if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity == %d, removing ability",wrath_intensity)) end
+		local _,index = wml.find_child(abilities, "damage", { id = "latent_wrath" })
+		if debug then
+			if index ~= nil then
+				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index))
+				table.remove(abilities,index)
+			else
+				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found"))
+			end
+		end
 	else
-		if debug then wesnoth.interface.add_chat_message(string.format("Found latent_wrath_special, setting latent_wrath_special.add = %d",wrath_intensity)) end
-		latent_wrath_special.add = wrath_intensity
+		if latent_wrath_special == nil then
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: Didn't find latent_wrath_special, creating with add = %d",wrath_intensity)) end
+			table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
+		else
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: Found latent_wrath_special, setting add = %d",wrath_intensity)) end
+			latent_wrath_special.add = wrath_intensity
+		end
 	end
 	wesnoth.units.to_map(unit)
 end
