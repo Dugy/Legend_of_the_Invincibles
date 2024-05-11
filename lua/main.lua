@@ -39,6 +39,30 @@ function wesnoth.interface.game_display.unit_status()
 	     tooltip = _"in flames: This unit is in flames. It will lose 16 HP per turn, unless cured by a healer or by standing on a village."
 	} })
      end
+     if u.status.unslowable then
+	 table.insert(s, { "element", {
+	     image = "misc/unslowable.png",
+	     tooltip = _"unslowable: This unit cannot be affected by slow."
+	} })
+     end
+     if u.status.unpoisonable then
+	 table.insert(s, { "element", {
+	     image = "misc/unpoisonable.png",
+	     tooltip = _"unpoisonable: This unit cannot be affected by poison."
+	} })
+     end
+     if u.status.undrainable then
+	 table.insert(s, { "element", {
+	     image = "misc/undrainable.png",
+	     tooltip = _"undrainable: This unit cannot be drained."
+	} })
+     end
+     if u.status.unplagueable then
+	 table.insert(s, { "element", {
+	     image = "misc/unplagueable.png",
+	     tooltip = _"unplagueable: This unit will not return as undead when killed by a plague weapon special."
+	} })
+     end
      return s
 end
 
@@ -238,12 +262,14 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			if harmer then
 				local old_damage_inflicted = start_var_scope("damage_inflicted")
 				wml.variables["damage_inflicted"] = damage
+				wml.variables["harm_unit_trigger"] = true
 				if cfg.fire_attacker_hits then
 					wesnoth.game_events.fire("attacker hits", harmer.x, harmer.y, unit_to_harm.x, unit_to_harm.y, { wml.tag.first(primary_attack), wml.tag.second(secondary_attack) })
 				end
 				if cfg.fire_defender_hits then
 					wesnoth.game_events.fire("defender hits", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y, { wml.tag.first(secondary_attack), wml.tag.second(primary_attack) })
 				end
+				wml.variables["harm_unit_trigger"] = nil
 				wml.variables["damage_inflicted"] = nil
 				end_var_scope("damage_inflicted", old_damage_inflicted)
 			end
@@ -273,6 +299,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 				if unit_to_harm.hitpoints < 1 then
 					local uth_cfg = unit_to_harm.__cfg
 					local secondary_unit = nil
+					wml.variables["harm_unit_trigger"] = true
 					if harmer then
 						wesnoth.wml_actions.award_extra_experience{ id = harmer.id, death_of_level = uth_cfg.level, defer = true }
 						secondary_unit = { "secondary_unit", { id=harmer.id }}
@@ -280,7 +307,8 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					else
 						wesnoth.game_events.fire("last breath", unit_to_harm.x, unit_to_harm.y)
 					end
-					if wesnoth.get_unit(uth_cfg.id).hitpoints < 1 then -- For the case if something revived the unit
+					local after_events = wesnoth.units.get(uth_cfg.id)
+					if after_events and after_events.hitpoints < 1 then -- For the case if something revived the unit
 						wesnoth.wml_actions.kill({
 							id = unit_to_harm.id,
 							animate = toboolean( animate ),
@@ -288,6 +316,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 							secondary_unit
 						})
 					end
+					wml.variables["harm_unit_trigger"] = nil
 				end
 			end
 
@@ -322,7 +351,9 @@ local function unit_information_part_1()
     local starving = wml.variables["unit.variables.starving"]
     local from_the_ashes_used = wml.variables["unit.variables.from_the_ashes_used"]
     local from_the_ashes_cooldown = wml.variables["unit.variables.from_the_ashes_cooldown"]
-    local wrath = wml.variables["unit.variables.wrath_intensity"]
+    local wrath = nil
+    local latent_wrath = wml.get_child(wml.get_child(wml.variables["unit"], "abilities"), "damage", "latent_wrath")
+    if latent_wrath ~= nil then wrath = latent_wrath.add end
 
     local result = ""
     local span = "<span font_weight='bold'>"
@@ -1030,4 +1061,54 @@ function loti.util.list_attacks(unit)
 	end
 
 	return has_attack
+end
+
+function wesnoth.wml_actions.set_wrath_intensity(cfg)
+	local debug = cfg.debug or false
+	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
+	local unit = wesnoth.units.get(unit_id).__cfg
+	local abilities = wml.get_child(unit, "abilities")
+	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
+	local wrath_intensity = 0
+	if latent_wrath_special ~= nil then
+		wrath_intensity = latent_wrath_special.add
+	end
+	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity was %d",wrath_intensity)) end
+	if cfg.set ~= nil then wrath_intensity = cfg.set end
+	if cfg.div ~= nil then
+		if math.abs(wrath_intensity) <= 1 then
+			wrath_intensity = 0
+		else
+			wrath_intensity = wrath_intensity / cfg.div
+			if wrath_intensity > 0 then
+				wrath_intensity = math.floor(wrath_intensity)
+			else
+				wrath_intensity = math.ceil(wrath_intensity)
+			end
+		end
+	end
+	if cfg.add ~= nil then wrath_intensity = wrath_intensity + cfg.add end
+	if cfg.sub ~= nil then wrath_intensity = wrath_intensity - cfg.sub end
+	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: \twrath_intensity is %d",wrath_intensity)) end
+	if wrath_intensity == 0 then
+		if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity == %d, removing ability",wrath_intensity)) end
+		local _,index = wml.find_child(abilities, "damage", { id = "latent_wrath" })
+		if debug then
+			if index ~= nil then
+				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index))
+				table.remove(abilities,index)
+			else
+				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found"))
+			end
+		end
+	else
+		if latent_wrath_special == nil then
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: Didn't find latent_wrath_special, creating with add = %d",wrath_intensity)) end
+			table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
+		else
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: Found latent_wrath_special, setting add = %d",wrath_intensity)) end
+			latent_wrath_special.add = wrath_intensity
+		end
+	end
+	wesnoth.units.to_map(unit)
 end
