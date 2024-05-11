@@ -604,14 +604,15 @@ function wesnoth.update_stats(original)
 		if best_backstab then
 			table.insert(specials, best_backstab)
 		end
-		local wrath_intensity = 0
-		if vars.wrath == true then
-			wrath_intensity = vars.wrath_intensity
-		end
-		table.insert(specials, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
 	end
 
-	-- PART VIII: Apply visual effects
+	-- PART VIII: Abilities
+	local latent_wrath_special = wml.get_child(wml.get_child(original, "abilities"), "damage", "latent_wrath")
+	if latent_wrath_special ~= nil then
+		table.insert(wml.get_child(remade, "abilities"), { "damage", latent_wrath_special })
+	end
+
+	-- PART IX: Apply visual effects
 	if #visual_effects > 0 then
 		local visual_obj = { visual_provider = true }
 		for i = 1,#visual_effects do
@@ -649,7 +650,7 @@ function wesnoth.update_stats(original)
 	table.insert(visible_modifications, overlays_object)
 
 
-	-- PART IX: Some final changes
+	-- PART X: Some final changes
 	for i = #vars,1,-1 do
 		if vars[i][1] == "disabled_defences" then
 			local found = false
@@ -682,7 +683,7 @@ function wesnoth.update_stats(original)
 	end
 	remade.advances_to = table.concat(new_advances_to, ",")
 
-	-- PART X: Call WML hooks
+	-- PART XI: Call WML hooks
 	for i = 1,#events_to_fire do
 		remade = call_event_on_unit(remade, events_to_fire[i])
 	end
