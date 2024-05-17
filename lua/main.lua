@@ -63,14 +63,6 @@ function wesnoth.interface.game_display.unit_status()
 	     tooltip = _"unplagueable: This unit will not return as undead when killed by a plague weapon special."
 	} })
      end
-	if #s > 2 then -- Too long to fit the line
-		local entire_string = s[2][2].tooltip
-		for i = 3,#s do
-			entire_string = entire_string .. "\n ----------\n\n" .. s[i][2].tooltip
-		end
-		local old_statuses = s
-		s = {old_statuses[1], {"element", { image = "misc/icon-ellipsis.png", tooltip = entire_string }}}
-	end
      return s
 end
 
@@ -1074,7 +1066,8 @@ end
 function wesnoth.wml_actions.set_wrath_intensity(cfg)
 	local debug = cfg.debug or false
 	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
-	local unit = wesnoth.units.get(unit_id).__cfg
+	local unit_base = wesnoth.units.find({ id = unit_id})[1]
+	local unit = unit_base.__cfg
 	local abilities = wml.get_child(unit, "abilities")
 	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
 	local wrath_intensity = 0
@@ -1101,13 +1094,11 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 	if wrath_intensity == 0 then
 		if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity == %d, removing ability",wrath_intensity)) end
 		local _,index = wml.find_child(abilities, "damage", { id = "latent_wrath" })
-		if debug then
-			if index ~= nil then
-				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index))
-				table.remove(abilities,index)
-			else
-				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found"))
-			end
+		if index ~= nil then
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index)) end
+			table.remove(abilities,index)
+		else
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found")) end
 		end
 	else
 		if latent_wrath_special == nil then
@@ -1117,6 +1108,106 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: Found latent_wrath_special, setting add = %d",wrath_intensity)) end
 			latent_wrath_special.add = wrath_intensity
 		end
+	end
+	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: %s %s",unit.id,unit_base.valid)) end
+	if unit_base.valid == "recall" then 
+		wesnoth.units.to_recall(unit)
+	elseif unit_base.valid == "map" then
+		wesnoth.units.to_map(unit)
+	else 
+		wml.error(string.format("[set_wrath_intensity]: Failed to find location for %s (%s)",unit.id,unit_base.valid))
+	end
+end
+
+-- [unit_status_semaphore]
+--
+-- first call with action=incr will save original value and set status
+-- last call with action=decr (count=0) will restore original value
+--
+-- unit.variables.statuses.foo.original_value, where foo is a status like 'unhealable' - stores original value to restore when all custom actions are done messing with this status
+-- unit.variables.statuses.foo.count  - counts the number of custom actions that currently need this status set
+function wesnoth.wml_actions.unit_status_semaphore(cfg)
+	local debug = cfg.debug or false
+	if debug and not debug then print("shut up luacheck") end
+	local unit_id = cfg.id or wml.error("[unit_status_semaphore]: missing required id=")
+	local status = cfg.status or wml.error("[unit_status_semaphore]: missing required status=")
+	local action = cfg.action or wml.error("[unit_status_semaphore]: missing required action=")
+
+	local unit = wesnoth.units.get(unit_id).__cfg
+	local vars = wml.get_child(unit, "variables")
+	local statuses = wml.get_child(vars, "statuses")
+	local current = {}
+	local had_current = false
+	if statuses ~= nil then
+		current = wml.get_child(statuses, status)
+		if current == nil then
+			current = {}
+		else
+			had_current = true
+		end
+	end
+	if action == "clear" then -- just clear, do not reset to original value
+		if statuses ~= nil then
+			if status == "all" then
+				wml.remove_child(vars, "statuses")
+			else
+				wml.remove_child(statuses, status)
+				if #statuses == 0 then wml.remove_child(vars, "statuses") end
+			end
+		end
+	elseif action == "reset" then  -- clear and reset to original value
+		if statuses == nil then
+			wml.error("[unit_status_semaphore]: reset failed to find any original values")
+		else
+			if status == "all" then
+				for s in wml.child_range(vars, "statuses") do
+					wml.get_child(unit, "status")[s] = current.original_value
+					wml.remove_child(statuses, s)
+				end
+			else
+				if current == nil then
+					wml.error(string.format("[unit_status_semaphore]: reset failed to find original value for %s",status))
+				else
+					wml.get_child(unit, "status")[status] = current.original_value
+					wml.remove_child(statuses, status)
+				end
+			end
+			if #statuses == 0 then wml.remove_child(vars, "statuses") end
+		end
+	elseif action == "get_count" then
+		local variable = cfg.variable or wml.error("[unit_status_semaphore]: get_count requires variable=")
+		wml.variables[variable] = current.count
+	elseif action == "get_original" then
+		local variable = cfg.variable or wml.error("[unit_status_semaphore]: get_original requires variable=")
+                wml.variables[variable] = current.original_value
+	elseif action == "incr" then
+		if current == nil or current.count == nil or current.count == 0 then
+			current.count = 1
+			current.original_value = wml.get_child(unit, "status")[status]
+			wml.get_child(unit, "status")[status] = true
+		else
+			current.count = current.count + 1
+		end
+		if statuses == nil then
+			statuses = {}
+			table.insert(statuses, { status, current } )
+			table.insert(vars, { "statuses", statuses } )
+		else
+			if not had_current then table.insert(statuses, { status, current } ) end
+		end
+	elseif action == "decr" then
+		if statuses == nil or current == nil or current.count == nil or current.count == 0 then
+			wml.error("[unit_status_semaphore]: Cannot decrement nil/0 value")
+		else
+			current.count = current.count - 1
+			if current.count == 0 then
+				wml.get_child(unit, "status")[status] = current.original_value
+				wml.remove_child(statuses, status)
+				if #statuses == 0 then wml.remove_child(vars, "statuses") end
+			end
+		end
+	else
+		wml.error(string.format("[unit_status_semaphore]: Unknown action: %s", action))
 	end
 	wesnoth.units.to_map(unit)
 end
