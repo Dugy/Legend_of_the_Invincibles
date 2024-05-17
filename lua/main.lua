@@ -63,6 +63,14 @@ function wesnoth.interface.game_display.unit_status()
 	     tooltip = _"unplagueable: This unit will not return as undead when killed by a plague weapon special."
 	} })
      end
+	if #s > 2 then -- Too long to fit the line
+		local entire_string = s[2][2].tooltip
+		for i = 3,#s do
+			entire_string = entire_string .. "\n ----------\n\n" .. s[i][2].tooltip
+		end
+		local old_statuses = s
+		s = {old_statuses[1], {"element", { image = "misc/icon-ellipsis.png", tooltip = entire_string }}}
+	end
      return s
 end
 
@@ -1110,11 +1118,11 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 		end
 	end
 	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: %s %s",unit.id,unit_base.valid)) end
-	if unit_base.valid == "recall" then 
+	if unit_base.valid == "recall" then
 		wesnoth.units.to_recall(unit)
 	elseif unit_base.valid == "map" then
 		wesnoth.units.to_map(unit)
-	else 
+	else
 		wml.error(string.format("[set_wrath_intensity]: Failed to find location for %s (%s)",unit.id,unit_base.valid))
 	end
 end
