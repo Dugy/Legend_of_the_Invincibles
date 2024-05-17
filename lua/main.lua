@@ -1074,7 +1074,8 @@ end
 function wesnoth.wml_actions.set_wrath_intensity(cfg)
 	local debug = cfg.debug or false
 	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
-	local unit = wesnoth.units.get(unit_id).__cfg
+	local unit_base = wesnoth.units.find({ id = unit_id})[1]
+	local unit = unit_base.__cfg
 	local abilities = wml.get_child(unit, "abilities")
 	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
 	local wrath_intensity = 0
@@ -1101,13 +1102,11 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 	if wrath_intensity == 0 then
 		if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity == %d, removing ability",wrath_intensity)) end
 		local _,index = wml.find_child(abilities, "damage", { id = "latent_wrath" })
-		if debug then
-			if index ~= nil then
-				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index))
-				table.remove(abilities,index)
-			else
-				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found"))
-			end
+		if index ~= nil then
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index)) end
+			table.remove(abilities,index)
+		else
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found")) end
 		end
 	else
 		if latent_wrath_special == nil then
@@ -1118,5 +1117,12 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 			latent_wrath_special.add = wrath_intensity
 		end
 	end
-	wesnoth.units.to_map(unit)
+	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: %s %s",unit.id,unit_base.valid)) end
+	if unit_base.valid == "recall" then
+		wesnoth.units.to_recall(unit)
+	elseif unit_base.valid == "map" then
+		wesnoth.units.to_map(unit)
+	else
+		wml.error(string.format("[set_wrath_intensity]: Failed to find location for %s (%s)",unit.id,unit_base.valid))
+	end
 end
