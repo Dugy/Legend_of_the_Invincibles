@@ -948,7 +948,7 @@ function loti.util.list_equippable_sorts(unit)
 
 	-- All corporeal beings except bats can wear armour.
 	if not ( unit_type == "Ghost" or unit_type == "Wraith" or unit_type == "Spectre"
-		or unit_type == "Shadow" or unit_type == "Nightgaunt" or unit_type == "Dark Shade"
+		or unit_type == "Shadow" or unit_type == "Nightgaunt" or unit_type == "Dark Shade" or unit_type == "Reaper"
 		or unit_type:match(" Bat$") )
 	then
 		can_equip.armour = 1
@@ -1221,4 +1221,5 @@ function wesnoth.wml_actions.unit_status_semaphore(cfg)
 		wml.error(string.format("[unit_status_semaphore]: Unknown action: %s", action))
 	end
 	wesnoth.units.to_map(unit)
+
 end
