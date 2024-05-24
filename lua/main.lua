@@ -63,6 +63,14 @@ function wesnoth.interface.game_display.unit_status()
 	     tooltip = _"unplagueable: This unit will not return as undead when killed by a plague weapon special."
 	} })
      end
+	if #s > 2 then -- Too long to fit the line
+		local entire_string = s[2][2].tooltip
+		for i = 3,#s do
+			entire_string = entire_string .. "\n ----------\n\n" .. s[i][2].tooltip
+		end
+		local old_statuses = s
+		s = {old_statuses[1], {"element", { image = "misc/icon-ellipsis.png", tooltip = entire_string }}}
+	end
      return s
 end
 
@@ -1066,7 +1074,8 @@ end
 function wesnoth.wml_actions.set_wrath_intensity(cfg)
 	local debug = cfg.debug or false
 	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
-	local unit = wesnoth.units.get(unit_id).__cfg
+	local unit_base = wesnoth.units.find({ id = unit_id})[1]
+	local unit = unit_base.__cfg
 	local abilities = wml.get_child(unit, "abilities")
 	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
 	local wrath_intensity = 0
@@ -1093,13 +1102,11 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 	if wrath_intensity == 0 then
 		if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity == %d, removing ability",wrath_intensity)) end
 		local _,index = wml.find_child(abilities, "damage", { id = "latent_wrath" })
-		if debug then
-			if index ~= nil then
-				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index))
-				table.remove(abilities,index)
-			else
-				wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found"))
-			end
+		if index ~= nil then
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index)) end
+			table.remove(abilities,index)
+		else
+			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found")) end
 		end
 	else
 		if latent_wrath_special == nil then
@@ -1110,7 +1117,14 @@ function wesnoth.wml_actions.set_wrath_intensity(cfg)
 			latent_wrath_special.add = wrath_intensity
 		end
 	end
-	wesnoth.units.to_map(unit)
+	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: %s %s",unit.id,unit_base.valid)) end
+	if unit_base.valid == "recall" then
+		wesnoth.units.to_recall(unit)
+	elseif unit_base.valid == "map" then
+		wesnoth.units.to_map(unit)
+	else
+		wml.error(string.format("[set_wrath_intensity]: Failed to find location for %s (%s)",unit.id,unit_base.valid))
+	end
 end
 
 -- [unit_status_semaphore]
@@ -1127,6 +1141,9 @@ function wesnoth.wml_actions.unit_status_semaphore(cfg)
 	local status = cfg.status or wml.error("[unit_status_semaphore]: missing required status=")
 	local action = cfg.action or wml.error("[unit_status_semaphore]: missing required action=")
 
+	if debug then wesnoth.interface.add_chat_message(string.format("[unit_status_semaphore]: <%s>, %s, %s",unit_id,status,action)) end
+	-- under certain circumstances (probably when attack is interrupted, like a kill with disintegrate or Argan running in Old Friend) unit may be empty
+	if unit_id == "" then return end
 	local unit = wesnoth.units.get(unit_id).__cfg
 	local vars = wml.get_child(unit, "variables")
 	local statuses = wml.get_child(vars, "statuses")
