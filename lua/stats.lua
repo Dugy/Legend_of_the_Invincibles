@@ -93,9 +93,12 @@ function wesnoth.update_stats(original)
 	for i, item in ipairs(visible_modifications) do -- Update objects to reflect set effects and update items
 		if item[1] == "object" and item[2].number and item[2].sort then
 			visible_modifications[i][2] = loti.unit.item_with_set_effects(item[2].number, set_items, item[2].sort)
-
-			-- Legacy field: used by WML menu "Items" to show "Remove item" options
-			visible_modifications[i][2].description = loti.item.describe_item(item[2].number, item[2].sort, set_items)
+			-- extract anything we won't NEED to save in the unit
+			for k,v in pairs(visible_modifications[i][2]) do
+				if type(v) ~= "table" and k ~= "name" and k ~= "number" and k ~= "sort" then
+					visible_modifications[i][2][k] = nil
+				end
+			end
 		end
 	end
 
@@ -105,7 +108,6 @@ function wesnoth.update_stats(original)
 	visible_modifications = wml.get_child(remade, "modifications")
 	vars.updated = true
 	vars.geared = geared
-
 	-- Remove temporary dummy attacks
 	for i = #remade,1,-1 do
 		if remade[i][1] == "attack" and remade[i][2].temporary == true then
@@ -685,6 +687,7 @@ function wesnoth.update_stats(original)
 
 	-- PART XI: Call WML hooks
 	for i = 1,#events_to_fire do
+		--wesnoth.interface.add_chat_message(string.format("%d) %s",i,events_to_fire[i]))
 		remade = call_event_on_unit(remade, events_to_fire[i])
 	end
 	-- Restore unit from variable after the WML hooks.
