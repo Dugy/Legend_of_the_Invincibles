@@ -312,7 +312,9 @@ local wml_based_implementation = {
 	add_item = function(unit, item_number, item_sort)
 		unit = normalize_unit_param(unit)
 
-		local item = wesnoth.deepcopy(loti.item.type[item_number])
+		local item = {}
+		item.number = item_number
+		item.name = loti.item.type[item_number].name
 		if item_sort then
 			item.sort = item_sort
 		end
