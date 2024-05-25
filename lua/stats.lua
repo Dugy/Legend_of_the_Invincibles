@@ -687,7 +687,6 @@ function wesnoth.update_stats(original)
 
 	-- PART XI: Call WML hooks
 	for i = 1,#events_to_fire do
-		--wesnoth.interface.add_chat_message(string.format("%d) %s",i,events_to_fire[i]))
 		remade = call_event_on_unit(remade, events_to_fire[i])
 	end
 	-- Restore unit from variable after the WML hooks.
