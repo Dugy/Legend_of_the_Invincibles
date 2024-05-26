@@ -931,7 +931,7 @@ loti.item.describe_item = function(number, sort, set_items)
 					if part == "unpoisonable" then line = "<span color='yellow'>" .. _"Immune to Poison" .. "</span>"
 					elseif part == "unslowable" then line = "<span color='yellow'>" .. _"Immune to Slow" .. "</span>"
 					elseif part == "undrainable" then line = "<span color='yellow'>" .. _"Immune to Drain" .. "</span>"
-					elseif part == "unplaguable" then line = "<span color='yellow'>" .. _"Immune to Plague" .. "</span>"
+					elseif part == "unplagueable" then line = "<span color='yellow'>" .. _"Immune to Plague" .. "</span>"
 					elseif part == "unpretrifiable" then line = "<span color='yellow'>" .. _"Immune to Petrify" .. "</span>"
 					elseif part == "unhealable" then line = "<span color='yellow'>" .. _"Unhealable" .. "</span>"
 					elseif part == "invulnerable" then line = "<span color='yellow'>" .. _"Invulnerable" .. "</span>" end
