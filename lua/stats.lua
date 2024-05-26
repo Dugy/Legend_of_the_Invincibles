@@ -613,6 +613,10 @@ function wesnoth.update_stats(original)
 	if latent_wrath_special ~= nil then
 		table.insert(wml.get_child(remade, "abilities"), { "damage", latent_wrath_special })
 	end
+	local latent_resilience_special = wml.get_child(wml.get_child(original, "abilities"), "resistance", "latent_resolve")
+	if latent_resilience_special ~= nil then
+		table.insert(wml.get_child(remade, "abilities"), { "resistance", latent_resilience_special })
+	end
 
 	-- PART IX: Apply visual effects
 	if #visual_effects > 0 then

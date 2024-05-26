@@ -1071,62 +1071,6 @@ function loti.util.list_attacks(unit)
 	return has_attack
 end
 
-function wesnoth.wml_actions.set_wrath_intensity(cfg)
-	local debug = cfg.debug or false
-	local unit_id = cfg.id or wml.error("[set_wrath_intensity]: missing required id=")
-	local unit_base = wesnoth.units.find({ id = unit_id})[1]
-	local unit = unit_base.__cfg
-	local abilities = wml.get_child(unit, "abilities")
-	local latent_wrath_special = wml.get_child(abilities, "damage", "latent_wrath")
-	local wrath_intensity = 0
-	if latent_wrath_special ~= nil then
-		wrath_intensity = latent_wrath_special.add
-	end
-	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity was %d",wrath_intensity)) end
-	if cfg.set ~= nil then wrath_intensity = cfg.set end
-	if cfg.div ~= nil then
-		if math.abs(wrath_intensity) <= 1 then
-			wrath_intensity = 0
-		else
-			wrath_intensity = wrath_intensity / cfg.div
-			if wrath_intensity > 0 then
-				wrath_intensity = math.floor(wrath_intensity)
-			else
-				wrath_intensity = math.ceil(wrath_intensity)
-			end
-		end
-	end
-	if cfg.add ~= nil then wrath_intensity = wrath_intensity + cfg.add end
-	if cfg.sub ~= nil then wrath_intensity = wrath_intensity - cfg.sub end
-	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: \twrath_intensity is %d",wrath_intensity)) end
-	if wrath_intensity == 0 then
-		if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: wrath_intensity == %d, removing ability",wrath_intensity)) end
-		local _,index = wml.find_child(abilities, "damage", { id = "latent_wrath" })
-		if index ~= nil then
-			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: found id=latent_wrath at position %d",index)) end
-			table.remove(abilities,index)
-		else
-			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: no id=latent_wrath found")) end
-		end
-	else
-		if latent_wrath_special == nil then
-			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: Didn't find latent_wrath_special, creating with add = %d",wrath_intensity)) end
-			table.insert(abilities, { "damage", { id = "latent_wrath", apply_to = "self", add = wrath_intensity }})
-		else
-			if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: Found latent_wrath_special, setting add = %d",wrath_intensity)) end
-			latent_wrath_special.add = wrath_intensity
-		end
-	end
-	if debug then wesnoth.interface.add_chat_message(string.format("[set_wrath_intensity]: %s %s",unit.id,unit_base.valid)) end
-	if unit_base.valid == "recall" then
-		wesnoth.units.to_recall(unit)
-	elseif unit_base.valid == "map" then
-		wesnoth.units.to_map(unit)
-	else
-		wml.error(string.format("[set_wrath_intensity]: Failed to find location for %s (%s)",unit.id,unit_base.valid))
-	end
-end
-
 -- [unit_status_semaphore]
 --
 -- first call with action=incr will save original value and set status
@@ -1221,5 +1165,84 @@ function wesnoth.wml_actions.unit_status_semaphore(cfg)
 		wml.error(string.format("[unit_status_semaphore]: Unknown action: %s", action))
 	end
 	wesnoth.units.to_map(unit)
+end
 
+local function set_buildup_ability_intensity(cfg, tag_name, ability_type, ability_id, get_intensity, generate_ability_func)
+	local debug = cfg.debug or false
+	local unit_id = cfg.id or wml.error(tag_name .. ": missing required id=")
+	local unit_base = wesnoth.units.find({ id = unit_id})[1]
+	local unit = unit_base.__cfg
+	local abilities = wml.get_child(unit, "abilities")
+	local latent_ability = wml.get_child(abilities, ability_type, ability_id)
+	local intensity = 0
+	if latent_ability ~= nil then
+		intensity = get_intensity(latent_ability)
+	end
+	if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": intensity was %d", intensity)) end
+	if cfg.set ~= nil then intensity = cfg.set end
+	if cfg.div ~= nil then
+		if math.abs(intensity) <= 1 then
+			intensity = 0
+		else
+			intensity = intensity / cfg.div
+			if intensity > 0 then
+				intensity = math.floor(intensity)
+			else
+				intensity = math.ceil(intensity)
+			end
+		end
+	end
+	if cfg.add ~= nil then intensity = intensity + cfg.add end
+	if cfg.sub ~= nil then intensity = intensity - cfg.sub end
+	if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": \tintensity is %d", intensity)) end
+	if intensity == 0 then
+		if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": intensity == %d, removing ability", intensity)) end
+		local _,index = wml.find_child(abilities, ability_type, { id = ability_id })
+		if index ~= nil then
+			if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": found id=" .. ability_id .. " at position %d", index)) end
+			table.remove(abilities,index)
+		else
+			if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": no id=" .. ability_id .. " found")) end
+		end
+	else
+		if latent_ability == nil then
+			if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": Didn't find the ability, creating with add = %d", intensity)) end
+			table.insert(abilities, generate_ability_func(intensity))
+		else
+			if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": Found the ability, setting add = %d", intensity)) end
+			for i=1,#abilities do
+				if abilities[i][1] == ability_type and abilities[i][2].id == ability_id then
+					abilities[i] = generate_ability_func(intensity)
+				end
+			end
+		end
+	end
+	if debug then wesnoth.interface.add_chat_message(string.format(tag_name .. ": %s %s", unit.id, unit_base.valid)) end
+	if unit_base.valid == "recall" then
+		wesnoth.units.to_recall(unit)
+	elseif unit_base.valid == "map" then
+		wesnoth.units.to_map(unit)
+	else
+		wml.error(string.format(tag_name .. ": Failed to find location for %s (%s)", unit.id, unit_base.valid))
+	end
+end
+
+function wesnoth.wml_actions.set_wrath_intensity(cfg)
+	local function get_wrath_intensity(ability)
+		return ability.add
+	end
+	local function generate_wrath_ability(intensity)
+		return { "damage", { id = "latent_wrath", apply_to = "self", add = intensity }}
+	end
+	set_buildup_ability_intensity(cfg, "[set_wrath_intensity]", "damage", "latent_wrath", get_wrath_intensity, generate_wrath_ability)
+end
+
+function wesnoth.wml_actions.set_resolve_intensity(cfg)
+	local function get_resolve_intensity(ability)
+		return ability.add
+	end
+	local function generate_resolve_ability(intensity)
+		return { "resistance", { id = "latent_resolve", affect_self = true, affect_allies = false, max_value = 90, add = intensity }}
+	end
+	set_buildup_ability_intensity(cfg, "[set_resolve_intensity]", "resistance", "latent_resolve", get_resolve_intensity, generate_resolve_ability)
 end
