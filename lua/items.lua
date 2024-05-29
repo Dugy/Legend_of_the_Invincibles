@@ -927,7 +927,10 @@ loti.item.describe_item = function(number, sort, set_items)
 				elseif effect.set == "neutral" then line = "<span color='yellow'>" .. _"Sets alignment to neutral" .. "</span>" end
 			elseif effect.apply_to == "status" then
 				for part in string.gmatch(effect.add, '([^,]+)') do
-					if line then table.insert(desc, line) end
+					if line then
+						table.insert(desc, line)
+						line = nil
+					end
 					if part == "unpoisonable" then line = "<span color='yellow'>" .. _"Immune to Poison" .. "</span>"
 					elseif part == "unslowable" then line = "<span color='yellow'>" .. _"Immune to Slow" .. "</span>"
 					elseif part == "undrainable" then line = "<span color='yellow'>" .. _"Immune to Drain" .. "</span>"
