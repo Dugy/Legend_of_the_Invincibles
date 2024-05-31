@@ -154,6 +154,14 @@ function wesnoth.wml_actions.autorecall_menu()
 			unit.id ~= 'Lethalia_evil' and unit.id ~= 'Lilith'
 			then table.insert(av_list,unit.__cfg) end
 	end
+	av_list = sort_unit_list(av_list)
+
+	-- Create list of available units that will be shown (actually just a list of indicies into the list of all available units)
+	local search_value = ""
+	local filtered_av_list = {}
+	for k,_ in ipairs(av_list) do
+		filtered_av_list[k] = k
+	end
 
 	-- autorecall list from older saves may not contain full unit data, update
 	local new_ar = {}
@@ -238,6 +246,9 @@ function wesnoth.wml_actions.autorecall_menu()
 			T.linked_group { id = "ar_position", fixed_width = true, },
 			T.linked_group { id = "ar_unit", fixed_width = true },
 			T.linked_group { id = "av_unit", fixed_width = true },
+			height = "(gamemap_height)",
+			width = "(gamemap_width)",
+			automatic_placement = false,
 			T.grid {
 				T.row {
 					T.column {
@@ -269,7 +280,8 @@ function wesnoth.wml_actions.autorecall_menu()
 												T.label { 
 													use_markup=true,
 													label = "<span size='large' color='yellow'>"
-													.. _"Available Units (" .. #av_list .. ")</span>" }
+													.. _"Available Units (" .. #filtered_av_list .. 
+													"/" .. #av_list .. ")</span>" }
 											}
 										},
 										T.row {
@@ -280,6 +292,10 @@ function wesnoth.wml_actions.autorecall_menu()
 							}
 						}
 					}
+				},
+				T.row {
+					grow_factor = 1,
+					T.column { T.spacer {} }
 				},
 				T.row {
 					T.column { 
@@ -293,7 +309,7 @@ function wesnoth.wml_actions.autorecall_menu()
 									border_size = 80,
 									T.button { id = "add_slot",
 										definition = "add",
-										return_value_id = ADD_BUTTON_VALUE,
+										return_value = ADD_BUTTON_VALUE,
 										tooltip =_ "Buy space to automatically recall an additional unit" .. "\n" ..
 											_"Need: " .. next_autorecall_price .. _"  Have: " .. gold 
 									}
@@ -302,7 +318,7 @@ function wesnoth.wml_actions.autorecall_menu()
 									border = "right",
 									border_size = 10,
 									T.button { id = "ar_up",
-										return_value_id = UP_BUTTON_VALUE,
+										return_value = UP_BUTTON_VALUE,
 										definition = "up_arrow"
 									}
 								},
@@ -310,7 +326,7 @@ function wesnoth.wml_actions.autorecall_menu()
 									border = "right",
 									border_size = 40,
 									T.button { id = "ar_down",
-										return_value_id = DOWN_BUTTON_VALUE,
+										return_value = DOWN_BUTTON_VALUE,
 										definition = "down_arrow"
 									}
 								},
@@ -319,7 +335,7 @@ function wesnoth.wml_actions.autorecall_menu()
 									border = "left,right",
 									border_size = 10,
 									T.button { id = "ar_remove",
-										return_value_id = RIGHT_BUTTON_VALUE,
+										return_value = RIGHT_BUTTON_VALUE,
 										tooltip = "Remove unit from the autorecall list",
 										definition = "right_arrow"
 									}
@@ -346,9 +362,16 @@ function wesnoth.wml_actions.autorecall_menu()
 									border = "right",
 									border_size = 40,
 									T.button { id = "av_remove",
-										return_value_id = LEFT_BUTTON_VALUE,
+										return_value = LEFT_BUTTON_VALUE,
 										definition = "left_arrow",
 										tooltip =_ "Move unit to the autorecall list"
+									}
+								},
+								T.column {
+									T.text_box {
+										id = "search",
+										hint_text = _ "Search available units", 
+										hint_image = "icons/action/zoomdefault_25.png~FL(horiz)"
 									}
 								},
 								--T.column {
@@ -361,6 +384,18 @@ function wesnoth.wml_actions.autorecall_menu()
 		local function preshow(dialog)
 			local ar_listbox = dialog["ar_listbox"]
 			local av_listbox = dialog["av_listbox"]
+			local function update_filtered_av_list(filter)
+				filtered_av_list = {}
+				av_list = sort_unit_list(av_list)
+				for k,v in ipairs(av_list) do
+					-- This could be case-insensitive by converting both to lower
+					if string.find(tostring(v.name):lower(),filter:lower()) or string.find(tostring(v.language_name):lower(),filter:lower()) then
+						table.insert(filtered_av_list,k)
+					end
+				end
+				av_selected_index = 0  -- this could be smarter, updating the index if the unit is still visible
+			end
+
 			local function refresh_buttons()
 				dialog.ar_up.enabled = false
 				dialog.ar_down.enabled = false
@@ -382,7 +417,7 @@ function wesnoth.wml_actions.autorecall_menu()
 				if ar_selected_index ~= 0 then
 					unit = ar_list[ar_selected_index]
 				elseif av_selected_index ~= 0 then
-					unit = av_list[av_selected_index]
+					unit = av_list[filtered_av_list[av_selected_index]]
 				else 
 					return
 				end
@@ -436,7 +471,7 @@ function wesnoth.wml_actions.autorecall_menu()
 						tmp = ar_list[i]
 						ar_list[i]=ar_list[ar_selected_index]
 					elseif i == ar_selected_index then
-						ar_list[ar_selected_index]=tmp
+						ar_list[ar_selected_index] = tmp
 					end
 				end
 				ar_selected_index = ar_selected_index - 1
@@ -478,12 +513,19 @@ function wesnoth.wml_actions.autorecall_menu()
 				ar_list,av_list = switch_lists({index=ar_selected_index,from=ar_list,to=av_list})
 				if ar_selected_index > #ar_list then ar_selected_index = #ar_list end
 				if ar_selected_index == 0 then ar_selected_index = 0 end
+				update_filtered_av_list(search_value)
 				dialog:close()
 			end
 			dialog.av_remove.on_button_click = function() av_list,ar_list=
-				switch_lists({index=av_selected_index,from=av_list,to=ar_list})
+				switch_lists({index=filtered_av_list[av_selected_index],from=av_list,to=ar_list})
 				av_selected_index = 0
 				ar_selected_index = #ar_list
+				update_filtered_av_list(search_value)
+				dialog:close()
+			end
+			dialog.search.on_modified = function() 
+				search_value = dialog.search.text
+				update_filtered_av_list(search_value)
 				dialog:close()
 			end
 
@@ -504,14 +546,21 @@ function wesnoth.wml_actions.autorecall_menu()
 			if ar_selected_index ~= 0 then
 				ar_listbox.selected_index = ar_selected_index
 			end
-
-			av_list = sort_unit_list(av_list)
-			for i,unit in ipairs(av_list) do
-				av_listbox[i].av_unit.label = string.format("%s (%s)",unit.name,unit.language_name)
+			--av_list = sort_unit_list(av_list)
+			--for i,unit in ipairs(av_list) do
+		--		av_listbox[i].av_unit.label = string.format("%s (%s)",unit.name,unit.language_name)
+		--	end
+			for i,_ in ipairs(filtered_av_list) do
+				av_listbox[i].av_unit.label = string.format("%s (%s)",av_list[filtered_av_list[i]].name,av_list[filtered_av_list[i]].language_name)
 			end
 			av_listbox.on_modified = av_unit_toggle
 			if av_selected_index ~= 0 then
 				av_listbox.selected_index = av_selected_index
+			end
+
+			if search_value ~= "" then
+				dialog.search.text = search_value
+				dialog.search:focus()
 			end
 
 			dialog.unit_info_mp:add_item_of_type("empty_page")
