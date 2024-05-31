@@ -388,7 +388,6 @@ function wesnoth.wml_actions.autorecall_menu()
 				filtered_av_list = {}
 				av_list = sort_unit_list(av_list)
 				for k,v in ipairs(av_list) do
-					-- This could be case-insensitive by converting both to lower
 					if string.find(tostring(v.name):lower(),filter:lower()) or string.find(tostring(v.language_name):lower(),filter:lower()) then
 						table.insert(filtered_av_list,k)
 					end
