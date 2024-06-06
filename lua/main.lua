@@ -1195,3 +1195,13 @@ function wesnoth.wml_actions.set_resolve_intensity(cfg)
 	end
 	set_buildup_ability_intensity(cfg, "[set_resolve_intensity]", "resistance", "latent_resolve", get_resolve_intensity, generate_resolve_ability)
 end
+
+function wesnoth.wml_actions.set_elusiveness_intensity(cfg)
+	local function get_elusiveness_intensity(ability)
+		return ability.sub
+	end
+	local function generate_elusiveness_ability(intensity)
+		return { "chance_to_hit", { id = "latent_elusiveness", apply_to = "opponent", sub = intensity }}
+	end
+	set_buildup_ability_intensity(cfg, "[set_elusiveness_intensity]", "chance_to_hit", "latent_elusiveness", get_elusiveness_intensity, generate_elusiveness_ability)
+end
