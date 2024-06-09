@@ -1205,3 +1205,13 @@ function wesnoth.wml_actions.set_elusiveness_intensity(cfg)
 	end
 	set_buildup_ability_intensity(cfg, "[set_elusiveness_intensity]", "chance_to_hit", "latent_elusiveness", get_elusiveness_intensity, generate_elusiveness_ability)
 end
+
+function wesnoth.wml_actions.set_briskness_intensity(cfg)
+	local function get_briskness_intensity(ability)
+		return ability.add
+	end
+	local function generate_briskness_ability(intensity)
+		return { "attacks", { id = "latent_briskness", apply_to = "self", add = intensity }}
+	end
+	set_buildup_ability_intensity(cfg, "[set_briskness_intensity]", "attacks", "latent_briskness", get_briskness_intensity, generate_briskness_ability)
+end
