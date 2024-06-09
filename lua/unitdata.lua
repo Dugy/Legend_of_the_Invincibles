@@ -319,7 +319,7 @@ local wml_based_implementation = {
 			item.sort = item_sort
 		end
 
-		local on_equip = wml.get_child(item, "on_equip")
+		local on_equip = wml.get_child(loti.item.type[item_number], "on_equip")
 		if on_equip then
 			local variable = on_equip.variable or "armed"
 			wml.variables[variable] = unit
