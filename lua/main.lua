@@ -1206,6 +1206,16 @@ function wesnoth.wml_actions.set_elusiveness_intensity(cfg)
 	set_buildup_ability_intensity(cfg, "[set_elusiveness_intensity]", "chance_to_hit", "latent_elusiveness", get_elusiveness_intensity, generate_elusiveness_ability)
 end
 
+function wesnoth.wml_actions.set_precision_intensity(cfg)
+	local function get_precision_intensity(ability)
+		return ability.add
+	end
+	local function generate_precision_ability(intensity)
+		return { "chance_to_hit", { id = "latent_precision", apply_to = "self", add = intensity }}
+	end
+	set_buildup_ability_intensity(cfg, "[set_precision_intensity]", "chance_to_hit", "latent_precision", get_precision_intensity, generate_precision_ability)
+end
+
 function wesnoth.wml_actions.set_briskness_intensity(cfg)
 	local function get_briskness_intensity(ability)
 		return ability.add

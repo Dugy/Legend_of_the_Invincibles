@@ -609,14 +609,17 @@ function wesnoth.update_stats(original)
 	end
 
 	-- PART VIII: Abilities
-	local latent_wrath_special = wml.get_child(wml.get_child(original, "abilities"), "damage", "latent_wrath")
-	if latent_wrath_special ~= nil then
-		table.insert(wml.get_child(remade, "abilities"), { "damage", latent_wrath_special })
+	local function keep_buildup_ability(name, ability_type)
+		local latent_special = wml.get_child(wml.get_child(original, "abilities"), ability_type, name)
+		if latent_special ~= nil then
+			table.insert(wml.get_child(remade, "abilities"), { ability_type, latent_special })
+		end
 	end
-	local latent_resilience_special = wml.get_child(wml.get_child(original, "abilities"), "resistance", "latent_resolve")
-	if latent_resilience_special ~= nil then
-		table.insert(wml.get_child(remade, "abilities"), { "resistance", latent_resilience_special })
-	end
+	keep_buildup_ability("latent_wrath", "damage")
+	keep_buildup_ability("latent_resolve", "resistance")
+	keep_buildup_ability("latent_elusiveness", "chance_to_hit")
+	keep_buildup_ability("latent_precision", "chance_to_hit")
+	keep_buildup_ability("latent_briskness", "attacks")
 
 	-- PART IX: Apply visual effects
 	if #visual_effects > 0 then
