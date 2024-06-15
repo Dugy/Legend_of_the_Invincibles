@@ -68,6 +68,10 @@ read_globals = {
 							unit_status = {
 								read_only = false,
 								other_fields = true
+							},
+							unit_abilities = {
+								read_only = false,
+								other_fields = true
 							}
 						},
 						other_fields = true

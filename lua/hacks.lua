@@ -57,9 +57,9 @@ end
 
 local old_unit_abilities = wesnoth.interface.game_display.unit_abilities
 function wesnoth.interface.game_display.unit_abilities()
-	local displayed = wesnoth.interface.get_displayed_unit()
-	if not displayed then return {} end
-	local unit = displayed.__cfg
+	local unit_hook = wesnoth.interface.get_displayed_unit()
+	if not unit_hook then return {} end
+	local unit = unit_hook.__cfg
 	local abilities = wml.get_child(unit, "abilities")
 	local buildup_table = {}
 	for i = 1,#abilities do
@@ -82,7 +82,7 @@ function wesnoth.interface.game_display.unit_abilities()
 	local displayed = old_unit_abilities()
 	if #buildup_table > 0 then
 		for i = 1,#displayed do
-			table.insert(buildup_table, displayed[1])
+			table.insert(buildup_table, displayed[i])
 		end
 		displayed = buildup_table
 	end
