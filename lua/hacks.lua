@@ -55,6 +55,40 @@ function wesnoth.interface.game_display.unit_status()
 	return s
 end
 
+local old_unit_abilities = wesnoth.interface.game_display.unit_abilities
+function wesnoth.interface.game_display.unit_abilities()
+	local displayed = wesnoth.interface.get_displayed_unit()
+	if not displayed then return {} end
+	local unit = displayed.__cfg
+	local abilities = wml.get_child(unit, "abilities")
+	local buildup_table = {}
+	for i = 1,#abilities do
+		local function check_ability(id, getter, picture_positive, picture_negative, description)
+			if abilities[i][2].id == id then
+				local intensity = getter(abilities[i][2])
+				if intensity > 0 then
+					table.insert(buildup_table, { "element", { image = picture_positive, tooltip = string.format(description, intensity) } })
+				elseif intensity < 0 then
+					table.insert(buildup_table, { "element", { image = picture_negative, tooltip = string.format(description, intensity) } })
+				end
+			end
+		end
+		check_ability("latent_resolve", function(ability) return ability.add end, "misc/resolve.png", "misc/resolve_negative.png", _"%d%% to all resistances (halves every turn)")
+		check_ability("latent_wrath", function(ability) return ability.add end, "misc/wrath.png", "misc/wrath_negative.png", _"%d to damage (halves every turn)")
+		check_ability("latent_elusiveness", function(ability) return -ability.sub end, "misc/elusiveness.png", "misc/elusiveness_negative.png", _"%d%% enemy chance to hit (halves every turn)")
+		check_ability("latent_precision", function(ability) return ability.add end, "misc/precision.png", "misc/precision_negative.png", _"%d%% chance to hit (halves every turn)")
+		check_ability("latent_briskness", function(ability) return ability.add end, "misc/briskness.png", "misc/briskness_negative.png", _"%d to attack count (halves every turn)")
+	end
+	local displayed = old_unit_abilities()
+	if #buildup_table > 0 then
+		for i = 1,#displayed do
+			table.insert(buildup_table, displayed[1])
+		end
+		displayed = buildup_table
+	end
+	return displayed
+end
+
 local old_heal_unit = wesnoth.wml_actions.heal_unit
 function wesnoth.wml_actions.heal_unit(cfg)
 	cfg = cfg.__parsed
