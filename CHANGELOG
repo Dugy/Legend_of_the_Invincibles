@@ -1,11 +1,17 @@
 Changelog
 
 3.2.8 (maintenance)
+Weakened some overly popular unit by slightly changing their numbers to worse - Celestial Messenger, Dwarvish Battlerager, Elvish Assassin, Elvish Gryphon Rider, Elvish Nightprowler, Faerie Incarnation
+Changed Elvish Seer to be an advancement of Elvish Enchantress with more versatility and less damage, added AMLA options to Elvish Sylph, mostly focusing on damage
+Improved some underused units by adding exclusive new abilities to them - Abomination, Arch Necromancer, Blackguard, Champion Bowman, Chaos Rider, Dark Shade, Deathlord, Elvish Juggernaut, Elvish Overlord, Elvish Warlord, Forester, Goblin Ravager, Goblin Warbanner, Grim Knight, Infernal Knight, Monstrosity, Orcish Nightblade, Orcish Strafer, Phantom, Pilum Master, Predator, Reaper, Shadowalker, Shadow Prince, Sky Goblin, Soul Shooter, Troll Boulderlobber, Werewolf Rider, Zombie Rider
+Made part 1 harder on hard difficulty (thanks, White Haired Uncle)
 Changed the way resistance penetrate properties work, now they apply only to resistances against attacks of the wearer
-Change Elvish Seer to be an advancement of Elvish Enchantress with more versatility and less damage
-Add AMLA options to Elvish Sylph, mostly focusing on damage
+Dazzle, doom, trickery and mayhem are now stackable debuffs that decay to half every turn
 Changed the implementations of burning aura and deathaura, now resitances apply but burning aura can kill and deathaura poisons
-More bugfixes
+Made some overpowered items more restrictive, mainly to prevent stacking +1 attacks from armour
+Optimised save file size
+Ported the campaign to Wesnoth 1.18
+More bugfixes (and probably also regressions)
 
 3.2.7d (maintenance)
 More bugfixes
