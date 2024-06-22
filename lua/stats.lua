@@ -456,120 +456,124 @@ function wesnoth.update_stats(original)
 					end
 				end
 				if not strongest_attack then
-					strongest_attack = { name = "fangs", description = _"fangs", icon = "attacks/fangs-animal.png", type = "blade", range = eff.range or "melee", damage = 5, number = 4, { "specials", {}}}
+					if eff.range == "melee" then
+						strongest_attack = { name = "fangs", description = _"fangs", icon = "attacks/fangs-animal.png", type = "blade", range = eff.range or "melee", damage = 5, number = 4, { "specials", {}}}
+					end
 				else
 					strongest_attack = wesnoth.deepcopy(strongest_attack)
 				end
-				strongest_attack.is_bonus_attack = true
-				if eff.clone_anim then
-					local right_anim
-					local function get_best_anim(source)
-						for anim in wml.child_range(source, "attack_anim") do
-							local filter = wml.get_child(anim, "filter_attack")
-							if filter and filter.name == strongest_attack.name then
-								right_anim = anim
-								break -- priority
-							elseif filter and filter.range == strongest_attack.range then
-								right_anim = anim
-							elseif not filter then
-								right_anim = anim
+				if strongest_attack then
+					strongest_attack.is_bonus_attack = true
+					if eff.clone_anim then
+						local right_anim
+						local function get_best_anim(source)
+							for anim in wml.child_range(source, "attack_anim") do
+								local filter = wml.get_child(anim, "filter_attack")
+								if filter and filter.name == strongest_attack.name then
+									right_anim = anim
+									break -- priority
+								elseif filter and filter.range == strongest_attack.range then
+									right_anim = anim
+								elseif not filter then
+									right_anim = anim
+								end
 							end
 						end
-					end
-					local unit_type = wesnoth.unit_types[remade.type].__cfg
-					if remade.gender == "female" then
-						local female = wml.get_child(unit_type, "female")
-						if female then
-							unit_type = female
+						local unit_type = wesnoth.unit_types[remade.type].__cfg
+						if remade.gender == "female" then
+							local female = wml.get_child(unit_type, "female")
+							if female then
+								unit_type = female
+							end
 						end
-					end
-					get_best_anim(unit_type)
-					for variation in wml.child_range(unit_type, "variation") do
-						if variation.variation_name == remade.variation then
-							get_best_anim(variation)
+						get_best_anim(unit_type)
+						for variation in wml.child_range(unit_type, "variation") do
+							if variation.variation_name == remade.variation then
+								get_best_anim(variation)
+							end
 						end
-					end
-					if not right_anim then
-						for _, inner_eff in loti.unit.effects(remade) do
-							if inner_eff.apply_to == "new_animation" then
-								local filter = wml.get_child(inner_eff, "filter")
-								if not filter or not filter.gender or filter.gender == remade.gender then
-									for anim in wml.child_range(inner_eff, "attack_anim") do
-										filter = wml.get_child(anim, "filter_attack")
-										if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
-											right_anim = anim
+						if not right_anim then
+							for _, inner_eff in loti.unit.effects(remade) do
+								if inner_eff.apply_to == "new_animation" then
+									local filter = wml.get_child(inner_eff, "filter")
+									if not filter or not filter.gender or filter.gender == remade.gender then
+										for anim in wml.child_range(inner_eff, "attack_anim") do
+											filter = wml.get_child(anim, "filter_attack")
+											if filter or (filter.name and filter.name == strongest_attack.name) or (filter.range and filter.range == strongest_attack.range) then
+												right_anim = anim
+											end
 										end
 									end
 								end
 							end
 						end
-					end
 
-					if right_anim then
-						right_anim = wesnoth.deepcopy(right_anim)
-						local filter = wml.get_child(right_anim, "filter_attack")
-						if filter.name then
-							filter.name = eff.name
-						end
-						table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
-					else
-						-- This should not happen
-						wesnoth.log("warning", "Couldn't find right animation for unit " .. tostring(remade.id))
-					end
-				end
-				strongest_attack.name = eff.name
-				if eff.type then
-					strongest_attack.type = eff.type
-				end
-				if eff.icon then
-					strongest_attack.icon = eff.icon
-				end
-				local damage = 100
-				local attacks = 100
-				if eff.damage then
-					damage = damage + eff.damage
-				end
-				if eff.number then
-					attacks = attacks + eff.number
-				end
-				if eff.attacks then
-					attacks = attacks + eff.attacks
-				end
-				if eff.defense_weight then
-					strongest_attack.defense_weight = eff.defense_weight
-				end
-				if eff.attack_weight then
-					strongest_attack.attack_weight = eff.attack_weight
-				end
-				if eff.description then
-					strongest_attack.description = eff.description
-				end
-				-- Check if it's improved somewhere (I know this could be done with a better complexity)
-				for _, other_effect in loti.unit.effects(remade) do
-					if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
-						if other_effect.increase_damage then
-							damage = damage + other_effect.increase_damage
-						end
-						if other_effect.increase_attacks then
-							attacks = attacks + other_effect.increase_attacks
+						if right_anim then
+							right_anim = wesnoth.deepcopy(right_anim)
+							local filter = wml.get_child(right_anim, "filter_attack")
+							if filter.name then
+								filter.name = eff.name
+							end
+							table.insert(visual_effects, { apply_to = "new_animation", name = "animation_object_" .. eff.name, { "attack_anim", right_anim }})
+						else
+							-- This should not happen
+							wesnoth.log("warning", "Couldn't find right animation for unit " .. tostring(remade.id))
 						end
 					end
-				end
-				strongest_attack.damage = strongest_attack.damage * damage / 100
-				strongest_attack.number = strongest_attack.number * attacks / 100
-				if eff.merge then
-					strongest_attack.damage = strongest_attack.damage * strongest_attack.number
-					strongest_attack.number = 1
-				elseif strongest_attack.number < 1 then
-					strongest_attack.number = 1
-				end
-				local specials = wml.get_child(eff, "specials")
-				if specials then
-					for k = 1,#specials do
-						table.insert(wml.get_child(strongest_attack, "specials"), specials[k])
+					strongest_attack.name = eff.name
+					if eff.type then
+						strongest_attack.type = eff.type
 					end
+					if eff.icon then
+						strongest_attack.icon = eff.icon
+					end
+					local damage = 100
+					local attacks = 100
+					if eff.damage then
+						damage = damage + eff.damage
+					end
+					if eff.number then
+						attacks = attacks + eff.number
+					end
+					if eff.attacks then
+						attacks = attacks + eff.attacks
+					end
+					if eff.defense_weight then
+						strongest_attack.defense_weight = eff.defense_weight
+					end
+					if eff.attack_weight then
+						strongest_attack.attack_weight = eff.attack_weight
+					end
+					if eff.description then
+						strongest_attack.description = eff.description
+					end
+					-- Check if it's improved somewhere (I know this could be done with a better complexity)
+					for _, other_effect in loti.unit.effects(remade) do
+						if other_effect.apply_to == "improve_bonus_attack" and other_effect.name == eff.name then
+							if other_effect.increase_damage then
+								damage = damage + other_effect.increase_damage
+							end
+							if other_effect.increase_attacks then
+								attacks = attacks + other_effect.increase_attacks
+							end
+						end
+					end
+					strongest_attack.damage = strongest_attack.damage * damage / 100
+					strongest_attack.number = strongest_attack.number * attacks / 100
+					if eff.merge then
+						strongest_attack.damage = strongest_attack.damage * strongest_attack.number
+						strongest_attack.number = 1
+					elseif strongest_attack.number < 1 then
+						strongest_attack.number = 1
+					end
+					local specials = wml.get_child(eff, "specials")
+					if specials then
+						for k = 1,#specials do
+							table.insert(wml.get_child(strongest_attack, "specials"), specials[k])
+						end
+					end
+					table.insert(remade, { "attack", strongest_attack})
 				end
-				table.insert(remade, { "attack", strongest_attack})
 			end
 		end
 	end
