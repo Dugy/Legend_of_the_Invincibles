@@ -1120,6 +1120,9 @@ local function set_buildup_ability_intensity(cfg, tag_name, ability_type, abilit
 	local debug = cfg.debug or false
 	local unit_id = cfg.id or wml.error(tag_name .. ": missing required id=")
 	local unit_base = wesnoth.units.find({ id = unit_id})[1]
+	if unit_base == nil then
+		return
+	end
 	local unit = unit_base.__cfg
 	local abilities = wml.get_child(unit, "abilities")
 	local latent_ability = wml.get_child(abilities, ability_type, ability_id)
