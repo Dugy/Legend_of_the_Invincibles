@@ -480,13 +480,14 @@ function wesnoth.update_stats(original)
 							end
 						end
 						local unit_type = wesnoth.unit_types[remade.type].__cfg
+						get_best_anim(unit_type)
 						if remade.gender == "female" then
 							local female = wml.get_child(unit_type, "female")
 							if female then
 								unit_type = female
+								get_best_anim(unit_type)
 							end
 						end
-						get_best_anim(unit_type)
 						for variation in wml.child_range(unit_type, "variation") do
 							if variation.variation_name == remade.variation then
 								get_best_anim(variation)
