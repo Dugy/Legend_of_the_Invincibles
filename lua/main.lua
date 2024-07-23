@@ -93,7 +93,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 		else return false end
 	end
 
-	local this_unit <close> = utils.scoped_var("this_unit") -- luacheck: ignore unused
+	local this_unit <close> = utils.scoped_var("this_unit") --luacheck: no unused args
 
 	for index, unit_to_harm in ipairs(wesnoth.units.find_on_map(filter)) do
 		if unit_to_harm.valid then
@@ -202,7 +202,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			wesnoth.units.to_map(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
 
 			if harmer then
-				local old_damage_inflicted <close> = utils.scoped_var("damage_inflicted") -- luacheck: ignore unused
+				local old_damage_inflicted <close> = utils.scoped_var("damage_inflicted") --luacheck: no unused args
 				wml.variables["damage_inflicted"] = damage
 				wml.variables["harm_unit_trigger"] = true
 				if cfg.fire_attacker_hits then
