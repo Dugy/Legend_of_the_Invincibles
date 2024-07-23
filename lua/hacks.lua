@@ -91,12 +91,15 @@ end
 
 local old_heal_unit = wesnoth.wml_actions.heal_unit
 function wesnoth.wml_actions.heal_unit(cfg)
-	cfg = cfg.__parsed
-	if cfg.respect_unhealable == false then
+	local respect_unhealable = cfg.respect_unhealable or true
+	if respect_unhealable == false then
 		old_heal_unit(cfg)
 		return
 	end
 
+	if type(cfg) == "userdata" then
+		cfg = cfg.__parsed
+	end
 	local filter = wml.get_child(cfg, "filter")
 	table.insert(filter, {"not", {status = "unhealable"}})
 	old_heal_unit(cfg)
