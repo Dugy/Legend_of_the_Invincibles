@@ -77,24 +77,7 @@ end
 
 function wesnoth.wml_actions.harm_unit_loti(cfg)
 	-- Most of this is pasted from core, but I needed to do some edits that could not have been done without this unpleasant violation of the DRY (Don't Repeat Yourself) rule
-	-- To be honest, there are parts I don't even understand
 	-- It's meant to harm units but give experience only on kill, works only when used by weapon specials
-
-	-- These two functions were copied from wml-tags.lua too
-	local function start_var_scope(name)
-		local var = wml.array_access.get(name) --containers and arrays
-		if #var == 0 then var = wml.variables[name] end --scalars (and nil/empty)
-		wml.variables[name] = nil
-		return var
-	end
-	local function end_var_scope(name, var)
-		wml.variables[name] = nil
-		if type(var) == "table" then
-			wml.array_access.set(name, var)
-		else
-			wml.variables[name] = var
-		end
-	end
 
 	local filter = wml.get_child(cfg, "filter") or wml.error("[harm_unit_loti] missing required [filter] tag")
 	-- we need to use shallow_literal field, to avoid raising an error if $this_unit (not yet assigned) is used
@@ -110,7 +93,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 		else return false end
 	end
 
-	local this_unit <close> = utils.scoped_var("this_unit")
+	local this_unit <close> = utils.scoped_var("this_unit") -- luacheck: ignore unused
 
 	for index, unit_to_harm in ipairs(wesnoth.units.find_on_map(filter)) do
 		if unit_to_harm.valid then
@@ -219,7 +202,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			wesnoth.units.to_map(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
 
 			if harmer then
-				local old_damage_inflicted <close> = utils.scoped_var("damage_inflicted")
+				local old_damage_inflicted <close> = utils.scoped_var("damage_inflicted") -- luacheck: ignore unused
 				wml.variables["damage_inflicted"] = damage
 				wml.variables["harm_unit_trigger"] = true
 				if cfg.fire_attacker_hits then
