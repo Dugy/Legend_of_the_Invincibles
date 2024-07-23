@@ -1,3 +1,5 @@
+local utils = wesnoth.require "wml-utils"
+
 -- Some libraries place utility functions into this array,
 -- e.g. loti.item.storage.add()
 loti = {}
@@ -108,7 +110,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 		else return false end
 	end
 
-	local this_unit = start_var_scope("this_unit")
+	local this_unit <close> = utils.scoped_var("this_unit")
 
 	for index, unit_to_harm in ipairs(wesnoth.units.find_on_map(filter)) do
 		if unit_to_harm.valid then
@@ -217,7 +219,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 			wesnoth.units.to_map(unit_to_harm, unit_to_harm.x, unit_to_harm.y)
 
 			if harmer then
-				local old_damage_inflicted = start_var_scope("damage_inflicted")
+				local old_damage_inflicted <close> = utils.scoped_var("damage_inflicted")
 				wml.variables["damage_inflicted"] = damage
 				wml.variables["harm_unit_trigger"] = true
 				if cfg.fire_attacker_hits then
@@ -227,8 +229,6 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 					wesnoth.game_events.fire("defender hits", unit_to_harm.x, unit_to_harm.y, harmer.x, harmer.y, { wml.tag.first(secondary_attack), wml.tag.second(primary_attack) })
 				end
 				wml.variables["harm_unit_trigger"] = nil
-				wml.variables["damage_inflicted"] = nil
-				end_var_scope("damage_inflicted", old_damage_inflicted)
 			end
 
 			if add_tab then
@@ -269,7 +269,7 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 						wesnoth.wml_actions.kill({
 							id = unit_to_harm.id,
 							animate = toboolean( animate ),
-							fire_event = toboolean(toboolean(fire_event)),
+							fire_event = toboolean(fire_event),
 							secondary_unit
 						})
 					end
@@ -289,9 +289,6 @@ function wesnoth.wml_actions.harm_unit_loti(cfg)
 
 		wesnoth.wml_actions.redraw {}
 	end
-
-	wml.variables["this_unit"] = nil -- clearing this_unit
-	end_var_scope("this_unit", this_unit)
 end
 
 local _ = wesnoth.textdomain "wesnoth-loti"
