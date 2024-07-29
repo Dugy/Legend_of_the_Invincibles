@@ -649,7 +649,7 @@ loti.item.util.get_item_from_storage = function(unit, item_number, crafted_sort)
 	if wesnoth.current_version() < wesnoth.version "1.17.0" then
 		wesnoth.fire_event("item pick", unit)
 	else
-		wesnoth.game_events.fire("unequip", unit)
+		wesnoth.game_events.fire("item pick", unit)
 	end
 end
 
