@@ -717,34 +717,34 @@ loti.item.describe_item = function(number, sort, set_items)
 	if item.sort == "weaponword" then
 		is_weapon = true
 	end
-	local function describe_attacks_modification(variable, ending_more, ending_plus_one, ending_fewer, ending_minus_one)
+	local function describe_attacks_modification(variable, format_more, format_plus_one, format_fewer, format_minus_one)
 		if variable then
-			local ending = ending_fewer
+			local format = format_fewer
 			local color = "red"
 			if variable > 1 then
-				ending = ending_more
+				ending = format_more
 				color = "green"
 			elseif variable == 1 then
-				ending = ending_plus_one
+				ending = format_plus_one
 				color = "green"
 			elseif variable == -1 then
-				ending = ending_minus_one
+				ending = format_minus_one
 				color = "red"
 			end
 
-			table.insert(desc, "<span color='" .. color .. "'>" .. math.abs(variable) .. ending .. " </span>")
+			table.insert(desc, "<span color='" .. color .. "'>" .. string.format(format, math.abs(variable)) .. " </span>")
 		end
 	end
 	if is_weapon then
 		describe_attacks_modification(item.attacks,
-			_"% more attacks", _"% more attacks", _"% fewer attacks", _"% fewer attacks")
+			_"%d%% more attacks", _"%d%% more attacks", _"%d%% fewer attacks", _"%d%% fewer attacks")
 	else
 		describe_attacks_modification(item.attacks,
-			_" more attacks", _" more attack", _" fewer attacks", _" fewer attack")
+			_"%d more attacks", _"%d more attack", _"%d fewer attacks", _"%d fewer attack")
 	end
 
 	describe_attacks_modification(item.attacks_plus,
-		_" more attacks", _" more attack", _" fewer attacks", _" fewer attack")
+		_"%d more attacks", _"%d more attack", _"d% fewer attacks", _"%d fewer attack")
 
 	if item.merge then
 		table.insert(desc, "<span color='green'>" .. _"Merges attacks" .. "</span>")
