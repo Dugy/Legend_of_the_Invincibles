@@ -722,13 +722,13 @@ loti.item.describe_item = function(number, sort, set_items)
 			local format = format_fewer
 			local color = "red"
 			if variable > 1 then
-				ending = format_more
+				format = format_more
 				color = "green"
 			elseif variable == 1 then
-				ending = format_plus_one
+				format = format_plus_one
 				color = "green"
 			elseif variable == -1 then
-				ending = format_minus_one
+				format = format_minus_one
 				color = "red"
 			end
 
