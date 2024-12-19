@@ -1222,7 +1222,7 @@ function wesnoth.wml_actions.knockback(cfg)
 			end
 			local target = wesnoth.map.get(knocked)
 			local last_acceptable_target = target
-			for distance = 1, max_distance do
+			for distance = 1, max_distance do --luacheck: no unused
 				local adj = {};
 				adj["n"], adj["ne"], adj["se"], adj["s"], adj["sw"], adj["nw"] = wesnoth.map.get_adjacent_hexes(target)
 				local potential_target = adj[direction]
