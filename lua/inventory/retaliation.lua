@@ -143,7 +143,8 @@ local function onshow(dialog, unit)
 			for _, disable_record in ipairs(wml.array_access.get("disabled_defences", unit)) do
 				-- Note when comparing: "index" is Lua array index (starts with 1),
 				-- while order is C++ array index (starts with 0).
-				if disable_record.order + 1 == index then
+				-- Moreover, status.lua uses only the name, don't check if disable_record.order + 1 == index
+				if attack.name == disable_record.name then
 					attack_only = false
 					break
 				end
