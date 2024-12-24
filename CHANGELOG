@@ -1,6 +1,10 @@
 Changelog
 
-3.2.8 (maintenance)
+3.2.8b (maintenance)
+Fixed various bugs introduced in version 3.2.8
+Knockback now behaves more predictably and can't push units from the map to the recall list
+
+3.2.8 (development)
 Weakened some overly popular unit by slightly changing their numbers to worse - Celestial Messenger, Dwarvish Battlerager, Elvish Assassin, Elvish Gryphon Rider, Elvish Nightprowler, Faerie Incarnation
 Changed Elvish Seer to be an advancement of Elvish Enchantress with more versatility and less damage, added AMLA options to Elvish Sylph, mostly focusing on damage
 Improved some underused units by adding exclusive new abilities to them - Abomination, Arch Necromancer, Blackguard, Champion Bowman, Chaos Rider, Dark Shade, Deathlord, Elvish Juggernaut, Elvish Overlord, Elvish Warlord, Forester, Goblin Ravager, Goblin Warbanner, Grim Knight, Infernal Knight, Monstrosity, Orcish Nightblade, Orcish Strafer, Phantom, Pilum Master, Predator, Reaper, Shadowalker, Shadow Prince, Sky Goblin, Soul Shooter, Troll Boulderlobber, Werewolf Rider, Zombie Rider
