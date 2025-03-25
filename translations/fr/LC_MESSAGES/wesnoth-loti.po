@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2025-02-18 16:47 UTC\n"
-"PO-Revision-Date: 2025-02-18 20:10+0100\n"
+"PO-Revision-Date: 2025-03-25 23:10+0100\n"
 "Last-Translator: Bafy78 <remi.millerat@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -529,7 +529,7 @@ msgstr ""
 #. [lua]: check_ability
 #: Legend_of_the_Invincibles/lua/hacks.lua:76
 msgid "%d%% to all resistances (halves every turn)"
-msgstr "%d% % à toutes les résistances (divisé par deux à chaque tour)"
+msgstr "%d%% à toutes les résistances (divisé par deux à chaque tour)"
 
 #. [lua]: check_ability
 #: Legend_of_the_Invincibles/lua/hacks.lua:77
@@ -539,13 +539,12 @@ msgstr "%d aux dégâts (divisé par deux à chaque tour)"
 #. [lua]: check_ability
 #: Legend_of_the_Invincibles/lua/hacks.lua:78
 msgid "%d%% enemy chance to hit (halves every turn)"
-msgstr ""
-"%d% % de chances de l'ennemi de toucher (divisé par deux à chaque tour)"
+msgstr "%d%% de chances de l'ennemi de toucher (divisé par deux à chaque tour)"
 
 #. [lua]: check_ability
 #: Legend_of_the_Invincibles/lua/hacks.lua:79
 msgid "%d%% chance to hit (halves every turn)"
-msgstr "%d% % de chance de toucher (divisé par deux à chaque tour)"
+msgstr "%d%% de chance de toucher (divisé par deux à chaque tour)"
 
 #. [lua]: check_ability
 #: Legend_of_the_Invincibles/lua/hacks.lua:80
@@ -1017,18 +1016,18 @@ msgstr " (armes à distance seulement)"
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:740
 msgid "%d%% more attacks"
-msgstr "%d% % d'attaques supplémentaires"
+msgstr "%d%% d'attaques supplémentaires"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:740
 msgid "%d%% fewer attacks"
-msgstr "%d% % d'attaques en moins"
+msgstr "%d%% d'attaques en moins"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:743
 #: Legend_of_the_Invincibles/lua/items.lua:747
 msgid "%d more attacks"
-msgstr "%d% % d'attaques supplémentaires"
+msgstr "%d attaques supplémentaires"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:743
@@ -1050,7 +1049,7 @@ msgstr "%d attaque en moins"
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:747
 msgid "d% fewer attacks"
-msgstr "d % d'attaques en moins"
+msgstr "d% d'attaques en moins"
 
 #. [lua]: describe_attacks_modification
 #: Legend_of_the_Invincibles/lua/items.lua:750
