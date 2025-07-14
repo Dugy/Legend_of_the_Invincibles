@@ -7,16 +7,16 @@ on:
 
 jobs:
   upload-beta:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     env:
       PBL_PASSPHRASE: ${{ secrets.PBL_PASSPHRASE }}
       PBL_EMAIL: ${{ secrets.PBL_EMAIL }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Fetching up to the commit with the latest release is necessary to use "git describe"
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: wesnoth_tools
           key: buildcache-feb2022
