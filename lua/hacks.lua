@@ -77,7 +77,7 @@ function wesnoth.interface.game_display.unit_abilities()
 		check_ability("latent_wrath", function(ability) return ability.add end, "misc/wrath.png", "misc/wrath_negative.png", _"%d to damage (halves every turn)")
 		check_ability("latent_elusiveness", function(ability) return -ability.sub end, "misc/elusiveness.png", "misc/elusiveness_negative.png", _"%d%% enemy chance to hit (halves every turn)")
 		check_ability("latent_precision", function(ability) return ability.add end, "misc/precision.png", "misc/precision_negative.png", _"%d%% chance to hit (halves every turn)")
-		check_ability("latent_briskness", function(ability) return ability.add end, "misc/briskness.png", "misc/briskness_negative.png", _"%d to attack count (halves every turn)")
+		check_ability("latent_briskness_nonzero", function(ability) return ability.add end, "misc/briskness.png", "misc/briskness_negative.png", _"%d to attack count (halves every turn)")
 	end
 	local displayed = old_unit_abilities()
 	if #buildup_table > 0 then

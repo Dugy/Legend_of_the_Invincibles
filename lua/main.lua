@@ -1200,13 +1200,24 @@ function wesnoth.wml_actions.set_precision_intensity(cfg)
 end
 
 function wesnoth.wml_actions.set_briskness_intensity(cfg)
-	local function get_briskness_intensity(ability)
+	local function get_briskness_intensity_nonzero(ability)
 		return ability.add
 	end
-	local function generate_briskness_ability(intensity)
-		return { "attacks", { id = "latent_briskness", apply_to = "self", add = intensity }}
+	local function generate_briskness_ability_nonzero(intensity)
+		return { "attacks", { id = "latent_briskness_nonzero", apply_to = "self", add = intensity,
+				{ "filter_base_value", { greater_than = -intensity } }
+			} }
 	end
-	set_buildup_ability_intensity(cfg, "[set_briskness_intensity]", "attacks", "latent_briskness", get_briskness_intensity, generate_briskness_ability)
+	set_buildup_ability_intensity(cfg, "[set_briskness_intensity]", "attacks", "latent_briskness_nonzero", get_briskness_intensity_nonzero, generate_briskness_ability_nonzero)
+	local function get_briskness_intensity_zero(ability)
+		return -ability[1][2].less_than_equal_to
+	end
+	local function generate_briskness_ability_zero(intensity)
+		return { "attacks", { id = "latent_briskness_zero", apply_to = "self", value = 0,
+				{ "filter_base_value", { less_than_equal_to = -intensity } }
+			}}
+	end
+	set_buildup_ability_intensity(cfg, "[set_briskness_intensity_2]", "attacks", "latent_briskness_zero", get_briskness_intensity_zero, generate_briskness_ability_zero)
 end
 
 function wesnoth.wml_actions.knockback(cfg)
