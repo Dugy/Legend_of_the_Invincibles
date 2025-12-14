@@ -7,3 +7,9 @@ translate=yes
 [feedback]
     topic_id=32384
 [/feedback]
+
+[translation]
+    language="es"
+	title="Leyenda de los invencibles (beta)"
+    description="Esta es una versión de compilación diaria de Legend of the Invincibles. Contiene los cambios más recientes, pero también los errores más recientes. Úsala solo para pruebas o si tienes problemas con la versión principal y sabes que ya han sido solucionados, pero aún no se han subido."
+[/translation]
