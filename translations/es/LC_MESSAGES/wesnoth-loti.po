@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wesnoth-loti\n"
 "Report-Msgid-Bugs-To: https://bugs.wesnoth.org/\n"
-"POT-Creation-Date: 2025-12-10 19:33\n"
-"PO-Revision-Date: 2025-12-10 18:54-0300\n"
+"POT-Creation-Date: 2025-12-16 18:48\n"
+"PO-Revision-Date: 2025-12-18 12:10-0300\n"
 "Last-Translator: Sebastián Lecchini <Sebas38760@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -65,13 +65,33 @@ msgstr "Ayuda importante con la interfaz gráfica"
 msgid "German translation"
 msgstr "Traducción al alemán"
 
+#. [entry]
+#: Legend_of_the_Invincibles-master/_main.cfg:56
+msgid "(proofreading)"
+msgstr "(revisión)"
+
 #. [about]
 #: Legend_of_the_Invincibles-master/_main.cfg:60
+msgid "Spanish translation"
+msgstr "Traducción al español"
+
+#. [entry]
+#: Legend_of_the_Invincibles-master/_main.cfg:62
+msgid "(dialogues)"
+msgstr "(diálogos)"
+
+#. [entry]
+#: Legend_of_the_Invincibles-master/_main.cfg:62
+msgid "(mechanics)"
+msgstr "(mecánicas)"
+
+#. [about]
+#: Legend_of_the_Invincibles-master/_main.cfg:66
 msgid "Special thanks to"
 msgstr "Agradecimientos especiales a"
 
 #. [entry]
-#: Legend_of_the_Invincibles-master/_main.cfg:62
+#: Legend_of_the_Invincibles-master/_main.cfg:68
 msgid ""
 "Konrad2, Raijer, RainerT, Swistwarrior333, Aevyn, lynx, Cluesen_Mz, "
 "arobinson, Ferie_Storm, Celtic_Minstrel, Solaara, ShadeSlayer, TheZ, "
@@ -89,7 +109,7 @@ msgstr ""
 #. [attack], type=lightning, range=ranged
 #. [attack], type=arcane, range=ranged
 #. [effect]
-#: Legend_of_the_Invincibles-master/_main.cfg:78
+#: Legend_of_the_Invincibles-master/_main.cfg:84
 #: Legend_of_the_Invincibles-master/units/Akula.cfg:91
 #: Legend_of_the_Invincibles-master/units/Akula_steel.cfg:103
 #: Legend_of_the_Invincibles-master/units/Akula_steel_finale.cfg:95
@@ -111,56 +131,56 @@ msgstr "rayo"
 
 #. [campaign], id=Legend_of_the_Invincibles_I
 #. [campaign], id=Legend_of_the_Invincibles_VI
-#: Legend_of_the_Invincibles-master/_main.cfg:84
-#: Legend_of_the_Invincibles-master/_main.cfg:126
+#: Legend_of_the_Invincibles-master/_main.cfg:90
+#: Legend_of_the_Invincibles-master/_main.cfg:132
 msgid "Legend of the Invincibles"
-msgstr "La leyenda de los invencibles"
+msgstr "La Leyenda de los Invencibles"
 
 #. [campaign], id=Legend_of_the_Invincibles_I
-#: Legend_of_the_Invincibles-master/_main.cfg:85
+#: Legend_of_the_Invincibles-master/_main.cfg:91
 msgid "Part I:  Embracing the Darkness"
 msgstr "Parte I:  Abrazando la oscuridad"
 
 #. [campaign], id=Legend_of_the_Invincibles_I
-#: Legend_of_the_Invincibles-master/_main.cfg:90
+#: Legend_of_the_Invincibles-master/_main.cfg:96
 msgid "LotI1"
 msgstr "lLdlI1"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:95
+#: Legend_of_the_Invincibles-master/_main.cfg:101
 msgid "Kid with sword"
 msgstr "Niño con espada"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:96
-#: Legend_of_the_Invincibles-master/_main.cfg:137
+#: Legend_of_the_Invincibles-master/_main.cfg:102
+#: Legend_of_the_Invincibles-master/_main.cfg:143
 msgid "Easy"
 msgstr "Fácil"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:101
+#: Legend_of_the_Invincibles-master/_main.cfg:107
 msgid "Captain"
 msgstr "Capitán"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:102
-#: Legend_of_the_Invincibles-master/_main.cfg:143
+#: Legend_of_the_Invincibles-master/_main.cfg:108
+#: Legend_of_the_Invincibles-master/_main.cfg:149
 msgid "Medium"
 msgstr "Media"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:108
+#: Legend_of_the_Invincibles-master/_main.cfg:114
 msgid "Tyrant"
 msgstr "Tirano"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:109
-#: Legend_of_the_Invincibles-master/_main.cfg:150
+#: Legend_of_the_Invincibles-master/_main.cfg:115
+#: Legend_of_the_Invincibles-master/_main.cfg:156
 msgid "Hard"
 msgstr "Difícil"
 
 #. [campaign], id=Legend_of_the_Invincibles_I
-#: Legend_of_the_Invincibles-master/_main.cfg:111
+#: Legend_of_the_Invincibles-master/_main.cfg:117
 msgid ""
 "Sometimes, people don't embrace the tempting powers of darkness because of "
 "desires to rule, but merely for survival. Can the dark powers be used to "
@@ -183,7 +203,7 @@ msgstr ""
 "algunas de sus características especiales en un breve tutorial."
 
 #. [campaign], id=Legend_of_the_Invincibles_I
-#: Legend_of_the_Invincibles-master/_main.cfg:118
+#: Legend_of_the_Invincibles-master/_main.cfg:124
 msgid ""
 "To be continued...\n"
 "Go to BFW main window > Campaign >\n"
@@ -194,34 +214,34 @@ msgstr ""
 "Leyenda de los Invencibles, Parte II: Hacia la Luz"
 
 #. [campaign], id=Legend_of_the_Invincibles_VI
-#: Legend_of_the_Invincibles-master/_main.cfg:127
+#: Legend_of_the_Invincibles-master/_main.cfg:133
 msgid "Part II:  Into the Light"
 msgstr "Parte II:  Hacia la luz"
 
 #. [campaign], id=Legend_of_the_Invincibles_VI
-#: Legend_of_the_Invincibles-master/_main.cfg:131
+#: Legend_of_the_Invincibles-master/_main.cfg:137
 msgid "LotI2"
 msgstr "lLdlI2"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:136
+#: Legend_of_the_Invincibles-master/_main.cfg:142
 msgid "Undertaker"
 msgstr "Parca"
 
 #. [difficulty]
 #. [unit_type], id=Necromancer LotI, race=human
-#: Legend_of_the_Invincibles-master/_main.cfg:142
+#: Legend_of_the_Invincibles-master/_main.cfg:148
 #: Legend_of_the_Invincibles-master/units/Necromancer.cfg:4
 msgid "Necromancer"
 msgstr "Nigromante"
 
 #. [difficulty]
-#: Legend_of_the_Invincibles-master/_main.cfg:149
+#: Legend_of_the_Invincibles-master/_main.cfg:155
 msgid "Supreme Lich Overlord"
-msgstr "Señor supremo liche"
+msgstr "Supremo Señor liche"
 
 #. [campaign], id=Legend_of_the_Invincibles_VI
-#: Legend_of_the_Invincibles-master/_main.cfg:152
+#: Legend_of_the_Invincibles-master/_main.cfg:158
 msgid ""
 "Continuation of the previous part millennia later, when the consequences of "
 "past deeds transform the world into a much worse place. Will the old "
@@ -1298,126 +1318,119 @@ msgstr "tipo de daño extraño"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:560
-msgid ""
-"        Damage                  Resistance                      Penetration</"
-"span> \n"
-msgstr ""
-"        Daño                    Resistencia                     Penetración</"
-"span> \n"
+msgid "\tDamage\t\t\tResistance\t\t\tPenetration</span> \n"
+msgstr "\tDaño\t\t\tResistencia\tPenetración</span> \n"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:561
-msgid "Blade                           "
-msgstr "Filo                            "
+msgid "Blade\t\t\t\t"
+msgstr "Corte\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:562
-msgid "Pierce                          "
-msgstr "Perforación                     "
+msgid "Pierce\t\t\t\t"
+msgstr "Pernetración\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:563
-msgid "Impact                          "
-msgstr "Impacto                         "
+msgid "Impact\t\t\t\t"
+msgstr "Impacto\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:564
-msgid "Fire                            "
-msgstr "Fuego                           "
+msgid "Fire\t\t\t\t"
+msgstr "Fuego\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:565
-msgid "Cold                            "
-msgstr "Frío                            "
+msgid "Cold\t\t\t\t"
+msgstr "Frío\t\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:566
-msgid "Arcane                          "
-msgstr "Arcano                          "
+msgid "Arcane\t\t\t\t"
+msgstr "Arcano\t\t\t\t"
 
+#. Sebas:Cdm=Costo de Movimiento
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:592
-msgid ""
-"        Location                                Defence         Movement "
-"cost</span> \n"
-msgstr ""
-"        Terreno                                 Defensa         Coste de "
-"movimiento</span> \n"
+msgid "\tLocation\t\t\t\tDefence\t\tMovement cost</span> \n"
+msgstr "Terreno\t\t\tDefensa\t\t\tCdM</span> \n"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:593
-msgid "In forests                              "
-msgstr "En bosques                              "
+msgid "In forests\t\t\t\t"
+msgstr "En bosques\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:594
-msgid "In frozen places                "
-msgstr "En lugares helados              "
+msgid "In frozen places\t\t"
+msgstr "En lugares helados\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:595
-msgid "On flat terrains                "
-msgstr "En terrenos planos              "
+msgid "On flat terrains\t\t"
+msgstr "En terrenos planos\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:596
-msgid "In caves                                        "
-msgstr "En cuevas                                       "
+msgid "In caves\t\t\t\t\t"
+msgstr "En cuevas\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:597
-msgid "In mushroom grooves     "
-msgstr "En arboledas de hongos  "
+msgid "In mushroom grooves\t"
+msgstr "En arboledas de hongos\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:598
-msgid "In villages                             "
-msgstr "En aldeas                               "
+msgid "In villages\t\t\t\t"
+msgstr "En aldeas\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:599
-msgid "In castles                              "
-msgstr "En castillos                            "
+msgid "In castles\t\t\t\t"
+msgstr "En castillos\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:600
-msgid "In shallow waters               "
-msgstr "En aguas poco profundas         "
+msgid "In shallow waters\t\t"
+msgstr "En aguas poco profundas\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:601
-msgid "On coastal reefs                "
-msgstr "En arrecifes costeros           "
+msgid "On coastal reefs\t\t"
+msgstr "En arrecifes costeros\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:602
-msgid "In deep water                   "
-msgstr "En aguas profundas              "
+msgid "In deep water\t\t\t"
+msgstr "En aguas profundas\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:603
-msgid "On hills                                        "
-msgstr "En colinas                                      "
+msgid "On hills\t\t\t\t\t"
+msgstr "En colinas\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:604
-msgid "On mountains                            "
-msgstr "En montañas                             "
+msgid "On mountains\t\t\t\t"
+msgstr "En montañas\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:605
-msgid "On sands                                        "
-msgstr "En arenas                                       "
+msgid "On sands\t\t\t\t\t"
+msgstr "En arenas\t\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:606
 msgid "Above unwalkable places"
-msgstr "Sobre intransitable\t"
+msgstr "Sobre intransitable\t\t"
 
 #. [lua]: wesnoth.wml_actions.harm_unit_loti
 #: Legend_of_the_Invincibles-master/lua/main.lua:607
 msgid "Inside impassable walls"
-msgstr "Tras impenetrable\t\t"
+msgstr "Dentro de muros\t\t\t"
 
 #. [lua]: wesnoth.wml_actions.unit_information_part_6
 #: Legend_of_the_Invincibles-master/lua/main.lua:650
@@ -1754,27 +1767,27 @@ msgstr "Liderazgo"
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:116
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:261
 msgid "Healing others"
-msgstr "Curar a otros"
+msgstr "Sanar a otros"
 
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:121
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:266
 msgid "Blade resistance penetration"
-msgstr "Penetrabilidad de resistencia a corte"
+msgstr "Penetración de resistencia a corte"
 
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:126
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:271
 msgid "Impact resistance penetration"
-msgstr "Penetrabilidad de resistencia a impacto"
+msgstr "Penetración de resistencia a impacto"
 
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:131
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:276
 msgid "Pierce resistance penetration"
-msgstr "Penetrabilidad de resistencia a penetración"
+msgstr "Penetración de resistencia a penetración"
 
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:136
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:281
 msgid "Resist blade"
-msgstr "Resiste filo"
+msgstr "Resiste corte"
 
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:141
 #: Legend_of_the_Invincibles-master/lua/redeem.lua:286
@@ -1884,7 +1897,7 @@ msgid ""
 "Sucks $amount health on each successful hit with blade, pierce, impact or "
 "arcane damage."
 msgstr ""
-"Succiona $amount de vida en cada golpe exitoso con daño de filo, "
+"Succiona $amount de vida en cada golpe exitoso con daño de corte, "
 "perforación, impacto o arcano."
 
 #: Legend_of_the_Invincibles-master/lua/stats.lua:296
@@ -4885,7 +4898,7 @@ msgid ""
 "\n"
 "Take this item?"
 msgstr ""
-"<span color='#60A0FF'>Aumenta la resistencia a filo en un 15 %</span>\n"
+"<span color='#60A0FF'>Aumenta la resistencia a corte en un 15 %</span>\n"
 "<span color='green'>Daño aumentado en 3</span>\n"
 "<span color='green'>Aumenta todo el daño mágico en un 20%</span>\n"
 "<span color='#808080'><i>Krux nunca fue un gran guerrero, la diplomacia del "
@@ -4931,7 +4944,7 @@ msgid ""
 "<span color='#808080'><i>Krux has never been a great warrior, deceptive "
 "diplomacy was his favourite weapon.</i></span>"
 msgstr ""
-"<span color='#60A0FF'>Aumenta la resistencia a filo en un 15 %</span>\n"
+"<span color='#60A0FF'>Aumenta la resistencia a corte en un 15 %</span>\n"
 "<span color='green'>Daño aumentado en 3</span>\n"
 "<span color='green'>Aumenta todo el daño mágico en un 20%</span>\n"
 "<span color='#808080'><i>Krux nunca fue un gran guerrero, la diplomacia del "
@@ -5072,7 +5085,7 @@ msgid ""
 "diplomacy was his favourite weapon.</i></span>\n"
 "Take this item?"
 msgstr ""
-"<span color='#60A0FF'>Aumenta la resistencia a filo en un 15 %</span>\n"
+"<span color='#60A0FF'>Aumenta la resistencia a corte en un 15 %</span>\n"
 "<span color='green'>Daño aumentado en 3</span>\n"
 "<span color='green'>Aumenta todo el daño mágico en un 20%</span>\n"
 "<span color='#808080'><i>Krux nunca fue un gran guerrero, la diplomacia del "
@@ -8891,7 +8904,7 @@ msgstr ""
 "Efraim:\n"
 "El problema del calor puede resolverse atando más espíritus a nuestros "
 "cuerpos, posiblemente después, al convertirnos en liches. Nuestros espíritus "
-"pensarán y usarán magia, mientras los otros nos calentarán y curarán, y "
+"pensarán y usarán magia, mientras los otros nos calentarán y sanarán, y "
 "darán más poder mágico a nuestras almas. Pero corremos el riesgo de que nos "
 "venzan... Y sobre el segundo problema, creo que seremos lo bastante "
 "poderosos para matar suficientes enemigos al comienzo de cada batalla y "
@@ -9923,7 +9936,7 @@ msgstr ""
 "sin previo aviso y quedé gravemente herida. Me estaba muriendo, mi sangre "
 "corría por los pasadizos de la cueva y su dulce aroma empezaba a atraer "
 "carroñeros. No podía curarme porque apenas estaba consciente y él no tenía "
-"habilidades de curación. Solo su rápida reacción me salvó."
+"habilidades de sanación. Solo su rápida reacción me salvó."
 
 #. [message], speaker=Garcyn
 #: Legend_of_the_Invincibles-master/scenarios1/13_Twilight.cfg:297
@@ -11172,7 +11185,7 @@ msgid ""
 "doomed as well without them! We are unable to tackle the threat of demons "
 "all around!"
 msgstr ""
-"¡Nooo! ¡El hechizo suicida de detonación de mamá...! ¡Ya están MUERTOS! ¡Y "
+"¡Nooo! ¡El hechizo suicida de mamá...! ¡Ya están MUERTOS! ¡Y "
 "nosotros también estamos condenados sin ellos! ¡No podemos enfrentar la "
 "amenaza de demonios por todos lados!"
 
@@ -17409,7 +17422,7 @@ msgid ""
 "Demons, on the other hand, are always actively harassing the living in our "
 "world, because they seek conquest of our world."
 msgstr ""
-"Es una afirmación válida desde el punto de vista filosófico, sí, pero la "
+"Es una afirmación válida desde el punto de vista cortesófico, sí, pero la "
 "distinción es que los dioses no toman la iniciativa de reunir seguidores o "
 "creyentes. Simplemente existen, como símbolos de inspiración que atraen a "
 "las almas de quienes los toman como referencia para rasgos con los que se "
@@ -22155,7 +22168,7 @@ msgid ""
 "Absorb: When this unit is hit, it takes its regular damage, but heals 1 HP "
 "after it."
 msgstr ""
-"Absorber: Cuando esta unidad recibe daño, sufre su daño normal pero cura 1 "
+"Absorber: Cuando esta unidad recibe daño, sufre su daño normal pero sana 1 "
 "PV después."
 
 #. [objective], condition=win
@@ -22243,7 +22256,7 @@ msgid ""
 "bankrupt and cannot afford to support their army, the guards will desert and "
 "we can just walk right in."
 msgstr ""
-"Genial, ahora podemos tomar todos los pueblos y esperar. Cuando estén en "
+"Genial, ahora podemos tomar todas las aldeas y esperar. Cuando estén en "
 "bancarrota y no puedan mantener su ejército, los guardias desertarán y "
 "podremos entrar directamente."
 
@@ -22659,7 +22672,7 @@ msgid ""
 msgstr ""
 "Tienes razón, pero aunque el miedo hacia nosotros es mayor que nuestro "
 "poder, aún somos muy fuertes. Tú eres casi invencible por tu habilidad de "
-"drenar a tus enemigos para curarte. Nuestros enemigos nunca se unirán pero "
+"drenar a tus enemigos para sanarte. Nuestros enemigos nunca se unirán pero "
 "estoy seguro de que los dracos se unirán bajo nuestro mando. Ver cien "
 "dragones en batalla aterrorizará completamente a nuestros enemigos."
 
@@ -28425,7 +28438,7 @@ msgid ""
 "able to heal you as a reward for telling it to me."
 msgstr ""
 "De todos modos no tienes dónde huir. Ahora dime, ¿dónde está el libro? Tal "
-"vez pueda curarte como recompensa por decírmelo."
+"vez pueda sanarte como recompensa por decírmelo."
 
 #. [message], speaker=The Prince
 #: Legend_of_the_Invincibles-master/scenarios4/16_Lost_in_Space.cfg:281
@@ -30254,9 +30267,8 @@ msgid ""
 "in the shadows."
 msgstr ""
 "Efraim:\n"
-"Antes del pueblo, dejaremos nuestro ejército con Akula y entraremos al "
-"pueblo. Sé que ahora somos los más buscados, pero podemos... escondernos en "
-"las sombras."
+"Antes del pueblo, dejaremos nuestro ejército con Akula y entraremos Sé que "
+"ahora somos los más buscados, pero podemos... escondernos en las sombras."
 
 #. [part]
 #: Legend_of_the_Invincibles-master/scenarios5/04_Again.cfg:93
@@ -34653,7 +34665,7 @@ msgid ""
 msgstr ""
 "Mi objetivo es tan noble que justifica cualquier medio para lograrlo. Te "
 "torturaré hasta que me digas todo lo que sabes. Ahora dime cómo ser más "
-"poderosa o derretiré tu piel y te curaré al mismo tiempo para mantenerte "
+"poderosa o derretiré tu piel y te sanaré al mismo tiempo para mantenerte "
 "vivo horas. Es la última vez que pregunto sin causarte dolor."
 
 #. [message], speaker=Solomon
@@ -35258,9 +35270,10 @@ msgid ""
 "to move all your units to your leader if you have not done it in the last "
 "ten turns."
 msgstr ""
-"No pagas mantenimiento por unidades, pero los pueblos no producen oro, solo "
-"sirven para curar y defender. Al hacer clic derecho en tu líder podrás mover "
-"todas tus unidades hacia él si no lo has hecho en los últimos diez turnos."
+"No pagas mantenimiento por tus unidades, pero las aldeas no producen oro, "
+"solo sirven para sanar y defender. Al hacer clic derecho en tu líder podrás "
+"mover todas tus unidades hacia él si no lo has hecho en los últimos diez "
+"turnos."
 
 #. [message], speaker=$leader_chosen
 #: Legend_of_the_Invincibles-master/scenarios6/09_Across_the_Barren_Land.cfg:666
@@ -35644,7 +35657,7 @@ msgstr ""
 "habitante de nuestro mundo puede vivir en Chillhold más de una hora. Las "
 "temperaturas siempre son muy bajas y parece que no hay estaciones. La ropa "
 "puede proteger del frío, pero solo por un tiempo. Incluso los no muertos "
-"quedarán congelados e inmóviles. Los hechizos de curación pueden retrasar la "
+"quedarán congelados e inmóviles. Los hechizos de sanación pueden retrasar la "
 "muerte allí, pero es imposible calentarse activamente porque el fuego no "
 "puede existir allí - las temperaturas simplemente no suben más allá de "
 "cierto valor..."
@@ -38098,7 +38111,7 @@ msgid ""
 msgstr ""
 "Es una enorme llanura, así que todos pueden caminar por ella sin problemas, "
 "pero será difícil encontrar cobertura. Además, adelante no hay restos de "
-"civilización, tal vez unos pocos pueblos, pero no hay castillos, así que les "
+"civilización, tal vez unas pocas aldeas, pero no hay castillos, así que les "
 "recomiendo llevar a todos los que necesiten ahora."
 
 #. [message], speaker=Efraim
@@ -43492,12 +43505,12 @@ msgid ""
 "villages, if it is not a problem. Charge!"
 msgstr ""
 "Mis soldados son leales solo a mí, así que lideraré mis tropas. Tomaré "
-"algunos pueblos, si no es problema. ¡Carguen!"
+"algunas aldeas, si no es problema. ¡A la Carga!"
 
 #. [message], speaker=duke
 #: Legend_of_the_Invincibles-master/scenarios8/03_United.cfg:1048
 msgid "CHAAAARGE!"
-msgstr "¡CAAAARGA!"
+msgstr "¡AAA LA CAARGA!"
 
 #. [message], speaker=lich
 #: Legend_of_the_Invincibles-master/scenarios8/03_United.cfg:1052
@@ -43618,7 +43631,7 @@ msgstr ""
 #. [message], speaker=Lethalia
 #: Legend_of_the_Invincibles-master/scenarios8/04_Kidnapped.cfg:176
 msgid "Now, the usual routine. Capture some nearby villages..."
-msgstr "Ahora, la rutina de siempre. Capturar algunos pueblos cercanos..."
+msgstr "Ahora, la rutina de siempre. Capturar algunas aldeas cercanos..."
 
 #. [message], speaker=kidnapper1
 #: Legend_of_the_Invincibles-master/scenarios8/04_Kidnapped.cfg:194
@@ -44075,7 +44088,7 @@ msgid ""
 msgstr ""
 "¡Oye amigo, dame un respiro! Cuando no hay nada que hacer dormimos como "
 "cualquier persona decente – evidentemente tú no eres uno de esos... De todos "
-"modos, en este pueblo a nadie le importa trabajar de noche si no paga. Los "
+"modos, en esta aldea a nadie le importa trabajar de noche si no paga. Los "
 "robos más lucrativos se hacen a plena luz del día, incluso fuera del "
 "pueblo..."
 
@@ -45046,7 +45059,7 @@ msgid ""
 "Look at it, her wounds healed themselves... It seems that her anger can heal "
 "her, amazing. So, let us see her final challenge: a hellhound!"
 msgstr ""
-"Mírenla, sus heridas se curaron solas... Parece que su ira puede sanarla, "
+"Mírenla, sus heridas se sanaron solas... Parece que su ira puede sanarla, "
 "increíble. Entonces, veamos su desafío final: ¡un sabueso infernal!"
 
 #. [message], speaker=moderator
@@ -45428,11 +45441,11 @@ msgstr "nuevo ataque arcano drenante 2-5 daño + más daño por nivel"
 #: Legend_of_the_Invincibles-master/units/corruption.cfg:4270
 #: Legend_of_the_Invincibles-master/units/demons_race.cfg:190
 #: Legend_of_the_Invincibles-master/units/demons_race.cfg:907
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:576
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:815
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:1112
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:1410
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:1805
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:576
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:419
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:4524
 msgid "shadow wave"
@@ -45628,7 +45641,7 @@ msgstr ""
 "Odio todo este pueblo asqueroso, todo este país podrido, con gente que "
 "quiere lo que sea que el emperador demoníaco quiere. Pero entiendo que ser "
 "amigable con ellos me da mayor chance de sobrevivir este terror sangriento, "
-"así que solo me enfurezco en silencio. Extrañamente, puede curarme, "
+"así que solo me enfurezco en silencio. Extrañamente, puede sanarme, "
 "probablemente relacionado con mi origen oscuro."
 
 #. [message], speaker=narrator
@@ -46218,7 +46231,7 @@ msgstr ""
 "Algún tipo de fuente de poder. Parece dar energía a quien se acerca. Y las "
 "cenizas que libera parecen comestibles y con mucha energía. Podría servir de "
 "alimento si viajamos lejos. Tal vez sea comida para demonios. Creo que "
-"controlar estas fuentes de poder equivale a controlar pueblos."
+"controlar estas fuentes de poder equivale a controlar aldeas."
 
 #. [message], speaker=Lethalia
 #: Legend_of_the_Invincibles-master/scenarios8/11_Odd_World.cfg:194
@@ -46262,7 +46275,7 @@ msgid ""
 "flames to heal themselves, or to recharge their power."
 msgstr ""
 "Sí, pero no hay portal. Los demonios no aparecen de la nada, simplemente "
-"están aquí en gran número. Siento que usan estas llamas para curarse o "
+"están aquí en gran número. Siento que usan estas llamas para sanarse o "
 "recargar su poder."
 
 #. [message], speaker=Lethalia
@@ -50367,7 +50380,7 @@ msgid ""
 "I heavily doubt that. When you hit me, I will heal that wound twice! All "
 "these eyes popped out of heads in sheer amazement!"
 msgstr ""
-"Lo dudo mucho. ¡Cuando me golpeen, curaré esa herida dos veces! ¡Todos estos "
+"Lo dudo mucho. ¡Cuando me golpeen, sanaré esa herida dos veces! ¡Todos estos "
 "ojos saltaron de sus cabezas por puro asombro!"
 
 #. [message], speaker=Lethalia_evil
@@ -55146,11 +55159,11 @@ msgstr ""
 #: Legend_of_the_Invincibles-master/units/Orcish_Strafer.cfg:58
 #: Legend_of_the_Invincibles-master/units/Shadowalker.cfg:48
 #: Legend_of_the_Invincibles-master/units/demon_infiltrators.cfg:3008
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:436
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:393
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:437
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:510
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:1981
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:436
 msgid "crossbow"
 msgstr "ballesta"
 
@@ -55812,8 +55825,8 @@ msgstr "toque"
 #: Legend_of_the_Invincibles-master/units/corruption.cfg:2717
 #: Legend_of_the_Invincibles-master/units/corruption.cfg:2821
 #: Legend_of_the_Invincibles-master/units/corruption.cfg:3013
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:564
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:1785
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:564
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:4401
 msgid "chill tempest"
 msgstr "ola de frío"
@@ -55989,7 +56002,7 @@ msgid ""
 "more resistant to cold, blade and impact if adjacent to at least 2 allied "
 "undead"
 msgstr ""
-"más resistente a frío, filo e impacto si está adyacente a al menos 2 no "
+"más resistente a frío, corte e impacto si está adyacente a al menos 2 no "
 "muertos aliados"
 
 #. [unit_type], id=Argan_lich, race=undead
@@ -56425,7 +56438,7 @@ msgstr "mejor con maza"
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6424
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6446
 msgid "able to heal allies better"
-msgstr "permite curar mejor a los aliados"
+msgstr "permite sanar mejor a los aliados"
 
 #. [advancement], id=conviction
 #: Legend_of_the_Invincibles-master/units/Celestial_Messenger.cfg:642
@@ -57030,8 +57043,8 @@ msgid ""
 "Voracius Herb next to it. If it is poisoned, it will remove the poison "
 "instead of healing."
 msgstr ""
-"La unidad se curará 24 PV por turno si hay una Flor del Mal o Hierba Voraz "
-"al lado. Si está envenenada, eliminará el veneno en vez de curarse."
+"La unidad se sanará 24 PV por turno si hay una Flor del Mal o Hierba Voraz "
+"al lado. Si está envenenada, eliminará el veneno en vez de sanarse."
 
 #. [drains]
 #: Legend_of_the_Invincibles-master/units/Deathshroom.cfg:47
@@ -58197,7 +58210,7 @@ msgid ""
 "penetration)"
 msgstr ""
 "disparando balas que penetran mejor la armadura (+10% penetración de "
-"resistencia a perforación)"
+"resistencia a penetración)"
 
 #. [advancement], id=bullets2
 #: Legend_of_the_Invincibles-master/units/Dwarvish_Technocrat.cfg:388
@@ -58206,7 +58219,7 @@ msgid ""
 "penetration)"
 msgstr ""
 "disparando balas que penetran mejor la armadura (+5% penetración de "
-"resistencia a perforación)"
+"resistencia a penetración)"
 
 #. [unit_type], id=Efraim_doppelganger, race=undead, gender=male
 #: Legend_of_the_Invincibles-master/units/Efraim_doppelganger.cfg:66
@@ -58587,7 +58600,7 @@ msgstr ""
 "equipo, mientras que los efectos de distintas partes de armadura solo se "
 "acumulan multiplicativamente.\n"
 "La habilidad devorador de almas añadirá muchos otros avances (nuevos "
-"ataques, regeneración, curación, varias habilidades y mucho más).\n"
+"ataques, regeneración, sanación, varias habilidades y mucho más).\n"
 "Intenta evitar aprender de libros, porque mientras los avances normales "
 "añaden 20 a la experiencia máxima de los liches preservados, estos avances "
 "añaden un 20% a la experiencia máxima; eso puede equivaler más tarde incluso "
@@ -58910,8 +58923,8 @@ msgstr "tormenta de cuchillas"
 #: Legend_of_the_Invincibles-master/units/demon_infiltrators.cfg:4009
 #: Legend_of_the_Invincibles-master/units/demon_infiltrators.cfg:4168
 #: Legend_of_the_Invincibles-master/units/demon_infiltrators_unidentified.cfg:674
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:780
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:1858
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:780
 msgid "bow"
 msgstr "arco"
 
@@ -59683,8 +59696,8 @@ msgid ""
 "more rider-like resistances (more resistant to blade and impact, slightly "
 "less to pierce)"
 msgstr ""
-"resistencias más de jinete (más resistente a filo e impacto, ligeramente "
-"menos a perforación)"
+"resistencias más de jinete (más resistente a corte e impacto, ligeramente "
+"menos a penetración)"
 
 #. [advancement], id=frail_tide
 #: Legend_of_the_Invincibles-master/units/Grim_Knight.cfg:344
@@ -60729,7 +60742,7 @@ msgstr ""
 "equipo, mientras que los efectos de distintas partes de armadura solo se "
 "acumulan multiplicativamente.\n"
 "La habilidad devorador de almas añadirá muchos otros avances (nuevos "
-"ataques, regeneración, curación, varias habilidades y mucho más).\n"
+"ataques, regeneración, sanación, varias habilidades y mucho más).\n"
 "Intenta evitar aprender de libros, porque mientras los avances normales "
 "añaden 20 a la experiencia máxima de los liches preservados, estos avances "
 "añaden un 20% a la experiencia máxima; eso puede equivaler más tarde incluso "
@@ -60907,7 +60920,7 @@ msgid ""
 "pierce)"
 msgstr ""
 "mejor protegido contra golpes físicos (resistencias 2% mejores; +3% "
-"resistencia a perforación)"
+"resistencia a penetración)"
 
 #. [unit_type], id=Merchant, race=human
 #: Legend_of_the_Invincibles-master/units/Merchant.cfg:4
@@ -62889,8 +62902,8 @@ msgid ""
 "the poison instead of healing. This happens only at night, though, during "
 "the day, the unit will take 8 damage instead."
 msgstr ""
-"La unidad se curará 8 PV por turno. Si está envenenada, eliminará el veneno "
-"en vez de curarse. Esto solo ocurre de noche, durante el día la unidad "
+"La unidad se sanará 8 PV por turno. Si está envenenada, eliminará el veneno "
+"en vez de sanarse. Esto solo ocurre de noche, durante el día la unidad "
 "recibirá 8 de daño en su lugar."
 
 #. [variation], id=corruption4
@@ -62915,8 +62928,8 @@ msgid ""
 "the poison instead of healing. This happens only at night, though, during "
 "the day, the unit will take 16 damage instead."
 msgstr ""
-"La unidad se curará 8 PV por turno. Si está envenenada, eliminará el veneno "
-"en vez de curarse. Esto solo ocurre de noche, durante el día la unidad "
+"La unidad se sanará 8 PV por turno. Si está envenenada, eliminará el veneno "
+"en vez de sanarse. Esto solo ocurre de noche, durante el día la unidad "
 "recibirá 16 de daño en su lugar."
 
 #. [advancement], id=backup_amla
@@ -63178,7 +63191,7 @@ msgid ""
 msgstr ""
 "El Fuego Fatuo es una concentración materializada de energía mágica que "
 "puede existir sin una fuente mágica constante. La magia ofensiva lanzada "
-"sobre él casi no tiene efecto, porque se cura de esa fuente mágica tan "
+"sobre él casi no tiene efecto, porque se sana de esa fuente mágica tan "
 "rápido como es dañado por ella. Pero un arma con filo puede destrozar su "
 "cuerpo etéreo fácilmente. A veces puede ser peligroso por sus rayos y su "
 "invisibilidad cuando está débil."
@@ -63746,7 +63759,7 @@ msgstr ""
 msgid ""
 "Immune to drain, poison, and plague, extra cold, blade and pierce resistances"
 msgstr ""
-"Inmune a drenaje, veneno y plaga, resistencias extra a frío, filo y "
+"Inmune a drenaje, veneno y plaga, resistencias extra a frío, corte y "
 "perforación"
 
 #. [trait], id=physresist
@@ -64670,126 +64683,6 @@ msgstr ""
 "ser humano. Suelen crearse cuando un mortal es adorado como un dios o como "
 "descendencia directa de seres tocados por el poder divino."
 
-#. [race], id=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:4
-msgid "race^Undead Demon"
-msgstr "Demonio no muerto"
-
-#. [race], id=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:5
-msgid "race^Undead Demons"
-msgstr "Demonios no muertos"
-
-#. [race], id=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:8
-msgid ""
-"Demons are known to have no problems with using necromancy on the bodies of "
-"their own dead. Due to their selfishness and pride, they never care about "
-"others who can no longer cooperate with them and they do not believe they "
-"can die so that it could happen to them."
-msgstr ""
-"Se sabe que los demonios no tienen problemas en usar nigromancia sobre los "
-"cuerpos de sus propios muertos. Debido a su egoísmo y orgullo, nunca les "
-"importa nadie que ya no pueda cooperar con ellos y no creen que puedan morir "
-"para que les pase a ellos."
-
-#. [trait], id=ethereal
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:12
-msgid "ethereal"
-msgstr "etéreo"
-
-#. [trait], id=ethereal
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:13
-msgid "female^ethereal"
-msgstr "etérea"
-
-#. [trait], id=ethereal
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:14
-msgid "dealing arcane damage, resistant to physical damage"
-msgstr "inflige daño arcano, resistente al daño físico"
-
-#. [trait], id=venomous
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:49
-msgid "venomous"
-msgstr "venenoso"
-
-#. [trait], id=venomous
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:50
-msgid "female^venomous"
-msgstr "venenosa"
-
-#. [trait], id=superior
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:76
-msgid "superior"
-msgstr "superior"
-
-#. [trait], id=superior
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:77
-msgid "female^superior"
-msgstr "superiora"
-
-#. [trait], id=superior
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:79
-msgid "regenerates more, 4 more damage"
-msgstr "se regenera más, 4 más de daño"
-
-#. [trait], id=misshapen
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:99
-msgid "misshapen"
-msgstr "deforme"
-
-#. [trait], id=misshapen
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:100
-msgid "female^misshapen"
-msgstr "deforme"
-
-#. [unit_type], id=Knight of Disaster, race=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:112
-msgid "Knight of Disaster"
-msgstr "Caballero del desastre"
-
-#. [unit_type], id=Knight of Disaster, race=undead demon-loti
-#. [unit_type], id=Doom Knight, race=undead demon-loti
-#. [unit_type], id=Knight of Oblivion, race=undead demon-loti
-#. [unit_type], id=Knight of Annihilation, race=undead demon-loti
-#. [unit_type], id=Knight of Pain, race=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:126
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:311
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:401
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:532
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:744
-msgid ""
-"As far as is known, such behemoths are created by means of wicked "
-"procedures. To what extent a combination of necromancy and demonic magic "
-"provides the foundation to create undead entities from demon corpses that "
-"are significantly stronger than any other undead minion is mere speculation."
-msgstr ""
-"Hasta donde se sabe, estos behemots se crean mediante procedimientos "
-"malignos. En qué medida una combinación de nigromancia y magia demoníaca "
-"sirve de base para crear entidades no muertas a partir de cadáveres de "
-"demonios que son notablemente más fuertes que cualquier otro sirviente no "
-"muerto es mera especulación."
-
-#. [unit_type], id=Doom Knight, race=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:297
-msgid "Doom Knight"
-msgstr "Caballero de fatalidad"
-
-#. [unit_type], id=Knight of Oblivion, race=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:386
-msgid "Knight of Oblivion"
-msgstr "Caballero del olvido"
-
-#. [unit_type], id=Knight of Annihilation, race=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:517
-msgid "Knight of Annihilation"
-msgstr "Caballero de aniquilación"
-
-#. [unit_type], id=Knight of Pain, race=undead demon-loti
-#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:730
-msgid "Knight of Pain"
-msgstr "Caballero del dolor"
-
 #. [unit_type], id=Spearman_steel
 #: Legend_of_the_Invincibles-master/units/hybrids_of_steel.cfg:35
 msgid "Malefactor"
@@ -65139,6 +65032,126 @@ msgstr "Máquina vorpal"
 msgid "vorpalblade"
 msgstr "filo vorpal"
 
+#. [race], id=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:4
+msgid "race^Undead Demon"
+msgstr "Demonio no muerto"
+
+#. [race], id=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:5
+msgid "race^Undead Demons"
+msgstr "Demonios no muertos"
+
+#. [race], id=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:8
+msgid ""
+"Demons are known to have no problems with using necromancy on the bodies of "
+"their own dead. Due to their selfishness and pride, they never care about "
+"others who can no longer cooperate with them and they do not believe they "
+"can die so that it could happen to them."
+msgstr ""
+"Se sabe que los demonios no tienen problemas en usar nigromancia sobre los "
+"cuerpos de sus propios muertos. Debido a su egoísmo y orgullo, nunca les "
+"importa nadie que ya no pueda cooperar con ellos y no creen que puedan morir "
+"para que les pase a ellos."
+
+#. [trait], id=ethereal
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:12
+msgid "ethereal"
+msgstr "etéreo"
+
+#. [trait], id=ethereal
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:13
+msgid "female^ethereal"
+msgstr "etérea"
+
+#. [trait], id=ethereal
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:14
+msgid "dealing arcane damage, resistant to physical damage"
+msgstr "inflige daño arcano, resistente al daño físico"
+
+#. [trait], id=venomous
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:49
+msgid "venomous"
+msgstr "venenoso"
+
+#. [trait], id=venomous
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:50
+msgid "female^venomous"
+msgstr "venenosa"
+
+#. [trait], id=superior
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:76
+msgid "superior"
+msgstr "superior"
+
+#. [trait], id=superior
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:77
+msgid "female^superior"
+msgstr "superiora"
+
+#. [trait], id=superior
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:79
+msgid "regenerates more, 4 more damage"
+msgstr "se regenera más, 4 más de daño"
+
+#. [trait], id=misshapen
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:99
+msgid "misshapen"
+msgstr "deforme"
+
+#. [trait], id=misshapen
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:100
+msgid "female^misshapen"
+msgstr "deforme"
+
+#. [unit_type], id=Knight of Disaster, race=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:112
+msgid "Knight of Disaster"
+msgstr "Caballero del desastre"
+
+#. [unit_type], id=Knight of Disaster, race=undead demon-loti
+#. [unit_type], id=Doom Knight, race=undead demon-loti
+#. [unit_type], id=Knight of Oblivion, race=undead demon-loti
+#. [unit_type], id=Knight of Annihilation, race=undead demon-loti
+#. [unit_type], id=Knight of Pain, race=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:126
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:311
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:401
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:532
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:744
+msgid ""
+"As far as is known, such behemoths are created by means of wicked "
+"procedures. To what extent a combination of necromancy and demonic magic "
+"provides the foundation to create undead entities from demon corpses that "
+"are significantly stronger than any other undead minion is mere speculation."
+msgstr ""
+"Hasta donde se sabe, estos behemots se crean mediante procedimientos "
+"malignos. En qué medida una combinación de nigromancia y magia demoníaca "
+"sirve de base para crear entidades no muertas a partir de cadáveres de "
+"demonios que son notablemente más fuertes que cualquier otro sirviente no "
+"muerto es mera especulación."
+
+#. [unit_type], id=Doom Knight, race=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:297
+msgid "Doom Knight"
+msgstr "Caballero de fatalidad"
+
+#. [unit_type], id=Knight of Oblivion, race=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:386
+msgid "Knight of Oblivion"
+msgstr "Caballero del olvido"
+
+#. [unit_type], id=Knight of Annihilation, race=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:517
+msgid "Knight of Annihilation"
+msgstr "Caballero de aniquilación"
+
+#. [unit_type], id=Knight of Pain, race=undead demon-loti
+#: Legend_of_the_Invincibles-master/units/undead_demons.cfg:730
+msgid "Knight of Pain"
+msgstr "Caballero del dolor"
+
 #. [plague], id=plague({TYPE})
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:29
 msgid "plague ("
@@ -65438,7 +65451,7 @@ msgid ""
 msgstr ""
 "Esta unidad conoce tan bien la muerte que adopta una constitución más "
 "parecida a la de los no-muertos cuando está al lado de al menos dos aliados "
-"no-muertos, aumentando sus resistencias a filo, perforación y frío un 30%."
+"no-muertos, aumentando sus resistencias a corte, penetración y frío un 30%."
 
 #. [resistance], id=memories of life
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:241
@@ -65545,7 +65558,7 @@ msgid ""
 "opportunity to heal during combat."
 msgstr ""
 "En su ansia por infligir daño lo más furiosamente posible, el atacante no "
-"tiene oportunidad de curarse durante el combate."
+"tiene oportunidad de sanarse durante el combate."
 
 #. [damage], id=lurk
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:331
@@ -65729,7 +65742,7 @@ msgid ""
 msgstr ""
 "La presencia de esta unidad es tan siniestramente ominosa que todos los "
 "enemigos adyacentes sienten un cansancio decrépito por la edad, reduciendo "
-"sus resistencias a perforación, filo e impacto un "
+"sus resistencias a penetración, corte e impacto un "
 
 #. [berserk]
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:480
@@ -66152,7 +66165,7 @@ msgid ""
 "The unit will heal itself 4 HP per turn. If it is poisoned, these two "
 "effects will negate themselves."
 msgstr ""
-"La unidad se curará 4 PV por turno. Si está envenenada, ambos efectos se "
+"La unidad se sanará 4 PV por turno. Si está envenenada, ambos efectos se "
 "anularán."
 
 #. [regenerate], id=regenerates slightly
@@ -66163,7 +66176,7 @@ msgid ""
 "This unit regenerates, which allows it to heal without standing close to a "
 "healer."
 msgstr ""
-"Esta unidad se regenera, lo que le permite curarse sin necesidad de estar "
+"Esta unidad se regenera, lo que le permite sanarse sin necesidad de estar "
 "cerca de un sanador."
 
 #. [leadership], id=alliance
@@ -66336,7 +66349,7 @@ msgstr "regenera ("
 #. [regenerate], id=regenerates {VALUE}
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:983
 msgid "The unit will heal itself "
-msgstr "La unidad se curará "
+msgstr "La unidad se sanará "
 
 #. [regenerate], id=regenerates {VALUE}
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:983
@@ -66344,17 +66357,17 @@ msgid ""
 " HP per turn. If it is poisoned, it will remove the poison instead of "
 "healing."
 msgstr ""
-" PV por turno. Si está envenenada, eliminará el veneno en lugar de curarse."
+" PV por turno. Si está envenenada, eliminará el veneno en lugar de sanarse."
 
 #. [regenerate], id=bloodbound
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:993
 msgid "bloodbound"
-msgstr "sangre ligada"
+msgstr "vínculo de sangre"
 
 #. [regenerate], id=bloodbound
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:994
 msgid "female^bloodbound"
-msgstr "sangre ligada"
+msgstr "vínculo de sangre"
 
 #. [regenerate], id=bloodbound
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:995
@@ -66363,9 +66376,9 @@ msgid ""
 "the bloodbound ability. If it is poisoned, it will remove the poison instead "
 "of healing."
 msgstr ""
-"La unidad se curará 32 PV por turno si está adyacente a otra unidad con la "
+"La unidad se sanará 32 PV por turno si está adyacente a otra unidad con la "
 "habilidad vínculo de sangre. Si está envenenada, eliminará el veneno en "
-"lugar de curarse."
+"lugar de sanarse."
 
 #. [regenerate], id=devouring embers
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1009
@@ -66379,7 +66392,7 @@ msgid ""
 "This unit heals 16 HP per turn when above lava. If poisoned, the poison will "
 "be cured instead."
 msgstr ""
-"Esta unidad se cura 16 PV por turno cuando está sobre lava. Si está "
+"Esta unidad se sana 16 PV por turno cuando está sobre lava. Si está "
 "envenenada, el veneno se cura en su lugar."
 
 #. [regenerate], id=devouring embers
@@ -66388,7 +66401,7 @@ msgid ""
 " This unit regenerates, which allows it to heal as though always stationed "
 "in a village, if it is above lava."
 msgstr ""
-" Esta unidad se regenera, lo que le permite curarse como si siempre "
+" Esta unidad se regenera, lo que le permite sanarse como si siempre "
 "estuviera estacionada en una aldea, si está sobre lava."
 
 #. [damage], id=explosive detonation
@@ -66438,7 +66451,7 @@ msgid ""
 "offensively and defensively."
 msgstr ""
 "Cuando se usa este ataque, el usuario se transforma en un bloque de hielo "
-"móvil, recibiendo un 33% menos de daño por frío, perforación y filo. "
+"móvil, recibiendo un 33% menos de daño por frío, penetración y corte. "
 "Funciona tanto ofensiva como defensivamente."
 
 #. [dummy], id=horrid_dummy
@@ -66467,9 +66480,9 @@ msgid ""
 "than is normally possible on the battlefield.  A unit cared for by this "
 "healer may heal up to "
 msgstr ""
-"Esta unidad combina remedios herbales con magia para curar unidades más "
+"Esta unidad combina remedios herbales con magia para sanar unidades más "
 "rápido de lo normal en el campo de batalla. Una unidad atendida por este "
-"sanador puede curarse hasta "
+"sanador puede sanarse hasta "
 
 #. [heals], id=healing_{VALUE}
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1085
@@ -67164,7 +67177,7 @@ msgid ""
 "When a unit adjacent to this unit takes damage, this unit heals 5% of the "
 "damage."
 msgstr ""
-"Cuando una unidad adyacente a esta recibe daño, esta unidad se cura un 5% "
+"Cuando una unidad adyacente a esta recibe daño, esta unidad se sana un 5% "
 "del daño recibido."
 
 #. [dummy], id=unholy hunger
@@ -67183,10 +67196,10 @@ msgid ""
 "village."
 msgstr ""
 "Esta unidad ansía las almas de los seres vivos. Cuando mata a una unidad "
-"viva, se cura 10 PV y su máximo de PV aumenta en 3. Si no se alimenta "
+"viva, se sana 10 PV y su máximo de PV aumenta en 3. Si no se alimenta "
 "continuamente, comienza a pasar hambre y pierde 1 PV máximo adicional por "
 "cada turno que no mata nada al inicio del turno. El hambre no tiene efecto "
-"si la unidad está siendo curada por un sanador o está en una aldea."
+"si la unidad está siendo sanada por un sanador o está en una aldea."
 
 #. [dummy], id=incinerate
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1590
@@ -67201,7 +67214,7 @@ msgid ""
 "the unit gets the experience."
 msgstr ""
 "Este ataque incinera a sus objetivos. Las unidades en llamas pierden 16 PV "
-"cada turno hasta que sean curadas. Las llamas pueden matar a una unidad; el "
+"cada turno hasta que sean sanadas. Las llamas pueden matar a una unidad; el "
 "atacante que la incineró recibe la experiencia."
 
 #. [dummy], id=hit and run
@@ -67461,7 +67474,7 @@ msgstr "mofa"
 #. [dummy], id=mockery
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1735
 msgid "When an attack against this unit misses, he/she heals 2 HP."
-msgstr "Cuando un ataque contra esta unidad falla, se cura 2 PV."
+msgstr "Cuando un ataque contra esta unidad falla, se sana 2 PV."
 
 #. [dummy], id=supreme murderlust
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1741
@@ -67474,19 +67487,19 @@ msgid ""
 "When this unit kills another unit, he/she heals 8 HP and is ridden of poison "
 "and slow."
 msgstr ""
-"Cuando esta unidad mata a otra, se cura 8 PV y se libera del veneno y de la "
+"Cuando esta unidad mata a otra, se sana 8 PV y se libera del veneno y de la "
 "lentitud."
 
 #. [dummy], id=murderlust
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1748
 msgid "murderlust"
-msgstr "sed de matar"
+msgstr "sed de muerte"
 
 #. [dummy], id=murderlust
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1749
 msgid ""
 "When this unit kills another unit during his/her turn, he/she heals 8 HP."
-msgstr "Cuando esta unidad mata a otra durante su turno, se cura 8 PV."
+msgstr "Cuando esta unidad mata a otra durante su turno, se sana 8 PV."
 
 #. [dummy], id=killhunger
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1755
@@ -67496,7 +67509,7 @@ msgstr "saciar"
 #. [dummy], id=killhunger
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1756
 msgid "When this unit kills another unit, it heals 4 HP."
-msgstr "Cuando esta unidad mata a otra, se cura 4 PV."
+msgstr "Cuando esta unidad mata a otra, se sana 4 PV."
 
 #. [dummy], id=lesser evisceration
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1762
@@ -67506,7 +67519,7 @@ msgstr "evisceración menor"
 #. [dummy], id=lesser evisceration
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1763
 msgid "When this unit kills another unit, nearby allies heal 4 HP."
-msgstr "Cuando esta unidad mata a otra, los aliados cercanos se curan 4 PV."
+msgstr "Cuando esta unidad mata a otra, los aliados cercanos se sanan 4 PV."
 
 #. [dummy], id=evisceration
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1769
@@ -67516,7 +67529,7 @@ msgstr "evisceración"
 #. [dummy], id=evisceration
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1770
 msgid "When this unit kills another unit, nearby allies heal 10 HP."
-msgstr "Cuando esta unidad mata a otra, los aliados cercanos se curan 10 PV."
+msgstr "Cuando esta unidad mata a otra, los aliados cercanos se sanan 10 PV."
 
 #. [dummy], id=greater evisceration
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1776
@@ -67526,7 +67539,7 @@ msgstr "gran evisceración"
 #. [dummy], id=greater evisceration
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1777
 msgid "When this unit kills another unit, nearby allies heal 16 HP."
-msgstr "Cuando esta unidad mata a otra, los aliados cercanos se curan 16 PV."
+msgstr "Cuando esta unidad mata a otra, los aliados cercanos se sanan 16 PV."
 
 #. [dummy], id=regrowing
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1784
@@ -67534,7 +67547,7 @@ msgid ""
 "When this unit begins combat, offensively or defensively, it heals an amount "
 "of hitpoints equal to two times their level."
 msgstr ""
-"Cuando esta unidad inicia combate, ofensiva o defensivamente, se cura una "
+"Cuando esta unidad inicia combate, ofensiva o defensivamente, se sana una "
 "cantidad de puntos de vida igual al doble de su nivel."
 
 #. [dummy], id=flaming radiance
@@ -67566,7 +67579,7 @@ msgid ""
 "hitpoints and deals 40 fire damage to all nearby foes. This ability can be "
 "used only once per 10 turns."
 msgstr ""
-"Si esta unidad es atacada y sus puntos de vida bajan de 20, se cura 40 PV e "
+"Si esta unidad es atacada y sus puntos de vida bajan de 20, se sana 40 PV e "
 "inflige 40 de daño de fuego a todos los enemigos cercanos. Esta habilidad "
 "solo se puede usar una vez cada 10 turnos."
 
@@ -67761,7 +67774,7 @@ msgid ""
 msgstr ""
 "Cada golpe con este ataque tiene una probabilidad de añadir todos los puntos "
 "de vida de la víctima a los del atacante y sus aliados cercanos (dividido "
-"entre el número de unidades curadas), matando a la víctima. La probabilidad "
+"entre el número de unidades sanadas), matando a la víctima. La probabilidad "
 "depende del nivel de la víctima. Solo funciona ofensivamente."
 
 #. [damage], id=soul thrash
@@ -67800,7 +67813,7 @@ msgstr ""
 msgid ""
 "When this unit is hit, it takes its regular damage, but heals 1 HP after it."
 msgstr ""
-"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se cura 1 PV "
+"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se sana 1 PV "
 "después."
 
 #. [dummy], id=absorb
@@ -67813,7 +67826,7 @@ msgstr "absorbe (2)"
 msgid ""
 "When this unit is hit, it takes its regular damage, but heals 2 HP after it."
 msgstr ""
-"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se cura 2 PV "
+"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se sana 2 PV "
 "después."
 
 #. [dummy], id=absorb
@@ -67826,7 +67839,7 @@ msgstr "absorbe (3)"
 msgid ""
 "When this unit is hit, it takes its regular damage, but heals 3 HP after it."
 msgstr ""
-"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se cura 3 PV "
+"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se sana 3 PV "
 "después."
 
 #. [dummy], id=absorb
@@ -67839,7 +67852,7 @@ msgstr "absorbe (4)"
 msgid ""
 "When this unit is hit, it takes its regular damage, but heals 4 HP after it."
 msgstr ""
-"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se cura 4 PV "
+"Cuando esta unidad recibe un golpe, sufre su daño normal, pero se sana 4 PV "
 "después."
 
 #. [dummy], id=leech
@@ -67858,7 +67871,7 @@ msgid ""
 msgstr ""
 "Todas las unidades enemigas adyacentes a una unidad con esta habilidad "
 "pierden 2 puntos de vida al inicio del turno de esta unidad. El daño "
-"infligido cura a la unidad. No puede matar."
+"infligido sana a la unidad. No puede matar."
 
 #. [dummy], id=fueled by death
 #: Legend_of_the_Invincibles-master/utils/abilities.cfg:1949
@@ -67897,7 +67910,7 @@ msgid ""
 "kill."
 msgstr ""
 "Todos los aliados adyacentes a una unidad con esta habilidad pierden 4 "
-"puntos de vida al inicio del turno de esta unidad. El daño infligido cura a "
+"puntos de vida al inicio del turno de esta unidad. El daño infligido sana a "
 "la unidad. No puede matar."
 
 #. [damage], id=leeches
@@ -68881,7 +68894,7 @@ msgstr "capaz de envenenar armas (Libro de tinturas herbales y malignidades)"
 #. [advancement], id=BoHTaM2
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:313
 msgid "capable of self-healing (Book of Herbal Tinctures and Malignancies)"
-msgstr "capaz de autocuración (Libro de tinturas herbales y malignidades)"
+msgstr "capaz de autosanación (Libro de tinturas herbales y malignidades)"
 
 #. [advancement], id=BoHTaM3
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:328
@@ -69210,7 +69223,7 @@ msgid ""
 "healing nearby allies (Raijer's Bloody Field)"
 msgstr ""
 "tiene probabilidad de drenar el alma enemiga al golpearlo, matándolo al "
-"instante y curando a los aliados cercanos (Campo sangriento de Raijer)"
+"instante y sanando a los aliados cercanos (Campo sangriento de Raijer)"
 
 #. [advancement], id=RBF4
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:2042
@@ -69388,7 +69401,7 @@ msgid ""
 "more skeleton-like - resistances: cold +15%, pierce +15%, blade +10%, impact "
 "-5%, fire -5%, arcane -10% (Undead Legacy)"
 msgstr ""
-"más esquelético – resistencias: frío +15%, perforación +15%, filo +10%, "
+"más esquelético – resistencias: frío +15%, penetración +15%, corte +10%, "
 "impacto -5%, fuego -5%, arcano -10% (Legado no-muerto)"
 
 #. [advancement], id=UL2
@@ -69598,18 +69611,18 @@ msgstr "devuelve la vida a los no-muertos (Legado de la luz)"
 #. [advancement], id=LoL-healing1
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:3382
 msgid "healing nearby allies (Legacy of Light)"
-msgstr "cura a los aliados cercanos (Legado de la luz)"
+msgstr "sana a los aliados cercanos (Legado de la luz)"
 
 #. [advancement], id=LoL-healing2
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:3397
 msgid "healing nearby allies more efficiently (Legacy of Light)"
-msgstr "cura a los aliados cercanos con mayor eficiencia (Legado de la luz)"
+msgstr "sana a los aliados cercanos con mayor eficiencia (Legado de la luz)"
 
 #. [advancement], id=LoL-healing3
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:3418
 msgid "healing nearby allies even more efficiently (Legacy of Light)"
 msgstr ""
-"cura a los aliados cercanos con aún mayor eficiencia (Legado de la luz)"
+"sana a los aliados cercanos con aún mayor eficiencia (Legado de la luz)"
 
 #. [advancement], id=LoP1
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:3441
@@ -69695,7 +69708,7 @@ msgstr "inflige más daño en forma de hielo (Legado del norte helado)"
 msgid ""
 "3% more resistant to cold, blade and pierce (Legacy of the Freezing North)"
 msgstr ""
-"3% más resistente al frío, filo y perforación (Legado del norte helado)"
+"3% más resistente al frío, corte y penetración (Legado del norte helado)"
 
 #. [advancement], id=LotF1
 #. [advancement], id=LotF4
@@ -70139,7 +70152,7 @@ msgstr "mejor protegido del daño arcano (5% mejores resistencias)"
 #. [advancement], id=resist_blade1
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6160
 msgid "better protected from blade (5% better resistances)"
-msgstr "mejor protegido del filo (5% mejores resistencias)"
+msgstr "mejor protegido del corte (5% mejores resistencias)"
 
 #. [advancement], id=resist_pierce1
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6176
@@ -70159,12 +70172,12 @@ msgstr "tiene más puntos de vida"
 #. [advancement], id=leadership1
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6468
 msgid "able to lead allies into battle (leadership of a level 4 unit)"
-msgstr "capaz de liderar aliados en batalla (liderazgo de unidad de nivel 4)"
+msgstr "capaz de liderar aliados en batalla (liderazgo de unidad nivel 4)"
 
 #. [advancement], id=leadership2
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6484
 msgid "able to lead allies into battle (leadership of a level 5 unit)"
-msgstr "capaz de liderar aliados en batalla (liderazgo de unidad de nivel 5)"
+msgstr "capaz de liderar aliados en batalla (liderazgo de unidad nivel 5)"
 
 #. [advancement], id=leadership3
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6506
@@ -70216,7 +70229,7 @@ msgstr ""
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6608
 msgid "decreasing blade resistance of all adjacent enemies by 5% more"
 msgstr ""
-"reduce la resistencia al filo de todos los enemigos adyacentes un 5% más"
+"reduce la resistencia al corte de todos los enemigos adyacentes un 5% más"
 
 #. [advancement], id=impact_penetrate1
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6619
@@ -70228,7 +70241,7 @@ msgstr ""
 #: Legend_of_the_Invincibles-master/utils/amla.cfg:6630
 msgid "decreasing pierce resistance of all adjacent enemies by 5% more"
 msgstr ""
-"reduce la resistencia a la perforación de todos los enemigos adyacentes un "
+"reduce la resistencia a la penetración de todos los enemigos adyacentes un "
 "5% más"
 
 #. [set_menu_item], id=confautorecall
@@ -76980,7 +76993,7 @@ msgid ""
 "per level, heals 2 HP every turn"
 msgstr ""
 "Nacido mejor que los demás, 5 puntos de vida más + 3 más por nivel, 1 más de "
-"daño por nivel, se cura 2 PV cada turno"
+"daño por nivel, se sana 2 PV cada turno"
 
 #. [message], speaker=narrator
 #: Legend_of_the_Invincibles-master/utils/global_events.cfg:1792
@@ -77221,7 +77234,7 @@ msgid ""
 "Collect all the villages you can, then cross the river, occupy the keep and "
 "recruit a lot. The orcs will go down easily."
 msgstr ""
-"Recoge todos los pueblos que puedas, luego cruza el río, ocupa el torreón y "
+"Recoge todas las aldeas que puedas, luego cruza el río, ocupa el torreón y "
 "recluta mucho. Los orcos caerán fácil."
 
 #. [option]
@@ -77354,7 +77367,7 @@ msgid ""
 "the lich."
 msgstr ""
 "Primero será igual que el escenario anterior, mata algunos murciélagos y "
-"úsalos para capturar pueblos que no puedes alcanzar. Cuando salgas de la "
+"úsalos para capturar aldeas que no puedes alcanzar. Cuando salgas de la "
 "cueva con lava, encontrarás varios soldados, pero solo puedes reclutar no "
 "muertos (y reincorporar unidades normales). Lucharás contra muchos no "
 "muertos, así que consigue Hechiceras Elfas y úsalas para atacar cualquier "
@@ -77403,7 +77416,7 @@ msgstr ""
 "Los fantasmas se atacarán entre sí y no se enfocarán especialmente en "
 "matarte. Intenta cazar a los que tengan poca vida y reúne varios espíritus "
 "bajo tu control. Después de varios turnos, vendrá un espectro realmente "
-"problemático, así que lleva a tu líder a un pueblo cerca de él, "
+"problemático, así que lleva a tu líder a una aldea cerca de él, "
 "preferiblemente al lado, y usa tu líder y otros espíritus para matarlo. No "
 "te preocupes por las bajas, no necesitarás estas unidades después."
 
@@ -77561,8 +77574,8 @@ msgid ""
 msgstr ""
 "Recluta/reincorpora, preferiblemente elfos con daño arcano, usa líderes para "
 "repeler a los primeros atacantes, haz todo lo posible por mantener tus "
-"pueblos y ocupar el torreón en la isla. Recluta/reincorpora más unidades "
-"allí y ataca al líder enemigo."
+"aldeas y ocupar el torreón en la isla. Recluta/reincorpora más unidades allí "
+"y ataca al líder enemigo."
 
 #. [option]
 #: Legend_of_the_Invincibles-master/utils/help.cfg:418
@@ -77828,7 +77841,7 @@ msgid ""
 "entrance into a secret scenario. You can avoid it simply by moving into the "
 "southern edge and defeating the last enemy."
 msgstr ""
-"No reincorpores, este es un escenario largo sin oro de pueblos. Muévete al "
+"No reincorpores, este es un escenario largo sin oro de aldeas. Muévete al "
 "sur, derrota enemigos en el camino (debes mantenerte en grupo, si los "
 "encuentras puede ser demasiado tarde). Cuidado con no muertos ocultos en la "
 "cueva. Si exploras las montañas al suroeste de la cueva, puedes encontrar "
@@ -79218,7 +79231,7 @@ msgstr ""
 "absorber enemigos de niveles más altos, más tarde también gana área de "
 "efecto. Si la descuidas, te quedarás sin avances útiles y los enemigos de "
 "bajo nivel para redimir serán bastante raros. Añade primero algunos avances "
-"generalmente útiles, como regeneración mejorada, curación, liderazgo, "
+"generalmente útiles, como regeneración mejorada, sanación, liderazgo, "
 "penetración de una resistencia preferida. Sin embargo, siempre ten en cuenta "
 "que fracasarás miserablemente si intentas pasar este capítulo solo con "
 "líderes, no importa cuán poderosos sean."
@@ -79691,10 +79704,10 @@ msgid ""
 "don't want to be attacked by too many enemies."
 msgstr ""
 "Los intrusos son bastante fuertes y pueden machacar a tus héroes rápido si "
-"no tienes cuidado. Deja que unidades rápidas capturen pueblos, recluta "
-"muchos Cadáveres Caminantes (sin mantenimiento) con Efraim y úsalos como "
-"fuerza de desgaste y apoyo. Usa a tus héroes solo con apoyo de un grupo de "
-"zombis, no quieres que te ataquen demasiados enemigos."
+"no tienes cuidado. Deja que unidades rápidas capturen aldeas, recluta muchos "
+"Cadáveres Caminantes (sin mantenimiento) con Efraim y úsalos como fuerza de "
+"desgaste y apoyo. Usa a tus héroes solo con apoyo de un grupo de zombis, no "
+"quieres que te ataquen demasiados enemigos."
 
 #. [option]
 #: Legend_of_the_Invincibles-master/utils/help.cfg:1852
@@ -79758,7 +79771,7 @@ msgstr ""
 "contra el enemigo del sur. Puede matarlos a todos en represalia y luego a "
 "algunos con ataques explosivos, barriendo al enemigo más rápido de lo que su "
 "líder recluta. Aplasta un lado con todas las unidades y luego enfrenta al "
-"último adversario que tiene muchos pueblos y ya está cerca del pueblo."
+"último adversario que tiene muchas aldeas y ya está cerca del pueblo."
 
 #. [option]
 #: Legend_of_the_Invincibles-master/utils/help.cfg:1880
@@ -79836,7 +79849,7 @@ msgid ""
 "cetera."
 msgstr ""
 "Los enemigos reclutan mucho y necesitas guardar oro para después, así que "
-"ocupa tantos pueblos como puedas y usa a los aliados como carne de cañón. "
+"ocupa tantas aldeas como puedas y usa a los aliados como carne de cañón. "
 "Intenta aprovechar el terreno, hay muchos meandros de río, bosquecillos, etc."
 
 #. [option]
@@ -79929,8 +79942,8 @@ msgid ""
 "terrain - get used to it. Identifying the correct way might not be easy, "
 "have Lethalia scout around and check where you should move along."
 msgstr ""
-"Encontrarás algunos pueblos donde los heridos curan 16 PV por turno, tenlo "
-"en cuenta. El escenario es bastante lineal, pero en su mayor parte cruzas "
+"Encontrarás algunas aldeas donde los heridos sanan 16 PV por turno, tenlo en "
+"cuenta. El escenario es bastante lineal, pero en su mayor parte cruzas "
 "terreno difícil – acostúmbrate. Identificar el camino correcto puede no ser "
 "fácil, haz que Lethalia explore y vea por dónde avanzar."
 
@@ -79966,7 +79979,7 @@ msgstr ""
 "derrota más soldados y prepárate para más ataques. Luego entra a la "
 "fortaleza, mata a los líderes inútiles y entra al edificio del norte. "
 "Encontrarás algunos demonios, algunos muy duros, así que pelea en los "
-"pasillos estrechos dentro del castillo y usa los pueblos mejorados para "
+"pasillos estrechos dentro del castillo y usa las aldeas mejoradas para "
 "recuperarte entre combates. Después de derrotar al tercer jefe, avanza al "
 "oeste por el túnel estrecho y el bosque."
 
@@ -79987,8 +80000,8 @@ msgid ""
 "and west. Once he is beaten, send a quick unit to the passage out."
 msgstr ""
 "Este escenario es una trampa. Parece fácil, solo unos enemigos débiles, pero "
-"avanza con cuidado y cubre toda la superficie que puedas, capturar pueblos "
-"es esencial. Deja que unas unidades maten al demonio que genera diablillos, "
+"avanza con cuidado y cubre toda la superficie que puedas, capturar aldeas es "
+"esencial. Deja que unas unidades maten al demonio que genera diablillos, "
 "luego avanza hacia el enemigo cerca de la salida desde el norte y oeste. "
 "Cuando lo derrotes envía una unidad rápida al pasaje de salida."
 
@@ -80199,7 +80212,7 @@ msgid ""
 "leaders defeated."
 msgstr ""
 "Primero tienes que luchar contra el gran jefe. Es el demonio más fuerte y "
-"cambia de forma y habilidades. Si avanza se cura poco pero se hace más "
+"cambia de forma y habilidades. Si avanza se sana poco pero se hace más "
 "fuerte. Genera Almas Ardientes sin límite, así que mejor usa un ataque "
 "arcano de área contra ella para destruirlas. También tiene minions, intenta "
 "pelear contra cada uno en otro lugar, para aprovechar puñalada por la "
@@ -80763,7 +80776,7 @@ msgid ""
 "damage. Items that change the damage type prevent it from working. There is "
 "an item to change the damage type back."
 msgstr ""
-"Esto funciona solo con objetos que hagan daño de impacto, perforación o "
+"Esto funciona solo con objetos que hagan daño de impacto, penetración o "
 "corte. Los objetos que cambian el tipo de daño impiden que funcione. Hay un "
 "objeto para volver al tipo de daño."
 
@@ -80900,7 +80913,7 @@ msgstr ""
 "Esta habilidad se otorga a tus líderes en el capítulo 1, escenario 12 y es "
 "muy útil. Tras cierto número de muertes, se te pregunta qué nueva línea de "
 "avance debe tomar la unidad. Los beneficios varían, hechizos hacen mucho "
-"daño, regeneración aumenta la supervivencia, liderazgo o curación son muy "
+"daño, regeneración aumenta la supervivencia, liderazgo o sanación son muy "
 "útiles con otras unidades.\n"
 "\n"
 "Para ver el 'puntaje Devorador de Almas' de una unidad: clic derecho > "
@@ -81578,7 +81591,7 @@ msgid ""
 "<span color='orange'>This unit is fully healed, and its total HP is "
 "increased by 10.</span>"
 msgstr ""
-"<span color='orange'>Esta unidad se curará por completo, y aumentará sus PV "
+"<span color='orange'>Esta unidad se sanará por completo, y aumentará sus PV "
 "totales en 10.</span>"
 
 #. [object]
@@ -81598,7 +81611,7 @@ msgstr ""
 "<span color='orange'>Nueva habilidad: Hambre impía (la unidad pierde "
 "cantidades crecientes de vida máxima por turno (a menos que un sanador la "
 "cuide), pero al matar a un enemigo el contador se reinicia, gana +3 a vida "
-"máxima y se cura un poco). No tiene efecto si la víctima no puede ser "
+"máxima y se sana un poco). No tiene efecto si la víctima no puede ser "
 "drenada, como los no muertos.</span>"
 
 #. [object]
@@ -82816,7 +82829,7 @@ msgstr ""
 #: Legend_of_the_Invincibles-master/utils/item_list.cfg:2573
 msgid "You hit, you heal. I hit, you heal. But can you heal enough?"
 msgstr ""
-"Tú golpeas, te curas. Yo golpeo, te curas. ¿Pero puedes curarte lo "
+"Tú golpeas, te sanas. Yo golpeo, te sanas. ¿Pero puedes sanarte lo "
 "suficiente?"
 
 #. [latent]
@@ -83872,7 +83885,7 @@ msgid ""
 "<span color='orange'>This unit is fully healed and will regenerate health "
 "afterwards.</span>"
 msgstr ""
-"<span color='orange'>Esta unidad se cura por completo y regenerará vida con "
+"<span color='orange'>Esta unidad se sana por completo y regenerará vida con "
 "el tiempo.</span>"
 
 #. [object]
@@ -85671,7 +85684,7 @@ msgid ""
 "<span color='purple'>3% to pierce resistance (requires Eidolon's Necklace)</"
 "span>"
 msgstr ""
-"<span color='purple'>+3% a la resistencia a perforación (requiere el Collar "
+"<span color='purple'>+3% a la resistencia a penetración (requiere el Collar "
 "del Eidolon)</span>"
 
 #. [latent]
@@ -88974,17 +88987,17 @@ msgstr "(weakness) es (punished)"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:741
 msgid "profession^Destroyer"
-msgstr "destructor"
+msgstr "Destructor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:742
 msgid "profession_female^Destroyer"
-msgstr "destructor"
+msgstr "Destructor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:745
 msgid "Vanquisher"
-msgstr "vencedor"
+msgstr "Vencedor"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:746
@@ -89004,7 +89017,7 @@ msgstr "Castigadora"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:757
 msgid "Slayer"
-msgstr "asesino"
+msgstr "Asesino"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:758
@@ -89014,7 +89027,7 @@ msgstr "Asesina"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:761
 msgid "Liquidator"
-msgstr "liquidador"
+msgstr "Liquidador"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:762
@@ -89024,7 +89037,7 @@ msgstr "Liquidadora"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:765
 msgid "Hater"
-msgstr "resentido"
+msgstr "Resentido"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:766
@@ -89044,17 +89057,17 @@ msgstr "de (good_men)"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:787
 msgid "of the Careless"
-msgstr "de los despreocupados"
+msgstr "de los Despreocupados"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:791
 msgid "of the Corporeal"
-msgstr "del corpóreo"
+msgstr "de lo Corpóreo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:796
 msgid "of Evil Souls"
-msgstr "de malignas almas"
+msgstr "de Almas Malignas"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:801
@@ -89064,32 +89077,32 @@ msgstr "de (kings)"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:806
 msgid "of the Unwise"
-msgstr "de los insensatos"
+msgstr "de los Insensatos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:810
 msgid "of Legions"
-msgstr "de legiones"
+msgstr "de Legiones"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:815
 msgid "of the Puny"
-msgstr "de los pobres"
+msgstr "de los Pobres"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:819
 msgid "of the Weak"
-msgstr "de los débiles"
+msgstr "de los Débiles"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:824
 msgid "of the Undeserving"
-msgstr "de los indignos"
+msgstr "de los Indignos"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:829
 msgid "of Nightwalkers"
-msgstr "de los andasombras"
+msgstr "de los Andasombras"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:837
@@ -89099,12 +89112,12 @@ msgstr "Mata"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:840
 msgid "Destroys"
-msgstr "destruye"
+msgstr "Destruye"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:843
 msgid "Wrecks"
-msgstr "arruina"
+msgstr "Arruina"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:846
@@ -89114,17 +89127,17 @@ msgstr "Devasta"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:849
 msgid "Slays"
-msgstr "asesina"
+msgstr "Asesina"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:852
 msgid "Rends"
-msgstr "desgarra"
+msgstr "Desgarra"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:855
 msgid "Spreads Destruction"
-msgstr "propaga destrucción"
+msgstr "Propaga Destrucción"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:861
@@ -89144,27 +89157,27 @@ msgstr "Imparable"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:870
 msgid "Without Parley"
-msgstr "sin parlamento"
+msgstr "Sin Parlamento"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:873
 msgid "Without a Second Thought"
-msgstr "sin pensarlo dos veces"
+msgstr "sin Pensarlo dos Veces"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:876
 msgid "Enthusiastically"
-msgstr "entusiastamente"
+msgstr "Entusiastamente"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:879
 msgid "With (joy)"
-msgstr "con (joy)"
+msgstr "Con (joy)"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:886
 msgid "Bold"
-msgstr "valiente"
+msgstr "Valiente"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:887
@@ -89174,7 +89187,7 @@ msgstr "Valiente"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:892
 msgid "Wise"
-msgstr "sabio"
+msgstr "Sabio"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:893
@@ -89184,7 +89197,7 @@ msgstr "Sabia"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:898
 msgid "Strong"
-msgstr "fuerte"
+msgstr "Fuerte"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:899
@@ -89204,7 +89217,7 @@ msgstr "Poderosa"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:909
 msgid "Hidden"
-msgstr "oculto"
+msgstr "Oculto"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:910
@@ -89214,7 +89227,7 @@ msgstr "Oculta"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:914
 msgid "Venomous"
-msgstr "venenoso"
+msgstr "Venenoso"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:915
@@ -89224,7 +89237,7 @@ msgstr "Venenosa"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:920
 msgid "Incorporeal"
-msgstr "incorpóreo"
+msgstr "Incorpóreo"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:921
@@ -89234,7 +89247,7 @@ msgstr "Incorpórea"
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:925
 msgid "Shady"
-msgstr "turbio"
+msgstr "Turbio"
 
 #. [name_variation]
 #: Legend_of_the_Invincibles-master/utils/titles.cfg:926
@@ -89925,7 +89938,7 @@ msgid ""
 "improved own resistances of pierce, blade and cold"
 msgstr ""
 "Esta unidad tiene buen entendimiento de la muerte y ha hecho experimentos "
-"que mejoraron sus resistencias a perforación, corte y frío"
+"que mejoraron sus resistencias a penetración, corte y frío"
 
 #. [trait], id=impulsive
 #: Legend_of_the_Invincibles-master/utils/utils.cfg:421
@@ -90248,51 +90261,52 @@ msgid "No units available."
 msgstr "No hay unidades disponibles."
 
 #. [set_menu_item], id=teleport_to_{LEADER}
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1542
-msgid "Teleport units to {LEADER}"
-msgstr "Teletransportar unidades a {LEADER}"
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1543
+msgid "Teleport units to "
+msgstr "Teletransportar unidades a "
 
 #. [set_menu_item], id=cannot_teleport_to_{LEADER}
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1585
-msgid ""
-"<span font-style='oblique'>Spell to teleport units to {LEADER} is "
-"recharging</span>"
-msgstr ""
-"<span font-style='oblique'>El hechizo para teletransportar unidades a "
-"{LEADER} se está recargando</span>"
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1587
+msgid "<span font-style='oblique'>Spell to teleport units to "
+msgstr "<span font-style='oblique'>El hechizo para teletransportar unidades a "
+
+#. [set_menu_item], id=cannot_teleport_to_{LEADER}
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1587
+msgid " is recharging</span>"
+msgstr " se está recargando</span>"
 
 #. [value]
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1664
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1666
 msgid "Hahaha, you think you can match my dexterity, $unit.name|?"
 msgstr "¡Jajaja, crees que puedes igualar mi destreza, $unit.name|?"
 
 #. [value]
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1667
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1669
 msgid "Hahaha, nobody can match my dexterity!"
 msgstr "¡Jajaja, nadie puede igualar mi destreza!"
 
 #. [value]
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1670
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1672
 msgid "Missed me by that <span font='oblique'>that</span> much"
 msgstr "¡Me fallaste por <span font='oblique'>eso</span> tanto!"
 
 #. [value]
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1673
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1675
 msgid "Hey man, nice shot!"
 msgstr "¡Buen tiro, hombre!"
 
 #. [value]
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1676
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1678
 msgid "A swing and a miss!"
 msgstr "¡Un golpe y fallo!"
 
 #. [value]
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1679
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1681
 msgid "Just a <span font='oblique'>bit</span> outside!"
 msgstr "¡Apenas <span font='oblique'>un poco</span> fuera!"
 
 #. [then]
-#: Legend_of_the_Invincibles-master/utils/utils.cfg:1697
+#: Legend_of_the_Invincibles-master/utils/utils.cfg:1699
 msgid "Missed me, missed me, now ya gotta kiss me!"
 msgstr "¡Me fallaste, me fallaste, ahora tienes que besarme!"
 
