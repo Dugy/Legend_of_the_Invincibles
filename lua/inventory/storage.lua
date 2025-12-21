@@ -254,7 +254,6 @@ local function register_dropdown_widget()
 	gui.add_widget_definition("menu_button", "dropdown_menu_thin", definition)
 end
 
-local listbox_row = 0
 local shown_items -- Lua array of item numbers currently displayed in listbox, e.g. { 27, 34, 56}
 
 -- Check if the scenario has progressed enough to disable unstoring items
@@ -314,11 +313,11 @@ local function show_item_sorts(dialog)
 			-- TODO: print human-readable translatable name of item_sort.
 			local text = item_sort .. " (" .. count .. ")"
 
-			listbox_row = listbox_row + 1
-			dialog[listbox_id][listbox_row].storage_text.label = text
+			local row = dialog[listbox_id].item_count + 1
+			dialog[listbox_id][row].storage_text.label = text
 
 			-- For callback of "View" to know which item_sort was selected.
-			shown_items[listbox_row] = item_sort
+			shown_items[row] = item_sort
 		end
 	end
 
@@ -401,9 +400,8 @@ local function onshow(dialog, unit, item_sort)
 
 	-- Clear the form. Keep the listbox hidden until populated.
 	listbox.visible = false
-	if listbox_row > 0 then
+	if listbox.item_count > 0 then
 		listbox:remove_items_at(1, 0)
-		listbox_row = 0
 	end
 
 	-- Hide optional widgets until we know that they are needed.
@@ -475,13 +473,13 @@ local function onshow(dialog, unit, item_sort)
 			local item_number = item_name_to_number[item_name]
 			local count = types[item_number]
 
-			listbox_row = listbox_row + 1
+			local row = listbox.item_count + 1
 
 			local text = get_item_description(loti.item.type[item_number], count, set_items)
-			listbox[listbox_row].storage_text.label = text
+			listbox[row].storage_text.label = text
 
 			-- For callback of "Equip" to know which item was selected.
-			shown_items[listbox_row] = item_number
+			shown_items[row] = item_number
 		end
 	end
 

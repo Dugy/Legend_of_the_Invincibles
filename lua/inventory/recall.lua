@@ -105,7 +105,9 @@ local shown_units -- Lua array of units currently displayed in listbox
 -- Note: see get_tab() for internal structure of this tab.
 local function onshow(dialog)
 	local listbox = dialog[listbox_id]
-	listbox:remove_items_at(1, 0) -- Clear the listbox
+	if listbox.item_count > 0 then
+		listbox:remove_items_at(1, 0) -- Clear the listbox
+	end
 
 	-- List all units who have at least 1 item.
 	shown_units = wesnoth.units.find_on_recall({ trait = "geared" })
