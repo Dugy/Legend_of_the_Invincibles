@@ -1,5 +1,9 @@
 Changelog
 
+3.2.9 (development)
+Rework the Annihilation scenario
+Fix a lot of smaller bugs
+
 3.2.8b (maintenance)
 Fixed various bugs introduced in version 3.2.8
 Knockback now behaves more predictably and can't push units from the map to the recall list
