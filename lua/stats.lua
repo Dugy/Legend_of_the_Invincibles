@@ -90,16 +90,28 @@ function wesnoth.update_stats(original)
 		end
 	end
 
-	for i, item in ipairs(visible_modifications) do -- Update objects to reflect set effects and update items
+	local items_modifications = {}
+	local nonitem_modifications = {}
+	for i, item in ipairs(visible_modifications) do -- Put items with updated set effects into a separate table so that their effects apply after irreversible modifications
 		if item[1] == "object" and item[2].number and item[2].sort then
-			visible_modifications[i][2] = loti.unit.item_with_set_effects(item[2].number, set_items, item[2].sort)
+			local item_modification = loti.unit.item_with_set_effects(item[2].number, set_items, item[2].sort)
 			-- extract anything we won't NEED to save in the unit
-			for k,v in pairs(visible_modifications[i][2]) do
+			for k,v in pairs(item_modification) do
 				if type(v) ~= "table" and k ~= "name" and k ~= "number" and k ~= "sort" then
-					visible_modifications[i][2][k] = nil
+					item_modification[k] = nil
 				end
 			end
+			table.insert(items_modifications, item_modification)
+		else
+			table.insert(nonitem_modifications, item)
 		end
+	end
+	visible_modifications = {}
+	for i = 1,#nonitem_modifications do
+		table.insert(visible_modifications, nonitem_modifications[i] )
+	end
+	for i = 1,#items_modifications do
+		table.insert(visible_modifications, { "object", items_modifications[i]} )
 	end
 
 	-- PART III: Recreate the unit
