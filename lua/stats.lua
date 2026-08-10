@@ -92,7 +92,7 @@ function wesnoth.update_stats(original)
 
 	local items_modifications = {}
 	local nonitem_modifications = {}
-	for i, item in ipairs(visible_modifications) do -- Put items with updated set effects into a separate table so that their effects apply after irreversible modifications
+	for _, item in ipairs(visible_modifications) do -- Put items with updated set effects into a separate table so that their effects apply after irreversible modifications
 		if item[1] == "object" and item[2].number and item[2].sort then
 			local item_modification = loti.unit.item_with_set_effects(item[2].number, set_items, item[2].sort)
 			-- extract anything we won't NEED to save in the unit
