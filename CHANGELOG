@@ -3,6 +3,7 @@ Changelog
 3.2.9 (development)
 Rework the Annihilation scenario
 Make the overused +1 movement advancements reduce maximum hitpoints by 10 (offset to -7 by the standard +3); overly popular fast units get -15, some unpopular thematically fast units get no penalty
+Add new abilities to Lich King and Demilich that allow recovering health to allies
 Fix a lot of smaller bugs
 
 3.2.8b (maintenance)
